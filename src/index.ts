@@ -6,9 +6,11 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: '*',
+    origin: "*",
   },
 });
+
+console.log("--- Pedago Server started at port 3001 ---");
 
 io.on("connection", (socket) => {
   console.log("a user connected");
@@ -18,17 +20,16 @@ io.on("connection", (socket) => {
 
   //test
   socket.on("test", (data) => {
-    console.log('Test sent to us with data: ', data);
+    console.log("Test sent to us with data: ", data);
     socket.emit("now", {
       message: "You sent a test",
     });
   });
 
   // kill all connections
-  socket.on('disconnect', () => {
+  socket.on("disconnect", () => {
     socket.removeAllListeners();
- });
-
+  });
 });
 
-httpServer.listen(3000);
+httpServer.listen(3001);
