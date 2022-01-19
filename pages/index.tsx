@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-function useSocket(url) {
+function useSocket(url:string) {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function useSocket(url) {
 
 const ContentPage = () => {
   
-  const socket:any = useSocket('http://192.168.68.106:3000')
+  const socket:any = useSocket('http://localhost:3001')
   const [some, setSome] = useState('nothing yet');
   const [room , setRoom] = useState('dark');
 
