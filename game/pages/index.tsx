@@ -1,34 +1,53 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
-import { Component } from 'react';
-import { io } from 'socket.io-client';
+function useSocket(url) {
+  const [socket, setSocket] = useState(null)
 
-class Game extends Component {
-  constructor(props:any) {
-    super(props);
+  useEffect(() => {
+    const socketIo = io(url)
 
-    this.state = {
-      hello: '',
+    setSocket(socketIo);
+
+    function cleanup() {
+      socketIo.disconnect()
     }
-  }
+    return cleanup
 
-  componentDidMount() {
-    this.socket = io("http://192.168.68.106:8000");
-    this.socket.on('now', data => {
-      this.setState({
-        hello: data.message
-      });
-    })
-  }
+    // should only run once and not on every re-render,
+    // so pass an empty array
+  }, [])
 
-  render() {
-    return(
-      <h1>{this.state.hello}</h1>
-    )
-  }
+  return socket
 }
 
-export default Game;
+const ContentPage = () => {
+  
+  const socket:any = useSocket('http://192.168.68.106:3000')
+  const [some, setSome] = useState('nothing yet');
+  
+  useEffect(() => {
+    function handleEvent(payload:any) {
+      console.log(payload) 
+      setSome(JSON.stringify(payload));
+    }
+    if (socket) {
+      socket.on('now', handleEvent)
+    }
+  }, [socket, setSome]);
+
+  const sendShizzles = () => {
+    socket.emit("test", "data");
+    return;
+  }
+
+
+  return (
+    <div>
+      <h1>Hello page!</h1>
+      <div>{some}</div>
+      <button onClick={sendShizzles}>Send The Shizzles</button>
+    </div>
+  )
+}
+export default ContentPage;
