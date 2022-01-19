@@ -17,8 +17,8 @@ io.on("connection", (socket) => {
   });
 
   //test
-  socket.on("test", () => {
-    console.log('Test sent to us');
+  socket.on("test", (data) => {
+    console.log('Test sent to us with data: ', data);
     socket.emit("now", {
       message: "You sent a test",
     });

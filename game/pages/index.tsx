@@ -25,7 +25,8 @@ const ContentPage = () => {
   
   const socket:any = useSocket('http://192.168.68.106:3000')
   const [some, setSome] = useState('nothing yet');
-  
+  const [room , setRoom] = useState('dark');
+
   useEffect(() => {
     function handleEvent(payload:any) {
       console.log(payload) 
@@ -37,16 +38,17 @@ const ContentPage = () => {
   }, [socket, setSome]);
 
   const sendShizzles = () => {
-    socket.emit("test", "data");
-    return;
+    console.log('sending shizzles', room);
+    socket.emit("test", room);
   }
-
 
   return (
     <div>
-      <h1>Hello page!</h1>
+      <h1>Create room!</h1>
       <div>{some}</div>
+      <input type="text" name="room" onChange={event => setRoom(event.target.value)} value={room} />
       <button onClick={sendShizzles}>Send The Shizzles</button>
+      <pre>{some}</pre>
     </div>
   )
 }
