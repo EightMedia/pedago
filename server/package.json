@@ -1,0 +1,14 @@
+{
+  "name": "pedago-socket",
+  "version": "0.0.1",
+  "description": "Socket server for Pedago Game",
+  "main": "index.ts",
+  "repository": "https://github.com/EightMedia/pedago",
+  "author": "Eight Media",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "http": "^0.0.1-security",
+    "socket.io": "^4.4.1"
+  }
+}
