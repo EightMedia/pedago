@@ -1,5 +1,5 @@
 # dependencies
-*/node_modules
+node_modules
 
 # misc
 .DS_Store
@@ -9,5 +9,6 @@
 *.env*
 
 # next.js
-*/.next/
-*/out/
+.next/
+out/
+
