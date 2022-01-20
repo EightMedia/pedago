@@ -1,0 +1,13 @@
+{
+  "name": "pedago-game",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:EightMedia/pedago.git",
+  "author": "Eight Media <info@eight.nl>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "pedago-game-server",
+    "pedago-game-client"
+  ]
+}

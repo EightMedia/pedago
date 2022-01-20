@@ -1,27 +1,41 @@
-# pedago
+# Pedago Game
 
 Description here
 
 ## Installation
 
-The App consists of a server and a game-client. Both have a dedicated branch in this repo. Checkout the branch you want to use. To run the full game, both server and client need to be started.
+The App consists of a server and a game-client.
 
 ## Server
 
-To run the server, switch to the `server` branch and run `yarn start`.
+Run the server:
 
 ```
-git checkout server
+cd server
 yarn start
+```
+
+Run the server in development mode, with filewatch:
+
+```
+cd server
+yarn dev
 ```
 
 ## Client
 
-The client is a next app. To start the app in development mode, switch to the `game` branch and run `yarn dev`.
+The client is a next app. To start the app in development mode, cd to the client directory and .
+
+Run the client:
 
 ```
-git checkout game
+cd client
+yarn start
+```
+
+Run the client in development mode, with filewatch and hot reload:
+
+```
+cd client
 yarn dev
 ```
-
-To build the client, switch to the `game` branch and run `yarn build`.
