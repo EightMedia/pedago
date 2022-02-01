@@ -42,7 +42,7 @@ const ContentPage = () => {
     }
     // catch events
     if (socket) {
-      socket.on('now', handleEvent);
+      socket.on('message', handleEvent);
       socket.on('newData', handleData);
       // socket.on('view', handleEvent);
     }

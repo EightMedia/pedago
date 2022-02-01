@@ -79,13 +79,16 @@ io.on("connection", (socket) => {
     // check if room exists
     let msg;
     if (games[room]) {
+      console.log("room exists");
       socket.join(room);
       games[room].players[userId] = { name: name, id: userId };
       msg = "You joined room " + room;
     } else {
+      console.log("room does not exist");
       msg = "Room " + room + " does not exist.";
     }
-    // socket.broadcast.emit("newData", games);
+    console.log(games);
+    socket.emit("newData", games);
     socket.emit("message", {
       message: msg,
     });
