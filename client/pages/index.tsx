@@ -25,37 +25,41 @@ const ContentPage = () => {
   
   const socket:any = useSocket('http://localhost:3001')
   const [some, setSome] = useState('nothing yet');
+  const [gameData, setGameData] = useState({});
   const [joinRoomName , setJoinRoomName] = useState('some room');
   const [createRoomName , setCreateRoomName] = useState('some room');
   const [msg , setMsg] = useState('a message');
   const [name , setName] = useState('John Doe');
 
   useEffect(() => {
+    // set the "some" var
     function handleEvent(payload:any) {
-      console.log(payload) 
       setSome(JSON.stringify(payload));
     }
+    // set the "gameData" var
+    function handleData(payload:any) {
+      setGameData(payload);
+    }
+    // catch events
     if (socket) {
       socket.on('now', handleEvent);
-      socket.on('view', handleEvent);
+      socket.on('newData', handleData);
+      // socket.on('view', handleEvent);
     }
   }, [socket, setSome]);
 
   const joinRoom = () => {
-    console.log('Joining room', joinRoomName);
-    socket.emit("joinRoom", joinRoomName);
+    const data = {room: joinRoomName, name: name};
+    socket.emit("joinRoom", data);
   }
 
   const createRoom = () => {
-    console.log('Creating room', createRoomName);
     socket.emit("createRoom", createRoomName);
   }
 
-  const sendMsg = () => {
-    console.log('Sending msg', msg);
-    socket.emit("msg", {room: joinRoomName, msg: msg});
+  const sendMsg = (to:string) => {
+    socket.emit("msg", {room: joinRoomName, msg: msg, to: to});
   }
-  
 
   return (
     <div>
@@ -74,9 +78,14 @@ const ContentPage = () => {
       <section>
         <h2>Send message to joined room</h2>
         <input type="text" name="msg" onChange={e => setMsg(e.target.value)} value={msg} />
-        <button onClick={sendMsg}>Send</button>
+        <button onClick={() => {sendMsg('me')}}>Send to me</button>
+        <button onClick={() => {sendMsg('room')}}>Send to room</button>
+        <button onClick={() => {sendMsg('all')}}>Send to all</button>
       </section>
+      <h3>Message</h3>
       <pre>{some}</pre>
+      <h3>Game data</h3>
+      <pre>{JSON.stringify(gameData)}</pre>
     </div>
   )
 }

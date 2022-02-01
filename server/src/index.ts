@@ -19,16 +19,31 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   // does this emit to all users?
-  socket.emit("now", {
+  socket.emit("message", {
     message: "Hello you have connected",
   });
 
   // test
   socket.on("test", (data) => {
     console.log("Test sent to us with data: ", data);
-    socket.emit("now", {
+    socket.emit("message", {
       message: "You sent a test",
     });
+  });
+
+  // message
+  socket.on("message", (data) => {
+    const [room, msg, to] = data;
+    console.log("Message sent to " + to + " with data: ", data);
+    if (to === "room") {
+      socket.to(room).emit("message", msg);
+    }
+    if (to === "me") {
+      socket.to(socket.id).emit("message", msg);
+    }
+    if (to === "all") {
+      socket.broadcast.emit("message", msg);
+    }
   });
 
   // create room
@@ -46,7 +61,7 @@ io.on("connection", (socket) => {
     };
     console.log("All current rooms in socket.rooms:", socket.rooms);
     console.log("gamedata: ", games);
-    socket.emit("now", {
+    socket.emit("message", {
       message: "You created a room",
     });
   });
@@ -55,19 +70,23 @@ io.on("connection", (socket) => {
   socket.on("joinRoom", (data) => {
     // console.log("joinRoom sent to us with data: ", data);
     const userId = socket.id;
-    console.log("User " + userId + " wants to join room: ", data);
+    const { room, name } = data;
+    // socket.broadcast.emit("newData", games);
+    console.log(
+      "User " + userId + " wants to join room " + room + " with name " + name
+    );
+
     // check if room exists
     let msg;
-    if (games[data]) {
-      socket.join(data);
-      games[data].players.push(userId);
-      msg = "You joined room " + data;
+    if (games[room]) {
+      socket.join(room);
+      games[room].players[userId] = { name: name, id: userId };
+      msg = "You joined room " + room;
     } else {
-      msg = "Room " + data + " does not exist";
+      msg = "Room " + room + " does not exist.";
     }
-    console.log("gamedata: ", games);
-
-    socket.emit("now", {
+    // socket.broadcast.emit("newData", games);
+    socket.emit("message", {
       message: msg,
     });
   });
