@@ -58,7 +58,7 @@ const ContentPage = () => {
   }
 
   const sendMsg = (to:string) => {
-    socket.emit("msg", {room: joinRoomName, msg: msg, to: to});
+    socket.emit("message", {room: joinRoomName, msg: msg, to: to});
   }
 
   return (

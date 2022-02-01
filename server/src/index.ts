@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
     const timestamp = new Date().getTime().toString();
     // create room in games object
     games[data] = {
-      players: [],
+      players: {},
       admin: socket.id,
       active: true,
       started: timestamp,
@@ -87,11 +87,16 @@ io.on("connection", (socket) => {
       console.log("room does not exist");
       msg = "Room " + room + " does not exist.";
     }
-    console.log(games);
-    socket.emit("newData", games);
-    socket.emit("message", {
-      message: msg,
-    });
+
+    socket.emit("message", msg);
+
+    // Player joined
+    if (games[room].players[userId]) {
+      // Tell other players who joined
+      socket.to(room).emit("message", `${games[room].players[userId].name} joined`);
+      // Emit games data to everyone
+      io.in(room).emit("newData", games);
+    }
   });
 
   // kill all connections
