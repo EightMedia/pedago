@@ -80,12 +80,12 @@ const ContentPage = () => {
         <input type="text" name="msg" onChange={e => setMsg(e.target.value)} value={msg} />
         <button onClick={() => {sendMsg('me')}}>Send to me</button>
         <button onClick={() => {sendMsg('room')}}>Send to room</button>
-        <button onClick={() => {sendMsg('all')}}>Send to all</button>
+        <button onClick={() => {sendMsg('all')}}>Send to all games</button>
       </section>
       <h3>Message</h3>
       <pre>{some}</pre>
       <h3>Game data</h3>
-      <pre>{JSON.stringify(gameData)}</pre>
+      <pre>{JSON.stringify(gameData, null, 2)}</pre>
     </div>
   )
 }

@@ -16,33 +16,25 @@ type gameType = any;
 const games = {} as { [key: string]: gameType };
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("a user connected with socket ID: ", socket.id);
 
   // does this emit to all users?
   socket.emit("message", {
     message: "Hello you have connected",
   });
 
-  // test
-  socket.on("test", (data) => {
-    console.log("Test sent to us with data: ", data);
-    socket.emit("message", {
-      message: "You sent a test",
-    });
-  });
-
-  // message
+  // send messages
   socket.on("message", (data) => {
-    const [room, msg, to] = data;
+    const { room, msg, to } = data;
     console.log("Message sent to " + to + " with data: ", data);
     if (to === "room") {
-      socket.to(room).emit("message", msg);
+      io.to(room).emit("message", msg);
     }
     if (to === "me") {
-      socket.to(socket.id).emit("message", msg);
+      socket.emit("message", msg);
     }
     if (to === "all") {
-      socket.broadcast.emit("message", msg);
+      io.emit("message", msg);
     }
   });
 
@@ -59,8 +51,6 @@ io.on("connection", (socket) => {
       active: true,
       started: timestamp,
     };
-    console.log("All current rooms in socket.rooms:", socket.rooms);
-    console.log("gamedata: ", games);
     socket.emit("message", {
       message: "You created a room",
     });
@@ -78,25 +68,24 @@ io.on("connection", (socket) => {
 
     // check if room exists
     let msg;
-    if (games[room]) {
-      console.log("room exists");
+    const roomExists = room in games;
+    if (roomExists) {
       socket.join(room);
       games[room].players[userId] = { name: name, id: userId };
+      socket
+        .to(room)
+        .emit("message", `${games[room].players[userId].name} joined`);
       msg = "You joined room " + room;
     } else {
-      console.log("room does not exist");
       msg = "Room " + room + " does not exist.";
     }
 
     socket.emit("message", msg);
+  });
 
-    // Player joined
-    if (games[room].players[userId]) {
-      // Tell other players who joined
-      socket.to(room).emit("message", `${games[room].players[userId].name} joined`);
-      // Emit games data to everyone
-      io.in(room).emit("newData", games);
-    }
+  socket.onAny((eventName, ...args) => {
+    console.log("event: ", eventName, args);
+    io.emit("newData", games);
   });
 
   // kill all connections
