@@ -29,7 +29,6 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "pedago-game-client": "^0.*",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "express": "^4.17.2",
