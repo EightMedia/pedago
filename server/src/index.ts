@@ -16,14 +16,29 @@ type gameType = any;
 const games = {} as { [key: string]: gameType };
 
 io.on("connection", (socket) => {
+  const sendGameData = () => {
+    io.emit("newData", games);
+  };
+
   console.log("a user connected with socket ID: ", socket.id);
 
-  // does this emit to all users?
-  socket.emit("message", {
-    message: "Hello you have connected",
+  // send welcome to user on this socket
+  socket.emit("message", "Hello you have connected");
+
+  // begin to send user to start screen
+  socket.emit("to", { view: "Start", data: {} });
+
+  // log anything that comes in
+  socket.onAny((eventName, ...args) => {
+    console.log("event: ", eventName, args, games);
   });
 
-  // send messages
+  /**
+   *
+   * Send a message
+   *
+   */
+
   socket.on("message", (data) => {
     const { room, msg, to } = data;
     console.log("Message sent to " + to + " with data: ", data);
@@ -38,36 +53,42 @@ io.on("connection", (socket) => {
     }
   });
 
-  // create room
-  socket.on("createRoom", (data) => {
-    console.log("User " + socket.id + " wants to create room: ", data);
-    socket.join(data);
+  /**
+   *
+   * Create room
+   *
+   */
+
+  socket.on("createRoom", (room) => {
+    const pin = Math.floor(1000 + Math.random() * 9000);
+    socket.join(room);
     // string for current timestamp:
     const timestamp = new Date().getTime().toString();
     // create room in games object
-    games[data] = {
+    games[room] = {
       players: {},
+      pin: pin,
       admin: socket.id,
       active: true,
+      locked: false,
       started: timestamp,
     };
-    socket.emit("message", {
-      message: "You created a room",
-    });
+    socket.emit("message", "You created a room");
+    socket.emit("to", { view: "AdminDashboard", data: { room: room } });
+    sendGameData();
   });
 
-  // joinRoom
+  /**
+   *
+   * Join room
+   *
+   */
+
   socket.on("joinRoom", (data) => {
-    // console.log("joinRoom sent to us with data: ", data);
     const userId = socket.id;
     const { room, name } = data;
-    // socket.broadcast.emit("newData", games);
-    console.log(
-      "User " + userId + " wants to join room " + room + " with name " + name
-    );
 
     // check if room exists
-    let msg;
     const roomExists = room in games;
     if (roomExists) {
       socket.join(room);
@@ -75,20 +96,38 @@ io.on("connection", (socket) => {
       socket
         .to(room)
         .emit("message", `${games[room].players[userId].name} joined`);
-      msg = "You joined room " + room;
+      socket.emit("message", "You joined room " + room);
     } else {
-      msg = "Room " + room + " does not exist.";
+      socket.emit("Room " + room + " does not exist.");
     }
-
-    socket.emit("message", msg);
+    sendGameData();
   });
 
-  socket.onAny((eventName, ...args) => {
-    console.log("event: ", eventName, args);
-    io.emit("newData", games);
+  /**
+   *
+   * Demo options, redirect everyone to specific views
+   *
+   */
+  socket.on("reset", () => {
+    socket.broadcast.emit("to", { view: "Start", data: {} });
+  });
+  socket.on("killRoom", (room) => {
+    // message all players
+    io.in(room).emit("message", "Room was killed, party ended ☠️");
+    // redirect everyone to start screen
+    io.in(room).emit("to", { view: "Start", data: {} });
+    io.in(room).socketsLeave(room);
+    // delete room
+    delete games[room];
+    sendGameData();
   });
 
-  // kill all connections
+  /**
+   *
+   * clean exit
+   *
+   */
+
   socket.on("disconnect", () => {
     socket.removeAllListeners();
   });
