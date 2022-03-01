@@ -1,5 +1,5 @@
 {
-  "name": "pedago-game-server",
+  "name": "server",
   "description": "Socket server for Pedago Game",
   "version": "0.0.1",
   "main": "build/index.js",

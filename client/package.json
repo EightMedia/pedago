@@ -1,5 +1,5 @@
 {
-  "name": "pedago-game-client",
+  "name": "client",
   "description": "Client for Pedago Game",
   "version": "0.0.1",
   "private": true,

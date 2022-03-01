@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "pedago-game-server",
-    "pedago-game-client"
+    "server",
+    "client"
   ],
   "scripts": {
     "dev:client": "yarn --cwd client dev",
