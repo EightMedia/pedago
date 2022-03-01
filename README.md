@@ -1,41 +1,22 @@
 # Pedago Game
 
-Description here
+The Pedago Game is a virtual version of the physical card game: https://www.youtube.com/watch?v=dAqDFNFu7m8.
+The game consists of a server running socket.io and a nextjs frontend.
 
 ## Installation
 
 The App consists of a server and a game-client.
 
-## Server
+## Development
 
 Run the server:
 
 ```
-cd server
-yarn start
+yarn dev:server
 ```
-
-Run the server in development mode, with filewatch:
-
-```
-cd server
-yarn dev
-```
-
-## Client
-
-The client is a next app. To start the app in development mode, cd to the client directory and .
 
 Run the client:
 
 ```
-cd client
-yarn start
-```
-
-Run the client in development mode, with filewatch and hot reload:
-
-```
-cd client
-yarn dev
+yarn dev:client
 ```
