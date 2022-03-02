@@ -1,5 +1,5 @@
 export * from "./admin.interface";
-export * from "./function.enum";
+export * from "./role.enum";
 export * from "./option.interface";
 export * from "./organisation.interface";
 export * from "./pedago-room-dto.interface";
