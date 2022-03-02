@@ -1,4 +1,4 @@
-export enum Function {
+export enum Role {
     Docent,
     Trainer,
     Manager,
