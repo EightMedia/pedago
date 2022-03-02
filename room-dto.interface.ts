@@ -4,7 +4,7 @@ import { Organisation } from "./organisation.interface";
 import { Options } from "./option.interface";
 import { Group } from "./group.interface";
 
-export interface PedagoRoomDto {
+export interface RoomDto {
     id: string,
     admin: Admin;
     gameCode: number;
