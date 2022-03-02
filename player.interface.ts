@@ -1,3 +1,5 @@
+import { Category } from "./category.enum";
+import { Round } from "./round.interface";
 import { View } from "./view.enum";
 
 export interface Player {
@@ -6,10 +8,3 @@ export interface Player {
     rounds: Round[]
     view: View;
 }
-
-export interface Round {
-    number: number;
-    order: OrderColor[];
-}
-
-export type OrderColor = 'red' | 'yellow' | 'orange' | 'green' | 'blue' | 'purple';
