@@ -1,10 +1,10 @@
-import { ViewName } from 'pedago-models/models'
+import { ViewName } from 'pedago-models'
 
-const Result = ({handleClick}:{handleClick: (vn: ViewName) => void}) => {
+const Result = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     return (
         <>
-        Result
-        <button onClick={ () => handleClick(ViewName.Wizard)}>Back to Wizard</button>
+            Result
+            <button onClick={() => handleClick(ViewName.Wizard)}>Back to Wizard</button>
         </>
     )
 }

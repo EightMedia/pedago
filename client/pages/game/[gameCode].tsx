@@ -5,7 +5,7 @@ import Game from "../../views/game/Game/Game";
 import Lobby from "../../views/game/Lobby/Lobby";
 import Result from "../../views/game/Result/Result";
 import Wizard from "../../views/game/Wizard/Wizard";
-import { ViewName, ViewState, initialViewState } from 'pedago-models/models'
+import { ViewName, ViewState, initialViewState } from 'pedago-models'
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);

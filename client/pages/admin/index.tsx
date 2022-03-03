@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { initialViewState, ViewName } from "../../../models/view-state.interface";
+import { initialViewState, ViewName } from "pedago-models";
 import Wizard from "../../views/admin/Wizard/Wizard";
 
 function useSocket(url: string) {
@@ -28,7 +28,7 @@ const AdminMain = () => {
     const [view, setView] = useState(initialViewState);
 
     const handleClick = (value: ViewName): void => {
-        socket.emit('to', {name: value})
+        socket.emit('to', { name: value })
     }
 
     useEffect(() => {

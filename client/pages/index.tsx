@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
 import LandingPage from "../views/LandingPage";
 import * as languages from '../data/languages';
-import { DataTranslation, Language } from 'pedago-models/models'
+import { DataTranslation, Language } from 'pedago-models'
 
 
 const ContentPage = () => {
@@ -16,7 +16,7 @@ const ContentPage = () => {
     return langFromLocalStorage ? langFromLocalStorage as Language : DEFAULT_LANGUAGE;
   });
   const data: DataTranslation = languages[language];
-  
+
   useEffect(() => {
     localStorage.setItem("language", language);
   }, [language]);

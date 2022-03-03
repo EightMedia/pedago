@@ -1,9 +1,9 @@
-import { ViewName } from 'pedago-models/models'
+import { ViewName } from 'pedago-models'
 
 const Lobby = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     return (
         <>
-        Lobby
+            Lobby
             <button onClick={() => handleClick(ViewName.Wizard)}>Back to Wizard</button>
         </>
     )
