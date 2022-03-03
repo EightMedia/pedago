@@ -63,6 +63,47 @@ const ContentPage = () => {
     <>
       <LanguageContext.Provider value={data}>
         <LandingPage language={language} setLanguage={setLanguage}></LandingPage>
+        <div className="debugging">
+          <section>
+            <h2>Send message somewhere</h2>
+            <input
+              type="text"
+              name="msg"
+              onChange={(e) => setMsg(e.target.value)}
+              value={msg}
+            />
+            <button
+              onClick={() => {
+                sendMsg("me");
+              }}
+            >
+              Send to me
+            </button>
+            <button
+              onClick={() => {
+                sendMsg("room");
+              }}
+            >
+              Send to room
+            </button>
+            <button
+              onClick={() => {
+                sendMsg("all");
+              }}
+            >
+              Send to all games
+            </button>
+          </section>
+          <h3>Message</h3>
+          <pre>{JSON.stringify(some)}</pre>
+          <h3>Game data</h3>
+          <pre>{JSON.stringify(gameData, null, 2)}</pre>
+          <h3>View</h3>
+          <pre>{JSON.stringify(view, null, 2)}</pre>
+          <button onClick={() => setView({ view: "Start", data: {} })}>
+            RESET
+          </button>
+        </div>
       </LanguageContext.Provider>
     </>
   );
