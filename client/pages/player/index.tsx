@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PlayerLobby from "./lobby";
 import PlayerRounds from "./rounds";
 import PlayerWizard from "./wizard";
@@ -5,9 +6,9 @@ import PlayerWizard from "./wizard";
 const PlayerIndex = () => {
     return (
         <>
-            <PlayerLobby></PlayerLobby>
-            <PlayerRounds></PlayerRounds>
-            <PlayerWizard></PlayerWizard>
+            <Link href="/player/wizard">Wizard</Link>
+            <Link href="/player/lobby">Lobby</Link>
+            <Link href="/player/rounds">Rounds</Link>
         </>
     )
 }

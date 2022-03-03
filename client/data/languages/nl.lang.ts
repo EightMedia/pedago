@@ -1,6 +1,6 @@
-import { Content } from "../../models/content.interface";
+import { DataTranslation } from "../../models/data-translation.interface";
 
-export const NL: Content = {
+export const NL: DataTranslation = {
   landing: {
     title: "Ontdek jouw idealen als leraar",
     description:

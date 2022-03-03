@@ -1,6 +1,6 @@
-import { Content } from "../../models/content.interface";
+import { DataTranslation } from "../../models/data-translation.interface";
 
-export const EN: Content = {
+export const EN: DataTranslation = {
   landing: {
     title: "Discover your ideals as a teacher",
     description:
