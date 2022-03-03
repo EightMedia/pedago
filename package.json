@@ -8,8 +8,7 @@
   "private": true,
   "workspaces": [
     "server",
-    "client",
-    "pedago-models"
+    "client"
   ],
   "scripts": {
     "dev:client": "yarn --cwd client dev",
