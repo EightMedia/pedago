@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { initialViewState, ViewName } from "pedago-models";
+import { initialViewState, ViewName } from "models";
 import Wizard from "../../views/admin/Wizard/Wizard";
 
 function useSocket(url: string) {

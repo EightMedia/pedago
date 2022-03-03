@@ -1,4 +1,4 @@
-import { ViewName } from 'pedago-models'
+import { ViewName } from 'models'
 
 const Result = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     return (

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
 import LandingPage from "../views/LandingPage";
 import * as languages from '../data/languages';
-import { DataTranslation, Language } from 'pedago-models'
+import { DataTranslation, Language } from 'models'
 
 
 const ContentPage = () => {
