@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
   socket.emit("message", "Hello you have connected");
 
   // begin to send user to start screen
-  socket.emit("to", { view: "Start", data: {} });
+  socket.emit("to", { name: 0 });
 
   // log anything that comes in
   socket.onAny((eventName, ...args) => {
@@ -55,6 +55,16 @@ io.on("connection", (socket) => {
 
   /**
    *
+   * To
+   *
+   */
+
+  socket.on("to", (view) => {
+    socket.emit("to", view);
+  });
+
+  /**
+   *
    * Create room
    *
    */
@@ -74,7 +84,7 @@ io.on("connection", (socket) => {
       started: timestamp,
     };
     socket.emit("message", "You created a room");
-    socket.emit("to", { view: "AdminDashboard", data: { room: room } });
+    socket.emit("to", { view: 0, data: { room: room } });
     sendGameData();
   });
 
@@ -115,7 +125,7 @@ io.on("connection", (socket) => {
     // message all players
     io.in(room).emit("message", "Room was killed, party ended ☠️");
     // redirect everyone to start screen
-    io.in(room).emit("to", { view: "Start", data: {} });
+    io.in(room).emit("to", { view: 0, data: {} });
     io.in(room).socketsLeave(room);
     // delete room
     delete games[room];

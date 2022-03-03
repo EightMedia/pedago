@@ -1,15 +1,24 @@
 import Link from "next/link";
-import { ChangeEvent, Dispatch, SetStateAction, useContext } from "react";
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useContext, useState } from "react";
+import { Language } from "../../models/language.enum";
 import { LanguageContext } from "../contexts/LanguageContext";
-import { Language } from "../models/language.enum";
 import styles from '../styles/LandingPage.module.css';
 
 const LandingPage = ({ language, setLanguage }: { language: Language, setLanguage: Dispatch<SetStateAction<Language>> }) => {
+  const [gameCode, setGameCode] = useState<string | undefined>(undefined);
   const languageValues = Object.values(Language);
   const data = useContext(LanguageContext);
 
   const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setLanguage(event.target.value as Language);
+  }
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setGameCode(event.target.value);
+  }
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
   }
 
   return (
@@ -33,11 +42,15 @@ const LandingPage = ({ language, setLanguage }: { language: Language, setLanguag
           {data?.landing?.description}
         </div>
         <div className="action">
-        <form>
-          <input name="gameCode" placeholder={data?.landing?.input} />
-          <Link href="/player" passHref><button>{data?.landing?.button}</button></Link>
-        </form>
-        <Link href="/admin">{data?.landing?.create}</Link> {data?.landing?.asAdmin}
+          <form onSubmit={handleSubmit}>
+            <input type="number" maxLength={5} minLength={5} value={gameCode} onChange={handleInputChange} placeholder={data?.landing?.input} />
+            <Link href={`/game/${gameCode}`} passHref>
+              <button type="submit">
+                {data?.landing?.button}
+              </button>
+            </Link>
+          </form>
+          <Link href="/admin">{data?.landing?.create}</Link> {data?.landing?.asAdmin}
         </div>
       </div>
     </div>

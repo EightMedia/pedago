@@ -10,3 +10,6 @@ export * from "./players-type.interface";
 export * from "./round.interface";
 export * from "./sector.enum";
 export * from "./view.enum";
+export * from './data-translation.interface';
+export * from './language.enum';
+export * from './view-state.interface';

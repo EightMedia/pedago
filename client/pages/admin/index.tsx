@@ -1,14 +1,52 @@
-import Link from "next/link";
-import AdminLobby from "./lobby";
-import AdminRounds from "./rounds";
-import AdminWizard from "./wizard";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+import { initialViewState, ViewName } from "../../../models/view-state.interface";
+import Wizard from "../../views/admin/Wizard/Wizard";
+
+function useSocket(url: string) {
+    const [socket, setSocket] = useState<Socket | null>(null);
+
+    useEffect(() => {
+        const socketIo = io(url);
+
+        setSocket(socketIo);
+
+        function cleanup() {
+            socketIo.disconnect();
+        }
+        return cleanup;
+
+        // should only run once and not on every re-render,
+        // so pass an empty array
+    }, []);
+
+    return socket;
+}
 
 const AdminMain = () => {
+    const socket: any = useSocket("http://localhost:3001");
+    const [view, setView] = useState(initialViewState);
+
+    const handleClick = (value: ViewName): void => {
+        socket.emit('to', {name: value})
+    }
+
+    useEffect(() => {
+        if (socket) {
+            socket.on('to', setView);
+        }
+    }, [socket]);
+
     return (
         <>
-            <Link href="/admin/wizard">Wizard</Link>
-            <Link href="/admin/lobby">Lobby</Link>
-            <Link href="/admin/rounds">Rounds</Link>
+            {(() => {
+                switch (view.name) {
+                    case ViewName.Wizard:
+                        return <Wizard socket={socket} data={undefined} />
+                    default:
+                        return null
+                }
+            })()}
         </>
     )
 }

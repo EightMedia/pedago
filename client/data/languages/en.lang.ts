@@ -1,4 +1,4 @@
-import { DataTranslation } from "../../models/data-translation.interface";
+import { DataTranslation } from "../../../models/data-translation.interface";
 
 export const EN: DataTranslation = {
   landing: {

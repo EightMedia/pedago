@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
 import { Language } from "../models/language.enum";
 import LandingPage from "../views/LandingPage";
-import { DataTranslation as DataTranslation } from "../models/data-translation.interface";
+import { DataTranslation as DataTranslation } from "../../models/data-translation.interface";
 import * as languages from '../data/languages';
 
 const ContentPage = () => {
