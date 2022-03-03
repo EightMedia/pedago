@@ -1,4 +1,5 @@
 {
+  "editor.formatOnSave": true
   // "cssVarriablesAutocomplete.files": [
   //   "variables.css",
   //   "src/styles/variables.css"
