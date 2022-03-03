@@ -33,9 +33,16 @@ const ContentPage = () => {
   const [gameData, setGameData] = useState({});
   const [msg, setMsg] = useState("a message");
   const [view, setView] = useState({ view: "Start", data: {} });
-  
-  const [language, setLanguage] = useState<Language>(DEFAULT_LANGUAGE);
+
+  const [language, setLanguage] = useState<Language>(() => {
+    const langFromLocalStorage = window.localStorage.getItem("language");
+
+    return langFromLocalStorage ? langFromLocalStorage as Language : DEFAULT_LANGUAGE;
+  });
   const data: DataTranslation = languages[language];
+  useEffect(() => {
+    window.localStorage.setItem("language", language);
+  }, [language]);
 
   useEffect(() => {
     if (socket) {
@@ -55,8 +62,8 @@ const ContentPage = () => {
       <LanguageContext.Provider value={data}>
         <LandingPage language={language} setLanguage={setLanguage}></LandingPage>
         <form>
-          <input name="gameCode" placeholder="Voer spelcode in"/>
-        <Link href="/player" passHref><button>Meedoen aan spel</button></Link>
+          <input name="gameCode" placeholder="Voer spelcode in" />
+          <Link href="/player" passHref><button>Meedoen aan spel</button></Link>
         </form>
         <Link href="/admin">Spel aanmaken</Link> als beheerder
       </LanguageContext.Provider>
