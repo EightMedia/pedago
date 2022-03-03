@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { Language } from "pedago-models/models";
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useContext, useState } from "react";
-import { Language } from "../../models/language.enum";
 import { LanguageContext } from "../contexts/LanguageContext";
 import styles from '../styles/LandingPage.module.css';
 

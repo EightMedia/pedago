@@ -1,4 +1,4 @@
-import { ViewName } from "../../../models/view-state.interface";
+import { ViewName } from 'pedago-models/models'
 
 const Game = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     return (

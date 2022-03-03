@@ -1,10 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
-import { Language } from "../models/language.enum";
 import LandingPage from "../views/LandingPage";
-import { DataTranslation as DataTranslation } from "../../models/data-translation.interface";
 import * as languages from '../data/languages';
+import { DataTranslation, Language } from 'pedago-models/models'
+
 
 const ContentPage = () => {
   const [language, setLanguage] = useState<Language>(() => {
