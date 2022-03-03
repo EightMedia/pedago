@@ -35,4 +35,4 @@ const LandingPage = ({ language, setLanguage }: { language: Language, setLanguag
     </div>
   )
 }
-export default LandingPage; 
+export default LandingPage;
