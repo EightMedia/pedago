@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Socket, io } from "socket.io-client";
-import { initialViewState, ViewName, ViewState } from "../../../models/view-state.interface";
 import Game from "../../views/game/Game/Game";
 import Lobby from "../../views/game/Lobby/Lobby";
 import Result from "../../views/game/Result/Result";
 import Wizard from "../../views/game/Wizard/Wizard";
+import { ViewName, ViewState, initialViewState } from 'pedago-models/models'
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -32,7 +32,7 @@ const GameCode = () => {
   const [view, setView] = useState(initialViewState);
 
   const handleClick = (value: ViewName): void => {
-    socket.emit('to', {name: value})
+    socket.emit('to', { name: value })
   }
 
   useEffect(() => {
