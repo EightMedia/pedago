@@ -1,12 +1,11 @@
-import React, { ChangeEvent, createContext } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { defaultLanguage, DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
+import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
 import { Language } from "../models/language.enum";
 import LandingPage from "../views/LandingPage";
 import { DataTranslation as DataTranslation } from "../models/data-translation.interface";
 import * as languages from '../data/languages';
-import Link from "next/link";
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -35,7 +34,10 @@ const ContentPage = () => {
   const [view, setView] = useState({ view: "Start", data: {} });
 
   const [language, setLanguage] = useState<Language>(() => {
-    const langFromLocalStorage = window.localStorage.getItem("language");
+    let langFromLocalStorage;
+    if (typeof window !== "undefined") {
+      langFromLocalStorage = window.localStorage.getItem("language");
+    }
 
     return langFromLocalStorage ? langFromLocalStorage as Language : DEFAULT_LANGUAGE;
   });
@@ -61,11 +63,6 @@ const ContentPage = () => {
     <>
       <LanguageContext.Provider value={data}>
         <LandingPage language={language} setLanguage={setLanguage}></LandingPage>
-        <form>
-          <input name="gameCode" placeholder="Voer spelcode in" />
-          <Link href="/player" passHref><button>Meedoen aan spel</button></Link>
-        </form>
-        <Link href="/admin">Spel aanmaken</Link> als beheerder
       </LanguageContext.Provider>
     </>
   );

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ChangeEvent, Dispatch, SetStateAction, useContext } from "react";
 import { LanguageContext } from "../contexts/LanguageContext";
 import { Language } from "../models/language.enum";
@@ -30,6 +31,13 @@ const LandingPage = ({ language, setLanguage }: { language: Language, setLanguag
         </div>
         <div className="description">
           {data?.landing?.description}
+        </div>
+        <div className="action">
+        <form>
+          <input name="gameCode" placeholder={data?.landing?.input} />
+          <Link href="/player" passHref><button>{data?.landing?.button}</button></Link>
+        </form>
+        <Link href="/admin">{data?.landing?.create}</Link> {data?.landing?.asAdmin}
         </div>
       </div>
     </div>
