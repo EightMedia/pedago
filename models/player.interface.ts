@@ -8,6 +8,6 @@ export interface Player {
     name: string;
     group: Group;
     roomId: string;
-    rounds: Round[]
+    rounds: Round[];
     view: View;
 }

@@ -5,14 +5,14 @@ import { Options } from "./option.interface";
 import { Group } from "./group.interface";
 
 export interface RoomDto {
-    id: string,
+    id: string;
     admin: Admin;
     gameCode: number;
     organisation: Organisation;
-    players: Player[]
-    groups: Group[]
+    players: Player[];
+    groups: Group[];
     active: boolean;
     locked: boolean;
     startDate: string | Date;
-    options: Options
+    options: Options;
 }
