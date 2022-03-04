@@ -8,8 +8,8 @@ import dynamic from 'next/dynamic';
 const ContentPage = () => {
   const [language, setLanguage] = useState<Language>(() => {
     let langFromLocalStorage;
-    if (typeof document !== "undefined") {
-      langFromLocalStorage = localStorage.getItem("language");
+    if (typeof window !== "undefined") {
+      langFromLocalStorage = window.localStorage.getItem("language");
     }
 
     return langFromLocalStorage ? langFromLocalStorage as Language : DEFAULT_LANGUAGE;
