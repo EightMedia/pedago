@@ -3,11 +3,13 @@ import { Language } from "models";
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useContext, useState } from "react";
 import { LanguageContext } from "../contexts/LanguageContext";
 import styles from '../styles/LandingPage.module.css';
+import { useRouter } from 'next/router';
 
 const LandingPage = ({ language, setLanguage }: { language: Language, setLanguage: Dispatch<SetStateAction<Language>> }) => {
-  const [gameCode, setGameCode] = useState<string | undefined>(undefined);
+  const [gameCode, setGameCode] = useState<string>('');
   const languageValues = Object.values(Language);
   const data = useContext(LanguageContext);
+  const router = useRouter();
 
   const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setLanguage(event.target.value as Language);
@@ -19,6 +21,8 @@ const LandingPage = ({ language, setLanguage }: { language: Language, setLanguag
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    localStorage.setItem('gameCode', gameCode);
+    router.push(`/game/${gameCode}`);
   }
 
   return (
@@ -44,11 +48,9 @@ const LandingPage = ({ language, setLanguage }: { language: Language, setLanguag
         <div className="action">
           <form onSubmit={handleSubmit}>
             <input type="number" maxLength={5} minLength={5} value={gameCode} onChange={handleInputChange} placeholder={data?.landing?.input} />
-            <Link href={`/game/${gameCode}`} passHref>
-              <button type="submit">
-                {data?.landing?.button}
-              </button>
-            </Link>
+            <button type="submit">
+              {data?.landing?.button}
+            </button>
           </form>
           <Link href="/admin">{data?.landing?.create}</Link> {data?.landing?.asAdmin}
         </div>

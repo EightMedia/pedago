@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Socket, io } from "socket.io-client";
-import Game from "../../views/game/Game/Game";
-import Lobby from "../../views/game/Lobby/Lobby";
-import Result from "../../views/game/Result/Result";
-import Wizard from "../../views/game/Wizard/Wizard";
+import GameGame from "../../views/game/Game/GameGame";
+import GameLobby from "../../views/game/Lobby/GameLobby";
+import GameResult from "../../views/game/Result/GameResult";
+import GameWizard from "../../views/game/Wizard/GameWizard";
 import { ViewName, ViewState, initialViewState } from 'models'
 
 function useSocket(url: string) {
@@ -27,7 +27,7 @@ function useSocket(url: string) {
   return socket;
 }
 
-const GameCode = () => {
+const GameMain = () => {
   const socket: any = useSocket("http://localhost:3001");
   const [view, setView] = useState(initialViewState);
 
@@ -50,13 +50,13 @@ const GameCode = () => {
       {(() => {
         switch (view.name) {
           case ViewName.Wizard:
-            return (<Wizard handleClick={handleClick} />)
+            return (<GameWizard handleClick={handleClick} />)
           case ViewName.Lobby:
-            return <Lobby handleClick={handleClick} />
+            return <GameLobby handleClick={handleClick} />
           case ViewName.Game:
-            return <Game handleClick={handleClick} />
+            return <GameGame handleClick={handleClick} />
           case ViewName.Result:
-            return <Result handleClick={handleClick} />
+            return <GameResult handleClick={handleClick} />
           default:
             return null;
         }
@@ -64,4 +64,4 @@ const GameCode = () => {
     </div>
   );
 };
-export default GameCode;
+export default GameMain;

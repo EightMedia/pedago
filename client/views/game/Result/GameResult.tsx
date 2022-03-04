@@ -1,6 +1,6 @@
 import { ViewName } from 'models'
 
-const Result = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
+const GameResult = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     return (
         <>
             Result
@@ -9,4 +9,4 @@ const Result = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     )
 }
 
-export default Result;
+export default GameResult;

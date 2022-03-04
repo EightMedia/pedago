@@ -9,7 +9,7 @@ const ContentPage = () => {
   const [language, setLanguage] = useState<Language>(() => {
     let langFromLocalStorage;
     if (typeof window !== "undefined") {
-      langFromLocalStorage = window.localStorage.getItem("language");
+      langFromLocalStorage = localStorage.getItem("language");
     }
 
     return langFromLocalStorage ? langFromLocalStorage as Language : DEFAULT_LANGUAGE;

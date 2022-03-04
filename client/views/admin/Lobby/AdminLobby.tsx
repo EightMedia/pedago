@@ -1,6 +1,6 @@
 import { ViewName } from 'models'
 
-const Lobby = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
+const AdminLobby = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     return (
         <>
             Lobby
@@ -9,4 +9,4 @@ const Lobby = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     )
 }
 
-export default Lobby;
+export default AdminLobby;

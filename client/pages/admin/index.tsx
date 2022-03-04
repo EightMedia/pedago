@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { initialViewState, ViewName } from "models";
-import Wizard from "../../views/admin/Wizard/Wizard";
+import AdminWizard from "../../views/admin/Wizard/AdminWizard";
 
 function useSocket(url: string) {
     const [socket, setSocket] = useState<Socket | null>(null);
@@ -42,7 +42,7 @@ const AdminMain = () => {
             {(() => {
                 switch (view.name) {
                     case ViewName.Wizard:
-                        return <Wizard socket={socket} data={undefined} />
+                        return <AdminWizard socket={socket} data={undefined} />
                     default:
                         return null
                 }
