@@ -5,7 +5,7 @@ const ReDirect = () => {
     const router = useRouter();
     useEffect(() => {
         let gameCode;
-        if (window !== undefined) {
+        if (typeof window !== 'undefined') {
             gameCode = localStorage.getItem('gameCode');
         }
         gameCode ? router.push(`/game/${gameCode}`) : router.back();
