@@ -13,6 +13,8 @@
   "dependencies": {
     "typescript": "^4.6.2"
   },
-  "files": ["lib/**/*"],
+  "files": [
+    "lib/**/*"
+  ],
   "author": "Eight Media"
 }
