@@ -1,15 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
-import LandingPage from "../views/LandingPage";
 import * as languages from '../data/languages';
 import { DataTranslation, Language } from 'models'
-
+import dynamic from 'next/dynamic';
 
 const ContentPage = () => {
   const [language, setLanguage] = useState<Language>(() => {
     let langFromLocalStorage;
-    if (typeof window !== "undefined") {
+    if (typeof document !== "undefined") {
       langFromLocalStorage = localStorage.getItem("language");
     }
 
@@ -21,10 +20,12 @@ const ContentPage = () => {
     localStorage.setItem("language", language);
   }, [language]);
 
+  const LandingWithoutSSR = dynamic(() => import('../views/LandingPage'), { ssr: false })
+
   return (
     <>
       <LanguageContext.Provider value={data}>
-        <LandingPage language={language} setLanguage={setLanguage}></LandingPage>
+        <LandingWithoutSSR language={language} setLanguage={setLanguage}></LandingWithoutSSR>
       </LanguageContext.Provider>
     </>
   );
