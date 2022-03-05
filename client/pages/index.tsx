@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DEFAULT_LANGUAGE, LanguageContext } from '../contexts/LanguageContext';
 import * as languages from '../data/languages';
-import { DataTranslation, Language } from 'models'
+import { DataTranslation, Language } from 'models';
 import dynamic from 'next/dynamic';
 
 const ContentPage = () => {
@@ -11,7 +11,9 @@ const ContentPage = () => {
       langFromLocalStorage = localStorage.getItem('language');
     }
 
-    return langFromLocalStorage ? langFromLocalStorage as Language : DEFAULT_LANGUAGE;
+    return langFromLocalStorage
+      ? (langFromLocalStorage as Language)
+      : DEFAULT_LANGUAGE;
   });
   const data: DataTranslation = languages[language];
 
@@ -19,12 +21,17 @@ const ContentPage = () => {
     localStorage.setItem('language', language);
   }, [language]);
 
-  const LandingWithoutSSR = dynamic(() => import('../views/LandingPage'), { ssr: false })
+  const LandingWithoutSSR = dynamic(() => import('../views/LandingPage'), {
+    ssr: false,
+  });
 
   return (
     <>
       <LanguageContext.Provider value={data}>
-        <LandingWithoutSSR language={language} setLanguage={setLanguage}></LandingWithoutSSR>
+        <LandingWithoutSSR
+          language={language}
+          setLanguage={setLanguage}
+        ></LandingWithoutSSR>
       </LanguageContext.Provider>
     </>
   );

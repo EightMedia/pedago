@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import { Socket, io } from "socket.io-client";
-import GameGame from "../../views/game/Game/GameGame";
-import GameLobby from "../../views/game/Lobby/GameLobby";
-import GameResult from "../../views/game/Result/GameResult";
-import GameWizard from "../../views/game/Wizard/GameWizard";
-import { ViewName, ViewState, initialViewState } from 'models'
+import { initialViewState, ViewName, ViewState } from 'models';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
+import GameGame from '../../views/game/Game/GameGame';
+import GameLobby from '../../views/game/Lobby/GameLobby';
+import GameResult from '../../views/game/Result/GameResult';
+import GameWizard from '../../views/game/Wizard/GameWizard';
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -28,16 +28,16 @@ function useSocket(url: string) {
 }
 
 const GameMain = () => {
-  const socket: any = useSocket("http://localhost:3001");
+  const socket: any = useSocket('http://localhost:3001');
   const [view, setView] = useState(initialViewState);
 
   const handleClick = (value: ViewName): void => {
-    socket.emit('to', { name: value })
-  }
+    socket.emit('to', { name: value });
+  };
 
   useEffect(() => {
     if (socket) {
-      socket.on("to", (v: ViewState) => setView(v));
+      socket.on('to', (v: ViewState) => setView(v));
     }
   }, [socket, view]);
 
@@ -50,13 +50,13 @@ const GameMain = () => {
       {(() => {
         switch (view.name) {
           case ViewName.Wizard:
-            return (<GameWizard handleClick={handleClick} />)
+            return <GameWizard handleClick={handleClick} />;
           case ViewName.Lobby:
-            return <GameLobby handleClick={handleClick} />
+            return <GameLobby handleClick={handleClick} />;
           case ViewName.Game:
-            return <GameGame handleClick={handleClick} />
+            return <GameGame handleClick={handleClick} />;
           case ViewName.Result:
-            return <GameResult handleClick={handleClick} />
+            return <GameResult handleClick={handleClick} />;
           default:
             return null;
         }

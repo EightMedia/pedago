@@ -9,8 +9,8 @@ const ReDirect = () => {
             gameCode = localStorage.getItem('gameCode');
         }
         gameCode ? router.push(`/game/${gameCode}`) : router.back();
-    }, [])
+    }, []);
     return null;
-}
+};
 
 export default ReDirect;

@@ -1,4 +1,4 @@
-import { Sector } from "./sector.enum";
+import { Sector } from './sector.enum';
 
 export interface PlayersType {
     type: 'Studenten' | 'Professionals';

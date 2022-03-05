@@ -6,5 +6,5 @@ export enum Sector {
     WO,
     PrMaHBO,
     AcMa,
-    Anders
+    Anders,
 }

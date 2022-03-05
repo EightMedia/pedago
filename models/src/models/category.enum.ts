@@ -4,5 +4,5 @@ export enum Category {
     Contextual,
     Critical,
     Functional,
-    Psychological
-};
+    Psychological,
+}
