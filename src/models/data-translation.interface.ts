@@ -6,5 +6,5 @@ export interface DataTranslation {
         button: string;
         create: string;
         asAdmin: string;
-    }
+    };
 }
