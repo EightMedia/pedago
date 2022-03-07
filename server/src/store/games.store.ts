@@ -1,24 +1,27 @@
 import { RoomDto } from 'models';
-import create from 'zustand';
+import create, { GetState, SetState } from 'zustand';
+import { findRoomIndexById, getRoomById } from './games.query';
 
 export interface GamesState {
-    games: Record<string, RoomDto>;
+    games: RoomDto[];
+    addRoom: (room: RoomDto) => void;
+    updateRoom: (room: RoomDto) => void;
+    removeAllGames: () => void;
 }
 
-const useStore = create<GamesState>(set => ({
-    games: {},
+const useGamesStore = create<GamesState>((set: SetState<GamesState>, get:GetState<GamesState>) => ({
+    games: [],
     addRoom: (room: RoomDto) =>
         set((state: GamesState) => ({
             ...state,
-            games: { ...state.games, [room.id]: room },
+            games: [...state.games, room],
         })),
-    updateRoom: (roomId: string, room: RoomDto) =>
-        set((state: GamesState) => ({
-            ...state,
-            games: {
-                ...state.games,
-                [roomId]: { ...state.games[roomId], room },
-            },
-        })),
-    removeAllGames: () => set({ games: {} }),
+    updateRoom: (room: Partial<RoomDto>) => {
+        const index = findRoomIndexById(room.id as string);
+        let selectedRoom = get().games[index];
+        selectedRoom = { ...selectedRoom, ...room}
+    },
+    removeAllGames: () => set({ games: [] }),
 }));
+
+export default useGamesStore;
