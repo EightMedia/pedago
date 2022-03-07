@@ -1,6 +1,6 @@
 import express from 'express';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { ViewName } from 'models';
 
 const app = express();
@@ -16,42 +16,23 @@ console.log('--- Pedago Server started at port 3001 ---');
 type gameType = any;
 const games = {} as { [key: string]: gameType };
 
-io.on('connection', socket => {
+io.on('connection', (socket: Socket) => {
     const sendGameData = () => {
         io.emit('newData', games);
     };
-
+    console.log('socket', socket);
+    
     console.log('a user connected with socket ID: ', socket.id);
 
     // send welcome to user on this socket
     socket.emit('message', 'Hello you have connected');
 
     // begin to send user to start screen
-    socket.emit('to', { name: ViewName.Wizard });
+    socket.emit('to', { name: ViewName.Game });
 
     // log anything that comes in
     socket.onAny((eventName, ...args) => {
         console.log('event: ', eventName, args, games);
-    });
-
-    /**
-     *
-     * Send a message
-     *
-     */
-
-    socket.on('message', data => {
-        const { room, msg, to } = data;
-        console.log('Message sent to ' + to + ' with data: ', data);
-        if (to === 'room') {
-            io.to(room).emit('message', msg);
-        }
-        if (to === 'me') {
-            socket.emit('message', msg);
-        }
-        if (to === 'all') {
-            io.emit('message', msg);
-        }
     });
 
     /**
