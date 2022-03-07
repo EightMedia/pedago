@@ -4,5 +4,9 @@ export declare enum Category {
     Contextual = 2,
     Critical = 3,
     Functional = 4,
+<<<<<<< HEAD
     Psychological = 5
+=======
+    Psychological = 5,
+>>>>>>> main
 }

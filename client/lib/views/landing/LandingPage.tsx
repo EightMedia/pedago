@@ -2,6 +2,7 @@ import { Language } from 'models';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
+<<<<<<< HEAD:client/views/LandingPage.tsx
     ChangeEvent,
     Dispatch,
     FormEvent,
@@ -11,6 +12,17 @@ import {
 } from 'react';
 import { LanguageContext } from '../contexts/LanguageContext';
 import styles from '../styles/LandingPage.module.css';
+=======
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
+import { LanguageContext } from "../../../contexts/LanguageContext";
+import styles from "../styles/LandingPage.module.css";
+>>>>>>> main:client/lib/views/landing/LandingPage.tsx
 
 const LandingPage = ({
     language,

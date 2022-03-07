@@ -10,3 +10,7 @@ var Category;
     Category[Category["Functional"] = 4] = "Functional";
     Category[Category["Psychological"] = 5] = "Psychological";
 })(Category = exports.Category || (exports.Category = {}));
+<<<<<<< HEAD
+=======
+;
+>>>>>>> main
