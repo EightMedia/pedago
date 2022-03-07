@@ -8,7 +8,7 @@ import {
   useContext,
   useState,
 } from "react";
-import { LanguageContext } from "../contexts/LanguageContext";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 import styles from "../styles/LandingPage.module.css";
 
 const LandingPage = ({

@@ -22,9 +22,12 @@ const ContentPage = () => {
     localStorage.setItem("language", language);
   }, [language]);
 
-  const LandingWithoutSSR = dynamic(() => import("../views/LandingPage"), {
-    ssr: false,
-  });
+  const LandingWithoutSSR = dynamic(
+    () => import("../lib/views/landing/LandingPage"),
+    {
+      ssr: false,
+    }
+  );
 
   return (
     <>
