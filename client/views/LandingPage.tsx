@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { Language } from 'models';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
   ChangeEvent,
   Dispatch,
@@ -10,7 +11,6 @@ import {
 } from 'react';
 import { LanguageContext } from '../contexts/LanguageContext';
 import styles from '../styles/LandingPage.module.css';
-import { useRouter } from 'next/router';
 
 const LandingPage = ( {
   language,
@@ -66,7 +66,11 @@ const LandingPage = ( {
               onChange={ handleInputChange }
               placeholder={ data?.landing?.input }
             />
-            <button type="submit">{ data?.landing?.button }</button>
+            <Link href={ `/game/${ gameCode }` } passHref>
+              <button type="submit">
+                { data?.landing?.button }
+              </button>
+            </Link>
           </form>
           <Link href="/admin">{ data?.landing?.create }</Link>{ ' ' }
           { data?.landing?.asAdmin }
