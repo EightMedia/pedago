@@ -5,15 +5,15 @@ import Game from "../../views/game/Game/Game";
 import Lobby from "../../views/game/Lobby/Lobby";
 import Result from "../../views/game/Result/Result";
 import Wizard from "../../views/game/Wizard/Wizard";
-import { ViewName, ViewState, initialViewState } from 'models'
+import { ViewName, ViewState, initialViewState } from "models";
 
-function useSocket(url: string) {
-  const [socket, setSocket] = useState<Socket | null>(null);
+function useSocket( url: string ) {
+  const [ socket, setSocket ] = useState<Socket | null>( null );
 
-  useEffect(() => {
-    const socketIo = io(url);
+  useEffect( () => {
+    const socketIo = io( url );
 
-    setSocket(socketIo);
+    setSocket( socketIo );
 
     function cleanup() {
       socketIo.disconnect();
@@ -22,45 +22,45 @@ function useSocket(url: string) {
 
     // should only run once and not on every re-render,
     // so pass an empty array
-  }, []);
+  }, [] );
 
   return socket;
 }
 
 const GameCode = () => {
-  const socket: any = useSocket("http://localhost:3001");
-  const [view, setView] = useState(initialViewState);
+  const socket: any = useSocket( "http://localhost:3001" );
+  const [ view, setView ] = useState( initialViewState );
 
-  const handleClick = (value: ViewName): void => {
-    socket.emit('to', { name: value })
-  }
+  const handleClick = ( value: ViewName ): void => {
+    socket.emit( "to", { name: value } );
+  };
 
-  useEffect(() => {
-    if (socket) {
-      socket.on("to", (v: ViewState) => setView(v));
+  useEffect( () => {
+    if ( socket ) {
+      socket.on( "to", ( v: ViewState ) => setView( v ) );
     }
-  }, [socket, view]);
+  }, [ socket, view ] );
 
   const router = useRouter();
   const gameCode = router.query.gameCode;
 
   return (
     <div>
-      <h1>Joining game {gameCode}</h1>
-      {(() => {
-        switch (view.name) {
+      <h1>Joining game { gameCode }</h1>
+      { ( () => {
+        switch ( view.name ) {
           case ViewName.Wizard:
-            return (<Wizard handleClick={handleClick} />)
+            return <Wizard handleClick={ handleClick } />;
           case ViewName.Lobby:
-            return <Lobby handleClick={handleClick} />
+            return <Lobby handleClick={ handleClick } />;
           case ViewName.Game:
-            return <Game handleClick={handleClick} />
+            return <Game handleClick={ handleClick } />;
           case ViewName.Result:
-            return <Result handleClick={handleClick} />
+            return <Result handleClick={ handleClick } />;
           default:
             return null;
         }
-      })()}
+      } )() }
     </div>
   );
 };

@@ -3,13 +3,13 @@ import { io, Socket } from "socket.io-client";
 import { initialViewState, ViewName } from "models";
 import Wizard from "../../views/admin/Wizard/Wizard";
 
-function useSocket(url: string) {
-    const [socket, setSocket] = useState<Socket | null>(null);
+function useSocket( url: string ) {
+    const [ socket, setSocket ] = useState<Socket | null>( null );
 
-    useEffect(() => {
-        const socketIo = io(url);
+    useEffect( () => {
+        const socketIo = io( url );
 
-        setSocket(socketIo);
+        setSocket( socketIo );
 
         function cleanup() {
             socketIo.disconnect();
@@ -18,37 +18,37 @@ function useSocket(url: string) {
 
         // should only run once and not on every re-render,
         // so pass an empty array
-    }, []);
+    }, [] );
 
     return socket;
 }
 
 const AdminMain = () => {
-    const socket: any = useSocket("http://localhost:3001");
-    const [view, setView] = useState(initialViewState);
+    const socket: any = useSocket( "http://localhost:3001" );
+    const [ view, setView ] = useState( initialViewState );
 
-    const handleClick = (value: ViewName): void => {
-        socket.emit('to', { name: value })
-    }
+    const handleClick = ( value: ViewName ): void => {
+        socket.emit( "to", { name: value } );
+    };
 
-    useEffect(() => {
-        if (socket) {
-            socket.on('to', setView);
+    useEffect( () => {
+        if ( socket ) {
+            socket.on( "to", setView );
         }
-    }, [socket]);
+    }, [ socket ] );
 
     return (
         <>
-            {(() => {
-                switch (view.name) {
+            { ( () => {
+                switch ( view.name ) {
                     case ViewName.Wizard:
-                        return <Wizard socket={socket} data={undefined} />
+                        return <Wizard socket={ socket } data={ undefined } />;
                     default:
-                        return null
+                        return null;
                 }
-            })()}
+            } )() }
         </>
-    )
-}
+    );
+};
 
 export default AdminMain;
