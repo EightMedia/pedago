@@ -33,6 +33,7 @@
     "cross-env": "^7.0.3",
     "express": "^4.17.2",
     "http": "^0.0.1-security",
-    "socket.io": "^4.4.1"
+    "socket.io": "^4.4.1",
+    "zustand": "^3.7.1"
   }
 }
