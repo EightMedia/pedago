@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-const JoinGame = ({ socket }: { socket: any }) => {
-  const [joinRoomName, setJoinRoomName] = useState("some room");
-  const [name, setName] = useState("John Doe");
+const JoinGame = ( { socket }: { socket: any } ) => {
+  const [ joinRoomName, setJoinRoomName ] = useState( "some room" );
+  const [ name, setName ] = useState( "John Doe" );
 
   const joinRoom = () => {
-    localStorage.setItem("room", joinRoomName);
-    localStorage.setItem("name", name);
+    localStorage.setItem( "room", joinRoomName );
+    localStorage.setItem( "name", name );
     const data = { room: joinRoomName, name: name };
-    socket.emit("joinRoom", data);
+    socket.emit( "joinRoom", data );
   };
 
   return (
@@ -18,15 +18,15 @@ const JoinGame = ({ socket }: { socket: any }) => {
         <h2>Join room</h2>
         <input
           type="text"
-          onChange={(e) => setJoinRoomName(e.target.value)}
-          value={joinRoomName}
+          onChange={ ( e ) => setJoinRoomName( e.target.value ) }
+          value={ joinRoomName }
         />
         <input
           type="text"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
+          onChange={ ( e ) => setName( e.target.value ) }
+          value={ name }
         />
-        <button onClick={joinRoom}>join room</button>
+        <button onClick={ joinRoom }>join room</button>
       </section>
     </div>
   );
