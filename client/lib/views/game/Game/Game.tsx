@@ -1,6 +1,10 @@
 import { ViewName } from "models";
 
-const Game = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
+export const Game = ({
+  handleClick,
+}: {
+  handleClick: (vn: ViewName) => void;
+}) => {
   return (
     <>
       Game
@@ -10,5 +14,3 @@ const Game = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
     </>
   );
 };
-
-export default Game;
