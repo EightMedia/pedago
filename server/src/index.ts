@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import { ViewName } from "models";
 
 const app = express();
 const httpServer = createServer(app);
@@ -26,7 +27,7 @@ io.on("connection", (socket) => {
   socket.emit("message", "Hello you have connected");
 
   // begin to send user to start screen
-  socket.emit("to", { view: "Start", data: {} });
+  socket.emit("to", { name: ViewName.Wizard });
 
   // log anything that comes in
   socket.onAny((eventName, ...args) => {
@@ -55,6 +56,16 @@ io.on("connection", (socket) => {
 
   /**
    *
+   * To
+   *
+   */
+
+  socket.on("to", (view) => {
+    socket.emit("to", view);
+  });
+
+  /**
+   *
    * Create room
    *
    */
@@ -74,7 +85,7 @@ io.on("connection", (socket) => {
       started: timestamp,
     };
     socket.emit("message", "You created a room");
-    socket.emit("to", { view: "AdminDashboard", data: { room: room } });
+    socket.emit("to", { view: ViewName.Wizard, data: { room: room } });
     sendGameData();
   });
 
@@ -109,13 +120,13 @@ io.on("connection", (socket) => {
    *
    */
   socket.on("reset", () => {
-    socket.broadcast.emit("to", { view: "Start", data: {} });
+    socket.broadcast.emit("to", { view: ViewName.Wizard, data: {} });
   });
   socket.on("killRoom", (room) => {
     // message all players
     io.in(room).emit("message", "Room was killed, party ended ☠️");
     // redirect everyone to start screen
-    io.in(room).emit("to", { view: "Start", data: {} });
+    io.in(room).emit("to", { view: ViewName.Wizard, data: {} });
     io.in(room).socketsLeave(room);
     // delete room
     delete games[room];
