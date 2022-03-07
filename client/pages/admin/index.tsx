@@ -1,8 +1,8 @@
 import { initialViewState, ViewName } from 'models';
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
-import AdminGame from '../../views/admin/Game/AdminGame';
-import AdminWizard from '../../views/admin/Wizard/AdminWizard';
+import AdminGame from '../../lib/views/landing/admin/Game/AdminGame';
+import AdminWizard from '../../lib/views/landing/admin/Wizard/AdminWizard';
 
 function useSocket(url: string): Socket | null {
     const [socket, setSocket] = useState<Socket | null>(null);
