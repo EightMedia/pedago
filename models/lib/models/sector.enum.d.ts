@@ -6,9 +6,5 @@ export declare enum Sector {
     WO = 4,
     PrMaHBO = 5,
     AcMa = 6,
-<<<<<<< HEAD
-    Anders = 7
-=======
     Anders = 7,
->>>>>>> main
 }
