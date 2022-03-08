@@ -1,18 +1,13 @@
 import React from "react";
-import "./Button.css";
 import cx from "classnames";
-import { buttonType } from "./Button.types";
+import styles from "./Button.module.css";
+import { ButtonType } from "./Button.types";
 
-export const ButtonComponent = ({
-  className,
-  children,
-  href,
-  variation = "primary",
-}: buttonType) => {
+export const ButtonComponent = ({ children, onClick }: ButtonType) => {
   return (
-    <a href={href} className={cx("button", variation, className)}>
+    <button className={cx("Button", styles.Button)} onClick={onClick}>
       {children}
-    </a>
+    </button>
   );
 };
 

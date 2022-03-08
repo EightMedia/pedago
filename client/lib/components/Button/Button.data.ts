@@ -1,13 +1,10 @@
-import { buttonType } from "./Button.types";
+import React from "react";
+import { ButtonType } from "./Button.types";
 
-export const buttonDataPrimary: buttonType = {
-  href: "https://example.com",
-  children: "Click to example.com",
-  variation: "primary",
-};
+// demo text
+const text = React.createElement(React.Fragment, null, "Click me");
 
-export const buttonDataSecondary: buttonType = {
-  href: "/about-us/contact",
-  children: "Contact us",
-  variation: "secondary",
+export const ButtonData: ButtonType = {
+  onClick: () => alert("clicked"),
+  children: text,
 };

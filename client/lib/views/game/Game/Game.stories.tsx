@@ -1,30 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Game } from "./Game";
-import {
-  gameDataCountdown,
-  gameDataLead,
-  gameDataMatching,
-  gameDataSorting,
-} from "./Game.data";
+import { gameDataCountdown, gameDataLead, gameDataSorting } from "./Game.data";
 
 export default {
-  title: "Views/Game",
+  title: "Views/Game/Game",
   component: Game,
 } as ComponentMeta<typeof Game>;
 
 // Setting a “template” of how args map to rendering
 const Template: ComponentStory<typeof Game> = (args) => <Game {...args} />;
-
-// Matching
-export const Matching = Template.bind({});
-Matching.parameters = {
-  design: {
-    type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A2840",
-  },
-};
-Matching.args = { ...gameDataMatching };
 
 // Countdown
 export const Countdown = Template.bind({});
@@ -41,10 +26,20 @@ export const Lead = Template.bind({});
 Lead.parameters = {
   design: {
     type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A2840",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A3018",
   },
 };
 Lead.args = { ...gameDataLead };
+
+// // Onboarding
+// export const Onboarding = Template.bind({});
+// Onboarding.parameters = {
+//   design: {
+//     type: "figma",
+//     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A3448",
+//   },
+// };
+// Onboarding.args = { ...gameDataOnboarding };
 
 // Each story then reuses that template
 export const Sorting = Template.bind({});

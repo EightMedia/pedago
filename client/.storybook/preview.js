@@ -101,7 +101,20 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ["Hello", "Views", "Components", "Layouts"],
+      order: [
+        "Hello",
+        "Views",
+        [
+          "Introduction",
+          "Landing Page",
+          "Admin",
+          ["Wizard", "Lobby", "Game"],
+          "Game",
+          ["Wizard", "Lobby", "Game"],
+        ],
+        "Components",
+        "Layouts",
+      ],
     },
     panelPosition: "right",
   },

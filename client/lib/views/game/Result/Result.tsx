@@ -1,14 +1,14 @@
-import { ViewName } from "models";
+import React from "react";
+import cx from "classnames";
+import styles from "./Result.module.css";
+import { ResultType } from "./Result.types";
 
-const Result = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
+export const ResultComponent = ({}: ResultType) => {
   return (
-    <>
-      Result
-      <button onClick={() => handleClick(ViewName.Wizard)}>
-        Back to Wizard
-      </button>
-    </>
+    <div className={cx("Result", styles.Result)}>
+      <h2>Result</h2>
+    </div>
   );
 };
 
-export default Result;
+export const Result = React.memo(ResultComponent);
