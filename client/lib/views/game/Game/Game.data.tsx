@@ -1,8 +1,3 @@
-// export const gameData = {
-//   round: 1,
-//   maxRounds: 6,
-//   players: ["Stijn", "Vincent"],
-// };
 export const gameDataCountdown = {
   mockCounter: 10,
   round: 1,
