@@ -1,10 +1,7 @@
 import { memo, useState } from "react";
-import cx from "classnames";
-import styles from "./Wizard.module.css";
 import { WizardType } from "./Wizard.types";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
-import { ViewName } from "models";
 import { WizardRoomCode } from "./WizardRoomCode";
 import { WizardName } from "./WizardName";
 import { WizardGroup } from "./WizardGroup";
