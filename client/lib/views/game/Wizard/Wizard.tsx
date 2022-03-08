@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { memo, useState } from "react";
 import cx from "classnames";
 import styles from "./Wizard.module.css";
 import { WizardType } from "./Wizard.types";
@@ -11,7 +11,7 @@ import { WizardGroup } from "./WizardGroup";
 import { WizardInfo } from "./WizardInfo";
 
 export const WizardComponent = ({
-  handleClick,
+  handleEmit,
   groups,
   initialStep,
 }: WizardType) => {
@@ -28,4 +28,4 @@ export const WizardComponent = ({
   );
 };
 
-export const Wizard = React.memo(WizardComponent);
+export const Wizard = memo(WizardComponent);

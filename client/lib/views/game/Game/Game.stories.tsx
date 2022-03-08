@@ -31,16 +31,6 @@ Lead.parameters = {
 };
 Lead.args = { ...gameDataLead };
 
-// // Onboarding
-// export const Onboarding = Template.bind({});
-// Onboarding.parameters = {
-//   design: {
-//     type: "figma",
-//     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A3448",
-//   },
-// };
-// Onboarding.args = { ...gameDataOnboarding };
-
 // Each story then reuses that template
 export const Sorting = Template.bind({});
 Sorting.parameters = {

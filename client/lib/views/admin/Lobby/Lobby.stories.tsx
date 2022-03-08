@@ -13,6 +13,9 @@ const Template: ComponentStory<typeof Lobby> = (args) => <Lobby {...args} />;
 // Empty
 export const Empty = Template.bind({});
 Empty.parameters = {
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A11584",
@@ -24,6 +27,9 @@ Empty.args = { ...LobbyData };
 // one group
 export const OneGroup = Template.bind({});
 OneGroup.parameters = {
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A11271",
@@ -35,6 +41,9 @@ OneGroup.args = { ...LobbyData };
 // two groups
 export const TwoGroups = Template.bind({});
 TwoGroups.parameters = {
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=474%3A3400",

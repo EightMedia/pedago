@@ -1,6 +1,7 @@
 import { ViewName } from "models";
 import React from "react";
 import { SortList } from "../../../components/SortList";
+import { GameType } from "./Game.types";
 
 const gameCountdown = ({ counter }: { counter: number }) => {
   return (
@@ -19,13 +20,7 @@ const gameLead = ({ counter }: { counter: number }) => {
   );
 };
 
-export const Game = ({
-  handleClick,
-  mockCounter = 0,
-}: {
-  handleClick: (vn: ViewName) => void;
-  mockCounter?: 0 | 7 | 10;
-}) => {
+export const Game = ({ handleEmit, mockCounter = 0 }: GameType) => {
   const [counter, setCounter] = React.useState(10);
 
   React.useEffect(() => {
@@ -45,7 +40,7 @@ export const Game = ({
     <>
       <h2>Sorting!</h2>
       {/* <SortList /> */}
-      <button onClick={() => handleClick(ViewName.Wizard)}>I'm done!</button>
+      <button onClick={() => handleEmit(ViewName.Wizard)}>I'm done!</button>
     </>
   );
 };

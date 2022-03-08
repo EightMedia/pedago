@@ -1,9 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Panel } from "./Panel";
-import {
-  PanelData,
-} from "./Panel.data";
+import { PanelData } from "./Panel.data";
 
 export default {
   title: "Components/Panel",

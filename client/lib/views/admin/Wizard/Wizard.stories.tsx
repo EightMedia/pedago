@@ -13,6 +13,9 @@ const Template: ComponentStory<typeof Wizard> = (args) => <Wizard {...args} />;
 // story
 export const Primary = Template.bind({});
 Primary.parameters = {
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "",

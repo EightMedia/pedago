@@ -32,7 +32,7 @@ const GameCode = () => {
   const socket: any = useSocket("http://localhost:3001");
   const [view, setView] = useState(initialViewState);
 
-  const handleClick = (value: ViewName): void => {
+  const handleEmit = (value: ViewName): void => {
     socket.emit("to", { name: value });
   };
 
@@ -51,12 +51,16 @@ const GameCode = () => {
         switch (view.name) {
           case ViewName.Wizard:
             return (
-              <Wizard handleClick={handleClick} initialStep={WizardStep.Name} groups={[]} />
+              <Wizard
+                handleEmit={handleEmit}
+                initialStep={WizardStep.Name}
+                groups={[]}
+              />
             );
           case ViewName.Lobby:
-            return <Lobby handleClick={handleClick} />;
+            return <Lobby handleEmit={handleEmit} />;
           case ViewName.Game:
-            return <Game handleClick={handleClick} />;
+            return <Game handleEmit={handleEmit} />;
           case ViewName.Result:
             return <Result />;
           default:

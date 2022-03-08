@@ -1,5 +1,11 @@
 /* global styling. A reset etc.. */
 
+@import "../../../node_modules/css-reset-and-normalize/css/button-reset.css";
+@import "../../../node_modules/css-reset-and-normalize/css/link-reset.css";
+@import "../../../node_modules/css-reset-and-normalize/css/reset-and-normalize.css";
+@import "mediaQueries.css";
+@import "variables.css";
+
 html,
 body {
   margin: 0;
@@ -9,6 +15,7 @@ body {
 }
 body {
   padding: 1em;
+  background: var(--color-tomato);
 }
 
 a {
