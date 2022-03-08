@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { RoomDto, ViewName } from "models";
+import { Admin, RoomDto, ViewName } from "models";
 import { Socket } from "socket.io";
 import useGamesStore from "./store/games.store";
 
@@ -17,7 +17,7 @@ export const registerGame = (partialRoom: RoomDto, socket: Socket) => {
     id: roomName,
     admin: {
       id: adminId,
-    },
+    } as Admin,
     gameCode: gameCode,
     players: [],
     active: true,
@@ -41,5 +41,3 @@ export const reset = (socket: Socket) => {
 export const disconnectAll = (socket: Socket) => {
   socket.removeAllListeners();
 };
-
-// how to reconnect to socket if browser fails
