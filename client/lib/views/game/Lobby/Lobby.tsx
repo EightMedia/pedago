@@ -1,10 +1,6 @@
 import { ViewName } from "models";
 
-const AdminGame = ({
-  handleClick,
-}: {
-  handleClick: (vn: ViewName) => void;
-}) => {
+const Lobby = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
   return (
     <>
       Lobby
@@ -15,4 +11,4 @@ const AdminGame = ({
   );
 };
 
-export default AdminGame;
+export default Lobby;
