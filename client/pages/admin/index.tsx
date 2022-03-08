@@ -1,54 +1,60 @@
-import { initialViewState, ViewName } from 'models';
-import { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
-import AdminGame from '../../lib/views/landing/admin/Game/AdminGame';
-import AdminWizard from '../../lib/views/landing/admin/Wizard/AdminWizard';
+import { initialViewState, ViewName } from "models";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+import AdminGame from "../../lib/views/landing/admin/Game/AdminGame";
+import AdminWizard from "../../lib/views/landing/admin/Wizard/AdminWizard";
 
 function useSocket(url: string): Socket | null {
-    const [socket, setSocket] = useState<Socket | null>(null);
+  const [socket, setSocket] = useState<Socket | null>(null);
 
-    useEffect(() => {
-        const socketIo = io(url);
+  useEffect(() => {
+    const socketIo = io(url);
 
-        setSocket(socketIo);
+    setSocket(socketIo);
 
-        function cleanup() {
-            socketIo.disconnect();
-        }
-        return cleanup;
-    }, []);
+    function cleanup() {
+      socketIo.disconnect();
+    }
+    return cleanup;
+  }, []);
 
-    return socket;
+  return socket;
 }
 
 const AdminMain = () => {
-    const socket: Socket | null = useSocket('http://localhost:3001');
-    const [view, setView] = useState(initialViewState);
+  const socket: Socket | null = useSocket("http://localhost:3001");
+  const [view, setView] = useState(initialViewState);
 
-    const handleClick = (value: ViewName): void => {
-      (socket as Socket).emit('to', { name: value });
-    };
+  const handleClick = (value: ViewName): void => {
+    (socket as Socket).emit("to", { name: value });
+  };
 
-    useEffect(() => {
-        if (socket) {
-            socket.on('to', setView);
+  useEffect(() => {
+    if (socket) {
+      socket.on("to", setView);
+    }
+  }, [socket]);
+
+  return (
+    <>
+      {(() => {
+        switch (view.name) {
+          case ViewName.Wizard:
+            return <AdminWizard socket={socket} data={undefined} />;
+          case ViewName.Game:
+            return (
+              <AdminGame
+                socket={socket}
+                data={undefined}
+                handleClick={handleClick}
+              />
+            );
+          default:
+            return null;
         }
-    }, [socket]);
-
-    return (
-        <>
-            {(() => {
-                switch (view.name) {
-                    case ViewName.Wizard:
-                        return <AdminWizard socket={socket} data={undefined} />;
-                    case ViewName.Game:
-                        return <AdminGame socket={socket} data={undefined} handleClick={handleClick} />;
-                    default:
-                        return null;
-                }
-            })()}
-        </>
-    );
+      })()}
+    </>
+  );
 };
 
 export default AdminMain;

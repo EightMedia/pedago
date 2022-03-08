@@ -1,10 +1,10 @@
 export enum Sector {
-    PO,
-    VO,
-    MBO,
-    HBO,
-    WO,
-    PrMaHBO,
-    AcMa,
-    Anders,
+  PO,
+  VO,
+  MBO,
+  HBO,
+  WO,
+  PrMaHBO,
+  AcMa,
+  Anders,
 }
