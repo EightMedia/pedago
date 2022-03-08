@@ -1,6 +1,6 @@
 export enum View {
-    Start,
-    CreateGame,
-    JoinGame,
-    AdminDashboard,
+  Start,
+  CreateGame,
+  JoinGame,
+  AdminDashboard,
 }
