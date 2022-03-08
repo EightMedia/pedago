@@ -50,7 +50,7 @@ export const parameters = {
     viewports: {
       ...customViewports,
     },
-    defaultViewport: "Full",
+    defaultViewport: "MobileM",
   },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

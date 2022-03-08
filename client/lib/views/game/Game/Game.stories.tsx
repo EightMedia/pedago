@@ -14,6 +14,7 @@ const Template: ComponentStory<typeof Game> = (args) => <Game {...args} />;
 // Countdown
 export const Countdown = Template.bind({});
 Countdown.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A2840",
@@ -24,6 +25,7 @@ Countdown.args = { ...gameDataCountdown };
 // Lead
 export const Lead = Template.bind({});
 Lead.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A3018",
@@ -34,6 +36,7 @@ Lead.args = { ...gameDataLead };
 // Each story then reuses that template
 export const Sorting = Template.bind({});
 Sorting.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=542%3A3449",

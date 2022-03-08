@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof Wizard> = (args) => <Wizard {...args} />;
 // story
 export const Primary = Template.bind({});
 Primary.parameters = {
+  layout: "fullscreen",
   viewport: {
     defaultViewport: "Desktop",
   },

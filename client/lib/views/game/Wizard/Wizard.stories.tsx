@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof Wizard> = (args) => <Wizard {...args} />;
 // room code
 export const RoomCode = Template.bind({});
 RoomCode.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A6898",
@@ -26,6 +27,7 @@ RoomCode.args = {
 // user name
 export const Name = Template.bind({});
 Name.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A7172",
@@ -39,6 +41,7 @@ Name.args = {
 // group
 export const Group = Template.bind({});
 Group.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=459%3A1769",
@@ -52,6 +55,7 @@ Group.args = {
 // info
 export const Info = Template.bind({});
 Info.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=520%3A4271",

@@ -13,9 +13,10 @@ const Template: ComponentStory<typeof Lobby> = (args) => <Lobby {...args} />;
 // one group
 export const OneGroup = Template.bind({});
 OneGroup.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=459%3A2532",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=459%3A1927",
   },
 };
 OneGroup.storyName = "One group";
@@ -24,10 +25,11 @@ OneGroup.args = { ...LobbyData };
 // two groups
 export const TwoGroups = Template.bind({});
 TwoGroups.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=459%3A1927",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=459%3A2532",
   },
 };
-TwoGroups.storyName = "One group";
+TwoGroups.storyName = "Two groups";
 TwoGroups.args = { ...LobbyData };

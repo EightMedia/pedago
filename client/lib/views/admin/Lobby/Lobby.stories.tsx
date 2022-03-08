@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof Lobby> = (args) => <Lobby {...args} />;
 // Empty
 export const Empty = Template.bind({});
 Empty.parameters = {
+  layout: "fullscreen",
   viewport: {
     defaultViewport: "Desktop",
   },
@@ -27,6 +28,7 @@ Empty.args = { ...LobbyData };
 // one group
 export const OneGroup = Template.bind({});
 OneGroup.parameters = {
+  layout: "fullscreen",
   viewport: {
     defaultViewport: "Desktop",
   },
@@ -41,6 +43,7 @@ OneGroup.args = { ...LobbyData };
 // two groups
 export const TwoGroups = Template.bind({});
 TwoGroups.parameters = {
+  layout: "fullscreen",
   viewport: {
     defaultViewport: "Desktop",
   },
