@@ -1,20 +1,12 @@
-import { Socket } from "socket.io-client";
-
-const AdminWizard = ({
-  socket,
-  data,
-}: {
-  socket: Socket | null;
-  data: any;
-}) => {
+const Wizard = ({ socket, data }: { socket: any; data: any }) => {
   // back to start
   const resetEveryone = () => {
-    (socket as Socket).emit("reset");
+    socket.emit("reset");
   };
 
   // end the party
   const killRoom = () => {
-    (socket as Socket).emit("killRoom", data.room);
+    socket.emit("killRoom", data.room);
   };
 
   return (
@@ -28,4 +20,4 @@ const AdminWizard = ({
     </div>
   );
 };
-export default AdminWizard;
+export default Wizard;

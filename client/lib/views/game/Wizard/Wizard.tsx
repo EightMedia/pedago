@@ -1,10 +1,6 @@
 import { ViewName } from "models";
 
-const GameWizard = ({
-  handleClick,
-}: {
-  handleClick: (vn: ViewName) => void;
-}) => {
+const Wizard = ({ handleClick }: { handleClick: (vn: ViewName) => void }) => {
   return (
     <>
       <button onClick={() => handleClick(ViewName.Lobby)}>Lobby</button>
@@ -14,4 +10,4 @@ const GameWizard = ({
   );
 };
 
-export default GameWizard;
+export default Wizard;

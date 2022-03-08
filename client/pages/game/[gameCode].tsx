@@ -1,11 +1,8 @@
-import { initialViewState, ViewName, ViewState } from "models";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { useState, useEffect } from "react";
+import { Socket, io } from "socket.io-client";
+import { ViewName, ViewState, initialViewState } from "models";
 import { Game } from "../../lib/views/game/Game";
-import GameLobby from "../../lib/views/game/Lobby/GameLobby";
-import GameResult from "../../lib/views/game/Result/GameResult";
-import GameWizard from "../../lib/views/game/Wizard/GameWizard";
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -27,7 +24,7 @@ function useSocket(url: string) {
   return socket;
 }
 
-const GameMain = () => {
+const GameCode = () => {
   const socket: any = useSocket("http://localhost:3001");
   const [view, setView] = useState(initialViewState);
 
@@ -49,14 +46,8 @@ const GameMain = () => {
       <h1>Joining game {gameCode}</h1>
       {(() => {
         switch (view.name) {
-          case ViewName.Wizard:
-            return <GameWizard handleClick={handleClick} />;
-          case ViewName.Lobby:
-            return <GameLobby handleClick={handleClick} />;
           case ViewName.Game:
             return <Game handleClick={handleClick} />;
-          case ViewName.Result:
-            return <GameResult handleClick={handleClick} />;
           default:
             return null;
         }
@@ -64,4 +55,4 @@ const GameMain = () => {
     </div>
   );
 };
-export default GameMain;
+export default GameCode;
