@@ -3,7 +3,7 @@ import { GetState, SetState } from "zustand";
 import { GamesState } from "./games.store";
 
 // GETTERS
-export const getPlayerById = (
+export const getPlayerByIdFn = (
   get: GetState<GamesState>,
   roomId: string,
   playerId: string
@@ -13,7 +13,7 @@ export const getPlayerById = (
   return players?.find((player) => player.id === playerId);
 };
 
-export const getGroupsByRoomId = (
+export const getGroupsByRoomIdFn = (
   get: GetState<GamesState>,
   roomId: string
 ): Group[] | undefined => {
@@ -22,13 +22,13 @@ export const getGroupsByRoomId = (
 };
 
 // SETTERS
-export const addRoom = (set: SetState<GamesState>, room: RoomDto) =>
+export const addRoomFn = (set: SetState<GamesState>, room: RoomDto) =>
   set((state: GamesState) => ({
     ...state,
     games: [...state.games, room],
   }));
 
-export const updateRoom = (
+export const updateRoomFn = (
   set: SetState<GamesState>,
   room: Partial<RoomDto>
 ) => {
@@ -46,7 +46,7 @@ export const updateRoom = (
   }));
 };
 
-export const addPlayerToRoom = (
+export const addPlayerToRoomFn = (
   set: SetState<GamesState>,
   roomId: string,
   player: Partial<Player>
@@ -61,7 +61,7 @@ export const addPlayerToRoom = (
   }));
 };
 
-export const updatePlayer = (
+export const updatePlayerFn = (
   set: SetState<GamesState>,
   roomId: string,
   playerId: string,

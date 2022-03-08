@@ -1,12 +1,12 @@
 import { Group, Player, RoomDto } from "models";
 import create, { GetState, SetState } from "zustand";
 import {
-  addPlayerToRoom,
-  addRoom,
-  getGroupsByRoomId,
-  getPlayerById,
-  updatePlayer,
-  updateRoom,
+  addPlayerToRoomFn,
+  addRoomFn,
+  getGroupsByRoomIdFn,
+  getPlayerByIdFn,
+  updatePlayerFn,
+  updateRoomFn,
 } from "./games.query";
 export interface GamesState {
   games: RoomDto[];
@@ -33,15 +33,15 @@ const useGamesStore = create<GamesState>(
       get().games.find((room) => room.id === roomId),
     getRoomByGameCode: (gameCode: number) =>
       get().games.find((room) => room.gameCode === gameCode),
-    getPlayerById: (roomId, playerId) => getPlayerById(get, roomId, playerId),
-    getGroupsByRoomId: (roomId: string) => getGroupsByRoomId(get, roomId),
+    getPlayerById: (roomId, playerId) => getPlayerByIdFn(get, roomId, playerId),
+    getGroupsByRoomId: (roomId: string) => getGroupsByRoomIdFn(get, roomId),
     // Setters
-    addRoom: (room: RoomDto) => addRoom(set, room),
-    updateRoom: (room: RoomDto) => updateRoom(set, room),
+    addRoom: (room: RoomDto) => addRoomFn(set, room),
+    updateRoom: (room: RoomDto) => updateRoomFn(set, room),
     addPlayerToRoom: (roomId: string, player: Partial<Player>) =>
-      addPlayerToRoom(set, roomId, player),
+      addPlayerToRoomFn(set, roomId, player),
     updatePlayer: (roomId: string, playerId: string, player: Partial<Player>) =>
-      updatePlayer(set, roomId, playerId, player),
+      updatePlayerFn(set, roomId, playerId, player),
     removeAllGames: () => set({ games: [] }),
   })
 );
