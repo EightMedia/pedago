@@ -1,13 +1,13 @@
 import { ViewName } from "models";
 
-const AdminResult = ({
+const AdminGame = ({
   handleClick,
 }: {
   handleClick: (vn: ViewName) => void;
 }) => {
   return (
     <>
-      Result
+      Lobby
       <button onClick={() => handleClick(ViewName.Wizard)}>
         Back to Wizard
       </button>
@@ -15,4 +15,4 @@ const AdminResult = ({
   );
 };
 
-export default AdminResult;
+export default AdminGame;

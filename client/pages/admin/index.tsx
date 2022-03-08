@@ -1,60 +1,32 @@
-import { initialViewState, ViewName } from "models";
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import AdminGame from "../../lib/views/landing/admin/Game/AdminGame";
-import AdminWizard from "../../lib/views/landing/admin/Wizard/AdminWizard";
+import { ViewName } from "models";
+import { Socket } from "socket.io-client";
 
-function useSocket(url: string): Socket | null {
-  const [socket, setSocket] = useState<Socket | null>(null);
-
-  useEffect(() => {
-    const socketIo = io(url);
-
-    setSocket(socketIo);
-
-    function cleanup() {
-      socketIo.disconnect();
-    }
-    return cleanup;
-  }, []);
-
-  return socket;
-}
-
-const AdminMain = () => {
-  const socket: Socket | null = useSocket("http://localhost:3001");
-  const [view, setView] = useState(initialViewState);
-
-  const handleClick = (value: ViewName): void => {
-    (socket as Socket).emit("to", { name: value });
-  };
-
-  useEffect(() => {
-    if (socket) {
-      socket.on("to", setView);
-    }
-  }, [socket]);
-
+const AdminGame = ({
+  handleClick,
+  socket,
+  data,
+}: {
+  handleClick: (vn: ViewName) => void;
+  socket: Socket | null;
+  data: any;
+}) => {
   return (
     <>
-      {(() => {
-        switch (view.name) {
-          case ViewName.Wizard:
-            return <AdminWizard socket={socket} data={undefined} />;
-          case ViewName.Game:
-            return (
-              <AdminGame
-                socket={socket}
-                data={undefined}
-                handleClick={handleClick}
-              />
-            );
-          default:
-            return null;
-        }
-      })()}
+      <div className="container">
+        <div className="header">
+          <div className="participant-count">{data?.participants?.length}</div>
+          <div className="logo">pedago</div>
+          <div className="button-group">
+            <button>Instellingen</button>
+            <button>Uitleg</button>
+          </div>
+        </div>
+      </div>
+      <button onClick={() => handleClick(ViewName.Wizard)}>
+        Back to Wizard
+      </button>
     </>
   );
 };
 
-export default AdminMain;
+export default AdminGame;

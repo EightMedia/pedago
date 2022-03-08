@@ -2,10 +2,10 @@ import { initialViewState, ViewName, ViewState } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import GameGame from "../../lib/views/landing/game/Game/GameGame";
-import GameLobby from "../../lib/views/landing/game/Lobby/GameLobby";
-import GameResult from "../../lib/views/landing/game/Result/GameResult";
-import GameWizard from "../../lib/views/landing/game/Wizard/GameWizard";
+import { Game } from "../../lib/views/game/Game";
+import GameLobby from "../../lib/views/game/Lobby/GameLobby";
+import GameResult from "../../lib/views/game/Result/GameResult";
+import GameWizard from "../../lib/views/game/Wizard/GameWizard";
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -54,7 +54,7 @@ const GameMain = () => {
           case ViewName.Lobby:
             return <GameLobby handleClick={handleClick} />;
           case ViewName.Game:
-            return <GameGame handleClick={handleClick} />;
+            return <Game handleClick={handleClick} />;
           case ViewName.Result:
             return <GameResult handleClick={handleClick} />;
           default:
