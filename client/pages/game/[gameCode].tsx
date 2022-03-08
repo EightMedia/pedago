@@ -51,7 +51,7 @@ const GameCode = () => {
         switch (view.name) {
           case ViewName.Wizard:
             return (
-              <Wizard handleClick={handleClick} initialStep={1} groups={[]} />
+              <Wizard handleClick={handleClick} initialStep={WizardStep.Name} groups={[]} />
             );
           case ViewName.Lobby:
             return <Lobby handleClick={handleClick} />;

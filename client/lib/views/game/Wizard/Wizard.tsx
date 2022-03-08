@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, memo } from "react";
 import cx from "classnames";
 import styles from "./Wizard.module.css";
 import { WizardType } from "./Wizard.types";
@@ -15,7 +15,7 @@ export const WizardComponent = ({
   groups,
   initialStep,
 }: WizardType) => {
-  const [step, setStep] = React.useState(initialStep);
+  const [step, setStep] = useState<WizardStep>(initialStep);
   return (
     <Page>
       <Panel>
