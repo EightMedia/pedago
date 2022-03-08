@@ -8,6 +8,7 @@ export interface RoomDto {
     admin: Admin;
     gameCode: number;
     players: Player[];
+    groups: Group[]
     active: boolean;
     locked: boolean;
     startDate: string | Date;

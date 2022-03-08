@@ -3,7 +3,7 @@ import { RoomDto, ViewName } from 'models';
 import { Socket } from 'socket.io';
 import useGamesStore from './store/games.store';
 
-const { addRoom, updateRoom, removeAllGames } = useGamesStore();
+const { addRoom, updateRoom } = useGamesStore();
 
 export const startGame = () => {};
 
@@ -31,7 +31,15 @@ export const registerGame = (partialRoom: RoomDto, socket: Socket) => {
 };
 
 export const updateRoomDto = (room: Partial<RoomDto>) => {
+    updateRoom(room as RoomDto);
+};
 
-}
+export const reset = (socket: Socket) => {
+    socket.broadcast.emit('to', { view: ViewName.Wizard, data: {} });
+};
+
+export const disconnectAll = (socket: Socket) => {
+    socket.removeAllListeners();
+};
 
 // how to reconnect to socket if browser fails
