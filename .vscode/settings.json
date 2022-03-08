@@ -1,8 +1,5 @@
 {
-  "editor.formatOnSave": true
-  // "cssVarriablesAutocomplete.files": [
-  //   "variables.css",
-  //   "src/styles/variables.css"
-  // ],
-  // "cssVarriablesAutocomplete.languageModes": ["css", "postcss", "svelte"]
+  "editor.formatOnSave": true,
+  "cssVarriablesAutocomplete.files": ["client/lib/styles/variables.css"],
+  "cssVarriablesAutocomplete.languageModes": ["css", "postcss"]
 }

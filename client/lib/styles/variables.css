@@ -1,5 +1,42 @@
 /* vars go here.. so we can point autocomplete to this file */
 
 :root {
-  --color-tomato: tomato;
+  /* Fonts */
+  --font-headings: "Work Sans", sans-serif;
+  --font-body: "Lato", sans-serif;
+
+  /* Colors */
+
+  /* theme colors */
+  --color-yellow: #ffb700;
+  --color-red: #f82a42;
+  --color-orange: #eb6e28;
+  --color-green: #00ab58;
+  --color-purple: #a81af4;
+  --color-blue: #196cff;
+
+  /* blue variations */
+  --color-dark-blue: #12008a;
+  --color-hover-blue: #004acc;
+
+  /* white */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-white-15: rgba(255, 255, 255, 0.15);
+
+  /* grey */
+  --color-grey-darkest: #201a47;
+  --color-grey-neutral: #9b98ac;
+
+  /* spacings... not sure if this is right yet */
+  --space-2xs: 9px;
+  --space-xs: 16px;
+  --space-sm: 20px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 64px;
+
+  /* border */
+  --border-radius-xs: 4px;
+  --border-radius-sm: 6px;
+  --border-radius-md: 8px;
 }

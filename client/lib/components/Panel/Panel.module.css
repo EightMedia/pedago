@@ -1,1 +1,14 @@
 /* css module */
+
+.Panel {
+  padding: var(--space-md);
+  background: var(--color-white);
+  border-radius: var(--border-radius-md);
+}
+
+.PanelTitle {
+  text-align: center;
+  font-weight: bold;
+  font: 700 23px / 1.1 var(--font-headings);
+  margin-bottom: var(--space-md);
+}
