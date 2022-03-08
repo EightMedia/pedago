@@ -20,3 +20,20 @@ Run the client:
 ```
 yarn dev:client
 ```
+
+### Create new components
+To create consistent components use the skeleton script.
+In `.skeleton` the skeleton files for various component types exist.
+
+usage:
+
+```
+yarn skeleton view lib/views/my/AwesomeView
+```
+
+- in the config.json the storybook section can be defined
+- `Component` in the filename is replaced with the component's name
+- .handlebars files are compiled with the variables type, name, section.
+- the .handlebars extension is removed.
+
+So ie: `.skeleton/view/Component.stories.tsx.handlebars` is compiled and becomes `lib/views/my/AwesomeView/AwesomeView.stories.tsx`
