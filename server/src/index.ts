@@ -24,6 +24,9 @@ console.log("--- Pedago Server started at port 3001 ---");
 io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
 
+  // Check if user exists, by getting a UUID from localStorage 
+  socket.on("playerId", console.log)
+
   // send welcome to user on this socket
   socket.emit("message", "Hello you have connected");
 

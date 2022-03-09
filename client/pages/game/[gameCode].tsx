@@ -10,31 +10,29 @@ function useSocket(url: string) {
   useEffect(() => {
     const socketIo = io(url);
 
+    socketIo.emit('playerId', localStorage.getItem('playerId'));
     setSocket(socketIo);
 
     function cleanup() {
       socketIo.disconnect();
     }
     return cleanup;
-
-    // should only run once and not on every re-render,
-    // so pass an empty array
-  }, []);
+  }, [url]);
 
   return socket;
 }
 
 const GameCode = () => {
-  const socket: any = useSocket("http://localhost:3001");
+  const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState(initialViewState);
 
   const handleClick = (value: ViewName): void => {
-    socket.emit("to", { name: value });
+    (socket as Socket).emit("to", { name: value });
   };
 
   useEffect(() => {
     if (socket) {
-      socket.on("to", (v: ViewState) => setView(v));
+      socket.on("to", setView);
     }
   }, [socket, view]);
 

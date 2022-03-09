@@ -14,7 +14,7 @@ const {
 
 export const joinRoomByGameCode = (
   gameCode: number,
-  callback: (args: any) => void
+  callback: (args: SocketCallback) => void
 ) => {
   const room = getRoomByGameCode(gameCode);
 
@@ -44,7 +44,7 @@ export const joinRoomWithName = (
   callback: (args: SocketCallback) => void
 ) => {
   const room = getRoomById(roomId);
-  const playerNameTaken = room?.players.some((p) => p.name === name);
+  const playerNameTaken = room?.players.some((p: Player) => p.name === name);
   const groupsAvaiable = room?.groups.length;
 
   if (!playerNameTaken) {
@@ -86,7 +86,7 @@ export const joinGroup = (
   callback: (args: SocketCallback) => void
 ) => {
   const player = getPlayerById(roomId, playerId);
-  const group = getGroupsByRoomId(roomId)?.find((g) => g.id === groupId);
+  const group = getGroupsByRoomId(roomId)?.find((g: Group) => g.id === groupId);
 
   if (!player) {
     callback({
