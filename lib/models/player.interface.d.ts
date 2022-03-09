@@ -3,6 +3,7 @@ import { Round } from "./round.interface";
 import { View } from "./view.enum";
 export interface Player {
     id: string;
+    socketId: string;
     name: string;
     group: Group;
     roomId: string;
