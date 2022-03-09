@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Socket, io } from "socket.io-client";
-import Game from "../../views/game/Game/Game";
-import Lobby from "../../views/game/Lobby/Lobby";
-import Result from "../../views/game/Result/Result";
-import Wizard from "../../views/game/Wizard/Wizard";
 import { ViewName, ViewState, initialViewState } from "models";
+import Wizard from "../../lib/views/game/Wizard/Wizard";
+import { Game } from "../../lib/views/game/Game";
+import Lobby from "../../lib/views/game/Lobby/Lobby";
+import Result from "../../lib/views/game/Result/Result";
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
