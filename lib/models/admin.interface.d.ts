@@ -1,6 +1,6 @@
-import { Organisation } from './organisation.interface';
-import { PlayersType } from './players-type.interface';
-import { Role } from './role.enum';
+import { Organisation } from "./organisation.interface";
+import { PlayersType } from "./players-type.interface";
+import { Role } from "./role.enum";
 export interface Admin {
     id: string;
     name: string;
