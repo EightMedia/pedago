@@ -11,7 +11,7 @@ const Wizard = ({ socket, data }: { socket: any; data: any }) => {
 
   return (
     <div>
-      <h1>Admin dashboard for room {`${data?.room || "black hole"}`}!</h1>
+      <h1>Admin dashboard for room {data?.room || "black hole"}!</h1>
       <section>
         <h2>Hello superboss! 🤠</h2>
         <button onClick={resetEveryone}>🎬 Reset everyone</button>
