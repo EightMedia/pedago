@@ -1,0 +1,14 @@
+import React from "react";
+import cx from "classnames";
+import styles from "./{{name}}.module.css";
+import { {{name}}Type } from "./{{name}}.types";
+
+export const {{name}}Component = ({}: {{name}}Type) => {
+  return (
+    <div className={cx("{{name}}", styles.{{name}})}>
+      <h2>{{name}}</h2>
+    </div>
+  );
+};
+
+export const {{name}} = React.memo({{name}}Component);
