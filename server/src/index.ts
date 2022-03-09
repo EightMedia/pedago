@@ -3,7 +3,13 @@ import { createServer } from "http";
 import { RoomDto, ViewName } from "models";
 import { Server, Socket } from "socket.io";
 import { disconnectAll, registerGame, reset, updateRoomDto } from "./admin";
-import { joinGroup, joinRoomByGameCode, joinRoomWithName } from "./player";
+import {
+  gameStart,
+  joinGroup,
+  joinRoomByGameCode,
+  joinRoomWithName,
+  requestLobby,
+} from "./player";
 
 const app = express();
 const httpServer = createServer(app);
@@ -26,15 +32,15 @@ io.on("connection", (socket: Socket) => {
 
   // METHODS
 
-  //    Admin methods
-
+  //  Admin methods
   socket.on("registerGame", (room: RoomDto) => registerGame(room, socket));
   socket.on("updateRoom", (room: Partial<RoomDto>) => updateRoomDto(room));
   socket.on("reset", () => reset(socket));
   socket.on("disconnect", () => disconnectAll(socket));
 
-  // Player methods
+  // If couples are formed, send partner to player. How? Broadcast alle couples, en filter in de FE de juiste eruit.
 
+  // Player methods
   socket.on("joinRoomByGameCode", (gameCode: number, callback) =>
     joinRoomByGameCode(gameCode, callback)
   );
@@ -46,6 +52,11 @@ io.on("connection", (socket: Socket) => {
     (groupId: string, roomId: string, playerId: string, callback) =>
       joinGroup(groupId, roomId, playerId, socket, callback)
   );
+  socket.on("requestLobby", (socket: Socket, callback) =>
+    requestLobby(socket, callback)
+  );
+  socket.on("gameStart", (playerId: string, socket: Socket, callback) => gameStart(playerId, socket, callback))
+
 });
 
 httpServer.listen(3001);

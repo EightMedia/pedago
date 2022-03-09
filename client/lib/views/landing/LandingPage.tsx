@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
-import styles from "../styles/LandingPage.module.css";
+import styles from "./LandingPage.module.css";
 
 const LandingPage = ({
   language,
