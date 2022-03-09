@@ -1,4 +1,4 @@
 export interface Organisation {
-  name: string;
-  additional: string;
+    name: string;
+    additional: string;
 }
