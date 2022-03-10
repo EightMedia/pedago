@@ -1,5 +1,5 @@
 import { Organisation } from "./organisation.interface";
-import { PlayersType } from "./players-type.interface";
+import { Players } from "./players-type.interface";
 import { Role } from "./role.enum";
 
 export interface Admin {
@@ -9,5 +9,5 @@ export interface Admin {
   role: Role[];
   customFunction: string;
   organisation: Organisation;
-  playersType: PlayersType;
+  players: Players;
 }
