@@ -16,6 +16,14 @@ module.exports = {
     "@storybook/addon-essentials",
     "storybook-css-modules-preset",
     "storybook-addon-designs",
+    {
+      name: "@storybook/addon-postcss",
+      options: {
+        postcssLoaderOptions: {
+          implementation: require("postcss"),
+        },
+      },
+    },
   ],
   framework: "@storybook/react",
 };
