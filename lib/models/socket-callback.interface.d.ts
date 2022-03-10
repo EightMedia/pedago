@@ -1,10 +1,10 @@
 import { Player } from "./player.interface";
 export interface SocketCallback {
-    status?: string;
+    status: string;
     message?: string;
     data?: {
-        roomId?: string;
         playerId?: string;
+        roomId?: string;
         partner?: Player;
     };
 }
