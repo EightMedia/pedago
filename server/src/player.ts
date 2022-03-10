@@ -1,22 +1,13 @@
 import { randomUUID } from "crypto";
 import { Group, Player, ViewName, SocketCallback } from "models";
 import { Socket } from "socket.io";
-import useGamesStore from "./store/games.store";
-
-const {
-  addPlayerToRoom,
-  getPlayerById,
-  getGroupsByRoomId,
-  getRoomById,
-  getRoomByGameCode,
-  updatePlayer,
-} = useGamesStore();
+import gamesStore from "./store/games.store";
 
 export const joinRoomByGameCode = (
   gameCode: number,
   callback: (args: SocketCallback) => void
 ) => {
-  const room = getRoomByGameCode(gameCode);
+  const room = gamesStore.getState().getRoomByGameCode(gameCode);
 
   if (room) {
     callback({
@@ -43,7 +34,7 @@ export const joinRoomWithName = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  const room = getRoomById(roomId);
+  const room = gamesStore.getState().getRoomById(roomId);
   const playerNameTaken = room?.players.some((p: Player) => p.name === name);
   const groupsAvaiable = room?.groups.length;
 
@@ -58,7 +49,7 @@ export const joinRoomWithName = (
       rounds: [],
     };
 
-    addPlayerToRoom(roomId, player);
+    gamesStore.getState().addPlayerToRoom(roomId, player);
 
     socket.broadcast.emit("message", `${name} has joined the game`);
     callback({
@@ -85,8 +76,8 @@ export const joinGroup = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  const player = getPlayerById(roomId, playerId);
-  const group = getGroupsByRoomId(roomId)?.find((g: Group) => g.id === groupId);
+  const player = gamesStore.getState().getPlayerById(roomId, playerId);
+  const group = gamesStore.getState().getGroupsByRoomId(roomId)?.find((g: Group) => g.id === groupId);
 
   if (!player) {
     callback({
@@ -100,7 +91,7 @@ export const joinGroup = (
     });
   } else {
     player.group = group as Group;
-    updatePlayer(roomId, playerId, player);
+    gamesStore.getState().updatePlayer(roomId, playerId, player);
     socket.emit("to", ViewName.InfoScreen);
     callback({
       status: "OK",

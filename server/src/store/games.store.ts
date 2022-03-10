@@ -27,7 +27,7 @@ export interface GamesState {
   removeAllGames: () => void;
 }
 
-const useGamesStore = create<GamesState>(
+const gamesStore = create<GamesState>(
   (set: SetState<GamesState>, get: GetState<GamesState>) => ({
     games: [],
 
@@ -50,4 +50,4 @@ const useGamesStore = create<GamesState>(
   })
 );
 
-export default useGamesStore;
+export default gamesStore;
