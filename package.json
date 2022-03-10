@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specifief\" && exit 1",
-    "build": "tsc && barrelsby -c './barrelsby.json'"
+    "build": " barrelsby -c './barrelsby.json' && tsc && barrelsby -c './barrelsby.json'"
   },
   "repository": "https://github.com/EightMedia/pedago",
   "license": "MIT",
