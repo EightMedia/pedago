@@ -1,4 +1,4 @@
-import { Group, Player, RoomDto } from "models";
+import { Group, Player, RoomDto, Team } from "models";
 import create, { GetState, SetState, StoreApi } from "zustand/vanilla";
 import {
   addPlayerToRoomFn,
@@ -15,6 +15,7 @@ export interface GamesState {
   getRoomByGameCode: (gameCode: number) => RoomDto | undefined;
   getPlayerById: (roomId: string, playerId: string) => Player | undefined;
   getGroupsByRoomId: (roomId: string) => Group[] | undefined;
+  getTeams: (roomId: string) => Team[] | undefined;
   
   addRoom: (room: RoomDto) => void;
   updateRoom: (room: RoomDto) => void;
@@ -34,10 +35,11 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
     // Getters
     getRoomById: (roomId: string) =>
       get().games.find((room) => room.id === roomId),
-    getRoomByGameCode: (gameCode: number) =>
-      get().games.find((room) => room.gameCode === gameCode),
+    getRoomByGameCode: (gameCode: number) => get().games.find((room) => room.gameCode === gameCode),
     getPlayerById: (roomId, playerId) => getPlayerByIdFn(get, roomId, playerId),
     getGroupsByRoomId: (roomId: string) => getGroupsByRoomIdFn(get, roomId),
+    getTeams: (roomId: string) => 
+      get().games.find((room) => room.id === roomId)?.teams,
 
     // Setters
     addRoom: (room: RoomDto) => addRoomFn(set, room),

@@ -5,26 +5,27 @@ import gamesStore from "./store/games.store";
 
 export const startGame = () => {};
 
-export const registerGame = (partialRoom: RoomDto, socket: Socket) => {
+export const registerGame = (socket: Socket) => {
   const roomName = randomUUID();
   const adminId = randomUUID();
   const gameCode = Math.floor(1000 + Math.random() * 9000);
-  const timestamp = new Date().getTime().toString();
+  const timestamp = new Date().toISOString();
   const room: RoomDto = {
-    ...partialRoom,
     id: roomName,
+    socketId: socket.id,
     admin: {
       id: adminId,
     } as Admin,
     gameCode: gameCode,
     players: [],
+    teams: [],
     active: true,
     locked: false,
     startDate: timestamp,
   };
   socket.join(roomName);
   socket.emit("message", "You have created the following room:", room);
-  socket.emit("to", { view: ViewName.Lobby, data: { room: room } });
+  socket.emit("to", ViewName.Lobby);
   gamesStore.getState().addRoom(room);
 };
 
@@ -33,7 +34,7 @@ export const updateRoomDto = (room: Partial<RoomDto>) => {
 };
 
 export const reset = (socket: Socket) => {
-  socket.broadcast.emit("to", { view: ViewName.Wizard, data: {} });
+  socket.broadcast.emit("to", ViewName.Wizard);
 };
 
 export const disconnectAll = (socket: Socket) => {

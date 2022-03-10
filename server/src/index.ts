@@ -10,6 +10,7 @@ import {
   joinRoomWithName,
   requestLobby,
 } from "./player";
+import gamesStore from "./store/games.store";
 
 const app = express();
 const httpServer = createServer(app);
@@ -23,25 +24,28 @@ console.log("--- Pedago Server started at port 3001 ---");
 
 io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
+  
+  registerGame(socket);
 
   // Check if user exists, by getting a UUID from localStorage 
-  socket.on("playerId", console.log)
+  socket.on("playerId", id => {
+    io.sockets.to(id).emit("message", gamesStore.getState().games);
+  })
 
   // send welcome to user on this socket
   socket.emit("message", "Hello you have connected");
 
   // begin to send user to start screen
-  socket.emit("to", { name: ViewName.Game });
+  socket.emit("to", ViewName.Game);
 
   // METHODS
 
   //  Admin methods
-  socket.on("registerGame", (room: RoomDto) => registerGame(room, socket));
+  socket.on("registerGame", () => registerGame(socket));
   socket.on("updateRoom", (room: Partial<RoomDto>) => updateRoomDto(room));
   socket.on("reset", () => reset(socket));
   socket.on("disconnect", () => disconnectAll(socket));
 
-  // If couples are formed, send partner to player. How? Broadcast alle couples, en filter in de FE de juiste eruit.
 
   // Player methods
   socket.on("joinRoomByGameCode", (gameCode: number, callback) =>
@@ -58,7 +62,7 @@ io.on("connection", (socket: Socket) => {
   socket.on("requestLobby", (socket: Socket, callback) =>
     requestLobby(socket, callback)
   );
-  socket.on("gameStart", (playerId: string, socket: Socket, callback) => gameStart(playerId, socket, callback))
+  socket.on("gameStart", (roomId: string, playerId: string, socket: Socket, callback) => gameStart(roomId, playerId, socket, callback))
 
 });
 

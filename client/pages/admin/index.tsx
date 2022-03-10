@@ -1,21 +1,46 @@
-import { ViewName } from "models";
-import { Socket } from "socket.io-client";
+import { initialViewState, ViewName } from "models";
+import { useState, useEffect } from "react";
+import { io, Socket } from "socket.io-client";
 
-const AdminGame = ({
-  handleClick,
-  socket,
-  data,
-}: {
-  handleClick: (vn: ViewName) => void;
-  socket: Socket | null;
-  data: any;
-}) => {
+function useSocket(url: string) {
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  useEffect(() => {
+    const socketIo = io(url);
+
+    socketIo.emit('playerId', localStorage.getItem('playerId'));
+    setSocket(socketIo);
+
+    function cleanup() {
+      socketIo.disconnect();
+    }
+    return cleanup;
+  }, [url]);
+
+  return socket;
+}
+
+const AdminGame = () => {
+  const socket: Socket | null = useSocket("http://localhost:3001");
+  const [view, setView] = useState(initialViewState);
+
+  const handleClick = (value: ViewName): void => {
+    (socket as Socket).emit("to", value);
+    (socket as Socket).emit("playerId", socket?.id);
+  };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("to", setView);
+      socket.on("message", console.warn)
+    }
+  }, [socket]);
 
   return (
     <>
       <div className="container">
         <div className="header">
-          <div className="participant-count">{data?.participants?.length}</div>
+          <div className="participant-count"></div>
           <div className="logo">pedago</div>
           <div className="button-group">
             <button>Instellingen</button>

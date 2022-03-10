@@ -1,7 +1,7 @@
+import { ViewName } from "models";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import { Socket, io } from "socket.io-client";
-import { ViewName, ViewState, initialViewState } from "models";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
 import { Game } from "../../lib/views/game/Game";
 
 function useSocket(url: string) {
@@ -24,30 +24,42 @@ function useSocket(url: string) {
 
 const GameCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
-  const [view, setView] = useState(initialViewState);
+  const [view, setView] = useState<ViewName>(ViewName.Lobby);
 
   const handleClick = (value: ViewName): void => {
-    (socket as Socket).emit("to", { name: value });
+    (socket as Socket).emit("to", value);
+    (socket as Socket).emit("playerId", socket?.id);
+    (socket as Socket).emit("joinRoomByGameCode", gameCode, (res: any) => {
+      console.log(res);
+      (socket as Socket).emit("joinRoomWithName", res.data.roomId, 'henk', (res: any) => {
+        console.log(res);
+      });
+    });
   };
+
+  const handleMessage = (v: any) => {
+    console.log(v);
+  }
 
   useEffect(() => {
     if (socket) {
       socket.on("to", setView);
+      socket.on("message", handleMessage)
     }
-  }, [socket, view]);
+  }, [socket]);
 
   const router = useRouter();
-  const gameCode = router.query.gameCode;
+  const gameCode = parseInt(router.query.gameCode as string, 10);
 
   return (
     <div>
       <h1>Joining game {gameCode}</h1>
       {(() => {
-        switch (view.name) {
+        switch (view) {
           case ViewName.Game:
             return <Game handleClick={handleClick} />;
           default:
-            return null;
+            return <>FAIL</>;
         }
       })()}
     </div>

@@ -33,10 +33,10 @@ export const joinRoomWithName = (
   name: string,
   socket: Socket,
   callback: (args: SocketCallback) => void
-) => {
+) => {  
   const room = gamesStore.getState().getRoomById(roomId);
   const playerNameTaken = room?.players.some((p: Player) => p.name === name);
-  const groupsAvaiable = room?.groups.length;
+  const groupsAvaiable = room?.groups?.length;
 
   if (!playerNameTaken) {
     socket.join(roomId);
@@ -49,7 +49,7 @@ export const joinRoomWithName = (
       rounds: [],
     };
 
-    gamesStore.getState().addPlayerToRoom(roomId, player);
+    gamesStore.getState().addPlayerToRoom(roomId, player);    
 
     socket.broadcast.emit("message", `${name} has joined the game`);
     callback({
@@ -77,7 +77,10 @@ export const joinGroup = (
   callback: (args: SocketCallback) => void
 ) => {
   const player = gamesStore.getState().getPlayerById(roomId, playerId);
-  const group = gamesStore.getState().getGroupsByRoomId(roomId)?.find((g: Group) => g.id === groupId);
+  const group = gamesStore
+    .getState()
+    .getGroupsByRoomId(roomId)
+    ?.find((g: Group) => g.id === groupId);
 
   if (!player) {
     callback({
@@ -112,10 +115,12 @@ export const requestLobby = (
 };
 
 export const gameStart = (
+  roomId: string,
   playerId: string,
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
+  gamesStore.getState().getTeams(roomId)
 
   // Set to READY in store?
   // Find couple and wait until other player is ready
