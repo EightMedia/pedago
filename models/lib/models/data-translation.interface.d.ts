@@ -1,4 +1,4 @@
-export interface DataTranslation {
+export interface Locale {
     landing: {
         title: string;
         description: string;

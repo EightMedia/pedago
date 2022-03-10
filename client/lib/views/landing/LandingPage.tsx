@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { Language } from "models";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   ChangeEvent,
   Dispatch,
@@ -18,9 +19,10 @@ const LandingPage = ({
   language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
-  const [gameCode, setGameCode] = useState<string | undefined>(undefined);
+  const [gameCode, setGameCode] = useState<string>("");
   const languageValues = Object.values(Language);
   const data = useContext(LanguageContext);
+  const router = useRouter();
 
   const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setLanguage(event.target.value as Language);
@@ -32,6 +34,8 @@ const LandingPage = ({
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    localStorage.setItem("gameCode", gameCode);
+    router.push(`/game/${gameCode}`);
   };
 
   return (
