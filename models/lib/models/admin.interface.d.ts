@@ -1,12 +1,14 @@
 import { Organisation } from "./organisation.interface";
-import { PlayersType } from "./players-type.interface";
+import { Players } from "./players-type.interface";
 import { Role } from "./role.enum";
 export interface Admin {
     id: string;
+    socketId: string;
     name: string;
     email: string;
     role: Role[];
-    customFunction: string;
+    customRole: string;
     organisation: Organisation;
-    playersType: PlayersType;
+    players: Players;
+    currentRound: number;
 }

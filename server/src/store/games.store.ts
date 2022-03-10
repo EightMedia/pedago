@@ -1,5 +1,5 @@
 import { Group, Player, RoomDto } from "models";
-import create, { GetState, SetState } from "zustand";
+import create, { GetState, SetState, StoreApi } from "zustand/vanilla";
 import {
   addPlayerToRoomFn,
   addRoomFn,
@@ -27,7 +27,7 @@ export interface GamesState {
   removeAllGames: () => void;
 }
 
-const gamesStore = create<GamesState>(
+const gamesStore: StoreApi<GamesState> = create<GamesState>(
   (set: SetState<GamesState>, get: GetState<GamesState>) => ({
     games: [],
 

@@ -4,10 +4,12 @@ import { Role } from "./role.enum";
 
 export interface Admin {
   id: string;
+  socketId: string;
   name: string;
   email: string;
   role: Role[];
-  customFunction: string;
+  customRole: string;
   organisation: Organisation;
   players: Players;
+  currentRound: number;
 }
