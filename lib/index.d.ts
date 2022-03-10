@@ -11,5 +11,6 @@ export * from "./models/role.enum";
 export * from "./models/room-dto.interface";
 export * from "./models/round.interface";
 export * from "./models/sector.enum";
+export * from "./models/socket-callback.interface";
 export * from "./models/view-state.interface";
 export * from "./models/view.enum";
