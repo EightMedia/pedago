@@ -35,3 +35,12 @@ a {
   padding: 1em;
   margin: 3em -1em 0;
 }
+
+.sr-only {
+  position: absolute;
+  left: -999em;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
