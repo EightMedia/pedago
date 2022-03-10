@@ -1,42 +1,29 @@
 import { randomUUID } from "crypto";
-import { Group, Player, ViewName } from "models";
+import { Group, Player, ViewName, SocketCallback } from "models";
 import { Socket } from "socket.io";
-import useGamesStore from "./store/games.store";
-
-const {
-  addPlayerToRoom,
-  getPlayerById,
-  getGroupsByRoomId,
-  getRoomById,
-  getRoomByGameCode,
-  updatePlayer,
-} = useGamesStore();
+import gamesStore from "./store/games.store";
 
 export const joinRoomByGameCode = (
   gameCode: number,
-  callback: ({
-    status,
-    message,
-    roomId,
-  }: {
-    status: string;
-    message: string;
-    roomId: string;
-  }) => void
+  callback: (args: SocketCallback) => void
 ) => {
-  const room = getRoomByGameCode(gameCode);
+  const room = gamesStore.getState().getRoomByGameCode(gameCode);
 
   if (room) {
     callback({
       status: "OK",
       message: "Room found",
-      roomId: room.id,
+      data: {
+        roomId: room.id,
+      },
     });
   } else {
     callback({
       status: "ERROR",
       message: `Room with game code ${gameCode} does not exist.`,
-      roomId: "",
+      data: {
+        roomId: "",
+      },
     });
   }
 };
@@ -45,10 +32,10 @@ export const joinRoomWithName = (
   roomId: string,
   name: string,
   socket: Socket,
-  callback: ({ status, message }: { status: string; message: string }) => void
+  callback: (args: SocketCallback) => void
 ) => {
-  const room = getRoomById(roomId);
-  const playerNameTaken = room?.players.some((p) => p.name === name);
+  const room = gamesStore.getState().getRoomById(roomId);
+  const playerNameTaken = room?.players.some((p: Player) => p.name === name);
   const groupsAvaiable = room?.groups.length;
 
   if (!playerNameTaken) {
@@ -62,7 +49,7 @@ export const joinRoomWithName = (
       rounds: [],
     };
 
-    addPlayerToRoom(roomId, player);
+    gamesStore.getState().addPlayerToRoom(roomId, player);
 
     socket.broadcast.emit("message", `${name} has joined the game`);
     callback({
@@ -70,9 +57,9 @@ export const joinRoomWithName = (
       message: "You have joined the game",
     });
     if (groupsAvaiable) {
-      socket.emit("to", { name: ViewName.SelectGroup, data: {} });
+      socket.emit("to", ViewName.SelectGroup);
     } else {
-      socket.emit("to", { name: ViewName.InfoScreen, data: {} });
+      socket.emit("to", ViewName.InfoScreen);
     }
   } else {
     callback({
@@ -87,10 +74,10 @@ export const joinGroup = (
   roomId: string,
   playerId: string,
   socket: Socket,
-  callback: ({ status, message }: { status: string; message: string }) => void
+  callback: (args: SocketCallback) => void
 ) => {
-  const player = getPlayerById(roomId, playerId);
-  const group = getGroupsByRoomId(roomId)?.find((g) => g.id === groupId);
+  const player = gamesStore.getState().getPlayerById(roomId, playerId);
+  const group = gamesStore.getState().getGroupsByRoomId(roomId)?.find((g: Group) => g.id === groupId);
 
   if (!player) {
     callback({
@@ -104,11 +91,38 @@ export const joinGroup = (
     });
   } else {
     player.group = group as Group;
-    updatePlayer(roomId, playerId, player);
-    socket.emit("to", { name: ViewName.InfoScreen, data: {} });
+    gamesStore.getState().updatePlayer(roomId, playerId, player);
+    socket.emit("to", ViewName.InfoScreen);
     callback({
       status: "OK",
-      message: "Group successfully added to Player",
+      message: "Player successfully added to Group",
     });
   }
+};
+
+export const requestLobby = (
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  socket.emit("to", ViewName.Lobby);
+  callback({
+    status: "OK",
+    message: "Navigate to Lobby",
+  });
+};
+
+export const gameStart = (
+  playerId: string,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+
+  // Set to READY in store?
+  // Find couple and wait until other player is ready
+
+  socket.emit("to", ViewName.Game);
+  callback({
+    status: "OK",
+    message: "Start game",
+  });
 };

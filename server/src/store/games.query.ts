@@ -1,5 +1,5 @@
 import { Group, Player, RoomDto } from "models";
-import { GetState, SetState } from "zustand";
+import { GetState, SetState } from "zustand/vanilla";
 import { GamesState } from "./games.store";
 
 // GETTERS

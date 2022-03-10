@@ -1,9 +1,7 @@
 import { randomUUID } from "crypto";
 import { Admin, RoomDto, ViewName } from "models";
 import { Socket } from "socket.io";
-import useGamesStore from "./store/games.store";
-
-const { addRoom, updateRoom } = useGamesStore();
+import gamesStore from "./store/games.store";
 
 export const startGame = () => {};
 
@@ -27,11 +25,11 @@ export const registerGame = (partialRoom: RoomDto, socket: Socket) => {
   socket.join(roomName);
   socket.emit("message", "You have created the following room:", room);
   socket.emit("to", { view: ViewName.Lobby, data: { room: room } });
-  addRoom(room);
+  gamesStore.getState().addRoom(room);
 };
 
 export const updateRoomDto = (room: Partial<RoomDto>) => {
-  updateRoom(room as RoomDto);
+  gamesStore.getState().updateRoom(room as RoomDto);
 };
 
 export const reset = (socket: Socket) => {
