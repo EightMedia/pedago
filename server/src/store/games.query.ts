@@ -89,3 +89,32 @@ export const updatePlayerFn = (
     }),
   }));
 };
+
+export const setPlayerReadyFn = (
+  set: SetState<GamesState>,
+  roomId: string,
+  playerId: string,
+  ready: boolean
+): void => {
+  set((state: GamesState) => ({
+    games: state.games.map((r: RoomDto) => {
+      if (roomId === r.id) {
+        return {
+          ...r,
+          players: r.players.map((p) => {
+            if (p.id === playerId) {
+              return {
+                ...p,
+                ready: ready
+              } as Player;
+            } else {
+              return p;
+            }
+          }),
+        } as RoomDto;
+      } else {
+        return r as RoomDto;
+      }
+    }),
+  }));
+};

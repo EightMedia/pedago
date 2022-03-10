@@ -1,4 +1,4 @@
-import { ViewName } from "models";
+import { SocketCallback, ViewName } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
@@ -29,9 +29,9 @@ const GameCode = () => {
   const handleClick = (value: ViewName): void => {
     (socket as Socket).emit("to", value);
     (socket as Socket).emit("playerId", socket?.id);
-    (socket as Socket).emit("joinRoomByGameCode", gameCode, (res: any) => {
+    (socket as Socket).emit("joinRoomByGameCode", undefined, gameCode, (res: SocketCallback) => {
       console.log(res);
-      (socket as Socket).emit("joinRoomWithName", res.data.roomId, 'henk', (res: any) => {
+      (socket as Socket).emit("joinRoomWithName", res?.data?.roomId, 'henk', (res: SocketCallback) => {
         console.log(res);
       });
     });

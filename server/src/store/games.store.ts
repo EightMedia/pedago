@@ -5,6 +5,7 @@ import {
   addRoomFn,
   getGroupsByRoomIdFn,
   getPlayerByIdFn,
+  setPlayerReadyFn,
   updatePlayerFn,
   updateRoomFn,
 } from "./games.query";
@@ -25,6 +26,7 @@ export interface GamesState {
     playerId: string,
     player: Partial<Player>
   ) => void;
+  setPlayerReady: (roomId: string, playerId: string, ready: boolean) => void;
   removeAllGames: () => void;
 }
 
@@ -48,6 +50,7 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       addPlayerToRoomFn(set, roomId, player),
     updatePlayer: (roomId: string, playerId: string, player: Partial<Player>) =>
       updatePlayerFn(set, roomId, playerId, player),
+      setPlayerReady: (roomId: string, playerId: string, ready: boolean) => setPlayerReadyFn(set, roomId, playerId, ready),
     removeAllGames: () => set({ games: [] }),
   })
 );
