@@ -10,7 +10,7 @@ function useSocket(url: string) {
   useEffect(() => {
     const socketIo = io(url);
 
-    socketIo.emit('playerId', localStorage.getItem('playerId'));
+    socketIo.emit("playerId", localStorage.getItem("playerId"));
     setSocket(socketIo);
 
     function cleanup() {
@@ -25,31 +25,44 @@ function useSocket(url: string) {
 const GameCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewName>(ViewName.Lobby);
+  const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
 
-  const handleClick = (value: ViewName): void => {
-    (socket as Socket).emit("to", value);
-    (socket as Socket).emit("playerId", socket?.id);
-    (socket as Socket).emit("joinRoomByGameCode", undefined, gameCode, (res: SocketCallback) => {
-      console.log(res);
-      (socket as Socket).emit("joinRoomWithName", res?.data?.roomId, 'henk', (res: SocketCallback) => {
-        console.log(res);
-      });
-    });
+  const handleClick = (value: ViewName, name: string): void => {
+    console.log(value);
+
+    (socket as Socket).emit(
+      "joinRoomWithName",
+      res?.data?.roomId,
+      name,
+      console.log
+    );
   };
 
   const handleMessage = (v: any) => {
     console.log(v);
-  }
+  };
+  
+  const router = useRouter();
+  const gameCode = parseInt(router.query.gameCode as string, 10);
+  
+  useEffect(() => {
+    if (socket) {
+      (socket as Socket).emit(
+        "joinRoomByGameCode",
+        undefined,
+        gameCode,
+        setRes
+      );
+    }
+  }, [socket, gameCode]);
+
 
   useEffect(() => {
     if (socket) {
       socket.on("to", setView);
-      socket.on("message", handleMessage)
+      socket.on("message", handleMessage);
     }
   }, [socket]);
-
-  const router = useRouter();
-  const gameCode = parseInt(router.query.gameCode as string, 10);
 
   return (
     <div>

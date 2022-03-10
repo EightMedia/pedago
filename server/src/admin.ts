@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { Admin, RoomDto, SocketCallback, ViewName } from "models";
+import { Admin, Player, RoomDto, SocketCallback, ViewName } from "models";
 import { Socket } from "socket.io";
 import gamesStore from "./store/games.store";
 
@@ -28,18 +28,27 @@ export const registerGame = (
   };
   socket.join(roomId);
   callback({
-    status: 'OK',
+    status: "OK",
     message: `You have created the following room: ${room}`,
     data: {
       roomId: roomId,
-      gameCode: gameCode
-    }
-  })
+      gameCode: gameCode,
+    },
+  });
   socket.emit("to", { name: ViewName.Lobby });
   gamesStore.getState().addRoom(room);
 };
 
 export const startGame = (roomId: string, socket: Socket) => {
+  const chunk = (arr: Player[], size: number) => {
+    return arr.reduce(
+      (acc: Player[], e: Player, i) => (
+        i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc
+      ),
+      []
+    );
+  };
+
   socket.broadcast.emit("message", `Hello broadcast ${roomId}`);
 };
 
