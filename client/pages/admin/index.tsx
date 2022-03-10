@@ -10,6 +10,7 @@ const AdminGame = ({
   socket: Socket | null;
   data: any;
 }) => {
+
   return (
     <>
       <div className="container">
