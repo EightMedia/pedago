@@ -1,11 +1,6 @@
 import React from "react";
-import cx from "classnames";
-import styles from "./Wizard.module.css";
-import { WizardType } from "./Wizard.types";
-import { Page } from "../../../components/Page";
-import { Panel } from "../../../components/Panel";
 import { Button } from "../../../components/Button";
-import { PanelTitle } from "../../../components/Panel/Panel";
+import { PanelTitle } from "../../../components/Panel";
 
 export const WizardRoomCode = ({
   setStep,

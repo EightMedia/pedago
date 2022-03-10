@@ -2,12 +2,16 @@ import React from "react";
 import cx from "classnames";
 import styles from "./Wizard.module.css";
 import { WizardType } from "./Wizard.types";
+import { Page } from "../../../components/Page";
+import { Panel, PanelTitle } from "../../../components/Panel";
 
 export const WizardComponent = ({}: WizardType) => {
   return (
-    <div className={cx("Wizard", styles.Wizard)}>
-      <h2>Wizard</h2>
-    </div>
+    <Page>
+      <Panel>
+        <PanelTitle>Wizard</PanelTitle>
+      </Panel>
+    </Page>
   );
 };
 

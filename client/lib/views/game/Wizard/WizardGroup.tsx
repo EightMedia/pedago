@@ -1,7 +1,7 @@
 import React from "react";
 import { Group } from "models";
 import { Button } from "../../../components/Button";
-import { PanelTitle } from "../../../components/Panel/Panel";
+import { PanelTitle } from "../../../components/Panel";
 
 export const WizardGroup = ({
   groups,

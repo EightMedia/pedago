@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../../../components/Button";
-import { PanelTitle } from "../../../components/Panel/Panel";
+import { PanelTitle } from "../../../components/Panel";
 
 export const WizardName = ({
   setStep,

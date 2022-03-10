@@ -1,5 +1,5 @@
 import React from "react";
-import { PanelTitle } from "../../../components/Panel/Panel";
+import { PanelTitle } from "../../../components/Panel";
 
 export const WizardInfo = () => {
   return (

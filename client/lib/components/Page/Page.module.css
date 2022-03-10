@@ -1,8 +1,38 @@
 /* css module */
 
-.Page {
+.page {
   height: 100%;
   padding: 16px;
   background: var(--color-dark-blue);
   padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  color: --var(--color-white);
+}
+
+.container {
+  min-height: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.top {
+  justify-content: flex-start;
+}
+.middle {
+  justify-content: middle;
+}
+
+.bg1 {
+  /* todo: decide bg image placement */
+}
+.bg2 {
+}
+.bg3 {
+}
+.bg4 {
+}
+.bg5 {
+}
+.bg6 {
 }
