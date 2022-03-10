@@ -3,15 +3,18 @@ import { Admin } from "./admin.interface";
 import { Organisation } from "./organisation.interface";
 import { Options } from "./option.interface";
 import { Group } from "./group.interface";
+import { Team } from "./team.interface";
 export interface RoomDto {
     id: string;
+    socketId: string;
     admin: Admin;
     gameCode: number;
-    organisation: Organisation;
+    organisation?: Organisation;
     players: Player[];
-    groups: Group[];
+    groups?: Group[];
+    teams?: Team[];
     active: boolean;
     locked: boolean;
     startDate: string | Date;
-    options: Options;
+    options?: Options;
 }
