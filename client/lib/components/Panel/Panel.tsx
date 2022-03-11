@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
 import cx from "classnames";
+import { memo } from "react";
 import styles from "./Panel.module.css";
 import { PanelType } from "./Panel.types";
 

@@ -1,7 +1,7 @@
+import cx from "classnames";
 import { memo } from "react";
 import styles from "./Stack.module.css";
 import { StackType } from "./Stack.types";
-import cx from "classnames";
 
 export const StackComponent = ({ children, gap = "2xs" }: StackType) => {
   return (

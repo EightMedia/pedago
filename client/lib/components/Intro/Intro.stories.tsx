@@ -1,4 +1,5 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
 import { Intro } from "./Intro";
 import { IntroData } from "./Intro.data";
 

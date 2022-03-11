@@ -1,9 +1,7 @@
-import cx from "classnames";
+import { memo } from "react";
+import { Page } from "../../../components/Page";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
-import { Page } from "../../../components/Page";
-import { Panel } from "../../../components/Panel";
-import { PanelTitle } from "../../../components/Panel";
 
 export const LobbyComponent = ({}: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
@@ -13,8 +11,7 @@ export const LobbyComponent = ({}: LobbyType) => {
       <header className={styles.header}>
         <div className="roomCode">3402</div>
         <p>
-          Voer de code in op <a href="{siteUrl}">{readableSiteUrl}</a> en doe
-          mee
+          Voer de code in op <a href={siteUrl}>{readableSiteUrl}</a> en doe mee
         </p>
       </header>
       <div className="groupsCollection">

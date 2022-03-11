@@ -1,13 +1,11 @@
 import { memo, useState } from "react";
-import { WizardSteps, WizardType } from "./Wizard.types";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
-import { WizardRoomCode } from "./WizardRoomCode";
-import { WizardName } from "./WizardName";
+import { WizardSteps, WizardType } from "./Wizard.types";
 import { WizardGroup } from "./WizardGroup";
 import { WizardInfo } from "./WizardInfo";
-import { WizardData } from "./Wizard.data";
-import { ViewName } from "models";
+import { WizardName } from "./WizardName";
+import { WizardRoomCode } from "./WizardRoomCode";
 
 export const WizardComponent = ({
   handleEmit,

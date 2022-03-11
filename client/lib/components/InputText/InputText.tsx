@@ -1,5 +1,5 @@
-import { memo } from "react";
 import cx from "classnames";
+import { memo } from "react";
 import styles from "./InputText.module.css";
 import { InputTextType } from "./InputText.types";
 

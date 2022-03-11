@@ -1,5 +1,5 @@
-import { memo } from "react";
 import cx from "classnames";
+import { memo } from "react";
 import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";
 
@@ -11,4 +11,4 @@ export const ButtonComponent = ({ children, onClick }: ButtonType) => {
   );
 };
 
-export const Button = React.memo(ButtonComponent);
+export const Button = memo(ButtonComponent);

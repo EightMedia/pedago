@@ -1,6 +1,6 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
 import { Stack } from "./Stack";
-import { StackData } from "./Stack.data";
 
 export default {
   title: "Layouts/Stack",

@@ -1,15 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
 import { SortList } from "./SortList";
-import {
-  SortListData,
-} from "./SortList.data";
+import { SortListData } from "./SortList.data";
 
 export default {
   title: "Components/SortList",
   component: SortList,
 } as ComponentMeta<typeof SortList>;
 
-const Template: ComponentStory<typeof SortList> = (args) => <SortList {...args} />;
+const Template: ComponentStory<typeof SortList> = (args) => (
+  <SortList {...args} />
+);
 
 // story
 export const Primary = Template.bind({});

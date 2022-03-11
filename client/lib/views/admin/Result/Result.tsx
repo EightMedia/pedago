@@ -1,7 +1,6 @@
-import cx from "classnames";
-import styles from "./Result.module.css";
-import { ResultType } from "./Result.types";
+import { memo } from "react";
 import { Page } from "../../../components/Page";
+import { ResultType } from "./Result.types";
 
 export const ResultComponent = ({}: ResultType) => {
   return (

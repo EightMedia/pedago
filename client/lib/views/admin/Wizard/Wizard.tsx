@@ -1,9 +1,7 @@
-import React from "react";
-import cx from "classnames";
-import styles from "./Wizard.module.css";
-import { WizardType } from "./Wizard.types";
+import { memo } from "react";
 import { Page } from "../../../components/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
+import { WizardType } from "./Wizard.types";
 
 export const WizardComponent = ({}: WizardType) => {
   return (
@@ -15,4 +13,4 @@ export const WizardComponent = ({}: WizardType) => {
   );
 };
 
-export const Wizard = React.memo(WizardComponent);
+export const Wizard = memo(WizardComponent);

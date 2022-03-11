@@ -1,5 +1,5 @@
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Game } from "./Game";
 import { gameData } from "./Game.data";
 import { GameScenes } from "./Game.types";

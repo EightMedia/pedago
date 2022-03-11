@@ -1,8 +1,8 @@
-import { memo } from "react";
 import cx from "classnames";
+import { memo } from "react";
+import { Button } from "../Button";
 import styles from "./SortList.module.css";
 import { SortCardType, SortListType } from "./SortList.types";
-import { Button } from "../Button";
 
 export const SortListComponent = ({ cards }: SortListType) => {
   return (

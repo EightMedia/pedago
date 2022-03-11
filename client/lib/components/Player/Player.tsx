@@ -1,8 +1,8 @@
-import { memo } from "react";
+import Avatar from "boring-avatars";
 import cx from "classnames";
+import { memo } from "react";
 import styles from "./Player.module.css";
 import { PlayerType } from "./Player.types";
-import Avatar from "boring-avatars";
 
 export const PlayerComponent = ({ name, group, size }: PlayerType) => {
   return (

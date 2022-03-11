@@ -1,8 +1,8 @@
-import { memo } from "react";
 import cx from "classnames";
+import { memo } from "react";
+import { Player } from "../Player/Player";
 import styles from "./PlayerGroup.module.css";
 import { PlayerGroupType } from "./PlayerGroup.types";
-import { Player } from "../Player/Player";
 
 export const PlayerGroupComponent = ({
   id,

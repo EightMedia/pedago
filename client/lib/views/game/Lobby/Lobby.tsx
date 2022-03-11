@@ -1,12 +1,11 @@
-import cx from "classnames";
-import styles from "./Lobby.module.css";
-import { LobbyType } from "./Lobby.types";
+import { memo } from "react";
+import { Intro } from "../../../components/Intro";
 import { Page } from "../../../components/Page";
-import { groupEnd } from "console";
 import { PlayerGroup } from "../../../components/PlayerGroup";
 import { Title } from "../../../components/Title";
-import { Intro } from "../../../components/Intro";
 import { Stack } from "../../../layouts/Stack";
+import styles from "./Lobby.module.css";
+import { LobbyType } from "./Lobby.types";
 
 export const LobbyComponent = ({ round, roundMax, groups }: LobbyType) => {
   return (

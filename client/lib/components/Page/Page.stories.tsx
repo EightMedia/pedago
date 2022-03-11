@@ -1,8 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
 import { Page } from "./Page";
-import {
-  PageData,
-} from "./Page.data";
+import { PageData } from "./Page.data";
 
 export default {
   title: "Components/Page",

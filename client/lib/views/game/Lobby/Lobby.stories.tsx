@@ -1,4 +1,5 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
 import { Lobby } from "./Lobby";
 import { LobbyDataOneGroup, LobbyDataTwoGroups } from "./Lobby.data";
 

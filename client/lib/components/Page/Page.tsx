@@ -1,8 +1,9 @@
 import cx from "classnames";
+import { memo } from "react";
 import styles from "./Page.module.css";
 import { PageType } from "./Page.types";
 
-export const PageComponent = ({
+const PageComponent = ({
   children,
   valign = "top",
   halign = "stretch",
