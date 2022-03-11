@@ -3,6 +3,7 @@ export enum ViewName {
   Lobby,
   Game,
   Result,
+  WaitingScreen,
   PlayerMatch,
   ChooseName,
   SelectGroup,

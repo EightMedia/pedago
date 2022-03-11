@@ -3,7 +3,6 @@ import { Admin } from "./admin.interface";
 import { Organisation } from "./organisation.interface";
 import { Options } from "./option.interface";
 import { Group } from "./group.interface";
-import { Team } from "./team.interface";
 export interface RoomDto {
     id: string;
     socketId: string;
@@ -12,7 +11,7 @@ export interface RoomDto {
     organisation?: Organisation;
     players: Player[];
     groups?: Group[];
-    teams?: Team[];
+    teams?: Player[][];
     active: boolean;
     locked: boolean;
     startDate: string | Date;
