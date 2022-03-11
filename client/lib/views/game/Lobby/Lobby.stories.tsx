@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Lobby } from "./Lobby";
-import { LobbyData } from "./Lobby.data";
+import { LobbyDataOneGroup, LobbyDataTwoGroups } from "./Lobby.data";
 
 export default {
   title: "Views/Game/Lobby",
@@ -20,7 +20,7 @@ OneGroup.parameters = {
   },
 };
 OneGroup.storyName = "One group";
-OneGroup.args = { ...LobbyData };
+OneGroup.args = { ...LobbyDataOneGroup };
 
 // two groups
 export const TwoGroups = Template.bind({});
@@ -32,4 +32,4 @@ TwoGroups.parameters = {
   },
 };
 TwoGroups.storyName = "Two groups";
-TwoGroups.args = { ...LobbyData };
+TwoGroups.args = { ...LobbyDataTwoGroups };

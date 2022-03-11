@@ -1,6 +1,16 @@
-import { ViewName } from "models";
+import { Round, ViewName } from "models";
+
+export enum GameScenes {
+  Countdown,
+  Lead,
+  Sort,
+}
 
 export type GameType = {
   handleEmit: (vn: ViewName) => void;
-  mockCounter?: 0 | 7 | 10;
+  initialScene: GameScenes;
+  autoPlay?: boolean;
+  countdownTime?: number;
+  leadTime?: number;
+  round: number;
 };

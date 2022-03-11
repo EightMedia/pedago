@@ -7,6 +7,7 @@ import { Result } from "../../lib/views/game/Result/Result";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { ViewName, ViewState, initialViewState } from "models";
 import { Page } from "../../lib/components/Page";
+import { WizardSteps } from "../../lib/views/game/Wizard/Wizard.types";
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -53,7 +54,7 @@ const GameCode = () => {
             return (
               <Wizard
                 handleEmit={handleEmit}
-                initialStep={WizardStep.Name}
+                initialStep={WizardSteps.Name}
                 groups={[]}
               />
             );

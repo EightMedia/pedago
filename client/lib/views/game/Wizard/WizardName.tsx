@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "../../../components/Button";
+import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
+import { Stack } from "../../../components/Stack";
 
 export const WizardName = ({
   setStep,
@@ -10,9 +12,11 @@ export const WizardName = ({
   return (
     <>
       <PanelTitle>Jouw voornaam</PanelTitle>
-      <p>Anderen zien dan met wie ze spelen</p>
-      <input type="text" />
-      <Button onClick={() => setStep(2)}>Volgende</Button>
+      <Stack>
+        <p>Anderen zien dan met wie ze spelen</p>
+        <InputText id="name" label="Naam" />
+        <Button onClick={() => setStep(2)}>Volgende</Button>
+      </Stack>
     </>
   );
 };

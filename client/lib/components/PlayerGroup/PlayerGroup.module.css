@@ -1,0 +1,10 @@
+/* css module */
+
+.PlayerGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2xs);
+  background: var(--color-white-15);
+  padding: var(--space-md);
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Wizard } from "./Wizard";
 import { WizardData } from "./Wizard.data";
+import { WizardSteps } from "./Wizard.types";
 
 export default {
   title: "Views/Game/Wizard",
@@ -21,7 +22,8 @@ RoomCode.parameters = {
 };
 RoomCode.storyName = "Room code";
 RoomCode.args = {
-  initialStep: 0,
+  ...WizardData,
+  initialStep: WizardSteps.RoomCode,
 };
 
 // user name
@@ -35,7 +37,8 @@ Name.parameters = {
 };
 Name.storyName = "User name";
 Name.args = {
-  initialStep: 1,
+  ...WizardData,
+  initialStep: WizardSteps.Name,
 };
 
 // group
@@ -49,7 +52,8 @@ Group.parameters = {
 };
 Group.storyName = "Group choice";
 Group.args = {
-  initialStep: 2,
+  ...WizardData,
+  initialStep: WizardSteps.Group,
 };
 
 // info
@@ -63,5 +67,5 @@ Info.parameters = {
 };
 Info.storyName = "Info choice";
 Info.args = {
-  initialStep: 3,
+  initialStep: WizardSteps.Info,
 };

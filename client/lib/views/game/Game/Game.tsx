@@ -1,46 +1,41 @@
-import { ViewName } from "models";
-import React from "react";
-import { SortList } from "../../../components/SortList";
-import { GameType } from "./Game.types";
+import { useState } from "react";
+import { Page } from "../../../components/Page";
+import { GameScenes, GameType } from "./Game.types";
+import { GameCountdown } from "./GameCountdown";
+import { GameLead } from "./GameLead";
+import { GameSort } from "./GameSort";
 
-const gameCountdown = ({ counter }: { counter: number }) => {
+export const Game = ({
+  handleEmit,
+  autoPlay = true,
+  countdownTime,
+  leadTime,
+  initialScene = GameScenes.Countdown,
+}: GameType) => {
+  const [scene, setScene] = useState(initialScene);
+
   return (
-    <>
-      <h2>Counting {counter - 7}</h2>
-    </>
-  );
-};
-
-const gameLead = ({ counter }: { counter: number }) => {
-  return (
-    <>
-      <h2>Lorem ipsum lead tekst...</h2>
-      <small>{counter}</small>
-    </>
-  );
-};
-
-export const Game = ({ handleEmit, mockCounter = 0 }: GameType) => {
-  const [counter, setCounter] = React.useState(10);
-
-  React.useEffect(() => {
-    if (mockCounter) {
-      setCounter(mockCounter);
-    } else {
-      counter > 0 &&
-        setInterval(() => {
-          setCounter((time) => time - 1);
-        }, 1000);
-    }
-  }, []);
-
-  if (counter > 7) return gameCountdown({ counter });
-  if (counter > 0) return gameLead({ counter });
-  return (
-    <>
-      <h2>Sorting!</h2>
-      {/* <SortList /> */}
-      <button onClick={() => handleEmit(ViewName.Wizard)}>I'm done!</button>
-    </>
+    <Page valign="center" halign="center">
+      {(() => {
+        let callback = undefined;
+        switch (scene) {
+          case GameScenes.Countdown:
+            callback = autoPlay ? () => setScene(GameScenes.Lead) : undefined;
+            return <GameCountdown time={countdownTime} callback={callback} />;
+          case GameScenes.Lead:
+            callback = autoPlay ? () => setScene(GameScenes.Lead) : undefined;
+            return (
+              <GameLead
+                time={leadTime}
+                callback={() => setScene(GameScenes.Sort)}
+              />
+            );
+          case GameScenes.Sort:
+            return <GameSort />;
+          default:
+            return null;
+        }
+      })()}
+    </Page>
   );
 };
