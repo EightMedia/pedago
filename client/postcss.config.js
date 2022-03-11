@@ -9,7 +9,7 @@ module.exports = {
       stage: 0,
       features: {
         "custom-properties": {
-          importFrom: "./lib/styles/vars.css",
+          importFrom: "./lib/styles/variables.css",
           preserve: true,
         },
         "custom-media-queries": {
