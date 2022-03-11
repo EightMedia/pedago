@@ -7,9 +7,4 @@ export interface Locale {
     create: string;
     asAdmin: string;
   };
-  game: {
-    round: string;
-    of: string;
-    done: string;
-  };
 }

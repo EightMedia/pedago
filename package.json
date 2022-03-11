@@ -14,6 +14,7 @@
   "scripts": {
     "dev:client": "yarn --cwd client dev",
     "dev:server": "yarn --cwd server dev",
-    "dev:storybook": "yarn --cwd client storybook"
+    "dev:storybook": "yarn --cwd client storybook",
+    "prettier": "npx prettier --write '**/*.tsx' npx prettier --write '**/*.ts'"
   }
 }
