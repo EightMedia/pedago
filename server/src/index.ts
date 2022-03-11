@@ -10,6 +10,7 @@ import {
   joinRoomWithName,
   requestLobby,
   storeRound,
+  storeTeamReady,
 } from "./player";
 import gamesStore from "./store/games.store";
 
@@ -64,7 +65,7 @@ io.on("connection", (socket: Socket) => {
   );
   socket.on("gameStart", (roomId: string, playerId: string, callback) => gameStart(roomId, playerId, socket, callback))
   socket.on("storeRound", (roomId: string, playerId: string, round: Round, callback) => storeRound(roomId, playerId, round, socket, callback))
-
+  socket.on("storeTeamReady", (roomId: string, playerId: string, callback) => storeTeamReady(roomId, playerId, socket, callback))
 });
 
 httpServer.listen(3001);

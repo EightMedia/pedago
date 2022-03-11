@@ -205,6 +205,17 @@ export const storeRound = (
   }
 };
 
+export const storeTeamReady = (
+  roomId: string,
+  playerId: string,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  const index: number = store.getTeamIndex(roomId, playerId);
+  store.setTeamReady(roomId, index, true);
+  // NOGNEIT AF
+}
+
 const determinePlayerView = (player: Player, socket: Socket) => {
   if (player.view === ViewName.Game) {
     const currentRound = player.rounds.length;
