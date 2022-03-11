@@ -31,5 +31,4 @@ __exportStar(require("./models/room-dto.interface"), exports);
 __exportStar(require("./models/round.interface"), exports);
 __exportStar(require("./models/sector.enum"), exports);
 __exportStar(require("./models/socket-callback.interface"), exports);
-__exportStar(require("./models/team.interface"), exports);
 __exportStar(require("./models/view-state.interface"), exports);

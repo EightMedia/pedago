@@ -16,5 +16,4 @@ export * from "./models/room-dto.interface";
 export * from "./models/round.interface";
 export * from "./models/sector.enum";
 export * from "./models/socket-callback.interface";
-export * from "./models/team.interface";
 export * from "./models/view-state.interface";

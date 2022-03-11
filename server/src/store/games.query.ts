@@ -1,4 +1,4 @@
-import { Group, Player, RoomDto } from "models";
+import { Group, Player, RoomDto, Round } from "models";
 import { GetState, SetState } from "zustand/vanilla";
 import { GamesState } from "./games.store";
 
@@ -68,11 +68,11 @@ export const updatePlayerFn = (
   player: Partial<Player>
 ): void => {
   set((state: GamesState) => ({
-    games: state.games.map((r: RoomDto) => {
-      if (roomId === r.id) {
+    games: state.games.map((room: RoomDto) => {
+      if (roomId === room.id) {
         return {
-          ...r,
-          players: r.players.map((p) => {
+          ...room,
+          players: room.players.map((p) => {
             if (p.id === playerId) {
               return {
                 ...p,
@@ -84,7 +84,7 @@ export const updatePlayerFn = (
           }),
         } as RoomDto;
       } else {
-        return r as RoomDto;
+        return room as RoomDto;
       }
     }),
   }));
@@ -97,23 +97,81 @@ export const setPlayerReadyFn = (
   ready: boolean
 ): void => {
   set((state: GamesState) => ({
-    games: state.games.map((r: RoomDto) => {
-      if (roomId === r.id) {
+    games: state.games.map((room: RoomDto) => {
+      if (roomId === room.id) {
         return {
-          ...r,
-          players: r.players.map((p) => {
-            if (p.id === playerId) {
+          ...room,
+          players: room.players.map((player) => {
+            if (player.id === playerId) {
               return {
-                ...p,
-                ready: ready
+                ...player,
+                ready: ready,
               } as Player;
             } else {
-              return p;
+              return player;
             }
           }),
         } as RoomDto;
       } else {
-        return r as RoomDto;
+        return room as RoomDto;
+      }
+    }),
+  }));
+};
+
+export const makeTeamsFn = (set: SetState<GamesState>, roomId: string) => {
+  set((state: GamesState) => ({
+    games: state.games.map((room) => {
+      if (roomId === room.id) {
+        return {
+          ...room,
+          teams: ((): Player[][] => {
+            let teams: Player[][] = [];
+            let team: Player[] = [];
+            const players = room.players;
+
+            for (let i = 0; i < players.length; i++) {
+              team.push(players[i]);
+              if (i % 2 === 1) {
+                team.push(players[i]);
+                if (i % 2 === 1) {
+                  teams.push(team);
+                  if (!(players.length % 2 === 1 && i === players.length - 2)) {
+                    team = [];
+                  }
+                }
+              }
+            }
+            return teams;
+          })(),
+        } as RoomDto;
+      } else {
+        return room as RoomDto;
+      }
+    }),
+  }));
+};
+
+export const storeRoundFn = (
+  set: SetState<GamesState>,
+  roomId: string,
+  playerId: string,
+  round: Round
+): void => {
+  set((state: GamesState) => ({
+    games: state.games.map((room) => {
+      if (roomId === room.id) {
+        return {
+          ...room,
+          players: room.players.map((player) => {
+            if (player.id === playerId) {
+              player.rounds.push(round);
+            }
+            return player;
+          }),
+        } as RoomDto;
+      } else {
+        return room as RoomDto;
       }
     }),
   }));

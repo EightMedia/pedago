@@ -1,7 +1,9 @@
 import { randomUUID } from "crypto";
-import { Admin, Player, RoomDto, SocketCallback, ViewName } from "models";
+import { Admin, RoomDto, SocketCallback, ViewName } from "models";
 import { Socket } from "socket.io";
 import gamesStore from "./store/games.store";
+
+const store = gamesStore.getState();
 
 export const registerGame = (
   partialRoom: RoomDto,
@@ -36,24 +38,17 @@ export const registerGame = (
     },
   });
   socket.emit("to", { name: ViewName.Lobby });
-  gamesStore.getState().addRoom(room);
+  store.addRoom(room);
 };
 
 export const startGame = (roomId: string, socket: Socket) => {
-  const chunk = (arr: Player[], size: number) => {
-    return arr.reduce(
-      (acc: Player[], e: Player, i) => (
-        i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc
-      ),
-      []
-    );
-  };
-
-  socket.broadcast.emit("message", `Hello broadcast ${roomId}`);
+  store.makeTeams(roomId);
+  socket.broadcast.to(roomId).emit("to", ViewName.PlayerMatch);
+  socket.broadcast.to(roomId).emit("message", `Teams ready for room: ${roomId}`);
 };
 
 export const updateRoomDto = (room: Partial<RoomDto>) => {
-  gamesStore.getState().updateRoom(room as RoomDto);
+  store.updateRoom(room as RoomDto);
 };
 
 export const reset = (socket: Socket) => {

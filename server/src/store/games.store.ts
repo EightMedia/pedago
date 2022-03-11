@@ -1,11 +1,13 @@
-import { Group, Player, RoomDto, Team } from "models";
+import { Group, Player, RoomDto, Round } from "models";
 import create, { GetState, SetState, StoreApi } from "zustand/vanilla";
 import {
   addPlayerToRoomFn,
   addRoomFn,
   getGroupsByRoomIdFn,
   getPlayerByIdFn,
+  makeTeamsFn,
   setPlayerReadyFn,
+  storeRoundFn,
   updatePlayerFn,
   updateRoomFn,
 } from "./games.query";
@@ -16,8 +18,8 @@ export interface GamesState {
   getRoomByGameCode: (gameCode: number) => RoomDto | undefined;
   getPlayerById: (roomId: string, playerId: string) => Player | undefined;
   getGroupsByRoomId: (roomId: string) => Group[] | undefined;
-  getTeams: (roomId: string) => Team[] | undefined;
-  
+  getTeams: (roomId: string) => Player[][] | undefined;
+
   addRoom: (room: RoomDto) => void;
   updateRoom: (room: RoomDto) => void;
   addPlayerToRoom: (roomId: string, player: Partial<Player>) => void;
@@ -27,6 +29,8 @@ export interface GamesState {
     player: Partial<Player>
   ) => void;
   setPlayerReady: (roomId: string, playerId: string, ready: boolean) => void;
+  makeTeams: (roomId: string) => void;
+  storeRound: (roomId: string, playerId: string, round: Round) => void;
   removeAllGames: () => void;
 }
 
@@ -37,10 +41,12 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
     // Getters
     getRoomById: (roomId: string) =>
       get().games.find((room) => room.id === roomId),
-    getRoomByGameCode: (gameCode: number) => get().games.find((room) => room.gameCode === gameCode),
-    getPlayerById: (roomId, playerId) => getPlayerByIdFn(get, roomId, playerId),
+    getRoomByGameCode: (gameCode: number) =>
+      get().games.find((room) => room.gameCode === gameCode),
+    getPlayerById: (roomId: string, playerId: string) =>
+      getPlayerByIdFn(get, roomId, playerId),
     getGroupsByRoomId: (roomId: string) => getGroupsByRoomIdFn(get, roomId),
-    getTeams: (roomId: string) => 
+    getTeams: (roomId: string) =>
       get().games.find((room) => room.id === roomId)?.teams,
 
     // Setters
@@ -50,7 +56,11 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       addPlayerToRoomFn(set, roomId, player),
     updatePlayer: (roomId: string, playerId: string, player: Partial<Player>) =>
       updatePlayerFn(set, roomId, playerId, player),
-      setPlayerReady: (roomId: string, playerId: string, ready: boolean) => setPlayerReadyFn(set, roomId, playerId, ready),
+    setPlayerReady: (roomId: string, playerId: string, ready: boolean) =>
+      setPlayerReadyFn(set, roomId, playerId, ready),
+    makeTeams: (roomId: string) => makeTeamsFn(set, roomId),
+    storeRound: (roomId: string, playerId: string, round: Round) =>
+      storeRoundFn(set, roomId, playerId, round),
     removeAllGames: () => set({ games: [] }),
   })
 );

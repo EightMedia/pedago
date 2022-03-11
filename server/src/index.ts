@@ -1,6 +1,6 @@
 import express from "express";
 import { createServer } from "http";
-import { RoomDto, ViewName } from "models";
+import { RoomDto, Round, ViewName } from "models";
 import { Server, Socket } from "socket.io";
 import { disconnectAll, registerGame, reset, startGame, updateRoomDto } from "./admin";
 import {
@@ -9,6 +9,7 @@ import {
   joinRoomByGameCode,
   joinRoomWithName,
   requestLobby,
+  storeRound,
 } from "./player";
 import gamesStore from "./store/games.store";
 
@@ -58,11 +59,12 @@ io.on("connection", (socket: Socket) => {
     (groupId: string, roomId: string, playerId: string, callback) =>
       joinGroup(groupId, roomId, playerId, socket, callback)
   );
-  socket.on("requestLobby", (socket: Socket, callback) =>
-    requestLobby(socket, callback)
+  socket.on("requestLobby", (roomId: string, playerId: string, callback) =>
+    requestLobby(roomId, playerId, socket, callback)
   );
-  socket.on("gameStart", (roomId: string, playerId: string, socket: Socket, callback) => gameStart(roomId, playerId, socket, callback))
-  
+  socket.on("gameStart", (roomId: string, playerId: string, callback) => gameStart(roomId, playerId, socket, callback))
+  socket.on("storeRound", (roomId: string, playerId: string, round: Round, callback) => storeRound(roomId, playerId, round, socket, callback))
+
 });
 
 httpServer.listen(3001);
