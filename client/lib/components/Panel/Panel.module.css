@@ -1,13 +1,13 @@
 /* css module */
 
-.Panel {
+.panel {
   padding: var(--space-md);
   background: var(--color-white);
   border-radius: var(--border-radius-md);
   color: var(--color-grey-darkest);
 }
 
-.PanelTitle {
+.panelTitle {
   text-align: center;
   font-weight: bold;
   font: 700 23px / 1.1 var(--font-headings);

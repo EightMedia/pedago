@@ -8,7 +8,7 @@ import { ResultType } from "./Result.types";
 export const ResultComponent = ({}: ResultType) => {
   return (
     <Page>
-      <div className={cx("Result", styles.Result)}>
+      <div className={cx("result", styles.result)}>
         <Title>Result</Title>
       </div>
     </Page>

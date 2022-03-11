@@ -1,6 +1,6 @@
 /* css module */
 
-.Button {
+.button {
   border-radius: var(--border-radius-sm);
   background: var(--color-blue);
   padding: var(--space-xs) var(--space-md);

@@ -10,7 +10,7 @@ export const PlayerGroupComponent = ({
   players,
 }: PlayerGroupType) => {
   return (
-    <div className={cx("PlayerGroup", styles.PlayerGroup)}>
+    <div className={cx(styles.playerGroup)}>
       {players.map((player) => (
         <Player {...player} />
       ))}
