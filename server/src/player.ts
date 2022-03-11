@@ -158,18 +158,23 @@ export const gameStart = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  const teams = store.getTeams(roomId);
-  store.setPlayerReady(roomId, playerId, true);
+  const index: number = store.getTeamIndex(roomId, playerId);
+  store.setTeamPlayerReady(roomId, playerId, index as number, true);
+  const teamReady: boolean = store.getTeamReady(roomId, index);
 
-  // Find couple and wait until other player is ready
-  // Emit ready message to partner?
-  // If both are ready, set both to ready: false
-
-  socket.emit("to", { name: ViewName.Game });
-  callback({
-    status: "OK",
-    message: "Start game",
-  });
+  if (teamReady) {
+    callback({
+      status: "OK",
+      message: "Start game",
+    });
+    const team = (store.getTeams(roomId) as Player[][])[index];
+    team.forEach((player: Player) => {
+      socket.to(player.socketId).emit("to", { name: ViewName.Game, round: 1 });
+    });
+    store.setTeamReady(roomId, index, false);
+  } else {
+    socket.emit("to", { name: ViewName.WaitingScreen });
+  }
 };
 
 export const storeRound = (
@@ -177,18 +182,28 @@ export const storeRound = (
   playerId: string,
   round: Round,
   socket: Socket,
-  callback: (args: SocketCallback) => void) => {
-    // Push round to Rounds array
-    store.storeRound(roomId, playerId, round);
+  callback: (args: SocketCallback) => void
+) => {
+  store.storeRound(roomId, playerId, round);
 
-    // Check if partner is ready, if not "to" waiting screen, if so send both to next screen
-    socket.emit("to", { name: ViewName.WaitingScreen})
+  const index: number = store.getTeamIndex(roomId, playerId);
+  store.setTeamPlayerReady(roomId, playerId, index as number, true);
+  const teamReady: boolean = store.getTeamReady(roomId, index);
 
+  if (teamReady) {
     callback({
       status: "OK",
-      message: "Round saved"
-    })
+      message: "Round saved",
+    });
+    const team = (store.getTeams(roomId) as Player[][])[index];
+    team.forEach((player: Player) => {
+      socket.to(player.socketId).emit("to", { name: ViewName.Discuss });
+    });
+    store.setTeamReady(roomId, index, false);
+  } else {
+    socket.emit("to", { name: ViewName.WaitingScreen });
   }
+};
 
 const determinePlayerView = (player: Player, socket: Socket) => {
   if (player.view === ViewName.Game) {

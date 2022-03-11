@@ -90,28 +90,52 @@ export const updatePlayerFn = (
   }));
 };
 
-export const setPlayerReadyFn = (
+export const setTeamPlayerReadyFn = (
   set: SetState<GamesState>,
   roomId: string,
   playerId: string,
+  teamIndex: number,
   ready: boolean
 ): void => {
   set((state: GamesState) => ({
     games: state.games.map((room: RoomDto) => {
       if (roomId === room.id) {
-        return {
-          ...room,
-          players: room.players.map((player) => {
-            if (player.id === playerId) {
-              return {
-                ...player,
-                ready: ready,
-              } as Player;
-            } else {
-              return player;
-            }
-          }),
-        } as RoomDto;
+        const team: Player[] = (room.teams as Player[][])[teamIndex];
+        team.map((player: Player) => {
+          if (player.id === playerId) {
+            return {
+              ...player,
+              ready: ready,
+            };
+          } else {
+            return player;
+          }
+        });
+        return room as RoomDto;
+      } else {
+        return room as RoomDto;
+      }
+    }),
+  }));
+};
+
+export const setTeamReadyFn = (
+  set: SetState<GamesState>,
+  roomId: string,
+  teamIndex: number,
+  ready: boolean
+) => {
+  set((state: GamesState) => ({
+    games: state.games.map((room: RoomDto) => {
+      if (roomId === room.id) {
+        const team: Player[] = (room.teams as Player[][])[teamIndex];
+        team.map((player: Player) => {
+          return {
+            ...player,
+            ready: ready,
+          };
+        });
+        return room as RoomDto;
       } else {
         return room as RoomDto;
       }
@@ -176,4 +200,4 @@ const makeTeamsFromPlayerList = (players: Player[]): Player[][] => {
     }
   }
   return teams;
-}
+};
