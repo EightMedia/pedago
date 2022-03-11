@@ -11,5 +11,5 @@ export enum WizardStep {
 export type WizardType = {
   handleEmit: (vn: ViewName) => void;
   groups: Group[];
-  initialStep?: WizardSteps;
+  initialStep?: WizardStep;
 };
