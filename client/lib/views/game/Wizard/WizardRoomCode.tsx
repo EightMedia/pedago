@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
-import { Stack } from "../../../components/Stack";
+import { Stack } from "../../../layouts/Stack";
 
 export const WizardRoomCode = ({
   setStep,

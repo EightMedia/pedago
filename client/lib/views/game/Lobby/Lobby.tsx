@@ -7,7 +7,7 @@ import { groupEnd } from "console";
 import { PlayerGroup } from "../../../components/PlayerGroup";
 import { Title } from "../../../components/Title";
 import { Intro } from "../../../components/Intro";
-import { Stack } from "../../../components/Stack";
+import { Stack } from "../../../layouts/Stack";
 
 export const LobbyComponent = ({ round, roundMax, groups }: LobbyType) => {
   return (

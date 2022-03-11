@@ -2,7 +2,7 @@ import React from "react";
 import { Group } from "models";
 import { Button } from "../../../components/Button";
 import { PanelTitle } from "../../../components/Panel";
-import { Stack } from "../../../components/Stack";
+import { Stack } from "../../../layouts/Stack";
 
 export const WizardGroup = ({
   groups,

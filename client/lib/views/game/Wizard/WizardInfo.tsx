@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../../components/Button";
 import { PanelTitle } from "../../../components/Panel";
-import { Stack } from "../../../components/Stack";
+import { Stack } from "../../../layouts/Stack";
 import styles from "./Wizard.module.css";
 
 const WizardInfoItem = ({
