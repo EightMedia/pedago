@@ -3,7 +3,7 @@ import { memo } from "react";
 import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";
 
-export const ButtonComponent = ({ children, onClick }: ButtonType) => {
+const ButtonComponent = ({ children, onClick }: ButtonType) => {
   return (
     <button className={cx("Button", styles.Button)} onClick={onClick}>
       {children}

@@ -3,7 +3,7 @@ import { Page } from "../../../components/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
 import { WizardType } from "./Wizard.types";
 
-export const WizardComponent = ({}: WizardType) => {
+const WizardComponent = ({}: WizardType) => {
   return (
     <Page>
       <Panel>
