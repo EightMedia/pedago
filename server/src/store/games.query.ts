@@ -125,25 +125,7 @@ export const makeTeamsFn = (set: SetState<GamesState>, roomId: string) => {
       if (roomId === room.id) {
         return {
           ...room,
-          teams: ((): Player[][] => {
-            let teams: Player[][] = [];
-            let team: Player[] = [];
-            const players = room.players;
-
-            for (let i = 0; i < players.length; i++) {
-              team.push(players[i]);
-              if (i % 2 === 1) {
-                team.push(players[i]);
-                if (i % 2 === 1) {
-                  teams.push(team);
-                  if (!(players.length % 2 === 1 && i === players.length - 2)) {
-                    team = [];
-                  }
-                }
-              }
-            }
-            return teams;
-          })(),
+          teams: makeTeamsFromPlayerList(room.players),
         } as RoomDto;
       } else {
         return room as RoomDto;
@@ -176,3 +158,22 @@ export const storeRoundFn = (
     }),
   }));
 };
+
+const makeTeamsFromPlayerList = (players: Player[]): Player[][] => {
+  let teams: Player[][] = [];
+  let team: Player[] = [];
+
+  for (let i = 0; i < players.length; i++) {
+    team.push(players[i]);
+    if (i % 2 === 1) {
+      team.push(players[i]);
+      if (i % 2 === 1) {
+        teams.push(team);
+        if (!(players.length % 2 === 1 && i === players.length - 2)) {
+          team = [];
+        }
+      }
+    }
+  }
+  return teams;
+}
