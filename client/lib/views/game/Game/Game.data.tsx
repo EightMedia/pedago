@@ -1,4 +1,6 @@
-export const gameDataMatching = {};
-export const gameDataCountdown = {};
-export const gameDataLead = {};
-export const gameDataSorting = {};
+export const gameData = {
+  autoPlay: false,
+  round: 1,
+  maxRounds: 6,
+  players: ["Stijn", "Vincent"],
+};

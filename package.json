@@ -1,19 +1,20 @@
 {
-    "name": "pedago-game",
-    "version": "0.0.1",
-    "main": "index.js",
-    "repository": "git@github.com:EightMedia/pedago.git",
-    "author": "Eight Media <info@eight.nl>",
-    "license": "MIT",
-    "private": true,
-    "workspaces": [
-        "server",
-        "client",
-        "models"
-    ],
-    "scripts": {
-        "dev:client": "yarn --cwd client dev",
-        "dev:server": "yarn --cwd server dev",
-        "prettier": "npx prettier --write '**/*.tsx' npx prettier --write '**/*.ts'"
-    }
+  "name": "pedago-game",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:EightMedia/pedago.git",
+  "author": "Eight Media <info@eight.nl>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "models"
+  ],
+  "scripts": {
+    "dev:client": "yarn --cwd client dev",
+    "dev:server": "yarn --cwd server dev",
+    "dev:storybook": "yarn --cwd client storybook",
+    "prettier": "npx prettier --write '**/*.tsx' npx prettier --write '**/*.ts'"
+  }
 }

@@ -1,0 +1,13 @@
+/* css module */
+
+.player {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-white-15);
+  overflow: hidden;
+  border-radius: var(--border-radius-xs);
+}
+.name {
+  font-size: var(--font-size-sm);
+  padding: var(--space-3xs);
+}

@@ -1,14 +1,25 @@
 /* global styling. A reset etc.. */
 
+@import "../../../node_modules/css-reset-and-normalize/css/button-reset.css";
+@import "../../../node_modules/css-reset-and-normalize/css/link-reset.css";
+@import "../../../node_modules/css-reset-and-normalize/css/reset-and-normalize.css";
+@import "mediaQueries.css";
+@import "variables.css";
+
 html,
 body {
-  margin: 0;
   width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: var(--font-size-md);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-body {
-  padding: 1em;
+
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 a {
@@ -24,4 +35,13 @@ a {
   background: #f3f3f3;
   padding: 1em;
   margin: 3em -1em 0;
+}
+
+.sr-only {
+  position: absolute;
+  left: -999em;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }

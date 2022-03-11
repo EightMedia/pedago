@@ -10,4 +10,9 @@ export const NL: DataTranslation = {
     create: "Spel aanmaken",
     asAdmin: "als beheerder",
   },
+  game: {
+    round: "Ronde",
+    of: "van",
+    done: "Ik ben klaar",
+  },
 };

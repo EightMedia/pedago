@@ -1,23 +1,18 @@
-const Wizard = ({ socket, data }: { socket: any; data: any }) => {
-  // back to start
-  const resetEveryone = () => {
-    socket.emit("reset");
-  };
+import React from "react";
+import cx from "classnames";
+import styles from "./Wizard.module.css";
+import { WizardType } from "./Wizard.types";
+import { Page } from "../../../components/Page";
+import { Panel, PanelTitle } from "../../../components/Panel";
 
-  // end the party
-  const killRoom = () => {
-    socket.emit("killRoom", data.room);
-  };
-
+export const WizardComponent = ({}: WizardType) => {
   return (
-    <div>
-      <h1>Admin dashboard for room {data?.room || "black hole"}!</h1>
-      <section>
-        <h2>Hello superboss! 🤠</h2>
-        <button onClick={resetEveryone}>🎬 Reset everyone</button>
-        <button onClick={killRoom}>☠️ Kill room</button>
-      </section>
-    </div>
+    <Page>
+      <Panel>
+        <PanelTitle>Wizard</PanelTitle>
+      </Panel>
+    </Page>
   );
 };
-export default Wizard;
+
+export const Wizard = React.memo(WizardComponent);

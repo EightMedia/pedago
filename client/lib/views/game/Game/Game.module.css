@@ -1,0 +1,3 @@
+.countdownNumber {
+  font-size: clamp(160px, 2.5vw, 200px);
+}

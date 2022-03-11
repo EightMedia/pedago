@@ -1,5 +1,6 @@
 module.exports = {
   stories: ["../**/*.stories.mdx", "../**/*.stories.@(js|jsx|ts|tsx)"],
+  staticDirs: ["../public"],
   typescript: {
     check: false,
     checkOptions: {},
@@ -15,6 +16,14 @@ module.exports = {
     "@storybook/addon-essentials",
     "storybook-css-modules-preset",
     "storybook-addon-designs",
+    {
+      name: "@storybook/addon-postcss",
+      options: {
+        postcssLoaderOptions: {
+          implementation: require("postcss"),
+        },
+      },
+    },
   ],
   framework: "@storybook/react",
 };
