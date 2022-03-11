@@ -3,9 +3,9 @@ import cx from "classnames";
 import styles from "./{{name}}.module.css";
 import { {{name}}Type } from "./{{name}}.types";
 
-export const {{name}}Component = ({}: {{name}}Type) => {
+const {{name}}Component = ({}: {{name}}Type) => {
   return (
-    <div className={cx("{{name}}", styles.{{name}})}>
+    <div className={cx(styles.wrapper)}>
       <h2>{{name}}</h2>
     </div>
   );
