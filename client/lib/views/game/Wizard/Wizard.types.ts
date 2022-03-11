@@ -1,8 +1,7 @@
 import { Group } from "models";
 import { ViewName } from "models/lib/models/view-state.interface";
 
-// enum for steps
-export enum WizardSteps {
+export enum WizardStep {
   RoomCode,
   Name,
   Group,

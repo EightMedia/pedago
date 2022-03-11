@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Player } from "./Player";
 import { PlayerData } from "./Player.data";

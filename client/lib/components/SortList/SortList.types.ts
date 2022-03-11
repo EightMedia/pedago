@@ -1,4 +1,3 @@
-import { Category } from "models";
 
 export type SortListType = {
   cards: any;

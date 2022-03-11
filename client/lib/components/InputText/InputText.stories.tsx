@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { InputText } from "./InputText";
 import { InputTextData } from "./InputText.data";

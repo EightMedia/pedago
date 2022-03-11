@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { PlayerGroup } from "./PlayerGroup";
 import { PlayerGroupData } from "./PlayerGroup.data";

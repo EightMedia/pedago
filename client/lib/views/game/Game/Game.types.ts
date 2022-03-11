@@ -1,4 +1,4 @@
-import { Round, ViewName } from "models";
+import { ViewName } from "models";
 
 export enum GameScenes {
   Countdown,

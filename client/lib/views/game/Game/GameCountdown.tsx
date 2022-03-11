@@ -15,7 +15,7 @@ export const GameCountdown = ({
       setCounter(counter - 1);
       if (counter === 0) {
         clearInterval(interval);
-        callback && callback();
+        callback();
       }
     }, 1000);
   }, [counter, setCounter, callback]);

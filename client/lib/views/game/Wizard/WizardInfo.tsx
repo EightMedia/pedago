@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../../../components/Button";
 import { PanelTitle } from "../../../components/Panel";
 import { Stack } from "../../../layouts/Stack";

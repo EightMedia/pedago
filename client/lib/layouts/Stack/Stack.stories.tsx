@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Stack } from "./Stack";
 import { StackData } from "./Stack.data";
@@ -23,7 +22,6 @@ const DemoStack = () => {
   );
 };
 
-// story
 export const Primary = Template.bind({});
 Primary.parameters = {
   design: {

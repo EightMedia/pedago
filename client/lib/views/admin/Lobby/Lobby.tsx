@@ -1,4 +1,3 @@
-import React from "react";
 import cx from "classnames";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
@@ -30,4 +29,4 @@ export const LobbyComponent = ({}: LobbyType) => {
   );
 };
 
-export const Lobby = React.memo(LobbyComponent);
+export const Lobby = memo(LobbyComponent);

@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import cx from "classnames";
 import styles from "./SortList.module.css";
 import { SortCardType, SortListType } from "./SortList.types";
@@ -19,4 +19,4 @@ export const SortListComponent = ({ cards }: SortListType) => {
   );
 };
 
-export const SortList = React.memo(SortListComponent);
+export const SortList = memo(SortListComponent);

@@ -1,4 +1,4 @@
-import React from "react";
+import { memo }  from "react";
 import cx from "classnames";
 import styles from "./Game.module.css";
 import { GameType } from "./Game.types";
@@ -12,4 +12,4 @@ export const GameComponent = ({}: GameType) => {
   );
 };
 
-export const Game = React.memo(GameComponent);
+export const Game = memo(GameComponent);

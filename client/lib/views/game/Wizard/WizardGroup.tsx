@@ -1,4 +1,3 @@
-import React from "react";
 import { Group } from "models";
 import { Button } from "../../../components/Button";
 import { PanelTitle } from "../../../components/Panel";
@@ -9,14 +8,14 @@ export const WizardGroup = ({
   setStep,
 }: {
   groups: any;
-  setStep: (number: number) => void;
+  setStep: (step: WizardSteps) => void;
 }) => {
   return (
     <>
       <PanelTitle>Kies je groep</PanelTitle>
       <Stack gap="2xs">
         {groups.map((item: Group) => (
-          <Button key={item.id} onClick={() => setStep(3)}>
+          <Button key={item.id} onClick={() => setStep(WizardSteps.Info)}>
             {item.name}
           </Button>
         ))}

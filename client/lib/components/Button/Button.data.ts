@@ -1,8 +1,8 @@
-import React from "react";
+import { createElement, Fragment } from "react";
 import { ButtonType } from "./Button.types";
 
 // demo text
-const text = React.createElement(React.Fragment, null, "Click me");
+const text = createElement(Fragment, null, "Click me");
 
 export const ButtonData: ButtonType = {
   onClick: () => alert("clicked"),

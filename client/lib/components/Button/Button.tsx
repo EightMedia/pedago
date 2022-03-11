@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import cx from "classnames";
 import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";

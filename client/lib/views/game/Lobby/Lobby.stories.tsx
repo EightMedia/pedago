@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Lobby } from "./Lobby";
 import { LobbyDataOneGroup, LobbyDataTwoGroups } from "./Lobby.data";
