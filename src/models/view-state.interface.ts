@@ -3,6 +3,8 @@ export enum ViewName {
   Lobby,
   Game,
   Result,
+  InfoScreen,
+  SelectGroup
 }
 
 export interface ViewState {

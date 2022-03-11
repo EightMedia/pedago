@@ -1,8 +1,8 @@
 export * from "./models/admin.interface";
 export * from "./models/category.enum";
-export * from "./models/data-translation.interface";
 export * from "./models/group.interface";
 export * from "./models/language.enum";
+export * from "./models/locale.interface";
 export * from "./models/option.interface";
 export * from "./models/organisation.interface";
 export * from "./models/player.interface";
@@ -11,5 +11,6 @@ export * from "./models/role.enum";
 export * from "./models/room-dto.interface";
 export * from "./models/round.interface";
 export * from "./models/sector.enum";
+export * from "./models/socket-callback.interface";
 export * from "./models/view-state.interface";
 export * from "./models/view.enum";

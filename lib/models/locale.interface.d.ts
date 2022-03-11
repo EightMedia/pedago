@@ -1,4 +1,4 @@
-export interface DataTranslation {
+export interface Locale {
     landing: {
         title: string;
         description: string;
@@ -6,5 +6,5 @@ export interface DataTranslation {
         button: string;
         create: string;
         asAdmin: string;
-    }
+    };
 }
