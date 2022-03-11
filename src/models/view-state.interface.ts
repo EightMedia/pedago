@@ -7,7 +7,8 @@ export enum ViewName {
   PlayerMatch,
   ChooseName,
   SelectGroup,
-  InfoScreen
+  InfoScreen,
+  Discuss
 }
 
 export interface ViewState {
