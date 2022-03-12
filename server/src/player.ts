@@ -39,8 +39,7 @@ export const joinRoomByGameCode = (
       ...player,
       socketId: socket.id,
     };
-    gamesStore
-      .getState()
+    store
       .updatePlayer(room.id, playerId as string, updatedPlayer);
     determinePlayerView(updatedPlayer as Player, socket);
   }
@@ -101,8 +100,7 @@ export const joinGroup = (
   callback: (args: SocketCallback) => void
 ) => {
   const player = store.getPlayerById(roomId, playerId);
-  const group = gamesStore
-    .getState()
+  const group = store
     .getGroupsByRoomId(roomId)
     ?.find((g: Group) => g.id === groupId);
 
@@ -140,8 +138,7 @@ export const requestLobby = (
   socket.emit("to", { name: ViewName.Lobby });
 
   // get players that requested lobby and broadcast the list
-  const playersInLobby = gamesStore
-    .getState()
+  const playersInLobby = store
     .getRoomById(roomId)
     ?.players.filter((p: Player) => p.view === ViewName.Lobby);
   socket.broadcast.to(roomId).emit("players", playersInLobby);
