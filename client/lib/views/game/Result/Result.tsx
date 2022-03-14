@@ -5,7 +5,7 @@ import { Title } from "../../../components/Title";
 import styles from "./Result.module.css";
 import { ResultType } from "./Result.types";
 
-export const ResultComponent = ({}: ResultType) => {
+const ResultComponent = ({}: ResultType) => {
   return (
     <Page>
       <div className={cx("Result", styles.Result)}>
