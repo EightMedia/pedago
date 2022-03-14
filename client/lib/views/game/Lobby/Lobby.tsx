@@ -7,7 +7,7 @@ import { Stack } from "../../../layouts/Stack";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
 
-export const LobbyComponent = ({ round, roundMax, groups }: LobbyType) => {
+const LobbyComponent = ({ round, roundMax, groups }: LobbyType) => {
   return (
     <Page>
       <div className={styles.header}>

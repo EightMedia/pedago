@@ -1,30 +1,30 @@
 import { memo, useState } from "react";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
-import { WizardSteps, WizardType } from "./Wizard.types";
+import { WizardStep, WizardType } from "./Wizard.types";
 import { WizardGroup } from "./WizardGroup";
 import { WizardInfo } from "./WizardInfo";
 import { WizardName } from "./WizardName";
 import { WizardRoomCode } from "./WizardRoomCode";
 
-export const WizardComponent = ({
+const WizardComponent = ({
   handleEmit,
   groups,
-  initialStep = WizardSteps.RoomCode,
+  initialStep = WizardStep.RoomCode,
 }: WizardType) => {
-  const [step, setStep] = useState<WizardSteps>(initialStep);
+  const [step, setStep] = useState<WizardStep>(initialStep);
   return (
     <Page valign="center">
       <Panel>
         {(() => {
           switch (step) {
-            case WizardSteps.RoomCode:
+            case WizardStep.RoomCode:
               return <WizardRoomCode setStep={setStep} />;
-            case WizardSteps.Name:
+            case WizardStep.Name:
               return <WizardName setStep={setStep} />;
-            case WizardSteps.Group:
+            case WizardStep.Group:
               return <WizardGroup groups={groups} setStep={setStep} />;
-            case WizardSteps.Info:
+            case WizardStep.Info:
               return <WizardInfo onClick={() => handleEmit(1)} />;
             default:
               return null;

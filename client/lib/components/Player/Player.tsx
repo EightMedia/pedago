@@ -4,7 +4,7 @@ import { memo } from "react";
 import styles from "./Player.module.css";
 import { PlayerType } from "./Player.types";
 
-export const PlayerComponent = ({ name, group, size }: PlayerType) => {
+const PlayerComponent = ({ name, group, size }: PlayerType) => {
   return (
     <div className={cx(styles.player)}>
       <Avatar square={true} name={name} variant="beam" size={32} />
