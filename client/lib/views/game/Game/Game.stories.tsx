@@ -1,57 +1,61 @@
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Game } from "./Game";
-import {
-  gameDataCountdown,
-  gameDataLead,
-  gameDataMatching,
-  gameDataSorting,
-} from "./Game.data";
+import { gameData } from "./Game.data";
+import { GameScenes } from "./Game.types";
 
 export default {
-  title: "Views/Game",
+  title: "Views/Game/Game",
   component: Game,
 } as ComponentMeta<typeof Game>;
 
 // Setting a “template” of how args map to rendering
 const Template: ComponentStory<typeof Game> = (args) => <Game {...args} />;
 
-// Matching
-export const Matching = Template.bind({});
-Matching.parameters = {
-  design: {
-    type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A2840",
-  },
-};
-Matching.args = { ...gameDataMatching };
-
 // Countdown
 export const Countdown = Template.bind({});
 Countdown.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A2840",
   },
 };
-Countdown.args = { ...gameDataCountdown };
+Countdown.args = { ...gameData, initialScene: GameScenes.Countdown };
 
 // Lead
 export const Lead = Template.bind({});
 Lead.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A2840",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A3018",
   },
 };
-Lead.args = { ...gameDataLead };
+Lead.args = { ...gameData, initialScene: GameScenes.Lead };
 
-// Each story then reuses that template
+// sort
 export const Sorting = Template.bind({});
 Sorting.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=542%3A3449",
   },
 };
-Sorting.args = { ...gameDataSorting };
+Sorting.args = { ...gameData, initialScene: GameScenes.Sort };
+
+// autoplay
+export const AutoPlay = Template.bind({});
+AutoPlay.parameters = {
+  layout: "fullscreen",
+  design: {
+    type: "figma",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=542%3A3449",
+  },
+};
+AutoPlay.args = {
+  ...gameData,
+  autoPlay: true,
+  initialScene: GameScenes.Countdown,
+};

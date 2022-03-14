@@ -1,6 +1,4 @@
-export type buttonType = {
-  className?: string;
-  href?: string;
+export type ButtonType = {
   children: React.ReactNode;
-  variation?: "primary" | "secondary";
+  onClick: () => void;
 };

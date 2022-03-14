@@ -1,9 +1,7 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from "react";
 import { {{name}} } from "./{{name}}";
-import {
-  {{name}}Data,
-} from "./{{name}}.data";
+import { {{name}}Data } from "./{{name}}.data";
 
 export default {
   title: "{{section}}/{{name}}",
@@ -15,6 +13,7 @@ const Template: ComponentStory<typeof {{name}}> = (args) => <{{name}} {...args} 
 // story
 export const Primary = Template.bind({});
 Primary.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "",

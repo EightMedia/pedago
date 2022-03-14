@@ -1,0 +1,13 @@
+/* css module */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  border: var(--border-neutral);
+  font-size: 16px;
+  padding: var(--space-xs);
+  border-radius: var(--border-radius-sm);
+}
