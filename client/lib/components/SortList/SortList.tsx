@@ -6,7 +6,7 @@ import { SortCardType, SortListType } from "./SortList.types";
 
 const SortListComponent = ({ cards }: SortListType) => {
   return (
-    <div className={cx("SortList", styles.SortList)}>
+    <div className={cx("sortList", styles.sortList)}>
       <div className="sortlist">
         {cards.map((item: SortCardType) => (
           <div key={item.id}>

@@ -1,6 +1,6 @@
 /* css module */
 
-.PlayerGroup {
+.playerGroup {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
