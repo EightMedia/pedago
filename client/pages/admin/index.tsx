@@ -66,7 +66,7 @@ const AdminGame = () => {
         Back to Wizard
       </button>
       <button onClick={() => startGame()}>
-        Back to Wizard
+        Start Game
       </button>
     </>
   );
