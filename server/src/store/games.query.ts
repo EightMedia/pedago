@@ -184,6 +184,7 @@ export const storeRoundFn = (
 };
 
 const makeTeamsFromPlayerList = (players: Player[]): Player[][] => {
+  players = shufflePlayerList(players);
   let teams: Player[][] = [];
   let team: Player[] = [];
 
@@ -200,4 +201,21 @@ const makeTeamsFromPlayerList = (players: Player[]): Player[][] => {
     }
   }
   return teams;
+};
+
+const shufflePlayerList = (players: Player[]): Player[] => {
+  let currentIndex = players.length,
+    randomIndex;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [players[currentIndex], players[randomIndex]] = [
+      players[randomIndex],
+      players[currentIndex],
+    ];
+  }
+
+  return players;
 };

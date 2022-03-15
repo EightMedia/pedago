@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { Group, Player, Round, SocketCallback, ViewName } from "models";
+import { Event, Group, Player, Round, SocketCallback, ViewName } from "models";
 import { Socket } from "socket.io";
 import gamesStore from "./store/games.store";
 
@@ -39,8 +39,7 @@ export const joinRoomByGameCode = (
       ...player,
       socketId: socket.id,
     };
-    store
-      .updatePlayer(room.id, playerId as string, updatedPlayer);
+    store.updatePlayer(room.id, playerId as string, updatedPlayer);
     determinePlayerView(updatedPlayer as Player, socket);
   }
 };
@@ -83,7 +82,7 @@ export const joinRoomWithName = (
       status: "OK",
       message: "You have joined the game",
     });
-    socket.emit("to", { name: player.view });
+    socket.emit(Event.To, { name: player.view });
   } else {
     callback({
       status: "ERROR",
@@ -117,7 +116,7 @@ export const joinGroup = (
   } else {
     player.group = group as Group;
     store.updatePlayer(roomId, playerId, player);
-    socket.emit("to", { name: ViewName.InfoScreen });
+    socket.emit(Event.To, { name: ViewName.InfoScreen });
     callback({
       status: "OK",
       message: "Player successfully added to Group",
@@ -135,13 +134,12 @@ export const requestLobby = (
     view: ViewName.Lobby,
   };
   store.updatePlayer(roomId, playerId, player);
-  socket.emit("to", { name: ViewName.Lobby });
+  socket.emit(Event.To, { name: ViewName.Lobby });
 
-  // get players that requested lobby and broadcast the list
   const playersInLobby = store
     .getRoomById(roomId)
     ?.players.filter((p: Player) => p.view === ViewName.Lobby);
-  socket.broadcast.to(roomId).emit("players", playersInLobby);
+  socket.broadcast.to(roomId).emit(Event.PlayerList, playersInLobby);
 
   callback({
     status: "OK",
@@ -166,11 +164,13 @@ export const gameStart = (
     });
     const team = (store.getTeams(roomId) as Player[][])[index];
     team.forEach((player: Player) => {
-      socket.to(player.socketId).emit("to", { name: ViewName.Game, round: 1 });
+      socket
+        .to(player.socketId)
+        .emit(Event.To, { name: ViewName.Game, round: 1 });
     });
     store.setTeamReady(roomId, index, false);
   } else {
-    socket.emit("to", { name: ViewName.WaitingScreen });
+    socket.emit(Event.To, { name: ViewName.WaitingScreen });
   }
 };
 
@@ -194,11 +194,11 @@ export const storeRound = (
     });
     const team = (store.getTeams(roomId) as Player[][])[index];
     team.forEach((player: Player) => {
-      socket.to(player.socketId).emit("to", { name: ViewName.Discuss });
+      socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
     });
     store.setTeamReady(roomId, index, false);
   } else {
-    socket.emit("to", { name: ViewName.WaitingScreen });
+    socket.emit(Event.To, { name: ViewName.WaitingScreen });
   }
 };
 
@@ -210,58 +210,81 @@ export const storeTeamReady = (
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
   store.setTeamReady(roomId, index, true);
-  // NOGNEIT AF
-}
+  
+  const player = store.getPlayerById(roomId, playerId);
+  const lastStoredRound = player?.rounds.length;
+
+  if (typeof lastStoredRound !== "number") {
+    callback({
+      status: "ERROR",
+      message: "Could not find played rounds",
+    });
+    return;
+  }
+
+  if (lastStoredRound === 6) {
+    socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
+    callback({
+      status: "OK",
+      message: "Well played! Here are your results...",
+    });
+  } else {
+    socket.emit(Event.To, {
+      name: ViewName.PlayerMatch,
+      data: { round: lastStoredRound + 1 },
+    });
+  }
+};
 
 const determinePlayerView = (player: Player, socket: Socket) => {
   if (player.view === ViewName.Game) {
     const currentRound = player.rounds.length;
     switch (currentRound) {
       case 0:
-        socket.emit("to", {
+        socket.emit(Event.To, {
           name: ViewName.Game,
           data: { round: 1 },
         });
         break;
       case 1:
-        socket.emit("to", {
+        socket.emit(Event.To, {
           name: ViewName.Game,
           data: { round: 2 },
         });
         break;
       case 2:
-        socket.emit("to", {
+        socket.emit(Event.To, {
           name: ViewName.Game,
           data: { round: 3 },
         });
         break;
       case 3:
-        socket.emit("to", {
+        socket.emit(Event.To, {
           name: ViewName.Game,
           data: { round: 4 },
         });
         break;
       case 4:
-        socket.emit("to", {
+        socket.emit(Event.To, {
           name: ViewName.Game,
           data: { round: 5 },
         });
         break;
       case 5:
-        socket.emit("to", {
+        socket.emit(Event.To, {
           name: ViewName.Game,
           data: { round: 6 },
         });
         break;
       case 6:
-        socket.emit("to", {
+        socket.emit(Event.To, {
           name: ViewName.Result,
         });
         break;
       default:
-        socket.emit("to", { name: ViewName.Lobby });
+        socket.emit(Event.To, { name: ViewName.Lobby });
     }
   } else {
-    socket.emit("to", { name: ViewName.Lobby });
+    socket.emit(Event.To, { name: ViewName.Lobby });
   }
 };
