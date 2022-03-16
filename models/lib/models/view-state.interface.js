@@ -7,8 +7,12 @@ var ViewName;
     ViewName[ViewName["Lobby"] = 1] = "Lobby";
     ViewName[ViewName["Game"] = 2] = "Game";
     ViewName[ViewName["Result"] = 3] = "Result";
-    ViewName[ViewName["InfoScreen"] = 4] = "InfoScreen";
-    ViewName[ViewName["SelectGroup"] = 5] = "SelectGroup";
+    ViewName[ViewName["WaitingScreen"] = 4] = "WaitingScreen";
+    ViewName[ViewName["PlayerMatch"] = 5] = "PlayerMatch";
+    ViewName[ViewName["ChooseName"] = 6] = "ChooseName";
+    ViewName[ViewName["SelectGroup"] = 7] = "SelectGroup";
+    ViewName[ViewName["InfoScreen"] = 8] = "InfoScreen";
+    ViewName[ViewName["Discuss"] = 9] = "Discuss";
 })(ViewName = exports.ViewName || (exports.ViewName = {}));
 exports.initialViewState = {
     name: ViewName.Wizard,

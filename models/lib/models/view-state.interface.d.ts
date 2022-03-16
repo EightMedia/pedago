@@ -3,8 +3,12 @@ export declare enum ViewName {
     Lobby = 1,
     Game = 2,
     Result = 3,
-    InfoScreen = 4,
-    SelectGroup = 5
+    WaitingScreen = 4,
+    PlayerMatch = 5,
+    ChooseName = 6,
+    SelectGroup = 7,
+    InfoScreen = 8,
+    Discuss = 9
 }
 export interface ViewState {
     name: ViewName;

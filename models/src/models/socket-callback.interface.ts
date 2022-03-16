@@ -7,5 +7,6 @@ export interface SocketCallback {
         playerId?: string;
         roomId?: string;
         partner?: Player;
+        gameCode?: number;
     }
 }
