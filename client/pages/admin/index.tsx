@@ -1,5 +1,9 @@
-import { initialViewState, RoomDto, SocketCallback, ViewName } from "models";
-import { useState, useEffect } from "react";
+import {
+  AdminEvent, Event, initialViewState, RoomDto,
+  SocketCallback,
+  ViewName
+} from "models";
+import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 function useSocket(url: string) {
@@ -7,8 +11,6 @@ function useSocket(url: string) {
 
   useEffect(() => {
     const socketIo = io(url);
-
-    socketIo.emit('playerId', localStorage.getItem('playerId'));
     setSocket(socketIo);
 
     function cleanup() {
@@ -24,29 +26,24 @@ const AdminGame = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState(initialViewState);
   const [res, setRes] = useState<SocketCallback>();
-  const mockRoom: Partial<RoomDto>= {
+  const mockRoom: Partial<RoomDto> = {
     admin: {
-      name: 'mocker',
-      email: 'asdf@asdf.com'
-    }
-  }
+      name: "mocker",
+      email: "asdf@asdf.com",
+    },
+  };
 
   const handleClick = (value: ViewName): void => {
-    (socket as Socket).emit("to", value);
-    (socket as Socket).emit("registerGame", mockRoom, (res: any) => {
-      console.log('register done', res.data.gameCode);
+    (socket as Socket).emit(Event.To, value);
+    (socket as Socket).emit(AdminEvent.RegisterGame, mockRoom, (res: any) => {
+      console.log("register done", res.data.gameCode);
       setRes(res);
     });
   };
-
-  const startGame = () => {
-    (socket as Socket).emit("startGame", res?.data?.roomId);
-  }
-
   useEffect(() => {
     if (socket) {
-      socket.on("to", setView);
-      socket.on("message", console.warn)
+      socket.on(Event.To, setView);
+      socket.on(Event.Message, console.warn);
     }
   }, [socket]);
 
@@ -62,12 +59,7 @@ const AdminGame = () => {
           </div>
         </div>
       </div>
-      <button onClick={() => handleClick(ViewName.Wizard)}>
-        Back to Wizard
-      </button>
-      <button onClick={() => startGame()}>
-        Back to Wizard
-      </button>
+      <button onClick={() => handleClick(ViewName.Wizard)}>Start game</button>
     </>
   );
 };

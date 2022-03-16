@@ -12,7 +12,7 @@ export const joinRoomByGameCode = (
   callback: (args: SocketCallback) => void
 ) => {
   const room = store.getRoomByGameCode(gameCode);
-
+  
   if (!room) {
     callback({
       status: "ERROR",
@@ -35,6 +35,10 @@ export const joinRoomByGameCode = (
       },
     });
   } else {
+    callback({
+      status: 'OK',
+      message: 'Player found'
+    })
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
@@ -82,7 +86,7 @@ export const joinRoomWithName = (
       status: "OK",
       message: "You have joined the game",
     });
-    socket.emit(Event.To, { name: player.view });
+    // socket.emit(Event.To, { name: player.view });
   } else {
     callback({
       status: "ERROR",
@@ -210,7 +214,7 @@ export const storeTeamReady = (
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
   store.setTeamReady(roomId, index, true);
-  
+
   const player = store.getPlayerById(roomId, playerId);
   const lastStoredRound = player?.rounds.length;
 

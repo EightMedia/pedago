@@ -9,7 +9,7 @@ const ReDirect = () => {
       gameCode = localStorage.getItem("gameCode");
     }
     gameCode ? router.push(`/game/${gameCode}`) : router.back();
-  }, []);
+  }, [router]);
   return null;
 };
 

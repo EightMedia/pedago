@@ -21,12 +21,10 @@ import {
   gameStart,
   joinGroup,
   joinRoomByGameCode,
-  joinRoomWithName,
-  requestLobby,
+  joinRoomWithName, requestLobby,
   storeRound,
   storeTeamReady
 } from "./player";
-import gamesStore from "./store/games.store";
 
 const app = express();
 const httpServer = createServer(app);
@@ -41,16 +39,11 @@ console.log("--- Pedago Server started at port 3001 ---");
 io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
 
-  // Check if user exists, by getting a UUID from localStorage
-  socket.on("playerId", (id) => {
-    io.sockets.to(id).emit(Event.Message, gamesStore.getState().games);
-  });
-
   // send welcome to user on this socket
   socket.emit(Event.Message, "Hello you have connected");
 
   // begin to send user to start screen
-  socket.emit(Event.To, ViewName.Game);
+  socket.emit(Event.To, ViewName.Wizard);
 
   // METHODS
 
@@ -70,6 +63,7 @@ io.on("connection", (socket: Socket) => {
   socket.on(AdminEvent.Disconnect, () => disconnectAll(socket));
 
   // Player methods
+  // io.sockets.to(id).emit(Event.Message, gamesStore.getState().games);
   socket.on(
     PlayerEvent.JoinRoomByGameCode,
     (
@@ -94,13 +88,19 @@ io.on("connection", (socket: Socket) => {
   );
   socket.on(
     PlayerEvent.RequestLobby,
-    (roomId: string, playerId: string, callback: (args: SocketCallback) => void) =>
-      requestLobby(roomId, playerId, socket, callback)
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => requestLobby(roomId, playerId, socket, callback)
   );
   socket.on(
     PlayerEvent.GameStart,
-    (roomId: string, playerId: string, callback: (args: SocketCallback) => void) =>
-      gameStart(roomId, playerId, socket, callback)
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => gameStart(roomId, playerId, socket, callback)
   );
   socket.on(
     PlayerEvent.StoreRound,
@@ -113,8 +113,11 @@ io.on("connection", (socket: Socket) => {
   );
   socket.on(
     PlayerEvent.StoreTeamReady,
-    (roomId: string, playerId: string, callback: (args: SocketCallback) => void) =>
-      storeTeamReady(roomId, playerId, socket, callback)
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => storeTeamReady(roomId, playerId, socket, callback)
   );
 });
 

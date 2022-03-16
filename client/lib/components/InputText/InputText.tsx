@@ -7,6 +7,7 @@ export const InputTextComponent = ({
   onChange,
   id,
   error,
+  type = "text",
   label,
   placeholder,
   showLabel = false,
@@ -21,7 +22,7 @@ export const InputTextComponent = ({
       </label>
       <input
         id={id}
-        type="text"
+        type={type}
         onChange={onChange}
         className={cx(styles.input, styles[error ? "valid" : "invalid"])}
         placeholder={placeholder}

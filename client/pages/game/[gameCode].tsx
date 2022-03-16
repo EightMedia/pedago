@@ -1,4 +1,4 @@
-import { SocketCallback, ViewName } from "models";
+import { Event, PlayerEvent, SocketCallback, ViewName } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
@@ -15,8 +15,6 @@ function useSocket(url: string) {
 
   useEffect(() => {
     const socketIo = io(url);
-
-    socketIo.emit("playerId", localStorage.getItem("playerId"));
     setSocket(socketIo);
 
     function cleanup() {
@@ -32,13 +30,10 @@ const GameCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewName>(ViewName.Lobby);
   const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
-
-  const handleClick = (value: ViewName, name: string): void => {
-    console.log(value);
-  };
+  let initialStep = WizardStep.Name;
 
   const handleEmit = (value: ViewName): void => {
-    (socket as Socket).emit("to", { name: value });
+    (socket as Socket).emit(Event.To, { name: value });
   };
 
   const handleMessage = (v: any) => {
@@ -48,21 +43,25 @@ const GameCode = () => {
   const router = useRouter();
   const gameCode = parseInt(router.query.gameCode as string, 10);
 
+  if (!gameCode) {
+    initialStep = WizardStep.RoomCode;
+  }
+
   useEffect(() => {
     if (socket) {
       (socket as Socket).emit(
-        "joinRoomByGameCode",
-        undefined,
+        PlayerEvent.JoinRoomByGameCode,
+        localStorage.getItem("playerId"),
         gameCode,
-        setRes
+        (callback: SocketCallback) => setRes(callback)
       );
-    }
+    }    
   }, [socket, gameCode]);
 
   useEffect(() => {
     if (socket) {
-      socket.on("to", setView);
-      socket.on("message", handleMessage);
+      socket.on(Event.To, setView);
+      socket.on(Event.Message, handleMessage);
     }
   }, [socket]);
 
@@ -73,9 +72,11 @@ const GameCode = () => {
           case ViewName.Wizard:
             return (
               <Wizard
+                socket={socket as Socket}
+                response={res}
                 handleEmit={handleEmit}
                 groups={[]}
-                initialStep={WizardStep.RoomCode}
+                initialStep={initialStep}
               />
             );
           case ViewName.Lobby:

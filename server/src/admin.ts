@@ -44,7 +44,9 @@ export const registerGame = (
 export const startGame = (roomId: string, socket: Socket) => {
   store.makeTeams(roomId);
   socket.broadcast.to(roomId).emit(Event.To, ViewName.PlayerMatch);
-  socket.broadcast.to(roomId).emit(Event.Message, `Teams ready for room: ${roomId}`);
+  socket.broadcast
+    .to(roomId)
+    .emit(Event.Message, `Teams ready for room: ${roomId}`);
 };
 
 export const updateRoomDto = (room: Partial<RoomDto>) => {

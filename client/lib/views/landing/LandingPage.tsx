@@ -7,7 +7,7 @@ import {
   FormEvent,
   SetStateAction,
   useContext,
-  useState,
+  useState
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import styles from "./LandingPage.module.css";
@@ -35,7 +35,7 @@ const LandingPage = ({
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     localStorage.setItem("gameCode", gameCode);
-    router.push(`/game/${gameCode}`);
+    router.push(`/game/${gameCode}`); 
   };
 
   return (
@@ -66,9 +66,7 @@ const LandingPage = ({
               onChange={handleInputChange}
               placeholder={data?.landing?.input}
             />
-            <Link href={`/game/${gameCode}`} passHref>
               <button type="submit">{data?.landing?.button}</button>
-            </Link>
           </form>
           <Link href="/admin">{data?.landing?.create}</Link>{" "}
           {data?.landing?.asAdmin}
