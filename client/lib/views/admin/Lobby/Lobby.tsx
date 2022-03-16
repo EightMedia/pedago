@@ -3,7 +3,7 @@ import { Page } from "../../../components/Page";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
 
-export const LobbyComponent = ({}: LobbyType) => {
+const LobbyComponent = ({}: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
   const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
   return (

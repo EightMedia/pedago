@@ -7,7 +7,7 @@ import { WizardInfo } from "./WizardInfo";
 import { WizardName } from "./WizardName";
 import { WizardRoomCode } from "./WizardRoomCode";
 
-export const WizardComponent = ({
+const WizardComponent = ({
   handleEmit,
   groups,
   initialStep = WizardStep.RoomCode,

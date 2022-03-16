@@ -4,7 +4,7 @@ import { Button } from "../Button";
 import styles from "./SortList.module.css";
 import { SortCardType, SortListType } from "./SortList.types";
 
-export const SortListComponent = ({ cards }: SortListType) => {
+const SortListComponent = ({ cards }: SortListType) => {
   return (
     <div className={cx("SortList", styles.SortList)}>
       <div className="sortlist">
