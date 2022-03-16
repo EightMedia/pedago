@@ -1,5 +1,6 @@
-import { PlayerEvent, SocketCallback, ViewName } from "models";
+import { PlayerEvent, RoomDto, SocketCallback } from "models";
 import { memo, useEffect, useState } from "react";
+import { Socket } from "socket.io-client";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
 import { WizardStep, WizardType } from "./Wizard.types";
@@ -12,32 +13,39 @@ const WizardComponent = ({
   socket,
   response,
   handleEmit,
-  groups,
-  initialStep = WizardStep.RoomCode,
+  initialStep,
 }: WizardType) => {
-  const [step, setStep] = useState<WizardStep>(initialStep);
+  const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
+  const [room, setRoom] = useState<RoomDto>({} as RoomDto);
 
   useEffect(() => {
     setRes(response as SocketCallback);
   }, [response]);
 
+  useEffect(() => {
+    setStep(initialStep as WizardStep);
+  }, [initialStep])
+
   const handleGameCode = (step: WizardStep, gameCode: number) => {
-    socket.emit(
+    (socket as Socket).emit(
       PlayerEvent.JoinRoomByGameCode,
       localStorage.getItem("playerId"),
       gameCode,
       setRes
     );
-    setStep(step);
+    if (res.status === "OK") {
+      setStep(step);
+    }
+    console.log(res);
   };
 
   const handleName = (step: WizardStep, name: string) => {
-    socket.emit(
+    (socket as Socket).emit(
       PlayerEvent.JoinRoomWithName,
-      response?.data?.roomId,
+      response?.data?.roomId || res?.data?.roomId,
       name,
-      console.log
+      (cb: SocketCallback) => setRoom(cb?.data?.room as RoomDto)
     );
     setStep(step);
   };
@@ -52,15 +60,20 @@ const WizardComponent = ({
             case WizardStep.Name:
               return <WizardName setStep={handleName} />;
             case WizardStep.Group:
-              if (groups?.length) {
-                return <WizardGroup groups={groups} setStep={setStep} />;
+              if (room && room.groups?.length) {
+                return (
+                  <WizardGroup
+                    groups={room ? room.groups : []}
+                    setStep={setStep}
+                  />
+                );
               } else {
-                return <WizardInfo onClick={() => handleEmit(ViewName.Game)} />;
+                return <WizardInfo onClick={() => handleEmit(res)} />;
               }
             case WizardStep.Info:
-              return <WizardInfo onClick={() => handleEmit(View)} />;
+              return <WizardInfo onClick={() => handleEmit(res)} />;
             default:
-              return null;
+              return <>Fail</>;
           }
         })()}
       </Panel>

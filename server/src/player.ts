@@ -12,7 +12,6 @@ export const joinRoomByGameCode = (
   callback: (args: SocketCallback) => void
 ) => {
   const room = store.getRoomByGameCode(gameCode);
-  
   if (!room) {
     callback({
       status: "ERROR",
@@ -36,9 +35,9 @@ export const joinRoomByGameCode = (
     });
   } else {
     callback({
-      status: 'OK',
-      message: 'Player found'
-    })
+      status: "OK",
+      message: "Player found",
+    });
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
@@ -85,6 +84,11 @@ export const joinRoomWithName = (
     callback({
       status: "OK",
       message: "You have joined the game",
+      data: {
+        roomId,
+        playerId: player.id,
+        room,
+      },
     });
     // socket.emit(Event.To, { name: player.view });
   } else {

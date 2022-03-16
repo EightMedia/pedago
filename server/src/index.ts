@@ -6,8 +6,7 @@ import {
   PlayerEvent,
   RoomDto,
   Round,
-  SocketCallback,
-  ViewName
+  SocketCallback
 } from "models";
 import { Server, Socket } from "socket.io";
 import {
@@ -43,7 +42,7 @@ io.on("connection", (socket: Socket) => {
   socket.emit(Event.Message, "Hello you have connected");
 
   // begin to send user to start screen
-  socket.emit(Event.To, ViewName.Wizard);
+  // socket.emit(Event.To, ViewName.Wizard);
 
   // METHODS
 

@@ -1,5 +1,4 @@
-import { Group, SocketCallback } from "models";
-import { ViewName } from "models/lib/models/view-state.interface";
+import { SocketCallback } from "models";
 import { Socket } from "socket.io-client";
 
 export enum WizardStep {
@@ -10,9 +9,8 @@ export enum WizardStep {
 }
 
 export type WizardType = {
-  socket: Socket;
+  socket?: Socket;
   response?: SocketCallback;
-  handleEmit: (vn: ViewName) => void;
-  groups: Group[];
+  handleEmit: (res: SocketCallback) => void;
   initialStep?: WizardStep;
 };

@@ -28,12 +28,19 @@ function useSocket(url: string) {
 
 const GameCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
-  const [view, setView] = useState<ViewName>(ViewName.Lobby);
+  const [view, setView] = useState<ViewName>(ViewName.Wizard);
   const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
-  let initialStep = WizardStep.Name;
+  const [step, setStep] = useState<WizardStep>();
 
-  const handleEmit = (value: ViewName): void => {
-    (socket as Socket).emit(Event.To, { name: value });
+  const requestLobby = (response: SocketCallback): void => {
+    (socket as Socket).emit(
+      PlayerEvent.RequestLobby,
+      response?.data?.roomId,
+      response?.data?.playerId,
+      (r: SocketCallback) => {
+        console.log(r);
+      }
+    );
   };
 
   const handleMessage = (v: any) => {
@@ -43,24 +50,28 @@ const GameCode = () => {
   const router = useRouter();
   const gameCode = parseInt(router.query.gameCode as string, 10);
 
-  if (!gameCode) {
-    initialStep = WizardStep.RoomCode;
-  }
-
   useEffect(() => {
-    if (socket) {
+    if (gameCode && socket) {
       (socket as Socket).emit(
         PlayerEvent.JoinRoomByGameCode,
         localStorage.getItem("playerId"),
         gameCode,
-        (callback: SocketCallback) => setRes(callback)
+        (response: SocketCallback) => {
+          setRes(response);
+          if (response.status === "OK") {
+            setStep(WizardStep.Name);
+            console.log(step)
+          } else {
+            setStep(WizardStep.RoomCode)
+          }
+          console.log(response);
+        }
       );
-    }    
-  }, [socket, gameCode]);
+    }
+  }, [step, socket, gameCode]);
 
   useEffect(() => {
     if (socket) {
-      socket.on(Event.To, setView);
       socket.on(Event.Message, handleMessage);
     }
   }, [socket]);
@@ -74,9 +85,8 @@ const GameCode = () => {
               <Wizard
                 socket={socket as Socket}
                 response={res}
-                handleEmit={handleEmit}
-                groups={[]}
-                initialStep={initialStep}
+                handleEmit={requestLobby}
+                initialStep={step}
               />
             );
           case ViewName.Lobby:
@@ -85,7 +95,6 @@ const GameCode = () => {
             return (
               <Game
                 autoPlay={true}
-                handleEmit={handleEmit}
                 initialScene={GameScenes.Countdown}
                 round={0}
                 countdownTime={3}
