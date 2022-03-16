@@ -9,6 +9,7 @@ export const PlayerGroupComponent = ({
   name,
   players,
 }: PlayerGroupType) => {
+  if (!players) return null;
   return (
     <div className={cx(styles.playerGroup)}>
       {players.map((player) => (
