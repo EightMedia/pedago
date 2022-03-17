@@ -31,7 +31,7 @@ export const joinRoomByGameCode = (
       status: "OK",
       message: "Room found",
       data: {
-        roomId: room.id,
+        room: room
       },
     });
   } else {
@@ -39,8 +39,7 @@ export const joinRoomByGameCode = (
       status: "OK",
       message: "Player found",
       data: {
-        room,
-        playerId: playerId,
+        room
       },
     });
     const viewData = determinePlayerView(player as Player);
@@ -157,9 +156,6 @@ export const requestLobby = (
   callback({
     status: "OK",
     message: "Navigate to Lobby",
-    data: {
-      room,
-    },
   });
   
   const playersInLobby = room?.players.filter(
@@ -168,6 +164,7 @@ export const requestLobby = (
     
   socket.broadcast.to(roomId).emit(Event.PlayerList, playersInLobby);
   socket.emit(Event.To, { name: ViewName.Lobby });
+  socket.emit(Event.Room, room);
   socket.emit(Event.PlayerList, playersInLobby);
 };
 

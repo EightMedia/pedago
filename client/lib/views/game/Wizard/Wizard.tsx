@@ -12,20 +12,17 @@ import { WizardRoomCode } from "./WizardRoomCode";
 
 const WizardComponent = ({
   socket,
-  callbackResponse,
-  handleEmitRoom,
   initialStep,
+  room
 }: WizardType) => {
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
-  const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
-  const [room, setRoom] = useState<RoomDto>({} as RoomDto);
+  const [localRoom, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerId, setPlayerId] = useState<string>("");
   const router = useRouter();
 
   useEffect(() => {
-    setRes(callbackResponse as SocketCallback);
-    return () => {};
-  }, [callbackResponse]);
+    setRoom(room);
+  },[room])
 
   useEffect(() => {
     setStep(initialStep as WizardStep);
@@ -41,22 +38,19 @@ const WizardComponent = ({
       localStorage.getItem("playerId"),
       gameCode,
       (r: SocketCallback) => {
-        const responseRoom = r.data?.room;
-        if (responseRoom) {
-          handleEmitRoom(responseRoom as RoomDto);
+        console.log(r);
+        if (r.status === "OK") {
+          setRoom(r.data?.room as RoomDto);
+          setStep(step);
         }
       }
     );
-    if (res.status === "OK") {
-      setStep(step);
-    }
-    console.log(res);
   };
 
   const handleName = (step: WizardStep, name: string) => {
     (socket as Socket).emit(
       PlayerEvent.JoinRoomWithName,
-      callbackResponse?.data?.roomId || res?.data?.roomId,
+      room.id || localRoom.id,
       name,
       (r: SocketCallback) => {
         const resData = r.data;
@@ -92,10 +86,7 @@ const WizardComponent = ({
       PlayerEvent.RequestLobby,
       room.id,
       playerId,
-      (r: SocketCallback) => {
-        const responseRoom = r.data?.room;
-        handleEmitRoom(responseRoom as RoomDto);
-      }
+      console.log
     );
   };
 
@@ -112,7 +103,7 @@ const WizardComponent = ({
               if (room && room.groups?.length) {
                 return (
                   <WizardGroup
-                    groups={room ? room.groups : []}
+                    groups={room.groups}
                     setStep={handleGroup}
                   />
                 );

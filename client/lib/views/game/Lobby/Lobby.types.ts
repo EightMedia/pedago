@@ -5,5 +5,5 @@ export type LobbyType = {
   roundMax: number;
   groups: Group[];
   playerList: Player[];
-  playerId: string | null;
+  playerId: Player["id"];
 };

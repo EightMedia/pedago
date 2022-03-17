@@ -37,7 +37,6 @@ function useSocket(url: string) {
 const GameCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewName>(ViewName.Wizard);
-  const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
   const [step, setStep] = useState<WizardStep>();
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
@@ -61,14 +60,14 @@ const GameCode = () => {
         PlayerEvent.JoinRoomByGameCode,
         localStorage.getItem("playerId"),
         gameCode,
-        (response: SocketCallback) => {
-          setRes(response);
-          if (response.status === "OK") {
+        (r: SocketCallback) => {
+          if (r.status === "OK") {
+            setRoom(r.data?.room as RoomDto);
             setStep(WizardStep.Name);
           } else {
             setStep(WizardStep.RoomCode);
           }
-          console.log(response);
+          console.log(r);
         }
       );
     }
@@ -94,9 +93,8 @@ const GameCode = () => {
             return (
               <Wizard
                 socket={socket as Socket}
-                callbackResponse={res}
-                handleEmitRoom={setRoom}
                 initialStep={step}
+                room={room}
               />
             );
           case ViewName.Lobby:
@@ -106,7 +104,7 @@ const GameCode = () => {
                 roundMax={6}
                 groups={room?.groups as Group[]}
                 playerList={playerList}
-                playerId={playerId}
+                playerId={playerId as string}
               />
             );
           case ViewName.Game:

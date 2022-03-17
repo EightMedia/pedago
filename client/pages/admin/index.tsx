@@ -1,5 +1,8 @@
 import {
-  AdminEvent, Event, initialViewState, RoomDto,
+  AdminEvent,
+  Event,
+  initialViewState,
+  RoomDto,
   SocketCallback,
   ViewName
 } from "models";
@@ -39,8 +42,8 @@ const AdminGame = () => {
       console.log("register done", res.data.gameCode);
       setRes(res);
     });
-    (socket as Socket).on(Event.PlayerList, v=> {
-      console.log('Players in the lobby:', v)
+    (socket as Socket).on(Event.PlayerList, (v) => {
+      console.log("Players in the lobby:", v);
     });
   };
   useEffect(() => {
