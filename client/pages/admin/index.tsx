@@ -40,7 +40,7 @@ const AdminGame = () => {
       setRes(res);
     });
     (socket as Socket).on(Event.PlayerList, v=> {
-      console.log('playerList', v)
+      console.log('Players in the lobby:', v)
     });
   };
   useEffect(() => {

@@ -2,6 +2,7 @@ import { randomUUID } from "crypto";
 import { Event, Group, Player, Round, SocketCallback, ViewName } from "models";
 import { Socket } from "socket.io";
 import gamesStore from "./store/games.store";
+import { determinePlayerView } from "./utils/determine-player-view";
 
 const store = gamesStore.getState();
 
@@ -102,7 +103,6 @@ export const joinRoomWithName = (
         room,
       },
     });
-    // socket.emit(Event.To, { name: player.view });
   } else {
     callback({
       status: "ERROR",
@@ -115,7 +115,6 @@ export const joinGroup = (
   groupId: string,
   roomId: string,
   playerId: string,
-  socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
   const player = store.getPlayerById(roomId, playerId);
@@ -258,53 +257,5 @@ export const storeTeamReady = (
       name: ViewName.PlayerMatch,
       data: { round: lastStoredRound + 1 },
     });
-  }
-};
-
-const determinePlayerView = (
-  player: Player
-): { name: ViewName; data?: any } => {
-  if (player.view === ViewName.Game) {
-    const currentRound = player.rounds.length;
-    switch (currentRound) {
-      case 0:
-        return {
-          name: ViewName.Game,
-          data: { round: 1 },
-        };
-      case 1:
-        return {
-          name: ViewName.Game,
-          data: { round: 2 },
-        };
-      case 2:
-        return {
-          name: ViewName.Game,
-          data: { round: 3 },
-        };
-      case 3:
-        return {
-          name: ViewName.Game,
-          data: { round: 4 },
-        };
-      case 4:
-        return {
-          name: ViewName.Game,
-          data: { round: 5 },
-        };
-      case 5:
-        return {
-          name: ViewName.Game,
-          data: { round: 6 },
-        };
-      case 6:
-        return {
-          name: ViewName.Result,
-        };
-      default:
-        return { name: ViewName.Lobby };
-    }
-  } else {
-    return { name: ViewName.Lobby };
   }
 };

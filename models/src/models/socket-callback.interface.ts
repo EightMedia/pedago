@@ -5,10 +5,10 @@ export interface SocketCallback {
     status: string;
     message?: string;
     data?: {
-        playerId?: string;
-        roomId?: string;
+        playerId?: Player["id"];
+        roomId?: RoomDto["id"];
         room?: RoomDto;
         partner?: Player;
-        gameCode?: number;
+        gameCode?: RoomDto["gameCode"];
     }
 }

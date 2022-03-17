@@ -72,7 +72,7 @@ const GameCode = () => {
         }
       );
     }
-  }, [step, socket, gameCode]);
+  }, [socket, gameCode]);
 
   useEffect(() => {
     if (socket) {

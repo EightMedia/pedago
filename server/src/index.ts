@@ -80,7 +80,7 @@ io.on("connection", (socket: Socket) => {
       roomId: string,
       playerId: string,
       callback: (args: SocketCallback) => void
-    ) => joinGroup(groupId, roomId, playerId, socket, callback)
+    ) => joinGroup(groupId, roomId, playerId, callback)
   );
   socket.on(
     PlayerEvent.RequestLobby,
