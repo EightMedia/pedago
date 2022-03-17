@@ -12,7 +12,7 @@ export const registerGame = (
 ) => {
   const roomId = randomUUID();
   const adminId = randomUUID();
-  const gameCode = Math.floor(1000 + Math.random() * 9000);
+  const roomCode = Math.floor(1000 + Math.random() * 9000);
   const timestamp = new Date().toISOString();
   const room: RoomDto = {
     ...partialRoom,
@@ -21,10 +21,11 @@ export const registerGame = (
     admin: {
       id: adminId,
     } as Admin,
-    gameCode: gameCode,
+    roomCode: roomCode,
     players: [],
     groups: [
-      {id: '4123rasfasdfg', name: 'Grooepie'}
+      {id: '4123rasfasdfg', name: 'Grooepie'},
+      {id: 'asdfasdf', name: 'asdf'},
     ],
     teams: [],
     active: true,
@@ -37,7 +38,7 @@ export const registerGame = (
     message: `You have created the following room: ${room}`,
     data: {
       roomId: roomId,
-      gameCode: gameCode,
+      roomCode: roomCode,
     },
   });
   socket.emit(Event.To, { name: ViewName.Lobby });

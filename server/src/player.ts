@@ -6,17 +6,17 @@ import { determinePlayerView } from "./utils/determine-player-view.util";
 
 const store = gamesStore.getState();
 
-export const joinRoomByGameCode = (
+export const joinRoomByroomCode = (
   playerId: string | undefined,
-  gameCode: number,
+  roomCode: number,
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  const room = store.getRoomByGameCode(gameCode);
+  const room = store.getRoomByroomCode(roomCode);
   if (!room) {
     callback({
       status: "ERROR",
-      message: `Room with game code ${gameCode} does not exist.`,
+      message: `Room with game code ${roomCode} does not exist.`,
     });
     return;
   }

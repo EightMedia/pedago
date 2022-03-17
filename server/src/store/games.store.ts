@@ -10,13 +10,13 @@ import {
   setTeamReadyFn,
   storeRoundFn,
   updatePlayerFn,
-  updateRoomFn,
+  updateRoomFn
 } from "./games.query";
 export interface GamesState {
   games: RoomDto[];
 
   getRoomById: (roomId: string) => RoomDto | undefined;
-  getRoomByGameCode: (gameCode: number) => RoomDto | undefined;
+  getRoomByroomCode: (roomCode: number) => RoomDto | undefined;
   getPlayerById: (roomId: string, playerId: string) => Player | undefined;
   getGroupsByRoomId: (roomId: string) => Group[] | undefined;
   getTeams: (roomId: string) => Player[][] | undefined;
@@ -50,8 +50,8 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
     // Getters
     getRoomById: (roomId: string) =>
       get().games.find((room) => room.id === roomId),
-    getRoomByGameCode: (gameCode: number) =>
-      get().games.find((room) => room.gameCode === gameCode),
+    getRoomByroomCode: (roomCode: number) =>
+      get().games.find((room) => room.roomCode === roomCode),
     getPlayerById: (roomId: string, playerId: string) =>
       getPlayerByIdFn(get, roomId, playerId),
     getGroupsByRoomId: (roomId: string) => getGroupsByRoomIdFn(get, roomId),

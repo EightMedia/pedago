@@ -5,7 +5,6 @@ import styles from "./PlayerGroup.module.css";
 import { PlayerGroupType } from "./PlayerGroup.types";
 
 export const PlayerGroupComponent = ({
-  id,
   name,
   players,
 }: PlayerGroupType) => {
@@ -20,7 +19,6 @@ export const PlayerGroupComponent = ({
           <Player key={index} {...player} />
         ))}
       </div>
-
     </div>
   );
 };

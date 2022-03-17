@@ -39,7 +39,7 @@ const AdminGame = () => {
   const handleClick = (value: ViewName): void => {
     (socket as Socket).emit(Event.To, value);
     (socket as Socket).emit(AdminEvent.RegisterGame, mockRoom, (res: any) => {
-      console.log("register done", res.data.gameCode);
+      console.log("register done", res.data.roomCode);
       setRes(res);
     });
     (socket as Socket).on(Event.PlayerList, (v) => {

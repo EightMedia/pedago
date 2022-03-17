@@ -8,15 +8,15 @@ import { WizardStep } from "./Wizard.types";
 export const WizardRoomCode = ({
   setStep,
 }: {
-  setStep: (step: WizardStep, gameCode: number) => void;
+  setStep: (step: WizardStep, roomCode: number) => void;
 }) => {
-  const [gameCode, setGameCode] = useState<number>(0);
+  const [roomCode, setroomCode] = useState<number>(0);
   return (
     <>
       <PanelTitle>Voer de spelcode in</PanelTitle>
       <Stack>
-        <InputText id="roomcode" label="Spelcode" type="number" onChange={e => setGameCode(parseInt(e?.target?.value, 10))} />
-        <Button onClick={() => setStep(WizardStep.Name, gameCode)}>Volgende</Button>
+        <InputText id="roomcode" label="Spelcode" type="number" onChange={e => setroomCode(parseInt(e?.target?.value, 10))} />
+        <Button onClick={() => setStep(WizardStep.Name, roomCode)}>Volgende</Button>
       </Stack>
     </>
   );

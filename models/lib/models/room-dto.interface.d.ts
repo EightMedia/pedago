@@ -1,13 +1,13 @@
-import { Player } from "./player.interface";
 import { Admin } from "./admin.interface";
-import { Organisation } from "./organisation.interface";
-import { Options } from "./option.interface";
 import { Group } from "./group.interface";
+import { Options } from "./option.interface";
+import { Organisation } from "./organisation.interface";
+import { Player } from "./player.interface";
 export interface RoomDto {
     id: string;
     socketId: string;
     admin: Admin;
-    gameCode: number;
+    roomCode: number;
     organisation?: Organisation;
     players: Player[];
     groups?: Group[];

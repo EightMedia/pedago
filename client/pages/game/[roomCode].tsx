@@ -34,7 +34,7 @@ function useSocket(url: string) {
   return socket;
 }
 
-const GameCode = () => {
+const roomCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewName>(ViewName.Wizard);
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
@@ -52,14 +52,14 @@ const GameCode = () => {
   }
 
   const router = useRouter();
-  const gameCode = parseInt(router.query.gameCode as string, 10);
+  const roomCode = parseInt(router.query.roomCode as string, 10);
 
   useEffect(() => {
-    if (gameCode && socket) {
+    if (roomCode && socket) {
       (socket as Socket).emit(
-        PlayerEvent.JoinRoomByGameCode,
+        PlayerEvent.JoinRoomByroomCode,
         localStorage.getItem("playerId"),
-        gameCode,
+        roomCode,
         (r: SocketCallback) => {
           if (r.status === "OK") {
             setRoom(r.data?.room as RoomDto);
@@ -71,7 +71,7 @@ const GameCode = () => {
         }
       );
     }
-  }, [socket, gameCode]);
+  }, [socket, roomCode]);
 
   useEffect(() => {
     if (socket) {
@@ -128,4 +128,4 @@ const GameCode = () => {
   );
 };
 
-export default GameCode;
+export default roomCode;

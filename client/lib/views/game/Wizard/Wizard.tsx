@@ -24,14 +24,14 @@ const WizardComponent = ({
     return () => {};
   }, [initialStep]);
 
-  const handleGameCode = (step: WizardStep, gameCode: number) => {
-    localStorage.setItem("gameCode", gameCode.toString());
-    router.push(`/game/${gameCode}`);
+  const handleroomCode = (step: WizardStep, roomCode: number) => {
+    localStorage.setItem("roomCode", roomCode.toString());
+    router.push(`/game/${roomCode}`);
 
     (socket as Socket).emit(
-      PlayerEvent.JoinRoomByGameCode,
+      PlayerEvent.JoinRoomByroomCode,
       localStorage.getItem("playerId"),
-      gameCode,
+      roomCode,
       (r: SocketCallback) => {
         console.log(r);
         if (r.status === "OK") {
@@ -88,7 +88,7 @@ const WizardComponent = ({
         {(() => {
           switch (step) {
             case WizardStep.RoomCode:
-              return <WizardRoomCode setStep={handleGameCode} />;
+              return <WizardRoomCode setStep={handleroomCode} />;
             case WizardStep.Name:
               return <WizardName setStep={handleName} />;
             case WizardStep.Group:

@@ -4,11 +4,11 @@ import { useEffect } from "react";
 const ReDirect = () => {
   const router = useRouter();
   useEffect(() => {
-    let gameCode;
+    let roomCode;
     if (typeof window !== "undefined") {
-      gameCode = localStorage.getItem("gameCode");
+      roomCode = localStorage.getItem("roomCode");
     }
-    gameCode ? router.push(`/game/${gameCode}`) : router.back();
+    roomCode ? router.push(`/game/${roomCode}`) : router.back();
   }, [router]);
   return null;
 };

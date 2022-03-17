@@ -19,7 +19,7 @@ const LandingPage = ({
   language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
-  const [gameCode, setGameCode] = useState<string>("");
+  const [roomCode, setroomCode] = useState<string>("");
   const languageValues = Object.values(Language);
   const data = useContext(LanguageContext);
   const router = useRouter();
@@ -29,13 +29,13 @@ const LandingPage = ({
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setGameCode(event.target.value);
+    setroomCode(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    localStorage.setItem("gameCode", gameCode);
-    router.push(`/game/${gameCode}`); 
+    localStorage.setItem("roomCode", roomCode);
+    router.push(`/game/${roomCode}`);
   };
 
   return (
@@ -62,11 +62,11 @@ const LandingPage = ({
               type="number"
               maxLength={5}
               minLength={5}
-              value={gameCode}
+              value={roomCode}
               onChange={handleInputChange}
               placeholder={data?.landing?.input}
             />
-              <button type="submit">{data?.landing?.button}</button>
+            <button type="submit">{data?.landing?.button}</button>
           </form>
           <Link href="/admin">{data?.landing?.create}</Link>{" "}
           {data?.landing?.asAdmin}
