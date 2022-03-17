@@ -1,4 +1,4 @@
-import { SocketCallback } from "models";
+import { RoomDto, SocketCallback } from "models";
 import { Socket } from "socket.io-client";
 
 export enum WizardStep {
@@ -10,7 +10,7 @@ export enum WizardStep {
 
 export type WizardType = {
   socket?: Socket;
-  response?: SocketCallback;
-  handleEmit: (res: SocketCallback) => void;
+  callbackResponse?: SocketCallback;
+  handleEmitRoom: (room: RoomDto) => void;
   initialStep?: WizardStep;
 };

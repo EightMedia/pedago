@@ -1,4 +1,5 @@
-import { PlayerEvent, RoomDto, SocketCallback } from "models";
+import { Group, PlayerEvent, RoomDto, SocketCallback } from "models";
+import { useRouter } from "next/router";
 import { memo, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { Page } from "../../../components/Page";
@@ -11,28 +12,40 @@ import { WizardRoomCode } from "./WizardRoomCode";
 
 const WizardComponent = ({
   socket,
-  response,
-  handleEmit,
+  callbackResponse,
+  handleEmitRoom,
   initialStep,
 }: WizardType) => {
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
+  const [playerId, setPlayerId] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
-    setRes(response as SocketCallback);
-  }, [response]);
+    setRes(callbackResponse as SocketCallback);
+    return () => {};
+  }, [callbackResponse]);
 
   useEffect(() => {
     setStep(initialStep as WizardStep);
-  }, [initialStep])
+    return () => {};
+  }, [initialStep]);
 
   const handleGameCode = (step: WizardStep, gameCode: number) => {
+    localStorage.setItem("gameCode", gameCode.toString());
+    router.push(`/game/${gameCode}`);
+
     (socket as Socket).emit(
       PlayerEvent.JoinRoomByGameCode,
       localStorage.getItem("playerId"),
       gameCode,
-      setRes
+      (r: SocketCallback) => {
+        const responseRoom = r.data?.room;
+        if (responseRoom) {
+          handleEmitRoom(responseRoom as RoomDto);
+        }
+      }
     );
     if (res.status === "OK") {
       setStep(step);
@@ -43,11 +56,47 @@ const WizardComponent = ({
   const handleName = (step: WizardStep, name: string) => {
     (socket as Socket).emit(
       PlayerEvent.JoinRoomWithName,
-      response?.data?.roomId || res?.data?.roomId,
+      callbackResponse?.data?.roomId || res?.data?.roomId,
       name,
-      (cb: SocketCallback) => setRoom(cb?.data?.room as RoomDto)
+      (r: SocketCallback) => {
+        const resData = r.data;
+        if (resData) {
+          setRoom(resData?.room as RoomDto);
+          setPlayerId(resData?.playerId as string);
+          localStorage.setItem("playerId", resData?.playerId as string);
+          setStep(step);
+        } else {
+          console.error(r);
+        }
+      }
     );
-    setStep(step);
+  };
+
+  const handleGroup = (step: WizardStep, group: Group) => {
+    (socket as Socket).emit(
+      PlayerEvent.JoinGroup,
+      group.id,
+      room.id,
+      playerId,
+      (r: SocketCallback) => {
+        console.log(r);
+        if (r.status === "OK") {
+          setStep(step);
+        }
+      }
+    );
+  };
+
+  const requestLobby = (): void => {
+    (socket as Socket).emit(
+      PlayerEvent.RequestLobby,
+      room.id,
+      playerId,
+      (r: SocketCallback) => {
+        const responseRoom = r.data?.room;
+        handleEmitRoom(responseRoom as RoomDto);
+      }
+    );
   };
 
   return (
@@ -64,14 +113,14 @@ const WizardComponent = ({
                 return (
                   <WizardGroup
                     groups={room ? room.groups : []}
-                    setStep={setStep}
+                    setStep={handleGroup}
                   />
                 );
               } else {
-                return <WizardInfo onClick={() => handleEmit(res)} />;
+                return <WizardInfo onClick={() => requestLobby()} />;
               }
             case WizardStep.Info:
-              return <WizardInfo onClick={() => handleEmit(res)} />;
+              return <WizardInfo onClick={() => requestLobby()} />;
             default:
               return <>Fail</>;
           }

@@ -1,4 +1,12 @@
-import { Event, PlayerEvent, SocketCallback, ViewName } from "models";
+import {
+  Event,
+  Group,
+  Player,
+  PlayerEvent,
+  RoomDto,
+  SocketCallback,
+  ViewName
+} from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
@@ -31,21 +39,18 @@ const GameCode = () => {
   const [view, setView] = useState<ViewName>(ViewName.Wizard);
   const [res, setRes] = useState<SocketCallback>({} as SocketCallback);
   const [step, setStep] = useState<WizardStep>();
-
-  const requestLobby = (response: SocketCallback): void => {
-    (socket as Socket).emit(
-      PlayerEvent.RequestLobby,
-      response?.data?.roomId,
-      response?.data?.playerId,
-      (r: SocketCallback) => {
-        console.log(r);
-      }
-    );
-  };
+  const [playerList, setPlayerList] = useState<Player[]>([]);
+  const [room, setRoom] = useState<RoomDto>({} as RoomDto);
+  const [round, setRound] = useState<number>(1);
+  let playerId: string | null = "";
 
   const handleMessage = (v: any) => {
     console.log(v);
   };
+
+  if (typeof window !== "undefined") {
+    playerId = localStorage.getItem("playerId");
+  }
 
   const router = useRouter();
   const gameCode = parseInt(router.query.gameCode as string, 10);
@@ -60,9 +65,8 @@ const GameCode = () => {
           setRes(response);
           if (response.status === "OK") {
             setStep(WizardStep.Name);
-            console.log(step)
           } else {
-            setStep(WizardStep.RoomCode)
+            setStep(WizardStep.RoomCode);
           }
           console.log(response);
         }
@@ -73,6 +77,12 @@ const GameCode = () => {
   useEffect(() => {
     if (socket) {
       socket.on(Event.Message, handleMessage);
+      socket.on(Event.To, (vd) => {
+        setRound(vd.data?.round || 1);
+        setView(vd.name);
+      });
+      socket.on(Event.Room, setRoom);
+      socket.on(Event.PlayerList, setPlayerList);
     }
   }, [socket]);
 
@@ -84,16 +94,25 @@ const GameCode = () => {
             return (
               <Wizard
                 socket={socket as Socket}
-                response={res}
-                handleEmit={requestLobby}
+                callbackResponse={res}
+                handleEmitRoom={setRoom}
                 initialStep={step}
               />
             );
           case ViewName.Lobby:
-            return <Lobby round={1} roundMax={6} groups={[]} />;
+            return (
+              <Lobby
+                round={round}
+                roundMax={6}
+                groups={room?.groups as Group[]}
+                playerList={playerList}
+                playerId={playerId}
+              />
+            );
           case ViewName.Game:
             return (
               <Game
+                handleEmit={() => {}}
                 autoPlay={true}
                 initialScene={GameScenes.Countdown}
                 round={0}

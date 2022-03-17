@@ -39,6 +39,9 @@ const AdminGame = () => {
       console.log("register done", res.data.gameCode);
       setRes(res);
     });
+    (socket as Socket).on(Event.PlayerList, v=> {
+      console.log('playerList', v)
+    });
   };
   useEffect(() => {
     if (socket) {

@@ -41,9 +41,6 @@ io.on("connection", (socket: Socket) => {
   // send welcome to user on this socket
   socket.emit(Event.Message, "Hello you have connected");
 
-  // begin to send user to start screen
-  // socket.emit(Event.To, ViewName.Wizard);
-
   // METHODS
 
   //  Admin methods

@@ -23,6 +23,9 @@ export const registerGame = (
     } as Admin,
     gameCode: gameCode,
     players: [],
+    groups: [
+      {id: '4123rasfasdfg', name: 'Grooepie'}
+    ],
     teams: [],
     active: true,
     locked: false,

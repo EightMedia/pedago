@@ -1,5 +1,8 @@
 export declare enum Event {
     To = "to",
     Message = "message",
-    PlayerList = "playerList"
+    PlayerList = "playerList",
+    Room = "room",
+    Players = "players",
+    PlayerId = "playerId"
 }

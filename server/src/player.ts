@@ -37,13 +37,26 @@ export const joinRoomByGameCode = (
     callback({
       status: "OK",
       message: "Player found",
+      data: {
+        room,
+        playerId: playerId,
+      },
     });
+    const viewData = determinePlayerView(player as Player);
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
     };
+    const playersInLobby = room?.players.filter(
+      (p: Player) => p.view === ViewName.Lobby
+    );
+
     store.updatePlayer(room.id, playerId as string, updatedPlayer);
-    determinePlayerView(updatedPlayer as Player, socket);
+
+    socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
+    socket.emit(Event.Room, room);
+    socket.emit(Event.PlayerList, playersInLobby);
+    socket.emit(Event.To, viewData);
   }
 };
 
@@ -67,9 +80,9 @@ export const joinRoomWithName = (
   if (!playerNameTaken) {
     const groupsAvaiable = room?.groups?.length;
     socket.join(roomId);
-
+    const playerId = randomUUID();
     const player: Partial<Player> = {
-      id: randomUUID(),
+      id: playerId,
       socketId: socket.id,
       name: name,
       group: undefined,
@@ -85,8 +98,7 @@ export const joinRoomWithName = (
       status: "OK",
       message: "You have joined the game",
       data: {
-        roomId,
-        playerId: player.id,
+        playerId,
         room,
       },
     });
@@ -124,10 +136,9 @@ export const joinGroup = (
   } else {
     player.group = group as Group;
     store.updatePlayer(roomId, playerId, player);
-    socket.emit(Event.To, { name: ViewName.InfoScreen });
     callback({
       status: "OK",
-      message: "Player successfully added to Group",
+      message: "Player successfully added to group",
     });
   }
 };
@@ -138,21 +149,27 @@ export const requestLobby = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  const player: Partial<Player> = {
-    view: ViewName.Lobby,
-  };
-  store.updatePlayer(roomId, playerId, player);
-  socket.emit(Event.To, { name: ViewName.Lobby });
+  const player = store.getPlayerById(roomId, playerId);
 
-  const playersInLobby = store
-    .getRoomById(roomId)
-    ?.players.filter((p: Player) => p.view === ViewName.Lobby);
-  socket.broadcast.to(roomId).emit(Event.PlayerList, playersInLobby);
-
+  (player as Player).view = ViewName.Lobby;
+  store.updatePlayer(roomId, playerId, player as Player);
+  
+  const room = store.getRoomById(roomId);
   callback({
     status: "OK",
     message: "Navigate to Lobby",
+    data: {
+      room,
+    },
   });
+  
+  const playersInLobby = room?.players.filter(
+    (p: Player) => p.view === ViewName.Lobby
+    );
+    
+  socket.broadcast.to(roomId).emit(Event.PlayerList, playersInLobby);
+  socket.emit(Event.To, { name: ViewName.Lobby });
+  socket.emit(Event.PlayerList, playersInLobby);
 };
 
 export const gameStart = (
@@ -244,55 +261,50 @@ export const storeTeamReady = (
   }
 };
 
-const determinePlayerView = (player: Player, socket: Socket) => {
+const determinePlayerView = (
+  player: Player
+): { name: ViewName; data?: any } => {
   if (player.view === ViewName.Game) {
     const currentRound = player.rounds.length;
     switch (currentRound) {
       case 0:
-        socket.emit(Event.To, {
+        return {
           name: ViewName.Game,
           data: { round: 1 },
-        });
-        break;
+        };
       case 1:
-        socket.emit(Event.To, {
+        return {
           name: ViewName.Game,
           data: { round: 2 },
-        });
-        break;
+        };
       case 2:
-        socket.emit(Event.To, {
+        return {
           name: ViewName.Game,
           data: { round: 3 },
-        });
-        break;
+        };
       case 3:
-        socket.emit(Event.To, {
+        return {
           name: ViewName.Game,
           data: { round: 4 },
-        });
-        break;
+        };
       case 4:
-        socket.emit(Event.To, {
+        return {
           name: ViewName.Game,
           data: { round: 5 },
-        });
-        break;
+        };
       case 5:
-        socket.emit(Event.To, {
+        return {
           name: ViewName.Game,
           data: { round: 6 },
-        });
-        break;
+        };
       case 6:
-        socket.emit(Event.To, {
+        return {
           name: ViewName.Result,
-        });
-        break;
+        };
       default:
-        socket.emit(Event.To, { name: ViewName.Lobby });
+        return { name: ViewName.Lobby };
     }
   } else {
-    socket.emit(Event.To, { name: ViewName.Lobby });
+    return { name: ViewName.Lobby };
   }
 };

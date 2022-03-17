@@ -15,7 +15,7 @@ export const WizardRoomCode = ({
     <>
       <PanelTitle>Voer de spelcode in</PanelTitle>
       <Stack>
-        <InputText id="roomcode" label="Spelcode"  type="number" onChange={e => setGameCode(parseInt(e?.target?.value, 10))} />
+        <InputText id="roomcode" label="Spelcode" type="number" onChange={e => setGameCode(parseInt(e?.target?.value, 10))} />
         <Button onClick={() => setStep(WizardStep.Name, gameCode)}>Volgende</Button>
       </Stack>
     </>
