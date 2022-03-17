@@ -1,13 +1,11 @@
-import {
-  AdminEvent,
-  Event,
-  initialViewState,
-  RoomDto,
-  SocketCallback,
-  ViewName
-} from "models";
+import { AdminEvent, Event, Player, RoomDto, ViewName, ViewState } from "models";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+import { Page } from "../../lib/components/Page";
+import { Game } from "../../lib/views/admin/Game";
+import { Lobby } from "../../lib/views/admin/Lobby";
+import { Result } from "../../lib/views/admin/Result";
+import { Wizard } from "../../lib/views/admin/Wizard";
 
 function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -27,8 +25,10 @@ function useSocket(url: string) {
 
 const AdminGame = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
-  const [view, setView] = useState(initialViewState);
-  const [res, setRes] = useState<SocketCallback>();
+  const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
+  const [room, setRoom] = useState<RoomDto>();
+  const [playerList, setPlayerList] = useState<Player[]>([]);
+
   const mockRoom: Partial<RoomDto> = {
     admin: {
       name: "mocker",
@@ -36,11 +36,10 @@ const AdminGame = () => {
     },
   };
 
-  const handleClick = (value: ViewName): void => {
-    (socket as Socket).emit(Event.To, value);
+  const handleRegisterGame = (): void => {
     (socket as Socket).emit(AdminEvent.RegisterGame, mockRoom, (res: any) => {
-      console.log("register done", res.data.roomCode);
-      setRes(res);
+      console.log("register done", res.data.room.roomCode);
+      setRoom(res.data.room);
     });
     (socket as Socket).on(Event.PlayerList, (v) => {
       console.log("Players in the lobby:", v);
@@ -50,23 +49,32 @@ const AdminGame = () => {
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
+      socket.on(Event.PlayerList, setPlayerList)
     }
   }, [socket]);
 
   return (
-    <>
-      <div className="container">
-        <div className="header">
-          <div className="participant-count"></div>
-          <div className="logo">pedago</div>
-          <div className="button-group">
-            <button>Instellingen</button>
-            <button>Uitleg</button>
-          </div>
-        </div>
-      </div>
-      <button onClick={() => handleClick(ViewName.Wizard)}>Start game</button>
-    </>
+    <Page>
+      {(() => {
+        switch (view.name) {
+          case ViewName.Wizard:
+            return (
+              <Wizard
+                socket={socket as Socket}
+                handleRegisterGame={handleRegisterGame}
+              />
+            );
+          case ViewName.Lobby:
+            return <Lobby socket={socket as Socket} playerList={playerList} room={room as RoomDto} />;
+          case ViewName.Game:
+            return <Game />;
+          case ViewName.Result:
+            return <Result />;
+          default:
+            return <>FAIL</>;
+        }
+      })()}
+    </Page>
   );
 };
 

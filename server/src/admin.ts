@@ -24,8 +24,8 @@ export const registerGame = (
     roomCode: roomCode,
     players: [],
     groups: [
-      {id: '4123rasfasdfg', name: 'Grooepie'},
-      {id: 'asdfasdf', name: 'asdf'},
+      { id: "4123rasfasdfg", name: "Grooepie" },
+      { id: "asdfasdf", name: "asdf" },
     ],
     teams: [],
     active: true,
@@ -37,17 +37,20 @@ export const registerGame = (
     status: "OK",
     message: `You have created the following room: ${room}`,
     data: {
-      roomId: roomId,
-      roomCode: roomCode,
+      room: room
     },
   });
-  socket.emit(Event.To, { name: ViewName.Lobby });
   store.addRoom(room);
+  socket.emit(Event.To, { name: ViewName.Lobby });
+  socket.emit(Event.Room, room);
 };
 
 export const startGame = (roomId: string, socket: Socket) => {
   store.makeTeams(roomId);
-  socket.broadcast.to(roomId).emit(Event.To, ViewName.PlayerMatch);
+  
+  socket.emit(Event.To, { name: ViewName.RoundOverview });
+  socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
+  socket.broadcast.to(roomId).emit(Event.Teams, { name: ViewName.PlayerMatch });
   socket.broadcast
     .to(roomId)
     .emit(Event.Message, `Teams ready for room: ${roomId}`);

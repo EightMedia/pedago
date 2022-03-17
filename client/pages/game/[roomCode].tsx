@@ -5,7 +5,8 @@ import {
   PlayerEvent,
   RoomDto,
   SocketCallback,
-  ViewName
+  ViewName,
+  ViewState
 } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -36,7 +37,7 @@ function useSocket(url: string) {
 
 const roomCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
-  const [view, setView] = useState<ViewName>(ViewName.Wizard);
+  const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
@@ -75,9 +76,9 @@ const roomCode = () => {
   useEffect(() => {
     if (socket) {
       socket.on(Event.Message, handleMessage);
-      socket.on(Event.To, (vd) => {
-        setRound(vd.data?.round || 1);
-        setView(vd.name);
+      socket.on(Event.To, (vs) => {
+        setRound(vs.data?.round || 1);
+        setView(vs);
       });
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, setPlayerList);
@@ -87,7 +88,7 @@ const roomCode = () => {
   return (
     <Page>
       {(() => {
-        switch (view) {
+        switch (view.name) {
           case ViewName.Wizard:
             return (
               <Wizard
