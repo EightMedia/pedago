@@ -5,7 +5,7 @@ import { ButtonType } from "./Button.types";
 
 const ButtonComponent = ({ children, onClick }: ButtonType) => {
   return (
-    <button className={cx("Button", styles.Button)} onClick={onClick}>
+    <button className={cx(styles.button)} onClick={onClick}>
       {children}
     </button>
   );

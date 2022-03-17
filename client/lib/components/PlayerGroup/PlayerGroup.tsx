@@ -9,6 +9,7 @@ export const PlayerGroupComponent = ({
   name,
   players,
 }: PlayerGroupType) => {
+  if (!players) return null;
   return (
     <div className={cx(styles.playerGroup)}>
       <div className={cx(styles.groupName)}>
@@ -19,6 +20,7 @@ export const PlayerGroupComponent = ({
           <Player key={index} {...player} />
         ))}
       </div>
+
     </div>
   );
 };
