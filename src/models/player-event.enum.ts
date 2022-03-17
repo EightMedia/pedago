@@ -1,5 +1,5 @@
 export enum PlayerEvent {
-  JoinRoomByGameCode = "joinRoomByGameCode",
+  JoinRoomByroomCode = "joinRoomByroomCode",
   JoinRoomWithName = "joinRoomWithName",
   JoinGroup = "joinGroup",
   RequestLobby = "requestLobby",

@@ -9,6 +9,6 @@ export interface SocketCallback {
         roomId?: RoomDto["id"];
         room?: RoomDto;
         partner?: Player;
-        gameCode?: RoomDto["gameCode"];
+        roomCode?: RoomDto["roomCode"];
     }
 }
