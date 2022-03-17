@@ -10,11 +10,11 @@ export const PlayerGroupComponent = ({
   players,
 }: PlayerGroupType) => {
   return (
-    <div className={cx("PlayerGroup", styles.PlayerGroup)}>
-      <div>
+    <div className={cx(styles.playerGroup)}>
+      <div className={cx(styles.groupName)}>
         <strong>{name}</strong>
       </div>
-      <div>
+      <div className={cx(styles.players)}>
         {players.map((player, index) => (
           <Player key={index} {...player} />
         ))}

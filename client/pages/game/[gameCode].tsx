@@ -37,7 +37,7 @@ function useSocket(url: string) {
 const GameCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewName>(ViewName.Wizard);
-  const [step, setStep] = useState<WizardStep>();
+  const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
@@ -63,9 +63,9 @@ const GameCode = () => {
         (r: SocketCallback) => {
           if (r.status === "OK") {
             setRoom(r.data?.room as RoomDto);
-            setStep(WizardStep.Name);
+            setWizardStep(WizardStep.Name);
           } else {
-            setStep(WizardStep.RoomCode);
+            setWizardStep(WizardStep.RoomCode);
           }
           console.log(r);
         }
@@ -93,7 +93,7 @@ const GameCode = () => {
             return (
               <Wizard
                 socket={socket as Socket}
-                initialStep={step}
+                initialStep={wizardStep}
                 room={room}
               />
             );

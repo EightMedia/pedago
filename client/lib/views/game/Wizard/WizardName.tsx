@@ -12,13 +12,21 @@ export const WizardName = ({
 }) => {
   const [name, setName] = useState<string>("");
   
+  const handleSubmit = () => {
+    if (name.length >= 3) {
+      setStep(WizardStep.Group, name)
+    } else {
+      console.error("Your name should, at least, consist of three characters")
+    }
+  }
+
   return (
     <>
       <PanelTitle>Jouw voornaam</PanelTitle>
       <Stack>
         <p>Anderen zien dan met wie ze spelen</p>
         <InputText id="name" label="Naam" onChange={e => setName(e?.target?.value)} />
-        <Button onClick={() => setStep(WizardStep.Group, name)}>Volgende</Button>
+        <Button onClick={() => handleSubmit()}>Volgende</Button>
       </Stack>
     </>
   );

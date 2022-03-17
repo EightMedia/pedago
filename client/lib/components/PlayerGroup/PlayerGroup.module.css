@@ -1,10 +1,22 @@
 /* css module */
 
-.PlayerGroup {
+.playerGroup {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+  gap: var(--space-2xs);
+  background: var(--color-white-15);
+  padding: var(--space-md);
+}
+
+.groupName {
+}
+
+.players {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-2xs);
   background: var(--color-white-15);
   padding: var(--space-md);

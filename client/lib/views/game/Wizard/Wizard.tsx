@@ -1,4 +1,4 @@
-import { Group, PlayerEvent, RoomDto, SocketCallback } from "models";
+import { Group, PlayerEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
 import { memo, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
@@ -16,13 +16,8 @@ const WizardComponent = ({
   room
 }: WizardType) => {
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
-  const [localRoom, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerId, setPlayerId] = useState<string>("");
   const router = useRouter();
-
-  useEffect(() => {
-    setRoom(room);
-  },[room])
 
   useEffect(() => {
     setStep(initialStep as WizardStep);
@@ -40,7 +35,6 @@ const WizardComponent = ({
       (r: SocketCallback) => {
         console.log(r);
         if (r.status === "OK") {
-          setRoom(r.data?.room as RoomDto);
           setStep(step);
         }
       }
@@ -50,18 +44,16 @@ const WizardComponent = ({
   const handleName = (step: WizardStep, name: string) => {
     (socket as Socket).emit(
       PlayerEvent.JoinRoomWithName,
-      room.id || localRoom.id,
+      room.id,
       name,
       (r: SocketCallback) => {
         const resData = r.data;
         if (resData) {
-          setRoom(resData?.room as RoomDto);
           setPlayerId(resData?.playerId as string);
           localStorage.setItem("playerId", resData?.playerId as string);
           setStep(step);
-        } else {
-          console.error(r);
         }
+        console.log(r);
       }
     );
   };

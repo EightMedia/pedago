@@ -39,7 +39,7 @@ io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
 
   // send welcome to user on this socket
-  socket.emit(Event.Message, "Hello you have connected");
+  socket.emit(Event.Message, "Hello you have connected to Pedago");
 
   // METHODS
 

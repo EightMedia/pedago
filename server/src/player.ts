@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import { Event, Group, Player, Round, SocketCallback, ViewName } from "models";
 import { Socket } from "socket.io";
 import gamesStore from "./store/games.store";
-import { determinePlayerView } from "./utils/determine-player-view";
+import { determinePlayerView } from "./utils/determine-player-view.util";
 
 const store = gamesStore.getState();
 
@@ -17,9 +17,6 @@ export const joinRoomByGameCode = (
     callback({
       status: "ERROR",
       message: `Room with game code ${gameCode} does not exist.`,
-      data: {
-        roomId: "",
-      },
     });
     return;
   }
@@ -30,17 +27,11 @@ export const joinRoomByGameCode = (
     callback({
       status: "OK",
       message: "Room found",
-      data: {
-        room: room
-      },
     });
   } else {
     callback({
       status: "OK",
       message: "Player found",
-      data: {
-        room
-      },
     });
     const viewData = determinePlayerView(player as Player);
     const updatedPlayer: Partial<Player> = {
@@ -54,10 +45,10 @@ export const joinRoomByGameCode = (
     store.updatePlayer(room.id, playerId as string, updatedPlayer);
 
     socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
-    socket.emit(Event.Room, room);
     socket.emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.To, viewData);
   }
+  socket.emit(Event.Room, room);
 };
 
 export const joinRoomWithName = (
@@ -65,50 +56,51 @@ export const joinRoomWithName = (
   name: string,
   socket: Socket,
   callback: (args: SocketCallback) => void
-) => {
-  const room = store.getRoomById(roomId);
-  const playerNameTaken = room?.players.some((p: Player) => p.name === name);
+  ) => {
+    const room = store.getRoomById(roomId);
+    const playerNameTaken = room?.players.some((p: Player) => p.name === name);
+    
+    if (!room) {
+      callback({
+        status: "ERROR",
+        message: `Room does not exist.`,
+      });
+      return;
+    }
+    
+    if (!playerNameTaken) {
+      const groupsAvaiable = room?.groups?.length;
+      socket.join(roomId);
+      const playerId = randomUUID();
+      const player: Partial<Player> = {
+        id: playerId,
+        socketId: socket.id,
+        name: name,
+        group: undefined,
+        roomId: roomId,
+        rounds: [],
+        view: groupsAvaiable ? ViewName.SelectGroup : ViewName.InfoScreen,
+      };
+      
+      store.addPlayerToRoom(roomId, player);
+      
+      socket.broadcast.to(roomId).emit("message", `${name} has joined the game`);
+      callback({
+        status: "OK",
+        message: "You have joined the game",
+        data: {
+          playerId
+        },
+      });
 
-  if (!room) {
-    callback({
-      status: "ERROR",
-      message: `Room does not exist.`,
-    });
-    return;
-  }
-
-  if (!playerNameTaken) {
-    const groupsAvaiable = room?.groups?.length;
-    socket.join(roomId);
-    const playerId = randomUUID();
-    const player: Partial<Player> = {
-      id: playerId,
-      socketId: socket.id,
-      name: name,
-      group: undefined,
-      roomId: roomId,
-      rounds: [],
-      view: groupsAvaiable ? ViewName.SelectGroup : ViewName.InfoScreen,
-    };
-
-    store.addPlayerToRoom(roomId, player);
-
-    socket.broadcast.to(roomId).emit("message", `${name} has joined the game`);
-    callback({
-      status: "OK",
-      message: "You have joined the game",
-      data: {
-        playerId,
-        room,
-      },
-    });
-  } else {
-    callback({
-      status: "ERROR",
-      message: `Name taken: ${name}. Choose a different name.`,
-    });
-  }
-};
+      socket.emit(Event.Room, room);
+    } else {
+      callback({
+        status: "ERROR",
+        message: `Name taken: ${name}. Choose a different name.`,
+      });
+    }
+  };
 
 export const joinGroup = (
   groupId: string,
@@ -244,12 +236,16 @@ export const storeTeamReady = (
   }
 
   if (lastStoredRound === 6) {
-    socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
     callback({
       status: "OK",
       message: "Well played! Here are your results...",
     });
+    socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
   } else {
+    callback({
+      status: "OK",
+      message: "Going to the next round"
+    })
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
       data: { round: lastStoredRound + 1 },
