@@ -1,4 +1,4 @@
-import { Group, Player } from "models";
+import { AdminEvent, Group, Player, SocketCallback } from "models";
 import { memo } from "react";
 import { Page } from "../../../components/Page";
 import { PlayerGroup } from "../../../components/PlayerGroup";
@@ -24,6 +24,13 @@ const LobbyComponent = ({ socket, playerList, room }: LobbyType) => {
         }),
     };
   };
+
+  const handleStart = () => {
+    socket.emit(AdminEvent.StartGame, room.id, (r: SocketCallback) => {
+      console.log(r);
+    });
+  };
+
   return (
     <Page>
       <header className={styles.header}>
@@ -31,6 +38,7 @@ const LobbyComponent = ({ socket, playerList, room }: LobbyType) => {
         <p>
           Voer de code in op <a href={siteUrl}>{readableSiteUrl}</a> en doe mee
         </p>
+        <button onClick={handleStart}>Start</button>
       </header>
       <Stack gap="xs">
         {room.groups &&

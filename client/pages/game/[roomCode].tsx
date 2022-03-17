@@ -15,6 +15,7 @@ import { Page } from "../../lib/components/Page";
 import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
+import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
 import { Result } from "../../lib/views/game/Result/Result";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
@@ -42,6 +43,9 @@ const roomCode = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
+  const [teams, setTeams] = useState<Player[][]>([]);
+
+  const ROUND_MAX = 6;
   let playerId: string | null = "";
 
   const handleMessage = (v: any) => {
@@ -82,6 +86,7 @@ const roomCode = () => {
       });
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, setPlayerList);
+      socket.on(Event.Teams, setTeams)
     }
   }, [socket]);
 
@@ -101,12 +106,24 @@ const roomCode = () => {
             return (
               <Lobby
                 round={round}
-                roundMax={6}
+                roundMax={ROUND_MAX}
                 groups={room?.groups as Group[]}
                 playerList={playerList}
                 playerId={playerId as string}
               />
             );
+          case ViewName.PlayerMatch:
+            return (
+              <PlayerMatch
+                socket={socket as Socket}
+                round={round}
+                roundMax={ROUND_MAX}
+                teams={teams}
+                room={room as RoomDto}
+                playerId={playerId as string}
+              />
+            );
+
           case ViewName.Game:
             return (
               <Game

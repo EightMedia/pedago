@@ -1,4 +1,11 @@
-import { AdminEvent, Event, Player, RoomDto, ViewName, ViewState } from "models";
+import {
+  AdminEvent,
+  Event,
+  Player,
+  RoomDto,
+  ViewName,
+  ViewState
+} from "models";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { Page } from "../../lib/components/Page";
@@ -28,6 +35,7 @@ const AdminGame = () => {
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [room, setRoom] = useState<RoomDto>();
   const [playerList, setPlayerList] = useState<Player[]>([]);
+  const [teams, setTeams] = useState<Player[][]>([]);
 
   const mockRoom: Partial<RoomDto> = {
     admin: {
@@ -49,7 +57,8 @@ const AdminGame = () => {
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
-      socket.on(Event.PlayerList, setPlayerList)
+      socket.on(Event.PlayerList, setPlayerList);
+      socket.on(Event.Teams, setTeams);
     }
   }, [socket]);
 
@@ -65,7 +74,13 @@ const AdminGame = () => {
               />
             );
           case ViewName.Lobby:
-            return <Lobby socket={socket as Socket} playerList={playerList} room={room as RoomDto} />;
+            return (
+              <Lobby
+                socket={socket as Socket}
+                playerList={playerList}
+                room={room as RoomDto}
+              />
+            );
           case ViewName.Game:
             return <Game />;
           case ViewName.Result:
