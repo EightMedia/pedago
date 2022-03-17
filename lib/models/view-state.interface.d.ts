@@ -8,11 +8,12 @@ export declare enum ViewName {
     ChooseName = 6,
     SelectGroup = 7,
     InfoScreen = 8,
-    Discuss = 9
+    Discuss = 9,
+    RoundOverview = 10
 }
 export interface ViewState {
     name: ViewName;
-    data: ViewData;
+    data?: ViewData;
 }
 export declare const initialViewState: ViewState;
 export interface ViewData {
