@@ -19,7 +19,7 @@ import {
 import {
   gameStart,
   joinGroup,
-  joinRoomByroomCode,
+  joinRoomByRoomCode,
   joinRoomWithName, requestLobby,
   storeRound,
   storeTeamReady
@@ -61,12 +61,12 @@ io.on("connection", (socket: Socket) => {
   // Player methods
   // io.sockets.to(id).emit(Event.Message, gamesStore.getState().games);
   socket.on(
-    PlayerEvent.JoinRoomByroomCode,
+    PlayerEvent.JoinRoomByRoomCode,
     (
       playerId: string | undefined,
       roomCode: number,
       callback: (args: SocketCallback) => void
-    ) => joinRoomByroomCode(playerId, roomCode, socket, callback)
+    ) => joinRoomByRoomCode(playerId, roomCode, socket, callback)
   );
   socket.on(
     PlayerEvent.JoinRoomWithName,

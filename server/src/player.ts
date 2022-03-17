@@ -6,13 +6,13 @@ import { determinePlayerView } from "./utils/determine-player-view.util";
 
 const store = gamesStore.getState();
 
-export const joinRoomByroomCode = (
+export const joinRoomByRoomCode = (
   playerId: string | undefined,
   roomCode: number,
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  const room = store.getRoomByroomCode(roomCode);
+  const room = store.getRoomByRoomCode(roomCode);
   if (!room) {
     callback({
       status: "ERROR",

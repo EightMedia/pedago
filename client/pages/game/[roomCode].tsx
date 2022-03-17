@@ -57,7 +57,7 @@ const roomCode = () => {
   useEffect(() => {
     if (roomCode && socket) {
       (socket as Socket).emit(
-        PlayerEvent.JoinRoomByroomCode,
+        PlayerEvent.JoinRoomByRoomCode,
         localStorage.getItem("playerId"),
         roomCode,
         (r: SocketCallback) => {

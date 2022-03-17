@@ -19,7 +19,7 @@ const LandingPage = ({
   language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
-  const [roomCode, setroomCode] = useState<string>("");
+  const [roomCode, setRoomCode] = useState<string>("");
   const languageValues = Object.values(Language);
   const data = useContext(LanguageContext);
   const router = useRouter();
@@ -29,7 +29,7 @@ const LandingPage = ({
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setroomCode(event.target.value);
+    setRoomCode(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent) => {
