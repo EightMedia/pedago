@@ -1,6 +1,6 @@
 import { Group, PlayerEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
@@ -10,30 +10,19 @@ import { WizardInfo } from "./WizardInfo";
 import { WizardName } from "./WizardName";
 import { WizardRoomCode } from "./WizardRoomCode";
 
-const WizardComponent = ({
-  socket,
-  initialStep,
-  room
-}: WizardType) => {
+const WizardComponent = ({ socket, initialStep, room }: WizardType) => {
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [playerId, setPlayerId] = useState<string>("");
   const router = useRouter();
 
+  useEffect(() => {
+    setStep(initialStep as WizardStep);
+    return () => {};
+  }, [initialStep]);
+
   const handleRoomCode = (step: WizardStep, roomCode: number) => {
     localStorage.setItem("roomCode", roomCode.toString());
     router.push(`/game/${roomCode}`);
-
-    (socket as Socket).emit(
-      PlayerEvent.JoinRoomByRoomCode,
-      localStorage.getItem("playerId"),
-      roomCode,
-      (r: SocketCallback) => {
-        console.log(r);
-        if (r.status === "OK") {
-          setStep(step);
-        }
-      }
-    );
   };
 
   const handleName = (step: WizardStep, name: string) => {
@@ -89,10 +78,7 @@ const WizardComponent = ({
             case WizardStep.Group:
               if (room && room.groups?.length) {
                 return (
-                  <WizardGroup
-                    groups={room.groups}
-                    setStep={handleGroup}
-                  />
+                  <WizardGroup groups={room.groups} setStep={handleGroup} />
                 );
               } else {
                 return <WizardInfo onClick={() => requestLobby()} />;

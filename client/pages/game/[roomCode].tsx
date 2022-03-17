@@ -62,7 +62,6 @@ const roomCode = () => {
         roomCode,
         (r: SocketCallback) => {
           if (r.status === "OK") {
-            setRoom(r.data?.room as RoomDto);
             setWizardStep(WizardStep.Name);
           } else {
             setWizardStep(WizardStep.RoomCode);
