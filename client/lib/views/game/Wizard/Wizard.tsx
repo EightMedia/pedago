@@ -1,6 +1,6 @@
 import { Group, PlayerEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { Socket } from "socket.io-client";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
@@ -18,11 +18,6 @@ const WizardComponent = ({
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [playerId, setPlayerId] = useState<string>("");
   const router = useRouter();
-
-  useEffect(() => {
-    setStep(initialStep as WizardStep);
-    return () => {};
-  }, [initialStep]);
 
   const handleRoomCode = (step: WizardStep, roomCode: number) => {
     localStorage.setItem("roomCode", roomCode.toString());
