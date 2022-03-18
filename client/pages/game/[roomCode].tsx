@@ -123,14 +123,15 @@ const roomCode = () => {
                 playerId={playerId as string}
               />
             );
-
+          case ViewName.WaitingScreen:
+            return <div>Waiting for other player</div>
           case ViewName.Game:
             return (
               <Game
                 handleEmit={() => {}}
                 autoPlay={true}
                 initialScene={GameScenes.Countdown}
-                round={0}
+                round={round}
                 countdownTime={3}
                 leadTime={3}
               />

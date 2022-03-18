@@ -9,7 +9,6 @@ export enum ViewName {
   SelectGroup,
   InfoScreen,
   Discuss,
-  RoundOverview
 }
 
 export interface ViewState {

@@ -58,9 +58,22 @@ const AdminGame = () => {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
       socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Teams, setTeams);
+      socket.on(Event.Teams, t => {
+        console.log(t);
+        
+        setTeams(t)
+      });
     }
   }, [socket]);
+
+  const handleView = (view: ViewState) => {
+    setView(view);
+  };
+
+  const stopRound = () => {
+    // emit stopround
+    console.log(room);
+  };
 
   return (
     <Page>
@@ -82,7 +95,13 @@ const AdminGame = () => {
               />
             );
           case ViewName.Game:
-            return <Game />;
+            return (
+              <Game
+                handleView={handleView}
+                teams={teams}
+                stopRound={stopRound}
+              />
+            );
           case ViewName.Result:
             return <Result />;
           default:

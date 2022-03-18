@@ -63,7 +63,7 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       ),
     getTeamReady: (roomId: string, index: number) =>
       (get().getTeams(roomId) as Player[][])[index].every(
-        (player: Player) => player.ready === true
+        (player: Player) => player.ready
       ),
     // Setters
     addRoom: (room: RoomDto) => addRoomFn(set, room),

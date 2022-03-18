@@ -52,9 +52,12 @@ export const startGame = (
 ) => {
   try {
     store.makeTeams(roomId);
-    socket.emit(Event.To, { name: ViewName.RoundOverview });
+    const teams = store.getTeams(roomId);    
+
+    socket.emit(Event.To, { name: ViewName.Game });
+    socket.emit(Event.Teams, teams)
     socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
-    socket.broadcast.to(roomId).emit(Event.Teams, store.getTeams(roomId));
+    socket.broadcast.to(roomId).emit(Event.Teams, teams);
     socket.broadcast
       .to(roomId)
       .emit(Event.Message, `Teams ready for room: ${roomId}`);

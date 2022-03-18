@@ -101,18 +101,25 @@ export const setTeamPlayerReadyFn = (
   set((state: GamesState) => ({
     games: state.games.map((room: RoomDto) => {
       if (roomId === room.id) {
-        const team: Player[] = (room.teams as Player[][])[teamIndex];
-        team.map((player: Player) => {
-          if (player.id === playerId) {
-            return {
-              ...player,
-              ready: ready,
-            };
-          } else {
-            return player;
-          }
-        });
-        return room as RoomDto;
+        return {
+          ...room,
+          teams: room.teams?.map((team, index) => {
+            if (index === teamIndex) {
+              return team.map((p: Player) => {
+                if (p.id === playerId) {
+                  return {
+                    ...p,
+                    ready
+                  }
+                } else {
+                  return p;
+                }
+              })
+            } else {
+              return team;
+            }
+          })
+        }
       } else {
         return room as RoomDto;
       }

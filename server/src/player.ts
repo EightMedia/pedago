@@ -1,5 +1,13 @@
 import { randomUUID } from "crypto";
-import { Event, Group, Player, Round, SocketCallback, ViewName } from "models";
+import {
+  Event,
+  Group,
+  Player,
+  Round,
+  SocketCallback,
+  ViewName,
+  ViewState
+} from "models";
 import { Socket } from "socket.io";
 import gamesStore from "./store/games.store";
 import { determinePlayerView } from "./utils/determine-player-view.util";
@@ -56,51 +64,51 @@ export const joinRoomWithName = (
   name: string,
   socket: Socket,
   callback: (args: SocketCallback) => void
-  ) => {
-    const room = store.getRoomById(roomId);
-    const playerNameTaken = room?.players.some((p: Player) => p.name === name);
-    
-    if (!room) {
-      callback({
-        status: "ERROR",
-        message: `Room does not exist.`,
-      });
-      return;
-    }
-    
-    if (!playerNameTaken) {
-      const groupsAvaiable = room?.groups?.length;
-      socket.join(roomId);
-      const playerId = randomUUID();
-      const player: Partial<Player> = {
-        id: playerId,
-        socketId: socket.id,
-        name: name,
-        group: undefined,
-        roomId: roomId,
-        rounds: [],
-        view: groupsAvaiable ? ViewName.SelectGroup : ViewName.InfoScreen,
-      };
-      
-      store.addPlayerToRoom(roomId, player);
-      
-      socket.broadcast.to(roomId).emit("message", `${name} has joined the game`);
-      callback({
-        status: "OK",
-        message: "You have joined the game",
-        data: {
-          playerId
-        },
-      });
+) => {
+  const room = store.getRoomById(roomId);
+  const playerNameTaken = room?.players.some((p: Player) => p.name === name);
 
-      socket.emit(Event.Room, room);
-    } else {
-      callback({
-        status: "ERROR",
-        message: `Name taken: ${name}. Choose a different name.`,
-      });
-    }
-  };
+  if (!room) {
+    callback({
+      status: "ERROR",
+      message: `Room does not exist.`,
+    });
+    return;
+  }
+
+  if (!playerNameTaken) {
+    const groupsAvaiable = room?.groups?.length;
+    socket.join(roomId);
+    const playerId = randomUUID();
+    const player: Partial<Player> = {
+      id: playerId,
+      socketId: socket.id,
+      name: name,
+      group: undefined,
+      roomId: roomId,
+      rounds: [],
+      view: groupsAvaiable ? ViewName.SelectGroup : ViewName.InfoScreen,
+    };
+
+    store.addPlayerToRoom(roomId, player);
+
+    socket.broadcast.to(roomId).emit("message", `${name} has joined the game`);
+    callback({
+      status: "OK",
+      message: "You have joined the game",
+      data: {
+        playerId,
+      },
+    });
+
+    socket.emit(Event.Room, room);
+  } else {
+    callback({
+      status: "ERROR",
+      message: `Name taken: ${name}. Choose a different name.`,
+    });
+  }
+};
 
 export const joinGroup = (
   groupId: string,
@@ -143,17 +151,17 @@ export const requestLobby = (
 
   (player as Player).view = ViewName.Lobby;
   store.updatePlayer(roomId, playerId, player as Player);
-  
+
   const room = store.getRoomById(roomId);
   callback({
     status: "OK",
     message: "Navigate to Lobby",
   });
-  
+
   const playersInLobby = room?.players.filter(
     (p: Player) => p.view === ViewName.Lobby
-    );
-    
+  );
+
   socket.broadcast.to(roomId).emit(Event.PlayerList, playersInLobby);
   socket.emit(Event.To, { name: ViewName.Lobby });
   socket.emit(Event.Room, room);
@@ -179,8 +187,9 @@ export const gameStart = (
     team.forEach((player: Player) => {
       socket
         .to(player.socketId)
-        .emit(Event.To, { name: ViewName.Game, round: 1 });
+        .emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
     });
+    socket.emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
     store.setTeamReady(roomId, index, false);
   } else {
     socket.emit(Event.To, { name: ViewName.WaitingScreen });
@@ -244,8 +253,8 @@ export const storeTeamReady = (
   } else {
     callback({
       status: "OK",
-      message: "Going to the next round"
-    })
+      message: "Going to the next round",
+    });
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
       data: { round: lastStoredRound + 1 },
