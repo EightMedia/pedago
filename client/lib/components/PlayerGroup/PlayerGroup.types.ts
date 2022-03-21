@@ -1,5 +1,7 @@
 import { Group, Player } from "models";
 
-export type PlayerGroupType = Group & {
-  players: Array<{ name: Player["name"] }>;
+export type PlayerGroupType = {
+  id: Group["id"];
+  name: Group["name"];
+  players?: { name: Player["name"]; active?: boolean }[];
 };

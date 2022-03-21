@@ -1,9 +1,9 @@
-import { Group, Player } from "models";
+import { Player } from "models";
+import { PlayerGroupType } from "../../../components/PlayerGroup/PlayerGroup.types";
 
 export type LobbyType = {
   round: number;
   roundMax: number;
-  groups: Group[];
-  playerList: Player[];
-  playerId: Player["id"];
+  playerName: Player["name"];
+  groups: PlayerGroupType[];
 };

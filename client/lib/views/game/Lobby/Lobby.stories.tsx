@@ -1,11 +1,13 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import { PlayerGroup } from "../../../components/PlayerGroup";
 import { Lobby } from "./Lobby";
 import { LobbyDataOneGroup, LobbyDataTwoGroups } from "./Lobby.data";
 
 export default {
   title: "Views/Game/Lobby",
   component: Lobby,
+  subcomponents: { PlayerGroup },
 } as ComponentMeta<typeof Lobby>;
 
 const Template: ComponentStory<typeof Lobby> = (args) => <Lobby {...args} />;

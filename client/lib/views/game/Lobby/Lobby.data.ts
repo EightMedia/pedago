@@ -3,25 +3,24 @@ import { LobbyType } from "./Lobby.types";
 export const LobbyDataOneGroup: LobbyType = {
   round: 1,
   roundMax: 6,
+  playerName: "Stijn",
   groups: [
     {
-      id: 1,
-      name: "Group 1",
+      id: "1",
+      name: "Hogeschool Arnhem en Nijmegen",
       players: [
         {
           name: "Stijn",
+          active: true,
         },
         {
-          name: "Bo",
+          name: "Esmee",
         },
         {
-          name: "Vincent",
+          name: "Dilara",
         },
         {
-          name: "Annabelle",
-        },
-        {
-          name: "Bastiaan",
+          name: "Susanne",
         },
       ],
     },
@@ -31,46 +30,42 @@ export const LobbyDataOneGroup: LobbyType = {
 export const LobbyDataTwoGroups: LobbyType = {
   round: 1,
   roundMax: 6,
+  playerName: "Stijn",
   groups: [
     {
-      id: 1,
+      id: "1",
       name: "Hogeschool Arnhem en Nijmegen",
       players: [
         {
           name: "Stijn",
+          active: true,
         },
         {
-          name: "Bo",
+          name: "Esmee",
+        },
+        {
+          name: "Dilara",
         },
         {
           name: "Vincent",
-        },
-        {
-          name: "Annabelle",
-        },
-        {
-          name: "Bastiaan",
         },
       ],
     },
     {
-      id: 2,
-      name: "Veterstrikschool Alkmaar Zuid",
+      id: "2",
+      name: "Hogeschool Rotterdam",
       players: [
         {
-          name: "Stijn",
+          name: "Dilara",
         },
         {
-          name: "Bo",
+          name: "Esmee",
         },
         {
           name: "Vincent",
         },
         {
-          name: "Annabelle",
-        },
-        {
-          name: "Bastiaan",
+          name: "Stijn",
         },
       ],
     },

@@ -11,6 +11,7 @@
 }
 
 .groupName {
+  color: var(--color-white);
 }
 
 .players {

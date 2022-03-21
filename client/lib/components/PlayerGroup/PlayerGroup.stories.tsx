@@ -12,12 +12,14 @@ const Template: ComponentStory<typeof PlayerGroup> = (args) => (
   <PlayerGroup {...args} />
 );
 
-// story
 export const Primary = Template.bind({});
 Primary.parameters = {
   design: {
     type: "figma",
     url: "",
+  },
+  backgrounds: {
+    default: "dark",
   },
 };
 Primary.storyName = "PlayerGroup";
