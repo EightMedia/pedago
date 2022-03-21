@@ -1,7 +1,9 @@
-import { Group, Player, ViewName } from "models";
+import { Group, Player } from "models";
 
 export type LobbyType = {
   round: number;
   roundMax: number;
-  groups: Array<Group & { players: Array<{ name: Player["name"] }> }>;
+  groups: Group[];
+  playerList: Player[];
+  playerId: Player["id"];
 };

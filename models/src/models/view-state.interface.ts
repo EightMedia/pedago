@@ -8,12 +8,12 @@ export enum ViewName {
   ChooseName,
   SelectGroup,
   InfoScreen,
-  Discuss
+  Discuss,
 }
 
 export interface ViewState {
   name: ViewName;
-  data: ViewData;
+  data?: ViewData;
 }
 
 export const initialViewState: ViewState = {

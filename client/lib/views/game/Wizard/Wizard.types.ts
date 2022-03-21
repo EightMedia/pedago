@@ -1,5 +1,5 @@
-import { Group } from "models";
-import { ViewName } from "models/lib/models/view-state.interface";
+import { RoomDto } from "models";
+import { Socket } from "socket.io-client";
 
 export enum WizardStep {
   RoomCode,
@@ -9,7 +9,7 @@ export enum WizardStep {
 }
 
 export type WizardType = {
-  handleEmit: (vn: ViewName) => void;
-  groups: Group[];
+  socket?: Socket;
   initialStep?: WizardStep;
+  room: RoomDto;
 };

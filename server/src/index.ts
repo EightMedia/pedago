@@ -1,18 +1,29 @@
 import express from "express";
 import { createServer } from "http";
-import { RoomDto, Round, ViewName } from "models";
+import {
+  AdminEvent,
+  Event,
+  PlayerEvent,
+  RoomDto,
+  Round,
+  SocketCallback
+} from "models";
 import { Server, Socket } from "socket.io";
-import { disconnectAll, registerGame, reset, startGame, updateRoomDto } from "./admin";
+import {
+  disconnectAll,
+  registerGame,
+  reset,
+  startGame,
+  updateRoomDto
+} from "./admin";
 import {
   gameStart,
   joinGroup,
-  joinRoomByGameCode,
-  joinRoomWithName,
-  requestLobby,
+  joinRoomByRoomCode,
+  joinRoomWithName, requestLobby,
   storeRound,
-  storeTeamReady,
+  storeTeamReady
 } from "./player";
-import gamesStore from "./store/games.store";
 
 const app = express();
 const httpServer = createServer(app);
@@ -27,45 +38,83 @@ console.log("--- Pedago Server started at port 3001 ---");
 io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
 
-  // Check if user exists, by getting a UUID from localStorage 
-  socket.on("playerId", id => {
-    io.sockets.to(id).emit("message", gamesStore.getState().games);
-  })
-
   // send welcome to user on this socket
-  socket.emit("message", "Hello you have connected");
-
-  // begin to send user to start screen
-  socket.emit("to", ViewName.Game);
+  socket.emit(Event.Message, "Hello you have connected to Pedago");
 
   // METHODS
 
   //  Admin methods
-  socket.on("registerGame", (room: RoomDto, callback) => registerGame(room, socket, callback));
-  socket.on("startGame", (roomId: string) => startGame(roomId, socket));
-  socket.on("updateRoom", (room: Partial<RoomDto>) => updateRoomDto(room));
-  socket.on("reset", () => reset(socket));
-  socket.on("disconnect", () => disconnectAll(socket));
-
+  socket.on(
+    AdminEvent.RegisterGame,
+    (room: RoomDto, callback: (args: SocketCallback) => void) =>
+      registerGame(room, socket, callback)
+  );
+  socket.on(AdminEvent.StartGame, (roomId: string, callback: (args: SocketCallback) => void) =>
+    startGame(roomId, socket, callback)
+  );
+  socket.on(AdminEvent.UpdateRoom, (room: Partial<RoomDto>) =>
+    updateRoomDto(room)
+  );
+  socket.on(AdminEvent.Reset, () => reset(socket));
+  socket.on(AdminEvent.Disconnect, () => disconnectAll(socket));
 
   // Player methods
-  socket.on("joinRoomByGameCode", (playerId: string | undefined, gameCode: number, callback) =>
-    joinRoomByGameCode(playerId, gameCode, socket, callback)
-  );
-  socket.on("joinRoomWithName", (roomId: string, name: string, callback) =>
-    joinRoomWithName(roomId, name, socket, callback)
+  // io.sockets.to(id).emit(Event.Message, gamesStore.getState().games);
+  socket.on(
+    PlayerEvent.JoinRoomByRoomCode,
+    (
+      playerId: string | undefined,
+      roomCode: number,
+      callback: (args: SocketCallback) => void
+    ) => joinRoomByRoomCode(playerId, roomCode, socket, callback)
   );
   socket.on(
-    "joinGroup",
-    (groupId: string, roomId: string, playerId: string, callback) =>
-      joinGroup(groupId, roomId, playerId, socket, callback)
+    PlayerEvent.JoinRoomWithName,
+    (roomId: string, name: string, callback: (args: SocketCallback) => void) =>
+      joinRoomWithName(roomId, name, socket, callback)
   );
-  socket.on("requestLobby", (roomId: string, playerId: string, callback) =>
-    requestLobby(roomId, playerId, socket, callback)
+  socket.on(
+    PlayerEvent.JoinGroup,
+    (
+      groupId: string,
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => joinGroup(groupId, roomId, playerId, callback)
   );
-  socket.on("gameStart", (roomId: string, playerId: string, callback) => gameStart(roomId, playerId, socket, callback))
-  socket.on("storeRound", (roomId: string, playerId: string, round: Round, callback) => storeRound(roomId, playerId, round, socket, callback))
-  socket.on("storeTeamReady", (roomId: string, playerId: string, callback) => storeTeamReady(roomId, playerId, socket, callback))
+  socket.on(
+    PlayerEvent.RequestLobby,
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => requestLobby(roomId, playerId, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.GameStart,
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => gameStart(roomId, playerId, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.StoreRound,
+    (
+      roomId: string,
+      playerId: string,
+      round: Round,
+      callback: (args: SocketCallback) => void
+    ) => storeRound(roomId, playerId, round, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.StoreTeamReady,
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => storeTeamReady(roomId, playerId, socket, callback)
+  );
 });
 
 httpServer.listen(3001);

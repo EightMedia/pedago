@@ -8,7 +8,7 @@ export enum GameScenes {
 
 export type GameType = {
   handleEmit: (vn: ViewName) => void;
-  initialScene: GameScenes;
+  initialScene?: GameScenes;
   autoPlay?: boolean;
   countdownTime?: number;
   leadTime?: number;

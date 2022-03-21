@@ -1,5 +1,6 @@
-import { Group, Player, RoomDto, Round } from "models";
+import { Group, Player, PlayerStatus, RoomDto, Round } from "models";
 import { GetState, SetState } from "zustand/vanilla";
+import { makeTeamsFromPlayerList } from "../utils/player-list.util";
 import { GamesState } from "./games.store";
 
 // GETTERS
@@ -90,28 +91,35 @@ export const updatePlayerFn = (
   }));
 };
 
-export const setTeamPlayerReadyFn = (
+export const setTeamPlayerStatusFn = (
   set: SetState<GamesState>,
   roomId: string,
   playerId: string,
   teamIndex: number,
-  ready: boolean
+  status: PlayerStatus
 ): void => {
   set((state: GamesState) => ({
     games: state.games.map((room: RoomDto) => {
       if (roomId === room.id) {
-        const team: Player[] = (room.teams as Player[][])[teamIndex];
-        team.map((player: Player) => {
-          if (player.id === playerId) {
-            return {
-              ...player,
-              ready: ready,
-            };
-          } else {
-            return player;
-          }
-        });
-        return room as RoomDto;
+        return {
+          ...room,
+          teams: room.teams?.map((team, index) => {
+            if (index === teamIndex) {
+              return team.map((p: Player) => {
+                if (p.id === playerId) {
+                  return {
+                    ...p,
+                    status
+                  }
+                } else {
+                  return p;
+                }
+              })
+            } else {
+              return team;
+            }
+          })
+        }
       } else {
         return room as RoomDto;
       }
@@ -123,7 +131,7 @@ export const setTeamReadyFn = (
   set: SetState<GamesState>,
   roomId: string,
   teamIndex: number,
-  ready: boolean
+  status: PlayerStatus
 ) => {
   set((state: GamesState) => ({
     games: state.games.map((room: RoomDto) => {
@@ -132,7 +140,7 @@ export const setTeamReadyFn = (
         team.map((player: Player) => {
           return {
             ...player,
-            ready: ready,
+            status: status,
           };
         });
         return room as RoomDto;
@@ -181,23 +189,4 @@ export const storeRoundFn = (
       }
     }),
   }));
-};
-
-const makeTeamsFromPlayerList = (players: Player[]): Player[][] => {
-  let teams: Player[][] = [];
-  let team: Player[] = [];
-
-  for (let i = 0; i < players.length; i++) {
-    team.push(players[i]);
-    if (i % 2 === 1) {
-      team.push(players[i]);
-      if (i % 2 === 1) {
-        teams.push(team);
-        if (!(players.length % 2 === 1 && i === players.length - 2)) {
-          team = [];
-        }
-      }
-    }
-  }
-  return teams;
 };

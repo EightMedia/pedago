@@ -12,7 +12,7 @@ export declare enum ViewName {
 }
 export interface ViewState {
     name: ViewName;
-    data: ViewData;
+    data?: ViewData;
 }
 export declare const initialViewState: ViewState;
 export interface ViewData {
