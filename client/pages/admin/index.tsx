@@ -53,6 +53,7 @@ const AdminGame = () => {
       console.log("Players in the lobby:", v);
     });
   };
+  
   useEffect(() => {
     if (socket) {
       socket.on(Event.To, setView);

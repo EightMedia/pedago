@@ -27,6 +27,7 @@ __exportStar(require("./models/locale.interface"), exports);
 __exportStar(require("./models/option.interface"), exports);
 __exportStar(require("./models/organisation.interface"), exports);
 __exportStar(require("./models/player-event.enum"), exports);
+__exportStar(require("./models/player-status.enum"), exports);
 __exportStar(require("./models/player.interface"), exports);
 __exportStar(require("./models/players-type.interface"), exports);
 __exportStar(require("./models/role.enum"), exports);

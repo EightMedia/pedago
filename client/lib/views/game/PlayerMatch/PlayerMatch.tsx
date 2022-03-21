@@ -46,7 +46,7 @@ const PlayerMatchComponent = ({
         team
           .filter((p) => p.id !== playerId)
           .map((player, index) => <div key={index}>{player.name}</div>)}
-      <button onClick={handleFoundPartner}>Gevonden</button>
+      <button onClick={handleFoundPartner}></button>
     </Page>
   );
 };

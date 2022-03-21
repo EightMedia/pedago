@@ -1,4 +1,5 @@
 import { Group } from "./group.interface";
+import { PlayerStatus } from "./player-status.enum";
 import { Round } from "./round.interface";
 import { ViewName } from "./view-state.interface";
 export interface Player {
@@ -9,5 +10,5 @@ export interface Player {
     roomId: string;
     rounds: Round[];
     view: ViewName;
-    ready: boolean;
+    status: PlayerStatus;
 }

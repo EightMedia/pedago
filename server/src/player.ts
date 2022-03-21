@@ -3,6 +3,7 @@ import {
   Event,
   Group,
   Player,
+  PlayerStatus,
   Round,
   SocketCallback,
   ViewName,
@@ -88,6 +89,7 @@ export const joinRoomWithName = (
       roomId: roomId,
       rounds: [],
       view: groupsAvaiable ? ViewName.SelectGroup : ViewName.InfoScreen,
+      status: PlayerStatus.NotStarted
     };
 
     store.addPlayerToRoom(roomId, player);
@@ -175,10 +177,15 @@ export const gameStart = (
   callback: (args: SocketCallback) => void
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
-  store.setTeamPlayerReady(roomId, playerId, index as number, true);
-  const teamReady: boolean = store.getTeamReady(roomId, index);
-
-  if (teamReady) {
+  store.setTeamPlayerStatus(
+    roomId,
+    playerId,
+    index as number,
+    PlayerStatus.InProgress
+  );
+  const teamReady: PlayerStatus = store.getTeamReady(roomId, index);
+    
+  if (teamReady === PlayerStatus.InrPogress) {
     callback({
       status: "OK",
       message: "Start game",
@@ -188,9 +195,10 @@ export const gameStart = (
       socket
         .to(player.socketId)
         .emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
+        
     });
     socket.emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
-    store.setTeamReady(roomId, index, false);
+    store.setTeamReady(roomId, index, PlayerStatus.InProgress);
   } else {
     socket.emit(Event.To, { name: ViewName.WaitingScreen });
   }
@@ -206,7 +214,12 @@ export const storeRound = (
   store.storeRound(roomId, playerId, round);
 
   const index: number = store.getTeamIndex(roomId, playerId);
-  store.setTeamPlayerReady(roomId, playerId, index as number, true);
+  store.setTeamPlayerStatus(
+    roomId,
+    playerId,
+    index as number,
+    PlayerStatus.Done
+  );
   const teamReady: boolean = store.getTeamReady(roomId, index);
 
   if (teamReady) {
