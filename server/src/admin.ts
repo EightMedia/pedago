@@ -24,8 +24,8 @@ export const registerGame = (
     roomCode: roomCode,
     players: [],
     groups: [
-      {id: '4123rasfasdfg', name: 'Grooepie'},
-      {id: 'asdfasdf', name: 'asdf'},
+      { id: "4123rasfasdfg", name: "Grooepie" },
+      { id: "asdfasdf", name: "asdf" },
     ],
     teams: [],
     active: true,
@@ -37,20 +37,40 @@ export const registerGame = (
     status: "OK",
     message: `You have created the following room: ${room}`,
     data: {
-      roomId: roomId,
-      roomCode: roomCode,
+      room: room,
     },
   });
-  socket.emit(Event.To, { name: ViewName.Lobby });
   store.addRoom(room);
+  socket.emit(Event.To, { name: ViewName.Lobby });
+  socket.emit(Event.Room, room);
 };
 
-export const startGame = (roomId: string, socket: Socket) => {
-  store.makeTeams(roomId);
-  socket.broadcast.to(roomId).emit(Event.To, ViewName.PlayerMatch);
-  socket.broadcast
-    .to(roomId)
-    .emit(Event.Message, `Teams ready for room: ${roomId}`);
+export const startGame = (
+  roomId: string,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  try {
+    store.makeTeams(roomId);
+    const teams = store.getTeams(roomId);    
+
+    socket.emit(Event.To, { name: ViewName.Game });
+    socket.emit(Event.Teams, teams)
+    socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
+    socket.broadcast.to(roomId).emit(Event.Teams, teams);
+    socket.broadcast
+      .to(roomId)
+      .emit(Event.Message, `Teams ready for room: ${roomId}`);
+    callback({
+      status: "OK",
+      message: "Game started",
+    });
+  } catch {
+    callback({
+      status: "ERROR",
+      message: "Unknown error, trying to start the game",
+    });
+  }
 };
 
 export const updateRoomDto = (room: Partial<RoomDto>) => {

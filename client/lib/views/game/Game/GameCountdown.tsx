@@ -1,5 +1,5 @@
-import styles from "./Game.module.css";
 import { useEffect, useState } from "react";
+import styles from "./Game.module.css";
 
 export const GameCountdown = ({
   time = 3,
@@ -18,6 +18,7 @@ export const GameCountdown = ({
         callback();
       }
     }, 1000);
+    return;
   }, [counter, setCounter, callback]);
   return (
     <>

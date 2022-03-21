@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const GameLead = ({
   time = 3,
@@ -17,6 +17,7 @@ export const GameLead = ({
         callback && callback();
       }
     }, 1000);
+    return;
   }, [counter, setCounter, callback]);
   return (
     <>

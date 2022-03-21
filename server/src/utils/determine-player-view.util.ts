@@ -1,8 +1,8 @@
-import { Player, ViewName } from "models";
+import { Player, ViewName, ViewState } from "models";
 
 export const determinePlayerView = (
     player: Player
-  ): { name: ViewName; data?: any } => {
+  ): ViewState => {
     if (player.view === ViewName.Game) {
       const currentRound = player.rounds.length;
       switch (currentRound) {

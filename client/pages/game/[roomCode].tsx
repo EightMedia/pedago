@@ -5,7 +5,8 @@ import {
   PlayerEvent,
   RoomDto,
   SocketCallback,
-  ViewName
+  ViewName,
+  ViewState
 } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -14,6 +15,7 @@ import { Page } from "../../lib/components/Page";
 import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
+import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
 import { Result } from "../../lib/views/game/Result/Result";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
@@ -36,11 +38,14 @@ function useSocket(url: string) {
 
 const roomCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
-  const [view, setView] = useState<ViewName>(ViewName.Wizard);
+  const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
+  const [teams, setTeams] = useState<Player[][]>([]);
+
+  const ROUND_MAX = 6;
   let playerId: string | null = "";
 
   const handleMessage = (v: any) => {
@@ -75,19 +80,20 @@ const roomCode = () => {
   useEffect(() => {
     if (socket) {
       socket.on(Event.Message, handleMessage);
-      socket.on(Event.To, (vd) => {
-        setRound(vd.data?.round || 1);
-        setView(vd.name);
+      socket.on(Event.To, (vs) => {
+        setRound(vs.data?.round || 1);
+        setView(vs);
       });
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, setPlayerList);
+      socket.on(Event.Teams, setTeams)
     }
   }, [socket]);
 
   return (
     <Page>
       {(() => {
-        switch (view) {
+        switch (view.name) {
           case ViewName.Wizard:
             return (
               <Wizard
@@ -100,19 +106,32 @@ const roomCode = () => {
             return (
               <Lobby
                 round={round}
-                roundMax={6}
+                roundMax={ROUND_MAX}
                 groups={room?.groups as Group[]}
                 playerList={playerList}
                 playerId={playerId as string}
               />
             );
+          case ViewName.PlayerMatch:
+            return (
+              <PlayerMatch
+                socket={socket as Socket}
+                round={round}
+                roundMax={ROUND_MAX}
+                teams={teams}
+                room={room as RoomDto}
+                playerId={playerId as string}
+              />
+            );
+          case ViewName.WaitingScreen:
+            return <div>Waiting for other player</div>
           case ViewName.Game:
             return (
               <Game
                 handleEmit={() => {}}
                 autoPlay={true}
                 initialScene={GameScenes.Countdown}
-                round={0}
+                round={round}
                 countdownTime={3}
                 leadTime={3}
               />
