@@ -20,7 +20,8 @@ import {
   gameStart,
   joinGroup,
   joinRoomByRoomCode,
-  joinRoomWithName, requestLobby,
+  joinRoomWithName,
+  requestLobby,
   storeRound,
   storeTeamReady
 } from "./player";
@@ -49,8 +50,10 @@ io.on("connection", (socket: Socket) => {
     (room: RoomDto, callback: (args: SocketCallback) => void) =>
       registerGame(room, socket, callback)
   );
-  socket.on(AdminEvent.StartGame, (roomId: string, callback: (args: SocketCallback) => void) =>
-    startGame(roomId, socket, callback)
+  socket.on(
+    AdminEvent.StartGame,
+    (roomId: string, callback: (args: SocketCallback) => void) =>
+      startGame(roomId, socket, callback)
   );
   socket.on(AdminEvent.UpdateRoom, (room: Partial<RoomDto>) =>
     updateRoomDto(room)

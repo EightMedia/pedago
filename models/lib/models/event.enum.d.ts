@@ -5,5 +5,6 @@ export declare enum Event {
     Room = "room",
     Teams = "teams",
     Players = "players",
-    PlayerId = "playerId"
+    PlayerId = "playerId",
+    Round = "round"
 }

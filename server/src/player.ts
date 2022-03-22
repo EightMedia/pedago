@@ -3,8 +3,7 @@ import {
   Event,
   Group,
   Player,
-  PlayerStatus,
-  Round,
+  PlayerStatus, Round,
   SocketCallback,
   ViewName,
   ViewState
@@ -36,7 +35,7 @@ export const joinRoomByRoomCode = (
     callback({
       status: "OK",
       message: "Room found",
-    });
+    });    
   } else {
     callback({
       status: "OK",
@@ -51,8 +50,7 @@ export const joinRoomByRoomCode = (
       (p: Player) => p.view === ViewName.Lobby
     );
 
-    store.updatePlayer(room.id, playerId as string, updatedPlayer);
-
+    store.updatePlayer(room.id, playerId as string, updatedPlayer);      
     socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.To, viewData);
@@ -184,7 +182,7 @@ export const gameStart = (
     PlayerStatus.InProgress
   );
   const teamReady: boolean = store.getTeamReady(roomId, index);
-    
+
   if (teamReady) {
     callback({
       status: "OK",
