@@ -3,7 +3,8 @@ import {
   Event,
   Group,
   Player,
-  PlayerStatus, Round,
+  PlayerStatus,
+  Round,
   SocketCallback,
   ViewName,
   ViewState
@@ -35,27 +36,29 @@ export const joinRoomByRoomCode = (
     callback({
       status: "OK",
       message: "Room found",
-    });    
+    });
   } else {
     callback({
       status: "OK",
       message: "Player found",
     });
     const viewData = determinePlayerView(player as Player);
+    
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
     };
-    const playersInLobby = room?.players.filter(
+    store.updatePlayer(room.id, playerId as string, updatedPlayer);
+    
+    const playersInLobby = store.getRoomByRoomCode(roomCode)?.players.filter(
       (p: Player) => p.view === ViewName.Lobby
     );
 
-    store.updatePlayer(room.id, playerId as string, updatedPlayer);      
     socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.To, viewData);
   }
-  socket.emit(Event.Room, room);
+  socket.emit(Event.Room, store.getRoomByRoomCode(roomCode));
 };
 
 export const joinRoomWithName = (
@@ -87,7 +90,7 @@ export const joinRoomWithName = (
       roomId: roomId,
       rounds: [],
       view: groupsAvaiable ? ViewName.SelectGroup : ViewName.InfoScreen,
-      status: PlayerStatus.NotStarted
+      status: PlayerStatus.NotStarted,
     };
 
     store.addPlayerToRoom(roomId, player);
@@ -101,7 +104,7 @@ export const joinRoomWithName = (
       },
     });
 
-    socket.emit(Event.Room, room);
+    socket.emit(Event.Room, store.getRoomById(roomId));
   } else {
     callback({
       status: "ERROR",
@@ -194,7 +197,6 @@ export const gameStart = (
       socket
         .to(player.socketId)
         .emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
-        
     });
     socket.emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
     socket.broadcast.to(roomId).emit(Event.Teams, teams);

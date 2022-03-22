@@ -5,14 +5,15 @@ import { LobbyType } from "../Lobby.types";
 
 const getPlayerGroupType = (
   group: Group,
-  playerList: Player[]
+  playerList: Player[],
+  playerId: Player["id"]
 ): PlayerGroupType => {
   return {
     ...(group as Group),
     players: playerList
       .filter((p) => p.group.id === group.id)
       .map((p) => {
-        return { name: p.name, active: true };
+        return { name: p.name, active: p.id === playerId };
       }),
   };
 };
@@ -33,7 +34,7 @@ const getPlayerId = (
   socketId: string,
   players: Player[]
 ): string | undefined => {
-  return players.find((p) => p.socketId === socketId)?.id;
+  return players?.find((p) => p.socketId === socketId)?.id;
 };
 
 export const getLobbyType = (
@@ -46,9 +47,8 @@ export const getLobbyType = (
   const playerId = getPlayerId(socket.id, room.players);
   const playerName = getPlayerName(playerId, playerList);
   const groups = room.groups?.map((g) =>
-    getPlayerGroupType(g, playerList)
+    getPlayerGroupType(g, playerList, playerId as string)
   ) as PlayerGroupType[];
-
   return {
     round,
     roundMax,
