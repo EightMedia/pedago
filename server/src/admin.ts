@@ -43,10 +43,10 @@ export const registerGame = (
       room: room,
     },
   });
-
+  
   socket.join(room.id);
   socket.emit(Event.To, { name: ViewName.Lobby });
-  socket.emit(Event.Room, room);
+  socket.emit(Event.Room, store.getRoomById(roomId));
 };
 
 export const startGame = (

@@ -1,5 +1,6 @@
 import { Group, Player, RoomDto } from "models";
 import { Socket } from "socket.io-client";
+import { getPlayerId } from "../../../../../factories/shared.factory";
 import { PlayerGroupType } from "../../../../components/PlayerGroup/PlayerGroup.types";
 import { LobbyType } from "../Lobby.types";
 
@@ -28,13 +29,6 @@ const getPlayerName = (
   } else {
     return "";
   }
-};
-
-const getPlayerId = (
-  socketId: string,
-  players: Player[]
-): string | undefined => {
-  return players?.find((p) => p.socketId === socketId)?.id;
 };
 
 export const getLobbyType = (

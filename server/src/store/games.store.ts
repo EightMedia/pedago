@@ -66,7 +66,7 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
         team.some((player) => player.id === playerId)
       ),
     getTeamReady: (roomId: string, index: number): boolean =>
-      (get().getTeams(roomId) as Player[][])[index].every(
+      (get().getTeams(roomId) as Player[][])[index]?.every(
         (player: Player) => player.status === PlayerStatus.InProgress
       ),
     // Setters
