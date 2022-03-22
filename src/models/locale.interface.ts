@@ -7,4 +7,17 @@ export interface Locale {
     create: string;
     asAdmin: string;
   };
+  game: {
+    round: string;
+    of: string;
+    done: string;
+  };
+  rounds: {
+    id: number;
+    lead: string;
+    cards: {
+      id: string;
+      title: string;
+    }[];
+  }[];
 }
