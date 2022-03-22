@@ -57,7 +57,13 @@ export const registerGame = (
       },
     });
   } else {
-    room = partialRoom;
+    room = {
+      ...partialRoom,
+      ...store.getRoomByRoomCode(partialRoom.roomCode),
+      admin: {
+        socketId: socket.id,
+      },
+    };
 
     callback({
       status: "OK",
@@ -66,13 +72,7 @@ export const registerGame = (
         room: room,
       },
     });
-    store.updateRoom({
-      ...room,
-      ...store.getRoomByRoomCode(room.roomCode),
-      admin: {
-        socketId: socket.id,
-      },
-    });
+    store.updateRoom(room);
 
     const playersInLobby = store
       .getRoomByRoomCode(room.roomCode)
@@ -83,7 +83,7 @@ export const registerGame = (
   }
   socket.join(room.id);
 
-  socket.emit(Event.To, { name: ViewName.Lobby });
+  socket.emit(Event.To, room.view || { name: ViewName.Lobby });
   socket.emit(Event.Room, store.getRoomByRoomCode(room.roomCode));
 };
 
@@ -93,17 +93,27 @@ export const startGame = (
   callback: (args: SocketCallback) => void
 ) => {
   try {
+    // Update view of room and all players
+    store.updateRoom({
+      ...(store.getRoomById(roomId) as RoomDto),
+      view: { name: ViewName.Game },
+    });
     store.setAllPlayersView(roomId, { name: ViewName.PlayerMatch });
+
     store.makeTeams(roomId);
     const teams = store.getTeams(roomId);
 
+    // Emit events to admin
     socket.emit(Event.To, { name: ViewName.Game });
     socket.emit(Event.Teams, teams);
+
+    // Emit events to all players
     socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
     socket.broadcast.to(roomId).emit(Event.Teams, teams);
     socket.broadcast
       .to(roomId)
       .emit(Event.Message, `Teams made for room: ${roomId}`);
+
     callback({
       status: "OK",
       message: "Game started",
