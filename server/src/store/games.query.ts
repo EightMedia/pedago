@@ -23,11 +23,11 @@ export const getGroupsByRoomIdFn = (
 };
 
 // SETTERS
-export const addRoomFn = (set: SetState<GamesState>, room: RoomDto) =>
-  set((state: GamesState) => ({
-    ...state,
-    games: [...state.games, room],
-  }));
+export const addRoomFn = (set: SetState<GamesState>, room: RoomDto) => {
+  return set((state: GamesState) => {
+    state.games.push(room)
+  });
+};
 
 export const updateRoomFn = (
   set: SetState<GamesState>,
@@ -109,17 +109,17 @@ export const setTeamPlayerStatusFn = (
                 if (p.id === playerId) {
                   return {
                     ...p,
-                    status
-                  }
+                    status,
+                  };
                 } else {
                   return p;
                 }
-              })
+              });
             } else {
               return team;
             }
-          })
-        }
+          }),
+        };
       } else {
         return room as RoomDto;
       }

@@ -3,6 +3,7 @@ import {
   Event,
   Player,
   RoomDto,
+  SocketCallback,
   ViewName,
   ViewState
 } from "models";
@@ -36,6 +37,7 @@ const AdminGame = () => {
   const [room, setRoom] = useState<RoomDto>();
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [teams, setTeams] = useState<Player[][]>([]);
+  const [round, setRound] = useState<number>(1);
 
   const mockRoom: Partial<RoomDto> = {
     admin: {
@@ -44,25 +46,28 @@ const AdminGame = () => {
     },
   };
 
-  const handleRegisterGame = (): void => {
-    (socket as Socket).emit(AdminEvent.RegisterGame, mockRoom, (res: any) => {
-      console.log("register done", res.data.room.roomCode);
-      setRoom(res.data.room);
-    });
-    (socket as Socket).on(Event.PlayerList, (v) => {
-      console.log("Players in the lobby:", v);
-    });
+  const handleRegisterGame = (room: Partial<RoomDto>): void => {
+    if (socket) {
+      socket.emit(AdminEvent.RegisterGame, room, (res: SocketCallback) => {
+        if (res) console.log(res.message);
+        setRoom(res?.data?.room as RoomDto);
+        localStorage.setItem(
+          "room",
+          JSON.stringify(res?.data?.room as RoomDto)
+        );
+      });
+    }
   };
-  
+
   useEffect(() => {
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
       socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Teams, t => {
-        console.log(t);
-        
-        setTeams(t)
+      socket.on(Event.Teams, setTeams);
+      socket.on(Event.Round, setRound);
+      socket.on(Event.PlayerList, (v) => {
+        console.log("Players in the lobby:", v);
       });
     }
   }, [socket]);
@@ -84,7 +89,7 @@ const AdminGame = () => {
             return (
               <Wizard
                 socket={socket as Socket}
-                handleRegisterGame={handleRegisterGame}
+                handleRegisterGame={() => handleRegisterGame(mockRoom)}
               />
             );
           case ViewName.Lobby:
@@ -100,6 +105,7 @@ const AdminGame = () => {
               <Game
                 handleView={handleView}
                 teams={teams}
+                round={round}
                 stopRound={stopRound}
               />
             );

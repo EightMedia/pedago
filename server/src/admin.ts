@@ -14,6 +14,7 @@ export const registerGame = (
   const adminId = randomUUID();
   const roomCode = Math.floor(1000 + Math.random() * 9000);
   const timestamp = new Date().toISOString();
+  
   const room: RoomDto = {
     ...partialRoom,
     id: roomId,
@@ -32,17 +33,20 @@ export const registerGame = (
     locked: false,
     startDate: timestamp,
   };
-  socket.join(roomId);
+
+  store.addRoom(room);
+
   callback({
     status: "OK",
-    message: `You have created the following room: ${room}`,
+    message: `You have created a room with code: ${room.roomCode}`,
     data: {
       room: room,
     },
   });
-  store.addRoom(room);
+  
+  socket.join(room.id);
   socket.emit(Event.To, { name: ViewName.Lobby });
-  socket.emit(Event.Room, room);
+  socket.emit(Event.Room, store.getRoomById(roomId));
 };
 
 export const startGame = (
@@ -52,15 +56,15 @@ export const startGame = (
 ) => {
   try {
     store.makeTeams(roomId);
-    const teams = store.getTeams(roomId);    
+    const teams = store.getTeams(roomId);
 
     socket.emit(Event.To, { name: ViewName.Game });
-    socket.emit(Event.Teams, teams)
+    socket.emit(Event.Teams, teams);
     socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
     socket.broadcast.to(roomId).emit(Event.Teams, teams);
     socket.broadcast
       .to(roomId)
-      .emit(Event.Message, `Teams ready for room: ${roomId}`);
+      .emit(Event.Message, `Teams made for room: ${roomId}`);
     callback({
       status: "OK",
       message: "Game started",
@@ -69,6 +73,47 @@ export const startGame = (
     callback({
       status: "ERROR",
       message: "Unknown error, trying to start the game",
+    });
+  }
+};
+
+export const stopRound = (
+  roomId: string,
+  roundNo: number,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  // Hier moet een broadcast komen van een melding: De ronde is voorbij, met een OK knop.
+  // Als er op OK wordt gedrukt, dan verstuurt elke speler zijn data met storeRound.
+  // Misschien moeten we doen dat er automatisch de sort order wordt opgehaald bij elke speler
+
+  //Check of er players zijn die nog niet klaar zijn, die krijgen een melding. Anderen gaan meteen door
+
+  finishRound(roomId, roundNo, socket, callback);
+};
+
+export const finishRound = (
+  roomId: string,
+  roundNo: number,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  if (roundNo === 6) {
+    callback({
+      status: "OK",
+      message: "Here are the results...",
+    });
+    socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
+  } else {
+    const newRoundNo = roundNo + 1;
+    callback({
+      status: "OK",
+      message: "Going to the next round",
+    });
+    socket.emit(Event.Round, newRoundNo);
+    socket.broadcast.to(roomId).emit(Event.To, {
+      name: ViewName.PlayerMatch,
+      data: { round: newRoundNo },
     });
   }
 };
