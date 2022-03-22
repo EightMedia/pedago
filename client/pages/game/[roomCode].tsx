@@ -1,7 +1,5 @@
 import {
-  Event,
-  Group,
-  Player,
+  Event, Player,
   PlayerEvent,
   RoomDto,
   SocketCallback,
@@ -15,6 +13,7 @@ import { Page } from "../../lib/components/Page";
 import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
+import { getLobbyType } from "../../lib/views/game/Lobby/factories/Lobby.factory";
 import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
 import { Result } from "../../lib/views/game/Result/Result";
 import { Wizard } from "../../lib/views/game/Wizard";
@@ -105,11 +104,7 @@ const roomCode = () => {
           case ViewName.Lobby:
             return (
               <Lobby
-                round={round}
-                roundMax={ROUND_MAX}
-                groups={room?.groups as Group[]}
-                playerList={playerList}
-                playerId={playerId as string}
+                {...getLobbyType(socket as Socket, round, ROUND_MAX, room, playerList)}
               />
             );
           case ViewName.PlayerMatch:
