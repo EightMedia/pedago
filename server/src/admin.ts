@@ -1,5 +1,12 @@
 import { randomUUID } from "crypto";
-import { Admin, Event, RoomDto, SocketCallback, ViewName } from "models";
+import {
+  Admin,
+  Event,
+  Player,
+  RoomDto,
+  SocketCallback,
+  ViewName
+} from "models";
 import { Socket } from "socket.io";
 import gamesStore from "./store/games.store";
 
@@ -10,43 +17,74 @@ export const registerGame = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
+  let room;
   const roomId = randomUUID();
   const adminId = randomUUID();
   const roomCode = Math.floor(1000 + Math.random() * 9000);
   const timestamp = new Date().toISOString();
-  
-  const room: RoomDto = {
-    ...partialRoom,
-    id: roomId,
-    socketId: socket.id,
-    admin: {
-      id: adminId,
-    } as Admin,
-    roomCode: roomCode,
-    players: [],
-    groups: [
-      { id: "4123rasfasdfg", name: "Grooepie" },
-      { id: "asdfasdf", name: "asdf" },
-    ],
-    teams: [],
-    active: true,
-    locked: false,
-    startDate: timestamp,
-  };
 
-  store.addRoom(room);
+  const roomExists: boolean = Boolean(
+    store.getRoomByRoomCode(partialRoom.roomCode)
+  );
 
-  callback({
-    status: "OK",
-    message: `You have created a room with code: ${room.roomCode}`,
-    data: {
-      room: room,
-    },
-  });
-  
+  if (!partialRoom.roomCode || !roomExists) {
+    room = {
+      ...partialRoom,
+      id: roomId,
+      socketId: socket.id,
+      admin: {
+        id: adminId,
+      } as Admin,
+      roomCode: roomCode,
+      players: [],
+      groups: [
+        { id: "4123rasfasdfg", name: "Grooepie" },
+        { id: "asdfasdf", name: "asdf" },
+      ],
+      teams: [],
+      active: true,
+      locked: false,
+      startDate: timestamp,
+    };
+
+    store.addRoom(room);
+
+    callback({
+      status: "OK",
+      message: `You have created a room with code: ${room.roomCode}`,
+      data: {
+        room: room,
+      },
+    });
+  } else {
+    room = partialRoom;
+
+    callback({
+      status: "OK",
+      message: `You have joined the room with code: ${room.roomCode}`,
+      data: {
+        room: room,
+      },
+    });
+    store.updateRoom({
+      ...room,
+      ...store.getRoomByRoomCode(room.roomCode),
+      admin: {
+        socketId: socket.id,
+      },
+    });
+
+    const playersInLobby = store
+      .getRoomByRoomCode(room.roomCode)
+      ?.players.filter((p: Player) => p.view === ViewName.Lobby);
+    if (playersInLobby) {
+      socket.emit(Event.PlayerList, playersInLobby);
+    }
+  }
   socket.join(room.id);
+
   socket.emit(Event.To, { name: ViewName.Lobby });
-  socket.emit(Event.Room, store.getRoomById(roomId));
+  socket.emit(Event.Room, store.getRoomByRoomCode(room.roomCode));
 };
 
 export const startGame = (
@@ -55,6 +93,7 @@ export const startGame = (
   callback: (args: SocketCallback) => void
 ) => {
   try {
+    store.setAllPlayersView(roomId, { name: ViewName.PlayerMatch });
     store.makeTeams(roomId);
     const teams = store.getTeams(roomId);
 

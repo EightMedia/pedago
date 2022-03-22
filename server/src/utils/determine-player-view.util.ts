@@ -44,6 +44,6 @@ export const determinePlayerView = (
           return { name: ViewName.Lobby };
       }
     } else {
-      return { name: ViewName.Lobby };
+      return { name: player.view };
     }
   };

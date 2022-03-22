@@ -39,6 +39,11 @@ const AdminGame = () => {
   const [teams, setTeams] = useState<Player[][]>([]);
   const [round, setRound] = useState<number>(1);
 
+  let localRoom: string | null = "";
+  if (typeof window !== "undefined") {
+    localRoom = localStorage.getItem("room");
+  }
+
   const mockRoom: Partial<RoomDto> = {
     admin: {
       name: "mocker",
@@ -58,6 +63,23 @@ const AdminGame = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (localRoom) {
+      const parsedRoom = JSON.parse(localRoom);
+      if (socket) {
+        socket.emit(AdminEvent.RegisterGame, parsedRoom, (res: SocketCallback) => {
+          setRoom(res?.data?.room as RoomDto);
+          localStorage.setItem(
+            "room",
+            JSON.stringify(res?.data?.room as RoomDto)
+          );
+          console.log(res)
+        })
+      }
+    }
+  }, [localRoom, socket]);
+
 
   useEffect(() => {
     if (socket) {
