@@ -3,6 +3,7 @@ import { Group } from "./group.interface";
 import { Options } from "./option.interface";
 import { Organisation } from "./organisation.interface";
 import { Player } from "./player.interface";
+import { ViewState } from "./view-state.interface";
 
 export interface RoomDto {
   id: string;
@@ -17,4 +18,5 @@ export interface RoomDto {
   locked: boolean;
   startDate: string | Date;
   options?: Options;
+  view: ViewState;
 }

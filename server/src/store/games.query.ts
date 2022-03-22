@@ -1,4 +1,4 @@
-import { Group, Player, PlayerStatus, RoomDto, Round } from "models";
+import { Group, Player, PlayerStatus, RoomDto, Round, ViewState } from "models";
 import { GetState, SetState } from "zustand/vanilla";
 import { makeTeamsFromPlayerList } from "../utils/player-list.util";
 import { GamesState } from "./games.store";
@@ -25,7 +25,7 @@ export const getGroupsByRoomIdFn = (
 // SETTERS
 export const addRoomFn = (set: SetState<GamesState>, room: RoomDto) => {
   return set((state: GamesState) => {
-    state.games.push(room)
+    state.games.push(room);
   });
 };
 
@@ -82,6 +82,18 @@ export const updatePlayerFn = (
             } else {
               return p;
             }
+          }),
+          teams: room.teams?.map((team) => {
+            return team.map((p) => {
+              if (p.id === playerId) {
+                return {
+                  ...p,
+                  ...player,
+                };
+              } else {
+                return p;
+              }
+            });
           }),
         } as RoomDto;
       } else {
@@ -144,6 +156,28 @@ export const setTeamReadyFn = (
           };
         });
         return room as RoomDto;
+      } else {
+        return room as RoomDto;
+      }
+    }),
+  }));
+};
+
+export const setAllPlayersViewFn = (
+  set: SetState<GamesState>,
+  roomId: string,
+  viewState: ViewState
+) => {
+  set((state: GamesState) => ({
+    games: state.games.map((room) => {
+      if (roomId === room.id) {
+        return {
+          ...room,
+          players: room.players.map((p) => ({ ...p, view: viewState.name })),
+          teams: room.teams?.map((team) => {
+            team.map((p) => ({ ...p, view: viewState.name }));
+          }),
+        } as RoomDto;
       } else {
         return room as RoomDto;
       }

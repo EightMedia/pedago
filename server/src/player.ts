@@ -22,6 +22,7 @@ export const joinRoomByRoomCode = (
   callback: (args: SocketCallback) => void
 ) => {
   const room = store.getRoomByRoomCode(roomCode);
+
   if (!room) {
     callback({
       status: "ERROR",
@@ -42,11 +43,13 @@ export const joinRoomByRoomCode = (
       status: "OK",
       message: "Player found",
     });
+    socket.join(room.id);
     const viewData = determinePlayerView(player as Player);
     
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
+      view: viewData.name
     };
     store.updatePlayer(room.id, playerId as string, updatedPlayer);
     
