@@ -18,16 +18,19 @@ export const registerGame = (
   callback: (args: SocketCallback) => void
 ) => {
   let room;
-  const roomId = randomUUID();
-  const adminId = randomUUID();
-  const roomCode = Math.floor(1000 + Math.random() * 9000);
-  const timestamp = new Date().toISOString();
 
+  // Check if room is already instantiated
   const roomExists: boolean = Boolean(
     store.getRoomByRoomCode(partialRoom.roomCode)
   );
 
+  // If room doesn't exist, create new room
   if (!partialRoom.roomCode || !roomExists) {
+    const roomId = randomUUID();
+    const adminId = randomUUID();
+    const roomCode = Math.floor(1000 + Math.random() * 9000);
+    const timestamp = new Date().toISOString();
+
     room = {
       ...partialRoom,
       id: roomId,
@@ -46,7 +49,7 @@ export const registerGame = (
       locked: false,
       startDate: timestamp,
     };
-
+    // Add room to store
     store.addRoom(room);
 
     callback({
@@ -72,17 +75,17 @@ export const registerGame = (
         room: room,
       },
     });
+    // Update room to store
     store.updateRoom(room);
 
     const playersInLobby = store
       .getRoomByRoomCode(room.roomCode)
       ?.players.filter((p: Player) => p.view === ViewName.Lobby);
-    if (playersInLobby) {
+    if (playersInLobby?.length) {
       socket.emit(Event.PlayerList, playersInLobby);
     }
   }
   socket.join(room.id);
-
   socket.emit(Event.To, room.view || { name: ViewName.Lobby });
   socket.emit(Event.Room, store.getRoomByRoomCode(room.roomCode));
 };
@@ -93,7 +96,7 @@ export const startGame = (
   callback: (args: SocketCallback) => void
 ) => {
   try {
-    // Update view of room and all players
+    // Update view of room and players
     store.updateRoom({
       ...(store.getRoomById(roomId) as RoomDto),
       view: { name: ViewName.Game },
