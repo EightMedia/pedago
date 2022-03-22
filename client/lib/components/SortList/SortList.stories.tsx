@@ -15,6 +15,9 @@ const Template: ComponentStory<typeof SortList> = (args) => (
 // story
 export const Primary = Template.bind({});
 Primary.parameters = {
+  backgrounds: {
+    default: "dark",
+  },
   design: {
     type: "figma",
     url: "",

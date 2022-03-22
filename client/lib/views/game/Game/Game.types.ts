@@ -14,3 +14,8 @@ export type GameType = {
   leadTime?: number;
   round: number;
 };
+
+export type GameSortType = {
+  handleDoneSorting: (order: number[]) => void;
+  round: number;
+};

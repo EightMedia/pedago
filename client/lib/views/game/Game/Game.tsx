@@ -16,7 +16,7 @@ export const GameComponent = ({
 
   const handleDoneSorting = (order: number[]): void => {
     console.log(order);
-  }
+  };
 
   return (
     <Page valign="center" halign="center">
@@ -35,7 +35,7 @@ export const GameComponent = ({
               />
             );
           case GameScenes.Sort:
-            return <GameSort handleDoneSorting={handleDoneSorting} />;
+            return <GameSort handleDoneSorting={handleDoneSorting} round={1} />;
           default:
             return null;
         }
