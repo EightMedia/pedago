@@ -1,1 +1,27 @@
-/* css module */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+.item {
+  display: block;
+}
+.inner {
+  display: flex;
+  align-items: center;
+  padding: var(--space-2xs) var(--space-xs);
+  background: var(--color-white);
+  gap: var(--space-xs);
+}
+
+.icon {
+  flex: 0 0 24px;
+}
+
+.title {
+  color: var(--color-grey-darkest);
+}
+
+.item[aria-pressed] {
+  transform: rotate(10deg);
+}

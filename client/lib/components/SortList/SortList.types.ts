@@ -1,9 +1,8 @@
-
 export type SortListType = {
-  cards: any;
+  cards: SortItemType[];
 };
 
-export type SortCardType = {
-  id: number;
+export type SortItemType = {
+  id: string;
   title: string;
 };

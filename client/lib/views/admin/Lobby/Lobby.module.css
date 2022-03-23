@@ -1,1 +1,10 @@
-/* css module */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.roomCode {
+  font-size: 64px;
+  font-weight: bold;
+}

@@ -1,3 +1,4 @@
+import { Category } from "models";
 
 export enum GameScenes {
   Countdown,
@@ -10,5 +11,10 @@ export type GameType = {
   autoPlay?: boolean;
   countdownTime?: number;
   leadTime?: number;
+  round: number;
+};
+
+export type GameSortType = {
+  handleDoneSorting: (order: Category[]) => void;
   round: number;
 };
