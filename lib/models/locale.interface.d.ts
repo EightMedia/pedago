@@ -12,6 +12,9 @@ export interface Locale {
         of: string;
         done: string;
     };
+    discuss: {
+        ready: string;
+    };
     rounds: {
         id: number;
         lead: string;
