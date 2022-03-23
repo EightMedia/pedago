@@ -54,6 +54,12 @@ const roomCode = () => {
     console.log(v);
   };
 
+  const handleTeamReady = () => {
+    (socket as Socket).emit(PlayerEvent.StoreTeamReady, room.id, playerId, (res: SocketCallback) => {
+      console.log(res)
+    })
+  }
+
   if (typeof window !== "undefined") {
     playerId = localStorage.getItem("playerId");
   }
@@ -128,7 +134,10 @@ const roomCode = () => {
               case ViewName.WaitingScreen:
                 return <div>Waiting for other player</div>;
               case ViewName.Discuss:
-                return <div>Discussieren maar!</div>
+                return (<div>
+                  Discussieren maar!
+                  <button onClick={() => handleTeamReady()}>Wij zijn klaar</button>
+                  </div>)
               case ViewName.Game:
                 return (
                   <Game

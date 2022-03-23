@@ -187,7 +187,11 @@ export const gameStart = (
     index as number,
     PlayerStatus.InProgress
   );
-  const teamReady: boolean = store.getTeamReady(roomId, index, PlayerStatus.InProgress);
+  const teamReady: boolean = store.getTeamReady(
+    roomId,
+    index,
+    PlayerStatus.InProgress
+  );
 
   if (teamReady) {
     callback({
@@ -230,10 +234,14 @@ export const storeRound = (
     roomId,
     playerId,
     index as number,
-    PlayerStatus.Done
+    PlayerStatus.Discuss
   );
-  const teamReady: boolean = store.getTeamReady(roomId, index, PlayerStatus.Done);
-    
+  const teamReady: boolean = store.getTeamReady(
+    roomId,
+    index,
+    PlayerStatus.Discuss
+  );
+
   if (teamReady) {
     callback({
       status: "OK",
@@ -264,6 +272,7 @@ export const storeTeamReady = (
 
   const player = store.getPlayerById(roomId, playerId);
   const lastStoredRound = player?.rounds.length;
+  console.log(player?.rounds);
 
   if (typeof lastStoredRound !== "number") {
     callback({
@@ -279,6 +288,7 @@ export const storeTeamReady = (
       message: "Well played! Here are your results...",
     });
     socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
+    return;
   } else {
     callback({
       status: "OK",
@@ -288,5 +298,6 @@ export const storeTeamReady = (
       name: ViewName.PlayerMatch,
       data: { round: lastStoredRound + 1 },
     });
+    socket.broadcast.to(roomId).emit(Event.Teams, store.getTeams(roomId));
   }
 };
