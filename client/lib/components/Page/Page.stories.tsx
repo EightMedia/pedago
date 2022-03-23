@@ -8,11 +8,14 @@ export default {
   component: Page,
 } as ComponentMeta<typeof Page>;
 
-const Template: ComponentStory<typeof Page> = (args) => <Page {...args} />;
+const Template: ComponentStory<typeof Page> = (args) => (
+  <Page {...args}>🤡</Page>
+);
 
 // story
 export const Primary = Template.bind({});
 Primary.parameters = {
+  layout: "fullscreen",
   design: {
     type: "figma",
     url: "",
