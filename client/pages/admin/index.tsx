@@ -40,7 +40,6 @@ const AdminGame = () => {
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);
-  const [teams, setTeams] = useState<Player[][]>([]);
   const [round, setRound] = useState<number>(1);
 
   let localRoom: string | null = "";
@@ -93,7 +92,6 @@ const AdminGame = () => {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
       socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Teams, setTeams);
       socket.on(Event.Round, setRound);
       socket.on(Event.PlayerList, (v) => {
         console.log("Players in the lobby:", v);
@@ -133,7 +131,7 @@ const AdminGame = () => {
                 return (
                   <Game
                     handleView={handleView}
-                    teams={teams}
+                    teams={room?.teams as Player[][]}
                     round={round}
                     stopRound={stopRound}
                   />
