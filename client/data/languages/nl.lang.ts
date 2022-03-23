@@ -10,6 +10,12 @@ export const NL: Locale = {
     create: "Spel aanmaken",
     asAdmin: "als beheerder",
   },
+  playerMatch: {
+    youPlayWith: "Je speelt met",
+    youAre: "Jullie zijn",
+    findEachOther: "Zoek elkaar op en maak je klaar",
+    found: "Gevonden",
+  },
   game: {
     round: "Ronde",
     of: "van",
