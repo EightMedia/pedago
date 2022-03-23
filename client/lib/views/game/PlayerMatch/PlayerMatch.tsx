@@ -8,13 +8,14 @@ import { Page } from "../../../components/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
 import { Player } from "../../../components/Player";
 import { Center } from "../../../layouts/Center";
+import { Stack } from "../../../layouts/Stack";
 import { PlayerMatchType } from "./PlayerMatch.types";
 
 const PlayerMatchComponent = ({
   round,
   roundMax,
-  team,
-  companion,
+  teamName,
+  teamMembers,
 }: PlayerMatchType) => {
   // const [team, setTeam] = useState<PlayerModel[]>([]);
   const room = useContext(RoomContext);
@@ -52,13 +53,17 @@ const PlayerMatchComponent = ({
       </div>
       <Panel>
         <PanelTitle>{data.playerMatch.youPlayWith}</PanelTitle>
-        <Player name={companion} size="lg" />
+        <Stack>
+          {teamMembers.map((p) => (
+            <Player key={p.name} name={p.name} group={p.group} size="lg" />
+          ))}
+        </Stack>
         <Center space="sm">
           <p>
-            Jullie zijn <b>team {team}</b>. Zoek elkaar op en maak je klaar
+            Jullie zijn <b>team {teamName}</b>. Zoek elkaar op en maak je klaar
           </p>
         </Center>
-        <Button stretch={true} onClick={handleFoundPartner}>
+        <Button stretch onClick={handleFoundPartner}>
           {data.playerMatch.found}
         </Button>
       </Panel>
