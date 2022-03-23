@@ -60,7 +60,8 @@ export const joinRoomByRoomCode = (
     socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.To, viewData);
-  }
+  }  
+  socket.broadcast.to(room.id).emit(Event.Room, store.getRoomByRoomCode(roomCode));
   socket.emit(Event.Room, store.getRoomByRoomCode(roomCode));
 };
 

@@ -1,8 +1,9 @@
-import { PlayerEvent } from "models";
+import { Player as PlayerModel, PlayerEvent, SocketCallback } from "models";
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
+import { getPlayerId } from "../../../../factories/shared.factory";
 import { Button } from "../../../components/Button";
 import { Page } from "../../../components/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
@@ -17,23 +18,10 @@ const PlayerMatchComponent = ({
   teamName,
   teamMembers,
 }: PlayerMatchType) => {
-  // const [team, setTeam] = useState<PlayerModel[]>([]);
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
-
   const data = useContext(LanguageContext);
-
-  // useEffect(() => {
-  //   const currentTeam = teams.find((t) => t.some((p) => p.id === playerId));
-  //   setTeam(currentTeam as PlayerModel[]);
-  // }, [teams, playerId]);
-
-  // const getPlayerName = (
-  //   id: string,
-  //   players: PlayerModel[]
-  // ): string | undefined => {
-  //   return players?.find((p) => p.id === id)?.name;
-  // };
+  const playerId = getPlayerId(socket?.id as string, room?.players as PlayerModel[]);
 
   const handleFoundPartner = () => {
     socket?.emit(
@@ -54,7 +42,7 @@ const PlayerMatchComponent = ({
       <Panel>
         <PanelTitle>{data.playerMatch.youPlayWith}</PanelTitle>
         <Stack>
-          {teamMembers.map((p) => (
+          {teamMembers?.map((p) => (
             <Player key={p.name} name={p.name} group={p.group} size="lg" />
           ))}
         </Stack>

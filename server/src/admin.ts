@@ -104,15 +104,15 @@ export const startGame = (
     store.setAllPlayersView(roomId, { name: ViewName.PlayerMatch });
 
     store.makeTeams(roomId);
-    const teams = store.getTeams(roomId);
+    const room = store.getRoomById(roomId);
 
     // Emit events to admin
     socket.emit(Event.To, { name: ViewName.Game });
-    socket.emit(Event.Teams, teams);
+    socket.emit(Event.Room, room);
 
     // Emit events to all players
     socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
-    socket.broadcast.to(roomId).emit(Event.Teams, teams);
+    socket.broadcast.to(roomId).emit(Event.Room, room);
     socket.broadcast
       .to(roomId)
       .emit(Event.Message, `Teams made for room: ${roomId}`);
