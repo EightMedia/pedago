@@ -1,3 +1,47 @@
-import { DiscussType } from "./Discuss.types";
+import { DiscussStep, DiscussType } from "./Discuss.types";
 
-export const DiscussData: DiscussType = {};
+export const DiscussDataOneCompanion: DiscussType = {
+  autoPlay: false,
+  round: 1,
+  roundMax: 6,
+  initialStep: DiscussStep.Ready,
+  pause: true,
+  teamMembers: [
+    {
+      name: "My Name",
+      cards: [4, 1, 3, 2, 5, 6],
+    },
+    {
+      name: "Vincent",
+      cards: [6, 3, 2, 5, 4, 1],
+    },
+  ],
+  handleReady: () => {
+    alert("handleReady");
+  },
+};
+
+export const DiscussDataTwoCompanions: DiscussType = {
+  autoPlay: false,
+  round: 1,
+  roundMax: 6,
+  initialStep: DiscussStep.Ready,
+  pause: true,
+  teamMembers: [
+    {
+      name: "My Name",
+      cards: [4, 1, 3, 2, 5, 6],
+    },
+    {
+      name: "Esmee",
+      cards: [6, 3, 2, 5, 4, 1],
+    },
+    {
+      name: "Vincent",
+      cards: [5, 3, 1, 6, 4, 2],
+    },
+  ],
+  handleReady: () => {
+    alert("handleReady");
+  },
+};

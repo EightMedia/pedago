@@ -15,6 +15,9 @@ export const NL: Locale = {
     of: "van",
     done: "Ik ben klaar",
   },
+  discuss: {
+    ready: "Wij zijn klaar",
+  },
   rounds: [
     {
       id: 1,
