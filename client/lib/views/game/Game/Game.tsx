@@ -21,6 +21,7 @@ export const GameComponent = ({
   const socket = useContext(SocketContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
 
+
   const handleDoneSorting = (order: Category[]): void => {
     socket?.emit(
       PlayerEvent.StoreRound,
@@ -53,7 +54,7 @@ export const GameComponent = ({
               />
             );
           case GameScenes.Sort:
-            return <GameSort handleDoneSorting={handleDoneSorting} />;
+            return <GameSort handleDoneSorting={handleDoneSorting} round={1} />;
           default:
             return null;
         }
