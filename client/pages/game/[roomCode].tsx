@@ -12,11 +12,11 @@ import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
+import { getLobbyType } from "../../factories/Lobby.factory";
 import { Page } from "../../lib/components/Page";
 import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
-import { getLobbyType } from "../../lib/views/game/Lobby/factories/Lobby.factory";
 import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
 import { Result } from "../../lib/views/game/Result/Result";
 import { Wizard } from "../../lib/views/game/Wizard";
@@ -53,6 +53,12 @@ const roomCode = () => {
   const handleMessage = (v: any) => {
     console.log(v);
   };
+
+  const handleTeamReady = () => {
+    (socket as Socket).emit(PlayerEvent.StoreTeamReady, room.id, playerId, (res: SocketCallback) => {
+      console.log(res)
+    })
+  }
 
   if (typeof window !== "undefined") {
     playerId = localStorage.getItem("playerId");
@@ -128,7 +134,10 @@ const roomCode = () => {
               case ViewName.WaitingScreen:
                 return <div>Waiting for other player</div>;
               case ViewName.Discuss:
-                return <div>Discussieren maar!</div>
+                return (<div>
+                  Discussieren maar!
+                  <button onClick={() => handleTeamReady()}>Wij zijn klaar</button>
+                  </div>)
               case ViewName.Game:
                 return (
                   <Game

@@ -1,6 +1,7 @@
 import {
   AdminEvent,
   Event,
+  Group,
   Player,
   RoomDto,
   SocketCallback,
@@ -9,6 +10,9 @@ import {
 } from "models";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+import { RoomContext } from "../../contexts/RoomContext";
+import { SocketContext } from "../../contexts/SocketContext";
+import { getGroups } from "../../factories/Lobby.factory";
 import { Page } from "../../lib/components/Page";
 import { Game } from "../../lib/views/admin/Game";
 import { Lobby } from "../../lib/views/admin/Lobby";
@@ -34,7 +38,7 @@ function useSocket(url: string) {
 const AdminGame = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
-  const [room, setRoom] = useState<RoomDto>();
+  const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [teams, setTeams] = useState<Player[][]>([]);
   const [round, setRound] = useState<number>(1);
@@ -68,18 +72,21 @@ const AdminGame = () => {
     if (localRoom) {
       const parsedRoom = JSON.parse(localRoom);
       if (socket) {
-        socket.emit(AdminEvent.RegisterGame, parsedRoom, (res: SocketCallback) => {
-          setRoom(res?.data?.room as RoomDto);
-          localStorage.setItem(
-            "room",
-            JSON.stringify(res?.data?.room as RoomDto)
-          );
-          console.log(res)
-        })
+        socket.emit(
+          AdminEvent.RegisterGame,
+          parsedRoom,
+          (res: SocketCallback) => {
+            setRoom(res?.data?.room as RoomDto);
+            localStorage.setItem(
+              "room",
+              JSON.stringify(res?.data?.room as RoomDto)
+            );
+            console.log(res);
+          }
+        );
       }
     }
   }, [localRoom, socket]);
-
 
   useEffect(() => {
     if (socket) {
@@ -104,40 +111,42 @@ const AdminGame = () => {
   };
 
   return (
-    <Page>
-      {(() => {
-        switch (view.name) {
-          case ViewName.Wizard:
-            return (
-              <Wizard
-                socket={socket as Socket}
-                handleRegisterGame={() => handleRegisterGame(mockRoom)}
-              />
-            );
-          case ViewName.Lobby:
-            return (
-              <Lobby
-                socket={socket as Socket}
-                playerList={playerList}
-                room={room as RoomDto}
-              />
-            );
-          case ViewName.Game:
-            return (
-              <Game
-                handleView={handleView}
-                teams={teams}
-                round={round}
-                stopRound={stopRound}
-              />
-            );
-          case ViewName.Result:
-            return <Result />;
-          default:
-            return <>FAIL</>;
-        }
-      })()}
-    </Page>
+    <SocketContext.Provider value={socket}>
+      <RoomContext.Provider value={room}>
+        <Page>
+          {(() => {
+            switch (view.name) {
+              case ViewName.Wizard:
+                return (
+                  <Wizard
+                    socket={socket as Socket}
+                    handleRegisterGame={() => handleRegisterGame(mockRoom)}
+                  />
+                );
+              case ViewName.Lobby:
+                return (
+                  <Lobby
+                    lobbyGroups={getGroups(room?.groups as Group[], playerList)}
+                  />
+                );
+              case ViewName.Game:
+                return (
+                  <Game
+                    handleView={handleView}
+                    teams={teams}
+                    round={round}
+                    stopRound={stopRound}
+                  />
+                );
+              case ViewName.Result:
+                return <Result />;
+              default:
+                return <>FAIL</>;
+            }
+          })()}
+        </Page>
+      </RoomContext.Provider>
+    </SocketContext.Provider>
   );
 };
 

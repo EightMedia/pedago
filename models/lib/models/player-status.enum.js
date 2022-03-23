@@ -5,5 +5,6 @@ var PlayerStatus;
 (function (PlayerStatus) {
     PlayerStatus[PlayerStatus["NotStarted"] = 0] = "NotStarted";
     PlayerStatus[PlayerStatus["InProgress"] = 1] = "InProgress";
-    PlayerStatus[PlayerStatus["Done"] = 2] = "Done";
+    PlayerStatus[PlayerStatus["Discuss"] = 2] = "Discuss";
+    PlayerStatus[PlayerStatus["Done"] = 3] = "Done";
 })(PlayerStatus = exports.PlayerStatus || (exports.PlayerStatus = {}));

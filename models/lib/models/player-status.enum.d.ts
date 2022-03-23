@@ -1,5 +1,6 @@
 export declare enum PlayerStatus {
     NotStarted = 0,
     InProgress = 1,
-    Done = 2
+    Discuss = 2,
+    Done = 3
 }
