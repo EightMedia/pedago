@@ -7,9 +7,17 @@ const ButtonComponent = ({
   children,
   onClick,
   variation = "default",
+  stretch = false,
 }: ButtonType) => {
   return (
-    <button className={cx(styles.button, styles[variation])} onClick={onClick}>
+    <button
+      className={cx(
+        styles.button,
+        styles[variation],
+        stretch ? styles.stretch : null
+      )}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

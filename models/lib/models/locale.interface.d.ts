@@ -7,6 +7,12 @@ export interface Locale {
         create: string;
         asAdmin: string;
     };
+    playerMatch: {
+        youPlayWith: string;
+        youAre: string;
+        findEachOther: string;
+        found: string;
+    };
     game: {
         round: string;
         of: string;
