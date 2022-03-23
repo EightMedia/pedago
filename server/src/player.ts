@@ -268,8 +268,12 @@ export const storeTeamReady = (
   callback: (args: SocketCallback) => void
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
-  store.setTeamReady(roomId, index, PlayerStatus.Done);
-
+  store.setTeamPlayerStatus(
+    roomId,
+    playerId,
+    index as number,
+    PlayerStatus.Done
+  );
   const player = store.getPlayerById(roomId, playerId);
   const lastStoredRound = player?.rounds.length;
   console.log(player?.rounds);
