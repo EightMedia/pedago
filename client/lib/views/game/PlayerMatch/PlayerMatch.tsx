@@ -1,18 +1,20 @@
 import { Player, PlayerEvent, SocketCallback } from "models";
-import { memo, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { Page } from "../../../components/Page";
 import { Title } from "../../../components/Title";
 import { PlayerMatchType } from "./PlayerMatch.types";
 
 const PlayerMatchComponent = ({
-  socket,
   round,
   roundMax,
   teams,
-  room,
   playerId,
 }: PlayerMatchType) => {
   const [team, setTeam] = useState<Player[]>([]);
+  const room = useContext(RoomContext);
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     const currentTeam = teams.find((t) => t.some((p) => p.id === playerId));
@@ -24,9 +26,9 @@ const PlayerMatchComponent = ({
   };
 
   const handleFoundPartner = () => {
-    socket.emit(
+    socket?.emit(
       PlayerEvent.GameStart,
-      room.id,
+      room?.id,
       playerId,
       (r: SocketCallback) => {
         console.log(r);

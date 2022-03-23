@@ -13,6 +13,9 @@ const Template: ComponentStory<typeof Intro> = (args) => <Intro {...args} />;
 // story
 export const Primary = Template.bind({});
 Primary.parameters = {
+  backgrounds: {
+    default: "dark",
+  },
   design: {
     type: "figma",
     url: "",

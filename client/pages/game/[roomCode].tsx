@@ -1,6 +1,5 @@
 import {
   Event,
-  Group,
   Player,
   PlayerEvent,
   RoomDto,
@@ -11,10 +10,13 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+import { RoomContext } from "../../contexts/RoomContext";
+import { SocketContext } from "../../contexts/SocketContext";
 import { Page } from "../../lib/components/Page";
 import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
+import { getLobbyType } from "../../lib/views/game/Lobby/factories/Lobby.factory";
 import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
 import { Result } from "../../lib/views/game/Result/Result";
 import { Wizard } from "../../lib/views/game/Wizard";
@@ -86,63 +88,66 @@ const roomCode = () => {
       });
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Teams, setTeams)
+      socket.on(Event.Teams, setTeams);
     }
   }, [socket]);
 
   return (
-    <Page>
-      {(() => {
-        switch (view.name) {
-          case ViewName.Wizard:
-            return (
-              <Wizard
-                socket={socket as Socket}
-                initialStep={wizardStep}
-                room={room}
-              />
-            );
-          case ViewName.Lobby:
-            return (
-              <Lobby
-                round={round}
-                roundMax={ROUND_MAX}
-                groups={room?.groups as Group[]}
-                playerList={playerList}
-                playerId={playerId as string}
-              />
-            );
-          case ViewName.PlayerMatch:
-            return (
-              <PlayerMatch
-                socket={socket as Socket}
-                round={round}
-                roundMax={ROUND_MAX}
-                teams={teams}
-                room={room as RoomDto}
-                playerId={playerId as string}
-              />
-            );
-          case ViewName.WaitingScreen:
-            return <div>Waiting for other player</div>
-          case ViewName.Game:
-            return (
-              <Game
-                handleEmit={() => {}}
-                autoPlay={true}
-                initialScene={GameScenes.Countdown}
-                round={round}
-                countdownTime={3}
-                leadTime={3}
-              />
-            );
-          case ViewName.Result:
-            return <Result />;
-          default:
-            return <>FAIL</>;
-        }
-      })()}
-    </Page>
+    <SocketContext.Provider value={socket}>
+      <RoomContext.Provider value={room}>
+        <Page>
+          {(() => {
+            switch (view.name) {
+              case ViewName.Wizard:
+                return (
+                  <Wizard
+                    initialStep={wizardStep}
+                  />
+                );
+              case ViewName.Lobby:
+                return (
+                  <Lobby
+                    {...getLobbyType(
+                      socket as Socket,
+                      round,
+                      ROUND_MAX,
+                      room,
+                      playerList
+                    )}
+                  />
+                );
+              case ViewName.PlayerMatch:
+                return (
+                  <PlayerMatch
+                    round={round}
+                    roundMax={ROUND_MAX}
+                    teams={teams}
+                    playerId={playerId as string}
+                  />
+                );
+              case ViewName.WaitingScreen:
+                return <div>Waiting for other player</div>;
+              case ViewName.Discuss:
+                return <div>Discussieren maar!</div>
+              case ViewName.Game:
+                return (
+                  <Game
+                    autoPlay={true}
+                    initialScene={GameScenes.Countdown}
+                    round={round}
+                    countdownTime={3}
+                    leadTime={3}
+                  />
+                );
+              case ViewName.Result:
+                return <Result />;
+              default:
+                return <>FAIL</>;
+            }
+          })()}
+        </Page>
+      </RoomContext.Provider>
+    </SocketContext.Provider>
   );
 };
 

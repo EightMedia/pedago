@@ -4,6 +4,7 @@ export enum Event {
   PlayerList = "playerList",
   Room = "room",
   Teams = "teams",
-  Players = 'players',
-  PlayerId = 'playerId'
+  Players = "players",
+  PlayerId = "playerId",
+  Round = "round",
 }

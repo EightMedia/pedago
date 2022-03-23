@@ -1,4 +1,4 @@
-import { Group, Player, PlayerStatus, RoomDto, Round } from "models";
+import { Group, Player, PlayerStatus, RoomDto, Round, ViewState } from "models";
 import create, { GetState, SetState, StoreApi } from "zustand/vanilla";
 import {
   addPlayerToRoomFn,
@@ -6,6 +6,7 @@ import {
   getGroupsByRoomIdFn,
   getPlayerByIdFn,
   makeTeamsFn,
+  setAllPlayersViewFn,
   setTeamPlayerStatusFn,
   setTeamReadyFn,
   storeRoundFn,
@@ -21,7 +22,7 @@ export interface GamesState {
   getGroupsByRoomId: (roomId: string) => Group[] | undefined;
   getTeams: (roomId: string) => Player[][] | undefined;
   getTeamIndex: (roomId: string, playerId: string) => number;
-  getTeamReady: (roomId: string, index: number) => boolean;
+  getTeamReady: (roomId: string, index: number, status: PlayerStatus) => boolean;
 
   addRoom: (room: RoomDto) => void;
   updateRoom: (room: RoomDto) => void;
@@ -42,6 +43,8 @@ export interface GamesState {
     teamIndex: number,
     status: PlayerStatus
   ) => void;
+  setAllPlayersView: (roomId: string, viewState: ViewState) =>
+      void;
   makeTeams: (roomId: string) => void;
   storeRound: (roomId: string, playerId: string, round: Round) => void;
   removeAllGames: () => void;
@@ -65,9 +68,9 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       (get().getTeams(roomId) as Player[][]).findIndex((team) =>
         team.some((player) => player.id === playerId)
       ),
-    getTeamReady: (roomId: string, index: number): boolean =>
-      (get().getTeams(roomId) as Player[][])[index].every(
-        (player: Player) => player.status === PlayerStatus.InProgress
+    getTeamReady: (roomId: string, index: number, status: PlayerStatus): boolean =>
+      (get().getTeams(roomId) as Player[][])[index]?.every(
+        (player: Player) => player.status === status
       ),
     // Setters
     addRoom: (room: RoomDto) => addRoomFn(set, room),
@@ -84,6 +87,8 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
     ) => setTeamPlayerStatusFn(set, roomId, playerId, teamIndex, status),
     setTeamReady: (roomId: string, teamIndex: number, status: PlayerStatus) =>
       setTeamReadyFn(set, roomId, teamIndex, status),
+    setAllPlayersView: (roomId: string, viewState: ViewState) =>
+      setAllPlayersViewFn(set, roomId, viewState),
     makeTeams: (roomId: string) => makeTeamsFn(set, roomId),
     storeRound: (roomId: string, playerId: string, round: Round) =>
       storeRoundFn(set, roomId, playerId, round),

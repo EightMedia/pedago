@@ -5,11 +5,11 @@ import { SortList } from "../../../components/SortList";
 import { Center } from "../../../layouts/Center";
 import styles from "./Game.module.css";
 import { GameSortType } from "./Game.types";
+import { Category } from "models";
 
-export const GameSort = ({ round, handleDoneSorting }: GameSortType) => {
+export const GameSort = ({ handleDoneSorting }: { handleDoneSorting: (order: Category[]) => void; }) => {
   const data = useContext(LanguageContext);
   const roundData = data.rounds[round];
-
   return (
     <>
       <Center space="sm">
@@ -17,7 +17,15 @@ export const GameSort = ({ round, handleDoneSorting }: GameSortType) => {
       </Center>
       <SortList cards={roundData.cards} />
       <Center space="sm">
-        <Button onClick={() => handleDoneSorting([4, 2, 3, 1, 0, 5])}>
+        <Button onClick={() =>
+          handleDoneSorting([
+            Category.Caring,
+            Category.Contextual,
+            Category.Critical,
+            Category.Functional,
+            Category.Personal,
+            Category.Psychological,
+          ])}>
           {data.game.done}
         </Button>
       </Center>
