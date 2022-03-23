@@ -12,6 +12,14 @@ export interface Locale {
     of: string;
     done: string;
   };
+  waiting: {
+    goodBusy: string;
+    waiting: string;
+    isReady: string;
+    and: string;
+    areReady: string;
+    changeSomething: string;
+  };
   rounds: {
     id: number;
     lead: string;

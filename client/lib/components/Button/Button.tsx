@@ -3,9 +3,13 @@ import { memo } from "react";
 import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";
 
-const ButtonComponent = ({ children, onClick }: ButtonType) => {
+const ButtonComponent = ({
+  children,
+  onClick,
+  variation = "default",
+}: ButtonType) => {
   return (
-    <button className={cx(styles.button)} onClick={onClick}>
+    <button className={cx(styles.button, styles[variation])} onClick={onClick}>
       {children}
     </button>
   );
