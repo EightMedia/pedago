@@ -1,18 +1,20 @@
 /* css module */
 
 .player {
-  display: inline-flex;
   align-items: center;
   overflow: hidden;
   border-radius: var(--border-radius-xs);
 }
 
 .lg {
+  display: flex;
   color: var(--color-grey-darkest);
   font-size: var(--font-size-md);
+  border: var(--border-light);
 }
 
 .sm {
+  display: inline-flex;
   background: var(--color-white-15);
   color: var(--color-white);
   font-size: var(--font-size-sm);

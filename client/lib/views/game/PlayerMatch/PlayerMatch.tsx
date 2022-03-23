@@ -1,29 +1,38 @@
-import { Player, PlayerEvent, SocketCallback } from "models";
-import { memo, useContext, useEffect, useState } from "react";
+import { PlayerEvent } from "models";
+import { memo, useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
+import { Button } from "../../../components/Button";
 import { Page } from "../../../components/Page";
-import { Title } from "../../../components/Title";
+import { Panel, PanelTitle } from "../../../components/Panel";
+import { Player } from "../../../components/Player";
+import { Center } from "../../../layouts/Center";
 import { PlayerMatchType } from "./PlayerMatch.types";
 
 const PlayerMatchComponent = ({
   round,
   roundMax,
-  teams,
-  playerId,
+  team,
+  companion,
 }: PlayerMatchType) => {
-  const [team, setTeam] = useState<Player[]>([]);
+  // const [team, setTeam] = useState<PlayerModel[]>([]);
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
 
-  useEffect(() => {
-    const currentTeam = teams.find((t) => t.some((p) => p.id === playerId));
-    setTeam(currentTeam as Player[]);
-  }, [teams, playerId]);
+  const data = useContext(LanguageContext);
 
-  const getPlayerName = (id: string, players: Player[]): string | undefined => {
-    return players?.find((p) => p.id === id)?.name;
-  };
+  // useEffect(() => {
+  //   const currentTeam = teams.find((t) => t.some((p) => p.id === playerId));
+  //   setTeam(currentTeam as PlayerModel[]);
+  // }, [teams, playerId]);
+
+  // const getPlayerName = (
+  //   id: string,
+  //   players: PlayerModel[]
+  // ): string | undefined => {
+  //   return players?.find((p) => p.id === id)?.name;
+  // };
 
   const handleFoundPartner = () => {
     socket?.emit(
@@ -37,18 +46,22 @@ const PlayerMatchComponent = ({
   };
 
   return (
-    <Page>
+    <Page valign="center">
       <div>
         Ronde {round} van {roundMax}
       </div>
-      <Title>Hoi {getPlayerName(playerId, team)}</Title>
-      <br />
-      Wachten op:
-      {team &&
-        team
-          .filter((p) => p.id !== playerId)
-          .map((player, index) => <div key={index}>{player.name}</div>)}
-      <button onClick={handleFoundPartner}>Gevonden</button>
+      <Panel>
+        <PanelTitle>{data.playerMatch.youPlayWith}</PanelTitle>
+        <Player name={companion} size="lg" />
+        <Center space="sm">
+          <p>
+            Jullie zijn <b>team {team}</b>. Zoek elkaar op en maak je klaar
+          </p>
+        </Center>
+        <Button stretch={true} onClick={handleFoundPartner}>
+          {data.playerMatch.found}
+        </Button>
+      </Panel>
     </Page>
   );
 };
