@@ -45,17 +45,17 @@ export const joinRoomByRoomCode = (
     });
     socket.join(room.id);
     const viewData = determinePlayerView(player as Player);
-    
+
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
-      view: viewData.name
+      view: viewData.name,
     };
     store.updatePlayer(room.id, playerId as string, updatedPlayer);
-    
-    const playersInLobby = store.getRoomByRoomCode(roomCode)?.players.filter(
-      (p: Player) => p.view === ViewName.Lobby
-    );
+
+    const playersInLobby = store
+      .getRoomByRoomCode(roomCode)
+      ?.players.filter((p: Player) => p.view === ViewName.Lobby);
 
     socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.PlayerList, playersInLobby);
@@ -187,7 +187,7 @@ export const gameStart = (
     index as number,
     PlayerStatus.InProgress
   );
-  const teamReady: boolean = store.getTeamReady(roomId, index);
+  const teamReady: boolean = store.getTeamReady(roomId, index, PlayerStatus.InProgress);
 
   if (teamReady) {
     callback({
@@ -215,6 +215,14 @@ export const storeRound = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
+  if (!roomId || !playerId) {
+    callback({
+      status: "ERROR",
+      message: "Room and/or player unknown",
+    });
+    return;
+  }
+
   store.storeRound(roomId, playerId, round);
 
   const index: number = store.getTeamIndex(roomId, playerId);
@@ -224,18 +232,23 @@ export const storeRound = (
     index as number,
     PlayerStatus.Done
   );
-  const teamReady: boolean = store.getTeamReady(roomId, index);
-
+  const teamReady: boolean = store.getTeamReady(roomId, index, PlayerStatus.Done);
+    
   if (teamReady) {
     callback({
       status: "OK",
       message: "Round saved",
     });
     const team = (store.getTeams(roomId) as Player[][])[index];
+    socket.emit(Event.To, { name: ViewName.Discuss });
     team.forEach((player: Player) => {
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
     });
   } else {
+    callback({
+      status: "OK",
+      message: "Wait for other player",
+    });
     socket.emit(Event.To, { name: ViewName.WaitingScreen });
   }
 };

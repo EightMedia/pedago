@@ -1,7 +1,9 @@
 import { Group, PlayerEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
-import { memo, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
 import { WizardStep, WizardType } from "./Wizard.types";
@@ -10,10 +12,13 @@ import { WizardInfo } from "./WizardInfo";
 import { WizardName } from "./WizardName";
 import { WizardRoomCode } from "./WizardRoomCode";
 
-const WizardComponent = ({ socket, initialStep, room }: WizardType) => {
+const WizardComponent = ({ initialStep }: WizardType) => {
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [playerId, setPlayerId] = useState<string>("");
   const router = useRouter();
+
+  const room = useContext(RoomContext);
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     setStep(initialStep as WizardStep);
@@ -28,7 +33,7 @@ const WizardComponent = ({ socket, initialStep, room }: WizardType) => {
   const handleName = (step: WizardStep, name: string) => {
     (socket as Socket).emit(
       PlayerEvent.JoinRoomWithName,
-      room.id,
+      room?.id,
       name,
       (r: SocketCallback) => {
         const resData = r.data;
@@ -46,7 +51,7 @@ const WizardComponent = ({ socket, initialStep, room }: WizardType) => {
     (socket as Socket).emit(
       PlayerEvent.JoinGroup,
       group.id,
-      room.id,
+      room?.id,
       playerId,
       (r: SocketCallback) => {
         console.log(r);
@@ -60,7 +65,7 @@ const WizardComponent = ({ socket, initialStep, room }: WizardType) => {
   const requestLobby = (): void => {
     (socket as Socket).emit(
       PlayerEvent.RequestLobby,
-      room.id,
+      room?.id,
       playerId,
       console.log
     );

@@ -22,7 +22,7 @@ export interface GamesState {
   getGroupsByRoomId: (roomId: string) => Group[] | undefined;
   getTeams: (roomId: string) => Player[][] | undefined;
   getTeamIndex: (roomId: string, playerId: string) => number;
-  getTeamReady: (roomId: string, index: number) => boolean;
+  getTeamReady: (roomId: string, index: number, status: PlayerStatus) => boolean;
 
   addRoom: (room: RoomDto) => void;
   updateRoom: (room: RoomDto) => void;
@@ -68,9 +68,9 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       (get().getTeams(roomId) as Player[][]).findIndex((team) =>
         team.some((player) => player.id === playerId)
       ),
-    getTeamReady: (roomId: string, index: number): boolean =>
+    getTeamReady: (roomId: string, index: number, status: PlayerStatus): boolean =>
       (get().getTeams(roomId) as Player[][])[index]?.every(
-        (player: Player) => player.status === PlayerStatus.InProgress
+        (player: Player) => player.status === status
       ),
     // Setters
     addRoom: (room: RoomDto) => addRoomFn(set, room),
