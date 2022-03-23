@@ -1,16 +1,7 @@
 import { memo, ReactNode } from "react";
 import { ShapeType } from "./Shape.types";
 
-type svgsType = {
-  0: ReactNode;
-  1: ReactNode;
-  2: ReactNode;
-  3: ReactNode;
-  4: ReactNode;
-  5: ReactNode;
-};
-
-const svgs: svgsType = {
+const svgs: { [key: number]: ReactNode } = {
   0: (
     <path
       d="M15.865 6.59c-2.693.294-4.44 1.661-5.828 2.777-1.115.862-1.789 1.367-2.672 1.473-2 .231-4.314-1.684-5.892-3.325L0 6v8.543c2.714 1.978 5.408 2.82 8.059 2.525 2.693-.316 4.44-1.683 5.829-2.778 1.115-.883 1.788-1.367 2.672-1.472 1.999-.232 4.313 1.683 5.892 3.324l1.43 1.473V9.072c-2.693-1.957-5.386-2.798-8.017-2.483Z"

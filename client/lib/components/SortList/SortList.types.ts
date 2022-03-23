@@ -1,10 +1,8 @@
-import { Locale } from "models";
-
 export type SortListType = {
-  cards: Locale["rounds"][0]["cards"];
+  cards: SortItemType[];
 };
 
 export type SortItemType = {
-  id: Locale["rounds"][0]["cards"][0]["id"];
+  id: string;
   title: string;
 };
