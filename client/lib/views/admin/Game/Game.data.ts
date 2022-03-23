@@ -1,11 +1,12 @@
+import { ViewState } from "models";
 import { GameType } from "./Game.types";
 
 export const GameData: GameType = {
-  handleView: function (): void {
-    throw new Error("Function not implemented.");
+  handleView: function (view: ViewState): void {
+    alert("handleView: " + view);
   },
   stopRound: function (): void {
-    throw new Error("Function not implemented.");
+    alert("stop round");
   },
   teams: [],
   round: 1,
