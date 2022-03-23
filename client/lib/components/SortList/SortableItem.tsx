@@ -7,7 +7,7 @@ import { SortItemType } from "./SortList.types";
 
 export function SortableItem({ id, title }: SortItemType) {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: id });
+    useSortable({ id: id.toString() });
 
   let tf;
 
@@ -30,7 +30,7 @@ export function SortableItem({ id, title }: SortItemType) {
       className={styles.item}
     >
       <div className={styles.inner}>
-        <Shape category={id} className={styles.icon} />
+        <Shape category={Number(id)} className={styles.icon} />
         <div className={styles.title}>{title}</div>
       </div>
     </button>
