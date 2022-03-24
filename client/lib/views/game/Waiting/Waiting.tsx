@@ -1,5 +1,6 @@
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { Button } from "../../../components/Button";
 import { Loader } from "../../../components/Loader";
 import { Page } from "../../../components/Page";
@@ -11,10 +12,12 @@ const WaitingComponent = ({
   round,
   roundMax,
   teamMembers,
-  backToSort,
 }: WaitingType) => {
   const data = useContext(LanguageContext);
   const t = data.waiting;
+  const socket = useContext(SocketContext);
+
+  const backToSort = () => {};
   return (
     <Page valign="center">
       <div>
@@ -28,7 +31,7 @@ const WaitingComponent = ({
             {t.waiting} {teamMembers.join(" " + t.and + " ")} {t.areReady}
           </p>
         )}
-        {teamMembers?.length == 1 && (
+        {teamMembers?.length === 1 && (
           <p>
             {t.waiting} {teamMembers.join()} {t.isReady}
           </p>

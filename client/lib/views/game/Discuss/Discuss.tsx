@@ -1,5 +1,6 @@
 import { memo, useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { Page } from "../../../components/Page";
 import { DiscussStep, DiscussType } from "./Discuss.types";
 import { DiscussCompare } from "./DiscussCompare.scene";
@@ -11,13 +12,15 @@ const DiscussComponent = ({
   round,
   roundMax,
   initialStep,
+  pause = false,
   teamMembers,
-  handleReady,
   autoPlay = true,
 }: DiscussType) => {
   const data = useContext(LanguageContext);
+  const socket = useContext(SocketContext);
   const [step, setStep] = useState(initialStep);
-  console.log(step);
+
+  const handleReady = () => {};
 
   return (
     <Page valign="center">
@@ -41,7 +44,7 @@ const DiscussComponent = ({
             return <DiscussIntro time={3} callback={callback} />;
           case DiscussStep.Compare:
             return (
-              <DiscussCompare teamMembers={[]} handleReady={handleReady} />
+              <DiscussCompare teamMembers={teamMembers} handleReady={handleReady} />
             );
           case DiscussStep.Info:
             return (

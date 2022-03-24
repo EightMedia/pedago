@@ -12,9 +12,13 @@ import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
+import { getDiscussType } from "../../factories/Discuss.factory";
 import { getLobbyType } from "../../factories/Lobby.factory";
 import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
+import { getWaitingType } from "../../factories/Waiting.factory";
 import { Page } from "../../lib/components/Page";
+import { Discuss } from "../../lib/views/game/Discuss";
+import { DiscussStep } from "../../lib/views/game/Discuss/Discuss.types";
 import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
@@ -44,6 +48,9 @@ const roomCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
+  const [discussStep, setDiscussStep] = useState<DiscussStep>(
+    DiscussStep.Intro
+  );
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
@@ -135,15 +142,29 @@ const roomCode = () => {
                   />
                 );
               case ViewName.WaitingScreen:
-                return <Waiting />;
+                return (
+                  <Waiting
+                    {...getWaitingType(
+                      round,
+                      ROUND_MAX,
+                      room,
+                      playerId as string
+                    )}
+                  />
+                );
               case ViewName.Discuss:
                 return (
-                  <div>
-                    Discussieren maar!
-                    <button onClick={() => handleTeamReady()}>
-                      Wij zijn klaar
-                    </button>
-                  </div>
+                  <Discuss
+                    {...getDiscussType(
+                      round,
+                      ROUND_MAX,
+                      discussStep,
+                      false,
+                      true,
+                      room,
+                      playerId as string
+                    )}
+                  />
                 );
               case ViewName.Game:
                 return (

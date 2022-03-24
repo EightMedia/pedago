@@ -14,6 +14,5 @@ export type DiscussType = {
     name: string;
     cards: number[];
   }[];
-  handleReady: () => void;
   autoPlay?: boolean;
 };

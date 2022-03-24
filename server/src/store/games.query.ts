@@ -204,6 +204,7 @@ export const storeRoundFn = (
   set: SetState<GamesState>,
   roomId: string,
   playerId: string,
+  teamIndex: number,
   round: Round
 ): void => {
   set((state: GamesState) => ({
@@ -216,6 +217,22 @@ export const storeRoundFn = (
               player.rounds.push(round);
             }
             return player;
+          }),
+          teams: room.teams?.map((team, index) => {
+            if (index === teamIndex) {
+              return team.map((p: Player) => {
+                if (p.id === playerId) {
+                  return {
+                    ...p,
+                    status,
+                  };
+                } else {
+                  return p;
+                }
+              });
+            } else {
+              return team;
+            }
           }),
         } as RoomDto;
       } else {

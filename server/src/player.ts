@@ -60,8 +60,10 @@ export const joinRoomByRoomCode = (
     socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.PlayerList, playersInLobby);
     socket.emit(Event.To, viewData);
-  }  
-  socket.broadcast.to(room.id).emit(Event.Room, store.getRoomByRoomCode(roomCode));
+  }
+  socket.broadcast
+    .to(room.id)
+    .emit(Event.Room, store.getRoomByRoomCode(roomCode));
   socket.emit(Event.Room, store.getRoomByRoomCode(roomCode));
 };
 
@@ -227,10 +229,9 @@ export const storeRound = (
     });
     return;
   }
-
-  store.storeRound(roomId, playerId, round);
-
   const index: number = store.getTeamIndex(roomId, playerId);
+  store.storeRound(roomId, playerId, index, round);
+
   store.setTeamPlayerStatus(
     roomId,
     playerId,
