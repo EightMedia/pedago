@@ -18,6 +18,7 @@ import {
 } from "./admin";
 import {
   gameStart,
+  getLatestSortOrder,
   joinGroup,
   joinRoomByRoomCode,
   joinRoomWithName,
@@ -109,6 +110,14 @@ io.on("connection", (socket: Socket) => {
       round: Round,
       callback: (args: SocketCallback) => void
     ) => storeRound(roomId, playerId, round, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.SortOrder,
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => getLatestSortOrder(roomId, playerId, callback)
   );
   socket.on(
     PlayerEvent.StoreTeamReady,

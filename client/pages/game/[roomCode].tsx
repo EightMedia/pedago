@@ -51,6 +51,7 @@ const roomCode = () => {
   const [discussStep, setDiscussStep] = useState<DiscussStep>(
     DiscussStep.Intro
   );
+  const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Countdown);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
@@ -62,15 +63,9 @@ const roomCode = () => {
     console.log(v);
   };
 
-  const handleTeamReady = () => {
-    (socket as Socket).emit(
-      PlayerEvent.StoreTeamReady,
-      room.id,
-      playerId,
-      (res: SocketCallback) => {
-        console.log(res);
-      }
-    );
+  const handleBackToSort = () => {
+    setView({ name: ViewName.Game });
+    setGameScene(GameScenes.Sort);
   };
 
   if (typeof window !== "undefined") {
@@ -107,6 +102,10 @@ const roomCode = () => {
       });
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, setPlayerList);
+      socket.on(Event.Round, () => setRound((r) => r + 1));
+      socket.on(PlayerEvent.GameScene, () =>
+        setGameScene(GameScenes.Countdown)
+      );
     }
   }, [socket]);
 
@@ -141,6 +140,16 @@ const roomCode = () => {
                     )}
                   />
                 );
+              case ViewName.Game:
+                return (
+                  <Game
+                    autoPlay={true}
+                    initialScene={gameScene}
+                    round={round}
+                    countdownTime={3}
+                    leadTime={3}
+                  />
+                );
               case ViewName.WaitingScreen:
                 return (
                   <Waiting
@@ -150,6 +159,7 @@ const roomCode = () => {
                       room,
                       playerId as string
                     )}
+                    backToSort={handleBackToSort}
                   />
                 );
               case ViewName.Discuss:
@@ -164,16 +174,6 @@ const roomCode = () => {
                       room,
                       playerId as string
                     )}
-                  />
-                );
-              case ViewName.Game:
-                return (
-                  <Game
-                    autoPlay={true}
-                    initialScene={GameScenes.Countdown}
-                    round={round}
-                    countdownTime={3}
-                    leadTime={3}
                   />
                 );
               case ViewName.Result:

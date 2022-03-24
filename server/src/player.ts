@@ -3,6 +3,7 @@ import {
   Event,
   Group,
   Player,
+  PlayerEvent,
   PlayerStatus,
   Round,
   SocketCallback,
@@ -190,29 +191,20 @@ export const gameStart = (
     index as number,
     PlayerStatus.InProgress
   );
-  const teamReady: boolean = store.getTeamReady(
-    roomId,
-    index,
-    PlayerStatus.InProgress
-  );
 
-  if (teamReady) {
-    callback({
-      status: "OK",
-      message: "Start game",
-    });
-    const teams = store.getTeams(roomId);
-    const team = (teams as Player[][])[index];
-    team.forEach((player: Player) => {
-      socket
-        .to(player.socketId)
-        .emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
-    });
-    socket.emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
-    socket.broadcast.to(roomId).emit(Event.Teams, teams);
-  } else {
-    socket.emit(Event.To, { name: ViewName.WaitingScreen });
-  }
+  callback({
+    status: "OK",
+    message: "Start game",
+  });
+  const teams = store.getTeams(roomId);
+  const team = (teams as Player[][])[index];
+  team.forEach((player: Player) => {
+    socket
+      .to(player.socketId)
+      .emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
+  });
+  socket.emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
+  socket.broadcast.to(roomId).emit(Event.Teams, teams);
 };
 
 export const storeRound = (
@@ -251,9 +243,13 @@ export const storeRound = (
     });
     const team = (store.getTeams(roomId) as Player[][])[index];
     socket.emit(Event.To, { name: ViewName.Discuss });
+    socket.emit(Event.Round, null);
+
     team.forEach((player: Player) => {
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
+      socket.to(player.socketId).emit(Event.Round, null);
     });
+    socket.emit(PlayerEvent.GameScene, null);
   } else {
     callback({
       status: "OK",
@@ -261,6 +257,33 @@ export const storeRound = (
     });
     socket.emit(Event.To, { name: ViewName.WaitingScreen });
   }
+
+  socket.broadcast.to(roomId).emit(Event.Room, store.getRoomById(roomId));
+  socket.emit(Event.Room, store.getRoomById(roomId));
+};
+
+export const getLatestSortOrder = (
+  roomId: string,
+  playerId: string,
+  callback: (args: SocketCallback) => void
+) => {
+  const index: number = store.getTeamIndex(roomId, playerId);
+  const rounds = store.getPlayerById(roomId, playerId)?.rounds as Round[];
+  const lastIndex = rounds.length - 1;
+  store.setTeamPlayerStatus(
+    roomId,
+    playerId,
+    index as number,
+    PlayerStatus.InProgress
+  );
+
+  callback({
+    status: "OK",
+    message: "Latest sort order requested",
+    data: {
+      sortOrder: rounds[lastIndex]?.order,
+    },
+  });
 };
 
 export const storeTeamReady = (
@@ -278,7 +301,6 @@ export const storeTeamReady = (
   );
   const player = store.getPlayerById(roomId, playerId);
   const lastStoredRound = player?.rounds.length;
-  console.log(player?.rounds);
 
   if (typeof lastStoredRound !== "number") {
     callback({
