@@ -1,4 +1,4 @@
-import { Category, Player, PlayerEvent, SocketCallback } from "models";
+import { Category, Player, PlayerEvent, Round, SocketCallback } from "models";
 import { useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
@@ -13,7 +13,7 @@ import { GameSortType } from "./Game.types";
 export const GameSort = ({ round }: GameSortType) => {
   const data = useContext(LanguageContext);
   const roundData = data.rounds[round];
-  const [sortOrder, setSortOrder] = useState<any[]>([]);
+  const [order, setOrder] = useState<any[]>([]);
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
@@ -25,15 +25,15 @@ export const GameSort = ({ round }: GameSortType) => {
       playerId,
       {
         number: round,
-        sortOrder,
-      },
+        order,
+      } as Round,
       (res: SocketCallback) => {
         console.log(res);
       }
     );
   };
   const handleSortOrder = (items: Category[]): void => {
-    setSortOrder(items);
+    setOrder(items);
   }
 
   return (

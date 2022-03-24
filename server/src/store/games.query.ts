@@ -214,17 +214,25 @@ export const storeRoundFn = (
           ...room,
           players: room.players.map((player) => {
             if (player.id === playerId) {
+              const roundIndex = player.rounds.findIndex(r => r.number === round.number);
+              if (roundIndex >= 0) {
+                player.rounds.splice(roundIndex, 1);
+              }
               player.rounds.push(round);
             }
             return player;
           }),
           teams: room.teams?.map((team, index) => {
             if (index === teamIndex) {
-              return team.map((p: Player) => {
-                if (p.id === playerId) {
-                  p.rounds.push(round);
+              return team.map((player: Player) => {
+                if (player.id === playerId) {
+                  const roundIndex = player.rounds.findIndex(r => r.number === round.number);
+                  if (roundIndex >= 0) {
+                    player.rounds.splice(roundIndex, 1);
+                  }
+                  player.rounds.push(round);
                 }
-                return p;
+                return player;
               });
             } else {
               return team;

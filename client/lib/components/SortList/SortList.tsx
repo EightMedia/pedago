@@ -43,9 +43,7 @@ const SortListComponent = ({ cards, handleSortOrder }: SortListType) => {
       getPlayerId(socket.id, room?.players as Player[]),
       (res: SocketCallback) => {
         if (res?.data?.sortOrder) {
-          setItems(
-            categoryToSortList(res.data.sortOrder as Category[], cards)
-          );
+          setItems(categoryToSortList(res.data.sortOrder as Category[], cards));
         }
       }
     );

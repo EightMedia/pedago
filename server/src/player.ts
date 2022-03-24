@@ -262,18 +262,28 @@ export const storeRound = (
   socket.emit(Event.Room, store.getRoomById(roomId));
 };
 
-export const getLatestSortOrder = (roomId: string, playerId: string,
-  callback: (args: SocketCallback) => void) => {
-    const rounds = store.getPlayerById(roomId, playerId)?.rounds as Round[];
-    const lastIndex = rounds.length - 1;
-    
+export const getLatestSortOrder = (
+  roomId: string,
+  playerId: string,
+  callback: (args: SocketCallback) => void
+) => {
+  const index: number = store.getTeamIndex(roomId, playerId);
+  const rounds = store.getPlayerById(roomId, playerId)?.rounds as Round[];
+  const lastIndex = rounds.length - 1;
+  store.setTeamPlayerStatus(
+    roomId,
+    playerId,
+    index as number,
+    PlayerStatus.InProgress
+  );
+
   callback({
     status: "OK",
     message: "Latest sort order requested",
     data: {
-      sortOrder: rounds[lastIndex]?.order
-    }
-  })
+      sortOrder: rounds[lastIndex]?.order,
+    },
+  });
 };
 
 export const storeTeamReady = (
