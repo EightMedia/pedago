@@ -1,0 +1,43 @@
+.wrapper {
+  padding: 50px;
+  position: relative;
+}
+
+.label {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-size: --var(--font-size-2xs);
+  font-weight: 700;
+}
+
+.label0 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.label1 {
+  top: 33%;
+  right: 0;
+}
+.label2 {
+  top: 66%;
+  right: 0;
+}
+.label3 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.label4 {
+  top: 66%;
+  left: 0;
+}
+.label5 {
+  top: 33%;
+  left: 0;
+}
