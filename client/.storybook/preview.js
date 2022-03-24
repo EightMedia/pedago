@@ -34,6 +34,7 @@ const customViewports = {
     styles: {
       width: "375px",
       height: "100%",
+      overflow: "auto",
     },
   },
   MobileS: {

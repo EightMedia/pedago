@@ -1,4 +1,30 @@
 export interface Locale {
+    categories: {
+        0: {
+            title: string;
+            description: string;
+        };
+        1: {
+            title: string;
+            description: string;
+        };
+        2: {
+            title: string;
+            description: string;
+        };
+        3: {
+            title: string;
+            description: string;
+        };
+        4: {
+            title: string;
+            description: string;
+        };
+        5: {
+            title: string;
+            description: string;
+        };
+    };
     landing: {
         title: string;
         description: string;
@@ -28,6 +54,17 @@ export interface Locale {
     };
     discuss: {
         ready: string;
+    };
+    results: {
+        results: string;
+        myResult: string;
+        everyone: string;
+        yourResult: string;
+        save: string;
+        sendToMail: string;
+        yourMail: string;
+        send: string;
+        privacy: string;
     };
     rounds: {
         id: number;

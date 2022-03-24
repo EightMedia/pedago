@@ -1,16 +1,30 @@
-import cx from "classnames";
-import { memo } from "react";
+import { memo, useState } from "react";
 import { Page } from "../../../components/Page";
-import { Title } from "../../../components/Title";
-import styles from "./Result.module.css";
-import { ResultType } from "./Result.types";
+import { ResultStep, ResultType } from "./Result.types";
+import { ResultLoader } from "./ResultLoader.scene";
+import { ResultOverview } from "./ResultOverview.scene";
 
-const ResultComponent = ({}: ResultType) => {
+const ResultComponent = ({
+  autoPlay = true,
+  data,
+  initialStep = 0,
+}: ResultType) => {
+  const [step, setStep] = useState(initialStep);
+
   return (
-    <Page>
-      <div className={cx("result", styles.result)}>
-        <Title>Result</Title>
-      </div>
+    <Page valign="center">
+      {(() => {
+        let callback = undefined;
+        switch (step) {
+          case ResultStep.Loader:
+            callback = autoPlay ? () => setStep(ResultStep.Result) : undefined;
+            return <ResultLoader callback={callback} />;
+          case ResultStep.Result:
+            return <ResultOverview data={data} />;
+          default:
+            return null;
+        }
+      })()}
     </Page>
   );
 };
