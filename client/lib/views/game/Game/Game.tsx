@@ -31,7 +31,7 @@ export const GameComponent = ({
               />
             );
           case GameScenes.Sort:
-            return <GameSort round={1} />;
+            return <GameSort round={round} />;
           default:
             return null;
         }

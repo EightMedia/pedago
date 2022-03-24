@@ -8,13 +8,14 @@ export const sortListToCategory = (items: SortItemType[]): Category[] => {
 };
 
 export const categoryToSortList = (
-  items: Category[],
+  cats: Category[],
   cards: SortItemType[]
 ): SortItemType[] => {
-  return items.map((i) => {
+  return cats.map((i) => {
+    const cat = i.toString();
     return {
-      id: i.toString(),
-      title: getCardTitle(i.toString(), cards),
+      id: cat,
+      title: getCardTitle(cat, cards),
     };
   });
 };

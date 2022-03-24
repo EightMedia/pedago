@@ -8,7 +8,7 @@ export const WizardGroup = ({
   groups,
   setStep,
 }: {
-  groups: any;
+  groups: Group[];
   setStep: (step: WizardStep, group: Group) => void;
 }) => {
   return (
