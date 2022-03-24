@@ -4,27 +4,56 @@ import {
   KeyboardSensor,
   PointerSensor,
   useSensor,
-  useSensors,
+  useSensors
 } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
+  verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { memo, useState } from "react";
+import { Category, Player, PlayerEvent, SocketCallback } from "models";
+import { memo, useContext, useEffect, useState } from "react";
+import { RoomContext } from "../../../contexts/RoomContext";
+import { SocketContext } from "../../../contexts/SocketContext";
+import { getPlayerId } from "../../../factories/shared.factory";
+import {
+  categoryToSortList,
+  sortListToCategory
+} from "../../utils/sortlist-conversion.util";
 import { SortableItem } from "./SortableItem";
 import styles from "./SortList.module.css";
-import { SortListType } from "./SortList.types";
+import { SortItemType, SortListType } from "./SortList.types";
 
-const SortListComponent = ({ cards }: SortListType) => {
-  const [items, setItems] = useState(cards);
+const SortListComponent = ({ cards, handleSortOrder }: SortListType) => {
+  const [items, setItems] = useState<SortItemType[]>(cards);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+  const socket = useContext(SocketContext);
+  const room = useContext(RoomContext);
+
+  useEffect(() => {
+    socket?.emit(
+      PlayerEvent.SortOrder,
+      room?.id,
+      getPlayerId(socket.id, room?.players as Player[]),
+      (res: SocketCallback) => {
+        if (res?.data?.sortOrder) {
+          setItems(
+            categoryToSortList(res.data.sortOrder as Category[], cards)
+          );
+        }
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    handleSortOrder(sortListToCategory(items));
+  }, [items]);
 
   return (
     <DndContext
