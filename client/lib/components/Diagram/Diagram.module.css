@@ -23,21 +23,34 @@
 .label1 {
   top: 33%;
   right: 0;
+  transform: translateY(-50%);
 }
 .label2 {
   top: 66%;
   right: 0;
+  transform: translateY(-50%);
+  & svg {
+    order: -1;
+  }
 }
 .label3 {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  & svg {
+    order: -1;
+  }
 }
 .label4 {
   top: 66%;
   left: 0;
+  transform: translateY(-50%);
+  & svg {
+    order: -1;
+  }
 }
 .label5 {
   top: 33%;
   left: 0;
+  transform: translateY(-50%);
 }
