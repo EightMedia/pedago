@@ -21,6 +21,14 @@ export const NL: Locale = {
     of: "van",
     done: "Ik ben klaar",
   },
+  waiting: {
+    goodBusy: "Goed bezig!",
+    waiting: "Wachten tot",
+    isReady: "klaar is..",
+    and: "en",
+    areReady: "klaar zijn..",
+    changeSomething: "Nog iets aanpassen?",
+  },  
   discuss: {
     ready: "Wij zijn klaar",
   },

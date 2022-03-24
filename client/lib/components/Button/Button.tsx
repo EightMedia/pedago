@@ -3,10 +3,19 @@ import { memo } from "react";
 import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";
 
-const ButtonComponent = ({ children, onClick, stretch }: ButtonType) => {
+const ButtonComponent = ({
+  children,
+  onClick,
+  variation = "default",
+  stretch = false,
+}: ButtonType) => {
   return (
     <button
-      className={cx(styles.button, stretch ? styles.stretch : null)}
+      className={cx(
+        styles.button,
+        styles[variation],
+        stretch ? styles.stretch : null
+      )}
       onClick={onClick}
     >
       {children}

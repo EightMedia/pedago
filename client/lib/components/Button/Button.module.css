@@ -1,10 +1,6 @@
 /* css module */
 
 .button {
-  border-radius: var(--border-radius-sm);
-  background: var(--color-blue);
-  padding: var(--space-xs) var(--space-md);
-  color: var(--color-white);
   text-align: center;
 }
 
@@ -12,10 +8,23 @@
 .button:hover {
   background: var(--color-hover-blue);
 }
+
 .group {
   display: flex;
   flex-direction: column;
   gap: --var(--space-2xs);
+}
+
+.default {
+  border-radius: var(--border-radius-sm);
+  background: var(--color-blue);
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-white);
+}
+
+.line {
+  display: inline-block;
+  text-decoration: underline;
 }
 
 .stretch {
