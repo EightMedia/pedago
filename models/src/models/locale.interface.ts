@@ -26,6 +26,9 @@ export interface Locale {
     areReady: string;
     changeSomething: string;
   };
+  discuss: {
+    ready: string;
+  };
   rounds: {
     id: number;
     lead: string;

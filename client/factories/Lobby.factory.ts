@@ -1,8 +1,8 @@
 import { Group, Player, RoomDto } from "models";
 import { Socket } from "socket.io-client";
-import { getPlayerId } from "../../../../../factories/shared.factory";
-import { PlayerGroupType } from "../../../../components/PlayerGroup/PlayerGroup.types";
-import { LobbyType } from "../Lobby.types";
+import { PlayerGroupType } from "../lib/components/PlayerGroup/PlayerGroup.types";
+import { LobbyType } from "../lib/views/game/Lobby/Lobby.types";
+import { getPlayerId } from "./shared.factory";
 
 const getPlayerGroupType = (
   group: Group,
@@ -49,4 +49,15 @@ export const getLobbyType = (
     playerName,
     groups,
   };
+};
+
+export const getGroups = (
+  groups: Group[],
+  playerList: Player[]
+): PlayerGroupType[] => {
+  let lobbyGroups: PlayerGroupType[] = [];
+  groups.forEach((g) =>
+    lobbyGroups.push(getPlayerGroupType(g, playerList, ""))
+  );
+  return lobbyGroups;
 };

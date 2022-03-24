@@ -5,6 +5,7 @@ import { Page } from "../../../components/Page";
 import { GameType } from "./Game.types";
 
 const GameComponent = ({ handleView, teams, stopRound }: GameType) => {
+
   return (
     <Page>
       <h2>Game</h2>
@@ -27,7 +28,7 @@ const GameComponent = ({ handleView, teams, stopRound }: GameType) => {
         In progress
         {teams &&
           teams
-            .filter((t) => t.every((p) => p.status === PlayerStatus.InProgress))
+            .filter((t) => t.every((p) => p.status === PlayerStatus.InProgress || p.status === PlayerStatus.Discuss))
             ?.map((team, index) => (
               <div key={index}>
                 <div>{index + 1}</div>
@@ -39,7 +40,7 @@ const GameComponent = ({ handleView, teams, stopRound }: GameType) => {
         Done
         {teams &&
           teams
-            .filter((t) => t.every((p) => p.status === PlayerStatus.Done))
+            .filter((t) => t.some((p) => p.status === PlayerStatus.Done))
             ?.map((team, index) => (
               <div key={index}>
                 <div>{index + 1}</div>

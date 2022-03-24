@@ -28,6 +28,9 @@ export const NL: Locale = {
     and: "en",
     areReady: "klaar zijn..",
     changeSomething: "Nog iets aanpassen?",
+  },  
+  discuss: {
+    ready: "Wij zijn klaar",
   },
   rounds: [
     {

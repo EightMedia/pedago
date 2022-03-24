@@ -1,5 +1,7 @@
 import { AdminEvent, SocketCallback } from "models";
-import { memo } from "react";
+import { memo, useContext } from "react";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { Button } from "../../../components/Button";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
@@ -8,12 +10,15 @@ import { Stack } from "../../../layouts/Stack";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
 
-const LobbyComponent = ({ socket, room, groups }: LobbyType) => {
+const LobbyComponent = ({ lobbyGroups: groups }: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
   const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
 
+  const socket = useContext(SocketContext);
+  const room = useContext(RoomContext);
+
   const handleStart = () => {
-    socket?.emit(AdminEvent.StartGame, room.id, (r: SocketCallback) => {
+    socket?.emit(AdminEvent.StartGame, room?.id, (r: SocketCallback) => {
       console.log(r);
     });
   };
@@ -23,7 +28,7 @@ const LobbyComponent = ({ socket, room, groups }: LobbyType) => {
       <Stack gap="xs">
         <Panel>
           <header className={styles.header}>
-            <div className={styles.roomCode}>{room.roomCode}</div>
+            <div className={styles.roomCode}>{room?.roomCode}</div>
             <p>
               Voer de code in op <a href={siteUrl}>{readableSiteUrl}</a> en doe
               mee

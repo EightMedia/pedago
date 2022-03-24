@@ -1,9 +1,11 @@
+import { Group, Player } from "models";
+
 export type PlayerMatchType = {
   round: number;
   roundMax: number;
-  teamName: string;
+  teamName: number;
   teamMembers: {
-    name: string;
-    group: string;
+    name: Player["name"];
+    group: Group["name"];
   }[];
 };
