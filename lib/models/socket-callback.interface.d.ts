@@ -1,3 +1,4 @@
+import { Category } from "./category.enum";
 import { Player } from "./player.interface";
 import { RoomDto } from "./room-dto.interface";
 export interface SocketCallback {
@@ -7,7 +8,7 @@ export interface SocketCallback {
         playerId?: Player["id"];
         roomId?: RoomDto["id"];
         room?: RoomDto;
-        partner?: Player;
         roomCode?: RoomDto["roomCode"];
+        sortOrder?: Category[];
     };
 }
