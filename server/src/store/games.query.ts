@@ -222,13 +222,9 @@ export const storeRoundFn = (
             if (index === teamIndex) {
               return team.map((p: Player) => {
                 if (p.id === playerId) {
-                  return {
-                    ...p,
-                    status,
-                  };
-                } else {
-                  return p;
+                  p.rounds.push(round);
                 }
+                return p;
               });
             } else {
               return team;

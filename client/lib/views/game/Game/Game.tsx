@@ -14,13 +14,12 @@ export const GameComponent = ({
   round,
   countdownTime,
   leadTime,
-  initialScene = GameScenes.Countdown,
+  initialScene,
 }: GameType) => {
   const [scene, setScene] = useState(initialScene);
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
-
 
   const handleDoneSorting = (order: Category[]): void => {
     socket?.emit(
@@ -29,7 +28,7 @@ export const GameComponent = ({
       playerId,
       {
         number: round,
-        order
+        order,
       },
       (res: SocketCallback) => {
         console.log(res);

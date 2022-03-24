@@ -12,12 +12,12 @@ const WaitingComponent = ({
   round,
   roundMax,
   teamMembers,
+  backToSort
 }: WaitingType) => {
   const data = useContext(LanguageContext);
   const t = data.waiting;
   const socket = useContext(SocketContext);
 
-  const backToSort = () => {};
   return (
     <Page valign="center">
       <div>

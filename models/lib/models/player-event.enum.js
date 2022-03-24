@@ -10,4 +10,6 @@ var PlayerEvent;
     PlayerEvent["GameStart"] = "gameStart";
     PlayerEvent["StoreRound"] = "storeRound";
     PlayerEvent["StoreTeamReady"] = "storeTeamReady";
+    PlayerEvent["GameScene"] = "gameScene";
+    PlayerEvent["SortOrder"] = "sortOrder";
 })(PlayerEvent = exports.PlayerEvent || (exports.PlayerEvent = {}));

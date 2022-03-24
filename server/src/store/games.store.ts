@@ -65,7 +65,7 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
     getTeams: (roomId: string) =>
       get().games.find((room) => room.id === roomId)?.teams,
     getTeamIndex: (roomId: string, playerId: string) =>
-      (get().getTeams(roomId) as Player[][]).findIndex((team) =>
+      (get().getTeams(roomId) as Player[][])?.findIndex((team) =>
         team.some((player) => player.id === playerId)
       ),
     getTeamReady: (roomId: string, index: number, status: PlayerStatus): boolean =>

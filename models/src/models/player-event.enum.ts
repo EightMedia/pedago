@@ -6,4 +6,6 @@ export enum PlayerEvent {
   GameStart = "gameStart",
   StoreRound = "storeRound",
   StoreTeamReady = "storeTeamReady",
+  GameScene = "gameScene",
+  SortOrder = "sortOrder",
 }

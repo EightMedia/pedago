@@ -5,5 +5,7 @@ export declare enum PlayerEvent {
     RequestLobby = "requestLobby",
     GameStart = "gameStart",
     StoreRound = "storeRound",
-    StoreTeamReady = "storeTeamReady"
+    StoreTeamReady = "storeTeamReady",
+    GameScene = "gameScene",
+    SortOrder = "sortOrder"
 }

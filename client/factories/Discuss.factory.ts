@@ -18,10 +18,10 @@ export const getDiscussType = (
   const teamMembers: {
     name: string;
     cards: number[];
-  }[] = currentTeam?.map((p) => {
+  }[] = currentTeam?.map((p) => {      
     return {
       name: p.name,
-      cards: p.rounds[round + 1].order,
+      cards: p.rounds.find(r => r.number === round)?.order,
     };
   }) as {
     name: string;
