@@ -1,4 +1,30 @@
 export interface Locale {
+    categories: {
+        0: {
+            title: string;
+            description: string;
+        };
+        1: {
+            title: string;
+            description: string;
+        };
+        2: {
+            title: string;
+            description: string;
+        };
+        3: {
+            title: string;
+            description: string;
+        };
+        4: {
+            title: string;
+            description: string;
+        };
+        5: {
+            title: string;
+            description: string;
+        };
+    };
     landing: {
         title: string;
         description: string;

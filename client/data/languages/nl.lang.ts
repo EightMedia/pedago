@@ -1,6 +1,38 @@
 import { Locale } from "models";
 
 export const NL: Locale = {
+  categories: {
+    0: {
+      title: "Zorg legitimering",
+      description:
+        "is erop gericht het maximale uit kinderen te halen in termen van hun prestaties op school.",
+    },
+    1: {
+      title: "Persoonlijke legitimering",
+      description:
+        "is erop gericht het gedrag van leerlingen te labelen in mentale of emotionele termen ten einde adequaat onderwijs te kunnen verzorgen.",
+    },
+    2: {
+      title: "Contextuele legitimering",
+      description:
+        "is erop gericht de leefomstandigheden, het verleden, en de praktische levensbehoeften van leerlingen te betrekken bij onderwijssituaties.",
+    },
+    3: {
+      title: "Kritische legitimering",
+      description:
+        "is erop gericht leerlingen te begrijpen als unieke sociale wezens, die een persoonlijke relatie met deleraar hebben.",
+    },
+    4: {
+      title: "Functionele legitimering",
+      description:
+        "is erop gericht leerlingen te zien als kwetsbare wezens, die afhankelijk zijn van volwassenen om te overleven in een veeleisende wereld.",
+    },
+    5: {
+      title: "Psychologische legitimering",
+      description:
+        "is erop gericht leerlingen te bevrijden van beperkende ideeën over zichzelf en van de levensomstandigheden die deze ideeën inslijpen.",
+    },
+  },
   landing: {
     title: "Ontdek jouw idealen als leraar",
     description:
@@ -28,7 +60,7 @@ export const NL: Locale = {
     and: "en",
     areReady: "klaar zijn..",
     changeSomething: "Nog iets aanpassen?",
-  },  
+  },
   discuss: {
     ready: "Wij zijn klaar",
   },
