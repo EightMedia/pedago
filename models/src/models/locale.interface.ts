@@ -55,6 +55,17 @@ export interface Locale {
   discuss: {
     ready: string;
   };
+  results: {
+    results: string;
+    myResult: string;
+    everyone: string;
+    yourResult: string;
+    save: string;
+    sendToMail: string;
+    yourMail: string;
+    send: string;
+    privacy: string;
+  };
   rounds: {
     id: number;
     lead: string;

@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { Result } from "./Result";
-import { ResultData } from "./Result.data";
+import { ResultData, ResultDataGroups } from "./Result.data";
+import { ResultStep } from "./Result.types";
 
 export default {
   title: "Views/Game/Result",
@@ -20,7 +21,7 @@ Loader.parameters = {
   },
 };
 Loader.storyName = "Result loader";
-Loader.args = { ...ResultData };
+Loader.args = { ...ResultData, initialStep: ResultStep.Loader };
 
 // One group
 export const OneGroup = Template.bind({});
@@ -32,7 +33,11 @@ OneGroup.parameters = {
   },
 };
 OneGroup.storyName = "One group";
-OneGroup.args = { ...ResultData };
+OneGroup.args = {
+  ...ResultData,
+  initialStep: ResultStep.Result,
+  autoPlay: false,
+};
 
 // Two groups
 export const TwoGroups = Template.bind({});
@@ -44,4 +49,19 @@ TwoGroups.parameters = {
   },
 };
 TwoGroups.storyName = "Two groups";
-TwoGroups.args = { ...ResultData };
+TwoGroups.args = { ...ResultDataGroups, initialStep: ResultStep.Result };
+
+// Autoplay
+export const AutoPlay = Template.bind({});
+AutoPlay.parameters = {
+  layout: "fullscreen",
+  design: {
+    type: "figma",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=517%3A4209",
+  },
+};
+AutoPlay.storyName = "Autoplay scenes";
+AutoPlay.args = {
+  ...ResultDataGroups,
+  initialStep: ResultStep.Loader,
+};

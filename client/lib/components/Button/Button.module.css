@@ -32,3 +32,19 @@
   width: 100%;
   justify-content: center;
 }
+
+.whiteActive {
+  border-radius: 2em;
+  padding: var(--space-2xs) var(--space-sm);
+  background: var(--color-white);
+  color: var(--color-dark-blue);
+  border: solid 1px var(--color-white);
+}
+
+.whiteInactive {
+  border-radius: 2em;
+  padding: var(--space-2xs) var(--space-sm);
+  background: transparent;
+  color: var(--color-white);
+  border: solid 1px var(--color-white);
+}

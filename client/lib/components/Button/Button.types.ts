@@ -1,6 +1,6 @@
 export type ButtonType = {
   children: React.ReactNode;
   onClick: () => void;
-  variation?: "default" | "line";
+  variation?: "default" | "line" | "whiteActive" | "whiteInactive";
   stretch?: boolean;
 };

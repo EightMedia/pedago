@@ -64,6 +64,17 @@ export const NL: Locale = {
   discuss: {
     ready: "Wij zijn klaar",
   },
+  results: {
+    results: "Resultaten",
+    myResult: "Mijn resultaat",
+    everyone: "Iedereen",
+    yourResult: "Jouw uitkomst",
+    save: "Bewaren",
+    sendToMail: "We kunnen de uitkomst naar je e-mailadres toe sturen.",
+    yourMail: "Jouw e-mailadres",
+    send: "Versturen",
+    privacy: "Je mail wordt alleen gebruikt voor het opsturen.",
+  },
   rounds: [
     {
       id: 1,
