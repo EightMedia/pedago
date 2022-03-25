@@ -12,7 +12,7 @@ import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { PlayerMatchType } from "./PlayerMatch.types";
 
-const PlayerMatchMatchComponent = ({
+const PlayerMatchSceneComponent = ({
   round,
   roundMax,
   teamName,
@@ -59,4 +59,4 @@ const PlayerMatchMatchComponent = ({
   );
 };
 
-export const PlayerMatchMatch = memo(PlayerMatchMatchComponent);
+export const PlayerMatchScene = memo(PlayerMatchSceneComponent);

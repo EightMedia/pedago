@@ -28,4 +28,4 @@ const PlayerMatchWaitComponent = ({
   );
 };
 
-export const PlayerMatchWait = memo(PlayerMatchWaitComponent);
+export const PlayerMatchWaitScene = memo(PlayerMatchWaitComponent);

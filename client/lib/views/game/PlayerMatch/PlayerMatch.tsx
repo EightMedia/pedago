@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { Page } from "../../../components/Page";
-import { PlayerMatchScene, PlayerMatchType } from "./PlayerMatch.types";
-import { PlayerMatchMatch } from "./PlayerMatchMatch";
-import { PlayerMatchWait } from "./PlayerMatchWait";
+import { PlayerMatchScene } from "./PlayerMatch.scene";
+import { PlayerMatchSceneEnum, PlayerMatchType } from "./PlayerMatch.types";
+import { PlayerMatchWaitScene } from "./PlayerMatchWait.scene";
 
 const PlayerMatchComponent = ({
   round,
@@ -15,17 +15,17 @@ const PlayerMatchComponent = ({
     <Page valign="center" halign="center">
       {(() => {
         switch (initialScene) {
-          case PlayerMatchScene.Match:
+          case PlayerMatchSceneEnum.Match:
             return (
-              <PlayerMatchMatch
+              <PlayerMatchScene
                 round={round}
                 roundMax={roundMax}
                 teamName={teamName}
                 teamMembers={teamMembers}
               />
             );
-          case PlayerMatchScene.Wait:
-            return <PlayerMatchWait round={round} roundMax={roundMax} />;
+          case PlayerMatchSceneEnum.Wait:
+            return <PlayerMatchWaitScene round={round} roundMax={roundMax} />;
           default:
             return null;
         }

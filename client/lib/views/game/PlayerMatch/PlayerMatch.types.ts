@@ -1,6 +1,6 @@
 import { Group, Player } from "models";
 
-export enum PlayerMatchScene {
+export enum PlayerMatchSceneEnum {
   Wait,
   Match
 }
@@ -13,5 +13,5 @@ export type PlayerMatchType = {
     name: Player["name"];
     group: Group["name"];
   }[];
-  initialScene?: PlayerMatchScene
+  initialScene?: PlayerMatchSceneEnum
 };

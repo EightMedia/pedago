@@ -24,7 +24,7 @@ import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
 import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
-import { PlayerMatchScene } from "../../lib/views/game/PlayerMatch/PlayerMatch.types";
+import { PlayerMatchSceneEnum } from "../../lib/views/game/PlayerMatch/PlayerMatch.types";
 import { Result } from "../../lib/views/game/Result/Result";
 import { ResultStep } from "../../lib/views/game/Result/Result.types";
 import { Waiting } from "../../lib/views/game/Waiting";
@@ -51,8 +51,8 @@ const roomCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
-  const [playerMatchScene, setPlayerMatchScene] = useState<PlayerMatchScene>(
-    PlayerMatchScene.Wait
+  const [playerMatchScene, setPlayerMatchScene] = useState<PlayerMatchSceneEnum>(
+    PlayerMatchSceneEnum.Wait
   );
   const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Countdown);
   const [discussStep, setDiscussStep] = useState<DiscussStep>(
@@ -111,7 +111,7 @@ const roomCode = () => {
       );
       socket.on(PlayerEvent.PlayerMatchScene, (setToWait: boolean) =>
         setPlayerMatchScene(
-          setToWait ? PlayerMatchScene.Wait : PlayerMatchScene.Match
+          setToWait ? PlayerMatchSceneEnum.Wait : PlayerMatchSceneEnum.Match
         )
       );
     }

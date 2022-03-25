@@ -4,7 +4,7 @@ import {
   LineElement,
   PointElement,
   RadialLinearScale,
-  Tooltip,
+  Tooltip
 } from "chart.js";
 import cx from "classnames";
 import { memo, useContext } from "react";
@@ -16,18 +16,17 @@ import { DiagramType } from "./Diagram.types";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
-const findCategoryTitles = () => {
-  const t = useContext(LanguageContext);
-  const categories = Object.values(t.categories);
-  return categories.map((category) => category.title);
-};
-
 const DiagramComponent = ({
   primary,
   secondary,
   primaryLabel,
   secondaryLabel,
 }: DiagramType) => {
+  const findCategoryTitles = () => {
+    const t = useContext(LanguageContext);
+    const categories = Object.values(t.categories);
+    return categories.map((category) => category.title);
+  };
   const labels = findCategoryTitles();
   const data = {
     labels: labels,
