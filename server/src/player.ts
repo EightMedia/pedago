@@ -242,8 +242,10 @@ export const storeRound = (
     });
     const team = (store.getTeams(roomId) as Player[][])[index];
     socket.emit(Event.To, { name: ViewName.Discuss });
+    socket.emit(PlayerEvent.GameScene);
     team.forEach((player: Player) => {
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
+      socket.to(player.socketId).emit(PlayerEvent.GameScene);
     });
   } else {
     callback({
@@ -289,9 +291,9 @@ export const storeTeamReady = (
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
   const team = (store.getTeams(roomId) as Player[][])[index];
-  socket.emit(Event.Round, null);
+  socket.emit(Event.Round);
   team.forEach((player: Player) => {
-    socket.to(player.socketId).emit(Event.Round, null);
+    socket.to(player.socketId).emit(Event.Round);
   });
   store.setTeamPlayerStatus(
     roomId,
@@ -300,17 +302,9 @@ export const storeTeamReady = (
     PlayerStatus.Done
   );
   const player = store.getPlayerById(roomId, playerId);
-  const lastStoredRound = player?.rounds.length;
+  const lastRound = player?.rounds.find((r) => r.number === 6);
 
-  if (typeof lastStoredRound !== "number") {
-    callback({
-      status: "ERROR",
-      message: "Could not find played rounds",
-    });
-    return;
-  }
-
-  if (lastStoredRound === 6) {
+  if (lastRound) {
     callback({
       status: "OK",
       message: "Well played! Here are your results...",

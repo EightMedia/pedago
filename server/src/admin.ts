@@ -163,7 +163,7 @@ export const finishRound = (
       status: "OK",
       message: "Going to the next round",
     });
-    socket.emit(Event.Round, null);
+    socket.emit(Event.Round);
     socket.broadcast.to(roomId).emit(Event.To, {
       name: ViewName.PlayerMatch,
     });

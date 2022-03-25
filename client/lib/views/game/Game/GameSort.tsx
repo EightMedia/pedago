@@ -12,7 +12,7 @@ import { GameSortType } from "./Game.types";
 
 export const GameSort = ({ round }: GameSortType) => {
   const data = useContext(LanguageContext);
-  const roundData = data.rounds[round];
+  const roundData = data.rounds[round - 1];
   const [order, setOrder] = useState<Category[]>([]);
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
