@@ -7,7 +7,6 @@ var Event;
     Event["Message"] = "message";
     Event["PlayerList"] = "playerList";
     Event["Room"] = "room";
-    Event["Teams"] = "teams";
     Event["Players"] = "players";
     Event["PlayerId"] = "playerId";
     Event["Round"] = "round";

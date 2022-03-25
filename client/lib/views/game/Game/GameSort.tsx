@@ -39,9 +39,9 @@ export const GameSort = ({ round }: GameSortType) => {
   return (
     <>
       <Center space="sm">
-        <h2 className={styles.lead}>{roundData.lead}</h2>
+        <h2 className={styles.lead}>{roundData?.lead}</h2>
       </Center>
-      <SortList cards={roundData.cards} handleSortOrder={handleSortOrder} />
+      <SortList cards={roundData?.cards} handleSortOrder={handleSortOrder} />
       <Center space="sm">
         <Button
           onClick={() =>

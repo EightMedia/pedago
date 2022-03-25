@@ -1,6 +1,9 @@
+import { Player, PlayerEvent } from "models";
 import { memo, useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
+import { getPlayerId } from "../../../../factories/shared.factory";
 import { Page } from "../../../components/Page";
 import { DiscussStep, DiscussType } from "./Discuss.types";
 import { DiscussCompare } from "./DiscussCompare.scene";
@@ -18,9 +21,17 @@ const DiscussComponent = ({
 }: DiscussType) => {
   const data = useContext(LanguageContext);
   const socket = useContext(SocketContext);
+  const room = useContext(RoomContext);
   const [step, setStep] = useState(initialStep);
 
-  const handleReady = () => {};
+  const handleReady = () => {
+    socket?.emit(
+      PlayerEvent.StoreTeamReady,
+      room?.id,
+      getPlayerId(socket.id, room?.players as Player[]),
+      console.log
+    );
+  };
 
   return (
     <Page valign="center">
@@ -44,7 +55,10 @@ const DiscussComponent = ({
             return <DiscussIntro time={3} callback={callback} />;
           case DiscussStep.Compare:
             return (
-              <DiscussCompare teamMembers={teamMembers} handleReady={handleReady} />
+              <DiscussCompare
+                teamMembers={teamMembers}
+                handleReady={handleReady}
+              />
             );
           case DiscussStep.Info:
             return (

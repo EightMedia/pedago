@@ -4,6 +4,7 @@ import { memo, useContext, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
+import { setPlayerIdToLocalStorage } from "../../../../factories/shared.factory";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
 import { WizardStep, WizardType } from "./Wizard.types";
@@ -39,7 +40,7 @@ const WizardComponent = ({ initialStep }: WizardType) => {
         const resData = r.data;
         if (resData) {
           setPlayerId(resData?.playerId as string);
-          localStorage.setItem("playerId", resData?.playerId as string);
+          setPlayerIdToLocalStorage(resData?.playerId as string);
           setStep(step);
         }
         console.log(r);

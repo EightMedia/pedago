@@ -61,7 +61,7 @@ const SortListComponent = ({ cards, handleSortOrder }: SortListType) => {
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         <div className={styles.list}>
-          {items.map((item) => (
+          {items?.map((item) => (
             <SortableItem
               key={item.id}
               id={item.id.toString()}

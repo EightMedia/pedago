@@ -201,10 +201,9 @@ export const gameStart = (
   team.forEach((player: Player) => {
     socket
       .to(player.socketId)
-      .emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
+      .emit(Event.To, <ViewState>{ name: ViewName.Game });
   });
-  socket.emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
-  socket.broadcast.to(roomId).emit(Event.Teams, teams);
+  socket.emit(Event.To, <ViewState>{ name: ViewName.Game });
 };
 
 export const storeRound = (
@@ -243,13 +242,9 @@ export const storeRound = (
     });
     const team = (store.getTeams(roomId) as Player[][])[index];
     socket.emit(Event.To, { name: ViewName.Discuss });
-    socket.emit(Event.Round, null);
-
     team.forEach((player: Player) => {
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
-      socket.to(player.socketId).emit(Event.Round, null);
     });
-    socket.emit(PlayerEvent.GameScene, null);
   } else {
     callback({
       status: "OK",
@@ -293,6 +288,11 @@ export const storeTeamReady = (
   callback: (args: SocketCallback) => void
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
+  const team = (store.getTeams(roomId) as Player[][])[index];
+  socket.emit(Event.Round, null);
+  team.forEach((player: Player) => {
+    socket.to(player.socketId).emit(Event.Round, null);
+  });
   store.setTeamPlayerStatus(
     roomId,
     playerId,
@@ -316,16 +316,20 @@ export const storeTeamReady = (
       message: "Well played! Here are your results...",
     });
     socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
-    return;
   } else {
     callback({
       status: "OK",
       message: "Going to the next round",
     });
+    team.forEach((player: Player) => {
+      socket.to(player.socketId).emit(Event.To, {
+        name: ViewName.PlayerMatch,
+      });
+      socket.to(player.socketId).emit(PlayerEvent.PlayerMatchScene, true);
+    });
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
-      data: { round: lastStoredRound + 1 },
     });
-    socket.broadcast.to(roomId).emit(Event.Teams, store.getTeams(roomId));
+    socket.emit(PlayerEvent.PlayerMatchScene, true);
   }
 };

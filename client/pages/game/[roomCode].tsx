@@ -15,6 +15,7 @@ import { SocketContext } from "../../contexts/SocketContext";
 import { getDiscussType } from "../../factories/Discuss.factory";
 import { getLobbyType } from "../../factories/Lobby.factory";
 import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
+import { getPlayerIdToLocalStorage } from "../../factories/shared.factory";
 import { getWaitingType } from "../../factories/Waiting.factory";
 import { Page } from "../../lib/components/Page";
 import { Discuss } from "../../lib/views/game/Discuss";
@@ -23,7 +24,9 @@ import { Game } from "../../lib/views/game/Game";
 import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
 import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
+import { PlayerMatchScene } from "../../lib/views/game/PlayerMatch/PlayerMatch.types";
 import { Result } from "../../lib/views/game/Result/Result";
+import { ResultStep } from "../../lib/views/game/Result/Result.types";
 import { Waiting } from "../../lib/views/game/Waiting";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
@@ -48,13 +51,16 @@ const roomCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
+  const [playerMatchScene, setPlayerMatchScene] = useState<PlayerMatchScene>(
+    PlayerMatchScene.Wait
+  );
+  const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Countdown);
   const [discussStep, setDiscussStep] = useState<DiscussStep>(
     DiscussStep.Intro
   );
-  const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Countdown);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
-  const [round, setRound] = useState<number>(1);
+  const [round, setRound] = useState<number>(5);
 
   const ROUND_MAX = 6;
   let playerId: string | null = "";
@@ -69,7 +75,7 @@ const roomCode = () => {
   };
 
   if (typeof window !== "undefined") {
-    playerId = localStorage.getItem("playerId");
+    playerId = getPlayerIdToLocalStorage();
   }
 
   const router = useRouter();
@@ -79,7 +85,7 @@ const roomCode = () => {
     if (roomCode && socket) {
       (socket as Socket).emit(
         PlayerEvent.JoinRoomByRoomCode,
-        localStorage.getItem("playerId"),
+        getPlayerIdToLocalStorage(),
         roomCode,
         (r: SocketCallback) => {
           if (r.status === "OK") {
@@ -96,15 +102,17 @@ const roomCode = () => {
   useEffect(() => {
     if (socket) {
       socket.on(Event.Message, handleMessage);
-      socket.on(Event.To, (vs) => {
-        setRound(vs.data?.round || 1);
-        setView(vs);
-      });
+      socket.on(Event.To, setView);
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(Event.Round, () => setRound((r) => r + 1));
       socket.on(PlayerEvent.GameScene, () =>
         setGameScene(GameScenes.Countdown)
+      );
+      socket.on(PlayerEvent.PlayerMatchScene, (setToWait: boolean) =>
+        setPlayerMatchScene(
+          setToWait ? PlayerMatchScene.Wait : PlayerMatchScene.Match
+        )
       );
     }
   }, [socket]);
@@ -138,6 +146,7 @@ const roomCode = () => {
                       room,
                       playerId as string
                     )}
+                    initialScene={playerMatchScene}
                   />
                 );
               case ViewName.Game:
@@ -177,7 +186,16 @@ const roomCode = () => {
                   />
                 );
               case ViewName.Result:
-                return <Result />;
+                return (
+                  <Result
+                    initialStep={ResultStep.Loader}
+                    data={{
+                      me: [],
+                      total: [],
+                      groups: undefined,
+                    }}
+                  />
+                );
               default:
                 return <>FAIL</>;
             }
