@@ -3,7 +3,6 @@ export enum Event {
   Message = "message",
   PlayerList = "playerList",
   Room = "room",
-  Teams = "teams",
   Players = "players",
   PlayerId = "playerId",
   Round = "round",
