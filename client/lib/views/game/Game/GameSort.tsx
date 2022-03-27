@@ -25,7 +25,8 @@ export const GameSort = ({ round }: GameSortType) => {
       playerId,
       {
         number: round,
-        order,
+        // Reserve, so that index corresponds with model
+        order: order.reverse(),
       } as Round,
       (res: SocketCallback) => {
         console.log(res);
@@ -33,7 +34,8 @@ export const GameSort = ({ round }: GameSortType) => {
     );
   };
   const handleSortOrder = (items: Category[]): void => {
-    setOrder(items);
+    // Reserve, so that index corresponds with model
+    setOrder(items.reverse());
   }
 
   return (
