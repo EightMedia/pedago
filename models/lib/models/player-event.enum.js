@@ -12,4 +12,5 @@ var PlayerEvent;
     PlayerEvent["StoreTeamReady"] = "storeTeamReady";
     PlayerEvent["GameScene"] = "gameScene";
     PlayerEvent["SortOrder"] = "sortOrder";
+    PlayerEvent["PlayerMatchScene"] = "playerMatchScene";
 })(PlayerEvent = exports.PlayerEvent || (exports.PlayerEvent = {}));

@@ -43,9 +43,9 @@ io.on("connection", (socket: Socket) => {
   // send welcome to user on this socket
   socket.emit(Event.Message, "Hello you have connected to Pedago");
 
-  // METHODS
+  // Event Listeners
 
-  //  Admin methods
+  // Admin Listeners
   socket.on(
     AdminEvent.RegisterGame,
     (room: RoomDto, callback: (args: SocketCallback) => void) =>
@@ -62,8 +62,7 @@ io.on("connection", (socket: Socket) => {
   socket.on(AdminEvent.Reset, () => reset(socket));
   socket.on(AdminEvent.Disconnect, () => disconnectAll(socket));
 
-  // Player methods
-  // io.sockets.to(id).emit(Event.Message, gamesStore.getState().games);
+  // Player Listeners
   socket.on(
     PlayerEvent.JoinRoomByRoomCode,
     (
@@ -115,9 +114,10 @@ io.on("connection", (socket: Socket) => {
     PlayerEvent.SortOrder,
     (
       roomId: string,
+      round,
       playerId: string,
       callback: (args: SocketCallback) => void
-    ) => getLatestSortOrder(roomId, playerId, callback)
+    ) => getLatestSortOrder(roomId, round, playerId, callback)
   );
   socket.on(
     PlayerEvent.StoreTeamReady,

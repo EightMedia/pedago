@@ -14,5 +14,12 @@ export const DiscussReady = ({
   teamMembers,
 }: DiscussReadyProps) => {
   timedCallback(time, callback);
-  return <Title>ARIE-JAN-HENK is klaar</Title>;
+  return (
+    <>
+      {teamMembers &&
+        teamMembers?.map((p, i) => {
+          return <Title key={i}>{p.name} is klaar</Title>;
+        })}
+    </>
+  );
 };

@@ -92,7 +92,7 @@ const AdminGame = () => {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
       socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Round, setRound);
+      socket.on(Event.Round, () => setRound((r) => r + 1));
       socket.on(Event.PlayerList, (v) => {
         console.log("Players in the lobby:", v);
       });

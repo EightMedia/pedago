@@ -3,6 +3,7 @@ import {
   Admin,
   Event,
   Player,
+  PlayerEvent,
   RoomDto,
   SocketCallback,
   ViewName
@@ -111,6 +112,7 @@ export const startGame = (
     socket.emit(Event.Room, room);
 
     // Emit events to all players
+    socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, false);
     socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
     socket.broadcast.to(roomId).emit(Event.Room, room);
     socket.broadcast
@@ -157,16 +159,15 @@ export const finishRound = (
     });
     socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
   } else {
-    const newRoundNo = roundNo + 1;
     callback({
       status: "OK",
       message: "Going to the next round",
     });
-    socket.emit(Event.Round, newRoundNo);
+    socket.emit(Event.Round);
     socket.broadcast.to(roomId).emit(Event.To, {
       name: ViewName.PlayerMatch,
-      data: { round: newRoundNo },
     });
+    socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, true);
   }
 };
 
