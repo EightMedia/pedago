@@ -1,4 +1,4 @@
-import { Category, Player, Round } from "models";
+import { Category, Group, Player, RoomDto, Round } from "models";
 
 export const getResultsForRounds = (rounds: Round[]): number[] => {
   let [
@@ -37,6 +37,7 @@ export const getResultsForRounds = (rounds: Round[]): number[] => {
       }
     });
   });
+  
   return [caring, personal, contextual, critical, functional, psychological];
 };
 
@@ -56,4 +57,39 @@ export const getResultsForAllPlayers = (players: Player[]): number[] => {
       },
       [0, 0, 0, 0, 0, 0]
     );
+};
+
+const getPlayersFromGroup = (room: RoomDto, group: Group): number[] => {
+  const players = room.players.filter((p: Player) => p.group.id === group.id);
+  return getResultsForAllPlayers(players);
+};
+
+export const getResultData = (
+  room: RoomDto,
+  playerId: string
+): {
+  me: number[];
+  total: number[];
+  groups?: {
+    id: string;
+    name: string;
+    data: number[];
+  }[];
+} => {
+  const myRounds = room.players.find((p: Player) => p.id === playerId)?.rounds;
+  const me = getResultsForRounds(myRounds as Round[]);
+  const total = getResultsForAllPlayers(room.players);
+  const groups = room.groups?.map((group: Group) => {
+    return {
+      ...group,
+      data: getPlayersFromGroup(room, group),
+    };
+  });
+  console.log(me,total, groups);
+  
+  return {
+    me,
+    total,
+    groups,
+  };
 };

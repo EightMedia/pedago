@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
 import {
+  Category,
   Event,
   Group,
   Player,
@@ -15,6 +16,7 @@ import gamesStore from "./store/games.store";
 import { determinePlayerView } from "./utils/determine-player-view.util";
 
 const store = gamesStore.getState();
+const reverse = (arr: Category[]): Category[] => arr?.map((_, index) => arr[arr.length - 1 - index]);
 
 export const joinRoomByRoomCode = (
   playerId: string | undefined,
@@ -221,7 +223,10 @@ export const storeRound = (
     return;
   }
   const index: number = store.getTeamIndex(roomId, playerId);
-  store.storeRound(roomId, playerId, index, round);
+  store.storeRound(roomId, playerId, index, {
+    ...round,
+    order: reverse(round.order)
+  });
 
   store.setTeamPlayerStatus(
     roomId,
@@ -254,7 +259,6 @@ export const storeRound = (
     });
     socket.emit(Event.To, { name: ViewName.WaitingScreen });
   }
-
   socket.broadcast.to(roomId).emit(Event.Room, store.getRoomById(roomId));
   socket.emit(Event.Room, store.getRoomById(roomId));
 };
@@ -273,12 +277,11 @@ export const getLatestSortOrder = (
     index as number,
     PlayerStatus.InProgress
   );
-
   callback({
     status: "OK",
     message: "Latest sort order requested",
     data: {
-      sortOrder: rounds[lastIndex]?.order,
+      sortOrder: reverse(rounds[lastIndex]?.order),
     },
   });
 };
@@ -291,10 +294,6 @@ export const storeTeamReady = (
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
   const team = (store.getTeams(roomId) as Player[][])[index];
-  socket.emit(Event.Round);
-  team.forEach((player: Player) => {
-    socket.to(player.socketId).emit(Event.Round);
-  });
   store.setTeamPlayerStatus(
     roomId,
     playerId,
@@ -325,5 +324,9 @@ export const storeTeamReady = (
       name: ViewName.PlayerMatch,
     });
     socket.emit(PlayerEvent.PlayerMatchScene, true);
+    socket.emit(Event.Round);
+    team.forEach((player: Player) => {
+      socket.to(player.socketId).emit(Event.Round);
+    });
   }
 };

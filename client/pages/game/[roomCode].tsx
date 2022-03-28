@@ -15,6 +15,7 @@ import { SocketContext } from "../../contexts/SocketContext";
 import { getDiscussType } from "../../factories/Discuss.factory";
 import { getLobbyType } from "../../factories/Lobby.factory";
 import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
+import { getResultData } from "../../factories/Result.factory";
 import { getPlayerIdFromLocalStorage } from "../../factories/shared.factory";
 import { getWaitingType } from "../../factories/Waiting.factory";
 import { Page } from "../../lib/components/Page";
@@ -60,7 +61,7 @@ const roomCode = () => {
   );
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
-  const [round, setRound] = useState<number>(1);
+  const [round, setRound] = useState<number>(5);
 
   const ROUND_MAX = 6;
   let playerId: string | null = "";
@@ -189,11 +190,7 @@ const roomCode = () => {
                 return (
                   <Result
                     initialStep={ResultStep.Loader}
-                    data={{
-                      me: [],
-                      total: [],
-                      groups: undefined,
-                    }}
+                    data={getResultData(room, playerId as string)}
                   />
                 );
               default:

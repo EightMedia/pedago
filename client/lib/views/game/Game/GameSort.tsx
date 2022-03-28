@@ -25,8 +25,7 @@ export const GameSort = ({ round }: GameSortType) => {
       playerId,
       {
         number: round,
-        // Reserve, so that index corresponds with model
-        order: order.reverse(),
+        order: order,
       } as Round,
       (res: SocketCallback) => {
         console.log(res);
@@ -34,9 +33,8 @@ export const GameSort = ({ round }: GameSortType) => {
     );
   };
   const handleSortOrder = (items: Category[]): void => {
-    // Reserve, so that index corresponds with model
-    setOrder(items.reverse());
-  }
+    setOrder(items);
+  };
 
   return (
     <>
@@ -45,13 +43,7 @@ export const GameSort = ({ round }: GameSortType) => {
       </Center>
       <SortList cards={roundData?.cards} handleSortOrder={handleSortOrder} />
       <Center space="sm">
-        <Button
-          onClick={() =>
-            handleDoneSorting()
-          }
-        >
-          {data.game.done}
-        </Button>
+        <Button onClick={() => handleDoneSorting()}>{data.game.done}</Button>
       </Center>
     </>
   );

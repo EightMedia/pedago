@@ -40,7 +40,7 @@ const AdminGame = () => {
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);
-  const [round, setRound] = useState<number>(1);
+  const [round, setRound] = useState<number>(5);
 
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
