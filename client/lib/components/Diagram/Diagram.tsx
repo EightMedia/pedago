@@ -78,8 +78,8 @@ const DiagramComponent = ({
     <div className={styles.wrapper}>
       {labels.map((label, index) => (
         <div key={index} className={cx(styles["label" + index], styles.label)}>
-          {label.split(" ").map((word) => (
-            <div key={index}>{word}</div>
+          {label.split(" ").map((word, i) => (
+            <div key={i}>{word}</div>
           ))}
           <Shape category={index} />
         </div>
