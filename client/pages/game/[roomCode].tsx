@@ -61,7 +61,7 @@ const roomCode = () => {
   );
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
-  const [round, setRound] = useState<number>(5);
+  const [round, setRound] = useState<number>(1);
 
   const ROUND_MAX = 6;
   let playerId: string | null = "";
