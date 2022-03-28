@@ -84,9 +84,7 @@ export const getResultData = (
       ...group,
       data: getPlayersFromGroup(room, group),
     };
-  });
-  console.log(me,total, groups);
-  
+  });  
   return {
     me,
     total,

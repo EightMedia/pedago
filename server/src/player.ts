@@ -16,7 +16,8 @@ import gamesStore from "./store/games.store";
 import { determinePlayerView } from "./utils/determine-player-view.util";
 
 const store = gamesStore.getState();
-const reverse = (arr: Category[]): Category[] => arr?.map((_, index) => arr[arr.length - 1 - index]);
+const reverse = (arr: Category[]): Category[] =>
+  arr?.map((_, index) => arr[arr.length - 1 - index]);
 
 export const joinRoomByRoomCode = (
   playerId: string | undefined,
@@ -225,7 +226,7 @@ export const storeRound = (
   const index: number = store.getTeamIndex(roomId, playerId);
   store.storeRound(roomId, playerId, index, {
     ...round,
-    order: reverse(round.order)
+    order: reverse(round.order),
   });
 
   store.setTeamPlayerStatus(
@@ -265,25 +266,29 @@ export const storeRound = (
 
 export const getLatestSortOrder = (
   roomId: string,
+  round: number,
   playerId: string,
   callback: (args: SocketCallback) => void
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
   const rounds = store.getPlayerById(roomId, playerId)?.rounds as Round[];
-  const lastIndex = rounds.length - 1;
+  const lastIndex = (rounds?.length as number) - 1;
   store.setTeamPlayerStatus(
     roomId,
     playerId,
     index as number,
     PlayerStatus.InProgress
   );
-  callback({
-    status: "OK",
-    message: "Latest sort order requested",
-    data: {
-      sortOrder: reverse(rounds[lastIndex]?.order),
-    },
-  });
+  const isNotANewRound = rounds.some(r => r.number === round);
+  if (isNotANewRound) {
+    callback({
+      status: "OK",
+      message: "Latest sort order requested",
+      data: {
+        sortOrder: reverse(rounds[lastIndex]?.order),
+      },
+    });
+  }
 };
 
 export const storeTeamReady = (

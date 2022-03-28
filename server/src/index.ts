@@ -114,9 +114,10 @@ io.on("connection", (socket: Socket) => {
     PlayerEvent.SortOrder,
     (
       roomId: string,
+      round,
       playerId: string,
       callback: (args: SocketCallback) => void
-    ) => getLatestSortOrder(roomId, playerId, callback)
+    ) => getLatestSortOrder(roomId, round, playerId, callback)
   );
   socket.on(
     PlayerEvent.StoreTeamReady,

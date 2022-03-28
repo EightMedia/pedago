@@ -25,7 +25,7 @@ import { SortableItem } from "./SortableItem";
 import styles from "./SortList.module.css";
 import { SortItemType, SortListType } from "./SortList.types";
 
-const SortListComponent = ({ cards, handleSortOrder }: SortListType) => {
+const SortListComponent = ({ cards, round, handleSortOrder }: SortListType) => {
   const [items, setItems] = useState<SortItemType[]>(cards);
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -40,6 +40,7 @@ const SortListComponent = ({ cards, handleSortOrder }: SortListType) => {
     socket?.emit(
       PlayerEvent.SortOrder,
       room?.id,
+      round,
       getPlayerId(socket.id, room?.players as Player[]),
       (res: SocketCallback) => {
         if (res?.data?.sortOrder) {
