@@ -59,7 +59,7 @@ const getResultsForAllPlayers = (players: Player[]): number[] => {
     );
   const sortedAddedResults = sort(addedResults);
   let reducedNumbers: number[] = [];
-  
+
   addedResults.forEach((r) => {
     const index = sortedAddedResults.findIndex((rs) => r === rs);
     switch (index) {
@@ -123,5 +123,3 @@ export const getResultData = (
     groups,
   };
 };
-
-// Eerst sorteren, dan kijken welke index van de gesorteerde past bij de index van de niet gesorteerde en dat getal vervangen

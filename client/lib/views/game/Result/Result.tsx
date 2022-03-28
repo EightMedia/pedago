@@ -7,7 +7,7 @@ import { ResultOverview } from "./ResultOverview.scene";
 const ResultComponent = ({
   autoPlay = true,
   data,
-  initialStep = 0,
+  initialStep,
 }: ResultType) => {
   const [step, setStep] = useState(initialStep);
 

@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
 import {
+  Category,
   Event,
   Group,
   Player,
@@ -15,6 +16,8 @@ import gamesStore from "./store/games.store";
 import { determinePlayerView } from "./utils/determine-player-view.util";
 
 const store = gamesStore.getState();
+const reverse = (arr: Category[]): Category[] =>
+  arr?.map((_, index) => arr[arr.length - 1 - index]);
 
 export const joinRoomByRoomCode = (
   playerId: string | undefined,
@@ -201,10 +204,9 @@ export const gameStart = (
   team.forEach((player: Player) => {
     socket
       .to(player.socketId)
-      .emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
+      .emit(Event.To, <ViewState>{ name: ViewName.Game });
   });
-  socket.emit(Event.To, <ViewState>{ name: ViewName.Game, round: 1 });
-  socket.broadcast.to(roomId).emit(Event.Teams, teams);
+  socket.emit(Event.To, <ViewState>{ name: ViewName.Game });
 };
 
 export const storeRound = (
@@ -222,7 +224,10 @@ export const storeRound = (
     return;
   }
   const index: number = store.getTeamIndex(roomId, playerId);
-  store.storeRound(roomId, playerId, index, round);
+  store.storeRound(roomId, playerId, index, {
+    ...round,
+    order: reverse(round.order),
+  });
 
   store.setTeamPlayerStatus(
     roomId,
@@ -243,13 +248,11 @@ export const storeRound = (
     });
     const team = (store.getTeams(roomId) as Player[][])[index];
     socket.emit(Event.To, { name: ViewName.Discuss });
-    socket.emit(Event.Round, null);
-
+    socket.emit(PlayerEvent.GameScene);
     team.forEach((player: Player) => {
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
-      socket.to(player.socketId).emit(Event.Round, null);
+      socket.to(player.socketId).emit(PlayerEvent.GameScene);
     });
-    socket.emit(PlayerEvent.GameScene, null);
   } else {
     callback({
       status: "OK",
@@ -257,33 +260,35 @@ export const storeRound = (
     });
     socket.emit(Event.To, { name: ViewName.WaitingScreen });
   }
-
   socket.broadcast.to(roomId).emit(Event.Room, store.getRoomById(roomId));
   socket.emit(Event.Room, store.getRoomById(roomId));
 };
 
 export const getLatestSortOrder = (
   roomId: string,
+  round: number,
   playerId: string,
   callback: (args: SocketCallback) => void
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
   const rounds = store.getPlayerById(roomId, playerId)?.rounds as Round[];
-  const lastIndex = rounds.length - 1;
+  const lastIndex = (rounds?.length as number) - 1;
   store.setTeamPlayerStatus(
     roomId,
     playerId,
     index as number,
     PlayerStatus.InProgress
   );
-
-  callback({
-    status: "OK",
-    message: "Latest sort order requested",
-    data: {
-      sortOrder: rounds[lastIndex]?.order,
-    },
-  });
+  const isNotANewRound = rounds.some(r => r.number === round);
+  if (isNotANewRound) {
+    callback({
+      status: "OK",
+      message: "Latest sort order requested",
+      data: {
+        sortOrder: reverse(rounds[lastIndex]?.order),
+      },
+    });
+  }
 };
 
 export const storeTeamReady = (
@@ -293,6 +298,7 @@ export const storeTeamReady = (
   callback: (args: SocketCallback) => void
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
+  const team = (store.getTeams(roomId) as Player[][])[index];
   store.setTeamPlayerStatus(
     roomId,
     playerId,
@@ -300,32 +306,32 @@ export const storeTeamReady = (
     PlayerStatus.Done
   );
   const player = store.getPlayerById(roomId, playerId);
-  const lastStoredRound = player?.rounds.length;
+  const lastRound = player?.rounds.find((r) => r.number === 6);
 
-  if (typeof lastStoredRound !== "number") {
-    callback({
-      status: "ERROR",
-      message: "Could not find played rounds",
-    });
-    return;
-  }
-
-  if (lastStoredRound === 6) {
+  if (lastRound) {
     callback({
       status: "OK",
       message: "Well played! Here are your results...",
     });
     socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
-    return;
   } else {
     callback({
       status: "OK",
       message: "Going to the next round",
     });
+    team.forEach((player: Player) => {
+      socket.to(player.socketId).emit(Event.To, {
+        name: ViewName.PlayerMatch,
+      });
+      socket.to(player.socketId).emit(PlayerEvent.PlayerMatchScene, true);
+    });
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
-      data: { round: lastStoredRound + 1 },
     });
-    socket.broadcast.to(roomId).emit(Event.Teams, store.getTeams(roomId));
+    socket.emit(PlayerEvent.PlayerMatchScene, true);
+    socket.emit(Event.Round);
+    team.forEach((player: Player) => {
+      socket.to(player.socketId).emit(Event.Round);
+    });
   }
 };
