@@ -15,7 +15,7 @@ import { SocketContext } from "../../contexts/SocketContext";
 import { getDiscussType } from "../../factories/Discuss.factory";
 import { getLobbyType } from "../../factories/Lobby.factory";
 import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
-import { getPlayerIdToLocalStorage } from "../../factories/shared.factory";
+import { getPlayerIdFromLocalStorage } from "../../factories/shared.factory";
 import { getWaitingType } from "../../factories/Waiting.factory";
 import { Page } from "../../lib/components/Page";
 import { Discuss } from "../../lib/views/game/Discuss";
@@ -75,7 +75,7 @@ const roomCode = () => {
   };
 
   if (typeof window !== "undefined") {
-    playerId = getPlayerIdToLocalStorage();
+    playerId = getPlayerIdFromLocalStorage();
   }
 
   const router = useRouter();
@@ -85,7 +85,7 @@ const roomCode = () => {
     if (roomCode && socket) {
       (socket as Socket).emit(
         PlayerEvent.JoinRoomByRoomCode,
-        getPlayerIdToLocalStorage(),
+        getPlayerIdFromLocalStorage(),
         roomCode,
         (r: SocketCallback) => {
           if (r.status === "OK") {
