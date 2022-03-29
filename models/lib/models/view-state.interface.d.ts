@@ -5,10 +5,7 @@ export declare enum ViewName {
     Result = 3,
     WaitingScreen = 4,
     PlayerMatch = 5,
-    ChooseName = 6,
-    SelectGroup = 7,
-    InfoScreen = 8,
-    Discuss = 9
+    Discuss = 6
 }
 export interface ViewState {
     name: ViewName;
@@ -16,4 +13,5 @@ export interface ViewState {
 }
 export declare const initialViewState: ViewState;
 export interface ViewData {
+    round?: number;
 }

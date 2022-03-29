@@ -1,4 +1,4 @@
-import { Group, Player, PlayerStatus, RoomDto, Round, ViewState } from "models";
+import { Group, Player, PlayerStatus, RoomDto, Round } from "models";
 import { GetState, SetState } from "zustand/vanilla";
 import { makeTeamsFromPlayerList } from "../utils/player-list.util";
 import { GamesState } from "./games.store";
@@ -22,7 +22,7 @@ export const getGroupsByRoomIdFn = (
   return room?.groups;
 };
 
-// SETTERS
+// SETTERS/UPSERTERS
 export const addRoomFn = (set: SetState<GamesState>, room: RoomDto) => {
   return set((state: GamesState) => {
     state.games.push(room);
@@ -103,7 +103,7 @@ export const updatePlayerFn = (
   }));
 };
 
-export const setTeamPlayerStatusFn = (
+export const setPlayerStatusFn = (
   set: SetState<GamesState>,
   roomId: string,
   playerId: string,
@@ -115,6 +115,16 @@ export const setTeamPlayerStatusFn = (
       if (roomId === room.id) {
         return {
           ...room,
+          players: room.players?.map((p: Player) => {
+            if (p.id === playerId) {
+              return {
+                ...p,
+                status,
+              };
+            } else {
+              return p;
+            }
+          }),
           teams: room.teams?.map((team, index) => {
             if (index === teamIndex) {
               return team.map((p: Player) => {
@@ -163,19 +173,19 @@ export const setTeamReadyFn = (
   }));
 };
 
-export const setAllPlayersViewFn = (
+export const updateAllPlayersFn = (
   set: SetState<GamesState>,
   roomId: string,
-  viewState: ViewState
+  player: Partial<Player>
 ) => {
   set((state: GamesState) => ({
     games: state.games.map((room) => {
       if (roomId === room.id) {
         return {
           ...room,
-          players: room.players.map((p) => ({ ...p, view: viewState.name })),
+          players: room.players.map((p) => ({ ...p, ...player })),
           teams: room.teams?.map((team) => {
-            team.map((p) => ({ ...p, view: viewState.name }));
+            team.map((p) => ({ ...p, ...player }));
           }),
         } as RoomDto;
       } else {
@@ -214,7 +224,9 @@ export const storeRoundFn = (
           ...room,
           players: room.players.map((player) => {
             if (player.id === playerId) {
-              const roundIndex = player.rounds.findIndex(r => r.number === round.number);
+              const roundIndex = player.rounds.findIndex(
+                (r) => r.number === round.number
+              );
               if (roundIndex >= 0) {
                 player.rounds.splice(roundIndex, 1);
               }
@@ -226,7 +238,9 @@ export const storeRoundFn = (
             if (index === teamIndex) {
               return team.map((player: Player) => {
                 if (player.id === playerId) {
-                  const roundIndex = player.rounds.findIndex(r => r.number === round.number);
+                  const roundIndex = player.rounds.findIndex(
+                    (r) => r.number === round.number
+                  );
                   if (roundIndex >= 0) {
                     player.rounds.splice(roundIndex, 1);
                   }

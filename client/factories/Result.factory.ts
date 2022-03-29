@@ -92,7 +92,7 @@ const getResultsForAllPlayers = (players: Player[]): number[] => {
 const sort = (arr: number[]) => arr.map((a) => a).sort((a, b) => b - a);
 
 const getPlayersFromGroup = (room: RoomDto, group: Group): number[] => {
-  const players = room.players.filter((p: Player) => p.group.id === group.id);
+  const players = room.players.filter((p: Player) => p.group?.id === group.id);
   return getResultsForAllPlayers(players);
 };
 
