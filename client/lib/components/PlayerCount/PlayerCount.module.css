@@ -1,0 +1,14 @@
+.box {
+  display: inline-flex;
+  padding: var(--space-2xs) var(--space-xs);
+  background: var(--color-dark-blue);
+  align-items: center;
+}
+
+.dark {
+  background: var(--color-dark-blue);
+}
+
+.light {
+  background: var(--color-white-15);
+}
