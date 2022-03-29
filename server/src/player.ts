@@ -318,18 +318,19 @@ export const storeTeamReady = (
   const lastRound = player?.rounds.find((r) => r.number === 6);
 
   if (lastRound) {
+    socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
+    team.forEach((player: Player) => {
+      store.updatePlayer(roomId, player.id, {
+        status: PlayerStatus.Done
+      });
+    });
     callback({
       status: "OK",
       message: "Well played! Here are your results...",
     });
-    socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
   } else {
-    callback({
-      status: "OK",
-      message: "Going to the next round",
-    });
     const round = (player?.rounds?.length as number) + 1;
-
+    
     team.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         view: ViewName.PlayerMatch,
@@ -343,11 +344,16 @@ export const storeTeamReady = (
     });
     socket.emit(PlayerEvent.PlayerMatchScene, true);
     socket.emit(Event.Round, round);
-
+    
     updateClientRoom(socket, roomId);
-
+    
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
+    });
+
+    callback({
+      status: "OK",
+      message: "Going to the next round",
     });
   }
 };
