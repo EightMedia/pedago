@@ -5,9 +5,6 @@ export enum ViewName {
   Result,
   WaitingScreen,
   PlayerMatch,
-  ChooseName,
-  SelectGroup,
-  InfoScreen,
   Discuss,
 }
 
@@ -21,4 +18,6 @@ export const initialViewState: ViewState = {
   data: {},
 };
 
-export interface ViewData {}
+export interface ViewData {
+  round?: number;
+}
