@@ -1,6 +1,9 @@
 /* css module */
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
   text-align: center;
 }
 
