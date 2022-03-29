@@ -7,9 +7,7 @@ export interface SocketCallback {
     message?: string;
     data?: {
         playerId?: Player["id"];
-        roomId?: RoomDto["id"];
         room?: RoomDto;
-        roomCode?: RoomDto["roomCode"];
         sortOrder?: Category[]
     }
 }
