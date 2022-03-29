@@ -8,5 +8,6 @@ export declare enum PlayerEvent {
     StoreTeamReady = "storeTeamReady",
     GameScene = "gameScene",
     SortOrder = "sortOrder",
-    PlayerMatchScene = "playerMatchScene"
+    PlayerMatchScene = "playerMatchScene",
+    FetchSortOrder = "fetchSortOrder"
 }
