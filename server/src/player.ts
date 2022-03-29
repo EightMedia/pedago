@@ -49,7 +49,6 @@ export const joinRoomByRoomCode = (
     });
     socket.join(room.id);
 
-    // Update the player's socketId
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
@@ -101,7 +100,6 @@ export const joinRoomWithName = (
       round: 1,
     };
 
-    // Add player to store
     store.addPlayerToRoom(roomId, player);
 
     updateClientRoom(socket, room.id);
@@ -242,7 +240,6 @@ export const storeRound = (
     index as number,
     PlayerStatus.Discuss
   );
-
   const teamReady: boolean = store.getTeamReady(
     roomId,
     index,
