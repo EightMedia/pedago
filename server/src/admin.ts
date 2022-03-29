@@ -10,7 +10,7 @@ import {
   ViewName
 } from "models";
 import { Socket } from "socket.io";
-import { updateClientRoom } from "./shared";
+import { updateClientRoom, updatePlayersInLobby } from "./shared";
 import gamesStore from "./store/games.store";
 
 const store = gamesStore.getState();
@@ -81,15 +81,10 @@ export const registerGame = (
     // Update room to store
     store.updateRoom(room);
 
-    const playersInLobby = store
-      .getRoomByRoomCode(room.roomCode)
-      ?.players.filter((p: Player) => p.view === ViewName.Lobby);
-    if (playersInLobby?.length) {
-      socket.emit(Event.PlayerList, playersInLobby);
-    }
+    updatePlayersInLobby(socket, room.id)
   }
   socket.join(room.id);
-  socket.emit(Event.To, room.view || { name: ViewName.Lobby });
+  socket.emit(Event.To, room.view);
   socket.emit(Event.Room, store.getRoomByRoomCode(room.roomCode));
 };
 
@@ -103,7 +98,7 @@ export const startGame = (
     const room = store.getRoomById(roomId) as RoomDto;
     store.updateRoom({
       ...room,
-      view: { name: ViewName.Game },
+      view: ViewName.Game,
     });
 
     store.updateAllPlayers(roomId, <Partial<Player>>{
@@ -112,7 +107,6 @@ export const startGame = (
     })
     store.makeTeams(roomId);
 
-    
     // Emit events to admin
     socket.emit(Event.To, { name: ViewName.Game });
     
@@ -164,15 +158,23 @@ export const finishRound = (
     });
     socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
   } else {
+    const room = store.getRoomById(roomId) as RoomDto;
+    store.updateRoom({
+      ...room,
+      round: roundNo + 1
+    })
+
+    // Fetch latest sortorder from all players
+    socket.broadcast.to(roomId).emit(PlayerEvent.FetchSortOrder);
+
+    socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, true);
+    socket.broadcast.to(roomId).emit(Event.To, {
+      name: ViewName.PlayerMatch,
+    });
     callback({
       status: "OK",
       message: "Going to the next round",
     });
-    socket.emit(Event.Round);
-    socket.broadcast.to(roomId).emit(Event.To, {
-      name: ViewName.PlayerMatch,
-    });
-    socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, true);
   }
 };
 

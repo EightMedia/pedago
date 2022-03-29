@@ -13,4 +13,5 @@ var PlayerEvent;
     PlayerEvent["GameScene"] = "gameScene";
     PlayerEvent["SortOrder"] = "sortOrder";
     PlayerEvent["PlayerMatchScene"] = "playerMatchScene";
+    PlayerEvent["FetchSortOrder"] = "fetchSortOrder";
 })(PlayerEvent = exports.PlayerEvent || (exports.PlayerEvent = {}));

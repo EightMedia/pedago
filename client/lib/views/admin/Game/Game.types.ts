@@ -1,5 +1,3 @@
-import { TeamType } from "../../../components/TeamsList/TeamsList.types";
-
 export enum GameScene {
   Onboarding,
   Round,
@@ -7,12 +5,8 @@ export enum GameScene {
 }
 
 export type GameType = {
-  openSettings: () => void;
+  handleView: (view: ViewState) => void;
   stopRound: () => void;
-  timer: boolean;
-  round: {
-    current: number;
-    total: number;
-  };
-  teams: Array<TeamType>;
+  teams: Player[][];
+  round: number;
 };

@@ -1,4 +1,3 @@
-import { RoomDto } from "models";
 import { PlayerGroupType } from "../../../components/PlayerGroup/PlayerGroup.types";
 
 export enum LobbyStep {
@@ -7,12 +6,8 @@ export enum LobbyStep {
 }
 
 export type LobbyType = {
-  room: {
-    roomCode: RoomDto["roomCode"];
-    id: RoomDto["id"];
-    groups: PlayerGroupType[];
-  };
+  groups: PlayerGroupType[];
   initialStep?: LobbyStep;
-  handleStart: () => void;
-  handleInfo: () => void;
+  handleStart?: () => void;
+  handleInfo?: () => void;
 };

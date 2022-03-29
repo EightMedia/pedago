@@ -6,17 +6,18 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
-import { getGroups } from "../../factories/Lobby.factory";
+import { getAdminLobbyType } from "../../factories/AdminLobby.factory";
 import { Page } from "../../lib/components/Page";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
 import { Lobby } from "../../lib/views/admin/Lobby";
+import { LobbyStep } from "../../lib/views/admin/Lobby/Lobby.types";
 import { Result } from "../../lib/views/admin/Result";
 import { Wizard } from "../../lib/views/admin/Wizard";
 
@@ -28,6 +29,7 @@ const AdminGame = () => {
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [round, setRound] = useState<number>(1);
+  const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Info);
 
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
@@ -78,11 +80,10 @@ const AdminGame = () => {
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
-      socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Round, () => setRound((r) => r + 1));
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, (v) => {
         console.log("Players in the lobby:", v);
+        setPlayerList(v);
       });
     }
   }, [socket]);
@@ -107,7 +108,11 @@ const AdminGame = () => {
               case ViewName.Lobby:
                 return (
                   <Lobby
-                    lobbyGroups={getGroups(room?.groups as Group[], playerList)}
+                    groups={getAdminLobbyType(
+                      room.groups as Group[],
+                      playerList
+                    )}
+                    initialStep={lobbyStep}
                   />
                 );
               case ViewName.Game:
@@ -115,7 +120,8 @@ const AdminGame = () => {
                   <Game
                     handleView={handleView}
                     teams={room?.teams as Player[][]}
-                    round={round}
+                    round={room?.round as number}
+                    stopRound={stopRound}
                   />
                 );
               case ViewName.Result:
