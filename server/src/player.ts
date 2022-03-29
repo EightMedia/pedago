@@ -49,7 +49,6 @@ export const joinRoomByRoomCode = (
     });
     socket.join(room.id);
 
-    // Update the player's socketId
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
@@ -59,11 +58,12 @@ export const joinRoomByRoomCode = (
     updatePlayersInLobby(socket, room.id);
     updateClientRoom(socket, room.id);
     socket.emit(Event.Round, player.round);
-    // Check if player status is done
 
-    socket.emit(PlayerEvent.PlayerMatchScene, updatedPlayer.status !== PlayerStatus.NotStarted);
+    socket.emit(
+      PlayerEvent.PlayerMatchScene,
+      updatedPlayer.status !== PlayerStatus.NotStarted
+    );
     socket.emit(PlayerEvent.GameScene, false);
-    // Navigate
     socket.emit(Event.To, { name: updatedPlayer.view });
   }
 };
@@ -100,7 +100,6 @@ export const joinRoomWithName = (
       round: 1,
     };
 
-    // Add player to store
     store.addPlayerToRoom(roomId, player);
 
     updateClientRoom(socket, room.id);
@@ -144,7 +143,6 @@ export const joinGroup = (
       message: `Group with ID ${groupId} was not found`,
     });
   } else {
-    // Update player in store
     store.updatePlayer(roomId, playerId, {
       ...player,
       group,
@@ -166,7 +164,6 @@ export const requestLobby = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  // Update the player's view
   const player = store.getPlayerById(roomId, playerId);
   store.updatePlayer(roomId, playerId, {
     ...player,
@@ -174,11 +171,10 @@ export const requestLobby = (
   });
   socket.emit(PlayerEvent.PlayerMatchScene, true);
   socket.emit(PlayerEvent.GameScene, true);
-  
+
   updatePlayersInLobby(socket, roomId);
   updateClientRoom(socket, roomId);
 
-  // Navigate
   socket.emit(Event.To, { name: ViewName.Lobby });
 
   callback({
@@ -196,27 +192,27 @@ export const gameStart = (
   const index: number = store.getTeamIndex(roomId, playerId);
   const teams = store.getTeams(roomId);
   const team = (teams as Player[][])[index];
-  
+
   team.forEach((player: Player) => {
     socket
-    .to(player.socketId)
-    .emit(Event.To, <ViewState>{ name: ViewName.Game });
+      .to(player.socketId)
+      .emit(Event.To, <ViewState>{ name: ViewName.Game });
     store.updatePlayer(roomId, player.id, {
       view: ViewName.Game,
       status: PlayerStatus.InProgress,
     });
   });
-  
+
   updateClientRoom(socket, roomId);
-  
+
   socket.emit(PlayerEvent.PlayerMatchScene, true);
   socket.emit(PlayerEvent.GameScene, true);
   socket.emit(Event.To, <ViewState>{ name: ViewName.Game });
-  
-    callback({
-      status: "OK",
-      message: "Start game",
-    });
+
+  callback({
+    status: "OK",
+    message: "Start game",
+  });
 };
 
 export const storeRound = (
@@ -245,7 +241,6 @@ export const storeRound = (
     index as number,
     PlayerStatus.Discuss
   );
-
   const teamReady: boolean = store.getTeamReady(
     roomId,
     index,
@@ -257,6 +252,10 @@ export const storeRound = (
     updateClientRoom(socket, roomId);
 
     team.forEach((player: Player) => {
+      store.updatePlayer(roomId, player.id, {
+        ...player,
+        view: ViewName.Discuss,
+      });
       socket.to(player.socketId).emit(PlayerEvent.GameScene, true);
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
     });
@@ -270,7 +269,6 @@ export const storeRound = (
   } else {
     updateClientRoom(socket, roomId);
 
-    // Navigate
     socket.emit(Event.To, { name: ViewName.WaitingScreen });
 
     callback({
@@ -348,7 +346,6 @@ export const storeTeamReady = (
 
     updateClientRoom(socket, roomId);
 
-    // Navigate
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
     });
