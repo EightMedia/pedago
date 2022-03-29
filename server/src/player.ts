@@ -173,7 +173,6 @@ export const requestLobby = (
   });
   socket.emit(PlayerEvent.PlayerMatchScene, true);
   socket.emit(PlayerEvent.GameScene, true);
-
   updatePlayersInLobby(socket, roomId);
   updateClientRoom(socket, roomId);
 
