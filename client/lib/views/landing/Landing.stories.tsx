@@ -14,6 +14,9 @@ const Template: ComponentStory<typeof LandingPage> = (args) => (
 // story
 export const Home = Template.bind({});
 Home.parameters = {
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=563%3A4640",

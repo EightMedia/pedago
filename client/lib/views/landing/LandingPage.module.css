@@ -1,16 +1,57 @@
 .container {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin-bottom: 80px;
+}
+
+.logoWrapper {
+  grid-column: 2 / 2;
+  width: 160px;
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
+  display: block;
+  width: 160px;
+  height: auto;
+}
+
+.languageSelect {
+  grid-column: 3 / 3;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: var(--space-lg) 0 var(--space-lg);
+}
+
+.inputGroup {
+  flex-direction: column;
+  @media (--xs) {
+    flex-direction: row;
+  }
+  margin: 0 auto;
+  display: flex;
+  jusitfy-content: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.adminText {
+  flex: 0 0 100%;
+}
+
+.illustration {
+  width: 100%;
+  height: auto;
+  max-width: 784px;
+  margin: 0 auto;
 }
