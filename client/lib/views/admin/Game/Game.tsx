@@ -41,4 +41,4 @@ const GameComponent = ({
   }
 };
 
-export const Game = GameComponent;
+export const Game = memo(GameComponent);
