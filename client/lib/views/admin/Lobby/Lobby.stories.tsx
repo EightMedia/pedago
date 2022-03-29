@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { Lobby } from "./Lobby";
-import { LobbyDataOneGroup, LobbyDataTwogroups } from "./Lobby.data";
+import { LobbyData, LobbyDataOneGroup, LobbyDataTwogroups } from "./Lobby.data";
+import { LobbyStep } from "./Lobby.types";
 
 export default {
   title: "Views/Admin/Lobby",
@@ -9,6 +10,24 @@ export default {
 } as ComponentMeta<typeof Lobby>;
 
 const Template: ComponentStory<typeof Lobby> = (args) => <Lobby {...args} />;
+
+// Empty
+export const Info = Template.bind({});
+Info.parameters = {
+  layout: "fullscreen",
+  viewport: {
+    defaultViewport: "Desktop",
+  },
+  design: {
+    type: "figma",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A11584",
+  },
+  argTypes: {
+    initialStep: false,
+  },
+};
+Info.storyName = "Info screen";
+Info.args = { ...LobbyData, initialStep: LobbyStep.Info };
 
 // Empty
 export const Empty = Template.bind({});
@@ -23,7 +42,7 @@ Empty.parameters = {
   },
 };
 Empty.storyName = "Empty lobby";
-Empty.args = { ...LobbyDataOneGroup };
+Empty.args = { ...LobbyData, initialStep: LobbyStep.Lobby };
 
 // one group
 export const OneGroup = Template.bind({});
@@ -38,7 +57,7 @@ OneGroup.parameters = {
   },
 };
 OneGroup.storyName = "One group";
-OneGroup.args = { ...LobbyDataOneGroup };
+OneGroup.args = { ...LobbyDataOneGroup, initialStep: LobbyStep.Lobby };
 
 // two groups
 export const TwoGroups = Template.bind({});
@@ -53,4 +72,4 @@ TwoGroups.parameters = {
   },
 };
 TwoGroups.storyName = "Two groups";
-TwoGroups.args = { ...LobbyDataTwogroups };
+TwoGroups.args = { ...LobbyDataTwogroups, initialStep: LobbyStep.Lobby };
