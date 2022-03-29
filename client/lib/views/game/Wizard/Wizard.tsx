@@ -29,6 +29,7 @@ const WizardComponent = ({ initialStep }: WizardType) => {
   const handleRoomCode = (step: WizardStep, roomCode: number) => {
     localStorage.setItem("roomCode", roomCode.toString());
     router.push(`/game/${roomCode}`);
+    setStep(step);
   };
 
   const handleName = (step: WizardStep, name: string) => {

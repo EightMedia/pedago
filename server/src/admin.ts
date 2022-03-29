@@ -4,11 +4,13 @@ import {
   Event,
   Player,
   PlayerEvent,
+  PlayerStatus,
   RoomDto,
   SocketCallback,
   ViewName
 } from "models";
 import { Socket } from "socket.io";
+import { updateClientRoom } from "./shared";
 import gamesStore from "./store/games.store";
 
 const store = gamesStore.getState();
@@ -98,27 +100,30 @@ export const startGame = (
 ) => {
   try {
     // Update view of room and players
+    const room = store.getRoomById(roomId) as RoomDto;
     store.updateRoom({
-      ...(store.getRoomById(roomId) as RoomDto),
+      ...room,
       view: { name: ViewName.Game },
     });
-    store.setAllPlayersView(roomId, { name: ViewName.PlayerMatch });
 
+    store.updateAllPlayers(roomId, <Partial<Player>>{
+      status: PlayerStatus.NotStarted,
+      view: ViewName.PlayerMatch
+    })
     store.makeTeams(roomId);
-    const room = store.getRoomById(roomId);
 
+    
     // Emit events to admin
     socket.emit(Event.To, { name: ViewName.Game });
-    socket.emit(Event.Room, room);
-
+    
     // Emit events to all players
     socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, false);
     socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.PlayerMatch });
-    socket.broadcast.to(roomId).emit(Event.Room, room);
     socket.broadcast
-      .to(roomId)
-      .emit(Event.Message, `Teams made for room: ${roomId}`);
-
+    .to(roomId)
+    .emit(Event.Message, `Teams made for room: ${roomId}`);
+    
+    updateClientRoom(socket, roomId);
     callback({
       status: "OK",
       message: "Game started",

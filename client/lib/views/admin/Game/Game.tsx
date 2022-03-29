@@ -5,7 +5,6 @@ import { Page } from "../../../components/Page";
 import { GameType } from "./Game.types";
 
 const GameComponent = ({ handleView, teams, stopRound }: GameType) => {
-
   return (
     <Page>
       <h2>Game</h2>
