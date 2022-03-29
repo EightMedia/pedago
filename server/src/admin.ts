@@ -112,7 +112,6 @@ export const startGame = (
     })
     store.makeTeams(roomId);
 
-    
     // Emit events to admin
     socket.emit(Event.To, { name: ViewName.Game });
     

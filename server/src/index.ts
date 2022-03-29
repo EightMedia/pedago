@@ -16,6 +16,7 @@ import {
   startGame,
   updateRoomDto
 } from "./admin";
+import { getRecords } from "./airtable";
 import {
   gameStart,
   getLatestSortOrder,
@@ -26,6 +27,7 @@ import {
   storeRound,
   storeTeamReady
 } from "./player";
+require("dotenv").config();
 
 const app = express();
 const httpServer = createServer(app);
@@ -34,12 +36,14 @@ const io = new Server(httpServer, {
     origin: ["http://localhost:8000"],
   },
 });
-
 console.log("--- Pedago Server started at port 3001 ---");
+
+// Airtable
+getRecords(process.env.AIRTABLE_API_KEY as string);
 
 io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
-
+  
   // send welcome to user on this socket
   socket.emit(Event.Message, "Hello you have connected to Pedago");
 
