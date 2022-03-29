@@ -52,9 +52,8 @@ const roomCode = () => {
   const socket: Socket | null = useSocket("http://localhost:3001");
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
-  const [playerMatchScene, setPlayerMatchScene] = useState<PlayerMatchSceneEnum>(
-    PlayerMatchSceneEnum.Wait
-  );
+  const [playerMatchScene, setPlayerMatchScene] =
+    useState<PlayerMatchSceneEnum>(PlayerMatchSceneEnum.Wait);
   const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Countdown);
   const [discussStep, setDiscussStep] = useState<DiscussStep>(
     DiscussStep.Intro
@@ -106,9 +105,11 @@ const roomCode = () => {
       socket.on(Event.To, setView);
       socket.on(Event.Room, setRoom);
       socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Round, () => setRound((r) => r + 1));
-      socket.on(PlayerEvent.GameScene, () =>
-        setGameScene(GameScenes.Countdown)
+      socket.on(Event.Round, setRound);
+      socket.on(PlayerEvent.GameScene, (setToCountdown: boolean) =>
+        setToCountdown
+          ? setGameScene(GameScenes.Countdown)
+          : setGameScene(GameScenes.Sort)
       );
       socket.on(PlayerEvent.PlayerMatchScene, (setToWait: boolean) =>
         setPlayerMatchScene(
@@ -194,7 +195,7 @@ const roomCode = () => {
                   />
                 );
               default:
-                return <>FAIL</>;
+                return <>ERROR: ViewName not found</>;
             }
           })()}
         </Page>

@@ -1,11 +1,9 @@
 import { ViewName } from "models";
 import { PlayerStatus } from "models/lib/models/player-status.enum";
-import { memo } from "react";
 import { Page } from "../../../components/Page";
 import { GameType } from "./Game.types";
 
 const GameComponent = ({ handleView, teams, stopRound }: GameType) => {
-
   return (
     <Page>
       <h2>Game</h2>
@@ -28,7 +26,13 @@ const GameComponent = ({ handleView, teams, stopRound }: GameType) => {
         In progress
         {teams &&
           teams
-            .filter((t) => t.every((p) => p.status === PlayerStatus.InProgress || p.status === PlayerStatus.Discuss))
+            .filter((t) =>
+              t.every(
+                (p) =>
+                  p.status === PlayerStatus.InProgress ||
+                  p.status === PlayerStatus.Discuss
+              )
+            )
             ?.map((team, index) => (
               <div key={index}>
                 <div>{index + 1}</div>
@@ -52,4 +56,4 @@ const GameComponent = ({ handleView, teams, stopRound }: GameType) => {
   );
 };
 
-export const Game = memo(GameComponent);
+export const Game = GameComponent;

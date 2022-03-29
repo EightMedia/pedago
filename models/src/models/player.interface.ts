@@ -7,9 +7,10 @@ export interface Player {
   id: string;
   socketId: string;
   name: string;
-  group: Group;
+  group?: Group;
   roomId: string;
   rounds: Round[];
   view: ViewName;
   status: PlayerStatus;
+  round: number;
 }
