@@ -13,18 +13,10 @@ module.exports = {
           preserve: true,
         },
         "custom-media-queries": {
-          importFrom: "./lib/styles/globals.css",
+          importFrom: "./lib/styles/mediaQueries.css",
         },
         "nesting-rules": true,
       },
     },
   },
 };
-
-// // yarn add postcss-flexbugs-fixes postcss-preset-env -D
-// module.exports = {
-//   plugins: {
-//     "postcss-flexbugs-fixes": {},
-//     "postcss-preset-env": {},
-//   },
-// };
