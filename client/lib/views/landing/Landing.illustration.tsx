@@ -59,7 +59,7 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
       <rect x="88" y="464" width="280" height="52" rx="8" fill="#fff" />
       <path
         fillRule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="m108.225 479.276-4.95 4.949L109.05 490l-5.775 5.775 4.95 4.949L114 494.95l5.775 5.774 4.949-4.949L118.95 490l5.774-5.775-4.949-4.949L114 485.05l-5.775-5.774Z"
         fill="#FFB700"
       />
@@ -88,7 +88,7 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
       <rect x="416" y="272" width="280" height="52" rx="8" fill="#fff" />
       <path
         fillRule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="m436.225 287.276-4.95 4.949L437.05 298l-5.775 5.775 4.95 4.949L442 302.95l5.775 5.774 4.949-4.949L446.95 298l5.774-5.775-4.949-4.949L442 293.05l-5.775-5.774Z"
         fill="#FFB700"
       />
@@ -171,7 +171,7 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         d="M531.082 101.78V104h-8.47V89.54h2.69v12.24h5.78Zm5.543-8.2c.76 0 1.45.123 2.07.37.627.247 1.16.597 1.6 1.05.447.453.79 1.007 1.03 1.66s.36 1.383.36 2.19c0 .813-.12 1.547-.36 2.2a4.674 4.674 0 0 1-1.03 1.67c-.44.46-.973.813-1.6 1.06-.62.247-1.31.37-2.07.37-.766 0-1.463-.123-2.09-.37a4.533 4.533 0 0 1-1.61-1.06 4.879 4.879 0 0 1-1.03-1.67c-.24-.653-.36-1.387-.36-2.2 0-.807.12-1.537.36-2.19a4.769 4.769 0 0 1 1.03-1.66 4.597 4.597 0 0 1 1.61-1.05c.627-.247 1.324-.37 2.09-.37Zm0 8.67c.854 0 1.484-.287 1.89-.86.414-.573.62-1.413.62-2.52s-.206-1.95-.62-2.53c-.406-.58-1.036-.87-1.89-.87-.866 0-1.51.293-1.93.88-.413.58-.62 1.42-.62 2.52s.207 1.94.62 2.52c.42.573 1.064.86 1.93.86Zm9.275-6.73c.32-.613.7-1.093 1.14-1.44.44-.353.96-.53 1.56-.53.473 0 .853.103 1.14.31l-.16 1.85a.498.498 0 0 1-.15.26.4.4 0 0 1-.25.07c-.1 0-.25-.017-.45-.05a3.366 3.366 0 0 0-.57-.05c-.274 0-.517.04-.73.12-.214.08-.407.197-.58.35a2.406 2.406 0 0 0-.45.54 5.645 5.645 0 0 0-.36.73V104h-2.47V93.74h1.45c.253 0 .43.047.53.14.1.087.166.247.2.48l.15 1.16Zm11.448 2.17c0-.32-.047-.62-.14-.9a2.087 2.087 0 0 0-.4-.75c-.18-.213-.41-.38-.69-.5a2.267 2.267 0 0 0-.96-.19c-.714 0-1.277.203-1.69.61-.407.407-.667.983-.78 1.73h4.66Zm-4.71 1.49c.04.527.133.983.28 1.37.146.38.34.697.58.95.24.247.523.433.85.56.333.12.7.18 1.1.18.4 0 .743-.047 1.03-.14.293-.093.546-.197.76-.31.22-.113.41-.217.57-.31a.983.983 0 0 1 .48-.14c.206 0 .36.077.46.23l.71.9c-.274.32-.58.59-.92.81-.34.213-.697.387-1.07.52a5.904 5.904 0 0 1-1.13.27c-.38.053-.75.08-1.11.08a5.554 5.554 0 0 1-1.99-.35 4.535 4.535 0 0 1-1.6-1.05c-.454-.467-.81-1.04-1.07-1.72-.26-.687-.39-1.48-.39-2.38 0-.7.113-1.357.34-1.97.226-.62.55-1.157.97-1.61.426-.46.943-.823 1.55-1.09.613-.267 1.303-.4 2.07-.4.646 0 1.243.103 1.79.31a3.88 3.88 0 0 1 1.41.91c.393.393.7.88.92 1.46.226.573.34 1.23.34 1.97 0 .373-.04.627-.12.76-.08.127-.234.19-.46.19h-6.35ZM563.731 95c.207-.207.424-.397.65-.57a4.026 4.026 0 0 1 1.56-.74c.294-.073.614-.11.96-.11.56 0 1.057.097 1.49.29a2.82 2.82 0 0 1 1.08.8c.294.34.514.75.66 1.23.154.473.23.997.23 1.57V104h-2.47v-6.53c0-.627-.143-1.11-.43-1.45-.286-.347-.723-.52-1.31-.52-.426 0-.826.097-1.2.29a4.32 4.32 0 0 0-1.06.79V104h-2.47V93.74h1.51c.32 0 .53.15.63.45l.17.81Zm16.349-.24c0 .173-.03.343-.09.51a1.17 1.17 0 0 1-.24.41l-4.87 6.42h5.05v1.9h-7.92v-1.03c0-.113.027-.247.08-.4.054-.16.134-.31.24-.45l4.92-6.49h-4.95v-1.89h7.78v1.02Zm6.194-1.18c.76 0 1.45.123 2.07.37.626.247 1.16.597 1.6 1.05.446.453.79 1.007 1.03 1.66s.36 1.383.36 2.19c0 .813-.12 1.547-.36 2.2a4.688 4.688 0 0 1-1.03 1.67c-.44.46-.974.813-1.6 1.06-.62.247-1.31.37-2.07.37-.767 0-1.464-.123-2.09-.37a4.516 4.516 0 0 1-1.61-1.06 4.864 4.864 0 0 1-1.03-1.67c-.24-.653-.36-1.387-.36-2.2 0-.807.12-1.537.36-2.19a4.754 4.754 0 0 1 1.03-1.66 4.579 4.579 0 0 1 1.61-1.05c.626-.247 1.323-.37 2.09-.37Zm0 8.67c.853 0 1.483-.287 1.89-.86.413-.573.62-1.413.62-2.52s-.207-1.95-.62-2.53c-.407-.58-1.037-.87-1.89-.87-.867 0-1.51.293-1.93.88-.414.58-.62 1.42-.62 2.52s.206 1.94.62 2.52c.42.573 1.063.86 1.93.86Z"
         fill="#fff"
       />
-      <g clip-path="url(#c)">
+      <g clipPath="url(#c)">
         <path d="M464 72h-48v48h48V72Z" fill="#00AB58" />
         <path
           d="M467.804 111.225c1.777-14.471-8.514-27.643-22.986-29.42-14.471-1.777-27.643 8.514-29.42 22.986-1.777 14.471 8.514 27.643 22.986 29.42 14.471 1.777 27.643-8.514 29.42-22.986Z"
@@ -235,13 +235,13 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         <path
           d="M292.5 230.6c1-.4 2.8-.2 3.4 1 .4 1 .8 2.4.8 2.2 0-.8 0-2.4.2-3.2.2-.6.6-1.2 1.4-1.4.6-.2 1.2-.2 1.8-.2.6.2 1.2.6 1.6 1 .8 1.2.8 3.8.8 3.6.2-.6.2-2.4.6-3.2.2-.4 1-.8 1.4-1 .6-.2 1.4-.2 2 0 .4 0 1.2.6 1.4 1 .4.6.6 2.6.8 3.4 0 .2.2-.8.6-1.4.8-1.2 3.6-1.6 3.8 1.2v4.6c0 .8-.2 2.6-.4 3.4-.2.6-.8 2-1.4 2.8 0 0-2.2 2.4-2.4 3.6-.2 1.2-.2 1.2-.2 2s.2 1.8.2 1.8-1.6.2-2.4 0c-.8-.2-1.8-1.6-2-2.2-.4-.6-1-.6-1.4 0-.4.8-1.4 2.2-2 2.2-1.4.2-4.2 0-6.2 0 0 0 .4-2-.4-2.8l-2.2-2.2-1.6-1.8c-.6-.8-2-1.8-2.4-4-.4-1.8-.4-2.8 0-3.6.4-.8 1.4-1.2 1.8-1.2.4 0 1.4 0 1.8.2.4.2.6.4 1 .8.4.6.6 1 .4.2-.2-.6-.6-1.2-.8-2-.2-.8-.8-1.8-.8-3-1 0-.8-1.2.8-1.8Z"
           stroke="#201A47"
-          stroke-width="1.5"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
         />
         <path
           d="M306.5 246v-6.8M302.501 246l-.2-6.8M298.5 239.2v6.8"
           stroke="#201A47"
-          stroke-linecap="round"
+          strokeLinecap="round"
         />
       </g>
       <g filter="url(#g)">
@@ -252,13 +252,13 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         <path
           d="M647.5 379.6c1-.4 2.8-.2 3.4 1 .4 1 .8 2.4.8 2.2 0-.8 0-2.4.2-3.2.2-.6.6-1.2 1.4-1.4.6-.2 1.2-.2 1.8-.2.6.2 1.2.6 1.6 1 .8 1.2.8 3.8.8 3.6.2-.6.2-2.4.6-3.2.2-.4 1-.8 1.4-1 .6-.2 1.4-.2 2 0 .4 0 1.2.6 1.4 1 .4.6.6 2.6.8 3.4 0 .2.2-.8.6-1.4.8-1.2 3.6-1.6 3.8 1.2v4.6c0 .8-.2 2.6-.4 3.4-.2.6-.8 2-1.4 2.8 0 0-2.2 2.4-2.4 3.6-.2 1.2-.2 1.2-.2 2s.2 1.8.2 1.8-1.6.2-2.4 0c-.8-.2-1.8-1.6-2-2.2-.4-.6-1-.6-1.4 0-.4.8-1.4 2.2-2 2.2-1.4.2-4.2 0-6.2 0 0 0 .4-2-.4-2.8l-2.2-2.2-1.6-1.8c-.6-.8-2-1.8-2.4-4-.4-1.8-.4-2.8 0-3.6.4-.8 1.4-1.2 1.8-1.2.4 0 1.4 0 1.8.2.4.2.6.4 1 .8.4.6.6 1 .4.2-.2-.6-.6-1.2-.8-2-.2-.8-.8-1.8-.8-3-1 0-.8-1.2.8-1.8Z"
           stroke="#201A47"
-          stroke-width="1.5"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
         />
         <path
           d="M661.5 395v-6.8M657.501 395l-.2-6.8M653.5 388.2v6.8"
           stroke="#201A47"
-          stroke-linecap="round"
+          strokeLinecap="round"
         />
       </g>
     </g>
@@ -270,9 +270,9 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         width="880"
         height="684"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImage" stdDeviation="24" />
         <feComposite
           in2="SourceAlpha"
@@ -292,9 +292,9 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         width="331.467"
         height="124.206"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
@@ -321,9 +321,9 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         width="331.467"
         height="124.206"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
@@ -350,9 +350,9 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         width="32.6"
         height="30.389"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
@@ -379,9 +379,9 @@ export const LandingIllustration = ({ className }: { className?: string }) => (
         width="32.6"
         height="30.389"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
