@@ -41,7 +41,11 @@ export const GameSort = ({ round }: GameSortType) => {
       <Center space="sm">
         <h2 className={styles.lead}>{roundData?.lead}</h2>
       </Center>
-      <SortList cards={roundData?.cards} round={round} handleSortOrder={handleSortOrder} />
+      <SortList
+        cards={roundData?.cards}
+        round={round}
+        handleSortOrder={handleSortOrder}
+      />
       <Center space="sm">
         <Button onClick={() => handleDoneSorting()}>{data.game.done}</Button>
       </Center>
