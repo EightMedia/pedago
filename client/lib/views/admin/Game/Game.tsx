@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { GameScene, GameType } from "./Game.types";
 import { GameLead } from "./GameLead.scene";
 import { GameOnboarding } from "./GameOnboarding";
@@ -41,4 +41,4 @@ const GameComponent = ({
   }
 };
 
-export const Game = memo(GameComponent);
+export const Game = GameComponent;

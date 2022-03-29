@@ -9,7 +9,7 @@ import {
   Round,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { Socket } from "socket.io";
 import { updateClientRoom, updatePlayersInLobby } from "./shared";
@@ -49,6 +49,7 @@ export const joinRoomByRoomCode = (
     });
     socket.join(room.id);
 
+    // Update the player's socketId
     const updatedPlayer: Partial<Player> = {
       ...player,
       socketId: socket.id,
@@ -100,6 +101,7 @@ export const joinRoomWithName = (
       round: 1,
     };
 
+    // Add player to store
     store.addPlayerToRoom(roomId, player);
 
     updateClientRoom(socket, room.id);
@@ -241,6 +243,7 @@ export const storeRound = (
     index as number,
     PlayerStatus.Discuss
   );
+
   const teamReady: boolean = store.getTeamReady(
     roomId,
     index,
@@ -321,7 +324,7 @@ export const storeTeamReady = (
     socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
     team.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
-        status: PlayerStatus.Done
+        status: PlayerStatus.Done,
       });
     });
     callback({
@@ -330,7 +333,7 @@ export const storeTeamReady = (
     });
   } else {
     const round = (player?.rounds?.length as number) + 1;
-    
+
     team.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         view: ViewName.PlayerMatch,
@@ -344,9 +347,9 @@ export const storeTeamReady = (
     });
     socket.emit(PlayerEvent.PlayerMatchScene, true);
     socket.emit(Event.Round, round);
-    
+
     updateClientRoom(socket, roomId);
-    
+
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
     });

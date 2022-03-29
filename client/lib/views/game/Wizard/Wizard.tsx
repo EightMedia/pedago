@@ -32,7 +32,7 @@ const WizardComponent = ({ initialStep }: WizardType) => {
     setStep(step);
   };
 
-  const handleName = (step: WizardStep, name: string) => {
+  const handleName = (step: WizardStep, name: string) => {    
     (socket as Socket).emit(
       PlayerEvent.JoinRoomWithName,
       room?.id,
