@@ -4,12 +4,18 @@ import { useRouter } from "next/router";
 import {
   ChangeEvent,
   Dispatch,
-  FormEvent,
   SetStateAction,
   useContext,
-  useState
+  useState,
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
+import { Button } from "../../components/Button";
+import { InputText } from "../../components/InputText";
+import { Logo } from "../../components/Logo";
+import { Page } from "../../components/Page";
+import { Title } from "../../components/Title";
+import { Center } from "../../layouts/Center";
+import { LandingIllustration } from "./Landing.illustration";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = ({
@@ -32,47 +38,53 @@ const LandingPage = ({
     setRoomCode(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     localStorage.setItem("roomCode", roomCode);
     router.push(`/game/${roomCode}`);
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div></div>
-        <div className={styles.logo}>PEDAGO</div>
-        <div className="language-select">
-          <select value={language} onChange={handleLanguageChange}>
-            {languageValues.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+    <Page>
+      <Center>
+        <div className={styles.header}>
+          <div className={styles.logoWrapper}>
+            <Logo className={styles.logo} />
+          </div>
+          <div className={styles.languageSelect}>
+            <select value={language} onChange={handleLanguageChange}>
+              {languageValues.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
-      <div className="body">
-        <div className="title">{data?.landing?.title}</div>
-        <div className="description">{data?.landing?.description}</div>
-        <div className="action">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="number"
-              maxLength={5}
-              minLength={5}
-              value={roomCode}
-              onChange={handleInputChange}
-              placeholder={data?.landing?.input}
-            />
-            <button type="submit">{data?.landing?.button}</button>
-          </form>
-          <Link href="/admin">{data?.landing?.create}</Link>{" "}
-          {data?.landing?.asAdmin}
+        <div className={styles.body}>
+          <Title size="lg" element="h1">
+            {data?.landing?.title}
+          </Title>
+          <div className={styles.description}>{data?.landing?.description}</div>
+          <div className={styles.action}>
+            <div className={styles.inputGroup}>
+              <InputText
+                type="number"
+                onChange={handleInputChange}
+                placeholder={data?.landing?.input}
+                id={"roomCode"}
+                label={"spelcode"}
+              />
+              <Button onClick={handleSubmit}>{data?.landing?.button}</Button>
+            </div>
+            <div className={styles.adminText}>
+              <Link href="/admin">{data?.landing?.create}</Link>{" "}
+              {data?.landing?.asAdmin}
+            </div>
+          </div>
+          <LandingIllustration className={styles.illustration} />
         </div>
-      </div>
-    </div>
+      </Center>
+    </Page>
   );
 };
 export default LandingPage;

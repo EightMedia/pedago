@@ -1,6 +1,8 @@
+import { MouseEventHandler } from "react";
+
 export type ButtonType = {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick: MouseEventHandler;
   variation?: "default" | "line" | "whiteActive" | "whiteInactive";
   stretch?: boolean;
 };

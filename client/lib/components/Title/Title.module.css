@@ -5,3 +5,10 @@
   text-align: center;
   font-weight: 700;
 }
+
+.lg {
+  font-size: var(--font-size-xl);
+  @media (--sm) {
+    font-size: var(--font-size-3xl);
+  }
+}
