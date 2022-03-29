@@ -59,7 +59,9 @@ export const joinRoomByRoomCode = (
     updatePlayersInLobby(socket, room.id);
     updateClientRoom(socket, room.id);
     socket.emit(Event.Round, player.round);
-    socket.emit(PlayerEvent.PlayerMatchScene, false);
+    // Check if player status is done
+
+    socket.emit(PlayerEvent.PlayerMatchScene, updatedPlayer.status !== PlayerStatus.NotStarted);
     socket.emit(PlayerEvent.GameScene, false);
     // Navigate
     socket.emit(Event.To, { name: updatedPlayer.view });
@@ -164,17 +166,16 @@ export const requestLobby = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  const player = store.getPlayerById(roomId, playerId);
   // Update the player's view
+  const player = store.getPlayerById(roomId, playerId);
   store.updatePlayer(roomId, playerId, {
     ...player,
     view: ViewName.Lobby,
   });
   socket.emit(PlayerEvent.PlayerMatchScene, true);
   socket.emit(PlayerEvent.GameScene, true);
-  // Get the players that are in the Lobby
+  
   updatePlayersInLobby(socket, roomId);
-
   updateClientRoom(socket, roomId);
 
   // Navigate
