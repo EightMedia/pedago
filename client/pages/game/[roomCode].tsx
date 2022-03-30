@@ -5,11 +5,11 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
 import { getDiscussType } from "../../factories/Discuss.factory";
@@ -19,6 +19,7 @@ import { getResultData } from "../../factories/Result.factory";
 import { getPlayerIdFromLocalStorage } from "../../factories/shared.factory";
 import { getWaitingType } from "../../factories/Waiting.factory";
 import { Page } from "../../lib/components/Page";
+import { useSocket } from "../../lib/utils/useSocket.util";
 import { Discuss } from "../../lib/views/game/Discuss";
 import { DiscussStep } from "../../lib/views/game/Discuss/Discuss.types";
 import { Game } from "../../lib/views/game/Game";
@@ -32,24 +33,10 @@ import { Waiting } from "../../lib/views/game/Waiting";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
 
-function useSocket(url: string) {
-  const [socket, setSocket] = useState<Socket | null>(null);
-
-  useEffect(() => {
-    const socketIo = io(url);
-    setSocket(socketIo);
-
-    function cleanup() {
-      socketIo.disconnect();
-    }
-    return cleanup;
-  }, [url]);
-
-  return socket;
-}
-
 const roomCode = () => {
-  const socket: Socket | null = useSocket("http://localhost:3001");
+  const socket: Socket | null = useSocket(
+    process.env.SOCKET_URL || "http://localhost:3001"
+  );
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
   const [playerMatchScene, setPlayerMatchScene] =
