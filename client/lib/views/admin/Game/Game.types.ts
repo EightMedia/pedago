@@ -1,3 +1,5 @@
+import { PlayerStatus } from "models";
+
 export enum GameScene {
   Onboarding,
   Round,
@@ -5,8 +7,16 @@ export enum GameScene {
 }
 
 export type GameType = {
-  handleView: (view: ViewState) => void;
+  openSettings: () => void;
   stopRound: () => void;
-  teams: Player[][];
-  round: number;
+  timer: boolean;
+  teams: {
+    name: string;
+    status: PlayerStatus;
+    players: string[];
+  }[];
+  round: {
+    current: number;
+    total: number;
+  };
 };

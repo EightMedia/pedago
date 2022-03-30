@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { GameScene, GameType } from "./Game.types";
 import { GameLead } from "./GameLead.scene";
 import { GameOnboarding } from "./GameOnboarding";
