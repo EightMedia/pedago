@@ -4,7 +4,7 @@ import styles from "./Panel.module.css";
 import { PanelType } from "./Panel.types";
 
 const PanelComponent = ({ children }: PanelType) => {
-  return <div className={cx("panel", styles.panel)}>{children}</div>;
+  return <div className={cx(styles.panel)}>{children}</div>;
 };
 
 export const Panel = memo(PanelComponent);
