@@ -12,7 +12,10 @@ import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
-import { getAdminLobbyType, getLobbyRoom } from "../../factories/AdminLobby.factory";
+import {
+  getAdminLobbyType,
+  getLobbyRoom
+} from "../../factories/AdminLobby.factory";
 import { Page } from "../../lib/components/Page";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
