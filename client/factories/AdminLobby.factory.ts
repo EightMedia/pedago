@@ -26,9 +26,10 @@ export const getAdminLobbyType = (
 
 export const getLobbyRoom = (
   room: RoomDto
-): { roomCode: number; players: number } => {
+): { roomCode: number; id: string; players: number } => {
   return {
     roomCode: room.roomCode,
+    id: room.id,
     players: room.players?.length,
   };
 };
