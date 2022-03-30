@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { RoomContext } from "../../../../contexts/RoomContext";
 import { Button } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
 import { Page } from "../../../components/Page";
@@ -10,11 +8,14 @@ import { Stack } from "../../../layouts/Stack";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
 
-export const LobbyLobby = ({ groups, handleStart, handleInfo }: LobbyType) => {
+export const LobbyLobby = ({
+  room,
+  groups,
+  handleStart,
+  handleInfo,
+}: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
   const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
-  const room = useContext(RoomContext);
-  const playerCount = room?.players?.length as number;
 
   const handleSettings = () => {
     alert("settings view");
@@ -23,7 +24,7 @@ export const LobbyLobby = ({ groups, handleStart, handleInfo }: LobbyType) => {
   return (
     <Page>
       <div className={styles.header}>
-        <PlayerCount players={playerCount} variation="light" />
+        <PlayerCount players={room?.players} variation="light" />
         <span className="logo">Logo</span>
         <div className={styles.buttonGroup}>
           <Button onClick={handleSettings}>
