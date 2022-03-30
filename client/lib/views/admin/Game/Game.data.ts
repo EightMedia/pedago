@@ -3,7 +3,6 @@ import { GameType } from "./Game.types";
 
 export const GameData: GameType = {
   openSettings: () => alert("open settings"),
-  openInfo: () => alert("open info"),
   stopRound: () => alert("stop round"),
   timer: true,
   round: {
