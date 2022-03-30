@@ -27,7 +27,7 @@ export const GameData: GameType = {
     },
     {
       name: "4",
-      status: PlayerStatus.InProgress,
+      status: PlayerStatus.Done,
       players: ["Hendrik", "Khalid"],
     },
     {
@@ -42,8 +42,8 @@ export const GameData: GameType = {
     },
     {
       name: "7",
-      status: PlayerStatus.Done,
-      players: ["Selin", "Jannick", "Jalal"],
+      status: PlayerStatus.InProgress,
+      players: ["Selin", "Jalal"],
     },
   ],
 };
