@@ -7,12 +7,13 @@ export enum LobbyStep {
 }
 
 export type LobbyType = {
+  groups: PlayerGroupType[];
   room: {
     roomCode: RoomDto["roomCode"];
+    players: number;
     id: RoomDto["id"];
-    groups: PlayerGroupType[];
   };
   initialStep?: LobbyStep;
-  handleStart: () => void;
-  handleInfo: () => void;
+  handleStart?: () => void;
+  handleInfo?: () => void;
 };

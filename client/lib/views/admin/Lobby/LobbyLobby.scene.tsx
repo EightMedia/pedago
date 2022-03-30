@@ -8,7 +8,12 @@ import { Stack } from "../../../layouts/Stack";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
 
-export const LobbyLobby = ({ room, handleStart, handleInfo }: LobbyType) => {
+export const LobbyLobby = ({
+  room,
+  groups,
+  handleStart,
+  handleInfo,
+}: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
   const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
 
@@ -19,14 +24,14 @@ export const LobbyLobby = ({ room, handleStart, handleInfo }: LobbyType) => {
   return (
     <Page>
       <div className={styles.header}>
-        <PlayerCount players={8} variation="light" />
+        <PlayerCount players={room?.players} variation="light" />
         <span className="logo">Logo</span>
         <div className={styles.buttonGroup}>
           <Button onClick={handleSettings}>
             <Icon icon={IconsEnum.Settings} />
             Instellingen
           </Button>
-          <Button onClick={handleInfo}>
+          <Button onClick={handleInfo as () => void}>
             <Icon icon={IconsEnum.Info} />
             Uitleg
           </Button>
@@ -40,14 +45,11 @@ export const LobbyLobby = ({ room, handleStart, handleInfo }: LobbyType) => {
               Voer de code in op <a href={siteUrl}>{readableSiteUrl}</a> en doe
               mee
             </p>
-            <Button onClick={handleStart}>Start</Button>
+            <Button onClick={handleStart as () => void}>Start</Button>
           </header>
         </Panel>
-
-        {room?.groups &&
-          room?.groups.map((group) => (
-            <PlayerGroup key={group.id} {...group} />
-          ))}
+        {groups &&
+          groups.map((group) => <PlayerGroup key={group.id} {...group} />)}
       </Stack>
     </Page>
   );

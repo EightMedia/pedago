@@ -41,7 +41,7 @@ const roomCode = () => {
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
   const [playerMatchScene, setPlayerMatchScene] =
     useState<PlayerMatchSceneEnum>(PlayerMatchSceneEnum.Wait);
-  const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Countdown);
+  const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Sort);
   const [discussStep, setDiscussStep] = useState<DiscussStep>(
     DiscussStep.Intro
   );

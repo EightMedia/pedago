@@ -7,7 +7,10 @@ import {
   getPlayerByIdFn,
   makeTeamsFn,
   setPlayerStatusFn,
-  setTeamReadyFn, storeRoundFn, updateAllPlayersFn, updatePlayerFn,
+  setTeamReadyFn,
+  storeRoundFn,
+  updateAllPlayersFn,
+  updatePlayerFn,
   updateRoomFn
 } from "./games.query";
 export interface GamesState {
@@ -77,10 +80,16 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       roomId: string,
       index: number,
       status: PlayerStatus
-    ): boolean =>
-      (get().getTeams(roomId) as Player[][])[index]?.every(
-        (player: Player) => player.status === status
-      ),
+    ): boolean => {
+      const teams = get().getTeams(roomId);
+      if (teams) {
+        return teams[index]?.every(
+          (player: Player) => player.status === status
+        );
+      } else {
+        return false;
+      }
+    },
     // Setters
     addRoom: (room: RoomDto) => addRoomFn(set, room),
     updateRoom: (room: RoomDto) => updateRoomFn(set, room),

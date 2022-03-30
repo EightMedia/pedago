@@ -51,6 +51,14 @@ const SortListComponent = ({ cards, round, handleSortOrder }: SortListType) => {
   }, []);
 
   useEffect(() => {
+    if (socket) {
+      socket.on(PlayerEvent.FetchSortOrder, () =>
+        handleSortOrder(sortListToCategory(items))
+      );
+    }
+  }, [socket]);
+
+  useEffect(() => {
     handleSortOrder(sortListToCategory(items));
   }, [items]);
 
