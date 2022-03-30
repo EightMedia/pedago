@@ -16,7 +16,6 @@ import {
   startGame,
   updateRoomDto
 } from "./admin";
-import { createDB } from "./airtable";
 import {
   gameStart,
   getLatestSortOrder,
@@ -37,8 +36,6 @@ const io = new Server(httpServer, {
   },
 });
 console.log("--- Pedago Server started at port 3001 ---");
-
-createDB();
 
 io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
