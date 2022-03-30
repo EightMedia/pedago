@@ -1,8 +1,12 @@
-import { Player, ViewState } from "models";
+import { TeamType } from "../../../components/TeamsList/TeamsList.types";
 
 export type GameType = {
-    handleView: (view: ViewState) => void;
-    stopRound: () => void;
-    teams: Player[][];
-    round: number;
+  openSettings: () => void;
+  stopRound: () => void;
+  timer: boolean;
+  round: {
+    current: number;
+    total: number;
+  };
+  teams: Array<TeamType>;
 };
