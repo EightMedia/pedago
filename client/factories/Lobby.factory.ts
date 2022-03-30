@@ -12,7 +12,7 @@ const getPlayerGroupType = (
   return {
     ...(group as Group),
     players: playerList
-      .filter((p) => p.group.id === group.id)
+      .filter((p) => p.group?.id === group.id)
       .map((p) => {
         return { name: p.name, active: p.id === playerId };
       }),

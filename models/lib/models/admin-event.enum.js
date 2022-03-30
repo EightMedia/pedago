@@ -8,4 +8,5 @@ var AdminEvent;
     AdminEvent["UpdateRoom"] = "updateRoom";
     AdminEvent["Reset"] = "reset";
     AdminEvent["Disconnect"] = "disconnect";
+    AdminEvent["LobbyStep"] = "lobbyStep";
 })(AdminEvent = exports.AdminEvent || (exports.AdminEvent = {}));
