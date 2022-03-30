@@ -28,8 +28,7 @@ const AdminGame = () => {
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);
-  const [round, setRound] = useState<number>(1);
-  const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Info);
+  const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
 
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
@@ -81,9 +80,9 @@ const AdminGame = () => {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
       socket.on(Event.Room, setRoom);
-      socket.on(Event.PlayerList, (v) => {
-        console.log("Players in the lobby:", v);
-        setPlayerList(v);
+      socket.on(Event.PlayerList, setPlayerList);
+      socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
+        setLobbyStep(setToInfo ? LobbyStep.Info : LobbyStep.Lobby);
       });
     }
   }, [socket]);
@@ -101,7 +100,6 @@ const AdminGame = () => {
               case ViewName.Wizard:
                 return (
                   <Wizard
-                    socket={socket as Socket}
                     handleRegisterGame={() => handleRegisterGame(mockRoom)}
                   />
                 );
@@ -127,7 +125,7 @@ const AdminGame = () => {
               case ViewName.Result:
                 return <Result />;
               default:
-                return <>FAIL</>;
+                return <>ERROR: ViewName not found</>;
             }
           })()}
         </Page>

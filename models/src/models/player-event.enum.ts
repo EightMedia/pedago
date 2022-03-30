@@ -9,5 +9,5 @@ export enum PlayerEvent {
   GameScene = "gameScene",
   SortOrder = "sortOrder",
   PlayerMatchScene = "playerMatchScene",
-  FetchSortOrder = "fetchSortOrder"
+  FetchSortOrder = "fetchSortOrder",
 }

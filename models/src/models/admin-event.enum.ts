@@ -4,4 +4,5 @@ export enum AdminEvent {
   UpdateRoom = "updateRoom",
   Reset = "reset",
   Disconnect = "disconnect",
+  LobbyStep = "lobbyStep"
 }

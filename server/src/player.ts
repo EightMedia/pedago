@@ -259,6 +259,7 @@ export const storeRound = (
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
     });
     socket.emit(PlayerEvent.GameScene, true);
+    socket.emit(PlayerEvent.DiscussStepScene, true);
     socket.emit(Event.To, { name: ViewName.Discuss });
 
     callback({
