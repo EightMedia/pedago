@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
-import { getAdminLobbyType } from "../../factories/AdminLobby.factory";
+import { getAdminLobbyType, getLobbyRoom } from "../../factories/AdminLobby.factory";
 import { Page } from "../../lib/components/Page";
 import { Game } from "../../lib/views/admin/Game";
 import { Lobby } from "../../lib/views/admin/Lobby";
@@ -124,6 +124,7 @@ const AdminGame = () => {
               case ViewName.Lobby:
                 return (
                   <Lobby
+                    room={getLobbyRoom(room)}
                     groups={getAdminLobbyType(
                       room.groups as Group[],
                       playerList
