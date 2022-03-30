@@ -85,7 +85,6 @@ export const registerGame = (
 
     updatePlayersInLobby(socket, room.id);
   }
-  console.log(room.view);
   socket.join(room.id);
   socket.emit(Event.To, { name: room.view });
   socket.emit(Event.Room, store.getRoomByRoomCode(room.roomCode));
@@ -103,7 +102,7 @@ export const startGame = (
       ...room,
       view: ViewName.Game,
     });
-
+    
     store.updateAllPlayers(roomId, <Partial<Player>>{
       status: PlayerStatus.NotStarted,
       view: ViewName.PlayerMatch,
@@ -153,12 +152,10 @@ export const finishRound = (
     });
 
     // Fetch latest sortorder from all players
-    socket.broadcast.to(roomId).emit(PlayerEvent.FetchSortOrder);
+    socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
 
     socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, true);
-    socket.broadcast.to(roomId).emit(Event.To, {
-      name: ViewName.PlayerMatch,
-    });
+    
     callback({
       status: "OK",
       message: "Going to the next round",

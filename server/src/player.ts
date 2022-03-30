@@ -63,6 +63,7 @@ export const joinRoomByRoomCode = (
       PlayerEvent.PlayerMatchScene,
       updatedPlayer.status !== PlayerStatus.NotStarted
     );
+     // Turn off countdown
     socket.emit(PlayerEvent.GameScene, false);
     socket.emit(Event.To, { name: updatedPlayer.view });
   }
@@ -169,7 +170,9 @@ export const requestLobby = (
     ...player,
     view: ViewName.Lobby,
   });
+    // Set PlayerMatchScene to Wait
   socket.emit(PlayerEvent.PlayerMatchScene, true);
+    // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
 
   updatePlayersInLobby(socket, roomId);
@@ -204,8 +207,9 @@ export const gameStart = (
   });
 
   updateClientRoom(socket, roomId);
-
+  // Set PlayerMatchScene to Wait
   socket.emit(PlayerEvent.PlayerMatchScene, true);
+    // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
   socket.emit(Event.To, <ViewState>{ name: ViewName.Game });
 
@@ -256,11 +260,13 @@ export const storeRound = (
         ...player,
         view: ViewName.Discuss,
       });
+      // Turn on countdown
       socket.to(player.socketId).emit(PlayerEvent.GameScene, true);
       socket.to(player.socketId).emit(Event.To, { name: ViewName.Discuss });
     });
+    // Turn on countdown
     socket.emit(PlayerEvent.GameScene, true);
-    socket.emit(PlayerEvent.DiscussStepScene, true);
+
     socket.emit(Event.To, { name: ViewName.Discuss });
 
     callback({
@@ -278,6 +284,39 @@ export const storeRound = (
     });
   }
 };
+
+export const finishRoundByAdmin = (
+  roomId: string,
+  playerId: string,
+  round: Round,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  if (!roomId || !playerId) {
+    callback({
+      status: "ERROR",
+      message: "Room and/or player unknown",
+    });
+    return;
+  }
+  const index: number = store.getTeamIndex(roomId, playerId);
+  store.storeRound(roomId, playerId, index, {
+    ...round,
+    order: reverseSortOrder(round.order),
+  });
+
+  // Turn on countdown
+  socket.emit(PlayerEvent.GameScene, true);
+
+  updateClientRoom(socket, roomId);
+
+  callback({
+    status: "OK",
+    message: "Round saved by administrator",
+  });
+
+  storeTeamReady(roomId, playerId, socket, callback);
+}
 
 export const getLatestSortOrder = (
   roomId: string,
@@ -319,7 +358,7 @@ export const storeTeamReady = (
   const lastRound = player?.rounds.find((r) => r.number === 6);
 
   if (lastRound) {
-    socket.emit(Event.To, { name: ViewName.Result, data: { result: {} } });
+    socket.emit(Event.To, { name: ViewName.Result});
     team.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         status: PlayerStatus.Done
@@ -337,13 +376,17 @@ export const storeTeamReady = (
         view: ViewName.PlayerMatch,
         round,
       });
+        // Set PlayerMatchScene to Wait
       socket.to(player.socketId).emit(PlayerEvent.PlayerMatchScene, true);
+
       socket.to(player.socketId).emit(Event.Round, round);
       socket.to(player.socketId).emit(Event.To, {
         name: ViewName.PlayerMatch,
       });
     });
+      // Set PlayerMatchScene to Wait
     socket.emit(PlayerEvent.PlayerMatchScene, true);
+    
     socket.emit(Event.Round, round);
     
     updateClientRoom(socket, roomId);

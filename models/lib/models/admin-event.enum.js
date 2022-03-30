@@ -6,6 +6,7 @@ var AdminEvent;
     AdminEvent["RegisterGame"] = "registerGame";
     AdminEvent["StartGame"] = "startGame";
     AdminEvent["UpdateRoom"] = "updateRoom";
+    AdminEvent["FinishRound"] = "finishRound";
     AdminEvent["Reset"] = "reset";
     AdminEvent["Disconnect"] = "disconnect";
     AdminEvent["LobbyStep"] = "lobbyStep";

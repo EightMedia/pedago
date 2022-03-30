@@ -1,4 +1,4 @@
-import { ViewName } from "models";
+import { AdminEvent, SocketCallback, ViewName } from "models";
 import { PlayerStatus } from "models/lib/models/player-status.enum";
 import { memo, useContext } from "react";
 import { RoomContext } from "../../../../contexts/RoomContext";
@@ -10,12 +10,21 @@ const GameComponent = ({ handleView, teams }: GameType) => {
   const socket = useContext(SocketContext);
   const room = useContext(RoomContext);
 
-  const stopRound = () => {}
+  const stopRound = () => {
+    socket?.emit(
+      AdminEvent.FinishRound,
+      room?.id,
+      room?.round,
+      (res: SocketCallback) => {
+        console.log(res);
+      }
+    );
+  };
 
   return (
     <Page>
       <h2>Game</h2>
-      <button onClick={stopRound}></button>
+      <button onClick={stopRound}>Stopround</button>
       <button onClick={() => console.log(teams)}>Log teams</button>
       <button onClick={() => handleView({ name: ViewName.Lobby })}>Back</button>
       <div>

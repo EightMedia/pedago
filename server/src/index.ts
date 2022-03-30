@@ -11,12 +11,14 @@ import {
 import { Server, Socket } from "socket.io";
 import {
   disconnectAll,
+  finishRound,
   registerGame,
   reset,
   startGame,
   updateRoomDto
 } from "./admin";
 import {
+  finishRoundByAdmin,
   gameStart,
   getLatestSortOrder,
   joinGroup,
@@ -58,6 +60,14 @@ io.on("connection", (socket: Socket) => {
   );
   socket.on(AdminEvent.UpdateRoom, (room: Partial<RoomDto>) =>
     updateRoomDto(room)
+  );
+  socket.on(
+    AdminEvent.FinishRound,
+    (
+      roomId: string,
+      roundNo: number,
+      callback: (args: SocketCallback) => void
+    ) => finishRound(roomId, roundNo, socket, callback)
   );
   socket.on(AdminEvent.Reset, () => reset(socket));
   socket.on(AdminEvent.Disconnect, () => disconnectAll(socket));
@@ -109,6 +119,15 @@ io.on("connection", (socket: Socket) => {
       round: Round,
       callback: (args: SocketCallback) => void
     ) => storeRound(roomId, playerId, round, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.FinishRoundByAdmin,
+    (
+      roomId: string,
+      playerId: string,
+      round: Round,
+      callback: (args: SocketCallback) => void
+    ) => finishRoundByAdmin(roomId, playerId, round, socket, callback)
   );
   socket.on(
     PlayerEvent.SortOrder,
