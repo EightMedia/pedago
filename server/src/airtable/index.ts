@@ -2,12 +2,12 @@ import { RoomDto } from "models";
 import { dataToJson } from "../utils/data-to-json.util";
 
 const Airtable = require("airtable");
-const base = new Airtable({ apiKey: "keyzN9TKa3at7qyLl" }).base(
-  "appyVEK9HUo9uPDNX"
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+  process.env.AIRTABLE_BASE_ID
 );
 
 export const createDB = (room: RoomDto, playerId: string) => {
-  base("Games").create(
+  base(process.env.AIRTABLE_GAMES_TABLE).create(
     [
       {
         fields: {
