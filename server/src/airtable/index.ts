@@ -1,28 +1,26 @@
+import { RoomDto } from "models";
+import { dataToJson } from "../utils/data-to-json.util";
+
 const Airtable = require("airtable");
 const base = new Airtable({ apiKey: "keyzN9TKa3at7qyLl" }).base(
   "appyVEK9HUo9uPDNX"
 );
 
-export const createDB = () => {
+export const createDB = (room: RoomDto, playerId: string) => {
   base("Games").create(
     [
       {
         fields: {
-          Game: JSON.stringify({
-            "userId": 1,
-            "id": 1,
-            "title": "delectus aut autem",
-            "completed": false
-          }),
+          Game: dataToJson(room, playerId),
         },
       },
     ],
-    function (err, records) {
+    (err: any, records: any[]) => {
       if (err) {
         console.error(err);
         return;
       }
-      records.forEach(function (record) {
+      records.forEach((record) => {
         console.log(record.getId());
       });
     }
