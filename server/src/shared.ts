@@ -15,6 +15,6 @@ export const updatePlayersInLobby = (socket: Socket, roomId: string): void => {
   const playersInLobby = room?.players.filter(
     (p: Player) => p.view === ViewName.Lobby
   );
-  socket.broadcast.to(room.id).emit(Event.PlayerList, playersInLobby);
+  socket.broadcast.to(roomId).emit(Event.PlayerList, playersInLobby);
   socket.emit(Event.PlayerList, playersInLobby);
 };

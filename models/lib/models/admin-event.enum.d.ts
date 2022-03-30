@@ -3,5 +3,6 @@ export declare enum AdminEvent {
     StartGame = "startGame",
     UpdateRoom = "updateRoom",
     Reset = "reset",
-    Disconnect = "disconnect"
+    Disconnect = "disconnect",
+    LobbyStep = "lobbyStep"
 }
