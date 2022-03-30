@@ -1,4 +1,4 @@
-import { Group, Player } from "models";
+import { Group, Player, RoomDto } from "models";
 import { PlayerGroupType } from "../lib/components/PlayerGroup/PlayerGroup.types";
 
 const getPlayerGroupType = (
@@ -22,4 +22,13 @@ export const getAdminLobbyType = (
   return groups.map((group) =>
     getPlayerGroupType(group, playerList)
   ) as PlayerGroupType[];
+};
+
+export const getLobbyRoom = (
+  room: RoomDto
+): { roomCode: number; players: number } => {
+  return {
+    roomCode: room.roomCode,
+    players: room.players?.length,
+  };
 };
