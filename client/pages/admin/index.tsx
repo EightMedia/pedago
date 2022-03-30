@@ -6,37 +6,24 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
 import { getGroups } from "../../factories/Lobby.factory";
 import { Page } from "../../lib/components/Page";
+import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
 import { Lobby } from "../../lib/views/admin/Lobby";
 import { Result } from "../../lib/views/admin/Result";
 import { Wizard } from "../../lib/views/admin/Wizard";
 
-function useSocket(url: string) {
-  const [socket, setSocket] = useState<Socket | null>(null);
-
-  useEffect(() => {
-    const socketIo = io(url);
-    setSocket(socketIo);
-
-    function cleanup() {
-      socketIo.disconnect();
-    }
-    return cleanup;
-  }, [url]);
-
-  return socket;
-}
-
 const AdminGame = () => {
-  const socket: Socket | null = useSocket("http://localhost:3001");
+  const socket: Socket | null = useSocket(
+    process.env.SOCKET_URL || "http://localhost:3001"
+  );
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);
