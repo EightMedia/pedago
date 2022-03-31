@@ -41,6 +41,11 @@ export const GameRound = ({
   // teams with status Done
   const doneTeams = teams.filter((team) => team.status === PlayerStatus.Done);
 
+  const handleStopRound = () => {
+    setShowStopModal(false);
+    (stopRound as () => void)();
+  };
+
   return (
     <>
       <Page>
@@ -48,7 +53,10 @@ export const GameRound = ({
           <PlayerCount variation="light" players={playerCount} />
           <Logo />
           <ButtonGroup>
-            <Button variation="whiteBlocked" onClick={openSettings}>
+            <Button
+              variation="whiteBlocked"
+              onClick={openSettings as () => void}
+            >
               <Icon icon={IconsEnum.Settings} />
               Settings
             </Button>
@@ -87,7 +95,9 @@ export const GameRound = ({
         <Modal handleClose={() => setShowStopModal(false)}>
           <PanelTitle>Weet je het zeker?</PanelTitle>
           <p>Er zijn nog 12 spelers bezig met het afronden van de ronde.</p>
-          <Button onClick={stopRound}>Ja, start de volgende ronde</Button>
+          <Button onClick={handleStopRound}>
+            Ja, start de volgende ronde
+          </Button>
         </Modal>
       )}
       {showInfoModal && (
