@@ -6,12 +6,13 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState,
+  ViewState
 } from "models";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
+import { getAdminGameType } from "../../factories/AdminGame.factory";
 import {
   getAdminLobbyType,
   getLobbyRoom
@@ -19,6 +20,7 @@ import {
 import { Page } from "../../lib/components/Page";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
+import { GameScene } from "../../lib/views/admin/Game/Game.types";
 import { Lobby } from "../../lib/views/admin/Lobby";
 import { LobbyStep } from "../../lib/views/admin/Lobby/Lobby.types";
 import { Result } from "../../lib/views/admin/Result";
@@ -32,6 +34,7 @@ const AdminGame = () => {
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
+  const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
 
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
@@ -87,12 +90,13 @@ const AdminGame = () => {
       socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
         setLobbyStep(setToInfo ? LobbyStep.Info : LobbyStep.Lobby);
       });
+      socket.on(AdminEvent.GameScene, (setToOnBoarding: boolean) =>
+        setToOnBoarding
+          ? setGameScene(GameScene.Onboarding)
+          : setGameScene(GameScene.Round)
+      );
     }
   }, [socket]);
-
-  const handleView = (view: ViewState) => {
-    setView(view);
-  };
 
   return (
     <SocketContext.Provider value={socket}>
@@ -120,10 +124,8 @@ const AdminGame = () => {
               case ViewName.Game:
                 return (
                   <Game
-                    handleView={handleView}
-                    teams={room?.teams as Player[][]}
-                    round={room?.round as number}
-                    stopRound={stopRound}
+                    {...getAdminGameType(room as RoomDto)}
+                    initialScene={gameScene}
                   />
                 );
               case ViewName.Result:

@@ -5,5 +5,6 @@ export enum AdminEvent {
   FinishRound = "finishRound",
   Reset = "reset",
   Disconnect = "disconnect",
-  LobbyStep = "lobbyStep"
+  LobbyStep = "lobbyStep",
+  GameScene = "gameScene"
 }

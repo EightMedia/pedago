@@ -52,10 +52,13 @@ export const registerGame = (
       active: true,
       locked: false,
       startDate: timestamp,
+      view: ViewName.Lobby,
+      round: 1
     };
     // Add room to store
     store.addRoom(room);
 
+    socket.emit(AdminEvent.GameScene, false);
     socket.emit(AdminEvent.LobbyStep, true);
     callback({
       status: "OK",
@@ -72,7 +75,11 @@ export const registerGame = (
         socketId: socket.id,
       },
     };
+    // Update room to store
+    store.updateRoom(room);
 
+    updatePlayersInLobby(socket, room.id);
+    socket.emit(AdminEvent.GameScene, false);
     callback({
       status: "OK",
       message: `You have joined the room with code: ${room.roomCode}`,
@@ -80,10 +87,6 @@ export const registerGame = (
         room: room,
       },
     });
-    // Update room to store
-    store.updateRoom(room);
-
-    updatePlayersInLobby(socket, room.id);
   }
   socket.join(room.id);
   socket.emit(Event.To, { name: room.view });
@@ -151,11 +154,14 @@ export const finishRound = (
       round: roundNo + 1,
     });
 
+    // TODO
+    // Hier moet een iets verzonnen worden voor de functionaliteit van startgame en finishround
+    // Als ook een filtering op de players die nog niet begonnen zijn.
+
     // Fetch latest sortorder from all players
     socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
 
     socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, true);
-    
     callback({
       status: "OK",
       message: "Going to the next round",

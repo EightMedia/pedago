@@ -51,10 +51,6 @@ const DiscussComponent = ({
               />
             );
           case DiscussStep.Intro:
-            if (round > 1) {
-              setStep(DiscussStep.Compare);
-              return;
-            }
             callback = autoPlay ? () => setStep(DiscussStep.Info) : undefined;
             return <DiscussIntro time={3} callback={callback} />;
           case DiscussStep.Compare:
@@ -69,7 +65,7 @@ const DiscussComponent = ({
               <DiscussInfo handleBack={() => setStep(DiscussStep.Compare)} />
             );
           default:
-            return <>Fail</>;
+            return <>Discuss Fail</>;
         }
       })()}
     </Page>
