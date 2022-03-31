@@ -1,0 +1,22 @@
+.team {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-xs);
+  border-top: 1px dashed #ffffff;
+  &:not(:first-child) {
+    margin-top: 25px;
+  }
+}
+
+.teamName {
+  display: inline-block;
+  padding: 0 8px;
+  background: var(--color-dark-blue);
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translate(0, -50%);
+}

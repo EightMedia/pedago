@@ -30,6 +30,7 @@
   /* white */
   --color-white: rgba(255, 255, 255, 1);
   --color-white-15: rgba(255, 255, 255, 0.15);
+  --color-white-10: rgba(255, 255, 255, 0.1);
 
   /* grey */
   --color-grey-darkest: #201a47;
@@ -42,8 +43,9 @@
   --space-xs: 16px;
   --space-sm: 20px;
   --space-md: 24px;
-  --space-lg: 48px;
-  --space-xl: 64px;
+  --space-lg: 40px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
 
   /* border radius */
   --border-radius-xs: 4px;

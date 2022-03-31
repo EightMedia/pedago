@@ -1,67 +1,44 @@
-import { ViewName } from "models";
-import { PlayerStatus } from "models/lib/models/player-status.enum";
-import { memo, useContext } from "react";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
-import { Page } from "../../../components/Page";
-import { GameType } from "./Game.types";
+import { memo, useState } from "react";
+import { GameScene, GameType } from "./Game.types";
+import { GameLead } from "./GameLead.scene";
+import { GameOnboarding } from "./GameOnboarding";
+import { GameRound } from "./GameRound.scene";
 
-const GameComponent = ({ handleView, teams }: GameType) => {
-  const socket = useContext(SocketContext);
-  const room = useContext(RoomContext);
+const GameComponent = ({
+  openSettings,
+  stopRound,
+  round,
+  teams,
+  timer,
+  initialScene,
+}: GameType & { initialScene: GameScene }) => {
+  const [scene, setScene] = useState(initialScene);
 
-  const stopRound = () => {}
-
-  return (
-    <Page>
-      <h2>Game</h2>
-      <button onClick={stopRound}></button>
-      <button onClick={() => console.log(teams)}>Log teams</button>
-      <button onClick={() => handleView({ name: ViewName.Lobby })}>Back</button>
-      <div>
-        Not started
-        {teams &&
-          teams
-            .filter((t) => t.every((p) => p.status === PlayerStatus.NotStarted))
-            ?.map((team, index) => (
-              <div key={index}>
-                <div>{index + 1}</div>
-                {team && team.map((p, i) => <div key={i}>{p.name}</div>)}
-              </div>
-            ))}
-      </div>
-      <div>
-        In progress
-        {teams &&
-          teams
-            .filter((t) =>
-              t.every(
-                (p) =>
-                  p.status === PlayerStatus.InProgress ||
-                  p.status === PlayerStatus.Discuss
-              )
-            )
-            ?.map((team, index) => (
-              <div key={index}>
-                <div>{index + 1}</div>
-                {team && team.map((p, i) => <div key={i}>{p.name}</div>)}
-              </div>
-            ))}
-      </div>
-      <div>
-        Done
-        {teams &&
-          teams
-            .filter((t) => t.some((p) => p.status === PlayerStatus.Done))
-            ?.map((team, index) => (
-              <div key={index}>
-                <div>{index + 1}</div>
-                {team && team.map((p, i) => <div key={i}>{p.name}</div>)}
-              </div>
-            ))}
-      </div>
-    </Page>
-  );
+  switch (scene) {
+    case GameScene.Onboarding:
+      return <GameOnboarding handleOk={() => setScene(GameScene.Round)} />;
+    case GameScene.Round:
+      return (
+        <GameRound
+          openSettings={openSettings}
+          stopRound={stopRound}
+          round={round}
+          teams={teams}
+          timer={timer}
+        />
+      );
+    case GameScene.Lead:
+      const callback = () => setScene(GameScene.Round);
+      return (
+        <GameLead
+          round={round.current}
+          roundMax={round.total}
+          callback={callback}
+        />
+      );
+    default:
+      return null;
+  }
 };
 
 export const Game = memo(GameComponent);
