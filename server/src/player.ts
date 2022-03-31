@@ -9,7 +9,7 @@ import {
   Round,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { Socket } from "socket.io";
 import { updateClientRoom, updatePlayersInLobby } from "./shared";
@@ -174,10 +174,8 @@ export const requestLobby = (
   socket.emit(PlayerEvent.PlayerMatchScene, true);
     // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
-
   updatePlayersInLobby(socket, roomId);
   updateClientRoom(socket, roomId);
-
   socket.emit(Event.To, { name: ViewName.Lobby });
 
   callback({
@@ -361,7 +359,7 @@ export const storeTeamReady = (
     socket.emit(Event.To, { name: ViewName.Result});
     team.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
-        status: PlayerStatus.Done
+        status: PlayerStatus.Done,
       });
     });
     callback({
@@ -370,7 +368,7 @@ export const storeTeamReady = (
     });
   } else {
     const round = (player?.rounds?.length as number) + 1;
-    
+
     team.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         view: ViewName.PlayerMatch,
@@ -388,9 +386,9 @@ export const storeTeamReady = (
     socket.emit(PlayerEvent.PlayerMatchScene, true);
     
     socket.emit(Event.Round, round);
-    
+
     updateClientRoom(socket, roomId);
-    
+
     socket.emit(Event.To, {
       name: ViewName.PlayerMatch,
     });

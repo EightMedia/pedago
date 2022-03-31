@@ -6,7 +6,7 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
@@ -122,7 +122,8 @@ const AdminGame = () => {
                   <Game
                     handleView={handleView}
                     teams={room?.teams as Player[][]}
-                    round={room?.round}
+                    round={room?.round as number}
+                    stopRound={stopRound}
                   />
                 );
               case ViewName.Result:

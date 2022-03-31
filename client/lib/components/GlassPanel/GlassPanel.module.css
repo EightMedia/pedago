@@ -1,0 +1,7 @@
+.glass {
+  padding: var(--space-md);
+  background: var(--color-white-10);
+  border-radius: var(--border-radius-md);
+  backdrop-filter: blur(48px);
+  color: var(--color-white);
+}

@@ -1,7 +1,6 @@
 /* css module */
 
 .panel {
-  padding: var(--space-md);
   background: var(--color-white);
   border-radius: var(--border-radius-md);
   color: var(--color-grey-darkest);
