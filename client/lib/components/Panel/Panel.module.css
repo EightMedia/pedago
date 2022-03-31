@@ -1,21 +1,15 @@
-/* css module */
-
 .panel {
   background: var(--color-white);
   border-radius: var(--border-radius-md);
   color: var(--color-grey-darkest);
+  padding: var(--space-md);
+  @media (--sm) {
+    padding: var(--space-lg);
+  }
 }
 
 .panelTitle {
   text-align: center;
   font-weight: bold;
   font: 700 23px / 1.1 var(--font-headings);
-}
-
-.space-lg {
-  margin-bottom: var(--space-md);
-}
-
-.space-sm {
-  margin-bottom: var(--space-2xs);
 }
