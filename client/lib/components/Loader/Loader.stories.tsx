@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { Loader } from "./Loader";
 import { LoaderData } from "./Loader.data";
@@ -20,3 +20,17 @@ Primary.parameters = {
 };
 Primary.storyName = "Loader";
 Primary.args = { ...LoaderData };
+
+// story
+export const OnDark = Template.bind({});
+OnDark.parameters = {
+  backgrounds: {
+    default: "dark",
+  },
+  design: {
+    type: "figma",
+    url: "",
+  },
+};
+OnDark.storyName = "Op donkere achtergrond";
+OnDark.args = { ...LoaderData };

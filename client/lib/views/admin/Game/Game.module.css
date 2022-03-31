@@ -1,1 +1,13 @@
-/* css module */
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.round {
+  margin-bottom: var(--space-lg);
+}
+
+.timerAndStop {
+  display: flex;
+  gap: var(--space-xs);
+}
