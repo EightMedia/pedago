@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { Page } from "../../../components/Page";
+import { Page } from "../Page";
 import { ResultStep, ResultType } from "./Result.types";
 import { ResultLoader } from "./ResultLoader.scene";
 import { ResultOverview } from "./ResultOverview.scene";

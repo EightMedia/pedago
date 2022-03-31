@@ -15,8 +15,15 @@ const customViewports = {
       height: "100%",
     },
   },
+  TabletL: {
+    name: "Tablet L (1024px)",
+    styles: {
+      width: "1024px",
+      height: "100%",
+    },
+  },
   TabletM: {
-    name: "Tablet (768px)",
+    name: "Tablet M (768px)",
     styles: {
       width: "768px",
       height: "100%",

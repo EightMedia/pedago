@@ -1,5 +1,6 @@
 .wrapper {
-  padding: 50px;
+  max-width: 600px;
+  margin: var(--space-xl) auto;
   position: relative;
 }
 
@@ -21,12 +22,12 @@
   transform: translateX(-50%);
 }
 .label1 {
-  top: 33%;
+  top: 25%;
   right: 0;
   transform: translateY(-50%);
 }
 .label2 {
-  top: 66%;
+  top: 75%;
   right: 0;
   transform: translateY(-50%);
   & svg {
@@ -42,7 +43,7 @@
   }
 }
 .label4 {
-  top: 66%;
+  top: 75%;
   left: 0;
   transform: translateY(-50%);
   & svg {
@@ -50,7 +51,7 @@
   }
 }
 .label5 {
-  top: 33%;
+  top: 25%;
   left: 0;
   transform: translateY(-50%);
 }

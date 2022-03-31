@@ -1,0 +1,32 @@
+.wrapper {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(32, 26, 71, 0.1);
+  display: flex;
+}
+
+.color-0 {
+  background: var(--color-red);
+}
+
+.color-1 {
+  background: var(--color-orange);
+}
+
+.color-2 {
+  background: var(--color-yellow);
+}
+
+.color-3 {
+  background: var(--color-green);
+}
+
+.color-4 {
+  background: var(--color-blue);
+}
+
+.color-5 {
+  background: var(--color-purple);
+}
