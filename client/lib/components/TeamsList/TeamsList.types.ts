@@ -9,4 +9,5 @@ export type TeamType = {
 export type TeamsListType = {
   teams: Array<TeamType>;
   title: string;
+  emptyText: string;
 };
