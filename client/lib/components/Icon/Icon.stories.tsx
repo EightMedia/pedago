@@ -10,7 +10,6 @@ export default {
 } as ComponentMeta<typeof Icon>;
 
 const Template: ComponentStory<typeof Icon> = (args) => {
-  console.log(iconNames, iconKeys);
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       <div
