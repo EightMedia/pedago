@@ -22,7 +22,7 @@ const TeamsListComponent = ({ teams, title, emptyText }: TeamsListType) => {
           ))}
         </div>
       ))}
-      {teams.length === 0 && <p>{emptyText}</p>}
+      {teams?.length === 0 && <p>{emptyText}</p>}
     </GlassPanel>
   );
 };
