@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { Diagram } from "./Diagram";
-import { DiagramData } from "./Diagram.data";
+import { DiagramDataOneSet, DiagramDataTwoSets } from "./Diagram.data";
 
 export default {
   title: "Components/Diagram",
@@ -12,9 +12,9 @@ const Template: ComponentStory<typeof Diagram> = (args) => (
   <Diagram {...args} />
 );
 
-// story
-export const Primary = Template.bind({});
-Primary.parameters = {
+// One set
+export const OneSet = Template.bind({});
+OneSet.parameters = {
   backgrounds: {
     default: "dark",
   },
@@ -23,5 +23,19 @@ Primary.parameters = {
     url: "",
   },
 };
-Primary.storyName = "Diagram";
-Primary.args = { ...DiagramData };
+OneSet.storyName = "One dataset";
+OneSet.args = { ...DiagramDataOneSet };
+
+// Two sets
+export const TwoSets = Template.bind({});
+TwoSets.parameters = {
+  backgrounds: {
+    default: "dark",
+  },
+  design: {
+    type: "figma",
+    url: "",
+  },
+};
+TwoSets.storyName = "Two datasets";
+TwoSets.args = { ...DiagramDataTwoSets };

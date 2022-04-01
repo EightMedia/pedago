@@ -4,7 +4,7 @@ import {
   LineElement,
   PointElement,
   RadialLinearScale,
-  Tooltip
+  Tooltip,
 } from "chart.js";
 import cx from "classnames";
 import { memo, useContext } from "react";
@@ -37,14 +37,17 @@ const DiagramComponent = ({
         backgroundColor: "rgba(255, 255, 255, 0.8)",
         borderColor: "rgba(255, 255, 255, 0.8)",
       },
-      {
-        label: secondaryLabel,
-        data: secondary,
-        backgroundColor: "rgba(255, 255, 255, 0.2)",
-        borderColor: "rgba(255, 255, 255, 0.2)",
-      },
     ],
   };
+  if (secondary && secondaryLabel) {
+    data.datasets.push({
+      label: secondaryLabel,
+      data: secondary,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      borderColor: "rgba(255, 255, 255, 0.2)",
+    });
+  }
+
   const options = {
     elements: {
       line: {
@@ -84,7 +87,7 @@ const DiagramComponent = ({
           <Shape category={index} />
         </div>
       ))}
-      <Radar data={data} options={options} />;
+      <Radar data={data} options={options} />
     </div>
   );
 };

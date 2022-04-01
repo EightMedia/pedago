@@ -1,0 +1,30 @@
+.buttonsWrapper {
+  display: flex;
+  justify-content: center;
+}
+.buttons {
+  white-space: nowrap;
+  display: inline-flex;
+  overflow-x: auto;
+  justify-content: flex-start;
+  gap: var(--space-2xs);
+  margin-right: -20px;
+  margin-left: -20px;
+  padding-left: 20px;
+}
+
+.panels {
+  display: flex;
+  gap: var(--space-md);
+  flex-direction: column;
+  @media (--md) {
+    flex-direction: row;
+    align-items: flex-start;
+    & > *:first-child {
+      flex: 0 0 60%;
+    }
+    & > *:last-child {
+      flex: 1;
+    }
+  }
+}
