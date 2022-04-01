@@ -6,7 +6,8 @@ import { Title } from "../Title";
 import styles from "./TeamsList.module.css";
 import { TeamsListType } from "./TeamsList.types";
 
-const TeamsListComponent = ({ teams, title }: TeamsListType) => {
+const TeamsListComponent = ({ teams, title, emptyText }: TeamsListType) => {
+  if (!teams) return null;
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
   console.log(teams);
   return (
@@ -21,6 +22,7 @@ const TeamsListComponent = ({ teams, title }: TeamsListType) => {
           ))}
         </div>
       ))}
+      {teams.length === 0 && <p>{emptyText}</p>}
     </GlassPanel>
   );
 };

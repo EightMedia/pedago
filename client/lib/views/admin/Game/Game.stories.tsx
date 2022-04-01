@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { Game } from "./Game";
-import { GameData } from "./Game.data";
+import { GameData, teamsBusy, teamsReady, teamsStart } from "./Game.data";
 import { GameScene } from "./Game.types";
 
 export default {
@@ -11,9 +11,7 @@ export default {
 
 const Template: ComponentStory<typeof Game> = (args) => <Game {...args} />;
 
-// onboarding
-export const Onboarding = Template.bind({});
-Onboarding.parameters = {
+const gameParams = {
   layout: "fullscreen",
   viewport: {
     defaultViewport: "Desktop",
@@ -23,22 +21,38 @@ Onboarding.parameters = {
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A9643",
   },
 };
+
+// onboarding
+export const Onboarding = Template.bind({});
+Onboarding.parameters = gameParams;
 Onboarding.args = { ...GameData, initialScene: GameScene.Onboarding };
 
 // game round
-export const Primary = Template.bind({});
-Primary.parameters = {
-  layout: "fullscreen",
-  viewport: {
-    defaultViewport: "Desktop",
-  },
-  design: {
-    type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A9643",
-  },
+export const GameStart = Template.bind({});
+GameStart.parameters = gameParams;
+GameStart.args = {
+  ...GameData,
+  initialScene: GameScene.Round,
+  teams: teamsStart,
 };
-Primary.storyName = "Game";
-Primary.args = { ...GameData, initialScene: GameScene.Round };
+
+// game round
+export const GameBusy = Template.bind({});
+GameBusy.parameters = gameParams;
+GameBusy.args = {
+  ...GameData,
+  initialScene: GameScene.Round,
+  teams: teamsBusy,
+};
+
+// game round
+export const GameReady = Template.bind({});
+GameReady.parameters = gameParams;
+GameReady.args = {
+  ...GameData,
+  initialScene: GameScene.Round,
+  teams: teamsReady,
+};
 
 // next round lead
 export const NextRound = Template.bind({});
