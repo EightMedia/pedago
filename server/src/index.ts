@@ -11,12 +11,14 @@ import {
 import { Server, Socket } from "socket.io";
 import {
   disconnectAll,
+  finishRound,
   registerGame,
   reset,
   startGame,
   updateRoomDto
 } from "./admin";
 import {
+  finishRoundByAdmin,
   gameStart,
   getLatestSortOrder,
   joinGroup,
@@ -26,6 +28,7 @@ import {
   storeRound,
   storeTeamReady
 } from "./player";
+require("dotenv").config();
 
 const app = express();
 const httpServer = createServer(app);
@@ -34,12 +37,11 @@ const io = new Server(httpServer, {
     origin: ["http://localhost:8000"],
   },
 });
-
 console.log("--- Pedago Server started at port 3001 ---");
 
 io.on("connection", (socket: Socket) => {
   console.log("a user connected with socket ID: ", socket.id);
-
+  
   // send welcome to user on this socket
   socket.emit(Event.Message, "Hello you have connected to Pedago");
 
@@ -58,6 +60,14 @@ io.on("connection", (socket: Socket) => {
   );
   socket.on(AdminEvent.UpdateRoom, (room: Partial<RoomDto>) =>
     updateRoomDto(room)
+  );
+  socket.on(
+    AdminEvent.FinishRound,
+    (
+      roomId: string,
+      roundNo: number,
+      callback: (args: SocketCallback) => void
+    ) => finishRound(roomId, roundNo, socket, callback)
   );
   socket.on(AdminEvent.Reset, () => reset(socket));
   socket.on(AdminEvent.Disconnect, () => disconnectAll(socket));
@@ -109,6 +119,15 @@ io.on("connection", (socket: Socket) => {
       round: Round,
       callback: (args: SocketCallback) => void
     ) => storeRound(roomId, playerId, round, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.FinishRoundByAdmin,
+    (
+      roomId: string,
+      playerId: string,
+      round: Round,
+      callback: (args: SocketCallback) => void
+    ) => finishRoundByAdmin(roomId, playerId, round, socket, callback)
   );
   socket.on(
     PlayerEvent.SortOrder,

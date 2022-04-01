@@ -1,5 +1,5 @@
 import { Category, Player, PlayerEvent, Round, SocketCallback } from "models";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
@@ -25,16 +25,38 @@ export const GameSort = ({ round }: GameSortType) => {
       playerId,
       {
         number: round,
-        order: order,
+        order,
       } as Round,
       (res: SocketCallback) => {
         console.log(res);
       }
     );
   };
+
+  const finishRoundByAdmin = () => {
+    socket?.emit(
+      PlayerEvent.FinishRoundByAdmin,
+      room?.id,
+      playerId,
+      {
+        number: round,
+        order,
+      } as Round,
+      (res: SocketCallback) => {
+        console.log(res);
+      }
+    );
+  };
+
   const handleSortOrder = (items: Category[]): void => {
     setOrder(items);
   };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on(PlayerEvent.FinishRoundByAdmin, finishRoundByAdmin);
+    }
+  }, [socket]);
 
   return (
     <>

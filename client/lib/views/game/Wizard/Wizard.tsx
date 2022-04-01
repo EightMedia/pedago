@@ -93,7 +93,7 @@ const WizardComponent = ({ initialStep }: WizardType) => {
             case WizardStep.Info:
               return <WizardInfo onClick={() => requestLobby()} />;
             default:
-              return <>Fail</>;
+              return <>Wizard Fail</>;
           }
         })()}
       </Panel>
