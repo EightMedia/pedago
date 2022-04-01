@@ -11,6 +11,14 @@ export enum IconsEnum {
   Timer,
 }
 
+export const iconNames = Object.values(IconsEnum).filter(
+  (x) => typeof x === "string"
+);
+
+export const iconKeys = Object.keys(IconsEnum).filter(
+  (x) => !isNaN(parseInt(x))
+);
+
 const Icons: { [key in IconsEnum]: ReactElement } = {
   [IconsEnum.Person]: (
     <path
