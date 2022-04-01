@@ -3,6 +3,7 @@
   padding: var(--space-2xs) var(--space-xs);
   background: var(--color-dark-blue);
   align-items: center;
+  color: var(--color-white);
 }
 
 .dark {
