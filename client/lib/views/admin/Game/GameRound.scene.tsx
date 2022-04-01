@@ -87,9 +87,21 @@ export const GameRound = ({
         </div>
 
         <PanelGroup>
-          <TeamsList teams={notStartedTeams} title="Niet begonnen" />
-          <TeamsList teams={inProgressTeams} title="Bezig" />
-          <TeamsList teams={doneTeams} title="Klaar" />
+          <TeamsList
+            teams={notStartedTeams}
+            title="Niet begonnen"
+            emptyText="Iedereen is begonnen"
+          />
+          <TeamsList
+            teams={inProgressTeams}
+            title="Bezig"
+            emptyText="Er zijn geen teams bezig"
+          />
+          <TeamsList
+            teams={doneTeams}
+            title="Klaar"
+            emptyText="Er zijn nog geen teams klaar"
+          />
         </PanelGroup>
       </Page>
       {showStopModal && (
