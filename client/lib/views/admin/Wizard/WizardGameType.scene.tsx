@@ -1,5 +1,8 @@
-import React from "react";
+import { Players, Sector } from "models";
+import React, { useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
+import { InputOptions } from "../../../components/InputOptions";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { Center } from "../../../layouts/Center";
@@ -11,6 +14,7 @@ export const WizardGameType = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
+  const locales = useContext(LanguageContext);
   return (
     <>
       <Center>
@@ -23,6 +27,27 @@ export const WizardGameType = ({
           id="opleiding"
           label="Opleiding"
           showLabel={true}
+          onChange={(e) => updateData(e.target.value, "info.players.education")}
+        />
+        <InputOptions
+          id="year"
+          options={locales.year}
+          label="Leerjaar"
+          data={data.info?.players?.year}
+          enumOptions={true}
+          handleChange={(newData: Players["year"]) =>
+            updateData(newData, "info.players.year")
+          }
+        />
+        <InputOptions
+          id="sector"
+          options={locales.sector}
+          label="Sector"
+          data={data.info?.players?.sector}
+          enumOptions={true}
+          handleChange={(newData: Sector) =>
+            updateData(newData, "info.players.sector")
+          }
         />
         <Button stretch={true} onClick={() => handleStep(WizardStep.Options)}>
           Volgende

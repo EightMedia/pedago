@@ -26,9 +26,11 @@ const InputOptionsComponent = ({
   };
 
   const prepVals = (vals: OptionValueType[]) => {
+    if (!Array.isArray(vals)) return [];
     return enumOptions ? vals.map((v: any) => convertToInt(v)) : vals;
   };
   const valsToString = (vals: OptionValueType[]) => {
+    if (!Array.isArray(vals)) return [];
     return vals.map((v: any) => v.toString());
   };
 

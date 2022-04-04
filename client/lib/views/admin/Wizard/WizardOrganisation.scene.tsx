@@ -23,12 +23,16 @@ export const WizardOrganisation = ({
           id="organisation"
           label="Organisatie"
           showLabel={true}
+          onChange={(e) => updateData(e.target.value, "info.organisation.name")}
         />
         <InputText
           value={data?.info?.organisation?.location}
           id="location"
           label="Locatie"
           showLabel={true}
+          onChange={(e) =>
+            updateData(e.target.value, "info.organisation.location")
+          }
         />
         <Button stretch={true} onClick={() => handleStep(WizardStep.GameType)}>
           Volgende
