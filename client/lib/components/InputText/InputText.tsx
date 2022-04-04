@@ -11,6 +11,7 @@ export const InputTextComponent = ({
   label,
   placeholder,
   showLabel = false,
+  value,
 }: InputTextType) => {
   return (
     <div className={cx(styles.wrapper)}>
@@ -26,6 +27,7 @@ export const InputTextComponent = ({
         onChange={onChange}
         className={cx(styles.input, styles[error ? "valid" : "invalid"])}
         placeholder={placeholder}
+        value={value}
       />
       {error ?? <div className="error">{error}</div>}
     </div>

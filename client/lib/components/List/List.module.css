@@ -1,0 +1,16 @@
+.list {
+  margin-bottom: var(--space-md);
+}
+
+.listItem {
+  display: flex;
+}
+
+.dt {
+  font-weight: bold;
+  flex: 0 0 150px;
+}
+
+.dd {
+  flex: 1;
+}
