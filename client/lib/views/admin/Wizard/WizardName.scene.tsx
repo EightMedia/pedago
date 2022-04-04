@@ -1,6 +1,5 @@
 import { Role } from "models";
-import React, { useContext, useState } from "react";
-import set from "set-value";
+import React, { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
@@ -8,23 +7,14 @@ import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
-import { WizardStep, WizardStepProps, WizardType } from "./Wizard.types";
+import { WizardStep, WizardStepProps } from "./Wizard.types";
 
 export const WizardName = ({
   data,
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const [wizardData, setWizardData] = useState(data);
-
-  const updateWizardData = (value: any, path: string) => {
-    const newData: WizardType["data"] = set(wizardData, path, value) as any;
-    setWizardData(newData);
-  };
-
   const locales = useContext(LanguageContext);
-
-  console.log(wizardData);
 
   return (
     <>
@@ -39,6 +29,7 @@ export const WizardName = ({
           id="name"
           label="Voor- en achternaam"
           showLabel={true}
+          onChange={(e) => updateData(e.target.value, "info.name")}
         />
         <InputText
           value={data?.info?.email}
@@ -51,11 +42,9 @@ export const WizardName = ({
           id="role"
           options={locales.roles}
           label="Functie"
-          data={wizardData?.info?.role}
+          data={data?.info?.role}
           enumOptions={true}
-          handleChange={(newData: Role) =>
-            updateWizardData(newData, "info.role")
-          }
+          handleChange={(newData: Role) => updateData(newData, "info.role")}
         />
 
         <InputText
@@ -63,7 +52,7 @@ export const WizardName = ({
           id="customRole"
           label="Andere functie, namelijk"
           showLabel={true}
-          condition={wizardData.info?.role?.includes(Role.Other)}
+          condition={data.info?.role?.includes(Role.Other)}
         />
 
         <Button

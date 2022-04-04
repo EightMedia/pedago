@@ -11,7 +11,7 @@ export enum WizardStep {
 
 export type WizardStepProps = {
   data: WizardType["data"];
-  updateData: Dispatch<SetStateAction<WizardType["data"]>>;
+  updateData: any;
   handleStep: Dispatch<SetStateAction<WizardStep>>;
 };
 

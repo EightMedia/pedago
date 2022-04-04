@@ -1,4 +1,5 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import set from "set-value";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
 import { Title } from "../../../components/Title";
@@ -21,9 +22,14 @@ const WizardComponent = ({
     return () => {};
   }, [initialStep]);
 
+  const updateWizardData = (value: any, path: string) => {
+    const newData: WizardType["data"] = set({ ...data }, path, value) as any;
+    setWizardData(newData);
+  };
+
   const stepProps = {
     data: wizardData,
-    updateData: setWizardData,
+    updateData: updateWizardData,
     handleStep: setStep,
   };
 
@@ -63,4 +69,4 @@ const WizardComponent = ({
   );
 };
 
-export const Wizard = memo(WizardComponent);
+export const Wizard = WizardComponent;
