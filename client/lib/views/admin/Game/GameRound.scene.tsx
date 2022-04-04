@@ -40,6 +40,7 @@ export const GameRound = ({
   );
   // teams with status Done
   const doneTeams = teams.filter((team) => team.status === PlayerStatus.Done);
+  const teamsStillPlaying = notStartedTeams?.length + inProgressTeams?.length;
 
   const handleStopRound = () => {
     setShowStopModal(false);
@@ -78,7 +79,7 @@ export const GameRound = ({
             </Title>
             <div className={styles.timerAndStop}>
               {timer && <Timer time={600} />}
-              <Button onClick={() => setShowStopModal(!showStopModal)}>
+              <Button onClick={() => teamsStillPlaying ? setShowStopModal(!showStopModal) : handleStopRound()}>
                 Ronde afronden
               </Button>
             </div>
@@ -106,8 +107,10 @@ export const GameRound = ({
       {showStopModal && (
         <Modal handleClose={() => setShowStopModal(false)}>
           <PanelTitle>Weet je het zeker?</PanelTitle>
-          <p>Er zijn nog 12 spelers bezig met het afronden van de ronde.</p>
-          <Button onClick={handleStopRound}>Ja, start de volgende ronde</Button>
+          <p>Er {teamsStillPlaying === 1 ? "is nog 1 team" : `zijn nog ${teamsStillPlaying} teams`} bezig met het afronden van de ronde.</p>
+          <Button onClick={handleStopRound}>
+            Ja, start de volgende ronde
+          </Button>
         </Modal>
       )}
       {showInfoModal && (

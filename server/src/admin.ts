@@ -53,7 +53,7 @@ export const registerGame = (
       locked: false,
       startDate: timestamp,
       view: ViewName.Lobby,
-      round: 1
+      round: 1,
     };
     // Add room to store
     store.addRoom(room);
@@ -105,7 +105,7 @@ export const startGame = (
       ...room,
       view: ViewName.Game,
     });
-    
+
     store.updateAllPlayers(roomId, <Partial<Player>>{
       status: PlayerStatus.NotStarted,
       view: ViewName.PlayerMatch,
@@ -143,25 +143,37 @@ export const finishRound = (
 ) => {
   if (roundNo === 6) {
     socket.emit(Event.To, { name: ViewName.Result });
+    // Fetch latest sortorder from all players
+    socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
+    
     callback({
       status: "OK",
       message: "Here are the results...",
     });
   } else {
-    const room = store.getRoomById(roomId) as RoomDto;
-    store.updateRoom({
-      ...room,
-      round: roundNo + 1,
-    });
-
-    // TODO
-    // Hier moet een iets verzonnen worden voor de functionaliteit van startgame en finishround
-    // Als ook een filtering op de players die nog niet begonnen zijn.
-
     // Fetch latest sortorder from all players
     socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
 
-    socket.broadcast.to(roomId).emit(PlayerEvent.PlayerMatchScene, true);
+    const room = store.getRoomById(roomId) as RoomDto;
+
+    // Remove idle players
+    const filteredPlayers = room?.players?.filter(
+      (p) => p.status !== PlayerStatus.NotStarted
+    );
+    // Kick idle players out of the room
+    room?.players?.forEach(p => {
+      if (p.status === PlayerStatus.NotStarted) {
+        socket.to(p.socketId).socketsLeave(roomId);
+      }
+    })
+    store.updateRoom({
+      ...room,
+      players: filteredPlayers,
+      round: roundNo + 1,
+    });
+
+    setTimeout(() => startGame(roomId, socket, callback), 2000);
+
     callback({
       status: "OK",
       message: "Going to the next round",
