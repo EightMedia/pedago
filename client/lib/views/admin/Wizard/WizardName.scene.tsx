@@ -19,7 +19,6 @@ export const WizardName = ({
 
   const updateWizardData = (value: any, path: string) => {
     const newData: WizardType["data"] = set(wizardData, path, value) as any;
-    console.log(newData?.info?.role);
     setWizardData(newData);
   };
 
@@ -64,7 +63,7 @@ export const WizardName = ({
           id="customRole"
           label="Andere functie, namelijk"
           showLabel={true}
-          condition={wizardData.info?.role?.includes(3)}
+          condition={wizardData.info?.role?.includes(Role.Other)}
         />
 
         <Button
