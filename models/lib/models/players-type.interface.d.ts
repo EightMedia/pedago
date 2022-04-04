@@ -1,7 +1,7 @@
 import { Sector } from "./sector.enum";
 export interface Players {
     type: PlayerType;
-    year?: 1 | 2 | 3 | 4;
+    year?: Array<1 | 2 | 3 | 4>;
     sector: Sector[];
     education?: string;
 }
