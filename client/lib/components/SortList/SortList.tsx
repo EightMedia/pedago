@@ -52,7 +52,7 @@ const SortListComponent = ({ cards, round, handleSortOrder }: SortListType) => {
 
   useEffect(() => {
     handleSortOrder(sortListToCategory(items));
-  }, [items]);
+  }, [items, handleSortOrder]);
 
   return (
     <DndContext

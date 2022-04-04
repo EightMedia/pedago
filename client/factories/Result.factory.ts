@@ -1,6 +1,7 @@
 import { Category, Group, Player, RoomDto, Round } from "models";
+import { ResultGroup, ResultSet } from "../lib/components/Result/Result.types";
 
-const getResultsForRounds = (rounds: Round[]): number[] => {
+const getResultsForRounds = (rounds: Round[]): ResultSet => {
   let [
     caring = 0,
     personal = 0,
@@ -41,11 +42,11 @@ const getResultsForRounds = (rounds: Round[]): number[] => {
   return [caring, personal, contextual, critical, functional, psychological];
 };
 
-const getResultsForAllPlayers = (players: Player[]): number[] => {
+const getResultsForAllPlayers = (players: Player[]): ResultSet => {
   const addedResults = players
     .map((p) => getResultsForRounds(p.rounds))
     .reduce(
-      (previousValue: number[], currentValue: number[]): number[] => {
+      (previousValue: ResultSet, currentValue: number[]): ResultSet => {
         return [
           previousValue[0] + currentValue[0],
           previousValue[1] + currentValue[1],
@@ -57,61 +58,29 @@ const getResultsForAllPlayers = (players: Player[]): number[] => {
       },
       [0, 0, 0, 0, 0, 0]
     );
-  const sortedAddedResults = sort(addedResults);
-  let reducedNumbers: number[] = [];
-
-  addedResults.forEach((r) => {
-    const index = sortedAddedResults.findIndex((rs) => r === rs);
-    switch (index) {
-      case 0:
-        reducedNumbers.push(36);
-        break;
-      case 1:
-        reducedNumbers.push(30);
-        break;
-      case 2:
-        reducedNumbers.push(24);
-        break;
-      case 3:
-        reducedNumbers.push(18);
-        break;
-      case 4:
-        reducedNumbers.push(12);
-        break;
-      case 5:
-        reducedNumbers.push(6);
-        break;
-      default:
-        reducedNumbers = [0, 0, 0, 0, 0, 0];
-        break;
-    }
-  });
-  return reducedNumbers;
+  return addedResults.map((r) => r / players.length) as ResultSet;
 };
 
-const sort = (arr: number[]) => arr.map((a) => a).sort((a, b) => b - a);
-
-const getPlayersFromGroup = (room: RoomDto, group: Group): number[] => {
+const getPlayersFromGroup = (room: RoomDto, group: Group): ResultSet => {
   const players = room.players.filter((p: Player) => p.group?.id === group.id);
   return getResultsForAllPlayers(players);
 };
 
 export const getResultData = (
   room: RoomDto,
-  playerId: string
+  playerId: string | null
 ): {
-  me: number[];
-  total: number[];
-  groups?: {
-    id: string;
-    name: string;
-    data: number[];
-  }[];
+  me: ResultSet | undefined;
+  groups: ResultGroup[] | undefined;
 } => {
-  const myRounds = room.players.find((p: Player) => p.id === playerId)?.rounds;
-  const me = getResultsForRounds(myRounds as Round[]);
-  const total = getResultsForAllPlayers(room.players);
-  const groups = room.groups?.map((group: Group) => {
+  let me = undefined;
+  if (playerId) {
+    const myRounds = room.players.find(
+      (p: Player) => p.id === playerId
+    )?.rounds;
+    me = getResultsForRounds(myRounds as Round[]);
+  }
+  const groups = room.groups?.map((group: Group): ResultGroup => {
     return {
       ...group,
       data: getPlayersFromGroup(room, group),
@@ -119,7 +88,22 @@ export const getResultData = (
   });
   return {
     me,
-    total,
     groups,
   };
+};
+
+export const getDataForAllGroups = (groups: ResultGroup[]): ResultSet => {
+  let rnd = 1;
+  return groups
+    .map((g) => g.data)
+    .reduce(
+      (acc, data) => {
+        const sum: ResultSet = acc.map((num, i) => {
+          return (num * (rnd - 1) + data[i]) / rnd;
+        });
+        rnd++;
+        return sum;
+      },
+      [0, 0, 0, 0, 0, 0]
+    );
 };
