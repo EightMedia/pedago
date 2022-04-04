@@ -20,7 +20,7 @@ export type ResultOverviewProps = {
 };
 
 export const ResultOverview = ({ data }: ResultOverviewProps) => {
-  const groupsTotal = getDataForAllGroups(data.groups)  
+  const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
   const lang = useContext(LanguageContext);
   const t = lang.results;

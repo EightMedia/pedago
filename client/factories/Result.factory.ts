@@ -90,18 +90,20 @@ export const getResultData = (
     me,
     groups,
   };
-}
+};
 
 export const getDataForAllGroups = (groups: ResultGroup[]): ResultSet => {
   let rnd = 1;
-  return groups.map(g => g.data).reduce(
-    (acc, data) => {
-      const sum: ResultSet = acc.map((num, i) => {
-        return (num * (rnd - 1) + data[i]) / rnd;
-      });
-      rnd++;
-      return sum;
-    },
-    [0, 0, 0, 0, 0, 0]
-  );
-}
+  return groups
+    .map((g) => g.data)
+    .reduce(
+      (acc, data) => {
+        const sum: ResultSet = acc.map((num, i) => {
+          return (num * (rnd - 1) + data[i]) / rnd;
+        });
+        rnd++;
+        return sum;
+      },
+      [0, 0, 0, 0, 0, 0]
+    );
+};
