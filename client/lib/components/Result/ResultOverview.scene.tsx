@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
+import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
 import { Stack } from "../../layouts/Stack";
 import { Baro } from "../Baro";
@@ -10,7 +11,7 @@ import { Panel, PanelTitle } from "../Panel";
 import { Shape } from "../Shape";
 import { Title } from "../Title";
 import styles from "./Result.module.css";
-import { ResultType } from "./Result.types";
+import { ResultSet, ResultType } from "./Result.types";
 
 export type ResultOverviewProps = {
   time?: number;
@@ -19,25 +20,13 @@ export type ResultOverviewProps = {
 };
 
 export const ResultOverview = ({ data }: ResultOverviewProps) => {
-  let rnd = 1;
-  const groupsTotal = data.groups.reduce(
-    (acc, group) => {
-      const sum = acc.map(function (num, i) {
-        const avg = (num * (rnd - 1) + group.data[i]) / rnd;
-        return avg;
-      });
-      rnd++;
-      return sum;
-    },
-    [0, 0, 0, 0, 0, 0]
-  );
-
+  const groupsTotal = getDataForAllGroups(data.groups)  
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
   const lang = useContext(LanguageContext);
   const t = lang.results;
-  const [primaryData, setPrimaryData] = useState(initialPrimaryData);
-  const [secondaryData, setSecondaryData] = useState(groupsTotal);
-  const [detailsTitle, setDetailsTitle] = useState(t.myResult);
+  const [primaryData, setPrimaryData] = useState<ResultSet>(initialPrimaryData);
+  const [secondaryData, setSecondaryData] = useState<ResultSet>(groupsTotal);
+  const [detailsTitle, setDetailsTitle] = useState<string>(t.myResult);
   const [activeButton, setActiveButton] = useState<string>(
     data?.me ? "me" : "total"
   );
