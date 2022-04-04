@@ -9,7 +9,7 @@ import {
   Round,
   SocketCallback,
   ViewName,
-  ViewState,
+  ViewState
 } from "models";
 import { Socket } from "socket.io";
 import { updateClientRoom, updatePlayersInLobby } from "./shared";
@@ -63,7 +63,7 @@ export const joinRoomByRoomCode = (
       PlayerEvent.PlayerMatchScene,
       updatedPlayer.status !== PlayerStatus.NotStarted
     );
-     // Turn off countdown
+    // Turn off countdown
     socket.emit(PlayerEvent.GameScene, false);
     socket.emit(Event.To, { name: updatedPlayer.view });
   }
@@ -170,9 +170,9 @@ export const requestLobby = (
     ...player,
     view: ViewName.Lobby,
   });
-    // Set PlayerMatchScene to Wait
+  // Set PlayerMatchScene to Wait
   socket.emit(PlayerEvent.PlayerMatchScene, true);
-    // Turn on countdown
+  // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
   updatePlayersInLobby(socket, roomId);
   updateClientRoom(socket, roomId);
@@ -207,7 +207,7 @@ export const gameStart = (
   updateClientRoom(socket, roomId);
   // Set PlayerMatchScene to Wait
   socket.emit(PlayerEvent.PlayerMatchScene, true);
-    // Turn on countdown
+  // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
   socket.emit(Event.To, <ViewState>{ name: ViewName.Game });
 
@@ -313,8 +313,8 @@ export const finishRoundByAdmin = (
     message: "Round saved by administrator",
   });
 
-  storeTeamReady(roomId, playerId, socket, callback);
-}
+  setTimeout(() => storeTeamReady(roomId, playerId, socket, callback), 1000);
+};
 
 export const getLatestSortOrder = (
   roomId: string,
@@ -356,7 +356,7 @@ export const storeTeamReady = (
   const lastRound = player?.rounds.find((r) => r.number === 6);
 
   if (lastRound) {
-    socket.emit(Event.To, { name: ViewName.Result});
+    socket.emit(Event.To, { name: ViewName.Result });
     team.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         status: PlayerStatus.Done,
@@ -374,7 +374,7 @@ export const storeTeamReady = (
         view: ViewName.PlayerMatch,
         round,
       });
-        // Set PlayerMatchScene to Wait
+      // Set PlayerMatchScene to Wait
       socket.to(player.socketId).emit(PlayerEvent.PlayerMatchScene, true);
 
       socket.to(player.socketId).emit(Event.Round, round);
@@ -382,9 +382,9 @@ export const storeTeamReady = (
         name: ViewName.PlayerMatch,
       });
     });
-      // Set PlayerMatchScene to Wait
+    // Set PlayerMatchScene to Wait
     socket.emit(PlayerEvent.PlayerMatchScene, true);
-    
+
     socket.emit(Event.Round, round);
 
     updateClientRoom(socket, roomId);
