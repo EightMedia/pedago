@@ -10,7 +10,7 @@ export const dataToJson = (room: RoomDto, playerId: string): string => {
   const data = {
     date: room.startDate,
     organisation: room.organisation?.name,
-    location: room.organisation?.additional,
+    location: room.organisation?.location,
     adminRole: getRole(
       room.admin.role as Role[],
       room.admin.customRole as string

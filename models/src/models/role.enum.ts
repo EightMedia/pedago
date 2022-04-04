@@ -1,6 +1,6 @@
 export enum Role {
-  Docent,
+  Lecturer,
   Trainer,
   Manager,
-  Anders,
+  Other,
 }

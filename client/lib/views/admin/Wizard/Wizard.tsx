@@ -27,6 +27,11 @@ const WizardComponent = ({
     handleStep: setStep,
   };
 
+  const handleCreateGame = () => {
+    alert("Create game ");
+    console.log("create game with data: " + JSON.stringify(wizardData));
+  };
+
   return (
     <Page>
       <Title>Spel aanmaken</Title>
@@ -42,7 +47,13 @@ const WizardComponent = ({
             case WizardStep.Options:
               return <WizardOptions {...stepProps} />;
             case WizardStep.Check:
-              return <WizardCheck data={wizardData} handleStep={setStep} />;
+              return (
+                <WizardCheck
+                  data={wizardData}
+                  handleStep={setStep}
+                  handleCreateGame={handleCreateGame}
+                />
+              );
             default:
               return <>Wizard Fail</>;
           }

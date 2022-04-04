@@ -34,7 +34,11 @@ export const Name = Template.bind({});
 Name.parameters = params(
   "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=467%3A3285"
 );
-Name.args = { ...WizardData, initialStep: WizardStep.Name };
+Name.args = {
+  ...WizardData,
+  initialStep: WizardStep.Name,
+  data: wizardDataStudents,
+};
 
 // Organisation
 export const Organisation = Template.bind({});

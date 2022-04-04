@@ -5,6 +5,7 @@ import { InputTextType } from "./InputText.types";
 
 export const InputTextComponent = ({
   onChange,
+  condition = true,
   id,
   error,
   type = "text",
@@ -13,6 +14,7 @@ export const InputTextComponent = ({
   showLabel = false,
   value,
 }: InputTextType) => {
+  if (condition === false) return null;
   return (
     <div className={cx(styles.wrapper)}>
       <label

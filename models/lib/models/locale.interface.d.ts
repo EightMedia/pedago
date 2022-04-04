@@ -1,4 +1,13 @@
 export interface Locale {
+    roles: {
+        [key: number]: string;
+    };
+    year: {
+        [key: number]: string;
+    };
+    sector: {
+        [key: number]: string;
+    };
     categories: {
         0: {
             title: string;

@@ -9,4 +9,5 @@ export type InputTextType = {
   error?: string;
   showLabel?: boolean;
   value?: string;
+  condition?: boolean;
 };
