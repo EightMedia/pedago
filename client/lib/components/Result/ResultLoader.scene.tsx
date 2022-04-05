@@ -12,7 +12,7 @@ export const ResultLoader = ({ time = 3, callback }: ResultLoaderProps) => {
   timedCallback(1, callback);
   return (
     <>
-      <Panel>
+      <Panel width="sm">
         <Center>
           <Loader />
           <PanelTitle space="sm">Helemaal klaar!</PanelTitle>
