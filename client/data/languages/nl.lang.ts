@@ -1,6 +1,33 @@
-import { Locale } from "models";
+import { Locale, Role, Sector } from "models";
+import { PlayerType } from "models/lib/models/player-type.enum";
 
 export const NL: Locale = {
+  playerType: {
+    [PlayerType.Professionals]: "Professionals",
+    [PlayerType.Students]: "Studenten",
+  },
+  roles: {
+    [Role.Lecturer]: "Docent",
+    [Role.Trainer]: "Trainer",
+    [Role.Manager]: "Manager",
+    [Role.Other]: "Anders",
+  },
+  year: {
+    1: "Jaar 1",
+    2: "Jaar 2",
+    3: "Jaar 3",
+    4: "Jaar 4",
+  },
+  sector: {
+    [Sector.PO]: "PO",
+    [Sector.VO]: "VO",
+    [Sector.MBO]: "MBO",
+    [Sector.HBO]: "HBO",
+    [Sector.WO]: "WO",
+    [Sector.PrMaHBO]: "PrMaHBO",
+    [Sector.AcMa]: "AcMa",
+    [Sector.Other]: "Anders",
+  },
   categories: {
     0: {
       title: "Zorg legitimering",

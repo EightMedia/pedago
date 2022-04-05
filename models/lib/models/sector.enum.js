@@ -10,5 +10,5 @@ var Sector;
     Sector[Sector["WO"] = 4] = "WO";
     Sector[Sector["PrMaHBO"] = 5] = "PrMaHBO";
     Sector[Sector["AcMa"] = 6] = "AcMa";
-    Sector[Sector["Anders"] = 7] = "Anders";
+    Sector[Sector["Other"] = 7] = "Other";
 })(Sector = exports.Sector || (exports.Sector = {}));

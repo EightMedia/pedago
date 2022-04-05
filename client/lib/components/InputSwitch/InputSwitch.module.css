@@ -1,0 +1,13 @@
+.text {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  display: flex;
+}
+.input {
+  position: absolute;
+  left: -9999px;
+  width: 0;
+  height: 0;
+}

@@ -8,4 +8,6 @@ export type InputTextType = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: string;
   showLabel?: boolean;
+  value?: string;
+  condition?: boolean;
 };

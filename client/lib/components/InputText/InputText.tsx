@@ -5,13 +5,16 @@ import { InputTextType } from "./InputText.types";
 
 export const InputTextComponent = ({
   onChange,
+  condition = true,
   id,
   error,
   type = "text",
   label,
   placeholder,
   showLabel = false,
+  value,
 }: InputTextType) => {
+  if (condition === false) return null;
   return (
     <div className={cx(styles.wrapper)}>
       <label
@@ -26,6 +29,7 @@ export const InputTextComponent = ({
         onChange={onChange}
         className={cx(styles.input, styles[error ? "valid" : "invalid"])}
         placeholder={placeholder}
+        value={value}
       />
       {error ?? <div className="error">{error}</div>}
     </div>
