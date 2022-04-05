@@ -45,21 +45,33 @@ export const Organisation = Template.bind({});
 Organisation.parameters = params(
   "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=474%3A2747"
 );
-Organisation.args = { ...WizardData, initialStep: WizardStep.Organisation };
+Organisation.args = {
+  ...WizardData,
+  initialStep: WizardStep.Organisation,
+  data: wizardDataStudents,
+};
 
 // GameType
 export const GameType = Template.bind({});
 GameType.parameters = params(
   "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=474%3A3011"
 );
-GameType.args = { ...WizardData, initialStep: WizardStep.GameType };
+GameType.args = {
+  ...WizardData,
+  initialStep: WizardStep.GameType,
+  data: wizardDataStudents,
+};
 
 // Options
 export const Options = Template.bind({});
 Options.parameters = params(
   "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=474%3A3238"
 );
-Options.args = { ...WizardData, initialStep: WizardStep.Options };
+Options.args = {
+  ...WizardData,
+  initialStep: WizardStep.Options,
+  data: wizardDataStudents,
+};
 
 // Check Students
 export const CheckStudents = Template.bind({});

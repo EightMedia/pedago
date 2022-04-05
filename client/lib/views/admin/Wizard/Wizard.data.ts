@@ -1,3 +1,4 @@
+import { PlayerType } from "models";
 import { WizardStep, WizardType } from "./Wizard.types";
 
 export const wizardDataStudents: WizardType["data"] = {
@@ -11,8 +12,8 @@ export const wizardDataStudents: WizardType["data"] = {
       location: "Rotterdam",
     },
     players: {
-      type: "Studenten",
-      year: 2,
+      type: PlayerType.Students,
+      year: [2],
       sector: [1, 2],
       education: "Pabo",
     },
@@ -21,6 +22,16 @@ export const wizardDataStudents: WizardType["data"] = {
     timer: false,
     inGroups: true,
   },
+  groups: [
+    {
+      id: "group1",
+      name: "Hogeschool Utrecht",
+    },
+    {
+      id: "group2",
+      name: "Hogeschool Rotterdam",
+    },
+  ],
 };
 
 export const WizardData: WizardType = {
