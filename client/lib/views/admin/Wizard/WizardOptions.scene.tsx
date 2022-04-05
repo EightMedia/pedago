@@ -18,14 +18,21 @@ export const WizardOptions = ({
     return "";
   };
 
-  const handleGroupChange = (id: number, name: string) => {
+  const handleGroupChange = (id: number, name: string | undefined) => {
     let groups = data.groups || [];
-    if (name === "") {
-      delete groups[id];
+    if (!name) {
+      groups.pop();
     } else {
       groups[id] = { id: "group" + (id + 1), name: name };
     }
     updateData(groups, "groups");
+  };
+
+  const handleNextStep = () => {
+    if (data.options?.inGroups === false) {
+      [0, 1, 2, 3].forEach((g) => handleGroupChange(g, undefined));
+    }
+    handleStep(WizardStep.Check);
   };
 
   return (
@@ -93,7 +100,7 @@ export const WizardOptions = ({
           }}
           condition={(data.options?.inGroups && groupName(2) !== "") || false}
         />
-        <Button stretch={true} onClick={() => handleStep(WizardStep.Check)}>
+        <Button stretch={true} onClick={handleNextStep}>
           Volgende
         </Button>
         <Button

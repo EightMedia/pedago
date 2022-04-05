@@ -25,7 +25,7 @@ const WizardComponent = ({
   }, [initialStep]);
 
   const updateWizardData = (value: any, path: string) => {
-    const newData: WizardType["data"] = set({ ...data }, path, value) as any;
+    const newData: WizardType["data"] = set({ ...data, ...wizardData }, path, value) as any;
     setWizardData(newData);
   };
 

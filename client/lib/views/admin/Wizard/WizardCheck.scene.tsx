@@ -27,7 +27,7 @@ export const WizardCheck = ({
     roles?.pop();
     roles?.push(customRole);
   }
-  
+    
   return (
     <>
       <PanelTitle align="left">Jouw gegevens</PanelTitle>
@@ -47,7 +47,7 @@ export const WizardCheck = ({
       <List>
         <ListItem label="Spelers" value={playerType as string} />
         <ListItem label="Timer" value={data?.options?.timer ? "Aan" : "Uit"} />
-        <ListItem label="Groepen" value={groupNames?.join(", ") || "n.v.t."} />
+        <ListItem label="Groepen" value={groupNames?.length ? groupNames?.join(", ") : "n.v.t."} />
       </List>
 
       <Button stretch={true} onClick={() => handleCreateGame(data)}>
