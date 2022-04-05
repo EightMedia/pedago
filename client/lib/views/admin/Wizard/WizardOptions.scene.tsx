@@ -18,10 +18,10 @@ export const WizardOptions = ({
     return "";
   };
 
-  const handleGroupChange = (id: number, name: string | undefined) => {
+  const handleGroupChange = (id: number, name: string) => {
     let groups = data.groups || [];
     if (!name) {
-      groups.pop();
+      groups.splice(id, 1);
     } else {
       groups[id] = { id: id.toString(), name: name };
     }
@@ -30,7 +30,7 @@ export const WizardOptions = ({
 
   const handleNextStep = () => {
     if (data.options?.inGroups === false) {
-      [0, 1, 2, 3].forEach((g) => handleGroupChange(g, undefined));
+      updateData([], "groups")
     }
     handleStep(WizardStep.Check);
   };
