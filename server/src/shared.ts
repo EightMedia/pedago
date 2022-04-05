@@ -6,7 +6,7 @@ const store = gamesStore.getState();
 
 export const updateClientRoom = (socket: Socket, roomId: string): void => {
   const room = store.getRoomById(roomId) as RoomDto;
-  socket.broadcast.to(room.id).emit(Event.Room, room);
+  socket.broadcast.to(room?.id).emit(Event.Room, room);
   socket.emit(Event.Room, room);
 };
 

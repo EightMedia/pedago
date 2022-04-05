@@ -311,6 +311,9 @@ export const finishRoundByAdmin = (
   callback({
     status: "OK",
     message: "Round saved by administrator",
+    data: {
+      sortOrder: round.order
+    }
   });
 
   setTimeout(() => storeTeamReady(roomId, playerId, socket, callback), 1000);
