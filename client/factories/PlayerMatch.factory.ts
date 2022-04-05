@@ -16,7 +16,7 @@ export const getPlayerMatchType = (
     .map((p) => {
       return {
         name: p.name,
-        group: p.group.name,
+        group: p.group?.name,
       };
     });
 
