@@ -3,6 +3,8 @@
   border-radius: var(--border-radius-md);
   color: var(--color-grey-darkest);
   padding: var(--space-md);
+  margin-left: auto;
+  margin-right: auto;
   @media (--sm) {
     padding: var(--space-lg);
   }
@@ -25,4 +27,17 @@
 }
 .center {
   text-align: center;
+}
+
+.sm {
+  max-width: 368px;
+}
+.md {
+  max-width: 576px;
+}
+.lg {
+  max-width: 1200px;
+}
+.full {
+  max-width: 100%;
 }

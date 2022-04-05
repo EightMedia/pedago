@@ -5,7 +5,7 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState,
+  ViewState
 } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -19,6 +19,11 @@ import { getResultData } from "../../factories/Result.factory";
 import { getPlayerIdFromLocalStorage } from "../../factories/shared.factory";
 import { getWaitingType } from "../../factories/Waiting.factory";
 import { Page } from "../../lib/components/Page";
+import {
+  ResultGroup,
+  ResultSet,
+  ResultStep
+} from "../../lib/components/Result/Result.types";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Discuss } from "../../lib/views/game/Discuss";
 import { DiscussStep } from "../../lib/views/game/Discuss/Discuss.types";
@@ -27,8 +32,7 @@ import { GameScenes } from "../../lib/views/game/Game/Game.types";
 import { Lobby } from "../../lib/views/game/Lobby";
 import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
 import { PlayerMatchSceneEnum } from "../../lib/views/game/PlayerMatch/PlayerMatch.types";
-import { Result } from "../../lib/views/game/Result/Result";
-import { ResultStep } from "../../lib/views/game/Result/Result.types";
+import { Result } from "../../lib/views/game/Result";
 import { Waiting } from "../../lib/views/game/Waiting";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
@@ -178,7 +182,12 @@ const roomCode = () => {
                 return (
                   <Result
                     initialStep={ResultStep.Loader}
-                    data={getResultData(room, playerId as string)}
+                    data={
+                      getResultData(room, playerId as string) as {
+                        me?: ResultSet;
+                        groups: ResultGroup[];
+                      }
+                    }
                   />
                 );
               default:

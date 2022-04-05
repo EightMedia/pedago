@@ -17,7 +17,13 @@ import {
   getAdminLobbyType,
   getLobbyRoom
 } from "../../factories/AdminLobby.factory";
+import { getResultData } from "../../factories/Result.factory";
 import { Page } from "../../lib/components/Page";
+import {
+  ResultGroup,
+  ResultSet,
+  ResultStep
+} from "../../lib/components/Result/Result.types";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
 import { GameScene } from "../../lib/views/admin/Game/Game.types";
@@ -129,7 +135,17 @@ const AdminGame = () => {
                   />
                 );
               case ViewName.Result:
-                return <Result />;
+                return (
+                  <Result
+                    initialStep={ResultStep.Loader}
+                    data={
+                      getResultData(room, null) as {
+                        me?: ResultSet;
+                        groups: ResultGroup[];
+                      }
+                    }
+                  />
+                );
               default:
                 return <>ERROR: ViewName not found</>;
             }

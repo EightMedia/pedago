@@ -17,8 +17,8 @@ const TeamsListComponent = ({ teams, title, emptyText }: TeamsListType) => {
       {teams.map((team) => (
         <div key={team.name} className={styles.team}>
           <span className={styles.teamName}>{team.name}</span>
-          {team.players.map((player) => (
-            <Player name={player} />
+          {team.players.map((player, i) => (
+            <Player key={i} name={player} />
           ))}
         </div>
       ))}

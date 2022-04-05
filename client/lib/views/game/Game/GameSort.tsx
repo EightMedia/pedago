@@ -13,7 +13,7 @@ import { GameSortType } from "./Game.types";
 export const GameSort = ({ round }: GameSortType) => {
   const data = useContext(LanguageContext);
   const roundData = data.rounds[round - 1];
-  const [order, setOrder] = useState<Category[]>([]);
+  const [order, setOrder] = useState<Category[]>([0, 1, 2, 3, 4, 5]);
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
@@ -48,10 +48,6 @@ export const GameSort = ({ round }: GameSortType) => {
     );
   };
 
-  const handleSortOrder = (items: Category[]): void => {
-    setOrder(items);
-  };
-
   useEffect(() => {
     if (socket) {
       socket.on(PlayerEvent.FinishRoundByAdmin, finishRoundByAdmin);
@@ -66,7 +62,7 @@ export const GameSort = ({ round }: GameSortType) => {
       <SortList
         cards={roundData?.cards}
         round={round}
-        handleSortOrder={handleSortOrder}
+        handleSortOrder={setOrder}
       />
       <Center space="sm">
         <Button onClick={() => handleDoneSorting()}>{data.game.done}</Button>
