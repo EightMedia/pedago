@@ -1,4 +1,4 @@
-import { Players, Sector } from "models";
+import { Players, PlayerType, Sector } from "models";
 import React, { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
@@ -39,6 +39,7 @@ export const WizardGameType = ({
           label="Opleiding"
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.players.education")}
+          condition={data.info?.players?.type === PlayerType.Students}
         />
         <InputOptions
           id="year"
@@ -49,6 +50,7 @@ export const WizardGameType = ({
           handleChange={(newData: Players["year"]) =>
             updateData(newData, "info.players.year")
           }
+          condition={data.info?.players?.type === PlayerType.Students}
         />
         <InputOptions
           id="sector"
