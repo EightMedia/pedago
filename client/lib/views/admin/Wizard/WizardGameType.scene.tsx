@@ -32,6 +32,10 @@ export const WizardGameType = ({
           enumOptions={true}
           handleChange={(newData: any) => {
             updateData(newData[0], "info.players.type");
+            if (newData[0] === PlayerType.Professionals) {
+              updateData(undefined, "info.players.education");
+              updateData(undefined, "info.players.year");
+            }
           }}
         />
         <InputText

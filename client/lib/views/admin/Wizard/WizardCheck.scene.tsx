@@ -20,6 +20,7 @@ export const WizardCheck = ({
   const groupNames = data.groups?.map((group) => group.name);
   const playerType =
     Object.values(PlayerType)[data?.info?.players?.type as number];
+
   const roles = data?.info?.role?.map((r) => Object.values(Role)[r]);
   const customRole = data?.info?.customRole;
   if (customRole) {
@@ -46,7 +47,7 @@ export const WizardCheck = ({
       <List>
         <ListItem label="Spelers" value={playerType as string} />
         <ListItem label="Timer" value={data?.options?.timer ? "Aan" : "Uit"} />
-        <ListItem label="Groepen" value={`${groupNames}`} />
+        <ListItem label="Groepen" value={groupNames?.join(", ") || "n.v.t."} />
       </List>
 
       <Button stretch={true} onClick={() => handleCreateGame(data)}>
