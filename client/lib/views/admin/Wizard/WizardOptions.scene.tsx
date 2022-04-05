@@ -15,20 +15,16 @@ export const WizardOptions = ({
     if (data.groups && data.groups[id]) {
       return data.groups[id].name;
     }
-    return undefined;
+    return "";
   };
 
-  const [group1, setGroup1] = React.useState<string | undefined>(groupName(0));
-  const [group2, setGroup2] = React.useState<string | undefined>(groupName(1));
-  const [group3, setGroup3] = React.useState<string | undefined>(groupName(2));
-  const [group4, setGroup4] = React.useState<string | undefined>(groupName(3));
-
-  const handleGroups = () => {
-    let groups = [];
-    if (group1) groups.push({ id: "group1", name: group1 });
-    if (group2) groups.push({ id: "group2", name: group2 });
-    if (group3) groups.push({ id: "group3", name: group3 });
-    if (group4) groups.push({ id: "group4", name: group4 });
+  const handleGroupChange = (id: number, name: string) => {
+    let groups = data.groups || [];
+    if (name === "") {
+      delete groups[id];
+    } else {
+      groups[id] = { id: "group" + (id + 1), name: name };
+    }
     updateData(groups, "groups");
   };
 
@@ -40,51 +36,47 @@ export const WizardOptions = ({
       </Center>
       <Stack>
         <InputText
-          value={group1}
+          value={groupName(0)}
           id="group1"
           label="Groep 1"
           placeholder="Groep 1"
           showLabel={false}
           onChange={(e) => {
-            setGroup1(e.target.value);
-            handleGroups();
+            handleGroupChange(0, e.target.value);
           }}
         />
         <InputText
-          value={group2}
+          value={groupName(1)}
           id="group2"
           label="Groep 2"
           placeholder="Groep 2"
           showLabel={false}
           onChange={(e) => {
-            setGroup2(e.target.value);
-            handleGroups();
+            handleGroupChange(1, e.target.value);
           }}
-          condition={(group1 && group1?.length > 0) || false}
+          condition={groupName(0) !== "" || false}
         />
         <InputText
-          value={group3}
+          value={groupName(2)}
           id="group3"
           label="Groep 3"
           placeholder="Groep 3"
           showLabel={false}
           onChange={(e) => {
-            setGroup3(e.target.value);
-            handleGroups();
+            handleGroupChange(2, e.target.value);
           }}
-          condition={(group2 && group2?.length > 0) || false}
+          condition={groupName(1) !== "" || false}
         />
         <InputText
-          value={group4}
+          value={groupName(3)}
           id="group4"
           label="Groep 4"
           placeholder="Groep 4"
           showLabel={false}
           onChange={(e) => {
-            setGroup4(e.target.value);
-            handleGroups();
+            handleGroupChange(3, e.target.value);
           }}
-          condition={(group3 && group3?.length > 0) || false}
+          condition={groupName(2) !== "" || false}
         />
         <Button stretch={true} onClick={() => handleStep(WizardStep.Check)}>
           Volgende
