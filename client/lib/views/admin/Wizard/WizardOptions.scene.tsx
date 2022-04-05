@@ -23,7 +23,7 @@ export const WizardOptions = ({
     if (!name) {
       groups.pop();
     } else {
-      groups[id] = { id: "group" + (id + 1), name: name };
+      groups[id] = { id: id.toString(), name: name };
     }
     updateData(groups, "groups");
   };
