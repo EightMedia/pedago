@@ -22,6 +22,17 @@ export const WizardGameType = ({
         <PanelTitle>Type spelers</PanelTitle>
       </Center>
       <Stack>
+        <InputOptions
+          id="type"
+          multi={false}
+          options={locales.playerType}
+          label="type"
+          data={[data.info?.players?.type || 0]}
+          enumOptions={true}
+          handleChange={(newData: any) => {
+            updateData(newData[0], "info.players.type");
+          }}
+        />
         <InputText
           value={data.info?.players?.education}
           id="opleiding"
