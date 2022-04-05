@@ -12,6 +12,7 @@ export * from "./models/option.interface";
 export * from "./models/organisation.interface";
 export * from "./models/player-event.enum";
 export * from "./models/player-status.enum";
+export * from "./models/player-type.enum";
 export * from "./models/player.interface";
 export * from "./models/players-type.interface";
 export * from "./models/role.enum";

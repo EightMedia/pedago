@@ -1,4 +1,18 @@
+import { PlayerType } from "./player-type.enum";
 export interface Locale {
+    playerType: {
+        [PlayerType.Professionals]: string;
+        [PlayerType.Students]: string;
+    };
+    roles: {
+        [key: number]: string;
+    };
+    year: {
+        [key: number]: string;
+    };
+    sector: {
+        [key: number]: string;
+    };
     categories: {
         0: {
             title: string;

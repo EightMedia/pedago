@@ -1,6 +1,6 @@
 export declare enum Role {
-    Docent = 0,
+    Lecturer = 0,
     Trainer = 1,
     Manager = 2,
-    Anders = 3
+    Other = 3
 }
