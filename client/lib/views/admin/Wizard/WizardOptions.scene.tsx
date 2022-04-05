@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../../../components/Button";
+import { InputSwitch } from "../../../components/InputSwitch";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { Center } from "../../../layouts/Center";
@@ -35,6 +36,20 @@ export const WizardOptions = ({
         <PanelTitle>Extra spelopties</PanelTitle>
       </Center>
       <Stack>
+        <InputSwitch
+          id="timer"
+          label="Timer"
+          helpText="Spelrondes krijgen dan een limiet van 10 minuten"
+          checked={data.options?.timer}
+          onChange={(e) => updateData(e.target.checked, "options.timer")}
+        />
+        <InputSwitch
+          id="inGroups"
+          label="Werken in groepen"
+          helpText="Spelers spelen zoveel mogelijk met spelers uit andere groepen"
+          checked={data.options?.inGroups}
+          onChange={(e) => updateData(e.target.checked, "options.inGroups")}
+        />
         <InputText
           value={groupName(0)}
           id="group1"
