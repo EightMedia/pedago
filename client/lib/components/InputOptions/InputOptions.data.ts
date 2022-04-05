@@ -1,7 +1,7 @@
 import { InputOptionsType } from "./InputOptions.types";
 
 export const InputOptionsData: InputOptionsType = {
-  label: "An optionslist",
+  label: "A list of options",
   multi: true,
   id: "multi",
   enumOptions: true,
