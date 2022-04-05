@@ -1,6 +1,11 @@
 import { Locale, Role, Sector } from "models";
+import { PlayerType } from "models/lib/models/player-type.enum";
 
 export const NL: Locale = {
+  playerType: {
+    [PlayerType.Professionals]: "Professionals",
+    [PlayerType.Students]: "Studenten",
+  },
   roles: {
     [Role.Lecturer]: "Docent",
     [Role.Trainer]: "Trainer",
