@@ -73,7 +73,7 @@ export const parameters = {
     },
     defaultViewport: "MobileM",
   },
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: "^(on|handle)[A-Z].*" },
   controls: {
     matchers: {
       color: /(background|color)$/i,
