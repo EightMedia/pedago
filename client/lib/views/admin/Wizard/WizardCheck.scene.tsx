@@ -1,4 +1,5 @@
-import React from "react";
+import { Role } from "models";
+import { PlayerType } from "models/lib/models/player-type.enum";
 import { Button } from "../../../components/Button";
 import { List } from "../../../components/List";
 import { ListItem } from "../../../components/List/List";
@@ -17,6 +18,15 @@ export const WizardCheck = ({
   handleCreateGame,
 }: WizardCheckProps) => {
   const groupNames = data.groups?.map((group) => group.name);
+  const playerType =
+    Object.values(PlayerType)[data?.info?.players?.type as number];
+  const roles = data?.info?.role?.map((r) => Object.values(Role)[r]);
+  const customRole = data?.info?.customRole;
+  if (customRole) {
+    roles?.pop();
+    roles?.push(customRole);
+  }
+  
   return (
     <>
       <PanelTitle align="left">Jouw gegevens</PanelTitle>
@@ -24,7 +34,7 @@ export const WizardCheck = ({
       <List>
         <ListItem label="Naam" value={data?.info?.name} />
         <ListItem label="E-mailadres" value={data?.info?.email} />
-        <ListItem label="Functie" value={`${data?.info?.role}`} />{" "}
+        <ListItem label="Functie" value={roles?.join(", ")} />{" "}
         <ListItem
           label="Organisatie"
           value={`${data?.info?.organisation?.name} (${data?.info?.organisation?.location})`}
@@ -34,7 +44,7 @@ export const WizardCheck = ({
       <PanelTitle align="left">Spelopties</PanelTitle>
 
       <List>
-        <ListItem label="Spelers" value={data?.info?.players?.type} />
+        <ListItem label="Spelers" value={playerType as string} />
         <ListItem label="Timer" value={data?.options?.timer ? "Aan" : "Uit"} />
         <ListItem label="Groepen" value={`${groupNames}`} />
       </List>

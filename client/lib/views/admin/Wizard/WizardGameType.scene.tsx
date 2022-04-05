@@ -28,7 +28,7 @@ export const WizardGameType = ({
           multi={false}
           options={locales.playerType}
           label="type"
-          value={[data.info?.players?.type || 0]}
+          value={[data.info?.players?.type ?? PlayerType.Students]}
           enumOptions={true}
           handleChange={(newData: any) => {
             updateData(newData[0], "info.players.type");

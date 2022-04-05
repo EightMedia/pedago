@@ -1,4 +1,5 @@
 import { RoomDto } from "models";
+import { PlayerType } from "models/lib/models/player-type.enum";
 import { WizardType } from "../lib/views/admin/Wizard/Wizard.types";
 
 export const convertToRoomDto = (
@@ -17,6 +18,11 @@ export const getWizardData = (room: Partial<RoomDto>): WizardType["data"] => {
   return {
     info: {
       ...room.admin,
+      players: {
+        ...room.admin?.players,
+        type: PlayerType.Students,
+        sector: []
+      }
     },
     options: room.options,
     groups: room.groups,
