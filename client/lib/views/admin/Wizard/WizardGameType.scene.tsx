@@ -40,7 +40,7 @@ export const WizardGameType = ({
           label="Opleiding"
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.players.education")}
-          condition={data.info?.players?.type === PlayerType.Students}
+          condition={data.info?.players?.type !== PlayerType.Professionals}
         />
         <InputOptions
           id="year"
@@ -51,7 +51,7 @@ export const WizardGameType = ({
           handleChange={(newData: Players["year"]) =>
             updateData(newData, "info.players.year")
           }
-          condition={data.info?.players?.type === PlayerType.Students}
+          condition={data.info?.players?.type !== PlayerType.Professionals}
         />
         <InputOptions
           id="sector"
