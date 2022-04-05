@@ -59,6 +59,7 @@ export const WizardOptions = ({
           onChange={(e) => {
             handleGroupChange(0, e.target.value);
           }}
+          condition={data.options?.inGroups}
         />
         <InputText
           value={groupName(1)}
@@ -69,7 +70,7 @@ export const WizardOptions = ({
           onChange={(e) => {
             handleGroupChange(1, e.target.value);
           }}
-          condition={groupName(0) !== "" || false}
+          condition={(data.options?.inGroups && groupName(0) !== "") || false}
         />
         <InputText
           value={groupName(2)}
@@ -80,7 +81,7 @@ export const WizardOptions = ({
           onChange={(e) => {
             handleGroupChange(2, e.target.value);
           }}
-          condition={groupName(1) !== "" || false}
+          condition={(data.options?.inGroups && groupName(1) !== "") || false}
         />
         <InputText
           value={groupName(3)}
@@ -91,7 +92,7 @@ export const WizardOptions = ({
           onChange={(e) => {
             handleGroupChange(3, e.target.value);
           }}
-          condition={groupName(2) !== "" || false}
+          condition={(data.options?.inGroups && groupName(2) !== "") || false}
         />
         <Button stretch={true} onClick={() => handleStep(WizardStep.Check)}>
           Volgende
