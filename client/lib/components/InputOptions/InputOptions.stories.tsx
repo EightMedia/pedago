@@ -13,25 +13,25 @@ const Template: ComponentStory<typeof InputOptions> = (args) => (
 );
 
 // multiple options
-export const Multi = Template.bind({});
-Multi.args = { ...InputOptionsData, multi: true };
+export const EnumMulti = Template.bind({});
+EnumMulti.args = { ...InputOptionsData, multi: true };
 
 // multiple options with preset
-export const MultiWithPresetSelection = Template.bind({});
-MultiWithPresetSelection.args = {
+export const EnumMultiWithPresetSelection = Template.bind({});
+EnumMultiWithPresetSelection.args = {
   ...InputOptionsData,
   multi: true,
-  data: ["option1", "option3"],
+  data: [2, 4],
 };
 
 // single option
-export const Single = Template.bind({});
-Single.args = { ...InputOptionsData, multi: false };
+export const EnumSingle = Template.bind({});
+EnumSingle.args = { ...InputOptionsData, multi: false };
 
 // single options with preset
-export const singleWithPresetSelection = Template.bind({});
-singleWithPresetSelection.args = {
+export const EnumsingleWithPresetSelection = Template.bind({});
+EnumsingleWithPresetSelection.args = {
   ...InputOptionsData,
   multi: false,
-  data: ["option3"],
+  data: [3],
 };
