@@ -17,6 +17,7 @@ import {
   getAdminLobbyType,
   getLobbyRoom
 } from "../../factories/AdminLobby.factory";
+import { getWizardData } from "../../factories/AdminWizard.factory";
 import { getResultData } from "../../factories/Result.factory";
 import { Page } from "../../lib/components/Page";
 import {
@@ -31,6 +32,7 @@ import { Lobby } from "../../lib/views/admin/Lobby";
 import { LobbyStep } from "../../lib/views/admin/Lobby/Lobby.types";
 import { Result } from "../../lib/views/admin/Result";
 import { Wizard } from "../../lib/views/admin/Wizard";
+import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
 
 const AdminGame = () => {
   const socket: Socket | null = useSocket(
@@ -46,13 +48,6 @@ const AdminGame = () => {
   if (typeof window !== "undefined") {
     localRoom = localStorage.getItem("room");
   }
-
-  const mockRoom: Partial<RoomDto> = {
-    admin: {
-      name: "mocker",
-      email: "asdf@asdf.com",
-    },
-  };
 
   const handleRegisterGame = (room: Partial<RoomDto>): void => {
     if (socket) {
@@ -113,7 +108,9 @@ const AdminGame = () => {
               case ViewName.Wizard:
                 return (
                   <Wizard
-                    handleRegisterGame={() => handleRegisterGame(mockRoom)}
+                    data={getWizardData(room)}
+                    initialStep={WizardStep.Name}
+                    handleRegisterGame={handleRegisterGame}
                   />
                 );
               case ViewName.Lobby:

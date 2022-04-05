@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../../../components/Button";
 import { InputSwitch } from "../../../components/InputSwitch";
 import { InputText } from "../../../components/InputText";
@@ -70,7 +69,7 @@ export const WizardOptions = ({
           onChange={(e) => {
             handleGroupChange(1, e.target.value);
           }}
-          condition={(data.options?.inGroups && groupName(0) !== "") || false}
+          condition={Boolean(data.options?.inGroups && groupName(0) !== "") || false}
         />
         <InputText
           value={groupName(2)}
@@ -81,7 +80,7 @@ export const WizardOptions = ({
           onChange={(e) => {
             handleGroupChange(2, e.target.value);
           }}
-          condition={(data.options?.inGroups && groupName(1) !== "") || false}
+          condition={Boolean(data.options?.inGroups && groupName(1) !== "") || false}
         />
         <InputText
           value={groupName(3)}

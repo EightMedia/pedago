@@ -1,5 +1,5 @@
 import { Role } from "models";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
@@ -14,7 +14,15 @@ export const WizardName = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const locales = useContext(LanguageContext);
+  const locale = useContext(LanguageContext);
+
+  const handleNextStep = () => {
+    if (data.info?.name && data.info.email && data.info.role) {
+      handleStep(WizardStep.Organisation);
+    } else {
+      console.error("Please fill in the form");
+    }
+  };
 
   return (
     <>
@@ -25,40 +33,40 @@ export const WizardName = ({
 
       <Stack>
         <InputText
-          value={data?.info?.name}
+          value={data?.info?.name || ""}
           id="name"
           label="Voor- en achternaam"
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.name")}
         />
         <InputText
-          value={data?.info?.email}
+          value={data?.info?.email || ""}
           id="email"
+          type="email"
           label="E-mailadres"
           showLabel={true}
+          onChange={(e) => updateData(e.target.value, "info.email")}
         />
 
         <InputOptions
           id="role"
-          options={locales.roles}
+          options={locale.roles}
           label="Functie"
-          data={data?.info?.role}
+          value={data?.info?.role}
           enumOptions={true}
           handleChange={(newData: Role) => updateData(newData, "info.role")}
         />
 
         <InputText
-          value={data?.info?.customRole}
+          value={data?.info?.customRole || ""}
           id="customRole"
           label="Andere functie, namelijk"
           showLabel={true}
-          condition={data.info?.role?.includes(Role.Other)}
+          condition={Boolean(data.info?.role?.includes(Role.Other))}
+          onChange={(e) => updateData(e.target.value, "info.customRole")}
         />
 
-        <Button
-          stretch={true}
-          onClick={() => handleStep(WizardStep.Organisation)}
-        >
+        <Button stretch={true} onClick={handleNextStep}>
           Volgende
         </Button>
       </Stack>

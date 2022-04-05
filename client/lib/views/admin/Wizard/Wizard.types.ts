@@ -17,6 +17,7 @@ export type WizardStepProps = {
 
 export type WizardType = {
   initialStep: WizardStep;
+  handleRegisterGame: (room: Partial<RoomDto>) => void;
   data: {
     info?: {
       name?: Admin["name"];
