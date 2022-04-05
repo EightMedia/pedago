@@ -1,5 +1,5 @@
 import { Category, Player, PlayerEvent, Round, SocketCallback } from "models";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
@@ -13,10 +13,18 @@ import { GameSortType } from "./Game.types";
 export const GameSort = ({ round }: GameSortType) => {
   const data = useContext(LanguageContext);
   const roundData = data.rounds[round - 1];
-  const [order, setOrder] = useState<Category[]>([0, 1, 2, 3, 4, 5]);
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
+
+  const handleSortOrder = (order: Category[]): void => {
+    localStorage.setItem("order", order.toString());
+  };
+
+  const getSortOrder = (): Category[] => {
+    const localOrder = localStorage.getItem("order");
+    return localOrder?.split(",").map((o) => parseInt(o, 10)) as number[];
+  };
 
   const handleDoneSorting = (): void => {
     socket?.emit(
@@ -25,7 +33,7 @@ export const GameSort = ({ round }: GameSortType) => {
       playerId,
       {
         number: round,
-        order,
+        order: getSortOrder(),
       } as Round,
       (res: SocketCallback) => {
         console.log(res);
@@ -33,14 +41,14 @@ export const GameSort = ({ round }: GameSortType) => {
     );
   };
 
-  const finishRoundByAdmin = () => {
+  const finishRoundByAdmin = (): void => {
     socket?.emit(
       PlayerEvent.FinishRoundByAdmin,
       room?.id,
       playerId,
       {
         number: round,
-        order,
+        order: getSortOrder(),
       } as Round,
       (res: SocketCallback) => {
         console.log(res);
@@ -62,7 +70,7 @@ export const GameSort = ({ round }: GameSortType) => {
       <SortList
         cards={roundData?.cards}
         round={round}
-        handleSortOrder={setOrder}
+        handleSortOrder={handleSortOrder}
       />
       <Center space="sm">
         <Button onClick={() => handleDoneSorting()}>{data.game.done}</Button>
