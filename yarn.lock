@@ -1831,16 +1831,16 @@
     polished "^4.0.5"
     ts-dedent "^2.2.0"
 
-"@storybook/addon-links@^6.4.19":
-  version "6.4.19"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.4.19.tgz#001f26c4ffc7d36fd6018b8a137449948b337869"
-  integrity sha512-ebFHYlGDQkHSmI5QEJb1NxGNToVOLgjKkxXUe+JXX7AfHvrWiXVrN/57aOtBPZzj4h2jRPRTZgwR5glhPIlfEQ==
+"@storybook/addon-links@^6.4.20":
+  version "6.4.20"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.4.20.tgz#7e845a20deece65e7e684433d4c66a6ad61da52c"
+  integrity sha512-TyRuEd/3yRn2N9xasCKuE2bsY0dTRjAquGeg5WEtvHvr8V6QBLYAC4caXwPxIHSTcRQyO5IYYiVzEJ/+219neA==
   dependencies:
-    "@storybook/addons" "6.4.19"
-    "@storybook/client-logger" "6.4.19"
-    "@storybook/core-events" "6.4.19"
+    "@storybook/addons" "6.4.20"
+    "@storybook/client-logger" "6.4.20"
+    "@storybook/core-events" "6.4.20"
     "@storybook/csf" "0.0.2--canary.87bc651.0"
-    "@storybook/router" "6.4.19"
+    "@storybook/router" "6.4.20"
     "@types/qs" "^6.9.5"
     core-js "^3.8.2"
     global "^4.4.0"
@@ -2142,7 +2142,7 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/client-logger@6.4.19", "@storybook/client-logger@^6.4.0 || >=6.5.0-0":
+"@storybook/client-logger@6.4.19":
   version "6.4.19"
   resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.4.19.tgz#b2011ad2fa446cce4a9afdb41974b2a576e9fad2"
   integrity sha512-zmg/2wyc9W3uZrvxaW4BfHcr40J0v7AGslqYXk9H+ERLVwIvrR4NhxQFaS6uITjBENyRDxwzfU3Va634WcmdDQ==
@@ -2150,7 +2150,7 @@
     core-js "^3.8.2"
     global "^4.4.0"
 
-"@storybook/client-logger@6.4.20":
+"@storybook/client-logger@6.4.20", "@storybook/client-logger@^6.4.0 || >=6.5.0-0":
   version "6.4.20"
   resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.4.20.tgz#5a10d86f720c2a8d408aeb61c8d08eb5dcc3833a"
   integrity sha512-vbEivQvLQm05tuqSAb4s9RCc82YF1HcAvRneOYUGI7T/wSoijZzauIstKtb3LHEBBYpsELf4hJ3GuE5xZW3wXg==
@@ -8163,12 +8163,7 @@ minimatch@^3.0.2, minimatch@^3.0.4, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
-  integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
-
-minimist@^1.2.6:
+minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
