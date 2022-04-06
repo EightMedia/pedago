@@ -1,5 +1,5 @@
-import { Locale, Role, Sector } from "models"
-import { PlayerType } from "models/lib/models/player-type.enum"
+import { Locale, Role, Sector } from "models";
+import { PlayerType } from "models/lib/models/player-type.enum";
 
 export const NL: Locale = {
   playerType: {
@@ -109,10 +109,12 @@ export const NL: Locale = {
   adminLobby: {
     info: {
       title: "",
-      items: {
-        caption: "",
-        text: "",
-      }[],
+      items: [
+        {
+          caption: "",
+          text: "",
+        },
+      ],
       understood: "",
     },
     lobby: {
@@ -123,7 +125,7 @@ export const NL: Locale = {
       start: "",
     },
     playerGroup: {
-      waiting: ""
+      waiting: "",
     },
   },
   adminWizard: {
@@ -157,11 +159,11 @@ export const NL: Locale = {
       step: "Step",
       typePlayers: "Type spelers",
       education: "Opleiding",
-      year:"Leerjaar",
+      year: "Leerjaar",
       sector: "Sector",
       next: "Volgende",
-      back: "Terug naar vorige stap"
-    }
+      back: "Terug naar vorige stap",
+    },
   },
   gameWizard: {
     roomCode: {
@@ -442,4 +444,4 @@ export const NL: Locale = {
       ],
     },
   ],
-},
+};
