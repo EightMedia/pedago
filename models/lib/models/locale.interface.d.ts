@@ -60,6 +60,30 @@ export interface Locale {
         of: string;
         done: string;
     };
+    adminGame: {
+        round: {
+            settingsButton: string;
+            rulesButton: string;
+            category: string;
+            finish: string;
+            notStarted: string;
+            allStarted: string;
+            playing: string;
+            notPlaying: string;
+            done: string;
+            notDone: string;
+            areYouSure: string;
+            yesSure: string;
+            there: string;
+            isOneTeam: string;
+            are: string;
+            stillPlaying: string;
+        };
+        lead: {
+            continuing: string;
+            of: string;
+        };
+    };
     gameWizard: {
         roomCode: {
             roomCodeLabel: string;

@@ -1,5 +1,6 @@
 import { PlayerStatus } from "models";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { ButtonGroup } from "../../../components/Button";
 import { Button } from "../../../components/Button/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
@@ -27,6 +28,9 @@ export const GameRound = ({
 }: GameType) => {
   const [showStopModal, setShowStopModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const text = useContext(LanguageContext);
+  const gameText = text.adminGame.round;
+
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
   // teams with status not started:
   const notStartedTeams = teams.filter(
@@ -59,28 +63,36 @@ export const GameRound = ({
               onClick={openSettings as () => void}
             >
               <Icon icon={IconsEnum.Settings} />
-              Settings
+              {gameText.settingsButton}
             </Button>
             <Button
               variation="whiteBlocked"
               onClick={() => setShowInfoModal(true)}
             >
               <Icon icon={IconsEnum.Info} />
-              Uitleg
+              {gameText.rulesButton}
             </Button>
           </ButtonGroup>
         </div>
 
         <div className={styles.round}>
           <Center>
-            <p>Categorie: {round.current}</p>
+            <p>
+              {gameText.category}: {round.current}
+            </p>
             <Title>
-              Ronde {round.current} van {round.total}
+              {text.game.round} {round.current} {text.game.of} {round.total}
             </Title>
             <div className={styles.timerAndStop}>
               {timer && <Timer time={600} />}
-              <Button onClick={() => teamsStillPlaying ? setShowStopModal(!showStopModal) : handleStopRound()}>
-                Ronde afronden
+              <Button
+                onClick={() =>
+                  teamsStillPlaying
+                    ? setShowStopModal(!showStopModal)
+                    : handleStopRound()
+                }
+              >
+                {gameText.finish}
               </Button>
             </div>
           </Center>
@@ -89,28 +101,32 @@ export const GameRound = ({
         <PanelGroup>
           <TeamsList
             teams={notStartedTeams}
-            title="Niet begonnen"
-            emptyText="Iedereen is begonnen"
+            title={gameText.notStarted}
+            emptyText={gameText.allStarted}
           />
           <TeamsList
             teams={inProgressTeams}
-            title="Bezig"
-            emptyText="Er zijn geen teams bezig"
+            title={gameText.playing}
+            emptyText={gameText.notPlaying}
           />
           <TeamsList
             teams={doneTeams}
-            title="Klaar"
-            emptyText="Er zijn nog geen teams klaar"
+            title={gameText.done}
+            emptyText={gameText.notDone}
           />
         </PanelGroup>
       </Page>
       {showStopModal && (
         <Modal handleClose={() => setShowStopModal(false)}>
-          <PanelTitle>Weet je het zeker?</PanelTitle>
-          <p>Er {teamsStillPlaying === 1 ? "is nog 1 team" : `zijn nog ${teamsStillPlaying} teams`} bezig met het afronden van de ronde.</p>
-          <Button onClick={handleStopRound}>
-            Ja, start de volgende ronde
-          </Button>
+          <PanelTitle>{gameText.areYouSure}</PanelTitle>
+          <p>
+          {gameText.there}{" "}
+            {teamsStillPlaying === 1
+              ? gameText.isOneTeam
+              : `${gameText.are} ${teamsStillPlaying} teams`}{" "}
+            {gameText.stillPlaying}
+          </p>
+          <Button onClick={handleStopRound}>{gameText.yesSure}</Button>
         </Modal>
       )}
       {showInfoModal && (

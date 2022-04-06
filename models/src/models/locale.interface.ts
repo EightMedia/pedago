@@ -61,6 +61,30 @@ export interface Locale {
     of: string;
     done: string;
   };
+  adminGame: {
+    round: {
+      settingsButton: string;
+      rulesButton: string;
+      category: string;
+      finish: string;
+      notStarted: string;
+      allStarted: string;
+      playing: string;
+      notPlaying: string;
+      done: string;
+      notDone: string;
+      areYouSure: string;
+      yesSure: string;
+      there: string;
+      isOneTeam: string;
+      are: string;
+      stillPlaying: string;
+    };
+    lead: {
+      continuing: string;
+      of: string;
+    };
+  };
   gameWizard: {
     roomCode: {
       roomCodeLabel: string;
@@ -82,7 +106,7 @@ export interface Locale {
         text: string;
       }[];
       understood: string;
-    }
+    };
   };
   gameLobby: {
     hi: string;
@@ -107,11 +131,11 @@ export interface Locale {
     info: {
       discussDiff: string;
       understood: string;
-    }
+    };
     compare: {
       discussDiff: string;
       ready: string;
-    }
+    };
   };
   results: {
     loader: {

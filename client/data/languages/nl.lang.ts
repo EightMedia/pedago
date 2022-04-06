@@ -75,12 +75,36 @@ export const NL: Locale = {
     findEachOther: "Zoek elkaar op en maak je klaar",
     found: "Gevonden!",
     waitForOthers: "Wachten op medespelers...",
-    waitUntil:"Nog even wachten tot iedereen klaar is"
+    waitUntil: "Nog even wachten tot iedereen klaar is",
   },
   game: {
     round: "Ronde",
     of: "van",
     done: "Ik ben klaar",
+  },
+  adminGame: {
+    round: {
+      settingsButton: "Instellingen",
+      rulesButton: "Uitleg",
+      category: "Categorie",
+      finish: "Ronde afronden",
+      notStarted: "Niet begonnen",
+      allStarted: "Iedereen is begonnen",
+      playing: "Bezig",
+      notPlaying: "Er zijn geen teams bezig",
+      done: "Klaar",
+      notDone: "Er zijn nog geen teams klaar",
+      areYouSure: "Weet je het zeker?",
+      yesSure: "Ja, start de volgende ronde",
+      there: "Er",
+      isOneTeam: "is nog 1 team",
+      are: "zijn nog",
+      stillPlaying: "bezig met het afronden van de ronde.",
+    },
+    lead: {
+      continuing: "Door naar ronde",
+      of: "van",
+    },
   },
   gameWizard: {
     roomCode: {
