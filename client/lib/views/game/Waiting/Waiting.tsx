@@ -5,6 +5,7 @@ import { Button } from "../../../components/Button";
 import { Loader } from "../../../components/Loader";
 import { Page } from "../../../components/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
+import { Text } from "../../../components/Text";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { WaitingType } from "./Waiting.types";
@@ -30,14 +31,14 @@ const WaitingComponent = ({
           <PanelTitle space="sm">{t.goodBusy}</PanelTitle>
           <Stack>
             {teamMembers?.length > 1 && (
-              <p>
+              <Text tone="light">
                 {t.waiting} {teamMembers.join(" " + t.and + " ")} {t.areReady}
-              </p>
+              </Text>
             )}
             {teamMembers?.length === 1 && (
-              <p>
+              <Text tone="light">
                 {t.waiting} {teamMembers.join()} {t.isReady}
-              </p>
+              </Text>
             )}
             <Button onClick={backToSort} variation="line">
               {t.changeSomething}

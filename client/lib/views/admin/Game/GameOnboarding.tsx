@@ -1,6 +1,7 @@
 import { Button } from "../../../components/Button";
 import { Page } from "../../../components/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
+import { Text } from "../../../components/Text";
 
 export type GameOnboardingProps = {
   title: string;
@@ -12,7 +13,9 @@ export const GameInfo = ({ title }: { title: string }) => {
       <PanelTitle>{title}</PanelTitle>
       <div className="set">
         <h4>Meedoen</h4>
-        <p>Alle spelers moeten eerst naar pedago.game gaan.</p>
+        <Text tone="light">
+          Alle spelers moeten eerst naar pedago.game gaan.
+        </Text>
       </div>
       <div>
         <h4>Unieke code</h4>
