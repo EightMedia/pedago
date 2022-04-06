@@ -47,7 +47,7 @@ export const WizardCheck = ({
       <List>
         <ListItem label="Spelers" value={playerType as string} />
         <ListItem label="Timer" value={data?.options?.timer ? "Aan" : "Uit"} />
-        <ListItem label="Groepen" value={groupNames?.length ? groupNames?.join(", ") : "n.v.t."} />
+        <ListItem label={groupNames?.length as number > 1 ? "Groepen" : "Groep"} value={groupNames?.length ? groupNames?.join(", ") : "n.v.t."} />
       </List>
 
       <Button stretch={true} onClick={() => handleCreateGame(data)}>

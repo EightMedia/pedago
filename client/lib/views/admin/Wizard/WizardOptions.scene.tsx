@@ -29,8 +29,8 @@ export const WizardOptions = ({
   };
 
   const handleNextStep = () => {
-    if (data.options?.inGroups === false) {
-      updateData([], "groups")
+    if (!data.options?.inGroups) {
+      updateData([{id: 0, name: data.info?.organisation?.name}], "groups")
     }
     handleStep(WizardStep.Check);
   };
