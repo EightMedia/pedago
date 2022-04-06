@@ -130,13 +130,13 @@ export const NL: Locale = {
   },
   adminWizard: {
     name: {
-      step: "",
-      yourInfo: "",
-      name: "",
-      email: "",
-      role: "",
-      customRole: "",
-      nextButton: "",
+      step: "Step",
+      yourInfo: "Jouw gegevens",
+      name: "Naam",
+      email: "E-mailadres",
+      role: "Functie",
+      customRole: "Anders, namelijk:",
+      nextButton: "Volgende",
     },
     check: {
       yourInfo: "Jouw gegevens",
