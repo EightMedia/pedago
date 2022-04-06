@@ -11,8 +11,8 @@ import styles from "./Game.module.css";
 import { GameSortType } from "./Game.types";
 
 export const GameSort = ({ round }: GameSortType) => {
-  const data = useContext(LanguageContext);
-  const roundData = data.rounds[round - 1];
+  const text = useContext(LanguageContext);
+  const roundText = text.rounds[round - 1];
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
@@ -65,15 +65,15 @@ export const GameSort = ({ round }: GameSortType) => {
   return (
     <>
       <Center space="sm">
-        <h2 className={styles.lead}>{roundData?.lead}</h2>
+        <h2 className={styles.lead}>{roundText?.lead}</h2>
       </Center>
       <SortList
-        cards={roundData?.cards}
+        cards={roundText?.cards}
         round={round}
         handleSortOrder={handleSortOrder}
       />
       <Center space="sm">
-        <Button onClick={() => handleDoneSorting()}>{data.game.done}</Button>
+        <Button onClick={() => handleDoneSorting()}>{text.game.done}</Button>
       </Center>
     </>
   );

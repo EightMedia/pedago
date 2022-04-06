@@ -52,6 +52,8 @@ export interface Locale {
         youAre: string;
         findEachOther: string;
         found: string;
+        waitForOthers: string;
+        waitUntil: string;
     };
     game: {
         round: string;
@@ -81,6 +83,11 @@ export interface Locale {
             understood: string;
         };
     };
+    gameLobby: {
+        hi: string;
+        willStart: string;
+        waiting: string;
+    };
     waiting: {
         goodBusy: string;
         waiting: string;
@@ -106,6 +113,10 @@ export interface Locale {
         };
     };
     results: {
+        loader: {
+            done: string;
+            fetchResult: string;
+        };
         results: string;
         myResult: string;
         everyone: string;

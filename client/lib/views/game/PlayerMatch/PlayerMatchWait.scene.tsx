@@ -10,18 +10,18 @@ const PlayerMatchWaitComponent = ({
   round,
   roundMax
 }: PlayerMatchType) => {
-  const data = useContext(LanguageContext);
+  const text = useContext(LanguageContext);
 
   return (
     <Page valign="center">
       <div>
-        Ronde {round} van {roundMax}
+      {text.game.round} {round} {text.game.of} {roundMax}
       </div>
       <Panel>
-        <PanelTitle>{data.playerMatch.youPlayWith}</PanelTitle>
-        <Stack>Je speelt met...</Stack>
+        <PanelTitle>{text.playerMatch.youPlayWith}</PanelTitle>
+        <Stack>{text.playerMatch.waitForOthers}</Stack>
         <Center space="sm">
-          <p>Nog even wachten tot iedereen klaar is</p>
+          <p>{text.playerMatch.waitUntil}</p>
         </Center>
       </Panel>
     </Page>

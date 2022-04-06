@@ -14,31 +14,31 @@ const WaitingComponent = ({
   teamMembers,
   backToSort,
 }: WaitingType) => {
-  const data = useContext(LanguageContext);
-  const text = data.waiting;
+  const text = useContext(LanguageContext);
+  const waitingText = text.waiting;
 
   return (
     <Page valign="center">
       <div>
-        {data.game.round} {round} {data.game.of} {roundMax}
+        {text.game.round} {round} {text.game.of} {roundMax}
       </div>
       <Panel>
         <Center>
           <Loader />
-          <PanelTitle space="sm">{text.goodBusy}</PanelTitle>
+          <PanelTitle space="sm">{waitingText.goodBusy}</PanelTitle>
           <Stack>
             {teamMembers?.length > 1 && (
               <p>
-                {text.waiting} {teamMembers.join(" " + text.and + " ")} {text.areReady}
+                {waitingText.waiting} {teamMembers.join(" " + waitingText.and + " ")} {waitingText.areReady}
               </p>
             )}
             {teamMembers?.length === 1 && (
               <p>
-                {text.waiting} {teamMembers.join()} {text.isReady}
+                {waitingText.waiting} {teamMembers.join()} {waitingText.isReady}
               </p>
             )}
             <Button onClick={backToSort} variation="line">
-              {text.changeSomething}
+              {waitingText.changeSomething}
             </Button>
           </Stack>
         </Center>

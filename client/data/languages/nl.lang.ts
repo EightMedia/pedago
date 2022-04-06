@@ -73,7 +73,9 @@ export const NL: Locale = {
     youPlayWith: "Je speelt met",
     youAre: "Jullie zijn",
     findEachOther: "Zoek elkaar op en maak je klaar",
-    found: "Gevonden",
+    found: "Gevonden!",
+    waitForOthers: "Wachten op medespelers...",
+    waitUntil:"Nog even wachten tot iedereen klaar is"
   },
   game: {
     round: "Ronde",
@@ -121,6 +123,11 @@ export const NL: Locale = {
       understood: "Ik snap het",
     },
   },
+  gameLobby: {
+    hi: "Hoi",
+    willStart: "Het spel begint zo",
+    waiting: "We wachten even tot iedereen er is en dan kunnen we starten",
+  },
   waiting: {
     goodBusy: "Goed bezig!",
     waiting: "Wachten tot",
@@ -146,6 +153,10 @@ export const NL: Locale = {
     },
   },
   results: {
+    loader: {
+      done: "Helemaal klaar!",
+      fetchResult: "We halen jouw resultaten op.",
+    },
     results: "Resultaten",
     myResult: "Mijn resultaat",
     everyone: "Iedereen",
