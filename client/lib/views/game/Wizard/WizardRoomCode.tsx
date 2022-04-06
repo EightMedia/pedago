@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
@@ -11,12 +12,13 @@ export const WizardRoomCode = ({
   setStep: (step: WizardStep, roomCode: number) => void;
 }) => {
   const [roomCode, setRoomCode] = useState<number>(0);
+  const text = useContext(LanguageContext).gameWizard.roomCode;
   return (
     <>
       <PanelTitle>Voer de spelcode in</PanelTitle>
       <Stack>
-        <InputText id="roomcode" label="Spelcode" type="number" onChange={e => setRoomCode(parseInt(e?.target?.value, 10))} />
-        <Button onClick={() => setStep(WizardStep.Name, roomCode)}>Volgende</Button>
+        <InputText id="roomcode" label={text.roomCodeLabel} type="number" onChange={e => setRoomCode(parseInt(e?.target?.value, 10))} />
+        <Button onClick={() => setStep(WizardStep.Name, roomCode)}>{text.nextButton}</Button>
       </Stack>
     </>
   );

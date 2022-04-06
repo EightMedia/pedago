@@ -1,6 +1,5 @@
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import { Button } from "../../../components/Button";
 import { Loader } from "../../../components/Loader";
 import { Page } from "../../../components/Page";
@@ -16,8 +15,7 @@ const WaitingComponent = ({
   backToSort,
 }: WaitingType) => {
   const data = useContext(LanguageContext);
-  const t = data.waiting;
-  const socket = useContext(SocketContext);
+  const text = data.waiting;
 
   return (
     <Page valign="center">
@@ -27,20 +25,20 @@ const WaitingComponent = ({
       <Panel>
         <Center>
           <Loader />
-          <PanelTitle space="sm">{t.goodBusy}</PanelTitle>
+          <PanelTitle space="sm">{text.goodBusy}</PanelTitle>
           <Stack>
             {teamMembers?.length > 1 && (
               <p>
-                {t.waiting} {teamMembers.join(" " + t.and + " ")} {t.areReady}
+                {text.waiting} {teamMembers.join(" " + text.and + " ")} {text.areReady}
               </p>
             )}
             {teamMembers?.length === 1 && (
               <p>
-                {t.waiting} {teamMembers.join()} {t.isReady}
+                {text.waiting} {teamMembers.join()} {text.isReady}
               </p>
             )}
             <Button onClick={backToSort} variation="line">
-              {t.changeSomething}
+              {text.changeSomething}
             </Button>
           </Stack>
         </Center>

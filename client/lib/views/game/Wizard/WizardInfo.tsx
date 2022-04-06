@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { PanelTitle } from "../../../components/Panel";
 import { Stack } from "../../../layouts/Stack";
@@ -21,41 +23,38 @@ const WizardInfoItem = ({
 };
 
 export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
+  const text = useContext(LanguageContext).gameWizard.info;
+
   return (
     <>
-      <PanelTitle>Speluitleg</PanelTitle>
+      <PanelTitle>{text.title}</PanelTitle>
       <Stack gap="xs">
         <WizardInfoItem
           icon="some-icon"
-          title="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet cons lectetur adipisicing elit. Commodi recusandae dolor."
+          title={text.items[0].caption}
+          text={text.items[0].text}
         />
         <WizardInfoItem
           icon="some-icon"
-          title="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet cons lectetur adipisicing elit. Commodi recusandae dolor."
+          title={text.items[1].caption}
+          text={text.items[1].text}
         />
         <WizardInfoItem
           icon="some-icon"
-          title="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet cons lectetur adipisicing elit. Commodi recusandae dolor."
+          title={text.items[2].caption}
+          text={text.items[2].text}
         />
         <WizardInfoItem
           icon="some-icon"
-          title="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet cons lectetur adipisicing elit. Commodi recusandae dolor."
+          title={text.items[3].caption}
+          text={text.items[3].text}
         />
         <WizardInfoItem
           icon="some-icon"
-          title="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet cons lectetur adipisicing elit. Commodi recusandae dolor."
+          title={text.items[4].caption}
+          text={text.items[4].text}
         />
-        <WizardInfoItem
-          icon="some-icon"
-          title="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet cons lectetur adipisicing elit. Commodi recusandae dolor."
-        />
-        <Button onClick={onClick}>Ik snap het</Button>
+        <Button onClick={onClick}>{text.understood}</Button>
       </Stack>
     </>
   );

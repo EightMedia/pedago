@@ -80,6 +80,47 @@ export const NL: Locale = {
     of: "van",
     done: "Ik ben klaar",
   },
+  gameWizard: {
+    roomCode: {
+      roomCodeLabel: "Voer de spelcode in",
+      nextButton: "Volgende",
+    },
+    name: {
+      title: "Jouw voornaam",
+      othersWillSee: "Anderen zien hierdoor met wie ze spelen.",
+      nameLabel: "Naam",
+      nextButton: "Volgende",
+    },
+    group: {
+      title: "Kies je groep",
+    },
+    info: {
+      title: "Speluitleg",
+      items: [
+        {
+          caption: "6 rondes",
+          text: "Iedere ronde speel je tegen iemand anders en krijg je andere keuzes.",
+        },
+        {
+          caption: "10 minuten",
+          text: "Voor elke rond heb je tien minuten om kaarten te sorteren en te bespreken.",
+        },
+        {
+          caption: "Kaarten sorteren",
+          text: "Per ronde moet je zes kaarten sorteren, van meest naar minst belangrijk.",
+        },
+        {
+          caption: "Bespreken",
+          text: "Als jij en je partner gesorteerd hebben, bespreek je de resultaten met elkaar.",
+        },
+        {
+          caption: "Resultaat",
+          text: "Na zes rondes krijg je jouw resultaat.",
+        },
+      ],
+      understood: "Ik snap het",
+    },
+  },
   waiting: {
     goodBusy: "Goed bezig!",
     waiting: "Wachten tot",
@@ -89,7 +130,20 @@ export const NL: Locale = {
     changeSomething: "Nog iets aanpassen?",
   },
   discuss: {
-    ready: "Wij zijn klaar",
+    ready: {
+      ready: "is klaar",
+    },
+    intro: {
+      discussDiff: "Bespreek de verschillen en overeenkomsten met",
+    },
+    info: {
+      discussDiff: "Bespreek de verschillen en overeenkomsten",
+      understood: "Ik snap het",
+    },
+    compare: {
+      discussDiff: "Bespreek de verschillen en overeenkomsten",
+      ready: "Wij zij klaar",
+    },
   },
   results: {
     results: "Resultaten",
