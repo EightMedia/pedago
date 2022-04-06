@@ -108,24 +108,48 @@ export const NL: Locale = {
   },
   adminLobby: {
     info: {
-      title: "",
+      title: "Voor we beginnen",
       items: [
         {
-          caption: "",
-          text: "",
+          caption: "Meedoen",
+          text: "Alle spelers moeten eerst naar pedago.game gaan.",
+        },
+        {
+          caption: "Unieke code",
+          text: "Spelers kunnen meedoen met het spel door de code in te vullen die straks verschijnt.",
+        },
+        {
+          caption: "Scherm delen",
+          text: "Het is handig om je scherm te delen, zodat spelers ten alle tijden zien of ze al meedoen, of wat de code is.",
+        },
+        {
+          caption: "Spel starten",
+          text: "Wanneer je het spel start kun je niet meer terug.",
+        },
+        {
+          caption: "'Locken'",
+          text: "Er is een slotje naast de startknop die je kunt indrukken om te voorkomen dat er nog meer mensen mee gaan doen.",
+        },
+        {
+          caption: "Spelers verwijderen",
+          text: "Spelers kunnen worden gekickt wanneer ze niet welkom zijn, door er op te klikken of tappen.",
+        },
+        {
+          caption: "Instellingen aanpassen",
+          text: "De timer kan worden uitgeschakeld en de groepsnamen kunnen worden aangepast.",
         },
       ],
-      understood: "",
+      understood: "Ik snap het",
     },
     lobby: {
-      settingsButton: "",
-      rulesButton: "",
-      code: "",
-      andJoin: "",
-      start: "",
+      settingsButton: "Instellingen",
+      rulesButton: "Uitleg",
+      code: "Voer de code in op",
+      andJoin: "en doe mee",
+      start: "Start",
     },
     playerGroup: {
-      waiting: "",
+      waiting: "Wachten op spelers",
     },
   },
   adminWizard: {
