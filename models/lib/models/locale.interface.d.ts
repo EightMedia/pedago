@@ -84,6 +84,63 @@ export interface Locale {
             of: string;
         };
     };
+    adminLobby: {
+        info: {
+            title: string;
+            items: {
+                caption: string;
+                text: string;
+            }[];
+            understood: string;
+        };
+        lobby: {
+            settingsButton: string;
+            rulesButton: string;
+            code: string;
+            andJoin: string;
+            start: string;
+        };
+        playerGroup: {
+            waiting: string;
+        };
+    };
+    adminWizard: {
+        name: {
+            step: string;
+            yourInfo: string;
+            name: string;
+            email: string;
+            role: string;
+            customRole: string;
+            nextButton: string;
+        };
+        check: {
+            yourInfo: string;
+            name: string;
+            email: string;
+            role: string;
+            organisation: string;
+            gameOptions: string;
+            players: string;
+            timer: string;
+            none: string;
+            on: string;
+            off: string;
+            group: string;
+            groups: string;
+            create: string;
+            back: string;
+        };
+        gameType: {
+            step: string;
+            typePlayers: string;
+            education: string;
+            year: string;
+            sector: string;
+            next: string;
+            back: string;
+        };
+    };
     gameWizard: {
         roomCode: {
             roomCodeLabel: string;

@@ -1,5 +1,5 @@
-import { Locale, Role, Sector } from "models";
-import { PlayerType } from "models/lib/models/player-type.enum";
+import { Locale, Role, Sector } from "models"
+import { PlayerType } from "models/lib/models/player-type.enum"
 
 export const NL: Locale = {
   playerType: {
@@ -105,6 +105,63 @@ export const NL: Locale = {
       continuing: "Door naar ronde",
       of: "van",
     },
+  },
+  adminLobby: {
+    info: {
+      title: "",
+      items: {
+        caption: "",
+        text: "",
+      }[],
+      understood: "",
+    },
+    lobby: {
+      settingsButton: "",
+      rulesButton: "",
+      code: "",
+      andJoin: "",
+      start: "",
+    },
+    playerGroup: {
+      waiting: ""
+    },
+  },
+  adminWizard: {
+    name: {
+      step: "",
+      yourInfo: "",
+      name: "",
+      email: "",
+      role: "",
+      customRole: "",
+      nextButton: "",
+    },
+    check: {
+      yourInfo: "Jouw gegevens",
+      name: "Naam",
+      email: "E-mailadres",
+      role: "Functie",
+      organisation: "Organisatie",
+      gameOptions: "Spelopties",
+      players: "Spelers",
+      timer: "Timer",
+      none: "n.v.t.",
+      on: "Aan",
+      off: "Uit",
+      group: "Groepen",
+      groups: "Groepen",
+      create: "Spel aanmaken",
+      back: "Terug naar vorige stap",
+    },
+    gameType: {
+      step: "Step",
+      typePlayers: "Type spelers",
+      education: "Opleiding",
+      year:"Leerjaar",
+      sector: "Sector",
+      next: "Volgende",
+      back: "Terug naar vorige stap"
+    }
   },
   gameWizard: {
     roomCode: {
@@ -385,4 +442,4 @@ export const NL: Locale = {
       ],
     },
   ],
-};
+},

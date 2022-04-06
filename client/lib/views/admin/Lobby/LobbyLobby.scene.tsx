@@ -1,5 +1,8 @@
+import { useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
+import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
 import { PlayerCount } from "../../../components/PlayerCount";
@@ -16,6 +19,7 @@ export const LobbyLobby = ({
 }: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
   const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
+  const text = useContext(LanguageContext).adminLobby.lobby;
 
   const handleSettings = () => {
     alert("settings view");
@@ -25,15 +29,15 @@ export const LobbyLobby = ({
     <Page>
       <div className={styles.header}>
         <PlayerCount players={room?.players} variation="light" />
-        <span className="logo">Logo</span>
+        <Logo />
         <div className={styles.buttonGroup}>
           <Button onClick={handleSettings}>
             <Icon icon={IconsEnum.Settings} />
-            Instellingen
+            {text.settingsButton}
           </Button>
           <Button onClick={handleInfo as () => void}>
             <Icon icon={IconsEnum.Info} />
-            Uitleg
+            {text.rulesButton}
           </Button>
         </div>
       </div>
@@ -42,10 +46,9 @@ export const LobbyLobby = ({
           <header className={styles.header}>
             <div className={styles.roomCode}>{room?.roomCode}</div>
             <p>
-              Voer de code in op <a href={siteUrl}>{readableSiteUrl}</a> en doe
-              mee
+              {text.code} <a href={siteUrl}>{readableSiteUrl}</a> {text.andJoin}
             </p>
-            <Button onClick={handleStart as () => void}>Start</Button>
+            <Button onClick={handleStart as () => void}>{text.start}</Button>
           </header>
         </Panel>
         {groups &&

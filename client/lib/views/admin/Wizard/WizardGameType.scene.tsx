@@ -15,18 +15,19 @@ export const WizardGameType = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const locales = useContext(LanguageContext);
+  const text = useContext(LanguageContext);
+  const wizardGameTypeText = text.adminWizard.gameType;
   return (
     <>
       <Center>
-        <p>Stap 3/4</p>
-        <PanelTitle>Type spelers</PanelTitle>
+        <p>{wizardGameTypeText.step} 3/4</p>
+        <PanelTitle>{wizardGameTypeText.typePlayers}</PanelTitle>
       </Center>
       <Stack>
         <InputOptions
           id="type"
           multi={false}
-          options={locales.playerType}
+          options={text.playerType}
           label="type"
           value={[data.info?.players?.type ?? PlayerType.Students]}
           enumOptions={true}
@@ -41,15 +42,15 @@ export const WizardGameType = ({
         <InputText
           value={data.info?.players?.education || ""}
           id="opleiding"
-          label="Opleiding"
+          label={wizardGameTypeText.education}
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.players.education")}
           condition={data.info?.players?.type !== PlayerType.Professionals}
         />
         <InputOptions
           id="year"
-          options={locales.year}
-          label="Leerjaar"
+          options={text.year}
+          label={wizardGameTypeText.year}
           value={data.info?.players?.year}
           enumOptions={true}
           handleChange={(newData: Players["year"]) =>
@@ -59,8 +60,8 @@ export const WizardGameType = ({
         />
         <InputOptions
           id="sector"
-          options={locales.sector}
-          label="Sector"
+          options={text.sector}
+          label={wizardGameTypeText.sector}
           value={data.info?.players?.sector}
           enumOptions={true}
           handleChange={(newData: Sector) =>
@@ -68,13 +69,13 @@ export const WizardGameType = ({
           }
         />
         <Button stretch={true} onClick={() => handleStep(WizardStep.Options)}>
-          Volgende
+          {wizardGameTypeText.next}
         </Button>
         <Button
           variation="line"
           onClick={() => handleStep(WizardStep.Organisation)}
         >
-          Terug naar de vorige stap
+          {wizardGameTypeText.back}
         </Button>
       </Stack>
     </>
