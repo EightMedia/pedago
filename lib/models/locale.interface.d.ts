@@ -58,6 +58,29 @@ export interface Locale {
         of: string;
         done: string;
     };
+    gameWizard: {
+        roomCode: {
+            roomCodeLabel: string;
+            nextButton: string;
+        };
+        name: {
+            title: string;
+            othersWillSee: string;
+            nameLabel: string;
+            nextButton: string;
+        };
+        group: {
+            title: string;
+        };
+        info: {
+            title: string;
+            items: {
+                caption: string;
+                text: string;
+            }[];
+            understood: string;
+        };
+    };
     waiting: {
         goodBusy: string;
         waiting: string;
@@ -67,7 +90,20 @@ export interface Locale {
         changeSomething: string;
     };
     discuss: {
-        ready: string;
+        ready: {
+            ready: string;
+        };
+        intro: {
+            discussDiff: string;
+        };
+        info: {
+            discussDiff: string;
+            understood: string;
+        };
+        compare: {
+            discussDiff: string;
+            ready: string;
+        };
     };
     results: {
         results: string;
