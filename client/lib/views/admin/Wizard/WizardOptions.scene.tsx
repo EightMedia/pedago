@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../../../components/Button";
 import { InputSwitch } from "../../../components/InputSwitch";
 import { InputText } from "../../../components/InputText";
@@ -21,12 +20,19 @@ export const WizardOptions = ({
 
   const handleGroupChange = (id: number, name: string) => {
     let groups = data.groups || [];
-    if (name === "") {
-      delete groups[id];
+    if (!name) {
+      groups.splice(id, 1);
     } else {
-      groups[id] = { id: "group" + (id + 1), name: name };
+      groups[id] = { id: id.toString(), name: name };
     }
     updateData(groups, "groups");
+  };
+
+  const handleNextStep = () => {
+    if (!data.options?.inGroups) {
+      updateData([{id: 0, name: data.info?.organisation?.name}], "groups")
+    }
+    handleStep(WizardStep.Check);
   };
 
   return (
@@ -59,7 +65,7 @@ export const WizardOptions = ({
           onChange={(e) => {
             handleGroupChange(0, e.target.value);
           }}
-          condition={data.options?.inGroups}
+          condition={Boolean(data.options?.inGroups)}
         />
         <InputText
           value={groupName(1)}
@@ -94,7 +100,7 @@ export const WizardOptions = ({
           }}
           condition={(data.options?.inGroups && groupName(2) !== "") || false}
         />
-        <Button stretch={true} onClick={() => handleStep(WizardStep.Check)}>
+        <Button stretch={true} onClick={handleNextStep}>
           Volgende
         </Button>
         <Button

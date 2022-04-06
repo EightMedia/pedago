@@ -40,14 +40,11 @@ export const registerGame = (
       id: roomId,
       socketId: socket.id,
       admin: {
+        ...partialRoom.admin,
         id: adminId,
       } as Admin,
       roomCode: roomCode,
       players: [],
-      groups: [
-        { id: "4123rasfasdfg", name: "Grooepie" },
-        { id: "asdfasdf", name: "asdf" },
-      ],
       teams: [],
       active: true,
       locked: false,

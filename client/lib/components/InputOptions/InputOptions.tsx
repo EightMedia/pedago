@@ -5,14 +5,14 @@ import {
   InputOptionsType,
   OptionsType,
   OptionType,
-  OptionValueType,
+  OptionValueType
 } from "./InputOptions.types";
 
 const InputOptionsComponent = ({
   label,
   condition = true,
   id,
-  data = [],
+  value = [],
   options,
   multi = true,
   handleChange,
@@ -34,7 +34,7 @@ const InputOptionsComponent = ({
     return vals.map((v: any) => v.toString());
   };
 
-  const [selected, setSelected] = useState(valsToString(data));
+  const [selected, setSelected] = useState(valsToString(value));
 
   let optionsArr: OptionsType = Array.isArray(options) ? options : [];
   if (!Array.isArray(options)) {

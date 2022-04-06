@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
@@ -11,6 +10,13 @@ export const WizardOrganisation = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
+  const handleNextStep = () => {
+    if (data.info?.organisation?.name && data.info.organisation.location) {
+      handleStep(WizardStep.GameType);
+    } else {
+      console.error("Please fill in the form");
+    }
+  };
   return (
     <>
       <Center>
@@ -19,14 +25,14 @@ export const WizardOrganisation = ({
       </Center>
       <Stack>
         <InputText
-          value={data?.info?.organisation?.name}
+          value={data?.info?.organisation?.name || ""}
           id="organisation"
           label="Organisatie"
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.organisation.name")}
         />
         <InputText
-          value={data?.info?.organisation?.location}
+          value={data?.info?.organisation?.location || ""}
           id="location"
           label="Locatie"
           showLabel={true}
@@ -34,7 +40,7 @@ export const WizardOrganisation = ({
             updateData(e.target.value, "info.organisation.location")
           }
         />
-        <Button stretch={true} onClick={() => handleStep(WizardStep.GameType)}>
+        <Button stretch={true} onClick={handleNextStep}>
           Volgende
         </Button>
         <Button variation="line" onClick={() => handleStep(WizardStep.Name)}>

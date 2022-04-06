@@ -1,5 +1,6 @@
-import { Players, PlayerType, Sector } from "models";
-import React, { useContext } from "react";
+import { Players, Sector } from "models";
+import { PlayerType } from "models/lib/models/player-type.enum";
+import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
@@ -27,36 +28,40 @@ export const WizardGameType = ({
           multi={false}
           options={locales.playerType}
           label="type"
-          data={[data.info?.players?.type || 0]}
+          value={[data.info?.players?.type ?? PlayerType.Students]}
           enumOptions={true}
           handleChange={(newData: any) => {
             updateData(newData[0], "info.players.type");
+            if (newData[0] === PlayerType.Professionals) {
+              updateData(undefined, "info.players.education");
+              updateData(undefined, "info.players.year");
+            }
           }}
         />
         <InputText
-          value={data.info?.players?.education}
+          value={data.info?.players?.education || ""}
           id="opleiding"
           label="Opleiding"
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.players.education")}
-          condition={data.info?.players?.type === PlayerType.Students}
+          condition={data.info?.players?.type !== PlayerType.Professionals}
         />
         <InputOptions
           id="year"
           options={locales.year}
           label="Leerjaar"
-          data={data.info?.players?.year}
+          value={data.info?.players?.year}
           enumOptions={true}
           handleChange={(newData: Players["year"]) =>
             updateData(newData, "info.players.year")
           }
-          condition={data.info?.players?.type === PlayerType.Students}
+          condition={data.info?.players?.type !== PlayerType.Professionals}
         />
         <InputOptions
           id="sector"
           options={locales.sector}
           label="Sector"
-          data={data.info?.players?.sector}
+          value={data.info?.players?.sector}
           enumOptions={true}
           handleChange={(newData: Sector) =>
             updateData(newData, "info.players.sector")
