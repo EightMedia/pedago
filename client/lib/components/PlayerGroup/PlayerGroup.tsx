@@ -10,13 +10,13 @@ export const PlayerGroupComponent = ({ name, players }: PlayerGroupType) => {
   const text = useContext(LanguageContext).adminLobby.playerGroup;
   return (
     <div className={cx(styles.playerGroup)}>
-      <PlayerCount players={players?.length || 0} />
+      <PlayerCount players={players?.length as number} />
       <div className={cx(styles.groupName)}>{name}</div>
-      {players ? (
+      {players?.length ? (
         <div className={cx(styles.players)}>
           {players.map((player, index) => (
             <Player key={index} {...player} />
-          ))}
+          ))} 
         </div>
       ) : (
         <p>{text.waiting}</p>

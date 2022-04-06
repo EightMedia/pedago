@@ -18,7 +18,7 @@ export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
         <div>{text.items[4].caption}{text.items[4].text}</div>
         <div>{text.items[5].caption}{text.items[5].text}</div>
         <div>{text.items[6].caption}{text.items[6].text}</div>
-        <Button onClick={handleClick}>Ik snap het</Button>
+        <Button onClick={handleClick}>{text.understood}</Button>
       </Panel>
     </Page>
   );
