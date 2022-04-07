@@ -8,7 +8,6 @@ const TitleComponent = ({
   size = "md",
   element = "h2",
 }: TitleType) => {
-  // render element based on element var
   return createElement(
     element,
     { className: cx(styles.title, styles[size]) },

@@ -1,19 +1,26 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
+import { Title } from "../../../components/Title";
 import { DiscussType } from "./Discuss.types";
 
 export type DiscussCompareProps = {
   teamMembers: DiscussType["teamMembers"];
-  handleReady: DiscussType["handleReady"];
+  handleReady: () => void;
 };
 
 export const DiscussCompare = ({ handleReady }: DiscussCompareProps) => {
-  const data = useContext(LanguageContext);
+  const text = useContext(LanguageContext).discuss.compare;
   return (
     <>
-      <p>todo: kaartjes</p>
-      <Button onClick={handleReady}>{data.discuss.ready}</Button>
+      <Title>{text.discussDiff}</Title>
+      <>Card</>
+      <>Card</>
+      <>Card</>
+      <>Card</>
+      <>Card</>
+      <>Card</>
+      <Button onClick={handleReady}>{text.ready}</Button>
     </>
   );
 };

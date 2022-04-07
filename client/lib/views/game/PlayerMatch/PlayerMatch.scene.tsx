@@ -20,7 +20,7 @@ const PlayerMatchSceneComponent = ({
 }: PlayerMatchType) => {
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
-  const data = useContext(LanguageContext);
+  const text = useContext(LanguageContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as PlayerModel[]);
 
   const handleFoundPartner = () => {
@@ -37,10 +37,10 @@ const PlayerMatchSceneComponent = ({
   return (
     <Page valign="center">
       <div>
-        Ronde {round} van {roundMax}
+      {text.game.round} {round} {text.game.of} {roundMax}
       </div>
       <Panel>
-        <PanelTitle>{data.playerMatch.youPlayWith}</PanelTitle>
+        <PanelTitle>{text.playerMatch.youPlayWith}</PanelTitle>
         <Stack>
           {teamMembers?.map((p) => (
             <Player key={p.name} name={p.name} group={p.group} size="lg" />
@@ -48,11 +48,11 @@ const PlayerMatchSceneComponent = ({
         </Stack>
         <Center space="sm">
           <p>
-            Jullie zijn <b>team {teamName}</b>. Zoek elkaar op en maak je klaar
+            {text.playerMatch.youAre} <b>team {teamName}</b>. {text.playerMatch.findEachOther}
           </p>
         </Center>
         <Button stretch onClick={handleFoundPartner}>
-          {data.playerMatch.found}
+          {text.playerMatch.found}
         </Button>
       </Panel>
     </Page>

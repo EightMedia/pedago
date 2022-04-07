@@ -14,7 +14,8 @@ export const WizardName = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const locale = useContext(LanguageContext);
+  const text = useContext(LanguageContext);
+  const wizardNameText = text.adminWizard.name;
 
   const handleNextStep = () => {
     if (data.info?.name && data.info.email && data.info.role) {
@@ -27,15 +28,15 @@ export const WizardName = ({
   return (
     <>
       <Center>
-        <p>Stap 1/4</p>
-        <PanelTitle>Jouw gegevens</PanelTitle>
+        <p>{wizardNameText.step} 1/4</p>
+        <PanelTitle>{wizardNameText.yourInfo}</PanelTitle>
       </Center>
 
       <Stack>
         <InputText
           value={data?.info?.name || ""}
           id="name"
-          label="Voor- en achternaam"
+          label={wizardNameText.name}
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.name")}
         />
@@ -43,15 +44,15 @@ export const WizardName = ({
           value={data?.info?.email || ""}
           id="email"
           type="email"
-          label="E-mailadres"
+          label={wizardNameText.email}
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.email")}
         />
 
         <InputOptions
           id="role"
-          options={locale.roles}
-          label="Functie"
+          options={text.roles}
+          label={wizardNameText.role}
           value={data?.info?.role}
           enumOptions={true}
           handleChange={(newData: Role) => {
@@ -65,14 +66,14 @@ export const WizardName = ({
         <InputText
           value={data?.info?.customRole || ""}
           id="customRole"
-          label="Andere functie, namelijk"
+          label={wizardNameText.customRole}
           showLabel={true}
           condition={Boolean(data.info?.role?.includes(Role.Other))}
           onChange={(e) => updateData(e.target.value, "info.customRole")}
         />
 
         <Button stretch={true} onClick={handleNextStep}>
-          Volgende
+          {wizardNameText.nextButton}
         </Button>
       </Stack>
     </>

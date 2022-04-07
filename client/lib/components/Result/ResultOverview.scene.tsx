@@ -22,18 +22,20 @@ export type ResultOverviewProps = {
 export const ResultOverview = ({ data }: ResultOverviewProps) => {
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
-  const lang = useContext(LanguageContext);
-  const t = lang.results;
+  const text = useContext(LanguageContext);
+  const resultsText = text.results;
   const [primaryData, setPrimaryData] = useState<ResultSet>(initialPrimaryData);
   const [secondaryData, setSecondaryData] = useState<ResultSet>(groupsTotal);
-  const [detailsTitle, setDetailsTitle] = useState<string>(t.myResult);
+  const [detailsTitle, setDetailsTitle] = useState<string>(
+    resultsText.myResult
+  );
   const [activeButton, setActiveButton] = useState<string>(
     data?.me ? "me" : "total"
   );
 
   return (
     <>
-      <Title>{t.results}</Title>
+      <Title>{resultsText.results}</Title>
       {(data.groups.length > 1 || data.me) && (
         <div className={styles.buttonsWrapper}>
           <div className={styles.buttons}>
@@ -45,11 +47,11 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
                 onClick={() => {
                   setActiveButton("me");
                   setPrimaryData(data.me || groupsTotal);
-                  setDetailsTitle(t.myResult);
+                  setDetailsTitle(resultsText.myResult);
                   setSecondaryData(groupsTotal);
                 }}
               >
-                {t.myResult}
+                {resultsText.myResult}
               </Button>
             )}
             <Button
@@ -59,11 +61,11 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
               onClick={() => {
                 setActiveButton("total");
                 setPrimaryData(groupsTotal);
-                setDetailsTitle(t.everyone);
+                setDetailsTitle(resultsText.everyone);
                 setSecondaryData(data.me || groupsTotal);
               }}
             >
-              {t.everyone}
+              {resultsText.everyone}
             </Button>
             {data.groups.length > 1 &&
               data.groups.map((group) => (
@@ -90,8 +92,8 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
       <Diagram
         primary={primaryData}
         secondary={secondaryData}
-        primaryLabel={t.myResult}
-        secondaryLabel={t.everyone}
+        primaryLabel={resultsText.myResult}
+        secondaryLabel={resultsText.everyone}
       />
       <div className={styles.panels}>
         <Panel>
@@ -106,10 +108,10 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
                 <Baro value={item} max={36} color={index} />
                 <Shape className={styles.categoryIcon} category={index} />
                 <h3 className={styles.categoryTitle}>
-                  {Object.values(lang.categories)[index].title}
+                  {Object.values(text.categories)[index].title}
                 </h3>
                 <p className={styles.categoryText}>
-                  {Object.values(lang.categories)[index].description}
+                  {Object.values(text.categories)[index].description}
                 </p>
               </div>
             ))}
@@ -117,18 +119,18 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
         </Panel>
         <Panel>
           <Center>
-            <PanelTitle>{t.save}?</PanelTitle>
+            <PanelTitle>{resultsText.save}?</PanelTitle>
             <Stack>
-              <p>{t.sendToMail}</p>
+              <p>{resultsText.sendToMail}</p>
               <InputText
                 id={"email"}
                 label={"E-mail"}
-                placeholder={t.yourMail}
+                placeholder={resultsText.yourMail}
               />
               <Button stretch={true} onClick={() => alert("todo: send mail")}>
-                {t.send}
+                {resultsText.send}
               </Button>
-              <p>{t.privacy}</p>
+              <p>{resultsText.privacy}</p>
             </Stack>
           </Center>
         </Panel>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
@@ -11,7 +12,8 @@ export const WizardName = ({
   setStep: (step: WizardStep, name: string) => void;
 }) => {
   const [name, setName] = useState<string>("");
-  
+  const text = useContext(LanguageContext).gameWizard.name;
+
   const handleSubmit = () => {
     if (name.length >= 3) {
       setStep(WizardStep.Group, name)
@@ -22,11 +24,11 @@ export const WizardName = ({
 
   return (
     <>
-      <PanelTitle>Jouw voornaam</PanelTitle>
+      <PanelTitle>{text.title}</PanelTitle>
       <Stack>
-        <p>Anderen zien dan met wie ze spelen</p>
-        <InputText id="name" label="Naam" onChange={e => setName(e?.target?.value)} />
-        <Button onClick={() => handleSubmit()}>Volgende</Button>
+        <p>{text.othersWillSee}</p>
+        <InputText id="name" label={text.nameLabel} onChange={e => setName(e?.target?.value)} />
+        <Button onClick={() => handleSubmit()}>{text.nextButton}</Button>
       </Stack>
     </>
   );
