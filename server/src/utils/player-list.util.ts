@@ -1,5 +1,5 @@
 import { Group, Player } from "models";
-yarn
+
 export const makeTeamsFromPlayerList = (players: Player[]): Player[][] => {
   players = shufflePlayerList(players);
   let teams: Player[][] = [];

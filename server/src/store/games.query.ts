@@ -225,7 +225,7 @@ export const storeRoundFn = (
           players: room.players.map((player: Player) => {
             if (player.id === playerId) {
               const roundIndex = player.rounds.findIndex(
-                (r) => r.number === round.number
+                (r: Round) => r.number === round.number
               );
               if (roundIndex >= 0) {
                 player.rounds.splice(roundIndex, 1);

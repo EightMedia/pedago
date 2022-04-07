@@ -133,7 +133,7 @@ io.on("connection", (socket: Socket) => {
     PlayerEvent.SortOrder,
     (
       roomId: string,
-      round,
+      round: number,
       playerId: string,
       callback: (args: SocketCallback) => void
     ) => getLatestSortOrder(roomId, round, playerId, callback)

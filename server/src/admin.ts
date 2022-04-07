@@ -155,10 +155,10 @@ export const finishRound = (
 
     // Remove idle players
     const filteredPlayers = room?.players?.filter(
-      (p) => p.status !== PlayerStatus.NotStarted
+      (p: Player) => p.status !== PlayerStatus.NotStarted
     );
     // Kick idle players out of the room
-    room?.players?.forEach(p => {
+    room?.players?.forEach((p: Player) => {
       if (p.status === PlayerStatus.NotStarted) {
         socket.to(p.socketId).socketsLeave(roomId);
       }

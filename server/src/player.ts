@@ -356,7 +356,7 @@ export const storeTeamReady = (
   const team = (store.getTeams(roomId) as Player[][])[index];
   store.setPlayerStatus(roomId, playerId, index as number, PlayerStatus.Done);
   const player = store.getPlayerById(roomId, playerId);
-  const lastRound = player?.rounds.find((r) => r.number === 6);
+  const lastRound = player?.rounds.find((r: Round) => r.number === 6);
 
   if (lastRound) {
     socket.emit(Event.To, { name: ViewName.Result });
