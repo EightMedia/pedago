@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { GlassPanel } from "../GlassPanel";
 import { PanelGroup } from "./PanelGroup";
 
@@ -44,7 +43,6 @@ One.parameters = {
     url: "",
   },
 };
-One.storyName = "One";
 One.args = { children: childs1 };
 
 // Two
@@ -61,5 +59,4 @@ Two.parameters = {
     url: "",
   },
 };
-Two.storyName = "Two";
 Two.args = { children: childs2 };

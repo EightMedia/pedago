@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { Player } from "./Player";
 import { PlayerData } from "./Player.data";
 
@@ -19,8 +18,8 @@ export default {
 const Template: ComponentStory<typeof Player> = (args) => <Player {...args} />;
 
 // Small
-export const sm = Template.bind({});
-sm.parameters = {
+export const Sm = Template.bind({});
+Sm.parameters = {
   design: {
     type: "figma",
     url: "",
@@ -29,16 +28,16 @@ sm.parameters = {
     default: "dark",
   },
 };
-sm.storyName = "Small";
-sm.args = { ...PlayerData };
+Sm.storyName = "Small";
+Sm.args = { ...PlayerData };
 
 // large
-export const lg = Template.bind({});
-lg.parameters = {
+export const Lg = Template.bind({});
+Lg.parameters = {
   design: {
     type: "figma",
     url: "",
   },
 };
-lg.storyName = "large";
-lg.args = { ...PlayerData, size: "lg" };
+Lg.storyName = "large";
+Lg.args = { ...PlayerData, size: "lg" };

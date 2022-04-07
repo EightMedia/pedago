@@ -37,7 +37,7 @@ import { Waiting } from "../../lib/views/game/Waiting";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
 
-const roomCode = () => {
+const RoomCode = () => {
   const socket: Socket | null = useSocket(
     process.env.SOCKET_URL || "http://localhost:3001"
   );
@@ -200,4 +200,4 @@ const roomCode = () => {
   );
 };
 
-export default roomCode;
+export default RoomCode;

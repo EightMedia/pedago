@@ -46,8 +46,8 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
   ),
   [IconsEnum.Timer]: (
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M9 1h6v2H9V1Zm11.45 4.97-1.42 1.42A8.994 8.994 0 0 1 12 22c-4.98 0-9-4.03-9-9a9 9 0 0 1 9-9c2.12 0 4.07.74 5.62 1.98l1.42-1.42c.51.42.98.9 1.41 1.41ZM11 8v6h2V8h-2Z"
       fill="currentColor"
     />

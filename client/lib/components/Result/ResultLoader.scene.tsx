@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Center } from "../../layouts/Center";
-import { timedCallback } from "../../utils/timedCallback.util";
+import { TimedCallback } from "../../utils/timedCallback.util";
 import { Loader } from "../Loader";
 import { Panel, PanelTitle } from "../Panel";
 
@@ -11,7 +11,7 @@ export type ResultLoaderProps = {
 };
 
 export const ResultLoader = ({ time = 3, callback }: ResultLoaderProps) => {
-  timedCallback(1, callback);
+  TimedCallback(1, callback);
   const text = useContext(LanguageContext).results.loader;
 
   return (

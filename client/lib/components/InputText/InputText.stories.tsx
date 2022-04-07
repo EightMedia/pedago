@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { InputText } from "./InputText";
 import { InputTextData } from "./InputText.data";
 
@@ -20,7 +19,6 @@ Default.parameters = {
     url: "",
   },
 };
-Default.storyName = "Default";
 Default.args = { ...InputTextData };
 
 // error
@@ -31,5 +29,4 @@ Invalid.parameters = {
     url: "",
   },
 };
-Invalid.storyName = "Invalid";
 Invalid.args = { ...InputTextData, error: "The field has a lorem ipsum error" };

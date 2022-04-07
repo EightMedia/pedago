@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const timedCallback = (time: number, callback?: () => void) => {
+export const TimedCallback = (time: number, callback?: () => void) => {
   const [counter, setCounter] = useState(time);
   useEffect(() => {
     if (!callback) return;

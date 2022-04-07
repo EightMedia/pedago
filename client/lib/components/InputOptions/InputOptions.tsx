@@ -8,6 +8,20 @@ import {
   OptionValueType
 } from "./InputOptions.types";
 
+const convertToInt = (value: string) => {
+  if (value === "" || value === "0") return 0;
+  return parseInt(value, 10);
+};
+
+const prepVals = (vals: OptionValueType[], enumOptions: boolean) => {
+  if (!Array.isArray(vals)) return [];
+  return enumOptions ? vals.map((v: any) => convertToInt(v)) : vals;
+};
+const valsToString = (vals: OptionValueType[]) => {
+  if (!Array.isArray(vals)) return [];
+  return vals.map((v: any) => v.toString());
+};
+
 const InputOptionsComponent = ({
   label,
   condition = true,
@@ -18,23 +32,9 @@ const InputOptionsComponent = ({
   handleChange,
   enumOptions = false,
 }: InputOptionsType) => {
-  if (condition === false) return null;
-
-  const convertToInt = (value: string) => {
-    if (value === "" || value === "0") return 0;
-    return parseInt(value, 10);
-  };
-
-  const prepVals = (vals: OptionValueType[]) => {
-    if (!Array.isArray(vals)) return [];
-    return enumOptions ? vals.map((v: any) => convertToInt(v)) : vals;
-  };
-  const valsToString = (vals: OptionValueType[]) => {
-    if (!Array.isArray(vals)) return [];
-    return vals.map((v: any) => v.toString());
-  };
-
   const [selected, setSelected] = useState(valsToString(value));
+
+  if (condition === false) return null;
 
   let optionsArr: OptionsType = Array.isArray(options) ? options : [];
   if (!Array.isArray(options)) {
@@ -61,10 +61,10 @@ const InputOptionsComponent = ({
     setSelected(valsToString(newSelection));
 
     handleChange
-      ? handleChange(prepVals(newSelection))
+      ? handleChange(prepVals(newSelection, enumOptions))
       : console.log(
           "No handleChange, so loggin here: ",
-          prepVals(newSelection)
+          prepVals(newSelection, enumOptions)
         );
   };
 

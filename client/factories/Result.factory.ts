@@ -100,7 +100,7 @@ export const getDataForAllGroups = (groups: ResultGroup[]): ResultSet => {
       (acc, data) => {
         const sum: ResultSet = acc.map((num, i) => {
           return (num * (rnd - 1) + data[i]) / rnd;
-        });
+        }) as ResultSet;
         rnd++;
         return sum;
       },

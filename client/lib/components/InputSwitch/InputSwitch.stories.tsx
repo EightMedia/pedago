@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { InputSwitch } from "./InputSwitch";
 import { InputSwitchData } from "./InputSwitch.data";
 
@@ -20,16 +19,14 @@ Unchecked.parameters = {
     url: "",
   },
 };
-Unchecked.storyName = "Unchecked";
 Unchecked.args = { ...InputSwitchData, checked: false };
 
 // checked
-export const checked = Template.bind({});
-checked.parameters = {
+export const Checked = Template.bind({});
+Checked.parameters = {
   design: {
     type: "figma",
     url: "",
   },
 };
-checked.storyName = "Checked";
-checked.args = { ...InputSwitchData, checked: true };
+Checked.args = { ...InputSwitchData, checked: true };

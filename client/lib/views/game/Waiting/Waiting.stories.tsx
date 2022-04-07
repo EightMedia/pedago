@@ -1,9 +1,8 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { Waiting } from "./Waiting";
 import {
   WaitingDataOneCompanion,
-  WaitingDataTwoCompanions,
+  WaitingDataTwoCompanions
 } from "./Waiting.data";
 
 export default {
@@ -24,7 +23,6 @@ OneCompanion.parameters = {
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A3793",
   },
 };
-OneCompanion.storyName = "One Companion";
 OneCompanion.args = { ...WaitingDataOneCompanion };
 
 // Two companion
@@ -36,5 +34,4 @@ TwoCompanions.parameters = {
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=460%3A3793",
   },
 };
-TwoCompanions.storyName = "Two Companions";
 TwoCompanions.args = { ...WaitingDataTwoCompanions };
