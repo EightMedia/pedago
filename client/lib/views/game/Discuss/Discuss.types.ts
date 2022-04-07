@@ -15,4 +15,5 @@ export type DiscussType = {
     cards: number[];
   }[];
   autoPlay?: boolean;
+  handleReady?: () => void;
 };

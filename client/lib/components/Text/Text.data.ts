@@ -1,3 +1,5 @@
 import { TextType } from "./Text.types";
 
-export const TextData: TextType = {};
+export const TextData: TextType = {
+    children: undefined
+};

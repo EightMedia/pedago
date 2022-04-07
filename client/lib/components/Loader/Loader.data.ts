@@ -1,3 +1,3 @@
 import { LoaderType } from "./Loader.types";
 
-export const LoaderData: LoaderType = {};
+export const LoaderData: LoaderType = {} as object;
