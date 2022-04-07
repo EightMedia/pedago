@@ -1,4 +1,4 @@
-import { Player, Role, RoomDto } from "models";
+import { Role, RoomDto } from "models";
 import { getResultData } from "./result.util";
 
 export const dataToJson = (room: RoomDto, playerId: string): string => {
@@ -30,8 +30,4 @@ const getRole = (roles: Role[], customRole: string) => {
   return `${roles?.map((_, i) => Object.values(Role)[i]).join(", ")}${
     customRole ? ", " + customRole : ""
   }`;
-};
-
-const getPlayer = (room: RoomDto, playerId: string): Player | undefined => {
-  return room.players?.find((p) => p.id === playerId);
 };
