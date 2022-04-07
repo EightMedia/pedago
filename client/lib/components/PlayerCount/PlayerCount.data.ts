@@ -1,3 +1,5 @@
 import { PlayerCountType } from "./PlayerCount.types";
 
-export const PlayerCountData: PlayerCountType = {};
+export const PlayerCountData: PlayerCountType = {
+    players: 0
+};

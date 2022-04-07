@@ -1,1 +1,1 @@
-export type LoaderType = void;
+export type LoaderType = object;

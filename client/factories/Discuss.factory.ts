@@ -1,7 +1,7 @@
 import { RoomDto } from "models";
 import {
-    DiscussStep,
-    DiscussType
+  DiscussStep,
+  DiscussType
 } from "../lib/views/game/Discuss/Discuss.types";
 
 export const getDiscussType = (
@@ -34,6 +34,6 @@ export const getDiscussType = (
     initialStep,
     pause,
     teamMembers,
-    autoPlay,
+    autoPlay
   };
 };

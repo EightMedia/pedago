@@ -17,7 +17,7 @@ export const DiscussInfo = ({ handleBack }: DiscussInfoProps) => {
       <>DiscussInfoItem</>
       <>DiscussInfoItem</>
       <>DiscussInfoItem</>
-      <Button onClick={handleBack}>{text.ready}</Button>
+      <Button onClick={handleBack}>{text.understood}</Button>
     </Panel>
   );
 };

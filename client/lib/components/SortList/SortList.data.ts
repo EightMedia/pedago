@@ -7,4 +7,5 @@ export const SortListData: SortListType = {
     alert("We've sorted it out: " + JSON.stringify(items));
     return;
   },
+  round: 0
 };
