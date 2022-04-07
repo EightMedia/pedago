@@ -28,6 +28,7 @@ export const GameComponent = ({
               <GameLead
                 time={leadTime}
                 callback={() => setScene(GameScenes.Sort)}
+                round={round}
               />
             );
           case GameScenes.Sort:

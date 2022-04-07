@@ -9,7 +9,6 @@ import { TeamsListType } from "./TeamsList.types";
 const TeamsListComponent = ({ teams, title, emptyText }: TeamsListType) => {
   if (!teams) return null;
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
-  console.log(teams);
   return (
     <GlassPanel>
       <PlayerCount players={playerCount} />

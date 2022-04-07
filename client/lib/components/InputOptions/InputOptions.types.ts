@@ -8,7 +8,7 @@ export type OptionType = {
 export type OptionsType = { [key: string]: string } | OptionType[];
 
 export type InputOptionsType = {
-  data?: OptionValueType[];
+  value?: OptionValueType[];
   label?: string;
   multi?: boolean;
   options: OptionsType;

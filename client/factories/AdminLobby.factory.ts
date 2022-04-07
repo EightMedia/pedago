@@ -19,7 +19,7 @@ export const getAdminLobbyType = (
   groups: Group[],
   playerList: Player[]
 ): PlayerGroupType[] => {
-  return groups.map((group) =>
+  return groups?.map((group) =>
     getPlayerGroupType(group, playerList)
   ) as PlayerGroupType[];
 };

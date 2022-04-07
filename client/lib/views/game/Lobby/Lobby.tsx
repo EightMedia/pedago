@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { memo, useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Intro } from "../../../components/Intro";
 import { Page } from "../../../components/Page";
 import { PlayerGroup } from "../../../components/PlayerGroup";
@@ -8,17 +9,19 @@ import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
 
 const LobbyComponent = ({ round, roundMax, groups, playerName }: LobbyType) => {
+  const text = useContext(LanguageContext);
+  
   return (
     <Page>
       <div className={styles.header}>
-        Ronde {round} van {roundMax}
+        {text.game.round} {round} {text.game.of} {roundMax}
       </div>
       <Title>
-        Hoi {playerName}
+        {text.gameLobby.hi} {playerName}!
         <br />
-        Het spel begint zo
+        {text.gameLobby.willStart} 
       </Title>
-      <Intro>We wachten even tot iedereen er is en dan kunnen we starten</Intro>
+      <Intro> {text.gameLobby.waiting}</Intro>
       <Stack gap="xs">
         {groups &&
           groups.map((group) => (

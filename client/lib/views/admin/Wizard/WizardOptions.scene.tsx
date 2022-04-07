@@ -1,4 +1,5 @@
-import React from "react";
+import { useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputSwitch } from "../../../components/InputSwitch";
 import { InputText } from "../../../components/InputText";
@@ -12,6 +13,7 @@ export const WizardOptions = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
+  const text = useContext(LanguageContext).adminWizard.options;
   const groupName = (id: number) => {
     if (data.groups && data.groups[id]) {
       return data.groups[id].name;
@@ -21,51 +23,58 @@ export const WizardOptions = ({
 
   const handleGroupChange = (id: number, name: string) => {
     let groups = data.groups || [];
-    if (name === "") {
-      delete groups[id];
+    if (!name) {
+      groups.splice(id, 1);
     } else {
-      groups[id] = { id: "group" + (id + 1), name: name };
+      groups[id] = { id: id.toString(), name: name };
     }
     updateData(groups, "groups");
+  };
+
+  const handleNextStep = () => {
+    if (!data.options?.inGroups) {
+      updateData([{ id: 0, name: data.info?.organisation?.name }], "groups");
+    }
+    handleStep(WizardStep.Check);
   };
 
   return (
     <>
       <Center>
-        <p>Stap 4/4</p>
-        <PanelTitle>Extra spelopties</PanelTitle>
+        <p>{text.step} 4/4</p>
+        <PanelTitle>{text.title}</PanelTitle>
       </Center>
       <Stack>
         <InputSwitch
           id="timer"
-          label="Timer"
-          helpText="Spelrondes krijgen dan een limiet van 10 minuten"
+          label={text.timerLabel}
+          helpText={text.timerText}
           checked={data.options?.timer}
           onChange={(e) => updateData(e.target.checked, "options.timer")}
         />
         <InputSwitch
           id="inGroups"
-          label="Werken in groepen"
-          helpText="Spelers spelen zoveel mogelijk met spelers uit andere groepen"
+          label={text.inGroups}
+          helpText={text.inGroupsText}
           checked={data.options?.inGroups}
           onChange={(e) => updateData(e.target.checked, "options.inGroups")}
         />
         <InputText
           value={groupName(0)}
           id="group1"
-          label="Groep 1"
-          placeholder="Groep 1"
+          label={text.group1}
+          placeholder={text.group1}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(0, e.target.value);
           }}
-          condition={data.options?.inGroups}
+          condition={Boolean(data.options?.inGroups)}
         />
         <InputText
           value={groupName(1)}
           id="group2"
-          label="Groep 2"
-          placeholder="Groep 2"
+          label={text.group2}
+          placeholder={text.group2}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(1, e.target.value);
@@ -75,8 +84,8 @@ export const WizardOptions = ({
         <InputText
           value={groupName(2)}
           id="group3"
-          label="Groep 3"
-          placeholder="Groep 3"
+          label={text.group3}
+          placeholder={text.group3}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(2, e.target.value);
@@ -86,22 +95,22 @@ export const WizardOptions = ({
         <InputText
           value={groupName(3)}
           id="group4"
-          label="Groep 4"
-          placeholder="Groep 4"
+          label={text.group4}
+          placeholder={text.group4}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(3, e.target.value);
           }}
           condition={(data.options?.inGroups && groupName(2) !== "") || false}
         />
-        <Button stretch={true} onClick={() => handleStep(WizardStep.Check)}>
-          Volgende
+        <Button stretch={true} onClick={handleNextStep}>
+          {text.next}
         </Button>
         <Button
           variation="line"
           onClick={() => handleStep(WizardStep.GameType)}
         >
-          Terug naar de vorige stap
+          {text.back}
         </Button>
       </Stack>
     </>

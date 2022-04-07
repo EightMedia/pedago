@@ -194,7 +194,7 @@ export const gameStart = (
   const teams = store.getTeams(roomId);
   const team = (teams as Player[][])[index];
 
-  team.forEach((player: Player) => {
+  team?.forEach((player: Player) => {
     socket
       .to(player.socketId)
       .emit(Event.To, <ViewState>{ name: ViewName.Game });
@@ -253,7 +253,7 @@ export const storeRound = (
     const team = (store.getTeams(roomId) as Player[][])[index];
     updateClientRoom(socket, roomId);
 
-    team.forEach((player: Player) => {
+    team?.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         ...player,
         view: ViewName.Discuss,
@@ -360,7 +360,7 @@ export const storeTeamReady = (
 
   if (lastRound) {
     socket.emit(Event.To, { name: ViewName.Result });
-    team.forEach((player: Player) => {
+    team?.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         status: PlayerStatus.Done,
       });
@@ -372,7 +372,7 @@ export const storeTeamReady = (
   } else {
     const round = (player?.rounds?.length as number) + 1;
 
-    team.forEach((player: Player) => {
+    team?.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         view: ViewName.PlayerMatch,
         round,

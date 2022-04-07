@@ -1,6 +1,5 @@
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import { Button } from "../../../components/Button";
 import { Loader } from "../../../components/Loader";
 import { Page } from "../../../components/Page";
@@ -16,32 +15,31 @@ const WaitingComponent = ({
   teamMembers,
   backToSort,
 }: WaitingType) => {
-  const data = useContext(LanguageContext);
-  const t = data.waiting;
-  const socket = useContext(SocketContext);
+  const text = useContext(LanguageContext);
+  const waitingText = text.waiting;
 
   return (
     <Page valign="center">
       <div>
-        {data.game.round} {round} {data.game.of} {roundMax}
+        {text.game.round} {round} {text.game.of} {roundMax}
       </div>
       <Panel>
         <Center>
           <Loader />
-          <PanelTitle space="sm">{t.goodBusy}</PanelTitle>
+          <PanelTitle space="sm">{waitingText.goodBusy}</PanelTitle>
           <Stack>
             {teamMembers?.length > 1 && (
               <Text tone="light">
-                {t.waiting} {teamMembers.join(" " + t.and + " ")} {t.areReady}
+                {waitingText.waiting} {teamMembers.join(" " + waitingText.and + " ")} {waitingText.areReady}
               </Text>
             )}
             {teamMembers?.length === 1 && (
               <Text tone="light">
-                {t.waiting} {teamMembers.join()} {t.isReady}
+                {waitingText.waiting} {teamMembers.join()} {waitingText.isReady}
               </Text>
             )}
             <Button onClick={backToSort} variation="line">
-              {t.changeSomething}
+              {waitingText.changeSomething}
             </Button>
           </Stack>
         </Center>

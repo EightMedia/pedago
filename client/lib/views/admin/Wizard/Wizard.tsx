@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import set from "set-value";
+import { convertToRoomDto } from "../../../../factories/AdminWizard.factory";
 import { Page } from "../../../components/Page";
 import { Panel } from "../../../components/Panel";
 import { Title } from "../../../components/Title";
@@ -11,8 +12,9 @@ import { WizardOptions } from "./WizardOptions.scene";
 import { WizardOrganisation } from "./WizardOrganisation.scene";
 
 const WizardComponent = ({
-  initialStep = WizardStep.Name,
+  initialStep,
   data = {},
+  handleRegisterGame,
 }: WizardType) => {
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [wizardData, setWizardData] = useState<WizardType["data"]>(data);
@@ -23,7 +25,7 @@ const WizardComponent = ({
   }, [initialStep]);
 
   const updateWizardData = (value: any, path: string) => {
-    const newData: WizardType["data"] = set({ ...data }, path, value) as any;
+    const newData: WizardType["data"] = set({ ...data, ...wizardData }, path, value) as any;
     setWizardData(newData);
   };
 
@@ -34,8 +36,7 @@ const WizardComponent = ({
   };
 
   const handleCreateGame = () => {
-    alert("Create game ");
-    console.log("create game with data: " + JSON.stringify(wizardData));
+    handleRegisterGame(convertToRoomDto(wizardData));
   };
 
   return (

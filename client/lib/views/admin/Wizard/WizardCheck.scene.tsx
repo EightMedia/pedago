@@ -1,4 +1,7 @@
-import React from "react";
+import { Role } from "models";
+import { PlayerType } from "models/lib/models/player-type.enum";
+import { useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { List } from "../../../components/List";
 import { ListItem } from "../../../components/List/List";
@@ -16,34 +19,51 @@ export const WizardCheck = ({
   handleStep,
   handleCreateGame,
 }: WizardCheckProps) => {
+  const text = useContext(LanguageContext).adminWizard.check;
   const groupNames = data.groups?.map((group) => group.name);
+  const playerType =
+    Object.values(PlayerType)[data?.info?.players?.type as number];
+
+  const roles = data?.info?.role?.map((r) => Object.values(Role)[r]);
+  const customRole = data?.info?.customRole;
+  if (customRole) {
+    roles?.pop();
+    roles?.push(customRole);
+  }
+
   return (
     <>
-      <PanelTitle align="left">Jouw gegevens</PanelTitle>
+      <PanelTitle align="left">{text.yourInfo}</PanelTitle>
 
       <List>
-        <ListItem label="Naam" value={data?.info?.name} />
-        <ListItem label="E-mailadres" value={data?.info?.email} />
-        <ListItem label="Functie" value={`${data?.info?.role}`} />{" "}
+        <ListItem label={text.name} value={data?.info?.name} />
+        <ListItem label={text.email} value={data?.info?.email} />
+        <ListItem label={text.role} value={roles?.join(", ")} />{" "}
         <ListItem
-          label="Organisatie"
+          label={text.organisation}
           value={`${data?.info?.organisation?.name} (${data?.info?.organisation?.location})`}
         />
       </List>
 
-      <PanelTitle align="left">Spelopties</PanelTitle>
+      <PanelTitle align="left">{text.gameOptions}</PanelTitle>
 
       <List>
-        <ListItem label="Spelers" value={data?.info?.players?.type} />
-        <ListItem label="Timer" value={data?.options?.timer ? "Aan" : "Uit"} />
-        <ListItem label="Groepen" value={`${groupNames}`} />
+        <ListItem label={text.players} value={playerType as string} />
+        <ListItem
+          label={text.timer}
+          value={data?.options?.timer ? text.on : text.off}
+        />
+        <ListItem
+          label={(groupNames?.length as number) > 1 ? text.groups : text.group}
+          value={groupNames?.length ? groupNames?.join(", ") : text.none}
+        />
       </List>
 
       <Button stretch={true} onClick={() => handleCreateGame(data)}>
-        Spel aanmaken
+        {text.create}
       </Button>
       <Button variation="line" onClick={() => handleStep(WizardStep.Options)}>
-        Terug naar de vorige stap
+        {text.back}
       </Button>
     </>
   );

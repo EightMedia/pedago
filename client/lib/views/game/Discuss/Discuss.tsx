@@ -19,7 +19,7 @@ const DiscussComponent = ({
   teamMembers,
   autoPlay = true,
 }: DiscussType) => {
-  const data = useContext(LanguageContext);
+  const text = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const room = useContext(RoomContext);
   const [step, setStep] = useState(initialStep);
@@ -36,7 +36,7 @@ const DiscussComponent = ({
   return (
     <Page valign="center">
       <div>
-        {data.game.round} {round} {data.game.of} {roundMax}
+        {text.game.round} {round} {text.game.of} {roundMax}
       </div>
       {(() => {
         let callback = undefined;
@@ -52,7 +52,7 @@ const DiscussComponent = ({
             );
           case DiscussStep.Intro:
             callback = autoPlay ? () => setStep(DiscussStep.Info) : undefined;
-            return <DiscussIntro time={3} callback={callback} />;
+            return <DiscussIntro time={3} callback={callback} teamMembers={teamMembers}/>;
           case DiscussStep.Compare:
             return (
               <DiscussCompare
