@@ -34,7 +34,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: ["http://localhost:8000"],
+    origin: ["http://localhost:8000", process.env.SOCKET_ORIGIN as string],
   },
 });
 console.log("--- Pedago Server started at port 3001 ---");
