@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { InputOptions } from "./InputOptions";
 import { InputOptionsData } from "./InputOptions.data";
 
@@ -21,7 +20,6 @@ export const EnumMultiWithPresetSelection = Template.bind({});
 EnumMultiWithPresetSelection.args = {
   ...InputOptionsData,
   multi: true,
-  data: [2, 4],
 };
 
 // single option
@@ -33,5 +31,4 @@ export const EnumsingleWithPresetSelection = Template.bind({});
 EnumsingleWithPresetSelection.args = {
   ...InputOptionsData,
   multi: false,
-  data: [3],
 };

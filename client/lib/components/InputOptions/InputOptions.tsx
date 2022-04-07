@@ -53,7 +53,7 @@ const InputOptionsComponent = ({
     if (multi && Array.isArray(selected)) {
       newSelection = checked
         ? [...selected, value]
-        : selected.filter((v: any) => v !== value && parseInt(v) !== value);
+        : selected.filter((v: any) => v !== value);
     } else {
       newSelection = checked ? [value] : [];
     }
