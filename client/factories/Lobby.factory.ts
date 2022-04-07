@@ -55,7 +55,7 @@ export const getGroups = (
   groups: Group[],
   playerList: Player[]
 ): PlayerGroupType[] => {
-  let lobbyGroups: PlayerGroupType[] = [];
+  const lobbyGroups: PlayerGroupType[] = [];
   groups.forEach((g) =>
     lobbyGroups.push(getPlayerGroupType(g, playerList, ""))
   );

@@ -21,7 +21,7 @@ const WizardComponent = ({
 
   useEffect(() => {
     setStep(initialStep as WizardStep);
-    return () => {};
+    return;
   }, [initialStep]);
 
   const updateWizardData = (value: any, path: string) => {

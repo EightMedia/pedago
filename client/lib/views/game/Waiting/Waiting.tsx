@@ -38,7 +38,7 @@ const WaitingComponent = ({
                 {waitingText.waiting} {teamMembers.join()} {waitingText.isReady}
               </Text>
             )}
-            <Button onClick={backToSort} variation="line">
+            <Button onClick={backToSort as () => void} variation="line">
               {waitingText.changeSomething}
             </Button>
           </Stack>

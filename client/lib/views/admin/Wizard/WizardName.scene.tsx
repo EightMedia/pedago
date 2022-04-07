@@ -57,7 +57,7 @@ export const WizardName = ({
           enumOptions={true}
           handleChange={(newData: Role) => {
             updateData(newData, "info.role");
-            if (!Boolean(data.info?.role?.includes(Role.Other))){
+            if (!(data.info?.role?.includes(Role.Other))){
               updateData(undefined, "info.customRole")
             }
           }}

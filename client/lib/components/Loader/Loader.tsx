@@ -1,9 +1,8 @@
 import { memo } from "react";
 import { Shape } from "../Shape";
 import styles from "./Loader.module.css";
-import { LoaderType } from "./Loader.types";
 
-const LoaderComponent = ({}: LoaderType) => {
+const LoaderComponent = () => {
   return (
     <div className={styles.loader}>
       <Shape category={0} className={styles.i0} />

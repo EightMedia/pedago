@@ -23,7 +23,7 @@ const WizardComponent = ({ initialStep }: WizardType) => {
 
   useEffect(() => {
     setStep(initialStep as WizardStep);
-    return () => {};
+    return;
   }, [initialStep]);
 
   const handleRoomCode = (step: WizardStep, roomCode: number) => {

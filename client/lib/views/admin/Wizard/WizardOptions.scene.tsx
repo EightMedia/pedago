@@ -22,7 +22,7 @@ export const WizardOptions = ({
   };
 
   const handleGroupChange = (id: number, name: string) => {
-    let groups = data.groups || [];
+    const groups = data.groups || [];
     if (!name) {
       groups.splice(id, 1);
     } else {

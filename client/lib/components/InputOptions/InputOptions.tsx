@@ -45,7 +45,7 @@ const InputOptionsComponent = ({
   }
 
   const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
-    let value: OptionType["value"] = e.target.value;
+    const value: OptionType["value"] = e.target.value;
 
     const checked = e.target.checked;
     let newSelection: OptionValueType[];
