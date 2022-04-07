@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
@@ -10,6 +12,8 @@ export const WizardOrganisation = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
+  const text = useContext(LanguageContext).adminWizard.organisation;
+
   const handleNextStep = () => {
     if (data.info?.organisation?.name && data.info.organisation.location) {
       handleStep(WizardStep.GameType);
@@ -20,31 +24,31 @@ export const WizardOrganisation = ({
   return (
     <>
       <Center>
-        <p>Stap 2/4</p>
-        <PanelTitle>Jouw organisatie</PanelTitle>
+        <p>{text.step} 2/4</p>
+        <PanelTitle>{text.yourOrg}</PanelTitle>
       </Center>
       <Stack>
         <InputText
           value={data?.info?.organisation?.name || ""}
           id="organisation"
-          label="Organisatie"
+          label={text.organisation}
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.organisation.name")}
         />
         <InputText
           value={data?.info?.organisation?.location || ""}
           id="location"
-          label="Locatie"
+          label={text.location}
           showLabel={true}
           onChange={(e) =>
             updateData(e.target.value, "info.organisation.location")
           }
         />
         <Button stretch={true} onClick={handleNextStep}>
-          Volgende
+          {text.next}
         </Button>
         <Button variation="line" onClick={() => handleStep(WizardStep.Name)}>
-          Terug naar de vorige stap
+          {text.back}
         </Button>
       </Stack>
     </>

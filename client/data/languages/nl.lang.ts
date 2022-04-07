@@ -154,7 +154,7 @@ export const NL: Locale = {
   },
   adminWizard: {
     name: {
-      step: "Step",
+      step: "Stap",
       yourInfo: "Jouw gegevens",
       name: "Naam",
       email: "E-mailadres",
@@ -180,7 +180,7 @@ export const NL: Locale = {
       back: "Terug naar vorige stap",
     },
     gameType: {
-      step: "Step",
+      step: "Stap",
       typePlayers: "Type spelers",
       education: "Opleiding",
       year: "Leerjaar",
@@ -188,6 +188,28 @@ export const NL: Locale = {
       next: "Volgende",
       back: "Terug naar vorige stap",
     },
+    options: {
+      step: "Stap",
+      title: "Extra spelopties",
+      timerLabel: "Timer",
+      timerText: "Spelrondes krijgen dan een limiet van 10 minuten",
+      inGroups: "Werken in groepen",
+      inGroupsText: "Spelers spelen zoveel mogelijk met spelers uit andere groepen",
+      group1:"Groep 1",
+      group2: "Groep 2",
+      group3: "Groep 3",
+      group4: "Groep 4",
+      next: "Volgende",
+      back: "Terug naar de vorige stap"
+    },
+    organisation: {
+      step: "Stap",
+      yourOrg: "Jouw organisatie",
+      organisation: "Organisatie",
+      location: "Locatie",
+      next: "Volgende",
+      back: "Terug naar de vorige stap"
+    }
   },
   gameWizard: {
     roomCode: {

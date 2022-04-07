@@ -140,6 +140,28 @@ export interface Locale {
             next: string;
             back: string;
         };
+        options: {
+            step: string;
+            title: string;
+            timerLabel: string;
+            timerText: string;
+            inGroups: string;
+            inGroupsText: string;
+            group1: string;
+            group2: string;
+            group3: string;
+            group4: string;
+            next: string;
+            back: string;
+        };
+        organisation: {
+            step: string;
+            yourOrg: string;
+            organisation: string;
+            location: string;
+            next: string;
+            back: string;
+        };
     };
     gameWizard: {
         roomCode: {
