@@ -9,16 +9,16 @@ export const getPlayerByIdFn = (
   roomId: string,
   playerId: string
 ): Player | undefined => {
-  const room = get().games.find((room) => room.id === roomId);
+  const room = get().games.find((room: RoomDto) => room.id === roomId);
   const players = room?.players;
-  return players?.find((player) => player.id === playerId);
+  return players?.find((player: Player) => player.id === playerId);
 };
 
 export const getGroupsByRoomIdFn = (
   get: GetState<GamesState>,
   roomId: string
 ): Group[] | undefined => {
-  const room = get().games.find((room) => room.id === roomId);
+  const room = get().games.find((room: RoomDto) => room.id === roomId);
   return room?.groups;
 };
 
@@ -53,7 +53,7 @@ export const addPlayerToRoomFn = (
   player: Partial<Player>
 ): void => {
   set((state: GamesState) => ({
-    games: state.games.map((room) => {
+    games: state.games.map((room: RoomDto) => {
       if (room.id === roomId) {
         room.players.push(player as Player);
       }
@@ -73,7 +73,7 @@ export const updatePlayerFn = (
       if (roomId === room.id) {
         return {
           ...room,
-          players: room.players.map((p) => {
+          players: room.players.map((p: Player) => {
             if (p.id === playerId) {
               return {
                 ...p,
@@ -83,8 +83,8 @@ export const updatePlayerFn = (
               return p;
             }
           }),
-          teams: room.teams?.map((team) => {
-            return team.map((p) => {
+          teams: room.teams?.map((team: Player[]) => {
+            return team.map((p: Player) => {
               if (p.id === playerId) {
                 return {
                   ...p,
@@ -125,7 +125,7 @@ export const setPlayerStatusFn = (
               return p;
             }
           }),
-          teams: room.teams?.map((team, index) => {
+          teams: room.teams?.map((team: Player[], index: number) => {
             if (index === teamIndex) {
               return team.map((p: Player) => {
                 if (p.id === playerId) {
@@ -179,13 +179,13 @@ export const updateAllPlayersFn = (
   player: Partial<Player>
 ) => {
   set((state: GamesState) => ({
-    games: state.games.map((room) => {
+    games: state.games.map((room: RoomDto) => {
       if (roomId === room.id) {
         return {
           ...room,
-          players: room.players.map((p) => ({ ...p, ...player })),
-          teams: room.teams?.map((team) => {
-            team.map((p) => ({ ...p, ...player }));
+          players: room.players.map((p: Player) => ({ ...p, ...player })),
+          teams: room.teams?.map((team: Player[]) => {
+            team.map((p: Player) => ({ ...p, ...player }));
           }),
         } as RoomDto;
       } else {
@@ -197,7 +197,7 @@ export const updateAllPlayersFn = (
 
 export const makeTeamsFn = (set: SetState<GamesState>, roomId: string) => {
   set((state: GamesState) => ({
-    games: state.games.map((room) => {
+    games: state.games.map((room: RoomDto) => {
       if (roomId === room.id) {
         return {
           ...room,
@@ -218,11 +218,11 @@ export const storeRoundFn = (
   round: Round
 ): void => {
   set((state: GamesState) => ({
-    games: state.games.map((room) => {
+    games: state.games.map((room: RoomDto) => {
       if (roomId === room.id) {
         return {
           ...room,
-          players: room.players.map((player) => {
+          players: room.players.map((player: Player) => {
             if (player.id === playerId) {
               const roundIndex = player.rounds.findIndex(
                 (r) => r.number === round.number
@@ -234,7 +234,7 @@ export const storeRoundFn = (
             }
             return player;
           }),
-          teams: room.teams?.map((team, index) => {
+          teams: room.teams?.map((team: Player[], index: number) => {
             if (index === teamIndex) {
               return team.map((player: Player) => {
                 if (player.id === playerId) {
