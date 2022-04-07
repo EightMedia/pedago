@@ -47,7 +47,7 @@ export const NL: Locale = {
     3: {
       title: "Kritische legitimering",
       description:
-        "is erop gericht leerlingen te begrijpen als unieke sociale wezens, die een persoonlijke relatie met deleraar hebben.",
+        "is erop gericht leerlingen te begrijpen als unieke sociale wezens, die een persoonlijke relatie met de leraar hebben.",
     },
     4: {
       title: "Functionele legitimering",
