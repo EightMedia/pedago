@@ -37,4 +37,7 @@ export const wizardDataStudents: WizardType["data"] = {
 export const WizardData: WizardType = {
   initialStep: WizardStep.Name,
   data: {},
+  handleRegisterGame: function (): void {
+    throw new Error("Function not implemented.");
+  },
 };
