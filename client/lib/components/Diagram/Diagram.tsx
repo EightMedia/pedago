@@ -29,7 +29,7 @@ const DiagramComponent = ({
   };
   const labels = findCategoryTitles();
   const data = {
-    labels: labels,
+    labels: labels, 
     datasets: [
       {
         label: primaryLabel,
