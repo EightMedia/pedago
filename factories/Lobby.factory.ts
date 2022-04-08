@@ -11,8 +11,7 @@ const getPlayerGroupType = (
 ): PlayerGroupType => {
   return {
     ...(group as Group),
-    players: playerList
-      .filter((p) => p.group?.id === group.id)
+    players: playerList?.filter((p) => p.group?.id === group.id)
       .map((p) => {
         return { name: p.name, active: p.id === playerId };
       }),
@@ -23,8 +22,8 @@ const getPlayerName = (
   id: string | undefined,
   playerList: Player[]
 ): Player["name"] => {
-  const players: Player[] = playerList.filter((p) => p.id === id);
-  if (players.length === 1) {
+  const players: Player[] = playerList?.filter((p) => p.id === id);
+  if (players?.length === 1) {
     return players[0].name;
   } else {
     return "";

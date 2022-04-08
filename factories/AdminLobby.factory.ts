@@ -7,8 +7,7 @@ const getPlayerGroupType = (
 ): PlayerGroupType => {
   return {
     ...(group as Group),
-    players: playerList
-      .filter((p) => p.group?.id === group.id)
+    players: playerList?.filter((p) => p.group?.id === group.id)
       .map((p) => {
         return { name: p.name, active: false };
       }),
@@ -30,6 +29,6 @@ export const getLobbyRoom = (
   return {
     roomCode: room.roomCode,
     id: room.id,
-    players: room.players?.length,
+    players: room?.players?.length,
   };
 };
