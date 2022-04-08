@@ -1,14 +1,30 @@
 .title {
+  font-family: var(--font-headings);
   color: var(--color-white);
   font-size: var(--font-size-xl);
   margin-bottom: var(--space-md);
-  text-align: center;
   font-weight: 700;
 }
 
-.lg {
-  font-size: var(--font-size-xl);
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center;
+}
+
+/* the difference between md/lg is only visible on desktop view afaik */
+
+.md {
+  font-size: --var(--font-size-xl);
   @media (--sm) {
-    font-size: var(--font-size-3xl);
+    font-size: --var(--font-size-2xl);
+  }
+}
+
+.lg {
+  font-size: 34px;
+  @media (--sm) {
+    font-size: 44px;
   }
 }

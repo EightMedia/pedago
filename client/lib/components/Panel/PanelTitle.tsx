@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { ReactNode } from "react";
+import { isValidElement, ReactNode } from "react";
 import styles from "./Panel.module.css";
 
 export interface PanelTitleType {
@@ -17,7 +17,7 @@ export const PanelTitle = ({
     <h2
       className={cx(styles.panelTitle, styles["space-" + space], styles[align])}
     >
-      {children}
+      {isValidElement(children) ? children : <p>{children}</p>}
     </h2>
   );
 };
