@@ -7,10 +7,11 @@ const TitleComponent = ({
   children,
   size = "md",
   element = "h2",
+  align = "center",
 }: TitleType) => {
   return createElement(
     element,
-    { className: cx(styles.title, styles[size]) },
+    { className: cx(styles.title, styles[size], styles[align]) },
     children
   );
 };
