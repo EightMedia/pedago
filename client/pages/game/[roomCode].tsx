@@ -38,9 +38,7 @@ import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
 
 const RoomCode = () => {
-  const socket: Socket | null = useSocket(
-    process.env.SOCKET_URL || "http://localhost:3001"
-  );
+  const socket: Socket | null = useSocket("/api");
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [wizardStep, setWizardStep] = useState<WizardStep>(WizardStep.RoomCode);
   const [playerMatchScene, setPlayerMatchScene] =

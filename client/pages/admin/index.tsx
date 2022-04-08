@@ -35,9 +35,7 @@ import { Wizard } from "../../lib/views/admin/Wizard";
 import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
 
 const AdminGame = () => {
-  const socket: Socket | null = useSocket(
-    process.env.SOCKET_URL || "http://localhost:3001"
-  );
+  const socket: Socket | null = useSocket("/api");
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [playerList, setPlayerList] = useState<Player[]>([]);

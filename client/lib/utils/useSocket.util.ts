@@ -5,7 +5,8 @@ export function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketIo = io(url);
+    fetch(url).then(console.log);
+    const socketIo = io();
     setSocket(socketIo);
 
     function cleanup() {
