@@ -8,5 +8,8 @@
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
     "plugin:storybook/recommended"
-  ]
+  ],
+  "rules": {
+    "@typescript-eslint/no-var-requires": 0
+  }
 }

@@ -2,7 +2,7 @@ import { Group, Player } from "models";
 
 export const makeTeamsFromPlayerList = (players: Player[]): Player[][] => {
   players = shufflePlayerList(players);
-  let teams: Player[][] = [];
+  const teams: Player[][] = [];
   let team: Player[] = [];
 
   for (let i = 0; i < players.length; i++) {
@@ -36,7 +36,7 @@ const shufflePlayerList = (players: Player[]): Player[] => {
 
 const getPlayerGroups = (players: Player[]): Player[] => {
   const result =  players.reduce((acc: any, player: Player) => {
-    let key = (player["group"] as Group)["id"];
+    const key = (player["group"] as Group)["id"];
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -48,7 +48,7 @@ const getPlayerGroups = (players: Player[]): Player[] => {
 
 const zipPlayers = (amount: number, playersByGroup: Player[][]): Player[] => {
   const [group1, group2, group3, group4] = playersByGroup;
-  let playerList: Player[] = [];
+  const playerList: Player[] = [];
   for (let i = 0; i < amount; i++) {
     if (group1?.length && group1[i]) {
       playerList.push(group1[i]);
