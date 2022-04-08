@@ -11,7 +11,7 @@ import {
   SocketCallback,
   ViewName,
   ViewState
-} from "./../lib/models";
+} from "../../lib/models";
 import { updateClientRoom, updatePlayersInLobby } from "./shared";
 import gamesStore from "./store/games.store";
 
