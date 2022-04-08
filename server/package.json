@@ -14,7 +14,13 @@
     "build": "tsc",
     "watch": "tsc -w",
     "logs": "heroku logs --tail",
-    "kill": "lsof -ti:3001 | xargs kill"
+    "kill": "lsof -ti:3001 | xargs kill",
+    "postinstall": "tsc",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w"
+  },
+  "engines": {
+    "node": "14.19.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
