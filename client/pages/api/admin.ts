@@ -24,7 +24,7 @@ export const registerGame = (
   let room;
 
   // Check if room is already instantiated
-  const roomExists: boolean = Boolean(
+  const roomExists = Boolean(
     store.getRoomByRoomCode(partialRoom.roomCode)
   );
 
