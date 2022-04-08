@@ -37,7 +37,7 @@ export const getLobbyType = (
   room: RoomDto,
   playerList: Player[]
 ): LobbyType => {
-  const playerId = getPlayerId(socket.id, room.players);
+  const playerId = getPlayerId(socket.id, room?.players);
   const playerName = getPlayerName(playerId, playerList);
   const groups = room.groups?.map((g) =>
     getPlayerGroupType(g, playerList, playerId as string)
