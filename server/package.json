@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "(lsof -ti:3001 | xargs kill) && (run-p --print-label watch run-server)",
-    "preinstall": "npm install ../models/",
+    "preinstall": "yarn add models",
     "run-server": "(lsof -ti:3001 | xargs kill) && (nodemon ./src/server.ts)",
     "build": "tsc",
     "watch": "tsc -w",
@@ -35,8 +35,8 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "http": "^0.0.1-security",
+    "models": "file:../models",
     "socket.io": "^4.4.1",
-    "zustand": "^3.7.1",
-    "models": "file:../models"
+    "zustand": "^3.7.1"
   }
 }
