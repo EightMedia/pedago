@@ -11,7 +11,7 @@ export default {
 
 const Template: ComponentStory<typeof Panel> = (args) => (
   <Panel {...args}>
-    <PanelTitle children={PanelData.children} />
+    <PanelTitle>{PanelData.children}</PanelTitle>
   </Panel>
 );
 
