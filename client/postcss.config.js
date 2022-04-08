@@ -9,6 +9,7 @@ module.exports = {
       stage: 0,
       features: {
         "custom-properties": {
+          disableDeprecationNotice: true,
           importFrom: "./lib/styles/variables.css",
           preserve: true,
         },
