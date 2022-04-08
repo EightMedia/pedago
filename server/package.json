@@ -9,15 +9,12 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "(lsof -ti:3001 | xargs kill) && (run-p --print-label watch run-server)",
-    "preinstall": "yarn add models",
+    "preinstall": "npm install models",
     "run-server": "(lsof -ti:3001 | xargs kill) && (nodemon ./src/server.ts)",
     "build": "tsc",
     "watch": "tsc -w",
     "logs": "heroku logs --tail",
     "kill": "lsof -ti:3001 | xargs kill"
-  },
-  "engines": {
-    "node": "14.19.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
