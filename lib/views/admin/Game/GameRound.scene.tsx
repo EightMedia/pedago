@@ -31,19 +31,19 @@ export const GameRound = ({
   const text = useContext(LanguageContext);
   const gameText = text.adminGame.round;
 
-  const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
+  const playerCount = teams?.reduce((acc, team) => acc + team.players.length, 0);
   // teams with status not started:
-  const notStartedTeams = teams.filter(
+  const notStartedTeams = teams?.filter(
     (team) => team.status === PlayerStatus.NotStarted
   );
   // teams with status inProgress or Discuss
-  const inProgressTeams = teams.filter(
+  const inProgressTeams = teams?.filter(
     (team) =>
       team.status === PlayerStatus.InProgress ||
       team.status === PlayerStatus.Discuss
   );
   // teams with status Done
-  const doneTeams = teams.filter((team) => team.status === PlayerStatus.Done);
+  const doneTeams = teams?.filter((team) => team.status === PlayerStatus.Done);
   const teamsStillPlaying = notStartedTeams?.length + inProgressTeams?.length;
 
   const handleStopRound = () => {
