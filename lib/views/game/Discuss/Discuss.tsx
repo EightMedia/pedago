@@ -4,7 +4,7 @@ import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
 import { getPlayerId } from "../../../../factories/shared.factory";
 import { Page } from "../../../components/Page";
-import { Player, PlayerEvent } from "./../lib/models";
+import { Player, PlayerEvent } from "../../../models";
 import { DiscussStep, DiscussType } from "./Discuss.types";
 import { DiscussCompare } from "./DiscussCompare.scene";
 import { DiscussInfo } from "./DiscussInfo.scene";

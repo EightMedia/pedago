@@ -16,11 +16,11 @@ import { memo, useContext, useEffect, useState } from "react";
 import { RoomContext } from "../../../contexts/RoomContext";
 import { SocketContext } from "../../../contexts/SocketContext";
 import { getPlayerId } from "../../../factories/shared.factory";
+import { Category, Player, PlayerEvent, SocketCallback } from "../../models";
 import {
   categoryToSortList,
   sortListToCategory
 } from "../../utils/sortlist-conversion.util";
-import { Category, Player, PlayerEvent, SocketCallback } from "./../lib/models";
 import { SortableItem } from "./SortableItem";
 import styles from "./SortList.module.css";
 import { SortItemType, SortListType } from "./SortList.types";
