@@ -1,5 +1,5 @@
 .timer {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   padding: var(--space-xs);
   background: var(--color-white-10);
