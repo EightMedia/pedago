@@ -20,6 +20,9 @@ const Template: ComponentStory<typeof Result> = (args) => <Result {...args} />;
 export const Loader = Template.bind({});
 Loader.parameters = {
   layout: "fullscreen",
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A8604",
@@ -32,6 +35,9 @@ Loader.args = { ...ResultData };
 export const OneGroup = Template.bind({});
 OneGroup.parameters = {
   layout: "fullscreen",
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=519%3A9017",
@@ -50,6 +56,9 @@ OneGroup.args = {
 export const TwoGroups = Template.bind({});
 TwoGroups.parameters = {
   layout: "fullscreen",
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=519%3A9017",
@@ -68,6 +77,9 @@ TwoGroups.args = {
 export const ThreeGroups = Template.bind({});
 ThreeGroups.parameters = {
   layout: "fullscreen",
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=519%3A9017",
@@ -86,6 +98,9 @@ ThreeGroups.args = {
 export const AutoPlay = Template.bind({});
 AutoPlay.parameters = {
   layout: "fullscreen",
+  viewport: {
+    defaultViewport: "Desktop",
+  },
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=517%3A4209",

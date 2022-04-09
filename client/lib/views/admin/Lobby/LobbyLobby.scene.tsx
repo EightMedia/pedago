@@ -26,7 +26,7 @@ export const LobbyLobby = ({
   };
 
   return (
-    <Page>
+    <Page background={2}>
       <div className={styles.header}>
         <PlayerCount players={room?.players} variation="light" />
         <Logo />

@@ -62,7 +62,7 @@ export const GameInfo = ({ title }: { title: string }) => {
 
 export const GameOnboarding = ({ handleOk }: { handleOk: () => void }) => {
   return (
-    <Page>
+    <Page valign="center">
       <Panel>
         <GameInfo title="Voor we beginnen" />
         <Button onClick={handleOk}>Ik snap het</Button>

@@ -17,7 +17,7 @@ export const GameLead = ({ round, roundMax, callback }: GameLeadProps) => {
     TimedCallback(3, callback);
   }
   return (
-    <Page>
+    <Page background={6} valign="center">
       <Title>
         {text.continuing} {round} {text.of} {roundMax}
       </Title>
