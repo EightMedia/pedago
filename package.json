@@ -12,8 +12,8 @@
     "models"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach run build",
-    "start": "yarn workspaces server start",
+    "start": "yarn workspace server run build && yarn workspace server run start",
+    "build": "yarn workspace models run build && yarn workspace client run build",
     "dev:client": "yarn --cwd client dev",
     "dev:server": "yarn --cwd server dev",
     "dev:storybook": "yarn --cwd client storybook",
