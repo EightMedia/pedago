@@ -7,6 +7,11 @@ import { WizardStep } from "./Wizard.types";
 export default {
   title: "Views/Game/Wizard",
   component: Wizard,
+  argTypes: {
+    initialStep: {
+      control: false,
+    },
+  },
 } as ComponentMeta<typeof Wizard>;
 
 const Template: ComponentStory<typeof Wizard> = (args) => <Wizard {...args} />;
@@ -20,23 +25,21 @@ RoomCode.parameters = {
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A6898",
   },
 };
-RoomCode.storyName = "Room code";
 RoomCode.args = {
   ...WizardData,
   initialStep: WizardStep.RoomCode,
 };
 
 // user name
-export const Name = Template.bind({});
-Name.parameters = {
+export const UserName = Template.bind({});
+UserName.parameters = {
   layout: "fullscreen",
   design: {
     type: "figma",
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A7172",
   },
 };
-Name.storyName = "User name";
-Name.args = {
+UserName.args = {
   ...WizardData,
   initialStep: WizardStep.Name,
 };
@@ -65,7 +68,7 @@ Info.parameters = {
     url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=520%3A4271",
   },
 };
-Info.storyName = "Info choice";
+Info.storyName = "Info";
 Info.args = {
   initialStep: WizardStep.Info,
 };

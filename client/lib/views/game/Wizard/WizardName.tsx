@@ -31,13 +31,15 @@ export const WizardName = ({
       <Stack>
         <p>{text.othersWillSee}</p>
         <div className={styles.avatarInput}>
-          <Avatar
-            square={true}
-            name={name}
-            colors={avatarColors}
-            variant="beam"
-            size={48}
-          />
+          <figure className={styles.avatarFigure}>
+            <Avatar
+              square={true}
+              name={name}
+              variant="beam"
+              size={40}
+              colors={avatarColors}
+            />
+          </figure>
           <InputText
             id="name"
             label={text.nameLabel}
