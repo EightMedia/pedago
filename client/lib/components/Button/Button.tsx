@@ -1,7 +1,11 @@
 import cx from "classnames";
-import { memo } from "react";
+import { memo, ReactNode } from "react";
 import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";
+
+const ButtonGroup = ({ children }: { children: ReactNode }) => {
+  <div className={styles.buttonGroup}>{children}</div>;
+};
 
 const ButtonComponent = ({
   children,

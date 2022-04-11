@@ -16,7 +16,7 @@ export const Primary = Template.bind({});
 Primary.parameters = {
   design: {
     type: "figma",
-    url: "",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=474%3A3404",
   },
   backgrounds: {
     default: "dark",

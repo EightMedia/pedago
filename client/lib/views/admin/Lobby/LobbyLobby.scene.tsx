@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button } from "../../../components/Button";
+import { Button, ButtonGroup } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
 import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
+import { PageSlot } from "../../../components/Page/Page";
 import { Panel } from "../../../components/Panel";
+import { PanelGroup } from "../../../components/PanelGroup";
 import { PlayerCount } from "../../../components/PlayerCount";
 import { PlayerGroup } from "../../../components/PlayerGroup";
 import { Stack } from "../../../layouts/Stack";
@@ -27,22 +29,27 @@ export const LobbyLobby = ({
 
   return (
     <Page background={2}>
-      <div className={styles.header}>
+      <PageSlot location="headerLeft">
         <PlayerCount players={room?.players} variation="light" />
+      </PageSlot>
+      <PageSlot location="headerMid">
         <Logo />
-        <div className={styles.buttonGroup}>
-          <Button onClick={handleSettings}>
+      </PageSlot>
+      <PageSlot location="headerRight">
+        <ButtonGroup>
+          <Button variation="whiteBlocked" onClick={handleSettings}>
             <Icon icon={IconsEnum.Settings} />
             {text.settingsButton}
           </Button>
-          <Button onClick={handleInfo as () => void}>
+          <Button variation="whiteBlocked" onClick={handleInfo as () => void}>
             <Icon icon={IconsEnum.Info} />
             {text.rulesButton}
           </Button>
-        </div>
-      </div>
+        </ButtonGroup>
+      </PageSlot>
+
       <Stack gap="xs">
-        <Panel>
+        <Panel width="full">
           <header className={styles.header}>
             <div className={styles.roomCode}>{room?.roomCode}</div>
             <p>
@@ -51,8 +58,10 @@ export const LobbyLobby = ({
             <Button onClick={handleStart as () => void}>{text.start}</Button>
           </header>
         </Panel>
-        {groups &&
-          groups.map((group) => <PlayerGroup key={group.id} {...group} />)}
+        <PanelGroup>
+          {groups &&
+            groups.map((group) => <PlayerGroup key={group.id} {...group} />)}
+        </PanelGroup>
       </Stack>
     </Page>
   );

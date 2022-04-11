@@ -28,32 +28,34 @@
     "body  body body"
     "footer footer footer";
   & > * {
+    width: 100%;
     grid-area: body;
-    justify-self: center;
-    align-self: center;
   }
 }
 
 .headerLeft {
   grid-area: headerLeft;
-  justify-self: start;
+  display: flex;
 }
 .headerMid {
   grid-area: headerMid;
-  justify-self: center;
+  display: flex;
+  justify-content: center;
 }
 .headerRight {
   grid-area: headerRight;
-  justify-self: end;
+  display: flex;
+  justify-content: flex-end;
 }
 .footer {
   grid-area: footer;
-  justify-self: center;
+  display: flex;
+  justify-content: center;
 }
 .body {
   grid-area: body;
-  justify-self: center;
-  align-self: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* alignment */

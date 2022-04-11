@@ -11,7 +11,7 @@ const PlayerCountComponent = ({
   return (
     <div className={cx(styles.box, styles[variation])}>
       <Icon icon={IconsEnum.Person} />
-      {players}
+      <span className={styles.text}>{players}</span>
     </div>
   );
 };

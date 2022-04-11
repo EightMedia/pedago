@@ -63,3 +63,9 @@
   background: var(--color-white);
   color: var(--color-dark-blue);
 }
+
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}

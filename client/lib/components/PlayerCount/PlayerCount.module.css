@@ -4,6 +4,12 @@
   background: var(--color-dark-blue);
   align-items: center;
   color: var(--color-white);
+  border-radius: var(--border-radius-sm);
+}
+
+.text {
+  margin-left: var(--space-3xs);
+  font-size: 18px;
 }
 
 .dark {
