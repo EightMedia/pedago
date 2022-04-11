@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { Title } from "../../../components/Title";
 
 export const GameLead = ({
   time = 3,
   callback,
-  round
+  round,
 }: {
   time?: number;
   callback?: () => void;
-  round: number
+  round: number;
 }) => {
   const [counter, setCounter] = useState(time);
   const text = useContext(LanguageContext).rounds[round - 1];
@@ -26,7 +27,7 @@ export const GameLead = ({
   }, [counter, setCounter, callback]);
   return (
     <>
-      <h2>{text.lead}</h2>
+      <Title>{text.lead}</Title>
     </>
   );
 };

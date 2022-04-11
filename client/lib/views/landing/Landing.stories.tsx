@@ -14,6 +14,7 @@ const Template: ComponentStory<typeof LandingPage> = (args) => (
 // story
 export const Home = Template.bind({});
 Home.parameters = {
+  layout: "fullscreen",
   viewport: {
     defaultViewport: "Desktop",
   },

@@ -10,16 +10,16 @@ import { LobbyType } from "./Lobby.types";
 
 const LobbyComponent = ({ round, roundMax, groups, playerName }: LobbyType) => {
   const text = useContext(LanguageContext);
-  
+
   return (
-    <Page>
+    <Page background={2}>
       <div className={styles.header}>
         {text.game.round} {round} {text.game.of} {roundMax}
       </div>
       <Title>
         {text.gameLobby.hi} {playerName}!
         <br />
-        {text.gameLobby.willStart} 
+        {text.gameLobby.willStart}
       </Title>
       <Intro> {text.gameLobby.waiting}</Intro>
       <Stack gap="xs">
