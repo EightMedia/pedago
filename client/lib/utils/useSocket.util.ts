@@ -5,7 +5,12 @@ export function useSocket(url: string) {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketIo = io(url);
+    const socketIo = io(url, {
+      withCredentials: true,
+      extraHeaders: {
+        "pedago-header": "abcd",
+      },
+    });
     setSocket(socketIo);
 
     function cleanup() {
