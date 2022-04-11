@@ -29,7 +29,10 @@
     "footer footer footer";
   & > * {
     width: 100%;
+  }
+  & > *:not([class*="header"]):not([class*="footer"]) {
     grid-area: body;
+    align-self: flex-start;
   }
 }
 
