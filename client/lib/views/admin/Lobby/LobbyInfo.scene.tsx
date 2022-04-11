@@ -8,7 +8,7 @@ export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
   const text = useContext(LanguageContext).adminLobby.info;
 
   return (
-    <Page background={2} valign="center">
+    <Page background={2}>
       <Panel>
         <PanelTitle>{text.title}</PanelTitle>
         <div>

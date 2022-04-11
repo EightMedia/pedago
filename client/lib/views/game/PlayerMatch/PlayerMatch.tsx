@@ -12,7 +12,7 @@ const PlayerMatchComponent = ({
   initialScene,
 }: PlayerMatchType) => {
   return (
-    <Page background={5} valign="center" halign="center">
+    <Page background={5}>
       {(() => {
         switch (initialScene) {
           case PlayerMatchSceneEnum.Match:

@@ -9,22 +9,12 @@ export const PageSlot = ({ children, className, location }: PageSlotType) => (
   </div>
 );
 
-const PageComponent = ({
-  children,
-  valign = "top",
-  halign = "stretch",
-  background = 1,
-}: PageType) => {
+const PageComponent = ({ children, background = 1 }: PageType) => {
   return (
-    <div
-      className={cx(
-        styles.page,
-        styles["v-" + valign],
-        styles["h-" + halign],
-        styles["bg" + background]
-      )}
-    >
-      <div className="container">{children}</div>
+    <div className={cx(styles.page, styles["bg" + background])}>
+      <div className={styles.container}>
+        {isValidElement(children) ? children : <p>{children}</p>}
+      </div>
     </div>
   );
 };

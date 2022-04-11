@@ -12,7 +12,7 @@ const ResultComponent = ({
   const [step, setStep] = useState(initialStep);
 
   return (
-    <Page valign="center" background={4}>
+    <Page background={4}>
       {(() => {
         let callback = undefined;
         switch (step) {
