@@ -1,7 +1,13 @@
 import cx from "classnames";
-import { memo } from "react";
+import { isValidElement, memo } from "react";
 import styles from "./Page.module.css";
-import { PageType } from "./Page.types";
+import { PageSlotType, PageType } from "./Page.types";
+
+export const PageSlot = ({ children, className, location }: PageSlotType) => (
+  <div className={cx(styles[location], className)}>
+    {isValidElement(children) ? children : <p>{children}</p>}
+  </div>
+);
 
 const PageComponent = ({
   children,

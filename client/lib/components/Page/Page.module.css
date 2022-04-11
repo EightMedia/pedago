@@ -13,21 +13,40 @@
   background-size: 100% !important;
 }
 
-.bg1,
-.bg2,
-.bg3,
-.bg4,
-.bg5,
-.bg6 {
-  animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-
+/* container & slots */
 .container {
   min-height: 100%;
   margin: 0 auto;
   max-width: 1200px;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas:
+    "headerLeft headerMid headerRight"
+    "body  body body"
+    "footer footer footer";
+  & > * {
+    grid-template-area: body;
+  }
 }
 
+.headerLeft {
+  grid-template-area: headerLeft;
+}
+.headerMid {
+  grid-template-area: headerMid;
+}
+.headerRight {
+  grid-template-area: headerRight;
+}
+.footer {
+  grid-template-area: footer;
+}
+.body {
+  grid-template-area: body;
+}
+
+/* alignment */
 .v-top {
   justify-content: flex-start;
 }
@@ -45,6 +64,7 @@
   align-items: center;
 }
 
+/* backgrounds */
 @media (orientation: portrait) {
   .bg1 {
     background-image: url(/images/backgrounds/bg1-p-1.svg),
