@@ -10,6 +10,7 @@ export function useSocket(url: string) {
       extraHeaders: {
         "pedago-header": "abcd",
       },
+      transports: ['websocket', 'polling']
     });
     setSocket(socketIo);
 
