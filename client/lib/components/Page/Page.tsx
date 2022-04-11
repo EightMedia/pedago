@@ -9,10 +9,14 @@ export const PageSlot = ({ children, className, location }: PageSlotType) => (
   </div>
 );
 
-const PageComponent = ({ children, background = 1 }: PageType) => {
+const PageComponent = ({
+  children,
+  background = 1,
+  valign = "top",
+}: PageType) => {
   return (
     <div className={cx(styles.page, styles["bg" + background])}>
-      <div className={styles.container}>
+      <div className={cx(styles.container, styles["v-" + valign])}>
         {typeof children === "object" ? children : <p>{children}</p>}
       </div>
     </div>

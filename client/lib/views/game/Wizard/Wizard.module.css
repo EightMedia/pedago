@@ -1,0 +1,15 @@
+.avatarInput {
+  position: relative;
+  & > div > input {
+    text-align: left !important;
+    padding-left: 60px;
+  }
+  & > svg {
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    width: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}

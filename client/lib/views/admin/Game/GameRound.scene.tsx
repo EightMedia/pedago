@@ -7,6 +7,7 @@ import { Icon, IconsEnum } from "../../../components/Icon/Icon";
 import { Logo } from "../../../components/Logo";
 import { Modal } from "../../../components/Modal";
 import { Page } from "../../../components/Page";
+import { PageSlot } from "../../../components/Page/Page";
 import { PanelTitle } from "../../../components/Panel";
 import { PanelGroup } from "../../../components/PanelGroup";
 import { PlayerCount } from "../../../components/PlayerCount";
@@ -54,9 +55,13 @@ export const GameRound = ({
   return (
     <>
       <Page background={5}>
-        <div className={styles.header}>
+        <PageSlot location="headerLeft">
           <PlayerCount variation="light" players={playerCount} />
+        </PageSlot>
+        <PageSlot location="headerCenter">
           <Logo />
+        </PageSlot>
+        <PageSlot location="headerRight">
           <ButtonGroup>
             <Button
               variation="whiteBlocked"
@@ -73,7 +78,7 @@ export const GameRound = ({
               {gameText.rulesButton}
             </Button>
           </ButtonGroup>
-        </div>
+        </PageSlot>
 
         <div className={styles.round}>
           <Center>

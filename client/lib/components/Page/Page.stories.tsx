@@ -32,38 +32,36 @@ Primary.parameters = {
 Primary.storyName = "Page";
 Primary.args = { ...PageData };
 
-const SlotsTemplate: ComponentStory<typeof Page> = () => (
-  <Page>
-    <>
-      <PageSlot location="headerLeft">header left</PageSlot>
-      <PageSlot location="headerMid">header mid</PageSlot>
-      <PageSlot location="headerRight">header right</PageSlot>
-      <GlassPanel>
-        <Stack>
-          <Title align="left">Body</Title>
+const SlotsTemplate: ComponentStory<typeof Page> = (args) => (
+  <Page background={3} valign="center" {...args}>
+    <PageSlot location="headerLeft">header left</PageSlot>
+    <PageSlot location="headerCenter">header mid</PageSlot>
+    <PageSlot location="headerRight">header right</PageSlot>
+    <GlassPanel>
+      <Stack>
+        <Title align="left">Body</Title>
 
-          <Text size="lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et
-            illo laudantium voluptatum, iste veritatis quod excepturi sapiente
-            molestiae explicabo commodi consequuntur, animi quae porro quibusdam
-            provident, illum enim error.
-          </Text>
-          <Text size="lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et
-            illo laudantium voluptatum, iste veritatis quod excepturi sapiente
-            molestiae explicabo commodi consequuntur, animi quae porro quibusdam
-            provident, illum enim error.
-          </Text>
-          <Text size="lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et
-            illo laudantium voluptatum, iste veritatis quod excepturi sapiente
-            molestiae explicabo commodi consequuntur, animi quae porro quibusdam
-            provident, illum enim error.
-          </Text>
-        </Stack>
-      </GlassPanel>
-      <PageSlot location="footer">footer</PageSlot>
-    </>
+        <Text size="lg">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et illo
+          laudantium voluptatum, iste veritatis quod excepturi sapiente
+          molestiae explicabo commodi consequuntur, animi quae porro quibusdam
+          provident, illum enim error.
+        </Text>
+        <Text size="lg">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et illo
+          laudantium voluptatum, iste veritatis quod excepturi sapiente
+          molestiae explicabo commodi consequuntur, animi quae porro quibusdam
+          provident, illum enim error.
+        </Text>
+        <Text size="lg">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et illo
+          laudantium voluptatum, iste veritatis quod excepturi sapiente
+          molestiae explicabo commodi consequuntur, animi quae porro quibusdam
+          provident, illum enim error.
+        </Text>
+      </Stack>
+    </GlassPanel>
+    <PageSlot location="footer">footer</PageSlot>
   </Page>
 );
 
@@ -73,4 +71,7 @@ Slots.parameters = {
     defaultViewport: "Full",
   },
   layout: "fullscreen",
+};
+Slots.args = {
+  valign: "top",
 };

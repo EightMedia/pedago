@@ -32,7 +32,7 @@ export const LobbyLobby = ({
       <PageSlot location="headerLeft">
         <PlayerCount players={room?.players} variation="light" />
       </PageSlot>
-      <PageSlot location="headerMid">
+      <PageSlot location="headerCenter">
         <Logo />
       </PageSlot>
       <PageSlot location="headerRight">

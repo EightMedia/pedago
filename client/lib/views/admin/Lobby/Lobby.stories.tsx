@@ -20,7 +20,7 @@ Info.parameters = {
   },
   design: {
     type: "figma",
-    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=495%3A11584",
+    url: "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=519%3A5142",
   },
   argTypes: {
     initialStep: false,

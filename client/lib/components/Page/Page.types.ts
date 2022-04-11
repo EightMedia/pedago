@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 // page slot
 export type PageSlotType = {
-  location: "headerLeft" | "headerMid" | "headerRight" | "footer" | "body";
+  location: "headerLeft" | "headerCenter" | "headerRight" | "footer" | "body";
   children: ReactNode | string;
   className?: string;
 };
@@ -11,4 +11,5 @@ export type PageSlotType = {
 export type PageType = {
   children: ReactNode | string;
   background?: 1 | 2 | 3 | 4 | 5 | 6;
+  valign?: "top" | "center";
 };

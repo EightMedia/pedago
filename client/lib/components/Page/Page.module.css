@@ -2,7 +2,10 @@
 
 .page {
   height: 100%;
-  padding: 16px;
+  padding: 0 16px 16px;
+  @media (--sm) {
+    padding: 0 24px 24px;
+  }
   background-color: var(--color-dark-blue) !important;
   padding: var(--space-sm);
   display: flex;
@@ -21,10 +24,13 @@
   max-width: 1200px;
   display: grid;
   gap: var(--space-xs);
-  grid-template-rows: max-content auto max-content;
+  grid-template-rows: 72px auto 72px;
+  @media (--sm) {
+    grid-template-rows: 96px auto 96px;
+  }
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas:
-    "headerLeft headerMid headerRight"
+    "headerLeft headerCenter headerRight"
     "body  body body"
     "footer footer footer";
   & > * {
@@ -40,8 +46,8 @@
   grid-area: headerLeft;
   display: flex;
 }
-.headerMid {
-  grid-area: headerMid;
+.headerCenter {
+  grid-area: headerCenter;
   display: flex;
   justify-content: center;
 }
@@ -62,21 +68,10 @@
 }
 
 /* alignment */
-.v-top {
-  justify-content: flex-start;
-}
 .v-center {
-  justify-content: center;
-}
-
-.h-stretch {
-  align-items: stretch;
-}
-.h-left {
-  align-items: flex-start;
-}
-.h-center {
-  align-items: center;
+  & > *:not([class*="header"]):not([class*="footer"]) {
+    align-self: center;
+  }
 }
 
 /* backgrounds */

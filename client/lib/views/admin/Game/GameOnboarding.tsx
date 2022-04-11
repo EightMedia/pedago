@@ -1,5 +1,7 @@
 import { Button } from "../../../components/Button";
+import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
+import { PageSlot } from "../../../components/Page/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
 import { Text } from "../../../components/Text";
 import { TextTitle } from "../../../components/TextTitle";
@@ -69,6 +71,9 @@ export const GameInfo = ({ title }: { title: string }) => {
 export const GameOnboarding = ({ handleOk }: { handleOk: () => void }) => {
   return (
     <Page>
+      <PageSlot location="headerCenter">
+        <Logo />
+      </PageSlot>
       <Panel>
         <GameInfo title="Voor we beginnen" />
         <Button onClick={handleOk}>Ik snap het</Button>
