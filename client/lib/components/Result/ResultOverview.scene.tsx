@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
@@ -19,6 +20,11 @@ export type ResultOverviewProps = {
   data: ResultType["data"];
 };
 
+const handleEmail = (data: ResultType["data"], email: string) => {
+  const html = renderToStaticMarkup(ResultOverview({ data }));
+  console.log(email, html);
+};
+
 export const ResultOverview = ({ data }: ResultOverviewProps) => {
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
@@ -32,11 +38,20 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
   const [activeButton, setActiveButton] = useState<string>(
     data?.me ? "me" : "total"
   );
+  const [email, setEmail] = useState<string>("");
+
+    const handleClick = () => {
+      if (email) {
+        handleEmail(data, email)
+      } else {
+        console.error("No email provided")
+      }
+    }
 
   return (
     <>
       <Title>{resultsText.results}</Title>
-      {(data.groups.length > 1 || data.me) && (
+      {(data.groups?.length > 1 || data.me) && (
         <div className={styles.buttonsWrapper}>
           <div className={styles.buttons}>
             {data.me && (
@@ -99,7 +114,7 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
         <Panel>
           <PanelTitle>{detailsTitle}</PanelTitle>
           <Stack>
-            {primaryData.map((item, index) => (
+            {primaryData?.map((item, index) => (
               <div
                 key={index}
                 style={{ order: 0 - item }}
@@ -126,8 +141,9 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
                 id={"email"}
                 label={"E-mail"}
                 placeholder={resultsText.yourMail}
+                onChange={e => setEmail(e.target.value)}
               />
-              <Button stretch={true} onClick={() => alert("todo: send mail")}>
+              <Button stretch={true} onClick={handleClick}>
                 {resultsText.send}
               </Button>
               <p>{resultsText.privacy}</p>
