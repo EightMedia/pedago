@@ -1,8 +1,0 @@
-.itemTitle {
-  font-weight: bold;
-  font-size: var(--font-size-md);
-  margin-bottom: var(--space-3xs);
-}
-.itemText {
-  font-size: var(--font-size-sm);
-}

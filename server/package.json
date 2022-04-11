@@ -9,18 +9,16 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "(lsof -ti:3001 | xargs kill) && (run-p --print-label watch run-server)",
-    "preinstall": "npm install models",
-    "run-server": "(lsof -ti:3001 | xargs kill) && (nodemon ./src/server.ts)",
+    "run-server": "(lsof -ti:3001 | xargs kill) && (nodemon ./src/index.ts)",
     "build": "tsc",
     "watch": "tsc -w",
     "logs": "heroku logs --tail",
     "kill": "lsof -ti:3001 | xargs kill",
-    "postinstall": "tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w"
   },
   "engines": {
-    "node": "14.19.0"
+    "node": "^14.19.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
@@ -38,7 +36,6 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "http": "^0.0.1-security",
-    "models": "file:../models",
     "socket.io": "^4.4.1",
     "zustand": "^3.7.1"
   }
