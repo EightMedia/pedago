@@ -45,14 +45,17 @@
 .headerLeft {
   grid-area: headerLeft;
   display: flex;
+  align-items: center;
 }
 .headerCenter {
   grid-area: headerCenter;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .headerRight {
   grid-area: headerRight;
+  align-items: center;
   display: flex;
   justify-content: flex-end;
 }
@@ -60,6 +63,7 @@
   grid-area: footer;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .body {
   grid-area: body;
