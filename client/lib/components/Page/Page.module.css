@@ -3,11 +3,23 @@
 .page {
   min-height: 100%;
   padding: 16px;
-  background: var(--color-dark-blue);
+  background-color: var(--color-dark-blue) !important;
   padding: var(--space-sm);
   display: flex;
   flex-direction: column;
   color: var(--color-white);
+  /* bg deco styling: */
+  background-repeat: no-repeat !important;
+  background-size: 100% !important;
+}
+
+.bg1,
+.bg2,
+.bg3,
+.bg4,
+.bg5,
+.bg6 {
+  animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 
 .container {
@@ -33,16 +45,77 @@
   align-items: center;
 }
 
-.bg1 {
-  /* todo: decide bg image placement */
+@media (orientation: portrait) {
+  .bg1 {
+    background-image: url(/images/backgrounds/bg1-p-1.svg),
+      url(/images/backgrounds/bg1-p-2.svg), url(/images/backgrounds/bg1-p-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg2 {
+    background-image: url(/images/backgrounds/bg2-p-1.svg),
+      url(/images/backgrounds/bg2-p-2.svg), url(/images/backgrounds/bg2-p-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg3 {
+    background-image: url(/images/backgrounds/bg3-p-1.svg),
+      url(/images/backgrounds/bg3-p-2.svg), url(/images/backgrounds/bg3-p-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg4 {
+    background-image: url(/images/backgrounds/bg4-p-1.svg),
+      url(/images/backgrounds/bg4-p-2.svg), url(/images/backgrounds/bg4-p-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg5 {
+    background-image: url(/images/backgrounds/bg5-p-1.svg),
+      url(/images/backgrounds/bg5-p-2.svg), url(/images/backgrounds/bg5-p-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg6 {
+    background-image: url(/images/backgrounds/bg6-p-1.svg),
+      url(/images/backgrounds/bg6-p-2.svg), url(/images/backgrounds/bg6-p-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
 }
-.bg2 {
+@media (orientation: landscape) {
+  .bg1 {
+    background-image: url(/images/backgrounds/bg1-l-1.svg),
+      url(/images/backgrounds/bg1-l-2.svg), url(/images/backgrounds/bg1-l-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg2 {
+    background-image: url(/images/backgrounds/bg2-l-1.svg),
+      url(/images/backgrounds/bg2-l-2.svg), url(/images/backgrounds/bg2-l-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg3 {
+    background-image: url(/images/backgrounds/bg3-l-1.svg),
+      url(/images/backgrounds/bg3-l-2.svg), url(/images/backgrounds/bg3-l-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg4 {
+    background-image: url(/images/backgrounds/bg4-l-1.svg),
+      url(/images/backgrounds/bg4-l-2.svg), url(/images/backgrounds/bg4-l-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg5 {
+    background-image: url(/images/backgrounds/bg5-l-1.svg),
+      url(/images/backgrounds/bg5-l-2.svg), url(/images/backgrounds/bg5-l-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  .bg6 {
+    background-image: url(/images/backgrounds/bg6-l-1.svg),
+      url(/images/backgrounds/bg6-l-2.svg), url(/images/backgrounds/bg6-l-3.svg);
+    animation: bgAnim 0.5s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
 }
-.bg3 {
-}
-.bg4 {
-}
-.bg5 {
-}
-.bg6 {
+
+@keyframes bgAnim {
+  from {
+    background-position: center left -10vw, top -10vw right -10vw,
+      bottom -10vw right -10vw;
+  }
+  to {
+    background-position: center left, top right, bottom right;
+  }
 }

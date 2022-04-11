@@ -53,7 +53,7 @@ export const GameRound = ({
 
   return (
     <>
-      <Page>
+      <Page background={5}>
         <div className={styles.header}>
           <PlayerCount variation="light" players={playerCount} />
           <Logo />
@@ -120,7 +120,7 @@ export const GameRound = ({
         <Modal handleClose={() => setShowStopModal(false)}>
           <PanelTitle>{gameText.areYouSure}</PanelTitle>
           <p>
-          {gameText.there}{" "}
+            {gameText.there}{" "}
             {teamsStillPlaying === 1
               ? gameText.isOneTeam
               : `${gameText.are} ${teamsStillPlaying} teams`}{" "}

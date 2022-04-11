@@ -15,7 +15,7 @@ export const GameComponent = ({
   const [scene, setScene] = useState(initialScene);
 
   return (
-    <Page valign="center" halign="center">
+    <Page background={6} valign="center" halign="center">
       {(() => {
         let callback = undefined;
         switch (scene) {
@@ -25,11 +25,7 @@ export const GameComponent = ({
           case GameScenes.Lead:
             callback = autoPlay ? () => setScene(GameScenes.Lead) : undefined;
             return (
-              <GameLead
-                time={leadTime}
-                callback={() => setScene(GameScenes.Sort)}
-                round={round}
-              />
+              <GameLead time={leadTime} callback={callback} round={round} />
             );
           case GameScenes.Sort:
             return <GameSort round={round} />;

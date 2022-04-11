@@ -6,6 +6,13 @@ import { PageData } from "./Page.data";
 export default {
   title: "Components/Page",
   component: Page,
+  argTypes: {
+    background: {
+      control: {
+        type: "radio",
+      },
+    },
+  },
 } as ComponentMeta<typeof Page>;
 
 const Template: ComponentStory<typeof Page> = (args) => (
