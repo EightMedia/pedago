@@ -9,12 +9,11 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "(lsof -ti:3001 | xargs kill) && (run-p --print-label watch run-server)",
-    "run-server": "(lsof -ti:3001 | xargs kill) && (nodemon ./src/server.ts)",
+    "run-server": "(lsof -ti:3001 | xargs kill) && (nodemon ./src/index.ts)",
     "build": "tsc",
     "watch": "tsc -w",
     "logs": "heroku logs --tail",
     "kill": "lsof -ti:3001 | xargs kill",
-    "postinstall": "tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w"
   },
