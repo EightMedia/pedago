@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { PanelTitle } from "../../../components/Panel";
+import { Text } from "../../../components/Text";
+import { TextTitle } from "../../../components/TextTitle";
 import { Stack } from "../../../layouts/Stack";
 import styles from "./Wizard.module.css";
 
@@ -16,8 +18,8 @@ const WizardInfoItem = ({
 }) => {
   return (
     <div className={styles.infoItem}>
-      <h3 className={styles.itemTitle}>{title}</h3>
-      <p className={styles.itemText}>{text}</p>
+      <TextTitle>{title}</TextTitle>
+      <Text tone="light">{text}</Text>
     </div>
   );
 };
@@ -54,7 +56,9 @@ export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
           title={text.items[4].caption}
           text={text.items[4].text}
         />
-        <Button onClick={onClick}>{text.understood}</Button>
+        <Button stretch onClick={onClick}>
+          {text.understood}
+        </Button>
       </Stack>
     </>
   );
