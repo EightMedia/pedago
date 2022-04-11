@@ -23,7 +23,7 @@ export const GameComponent = ({
             callback = autoPlay ? () => setScene(GameScenes.Lead) : undefined;
             return <GameCountdown time={countdownTime} callback={callback} />;
           case GameScenes.Lead:
-            callback = autoPlay ? () => setScene(GameScenes.Lead) : undefined;
+            callback = autoPlay ? () => setScene(GameScenes.Sort) : undefined;
             return (
               <GameLead time={leadTime} callback={callback} round={round} />
             );
