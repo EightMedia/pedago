@@ -11,6 +11,7 @@ import {
   ViewName
 } from "models";
 import { Socket } from "socket.io";
+import storeGame from "./airtable";
 import { updateClientRoom, updatePlayersInLobby } from "./shared";
 import gamesStore from "./store/games.store";
 
@@ -143,6 +144,9 @@ export const finishRound = (
     // Fetch latest sortorder from all players
     socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
     
+    // Airtable
+    storeGame(store.getRoomById(roomId) as RoomDto, "");
+
     callback({
       status: "OK",
       message: "Here are the results...",
