@@ -1,5 +1,7 @@
+import { Event, SocketCallback } from "models";
 import { useContext, useState } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
+import { SocketContext } from "../../../contexts/SocketContext";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
 import { Stack } from "../../layouts/Stack";
@@ -17,12 +19,17 @@ export type ResultOverviewProps = {
   time?: number;
   callback?: () => void;
   data: ResultType["data"];
+  showEmailPanel: boolean;
 };
 
-export const ResultOverview = ({ data }: ResultOverviewProps) => {
+export const ResultOverview = ({
+  data,
+  showEmailPanel = true,
+}: ResultOverviewProps) => {
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
   const text = useContext(LanguageContext);
+  const socket = useContext(SocketContext);
   const resultsText = text.results;
   const [primaryData, setPrimaryData] = useState<ResultSet>(initialPrimaryData);
   const [secondaryData, setSecondaryData] = useState<ResultSet>(groupsTotal);
@@ -32,11 +39,38 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
   const [activeButton, setActiveButton] = useState<string>(
     data?.me ? "me" : "total"
   );
+  const [email, setEmail] = useState<string>("");
+
+  const handleEmail = () => {
+    const groupsParams = data.groups
+      .map((e) => {
+        return `${encodeURIComponent(e.name)}_${encodeURIComponent(
+          e.data.toString()
+        )}`;
+      })
+      .join("&");
+    const meParams = data.me
+      ? encodeURIComponent(data.me?.toString())
+      : undefined;
+
+    const url = `/result?me=${meParams}&groups=${groupsParams}`;
+    socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
+      console.log(res);
+    });
+  };
+
+  const handleClick = () => {
+    if (email) {
+      handleEmail();
+    } else {
+      console.error("No email provided");
+    }
+  };
 
   return (
     <div>
       <Title>{resultsText.results}</Title>
-      {(data.groups.length > 1 || data.me) && (
+      {(data.groups?.length > 1 || data.me) && (
         <div className={styles.buttonsWrapper}>
           <div className={styles.buttons}>
             {data.me && (
@@ -99,7 +133,7 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
         <Panel>
           <PanelTitle>{detailsTitle}</PanelTitle>
           <Stack>
-            {primaryData.map((item, index) => (
+            {primaryData?.map((item, index) => (
               <div
                 key={index}
                 style={{ order: 0 - item }}
@@ -117,23 +151,26 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
             ))}
           </Stack>
         </Panel>
-        <Panel>
-          <Center>
-            <PanelTitle>{resultsText.save}?</PanelTitle>
-            <Stack>
-              <p>{resultsText.sendToMail}</p>
-              <InputText
-                id={"email"}
-                label={"E-mail"}
-                placeholder={resultsText.yourMail}
-              />
-              <Button stretch={true} onClick={() => alert("todo: send mail")}>
-                {resultsText.send}
-              </Button>
-              <p>{resultsText.privacy}</p>
-            </Stack>
-          </Center>
-        </Panel>
+        {showEmailPanel && (
+          <Panel>
+            <Center>
+              <PanelTitle>{resultsText.save}?</PanelTitle>
+              <Stack>
+                <p>{resultsText.sendToMail}</p>
+                <InputText
+                  id={"email"}
+                  label={"E-mail"}
+                  placeholder={resultsText.yourMail}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Button stretch={true} onClick={handleClick}>
+                  {resultsText.send}
+                </Button>
+                <p>{resultsText.privacy}</p>
+              </Stack>
+            </Center>
+          </Panel>
+        )}
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ body {
   font-family: var(--font-body);
   font-weight: 400; /* design says 500, but there is no lato 500 in google fonts */
   line-height: 1.35;
+  background-color: var(--color-dark-blue);
 }
 
 html,

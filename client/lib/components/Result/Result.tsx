@@ -25,7 +25,7 @@ const ResultComponent = ({
             callback = autoPlay ? () => setStep(ResultStep.Result) : undefined;
             return <ResultLoader callback={callback} />;
           case ResultStep.Result:
-            return <ResultOverview data={data} />;
+            return <ResultOverview data={data} showEmailPanel={true} />;
           default:
             return null;
         }

@@ -1,9 +1,8 @@
-import React from "react";
+import { Language, Locale } from "models";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
 import * as languages from "../data/languages";
-import { Locale, Language } from "models";
-import dynamic from "next/dynamic";
 
 const ContentPage = () => {
   const [language, setLanguage] = useState<Language>(() => {

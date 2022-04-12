@@ -11,8 +11,8 @@ const getResultsForRounds = (rounds: Round[]): ResultSet => {
     psychological = 0,
   ]: number[] = [];
 
-  rounds.forEach((round) => {
-    round.order.forEach((cat: Category, index: number) => {
+  rounds?.forEach((round) => {
+    round.order?.forEach((cat: Category, index: number) => {
       const value = index + 1;
       switch (cat) {
         case Category.Caring:
@@ -75,7 +75,7 @@ export const getResultData = (
 } => {
   let me = undefined;
   if (playerId) {
-    const myRounds = room.players.find(
+    const myRounds = room.players?.find(
       (p: Player) => p.id === playerId
     )?.rounds;
     me = getResultsForRounds(myRounds as Round[]);
@@ -94,11 +94,10 @@ export const getResultData = (
 
 export const getDataForAllGroups = (groups: ResultGroup[]): ResultSet => {
   let rnd = 1;
-  return groups
-    .map((g) => g.data)
+  return groups?.map((g) => g.data)
     .reduce(
       (acc, data) => {
-        const sum: ResultSet = acc.map((num, i) => {
+        const sum: ResultSet = acc?.map((num, i) => {
           return (num * (rnd - 1) + data[i]) / rnd;
         }) as ResultSet;
         rnd++;

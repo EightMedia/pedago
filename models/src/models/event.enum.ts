@@ -6,4 +6,5 @@ export enum Event {
   Players = "players",
   PlayerId = "playerId",
   Round = "round",
+  Email = "email"
 }
