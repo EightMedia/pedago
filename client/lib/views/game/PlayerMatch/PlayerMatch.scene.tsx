@@ -7,7 +7,6 @@ import { getPlayerId } from "../../../../factories/shared.factory";
 import { Button } from "../../../components/Button";
 import { Panel, PanelTitle } from "../../../components/Panel";
 import { Player } from "../../../components/Player";
-import { Timer } from "../../../components/Timer";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { PlayerMatchType } from "./PlayerMatch.types";
@@ -39,10 +38,6 @@ const PlayerMatchSceneComponent = ({
 
   return (
     <>
-      <Timer time={600} />
-      <div>
-        {text.game.round} {round} {text.game.of} {roundMax}
-      </div>
       <Panel>
         <PanelTitle>{text.playerMatch.youPlayWith}</PanelTitle>
         <Stack>

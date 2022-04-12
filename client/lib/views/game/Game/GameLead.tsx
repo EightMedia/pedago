@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { Page } from "../../../components/Page";
 import { Title } from "../../../components/Title";
 
 export const GameLead = ({
@@ -26,8 +27,8 @@ export const GameLead = ({
     return;
   }, [counter, setCounter, callback]);
   return (
-    <>
+    <Page valign="center" background={6}>
       <Title>{text.lead}</Title>
-    </>
+    </Page>
   );
 };
