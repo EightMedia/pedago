@@ -20,7 +20,7 @@ const CompareCard = ({ id, round = 0 }: { id: number; round: number }) => {
     <div className={styles.card}>
       <Shape category={Number(id - 1)} className={styles.icon} />
       <div className={styles.title}>
-        {text.rounds[round].cards[id - 1].title}
+        {text.rounds[round]?.cards[id - 1]?.title}
       </div>
     </div>
   );
@@ -37,7 +37,7 @@ const CompareCardsList = ({
 }) => (
   <Stack>
     <Player name={player} />
-    {cards.map((card) => (
+    {cards?.map((card) => (
       <CompareCard key={card} id={card} round={round} />
     ))}
   </Stack>
