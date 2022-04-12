@@ -92,6 +92,16 @@ const WizardComponent = ({ initialStep }: WizardType) => {
                 return (
                   <WizardGroup groups={room.groups} setStep={handleGroup} />
                 );
+              } else if (initialStep === WizardStep.Group) {
+                return (
+                  <WizardGroup
+                    setStep={handleGroup}
+                    groups={[
+                      { id: "0", name: "Demo group 1" },
+                      { id: "1", name: "Demo group 2" },
+                    ]}
+                  />
+                );
               } else {
                 return <WizardInfo onClick={() => requestLobby()} />;
               }
