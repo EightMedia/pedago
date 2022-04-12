@@ -10,4 +10,5 @@ var Event;
     Event["Players"] = "players";
     Event["PlayerId"] = "playerId";
     Event["Round"] = "round";
+    Event["Email"] = "email";
 })(Event = exports.Event || (exports.Event = {}));

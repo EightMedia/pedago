@@ -1,5 +1,7 @@
+import { Event, SocketCallback } from "models";
 import { useContext, useState } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
+import { SocketContext } from "../../../contexts/SocketContext";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
 import { Stack } from "../../layouts/Stack";
@@ -27,6 +29,7 @@ export const ResultOverview = ({
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
   const text = useContext(LanguageContext);
+  const socket = useContext(SocketContext);
   const resultsText = text.results;
   const [primaryData, setPrimaryData] = useState<ResultSet>(initialPrimaryData);
   const [secondaryData, setSecondaryData] = useState<ResultSet>(groupsTotal);
@@ -51,6 +54,9 @@ export const ResultOverview = ({
       : undefined;
 
     const url = `/result?me=${meParams}&groups=${groupsParams}`;
+    socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
+      console.log(res);
+    });
   };
 
   const handleClick = () => {

@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { Page } from "../../lib/components/Page";
 import {
-    ResultGroup,
-    ResultSet
+  ResultGroup,
+  ResultSet
 } from "../../lib/components/Result/Result.types";
 import { ResultOverview } from "../../lib/components/Result/ResultOverview.scene";
 
