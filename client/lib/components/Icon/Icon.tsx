@@ -12,7 +12,7 @@ export enum IconsEnum {
   SettingsOutline,
   Lock,
   Person,
-  Name,
+  Remove,
   Add,
   AddCircle,
   Swap,
@@ -94,7 +94,7 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
       fill="currentColor"
     />
   ),
-  [IconsEnum.Name]: (
+  [IconsEnum.Remove]: (
     <path
       d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm5 11H7v-2h10v2Z"
       fill="currentColor"
@@ -241,6 +241,8 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
 const IconComponent = ({ icon, className, color, infoIcon }: IconType) => {
   const colorStyle = color ? { color: color } : {};
   if (infoIcon) {
+    const mask = `url(#icon-${icon})`;
+    const id = `icon-${icon}`;
     return (
       <>
         <svg
@@ -252,17 +254,17 @@ const IconComponent = ({ icon, className, color, infoIcon }: IconType) => {
           className={cx(styles.icon, className)}
           mask="url(#grp)"
         >
-          <rect width="24" height="24" fill="url(#a)" mask="url(#mask)" />
+          <rect width="24" height="24" fill="url(#a)" mask={mask} />
           <rect
             width="24"
             height="24"
             fill="url(#b)"
-            mask="url(#mask)"
+            mask={mask}
             fillOpacity="0.25"
           />
           <defs>
             <mask
-              id="mask"
+              id={id}
               x="0"
               y="0"
               width="24"

@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
-import { IconsEnum } from "../../../components/Icon/Icon";
 import { InfoItem } from "../../../components/InfoItem";
 import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
@@ -23,7 +22,7 @@ export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
           {text.items.map((item, index) => (
             <InfoItem
               key={index}
-              icon={IconsEnum.Info}
+              icon={item.icon ? item.icon : undefined}
               title={item.caption}
               text={item.text}
             />

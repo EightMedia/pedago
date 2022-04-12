@@ -1,5 +1,6 @@
 import { Locale, Role, Sector } from "models";
 import { PlayerType } from "models/lib/models/player-type.enum";
+import { IconsEnum } from "../../lib/components/Icon/Icon";
 
 export const NL: Locale = {
   playerType: {
@@ -113,30 +114,37 @@ export const NL: Locale = {
         {
           caption: "Meedoen",
           text: "Alle spelers moeten eerst naar pedago.game gaan.",
+          icon: IconsEnum.Info,
         },
         {
           caption: "Unieke code",
           text: "Spelers kunnen meedoen met het spel door de code in te vullen die straks verschijnt.",
+          icon: IconsEnum.Code,
         },
         {
           caption: "Scherm delen",
           text: "Het is handig om je scherm te delen, zodat spelers ten alle tijden zien of ze al meedoen, of wat de code is.",
+          icon: IconsEnum.ScreenShare,
         },
         {
           caption: "Spel starten",
           text: "Wanneer je het spel start kun je niet meer terug.",
+          icon: IconsEnum.Flag,
         },
         {
           caption: "'Locken'",
           text: "Er is een slotje naast de startknop die je kunt indrukken om te voorkomen dat er nog meer mensen mee gaan doen.",
+          icon: IconsEnum.Lock,
         },
         {
           caption: "Spelers verwijderen",
           text: "Spelers kunnen worden gekickt wanneer ze niet welkom zijn, door er op te klikken of tappen.",
+          icon: IconsEnum.Remove,
         },
         {
           caption: "Instellingen aanpassen",
           text: "De timer kan worden uitgeschakeld en de groepsnamen kunnen worden aangepast.",
+          icon: IconsEnum.Settings,
         },
       ],
       understood: "Ik snap het",
