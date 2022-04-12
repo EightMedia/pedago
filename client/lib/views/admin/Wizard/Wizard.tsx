@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import set from "set-value";
 import { convertToRoomDto } from "../../../../factories/AdminWizard.factory";
+import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
+import { PageSlot } from "../../../components/Page/Page";
 import { Panel } from "../../../components/Panel";
 import { Title } from "../../../components/Title";
 import { WizardStep, WizardType } from "./Wizard.types";
@@ -25,7 +27,11 @@ const WizardComponent = ({
   }, [initialStep]);
 
   const updateWizardData = (value: any, path: string) => {
-    const newData: WizardType["data"] = set({ ...data, ...wizardData }, path, value) as any;
+    const newData: WizardType["data"] = set(
+      { ...data, ...wizardData },
+      path,
+      value
+    ) as any;
     setWizardData(newData);
   };
 
@@ -40,32 +46,37 @@ const WizardComponent = ({
   };
 
   return (
-    <Page>
-      <Title>Spel aanmaken</Title>
-      <Panel>
-        {(() => {
-          switch (step) {
-            case WizardStep.Name:
-              return <WizardName {...stepProps} />;
-            case WizardStep.Organisation:
-              return <WizardOrganisation {...stepProps} />;
-            case WizardStep.GameType:
-              return <WizardGameType {...stepProps} />;
-            case WizardStep.Options:
-              return <WizardOptions {...stepProps} />;
-            case WizardStep.Check:
-              return (
-                <WizardCheck
-                  data={wizardData}
-                  handleStep={setStep}
-                  handleCreateGame={handleCreateGame}
-                />
-              );
-            default:
-              return <>Wizard Fail</>;
-          }
-        })()}
-      </Panel>
+    <Page valign="center">
+      <PageSlot location="headerCenter">
+        <Logo />
+      </PageSlot>
+      <div>
+        <Title>Spel aanmaken</Title>
+        <Panel>
+          {(() => {
+            switch (step) {
+              case WizardStep.Name:
+                return <WizardName {...stepProps} />;
+              case WizardStep.Organisation:
+                return <WizardOrganisation {...stepProps} />;
+              case WizardStep.GameType:
+                return <WizardGameType {...stepProps} />;
+              case WizardStep.Options:
+                return <WizardOptions {...stepProps} />;
+              case WizardStep.Check:
+                return (
+                  <WizardCheck
+                    data={wizardData}
+                    handleStep={setStep}
+                    handleCreateGame={handleCreateGame}
+                  />
+                );
+              default:
+                return <>Wizard Fail</>;
+            }
+          })()}
+        </Panel>
+      </div>
     </Page>
   );
 };

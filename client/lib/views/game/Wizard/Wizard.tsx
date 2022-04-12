@@ -5,7 +5,9 @@ import { Socket } from "socket.io-client";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
 import { setPlayerIdToLocalStorage } from "../../../../factories/shared.factory";
+import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
+import { PageSlot } from "../../../components/Page/Page";
 import { Panel } from "../../../components/Panel";
 import { WizardStep, WizardType } from "./Wizard.types";
 import { WizardGroup } from "./WizardGroup";
@@ -74,7 +76,10 @@ const WizardComponent = ({ initialStep }: WizardType) => {
   };
 
   return (
-    <Page>
+    <Page valign="center">
+      <PageSlot location="headerCenter">
+        <Logo />
+      </PageSlot>
       <Panel>
         {(() => {
           switch (step) {

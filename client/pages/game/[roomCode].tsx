@@ -5,7 +5,7 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -18,11 +18,10 @@ import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
 import { getResultData } from "../../factories/Result.factory";
 import { getPlayerIdFromLocalStorage } from "../../factories/shared.factory";
 import { getWaitingType } from "../../factories/Waiting.factory";
-import { Page } from "../../lib/components/Page";
 import {
   ResultGroup,
   ResultSet,
-  ResultStep
+  ResultStep,
 } from "../../lib/components/Result/Result.types";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Discuss } from "../../lib/views/game/Discuss";
@@ -113,88 +112,86 @@ const RoomCode = () => {
   return (
     <SocketContext.Provider value={socket}>
       <RoomContext.Provider value={room}>
-        <Page>
-          {(() => {
-            switch (view.name) {
-              case ViewName.Wizard:
-                return <Wizard initialStep={wizardStep} />;
-              case ViewName.Lobby:
-                return (
-                  <Lobby
-                    {...getLobbyType(
-                      socket as Socket,
-                      round,
-                      ROUND_MAX,
-                      room,
-                      playerList
-                    )}
-                  />
-                );
-              case ViewName.PlayerMatch:
-                return (
-                  <PlayerMatch
-                    {...getPlayerMatchType(
-                      round,
-                      ROUND_MAX,
-                      room,
-                      playerId as string
-                    )}
-                    initialScene={playerMatchScene}
-                  />
-                );
-              case ViewName.Game:
-                return (
-                  <Game
-                    autoPlay={true}
-                    initialScene={gameScene}
-                    round={round}
-                    countdownTime={3}
-                    leadTime={3}
-                  />
-                );
-              case ViewName.WaitingScreen:
-                return (
-                  <Waiting
-                    {...getWaitingType(
-                      round,
-                      ROUND_MAX,
-                      room,
-                      playerId as string
-                    )}
-                    backToSort={handleBackToSort}
-                  />
-                );
-              case ViewName.Discuss:
-                return (
-                  <Discuss
-                    {...getDiscussType(
-                      round,
-                      ROUND_MAX,
-                      discussStep,
-                      false,
-                      true,
-                      room,
-                      playerId as string
-                    )}
-                  />
-                );
-              case ViewName.Result:
-                return (
-                  <Result
-                    initialStep={ResultStep.Loader}
-                    data={
-                      getResultData(room, playerId as string) as {
-                        me?: ResultSet;
-                        groups: ResultGroup[];
-                      }
+        {(() => {
+          switch (view.name) {
+            case ViewName.Wizard:
+              return <Wizard initialStep={wizardStep} />;
+            case ViewName.Lobby:
+              return (
+                <Lobby
+                  {...getLobbyType(
+                    socket as Socket,
+                    round,
+                    ROUND_MAX,
+                    room,
+                    playerList
+                  )}
+                />
+              );
+            case ViewName.PlayerMatch:
+              return (
+                <PlayerMatch
+                  {...getPlayerMatchType(
+                    round,
+                    ROUND_MAX,
+                    room,
+                    playerId as string
+                  )}
+                  initialScene={playerMatchScene}
+                />
+              );
+            case ViewName.Game:
+              return (
+                <Game
+                  autoPlay={true}
+                  initialScene={gameScene}
+                  round={round}
+                  countdownTime={3}
+                  leadTime={3}
+                />
+              );
+            case ViewName.WaitingScreen:
+              return (
+                <Waiting
+                  {...getWaitingType(
+                    round,
+                    ROUND_MAX,
+                    room,
+                    playerId as string
+                  )}
+                  backToSort={handleBackToSort}
+                />
+              );
+            case ViewName.Discuss:
+              return (
+                <Discuss
+                  {...getDiscussType(
+                    round,
+                    ROUND_MAX,
+                    discussStep,
+                    false,
+                    true,
+                    room,
+                    playerId as string
+                  )}
+                />
+              );
+            case ViewName.Result:
+              return (
+                <Result
+                  initialStep={ResultStep.Loader}
+                  data={
+                    getResultData(room, playerId as string) as {
+                      me?: ResultSet;
+                      groups: ResultGroup[];
                     }
-                  />
-                );
-              default:
-                return <>ERROR: ViewName not found</>;
-            }
-          })()}
-        </Page>
+                  }
+                />
+              );
+            default:
+              return <>ERROR: ViewName not found</>;
+          }
+        })()}
       </RoomContext.Provider>
     </SocketContext.Provider>
   );
