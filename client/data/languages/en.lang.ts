@@ -3,7 +3,8 @@ import { Locale } from "models";
 export const EN: Locale = {
   landing: {
     title: "Discover your ideals as a teacher",
-    description: "Get to know your own pedagogical powers with this game. You play with other players, together you’ll discuss the results.",
+    description:
+      "Get to know your own pedagogical powers with this game. You play with other players, together you’ll discuss the results.",
     input: "Enter game code",
     button: "Join game",
     create: "Create a game",
@@ -11,7 +12,7 @@ export const EN: Locale = {
   },
   playerType: {
     1: "",
-    0: ""
+    0: "",
   },
   roles: {},
   year: {},
@@ -19,28 +20,28 @@ export const EN: Locale = {
   categories: {
     0: {
       title: "",
-      description: ""
+      description: "",
     },
     1: {
       title: "",
-      description: ""
+      description: "",
     },
     2: {
       title: "",
-      description: ""
+      description: "",
     },
     3: {
       title: "",
-      description: ""
+      description: "",
     },
     4: {
       title: "",
-      description: ""
+      description: "",
     },
     5: {
       title: "",
-      description: ""
-    }
+      description: "",
+    },
   },
   playerMatch: {
     youPlayWith: "",
@@ -48,12 +49,12 @@ export const EN: Locale = {
     findEachOther: "",
     found: "",
     waitForOthers: "",
-    waitUntil: ""
+    waitUntil: "",
   },
   game: {
     round: "",
     of: "",
-    done: ""
+    done: "",
   },
   adminGame: {
     round: {
@@ -72,29 +73,29 @@ export const EN: Locale = {
       there: "",
       isOneTeam: "",
       are: "",
-      stillPlaying: ""
+      stillPlaying: "",
     },
     lead: {
       continuing: "",
-      of: ""
-    }
+      of: "",
+    },
   },
   adminLobby: {
     info: {
       title: "",
       items: [],
-      understood: ""
+      understood: "",
     },
     lobby: {
       settingsButton: "",
       rulesButton: "",
       code: "",
       andJoin: "",
-      start: ""
+      start: "",
     },
     playerGroup: {
-      waiting: ""
-    }
+      waiting: "",
+    },
   },
   adminWizard: {
     name: {
@@ -104,7 +105,7 @@ export const EN: Locale = {
       email: "",
       role: "",
       customRole: "",
-      nextButton: ""
+      nextButton: "",
     },
     check: {
       yourInfo: "",
@@ -121,7 +122,7 @@ export const EN: Locale = {
       group: "",
       groups: "",
       create: "",
-      back: ""
+      back: "",
     },
     gameType: {
       step: "",
@@ -130,7 +131,7 @@ export const EN: Locale = {
       year: "",
       sector: "",
       next: "",
-      back: ""
+      back: "",
     },
     options: {
       step: "",
@@ -144,7 +145,7 @@ export const EN: Locale = {
       group3: "",
       group4: "",
       next: "",
-      back: ""
+      back: "",
     },
     organisation: {
       step: "",
@@ -152,33 +153,33 @@ export const EN: Locale = {
       organisation: "",
       location: "",
       next: "",
-      back: ""
-    }
+      back: "",
+    },
   },
   gameWizard: {
     roomCode: {
       roomCodeLabel: "",
-      nextButton: ""
+      nextButton: "",
     },
     name: {
       title: "",
       othersWillSee: "",
       nameLabel: "",
-      nextButton: ""
+      nextButton: "",
     },
     group: {
-      title: ""
+      title: "",
     },
     info: {
       title: "",
       items: [],
-      understood: ""
-    }
+      understood: "",
+    },
   },
   gameLobby: {
     hi: "",
     willStart: "",
-    waiting: ""
+    waiting: "",
   },
   waiting: {
     goodBusy: "",
@@ -186,28 +187,30 @@ export const EN: Locale = {
     isReady: "",
     and: "",
     areReady: "",
-    changeSomething: ""
+    changeSomething: "",
   },
   discuss: {
     ready: {
-      ready: ""
+      ready: "",
     },
     intro: {
-      discussDiff: ""
+      discussDiff: "",
+      items: [],
     },
     info: {
       discussDiff: "",
-      understood: ""
+      understood: "",
     },
     compare: {
       discussDiff: "",
-      ready: ""
-    }
+      ready: "",
+      info: "",
+    },
   },
   results: {
     loader: {
       done: "",
-      fetchResult: ""
+      fetchResult: "",
     },
     results: "",
     myResult: "",
@@ -217,7 +220,7 @@ export const EN: Locale = {
     sendToMail: "",
     yourMail: "",
     send: "",
-    privacy: ""
+    privacy: "",
   },
-  rounds: []
+  rounds: [],
 };

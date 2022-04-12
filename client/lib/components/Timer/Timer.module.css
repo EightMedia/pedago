@@ -7,3 +7,10 @@
   backdrop-filter: blur(48px);
   color: var(--color-white);
 }
+
+.icon {
+  margin-right: var(--space-3xs);
+  @media (--sm-max) {
+    display: none;
+  }
+}

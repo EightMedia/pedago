@@ -7,10 +7,19 @@ const TextComponent = ({
   size = "md",
   weight = "normal",
   tone = "dark",
+  align = "left",
   children,
 }: TextType) => {
   return (
-    <p className={cx(styles.text, styles[tone], styles[weight], styles[size])}>
+    <p
+      className={cx(
+        styles.text,
+        styles[tone],
+        styles[weight],
+        styles[size],
+        styles[align]
+      )}
+    >
       {children}
     </p>
   );

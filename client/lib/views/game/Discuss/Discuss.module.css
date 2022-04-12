@@ -1,0 +1,27 @@
+.infoBtnText {
+  @media (--sm-max) {
+    position: absolute;
+    left: -999em;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+}
+
+.compare {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  & > * {
+    flex: 0 0 50%;
+  }
+}
+
+.card {
+  background: var(--color-white);
+  padding: var(--space-2xs);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-grey-darkest);
+  border: var(--border-light);
+}

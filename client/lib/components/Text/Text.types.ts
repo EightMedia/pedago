@@ -5,4 +5,5 @@ export type TextType = {
   size?: "xs" | "sm" | "md" | "lg"; // 12,16,18
   weight?: "normal" | "bold";
   tone?: "light" | "dark";
+  align?: "left" | "center" | "right";
 };
