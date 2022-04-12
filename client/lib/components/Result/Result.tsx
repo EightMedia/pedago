@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Logo } from "../Logo";
 import { Page } from "../Page";
 import { PageSlot } from "../Page/Page";
@@ -12,6 +12,10 @@ const ResultComponent = ({
   initialStep,
 }: ResultType) => {
   const [step, setStep] = useState(initialStep);
+
+  useEffect(() => {
+    return () => localStorage.removeItem("room");
+  }, []);
 
   return (
     <Page background={4}>
