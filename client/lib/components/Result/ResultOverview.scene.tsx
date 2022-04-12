@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
@@ -18,14 +17,13 @@ export type ResultOverviewProps = {
   time?: number;
   callback?: () => void;
   data: ResultType["data"];
+  showEmailPanel: boolean;
 };
 
-const handleEmail = (data: ResultType["data"], email: string) => {
-  const html = renderToStaticMarkup(ResultOverview({ data }));
-  console.log(email, html);
-};
-
-export const ResultOverview = ({ data }: ResultOverviewProps) => {
+export const ResultOverview = ({
+  data,
+  showEmailPanel = true,
+}: ResultOverviewProps) => {
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
   const text = useContext(LanguageContext);
@@ -40,13 +38,28 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
   );
   const [email, setEmail] = useState<string>("");
 
-    const handleClick = () => {
-      if (email) {
-        handleEmail(data, email)
-      } else {
-        console.error("No email provided")
-      }
+  const handleEmail = () => {
+    const groupsParams = data.groups
+      .map((e) => {
+        return `${encodeURIComponent(e.name)}_${encodeURIComponent(
+          e.data.toString()
+        )}`;
+      })
+      .join("&");
+    const meParams = data.me
+      ? encodeURIComponent(data.me?.toString())
+      : undefined;
+
+    const url = `/result?me=${meParams}&groups=${groupsParams}`;
+  };
+
+  const handleClick = () => {
+    if (email) {
+      handleEmail();
+    } else {
+      console.error("No email provided");
     }
+  };
 
   return (
     <>
@@ -132,24 +145,26 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
             ))}
           </Stack>
         </Panel>
-        <Panel>
-          <Center>
-            <PanelTitle>{resultsText.save}?</PanelTitle>
-            <Stack>
-              <p>{resultsText.sendToMail}</p>
-              <InputText
-                id={"email"}
-                label={"E-mail"}
-                placeholder={resultsText.yourMail}
-                onChange={e => setEmail(e.target.value)}
-              />
-              <Button stretch={true} onClick={handleClick}>
-                {resultsText.send}
-              </Button>
-              <p>{resultsText.privacy}</p>
-            </Stack>
-          </Center>
-        </Panel>
+        {showEmailPanel && (
+          <Panel>
+            <Center>
+              <PanelTitle>{resultsText.save}?</PanelTitle>
+              <Stack>
+                <p>{resultsText.sendToMail}</p>
+                <InputText
+                  id={"email"}
+                  label={"E-mail"}
+                  placeholder={resultsText.yourMail}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Button stretch={true} onClick={handleClick}>
+                  {resultsText.send}
+                </Button>
+                <p>{resultsText.privacy}</p>
+              </Stack>
+            </Center>
+          </Panel>
+        )}
       </div>
     </>
   );
