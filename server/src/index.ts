@@ -35,6 +35,8 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
     origin: ["http://localhost:8000", process.env.SOCKET_ORIGIN as string],
+    allowedHeaders: ["pedago-header"],
+    credentials: true
   },
 });
 const port = process.env.PORT || 80;

@@ -8,3 +8,5 @@ node_modules
 # local env files
 *.env*
 client/build-storybook.log
+.vercel
+auth.json
