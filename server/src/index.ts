@@ -17,6 +17,7 @@ import {
   startGame,
   updateRoomDto
 } from "./admin";
+import emailResults from "./email";
 import {
   finishRoundByAdmin,
   gameStart,
@@ -36,7 +37,7 @@ const io = new Server(httpServer, {
   cors: {
     origin: ["http://localhost:8000", process.env.SOCKET_ORIGIN as string],
     allowedHeaders: ["pedago-header"],
-    credentials: true
+    credentials: true,
   },
 });
 const port = process.env.PORT || 80;
@@ -50,6 +51,11 @@ io.on("connection", (socket: Socket) => {
   socket.emit(Event.Message, "Hello you have connected to Pedago");
 
   // Event Listeners
+  socket.on(
+    Event.Email,
+    (email: string, url: string, callback: (args: SocketCallback) => void) =>
+      emailResults(email, url, callback)
+  );
 
   // Admin Listeners
   socket.on(
