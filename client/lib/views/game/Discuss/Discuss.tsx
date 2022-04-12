@@ -15,7 +15,6 @@ const DiscussComponent = ({
   round,
   roundMax,
   initialStep,
-  pause = false,
   teamMembers,
   autoPlay = true,
 }: DiscussType) => {
