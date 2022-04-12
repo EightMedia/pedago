@@ -18,8 +18,8 @@ const TimerComponent = ({ time = 600 }: TimerType) => {
   }, [counter, setCounter]);
   return (
     <div className={cx(styles.timer)}>
-      <Icon icon={IconsEnum.Timer} />
-      {counter}
+      <Icon icon={IconsEnum.Timer} className={styles.icon} />
+      <span className={styles.text}>{counter}</span>
     </div>
   );
 };

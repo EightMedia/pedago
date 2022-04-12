@@ -4,7 +4,6 @@ import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
 import { getPlayerId } from "../../../../factories/shared.factory";
-import { Page } from "../../../components/Page";
 import { DiscussStep, DiscussType } from "./Discuss.types";
 import { DiscussCompare } from "./DiscussCompare.scene";
 import { DiscussInfo } from "./DiscussInfo.scene";
@@ -15,7 +14,6 @@ const DiscussComponent = ({
   round,
   roundMax,
   initialStep,
-  pause = false,
   teamMembers,
   autoPlay = true,
 }: DiscussType) => {
@@ -34,10 +32,7 @@ const DiscussComponent = ({
   };
 
   return (
-    <Page>
-      <div>
-        {text.game.round} {round} {text.game.of} {roundMax}
-      </div>
+    <>
       {(() => {
         let callback = undefined;
         switch (step) {
@@ -47,6 +42,8 @@ const DiscussComponent = ({
               <DiscussReady
                 teamMembers={teamMembers}
                 time={3}
+                round={round}
+                roundMax={roundMax}
                 callback={callback}
               />
             );
@@ -56,6 +53,8 @@ const DiscussComponent = ({
               <DiscussIntro
                 time={3}
                 callback={callback}
+                round={round}
+                roundMax={roundMax}
                 teamMembers={teamMembers}
               />
             );
@@ -74,7 +73,7 @@ const DiscussComponent = ({
             return <>Discuss Fail</>;
         }
       })()}
-    </Page>
+    </>
   );
 };
 

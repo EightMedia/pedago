@@ -194,13 +194,14 @@ export const NL: Locale = {
       timerLabel: "Timer",
       timerText: "Spelrondes krijgen dan een limiet van 10 minuten",
       inGroups: "Werken in groepen",
-      inGroupsText: "Spelers spelen zoveel mogelijk met spelers uit andere groepen",
-      group1:"Groep 1",
+      inGroupsText:
+        "Spelers spelen zoveel mogelijk met spelers uit andere groepen",
+      group1: "Groep 1",
       group2: "Groep 2",
       group3: "Groep 3",
       group4: "Groep 4",
       next: "Volgende",
-      back: "Terug naar de vorige stap"
+      back: "Terug naar de vorige stap",
     },
     organisation: {
       step: "Stap",
@@ -208,8 +209,8 @@ export const NL: Locale = {
       organisation: "Organisatie",
       location: "Locatie",
       next: "Volgende",
-      back: "Terug naar de vorige stap"
-    }
+      back: "Terug naar de vorige stap",
+    },
   },
   gameWizard: {
     roomCode: {
@@ -271,6 +272,28 @@ export const NL: Locale = {
     },
     intro: {
       discussDiff: "Bespreek de verschillen en overeenkomsten met",
+      items: [
+        {
+          caption: "Links begint",
+          text: "De persoon met de linkerrij trapt af.",
+        },
+        {
+          caption: "Bespreek de kaarten per positie ",
+          text: "Bespreek elkaars kaarten tegelijk van meest naar minst belangrijk.",
+        },
+        {
+          caption: "Stel elkaar vragen",
+          text: "Vraag elkaar waarom de keuze hoog staat.",
+        },
+        {
+          caption: "Niks is fout",
+          text: "Iedere volgorde is correct, probeer elkaar niet te overtuigen.",
+        },
+        {
+          caption: "Ieder heeft zijn eigen kijk",
+          text: "Probeer je te verplaatsen in de ander.",
+        },
+      ],
     },
     info: {
       discussDiff: "Bespreek de verschillen en overeenkomsten",
@@ -279,6 +302,7 @@ export const NL: Locale = {
     compare: {
       discussDiff: "Bespreek de verschillen en overeenkomsten",
       ready: "Wij zij klaar",
+      info: "Uitleg",
     },
   },
   results: {

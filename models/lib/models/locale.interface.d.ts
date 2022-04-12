@@ -205,6 +205,10 @@ export interface Locale {
         };
         intro: {
             discussDiff: string;
+            items: {
+                caption: string;
+                text: string;
+            }[];
         };
         info: {
             discussDiff: string;
@@ -213,6 +217,7 @@ export interface Locale {
         compare: {
             discussDiff: string;
             ready: string;
+            info: string;
         };
     };
     results: {

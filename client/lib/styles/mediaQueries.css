@@ -1,4 +1,5 @@
 /* postcss custom media queries */
 @custom-media --xs (min-width: 475px);
+@custom-media --sm-max (max-width: 767px);
 @custom-media --sm (min-width: 768px);
 @custom-media --md (min-width: 1024px);

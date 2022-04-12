@@ -58,7 +58,10 @@
 }
 
 .whiteBlocked {
-  padding: var(--space-xs) var(--space-md);
+  padding: var(--space-3xs);
+  @media (--sm) {
+    padding: var(--space-2xs) var(--space-xs) var(--space-2xs) var(--space-2xs);
+  }
   border-radius: var(--border-radius-xs);
   background: var(--color-white);
   color: var(--color-dark-blue);
