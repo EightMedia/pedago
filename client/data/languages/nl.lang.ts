@@ -275,7 +275,7 @@ export const NL: Locale = {
       items: [
         {
           caption: "Links begint",
-          text: "De persoon met de linkerrij trapt af.",
+          text: "De persoon met de linker rij trapt af.",
         },
         {
           caption: "Bespreek de kaarten per positie ",
