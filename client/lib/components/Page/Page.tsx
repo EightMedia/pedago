@@ -1,24 +1,24 @@
 import cx from "classnames";
 import { memo } from "react";
 import styles from "./Page.module.css";
-import { PageType } from "./Page.types";
+import { PageSlotType, PageType } from "./Page.types";
+
+export const PageSlot = ({ children, className, location }: PageSlotType) => (
+  <div className={cx(styles[location], className)}>
+    {typeof children === "object" ? children : <p>{children}</p>}
+  </div>
+);
 
 const PageComponent = ({
   children,
-  valign = "top",
-  halign = "stretch",
   background = 1,
+  valign = "top",
 }: PageType) => {
   return (
-    <div
-      className={cx(
-        styles.page,
-        styles["v-" + valign],
-        styles["h-" + halign],
-        styles["bg" + background]
-      )}
-    >
-      <div className="container">{children}</div>
+    <div className={cx(styles.page, styles["bg" + background])}>
+      <div className={cx(styles.container, styles["v-" + valign])}>
+        {typeof children === "object" ? children : <p>{children}</p>}
+      </div>
     </div>
   );
 };

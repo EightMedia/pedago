@@ -15,7 +15,7 @@ export const ResultLoader = ({ time = 3, callback }: ResultLoaderProps) => {
   const text = useContext(LanguageContext).results.loader;
 
   return (
-    <>
+    <div style={{ alignSelf: "center" }}>
       <Panel width="sm">
         <Center>
           <Loader />
@@ -23,6 +23,6 @@ export const ResultLoader = ({ time = 3, callback }: ResultLoaderProps) => {
           <p>{text.fetchResult}</p>
         </Center>
       </Panel>
-    </>
+    </div>
   );
 };

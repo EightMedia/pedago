@@ -34,7 +34,7 @@ const DiscussComponent = ({
   };
 
   return (
-    <Page valign="center">
+    <Page>
       <div>
         {text.game.round} {round} {text.game.of} {roundMax}
       </div>
@@ -52,7 +52,13 @@ const DiscussComponent = ({
             );
           case DiscussStep.Intro:
             callback = autoPlay ? () => setStep(DiscussStep.Info) : undefined;
-            return <DiscussIntro time={3} callback={callback} teamMembers={teamMembers}/>;
+            return (
+              <DiscussIntro
+                time={3}
+                callback={callback}
+                teamMembers={teamMembers}
+              />
+            );
           case DiscussStep.Compare:
             return (
               <DiscussCompare

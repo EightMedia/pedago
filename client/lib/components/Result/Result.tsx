@@ -1,5 +1,7 @@
 import { memo, useState } from "react";
+import { Logo } from "../Logo";
 import { Page } from "../Page";
+import { PageSlot } from "../Page/Page";
 import { ResultStep, ResultType } from "./Result.types";
 import { ResultLoader } from "./ResultLoader.scene";
 import { ResultOverview } from "./ResultOverview.scene";
@@ -12,7 +14,10 @@ const ResultComponent = ({
   const [step, setStep] = useState(initialStep);
 
   return (
-    <Page valign="center" background={4}>
+    <Page background={4}>
+      <PageSlot location="headerCenter">
+        <Logo />
+      </PageSlot>
       {(() => {
         let callback = undefined;
         switch (step) {

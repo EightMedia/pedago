@@ -1,0 +1,19 @@
+.avatarInput {
+  position: relative;
+  & > div > input {
+    text-align: left !important;
+    padding-left: 60px;
+  }
+}
+
+.avatarFigure {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  overflow: hidden;
+  border-radius: var(--border-radius-xs);
+}

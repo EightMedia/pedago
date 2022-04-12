@@ -34,7 +34,7 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
   );
 
   return (
-    <>
+    <div>
       <Title>{resultsText.results}</Title>
       {(data.groups.length > 1 || data.me) && (
         <div className={styles.buttonsWrapper}>
@@ -135,6 +135,6 @@ export const ResultOverview = ({ data }: ResultOverviewProps) => {
           </Center>
         </Panel>
       </div>
-    </>
+    </div>
   );
 };

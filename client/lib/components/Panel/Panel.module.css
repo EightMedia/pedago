@@ -5,6 +5,7 @@
   padding: var(--space-md);
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
   @media (--sm) {
     padding: var(--space-lg);
   }

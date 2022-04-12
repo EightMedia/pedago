@@ -74,7 +74,7 @@ const WizardComponent = ({ initialStep }: WizardType) => {
   };
 
   return (
-    <Page valign="center">
+    <Page>
       <Panel>
         {(() => {
           switch (step) {

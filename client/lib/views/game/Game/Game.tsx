@@ -15,7 +15,7 @@ export const GameComponent = ({
   const [scene, setScene] = useState(initialScene);
 
   return (
-    <Page background={6} valign="center" halign="center">
+    <Page background={6}>
       {(() => {
         let callback = undefined;
         switch (scene) {

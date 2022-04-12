@@ -19,7 +19,7 @@ const WaitingComponent = ({
   const waitingText = text.waiting;
 
   return (
-    <Page valign="center">
+    <Page>
       <div>
         {text.game.round} {round} {text.game.of} {roundMax}
       </div>
@@ -30,7 +30,9 @@ const WaitingComponent = ({
           <Stack>
             {teamMembers?.length > 1 && (
               <Text tone="light">
-                {waitingText.waiting} {teamMembers.join(" " + waitingText.and + " ")} {waitingText.areReady}
+                {waitingText.waiting}{" "}
+                {teamMembers.join(" " + waitingText.and + " ")}{" "}
+                {waitingText.areReady}
               </Text>
             )}
             {teamMembers?.length === 1 && (
