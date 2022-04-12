@@ -63,11 +63,16 @@ const DiscussComponent = ({
               <DiscussCompare
                 teamMembers={teamMembers}
                 handleReady={handleReady}
+                round={round}
               />
             );
           case DiscussStep.Info:
             return (
-              <DiscussInfo handleBack={() => setStep(DiscussStep.Compare)} />
+              <DiscussInfo
+                handleBack={() => setStep(DiscussStep.Compare)}
+                round={round}
+                roundMax={roundMax}
+              />
             );
           default:
             return <>Discuss Fail</>;
