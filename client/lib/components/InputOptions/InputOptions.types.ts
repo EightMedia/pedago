@@ -17,4 +17,7 @@ export type InputOptionsType = {
   id: string;
   condition?: boolean;
   enumOptions?: boolean;
+  customStyles?: {
+    readonly [key: string]: string;
+  };
 };

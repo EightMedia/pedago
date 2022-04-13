@@ -1,6 +1,6 @@
 import { Players, Sector } from "models";
 import { PlayerType } from "models/lib/models/player-type.enum";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
@@ -8,6 +8,7 @@ import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
+import playerTypeOptionStyles from "./PlayerTypeOptionsStyles.module.css";
 import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
@@ -16,6 +17,7 @@ export const WizardGameType = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
+  const [typeTouched, setTypeTouched] = useState(false);
   const text = useContext(LanguageContext);
   const wizardGameTypeText = text.adminWizard.gameType;
   return (
@@ -24,15 +26,16 @@ export const WizardGameType = ({
         <p>{wizardGameTypeText.step} 3/4</p>
         <PanelTitle>{wizardGameTypeText.typePlayers}</PanelTitle>
       </Center>
-      <Stack>
+      <Stack gap="sm">
         <InputOptions
+          customStyles={playerTypeOptionStyles}
           id="type"
           multi={false}
           options={text.playerType}
-          label="type"
           value={[data.info?.players?.type ?? PlayerType.Students]}
           enumOptions={true}
           handleChange={(newData: any) => {
+            setTypeTouched(true);
             updateData(newData[0], "info.players.type");
             if (newData[0] === PlayerType.Professionals) {
               updateData(undefined, "info.players.education");
@@ -40,45 +43,54 @@ export const WizardGameType = ({
             }
           }}
         />
-        <InputText
-          value={data.info?.players?.education || ""}
-          id="opleiding"
-          label={wizardGameTypeText.education}
-          showLabel={true}
-          onChange={(e) => updateData(e.target.value, "info.players.education")}
-          condition={data.info?.players?.type !== PlayerType.Professionals}
-        />
-        <InputOptions
-          id="year"
-          options={text.year}
-          label={wizardGameTypeText.year}
-          value={data.info?.players?.year}
-          enumOptions={true}
-          handleChange={(newData: Players["year"]) =>
-            updateData(newData, "info.players.year")
-          }
-          condition={data.info?.players?.type !== PlayerType.Professionals}
-        />
-        <InputOptions
-          id="sector"
-          options={text.sector}
-          label={wizardGameTypeText.sector}
-          value={data.info?.players?.sector}
-          enumOptions={true}
-          handleChange={(newData: Sector) =>
-            updateData(newData, "info.players.sector")
-          }
-        />
-        <Button stretch={true} onClick={() => handleStep(WizardStep.Options)}>
-          {wizardGameTypeText.next}
-        </Button>
-        <Button
-          variation="line"
-          onClick={() => handleStep(WizardStep.Organisation)}
-          className={styles.backButton}
-        >
-          {wizardGameTypeText.back}
-        </Button>
+        {typeTouched && (
+          <>
+            <InputText
+              value={data.info?.players?.education || ""}
+              id="opleiding"
+              label={wizardGameTypeText.education}
+              showLabel={true}
+              onChange={(e) =>
+                updateData(e.target.value, "info.players.education")
+              }
+              condition={data.info?.players?.type !== PlayerType.Professionals}
+            />
+            <InputOptions
+              id="year"
+              options={text.year}
+              label={wizardGameTypeText.year}
+              value={data.info?.players?.year}
+              enumOptions={true}
+              handleChange={(newData: Players["year"]) =>
+                updateData(newData, "info.players.year")
+              }
+              condition={data.info?.players?.type !== PlayerType.Professionals}
+            />
+            <InputOptions
+              id="sector"
+              options={text.sector}
+              label={wizardGameTypeText.sector}
+              value={data.info?.players?.sector}
+              enumOptions={true}
+              handleChange={(newData: Sector) =>
+                updateData(newData, "info.players.sector")
+              }
+            />
+            <Button
+              stretch={true}
+              onClick={() => handleStep(WizardStep.Options)}
+            >
+              {wizardGameTypeText.next}
+            </Button>
+            <Button
+              variation="line"
+              onClick={() => handleStep(WizardStep.Organisation)}
+              className={styles.backButton}
+            >
+              {wizardGameTypeText.back}
+            </Button>
+          </>
+        )}
       </Stack>
     </>
   );

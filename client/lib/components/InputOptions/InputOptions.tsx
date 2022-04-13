@@ -3,7 +3,7 @@ import { ChangeEvent, memo, useState } from "react";
 import { Icon } from "../Icon";
 import { IconsEnum } from "../Icon/Icon";
 import { Text } from "../Text";
-import styles from "./InputOptions.module.css";
+import defaultStyles from "./InputOptions.module.css";
 import {
   InputOptionsType,
   OptionsType,
@@ -35,8 +35,10 @@ const InputOptionsComponent = ({
   multi = true,
   handleChange,
   enumOptions = false,
+  customStyles,
 }: InputOptionsType) => {
   const [selected, setSelected] = useState(valsToString(value));
+  const styles = customStyles ? customStyles : defaultStyles;
 
   if (condition === false) return null;
 
