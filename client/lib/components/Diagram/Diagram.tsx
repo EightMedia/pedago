@@ -28,6 +28,7 @@ const DiagramComponent = ({
     const categories = Object.values(text.categories);
     return categories.map((category) => category.title);
   };
+
   const labels = findCategoryTitles();
 
   const data = {
