@@ -26,6 +26,7 @@ const TimerProvider = ({
         clearInterval(interval);
       }
     }, 1000);
+    
     return () => {
       clearInterval(interval);
       localStorage.removeItem("timer");

@@ -1,5 +1,6 @@
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
@@ -16,12 +17,13 @@ const PlayerMatchComponent = ({
   initialScene,
 }: PlayerMatchType) => {
   const text = useContext(LanguageContext);
+  const room = useContext(RoomContext);
   const timer = useContext(TimerContext);
 
   return (
     <Page background={5} valign="center">
       <PageSlot location="headerLeft">
-        <Timer time={timer} />
+      {room?.options?.timer as boolean && <Timer time={timer} />}
       </PageSlot>
 
       <PageSlot location="headerCenter">

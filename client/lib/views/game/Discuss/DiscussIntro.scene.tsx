@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
@@ -28,6 +29,7 @@ export const DiscussIntro = ({
   const text = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const timer = useContext(TimerContext);
+  const room  = useContext(RoomContext);
 
   const names = teamMembers
     ?.filter((p) => p.socketId !== socket?.id)
@@ -35,7 +37,7 @@ export const DiscussIntro = ({
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">
-        <Timer time={timer} />
+      {room?.options?.timer as boolean && <Timer time={timer} />}
       </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}
