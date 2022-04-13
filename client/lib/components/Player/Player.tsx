@@ -13,7 +13,7 @@ export const avatarColors = [
 ];
 
 const PlayerComponent = ({ name, group, size = "sm", active }: PlayerType) => {
-  const avatarSize = size === "sm" ? 32 : 64;
+  const avatarSize = size === "sm" ? 32 : 68;
   return (
     <div
       className={cx(

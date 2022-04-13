@@ -1,0 +1,10 @@
+.waiting {
+  border: var(--border-dashed);
+  border-radius: var(--border-radius-sm);
+  padding: var(--space-xs);
+}
+
+.teamName {
+  color: var(--color-grey-darkest);
+  font-weight: bold;
+}

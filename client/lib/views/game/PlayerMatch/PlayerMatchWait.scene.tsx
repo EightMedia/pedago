@@ -4,6 +4,8 @@ import { Panel, PanelTitle } from "../../../components/Panel";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { PlayerMatchType } from "./PlayerMatch.types";
+import styles from "./PlayerMatch.module.css";
+import { Text } from "../../../components/Text";
 
 const PlayerMatchWaitComponent = ({ round, roundMax }: PlayerMatchType) => {
   const text = useContext(LanguageContext);
@@ -11,10 +13,13 @@ const PlayerMatchWaitComponent = ({ round, roundMax }: PlayerMatchType) => {
   return (
     <Panel>
       <PanelTitle>{text.playerMatch.youPlayWith}</PanelTitle>
-      <Stack>{text.playerMatch.waitForOthers}</Stack>
-      <Center space="sm">
-        <p>{text.playerMatch.waitUntil}</p>
-      </Center>
+     <Stack gap="sm">
+      <div className={styles.waiting}>
+         <Text tone="light" size="mdlg" align="center">{text.playerMatch.waitForOthers}</Text>
+      </div>
+      
+      <Text align="center" tone="light" size="md">{text.playerMatch.waitUntil}</Text>
+     </Stack>
     </Panel>
   );
 };
