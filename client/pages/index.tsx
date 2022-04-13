@@ -1,8 +1,8 @@
-import { Language, Locale } from "models";
+import { Language } from "models";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { DEFAULT_LANGUAGE, LanguageContext } from "../contexts/LanguageContext";
-import * as languages from "../data/languages";
+import { DEFAULT_LANGUAGE } from "../contexts/LanguageContext";
+import LanguageProvider from "../providers/Language.provider";
 
 const ContentPage = () => {
   const [language, setLanguage] = useState<Language>(() => {
@@ -15,7 +15,6 @@ const ContentPage = () => {
       ? (langFromLocalStorage as Language)
       : DEFAULT_LANGUAGE;
   });
-  const data: Locale = languages[language];
 
   useEffect(() => {
     localStorage.setItem("language", language);
@@ -30,12 +29,12 @@ const ContentPage = () => {
 
   return (
     <>
-      <LanguageContext.Provider value={data}>
+      <LanguageProvider lang={language}>
         <LandingWithoutSSR
           language={language}
           setLanguage={setLanguage}
         ></LandingWithoutSSR>
-      </LanguageContext.Provider>
+      </LanguageProvider>
     </>
   );
 };

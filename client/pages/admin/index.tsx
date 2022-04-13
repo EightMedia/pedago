@@ -2,11 +2,12 @@ import {
   AdminEvent,
   Event,
   Group,
+  Language,
   Player,
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState,
+  ViewState
 } from "models";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
@@ -15,14 +16,14 @@ import { SocketContext } from "../../contexts/SocketContext";
 import { getAdminGameType } from "../../factories/AdminGame.factory";
 import {
   getAdminLobbyType,
-  getLobbyRoom,
+  getLobbyRoom
 } from "../../factories/AdminLobby.factory";
 import { getWizardData } from "../../factories/AdminWizard.factory";
 import { getResultData } from "../../factories/Result.factory";
 import {
   ResultGroup,
   ResultSet,
-  ResultStep,
+  ResultStep
 } from "../../lib/components/Result/Result.types";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
@@ -32,6 +33,7 @@ import { LobbyStep } from "../../lib/views/admin/Lobby/Lobby.types";
 import { Result } from "../../lib/views/admin/Result";
 import { Wizard } from "../../lib/views/admin/Wizard";
 import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
+import LanguageProvider from "../../providers/Language.provider";
 
 const AdminGame = () => {
   const socket: Socket | null = useSocket(
@@ -99,51 +101,58 @@ const AdminGame = () => {
   }, [socket]);
 
   return (
-    <SocketContext.Provider value={socket}>
-      <RoomContext.Provider value={room}>
-        {(() => {
-          switch (view.name) {
-            case ViewName.Wizard:
-              return (
-                <Wizard
-                  data={getWizardData(room)}
-                  initialStep={WizardStep.Name}
-                  handleRegisterGame={handleRegisterGame}
-                />
-              );
-            case ViewName.Lobby:
-              return (
-                <Lobby
-                  room={getLobbyRoom(room)}
-                  groups={getAdminLobbyType(room.groups as Group[], playerList)}
-                  initialStep={lobbyStep}
-                />
-              );
-            case ViewName.Game:
-              return (
-                <Game
-                  {...getAdminGameType(room as RoomDto)}
-                  initialScene={gameScene}
-                />
-              );
-            case ViewName.Result:
-              return (
-                <Result
-                  initialStep={ResultStep.Loader}
-                  data={
-                    getResultData(room, null) as {
-                      me?: ResultSet;
-                      groups: ResultGroup[];
+    <LanguageProvider
+    lang={typeof window !== "undefined" ? localStorage?.getItem("language") as Language : Language.NL}
+    >
+      <SocketContext.Provider value={socket}>
+        <RoomContext.Provider value={room}>
+          {(() => {
+            switch (view.name) {
+              case ViewName.Wizard:
+                return (
+                  <Wizard
+                    data={getWizardData(room)}
+                    initialStep={WizardStep.Name}
+                    handleRegisterGame={handleRegisterGame}
+                  />
+                );
+              case ViewName.Lobby:
+                return (
+                  <Lobby
+                    room={getLobbyRoom(room)}
+                    groups={getAdminLobbyType(
+                      room.groups as Group[],
+                      playerList
+                    )}
+                    initialStep={lobbyStep}
+                  />
+                );
+              case ViewName.Game:
+                return (
+                  <Game
+                    {...getAdminGameType(room as RoomDto)}
+                    initialScene={gameScene}
+                  />
+                );
+              case ViewName.Result:
+                return (
+                  <Result
+                    initialStep={ResultStep.Loader}
+                    data={
+                      getResultData(room, null) as {
+                        me?: ResultSet;
+                        groups: ResultGroup[];
+                      }
                     }
-                  }
-                />
-              );
-            default:
-              return <>ERROR: ViewName not found</>;
-          }
-        })()}
-      </RoomContext.Provider>
-    </SocketContext.Provider>
+                  />
+                );
+              default:
+                return <>ERROR: ViewName not found</>;
+            }
+          })()}
+        </RoomContext.Provider>
+      </SocketContext.Provider>
+    </LanguageProvider>
   );
 };
 
