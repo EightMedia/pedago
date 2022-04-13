@@ -41,19 +41,19 @@ const SlotsTemplate: ComponentStory<typeof Page> = (args) => (
       <Stack>
         <Title align="left">Body</Title>
 
-        <Text size="lg">
+        <Text size="lg" tone="light">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et illo
           laudantium voluptatum, iste veritatis quod excepturi sapiente
           molestiae explicabo commodi consequuntur, animi quae porro quibusdam
           provident, illum enim error.
         </Text>
-        <Text size="lg">
+        <Text size="lg" tone="light">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et illo
           laudantium voluptatum, iste veritatis quod excepturi sapiente
           molestiae explicabo commodi consequuntur, animi quae porro quibusdam
           provident, illum enim error.
         </Text>
-        <Text size="lg">
+        <Text size="lg" tone="light">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi et illo
           laudantium voluptatum, iste veritatis quod excepturi sapiente
           molestiae explicabo commodi consequuntur, animi quae porro quibusdam
