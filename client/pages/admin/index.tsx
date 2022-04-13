@@ -103,7 +103,7 @@ const AdminGame = () => {
   return (
     <SocketContext.Provider value={socket}>
       <RoomContext.Provider value={room}>
-        <TimerProvider time={timer}>
+        <TimerProvider timeStamp={timer}>
           {(() => {
             switch (view.name) {
               case ViewName.Wizard:
