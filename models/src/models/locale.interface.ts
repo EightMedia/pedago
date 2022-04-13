@@ -91,6 +91,7 @@ export interface Locale {
       items: {
         caption: string;
         text: string;
+        icon?: number;
       }[];
       understood: string;
     };
