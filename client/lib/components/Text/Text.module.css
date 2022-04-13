@@ -3,8 +3,11 @@
 }
 
 /* weight */
+.normal {
+  font-weight: 500;
+}
 .bold {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 /* tone */

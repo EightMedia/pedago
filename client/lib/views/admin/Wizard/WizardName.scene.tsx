@@ -32,7 +32,7 @@ export const WizardName = ({
         <PanelTitle>{wizardNameText.yourInfo}</PanelTitle>
       </Center>
 
-      <Stack>
+      <Stack gap="sm">
         <InputText
           value={data?.info?.name || ""}
           id="name"

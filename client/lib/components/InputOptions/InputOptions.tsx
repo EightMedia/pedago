@@ -1,11 +1,14 @@
 import cx from "classnames";
 import { ChangeEvent, memo, useState } from "react";
+import { Icon } from "../Icon";
+import { IconsEnum } from "../Icon/Icon";
+import { Text } from "../Text";
 import styles from "./InputOptions.module.css";
 import {
   InputOptionsType,
   OptionsType,
   OptionType,
-  OptionValueType
+  OptionValueType,
 } from "./InputOptions.types";
 
 const convertToInt = (value: string) => {
@@ -24,6 +27,7 @@ const valsToString = (vals: OptionValueType[]) => {
 
 const InputOptionsComponent = ({
   label,
+  helptext,
   condition = true,
   id,
   value = [],
@@ -68,12 +72,29 @@ const InputOptionsComponent = ({
         );
   };
 
+  const iconType = multi ? "iconMulti" : "iconSingle";
+
   return (
     <div className={cx(styles.wrapper)}>
-      {label ?? <p className={styles.groupLabel}></p>}
+      {label && <Text weight="bold">{label}</Text>}
+      {helptext && (
+        <Text size="sm" tone="light">
+          {helptext}
+        </Text>
+      )}
       <div className={styles.group}>
         {optionsArr?.map((item: OptionType, i: number) => (
-          <label className={styles.option} key={i}>
+          <label
+            className={cx(
+              styles.option,
+              styles[
+                selected?.includes(item.value)
+                  ? "optionChecked"
+                  : "optionUnchecked"
+              ]
+            )}
+            key={i}
+          >
             <input
               name={id}
               value={item.value}
@@ -82,6 +103,25 @@ const InputOptionsComponent = ({
               onChange={(e) => handleSelect(e)}
               checked={selected?.includes(item.value)}
             />
+            <span
+              className={cx(
+                styles.iconCheck,
+                styles[iconType],
+                styles[
+                  selected?.includes(item.value)
+                    ? iconType + "Checked"
+                    : iconType + "Unchecked"
+                ]
+              )}
+            >
+              {multi && (
+                <Icon
+                  icon={IconsEnum.Check}
+                  color="var(--color-white)"
+                  className={styles.icon}
+                />
+              )}
+            </span>
             <span className={styles.label}>{item.label}</span>
           </label>
         ))}
