@@ -9,6 +9,8 @@ import { Text } from "../../../components/Text";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { WaitingType } from "./Waiting.types";
+import styles from "./Waiting.module.css";
+import { Timer } from "../../../components/Timer";
 
 const WaitingComponent = ({
   round,
@@ -21,10 +23,14 @@ const WaitingComponent = ({
 
   return (
     <Page valign="center">
+      <PageSlot location="headerLeft">
+        <Timer time={600} />
+      </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}
       </PageSlot>
       <Panel>
+      
         <Center>
           <Loader />
           <PanelTitle space="sm">{waitingText.goodBusy}</PanelTitle>
@@ -37,7 +43,7 @@ const WaitingComponent = ({
               </Text>
             )}
             {teamMembers?.length === 1 && (
-              <Text tone="light">
+              <Text tone="light" size="md">
                 {waitingText.waiting} {teamMembers.join()} {waitingText.isReady}
               </Text>
             )}
