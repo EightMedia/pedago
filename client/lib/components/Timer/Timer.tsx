@@ -1,11 +1,11 @@
 import cx from "classnames";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "../Icon";
 import { IconsEnum } from "../Icon/Icon";
 import styles from "./Timer.module.css";
 import { TimerType } from "./Timer.types";
 
-const TimerComponent = ({ time }: TimerType) => {
+export const Timer = ({ time }: TimerType) => {
   const [counter, setCounter] = useState(time);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,5 +24,3 @@ const TimerComponent = ({ time }: TimerType) => {
     </div>
   );
 };
-
-export const Timer = memo(TimerComponent);

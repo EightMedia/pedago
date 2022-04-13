@@ -4,7 +4,7 @@ import { GameCountdown } from "./GameCountdown";
 import { GameLead } from "./GameLead";
 import { GameSort } from "./GameSort";
 
-export const GameComponent = ({
+ const GameComponent = ({
   autoPlay = true,
   round,
   countdownTime,

@@ -1,4 +1,4 @@
-import { memo, useContext } from "react";
+import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
@@ -9,7 +9,7 @@ import { PlayerMatchScene } from "./PlayerMatch.scene";
 import { PlayerMatchSceneEnum, PlayerMatchType } from "./PlayerMatch.types";
 import { PlayerMatchWaitScene } from "./PlayerMatchWait.scene";
 
-const PlayerMatchComponent = ({
+export const PlayerMatch = ({
   round,
   roundMax,
   teamName,
@@ -23,7 +23,7 @@ const PlayerMatchComponent = ({
   return (
     <Page background={5} valign="center">
       <PageSlot location="headerLeft">
-      {room?.options?.timer as boolean && <Timer time={timer} />}
+        {(room?.options?.timer as boolean) && <Timer time={timer} />}
       </PageSlot>
 
       <PageSlot location="headerCenter">
@@ -49,5 +49,3 @@ const PlayerMatchComponent = ({
     </Page>
   );
 };
-
-export const PlayerMatch = memo(PlayerMatchComponent);
