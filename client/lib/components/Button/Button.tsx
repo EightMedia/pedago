@@ -4,11 +4,11 @@ import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";
 
 const ButtonComponent = ({
-  children,
-  onClick,
   variation = "default",
-  stretch = false,
+  stretch,
   className,
+  children,
+  ...rest
 }: ButtonType) => {
   return (
     <button
@@ -18,7 +18,7 @@ const ButtonComponent = ({
         stretch ? styles.stretch : null,
         className
       )}
-      onClick={onClick}
+      {...rest}
     >
       {children}
     </button>

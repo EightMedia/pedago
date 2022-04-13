@@ -30,6 +30,10 @@
 }
 .md {
   font-size: var(--font-size-md);
+
+  @media (--sm) {
+    font-size: 18px;
+  }
 }
 
 .mdlg {

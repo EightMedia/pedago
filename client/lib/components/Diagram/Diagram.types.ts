@@ -3,4 +3,5 @@ export type DiagramType = {
   secondary?: number[];
   primaryLabel: string;
   secondaryLabel?: string;
+  className?: string;
 };

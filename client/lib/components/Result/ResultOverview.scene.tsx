@@ -11,6 +11,8 @@ import { Diagram } from "../Diagram";
 import { InputText } from "../InputText";
 import { Panel, PanelTitle } from "../Panel";
 import { Shape } from "../Shape";
+import { Text } from "../Text";
+import { TextTitle } from "../TextTitle";
 import { Title } from "../Title";
 import styles from "./Result.module.css";
 import { ResultSet, ResultType } from "./Result.types";
@@ -72,7 +74,7 @@ export const ResultOverview = ({
       <Title>{resultsText.results}</Title>
       {(data.groups?.length > 1 || data.me) && (
         <div className={styles.buttonsWrapper}>
-          <div className={styles.buttons}>
+          <div className={styles.buttons} dir="ltr">
             {data.me && (
               <Button
                 variation={
@@ -128,35 +130,45 @@ export const ResultOverview = ({
         secondary={secondaryData}
         primaryLabel={resultsText.myResult}
         secondaryLabel={resultsText.everyone}
+        className={styles.diagram}
       />
       <div className={styles.panels}>
         <Panel>
           <PanelTitle>{detailsTitle}</PanelTitle>
-          <Stack>
+          <Stack gap="lg">
             {primaryData?.map((item, index) => (
               <div
                 key={index}
                 style={{ order: 0 - item }}
                 className={styles.category}
               >
-                <Baro value={item} max={36} color={index} />
+                <Baro
+                  className={styles.categoryBaro}
+                  value={item}
+                  max={36}
+                  color={index}
+                />
                 <Shape className={styles.categoryIcon} category={index} />
-                <h3 className={styles.categoryTitle}>
-                  {Object.values(text.categories)[index].title}
-                </h3>
-                <p className={styles.categoryText}>
-                  {Object.values(text.categories)[index].description}
-                </p>
+                <div className={styles.categoryMain}>
+                  <TextTitle>
+                    {Object.values(text.categories)[index].title}
+                  </TextTitle>
+                  <Text tone="light">
+                    {Object.values(text.categories)[index].description}
+                  </Text>
+                </div>
               </div>
             ))}
           </Stack>
         </Panel>
         {showEmailPanel && (
-          <Panel>
+          <Panel width="sm">
             <Center>
-              <PanelTitle>{resultsText.save}?</PanelTitle>
-              <Stack>
-                <p>{resultsText.sendToMail}</p>
+              <PanelTitle space="sm">{resultsText.save}?</PanelTitle>
+              <Stack gap="md">
+                <Text align="center" tone="light">
+                  {resultsText.sendToMail}
+                </Text>
                 <InputText
                   id={"email"}
                   label={"E-mail"}
@@ -166,7 +178,9 @@ export const ResultOverview = ({
                 <Button stretch={true} onClick={handleClick}>
                   {resultsText.send}
                 </Button>
-                <p>{resultsText.privacy}</p>
+                <Text align="center" size="xs" tone="light">
+                  {resultsText.privacy}
+                </Text>
               </Stack>
             </Center>
           </Panel>

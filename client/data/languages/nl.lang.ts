@@ -73,9 +73,9 @@ export const NL: Locale = {
   playerMatch: {
     youPlayWith: "Je speelt met",
     youAre: "Jullie zijn",
-    findEachOther: "Zoek elkaar op en maak je klaar",
+    findEachOther: "Zoek elkaar op en maak je klaar.",
     found: "Gevonden!",
-    waitForOthers: "Wachten op medespelers...",
+    waitForOthers: "Wachten op medespeler...",
     waitUntil: "Nog even wachten tot iedereen klaar is",
   },
   game: {

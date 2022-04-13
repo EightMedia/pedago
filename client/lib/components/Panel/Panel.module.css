@@ -14,6 +14,10 @@
 .panelTitle {
   font-weight: bold;
   font: 700 23px / 1.1 var(--font-headings);
+
+  @media (--sm) {
+    font-size: 28px;
+  }
 }
 
 .space-sm {
