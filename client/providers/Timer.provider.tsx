@@ -12,7 +12,6 @@ const TimerProvider = ({
   const endTime = timeStamp + TIMER_SECONDS;
   
   const [timer, setTimer] = useState<number>(endTime - currentTime);
-  console.log(timeStamp, currentTime, timer, TIMER_SECONDS);
 
   useEffect(() => {
     const interval = setInterval(() => {
