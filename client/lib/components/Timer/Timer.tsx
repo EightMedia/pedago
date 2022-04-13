@@ -7,6 +7,7 @@ import { TimerType } from "./Timer.types";
 
 export const Timer = ({ time }: TimerType) => {
   const [counter, setCounter] = useState(time);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCounter(counter - 1);
@@ -17,6 +18,7 @@ export const Timer = ({ time }: TimerType) => {
     }
     return () => clearInterval(interval);
   }, [counter, setCounter]);
+
   return (
     <div className={cx(styles.timer)}>
       <Icon icon={IconsEnum.Timer} className={styles.icon} />
