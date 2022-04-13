@@ -1,6 +1,5 @@
 import { Player, PlayerEvent } from "models";
 import { memo, useContext, useState } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
 import { getPlayerId } from "../../../../factories/shared.factory";
@@ -17,7 +16,6 @@ const DiscussComponent = ({
   teamMembers,
   autoPlay = true,
 }: DiscussType) => {
-  const text = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const room = useContext(RoomContext);
   const [step, setStep] = useState(initialStep);

@@ -8,10 +8,12 @@ export const DiscussDataOneCompanion: DiscussType = {
   pause: true,
   teamMembers: [
     {
+      socketId: "",
       name: "My Name",
       cards: [4, 1, 3, 2, 5, 6],
     },
     {
+      socketId: "",
       name: "Vincent",
       cards: [6, 3, 2, 5, 4, 1],
     },
@@ -29,14 +31,17 @@ export const DiscussDataTwoCompanions: DiscussType = {
   pause: true,
   teamMembers: [
     {
+      socketId: "",
       name: "My Name",
       cards: [4, 1, 3, 2, 5, 6],
     },
     {
+      socketId: "",
       name: "Esmee",
       cards: [6, 3, 2, 5, 4, 1],
     },
     {
+      socketId: "",
       name: "Vincent",
       cards: [5, 3, 1, 6, 4, 2],
     },

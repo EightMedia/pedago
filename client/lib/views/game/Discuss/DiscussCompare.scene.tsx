@@ -18,9 +18,9 @@ const CompareCard = ({ id, round = 0 }: { id: number; round: number }) => {
   const text = useContext(LanguageContext);
   return (
     <div className={styles.card}>
-      <Shape category={Number(id - 1)} className={styles.icon} />
+      <Shape category={Number(id)} className={styles.icon} />
       <div className={styles.title}>
-        {text.rounds[round]?.cards[id - 1]?.title}
+        {text.rounds[round]?.cards[id]?.title}
       </div>
     </div>
   );
