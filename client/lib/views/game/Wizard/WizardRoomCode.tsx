@@ -15,7 +15,7 @@ export const WizardRoomCode = ({
   const text = useContext(LanguageContext).gameWizard.roomCode;
   return (
     <>
-      <PanelTitle>Voer de spelcode in</PanelTitle>
+      <PanelTitle>{text.roomCodeLabel}</PanelTitle>
       <Stack>
         <InputText id="roomcode" label={text.roomCodeLabel} type="number" onChange={e => setRoomCode(parseInt(e?.target?.value, 10))} />
         <Button onClick={() => setStep(WizardStep.Name, roomCode)}>{text.nextButton}</Button>

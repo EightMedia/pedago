@@ -10,12 +10,12 @@ export const DiscussDataOneCompanion: DiscussType = {
     {
       socketId: "",
       name: "My Name",
-      cards: [4, 1, 3, 2, 5, 6],
+      cards: [3, 0, 2, 1, 4, 5],
     },
     {
       socketId: "",
       name: "Vincent",
-      cards: [6, 3, 2, 5, 4, 1],
+      cards: [5, 2, 1, 4, 3, 0],
     },
   ],
   handleReady: () => {
@@ -33,17 +33,17 @@ export const DiscussDataTwoCompanions: DiscussType = {
     {
       socketId: "",
       name: "My Name",
-      cards: [4, 1, 3, 2, 5, 6],
+      cards: [3, 0, 2, 1, 4, 5],
     },
     {
       socketId: "",
       name: "Esmee",
-      cards: [6, 3, 2, 5, 4, 1],
+      cards: [5, 2, 1, 4, 3, 0],
     },
     {
       socketId: "",
       name: "Vincent",
-      cards: [5, 3, 1, 6, 4, 2],
+      cards: [4, 2, 0, 5, 3, 1],
     },
   ],
   handleReady: () => {

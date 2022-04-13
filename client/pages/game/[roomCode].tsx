@@ -1,11 +1,12 @@
 import {
   Event,
+  Language,
   Player,
   PlayerEvent,
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState,
+  ViewState
 } from "models";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -21,7 +22,7 @@ import { getWaitingType } from "../../factories/Waiting.factory";
 import {
   ResultGroup,
   ResultSet,
-  ResultStep,
+  ResultStep
 } from "../../lib/components/Result/Result.types";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Discuss } from "../../lib/views/game/Discuss";
@@ -35,6 +36,7 @@ import { Result } from "../../lib/views/game/Result";
 import { Waiting } from "../../lib/views/game/Waiting";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
+import LanguageProvider from "../../providers/Language.provider";
 
 const RoomCode = () => {
   const socket: Socket | null = useSocket(
@@ -110,6 +112,7 @@ const RoomCode = () => {
   }, [socket]);
 
   return (
+    <LanguageProvider lang={typeof window !== "undefined" ? localStorage?.getItem("language") as Language : Language.NL}>
     <SocketContext.Provider value={socket}>
       <RoomContext.Provider value={room}>
         {(() => {
@@ -194,6 +197,7 @@ const RoomCode = () => {
         })()}
       </RoomContext.Provider>
     </SocketContext.Provider>
+    </LanguageProvider>
   );
 };
 

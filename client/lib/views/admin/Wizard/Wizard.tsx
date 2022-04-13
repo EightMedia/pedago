@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import set from "set-value";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { convertToRoomDto } from "../../../../factories/AdminWizard.factory";
 import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
@@ -18,6 +19,7 @@ const WizardComponent = ({
   data = {},
   handleRegisterGame,
 }: WizardType) => {
+  const text = useContext(LanguageContext);
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [wizardData, setWizardData] = useState<WizardType["data"]>(data);
 
@@ -51,7 +53,7 @@ const WizardComponent = ({
         <Logo />
       </PageSlot>
       <div>
-        <Title>Spel aanmaken</Title>
+        <Title>{text.adminWizard.check.create}</Title>
         <Panel>
           {(() => {
             switch (step) {

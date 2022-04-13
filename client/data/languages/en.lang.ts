@@ -99,8 +99,8 @@ export const EN: Locale = {
   },
   adminWizard: {
     name: {
-      step: "",
-      yourInfo: "",
+      step: "Step",
+      yourInfo: "Yer info",
       name: "",
       email: "",
       role: "",
