@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Button } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
 import { Modal } from "../../../components/Modal";
@@ -19,9 +20,7 @@ const CompareCard = ({ id, round = 0 }: { id: number; round: number }) => {
   return (
     <div className={styles.card}>
       <Shape category={Number(id)} className={styles.icon} />
-      <div className={styles.title}>
-        {text.rounds[round]?.cards[id]?.title}
-      </div>
+      <div className={styles.title}>{text.rounds[round]?.cards[id]?.title}</div>
     </div>
   );
 };
@@ -49,12 +48,13 @@ export const DiscussCompare = ({
   round = 0,
 }: DiscussCompareProps) => {
   const text = useContext(LanguageContext);
+  const timer = useContext(TimerContext);
   const [showInfoModal, setShowInfoModal] = useState(false);
   return (
     <>
       <Page>
         <PageSlot location="headerLeft">
-          <Timer time={600} />
+          <Timer time={timer} />
         </PageSlot>
         <PageSlot location="headerCenter">
           <Text align="center">{text.discuss.compare.discussDiff}</Text>

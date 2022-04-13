@@ -24,7 +24,7 @@ export const GameLead = ({
         callback && callback();
       }
     }, 1000);
-    return;
+    return () => clearInterval(interval);
   }, [counter, setCounter, callback]);
   return (
     <Page valign="center" background={6}>

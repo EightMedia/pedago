@@ -1,6 +1,7 @@
 import { PlayerStatus } from "models";
 import { useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { ButtonGroup } from "../../../components/Button";
 import { Button } from "../../../components/Button/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
@@ -30,6 +31,7 @@ export const GameRound = ({
   const [showStopModal, setShowStopModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const text = useContext(LanguageContext);
+  const timerContext = useContext(TimerContext);
   const gameText = text.adminGame.round;
 
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
@@ -90,7 +92,7 @@ export const GameRound = ({
                 {text.game.round} {round.current} {text.game.of} {round.total}
               </Title>
               <div className={styles.timerAndStop}>
-                {timer && <Timer time={600} />}
+                {timer && <Timer time={timerContext} />}
                 <Button
                   onClick={() =>
                     teamsStillPlaying

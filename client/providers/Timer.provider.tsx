@@ -8,21 +8,20 @@ const TimerProvider = ({
   children: ReactNode;
   time: number;
 }) => {
-  const [timer, setTimer] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(time);
 
   useEffect(() => {
-    let timerFromLocalStorage: number | null = time;
-
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined") {        
       const localTime = localStorage.getItem("timer");
-      const locaTimeInt = localTime ? parseInt(localTime, 10) : null;
-      timerFromLocalStorage = locaTimeInt ? locaTimeInt : time;
+      const localTimeInt = localTime ? parseInt(localTime, 10) : null;
+      if (localTimeInt !== null && localTimeInt < time) {
+        setTimer(localTimeInt);
+      }
     }
 
     const interval = setInterval(() => {
-      setTimer((timerFromLocalStorage as number) - 1);
-      localStorage.setItem("timer", timer.toString());
-
+      setTimer(timer - 1);
+        localStorage.setItem("timer", (timer - 1).toString());
       if (timer === 0) {
         clearInterval(interval);
       }

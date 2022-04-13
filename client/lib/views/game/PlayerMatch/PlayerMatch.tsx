@@ -1,5 +1,6 @@
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Timer } from "../../../components/Timer";
@@ -15,10 +16,12 @@ const PlayerMatchComponent = ({
   initialScene,
 }: PlayerMatchType) => {
   const text = useContext(LanguageContext);
+  const timer = useContext(TimerContext);
+
   return (
     <Page background={5} valign="center">
       <PageSlot location="headerLeft">
-        <Timer time={600} />
+        <Timer time={timer} />
       </PageSlot>
 
       <PageSlot location="headerCenter">
