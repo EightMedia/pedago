@@ -217,6 +217,7 @@ export const NL: Locale = {
       yourOrg: "Jouw organisatie",
       organisation: "Organisatie",
       location: "Locatie",
+      locationHelp: "Eventueel met extra uitleg",
       next: "Volgende",
       back: "Terug naar de vorige stap",
     },

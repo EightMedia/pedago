@@ -12,3 +12,7 @@
     }
   }
 }
+
+.backButton {
+  align-self: flex-start;
+}

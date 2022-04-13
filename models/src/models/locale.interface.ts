@@ -162,6 +162,7 @@ export interface Locale {
       yourOrg: string;
       organisation: string;
       location: string;
+      locationHelp: string;
       next: string;
       back: string;
     };
