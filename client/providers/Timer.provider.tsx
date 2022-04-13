@@ -11,7 +11,7 @@ const TimerProvider = ({
   const [timer, setTimer] = useState<number>(time);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {        
+    if (typeof window !== "undefined") {
       const localTime = localStorage.getItem("timer");
       const localTimeInt = localTime ? parseInt(localTime, 10) : null;
       if (localTimeInt !== null && localTimeInt < time) {
@@ -21,15 +21,16 @@ const TimerProvider = ({
 
     const interval = setInterval(() => {
       setTimer(timer - 1);
-        localStorage.setItem("timer", (timer - 1).toString());
+      localStorage.setItem("timer", (timer - 1).toString());
       if (timer === 0) {
         clearInterval(interval);
+        localStorage.removeItem("timer");
       }
     }, 1000);
-    
+
     return () => {
       clearInterval(interval);
-      localStorage.removeItem("timer");
+    //   localStorage.removeItem("timer");
     };
   }, [timer, setTimer, time]);
 
