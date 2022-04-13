@@ -32,7 +32,7 @@
   font-size: var(--font-size-md);
 
   @media (--md) {
-    padding: var(--space-xs) var(--space-md);
+    padding: var(--space-sm) var(--space-xl);
     font-size: 20px;
   }
 
