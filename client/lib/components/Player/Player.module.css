@@ -9,7 +9,7 @@
 .lg {
   display: flex;
   color: var(--color-grey-darkest);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-mdlg);
   border: var(--border-light);
 }
 
@@ -32,8 +32,12 @@
 }
 
 .name {
+  color: var(--color-grey-darkest);
+  line-height: 1.35;
+  font-weight: bold;
 }
 
 .group {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
+  line-height: 1.35;
 }

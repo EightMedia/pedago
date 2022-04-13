@@ -10,6 +10,8 @@ import { Player } from "../../../components/Player";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { PlayerMatchType } from "./PlayerMatch.types";
+import styles from "./PlayerMatch.module.css";
+import { Text } from "../../../components/Text";
 
 const PlayerMatchSceneComponent = ({
   round,
@@ -40,20 +42,22 @@ const PlayerMatchSceneComponent = ({
     <>
       <Panel>
         <PanelTitle>{text.playerMatch.youPlayWith}</PanelTitle>
-        <Stack>
+        <Stack gap="xs">
           {teamMembers?.map((p) => (
             <Player key={p.name} name={p.name} group={p.group} size="lg" />
           ))}
-        </Stack>
-        <Center space="sm">
-          <p>
-            {text.playerMatch.youAre} <b>team {teamName}</b>.{" "}
+        
+        <div className={styles.playermatch}>
+          <Text align="center" tone="light" size="md"> 
+            {text.playerMatch.youAre} <span className={styles.teamname}> Team {teamName}</span>.{" "}
             {text.playerMatch.findEachOther}
-          </p>
-        </Center>
+          </Text>
+        </div>
+       
         <Button stretch onClick={handleFoundPartner}>
           {text.playerMatch.found}
         </Button>
+         </Stack>
       </Panel>
     </>
   );
