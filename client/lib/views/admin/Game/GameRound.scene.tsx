@@ -1,7 +1,8 @@
 import { PlayerStatus } from "models";
-import { useContext, useState } from "react";
+import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
+import { TimerContext, TIMER_SECONDS } from "../../../../contexts/TimerContext";
 import { ButtonGroup } from "../../../components/Button";
 import { Button } from "../../../components/Button/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
@@ -33,6 +34,7 @@ export const GameRound = ({
   const text = useContext(LanguageContext);
   const timerContext = useContext(TimerContext);
   const gameText = text.adminGame.round;
+  const router = useRouter();
 
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
   // teams with status not started:
@@ -53,6 +55,14 @@ export const GameRound = ({
     setShowStopModal(false);
     (stopRound as () => void)();
   };
+
+  useEffect(() => {
+    if (timerContext === TIMER_SECONDS) {
+      setTimeout(() => {
+        router.reload();
+      }, 500);
+    }
+  }, [timerContext]);
 
   return (
     <>

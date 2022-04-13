@@ -76,7 +76,7 @@ export const GameSort = ({ round }: GameSortType) => {
     <>
       <Page background={6}>
         <PageSlot location="headerLeft">
-          {room?.options?.timer as boolean && <Timer time={timer} />}
+          {(room?.options?.timer as boolean) && <Timer time={timer} />}
         </PageSlot>
         <PageSlot location="headerCenter">
           <h2 className={styles.lead}>{roundText?.lead}</h2>

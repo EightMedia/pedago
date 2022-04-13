@@ -89,7 +89,7 @@ const AdminGame = () => {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
       socket.on(Event.Room, (r: RoomDto) => {
-        setRoom(r);        
+        setRoom(r);
         setTimer(r.timerStamp);
       });
       socket.on(Event.PlayerList, setPlayerList);
