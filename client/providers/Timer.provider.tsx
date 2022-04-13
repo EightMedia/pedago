@@ -8,23 +8,18 @@ const TimerProvider = ({
   children: ReactNode;
   timeStamp: number;
 }) => {
-  const currentTime = Math.floor(Date.now() / 1000);
+  const currentTime = Math.floor(new Date().valueOf() / 1000);
   const endTime = timeStamp + TIMER_SECONDS;
-  
-  const [timer, setTimer] = useState<number>(endTime - currentTime);
+  const initialTimer = endTime - currentTime;
+  const [timer, setTimer] = useState<number>(initialTimer);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer(timer - 1);
-      if (timer <= 0) {
-        clearInterval(interval);
-      }
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [timer, timeStamp]);
+    if (timeStamp <= 0) {
+      setTimer(() => 0);
+    } else {
+      setTimer(endTime - currentTime);
+    }
+  }, [endTime, timeStamp, timer, currentTime]);
 
   return (
     <TimerContext.Provider value={timer}>{children}</TimerContext.Provider>

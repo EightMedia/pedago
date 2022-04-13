@@ -50,6 +50,7 @@ export const registerGame = (
       active: true,
       locked: false,
       startDate: timestamp,
+      timerStamp: 0,
       view: ViewName.Lobby,
       round: 1,
     };
@@ -101,7 +102,7 @@ export const startGame = (
     const room = store.getRoomById(roomId) as RoomDto;
     store.updateRoom({
       ...room,
-      timerStamp: Math.floor(Date.now() / 1000),
+      timerStamp: Math.floor(new Date().valueOf() / 1000),
       view: ViewName.Game,
     });
 

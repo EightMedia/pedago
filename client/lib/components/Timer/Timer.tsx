@@ -5,15 +5,16 @@ import { IconsEnum } from "../Icon/Icon";
 import styles from "./Timer.module.css";
 import { TimerType } from "./Timer.types";
 
-const TimerComponent = ({ time = 600 }: TimerType) => {
+const TimerComponent = ({ time }: TimerType) => {
   const [counter, setCounter] = useState(time);
   useEffect(() => {
     const interval = setInterval(() => {
       setCounter(counter - 1);
-      if (counter === 0) {
-        clearInterval(interval);
-      }
     }, 1000);
+    if (counter <= 0) {
+      clearInterval(interval);
+      setCounter(0);
+    }
     return () => clearInterval(interval);
   }, [counter, setCounter]);
   return (
