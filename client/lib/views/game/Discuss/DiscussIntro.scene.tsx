@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Timer } from "../../../components/Timer";
@@ -24,7 +25,8 @@ export const DiscussIntro = ({
 }: DiscussIntroProps) => {
   TimedCallback(time, callback);
   const text = useContext(LanguageContext);
-  const names = teamMembers?.map((p) => p.name);
+  const socket = useContext(SocketContext);
+  const names = teamMembers?.filter(p => p.socketId !== socket?.id).map((p) => p.name);
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">

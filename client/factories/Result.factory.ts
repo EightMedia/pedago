@@ -1,6 +1,9 @@
 import { Category, Group, Player, RoomDto, Round } from "models";
 import { ResultGroup, ResultSet } from "../lib/components/Result/Result.types";
 
+const reverseSortOrder = (arr: Category[]): Category[] =>
+  arr?.map((_, index) => arr[arr.length - 1 - index]);
+
 const getResultsForRounds = (rounds: Round[]): ResultSet => {
   let [
     caring = 0,
@@ -12,7 +15,7 @@ const getResultsForRounds = (rounds: Round[]): ResultSet => {
   ]: number[] = [];
 
   rounds?.forEach((round) => {
-    round.order?.forEach((cat: Category, index: number) => {
+    reverseSortOrder(round.order)?.forEach((cat: Category, index: number) => {
       const value = index + 1;
       switch (cat) {
         case Category.Caring:

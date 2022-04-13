@@ -11,6 +11,7 @@ export type DiscussType = {
   initialStep: DiscussStep;
   pause: boolean;
   teamMembers: {
+    socketId: string;
     name: string;
     cards: number[];
   }[];
