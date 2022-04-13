@@ -11,6 +11,9 @@
   color: var(--color-grey-darkest);
   font-size: var(--font-size-mdlg);
   border: var(--border-light);
+  & > svg {
+    flex: 0 0 68px;
+  }
 }
 
 .sm {
@@ -26,7 +29,7 @@
 }
 
 .nameWrapper {
-  padding: 2px var(--space-3xs);
+  padding: 2px var(--space-sm);
   display: flex;
   flex-direction: column;
 }
