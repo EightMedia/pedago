@@ -108,8 +108,13 @@ export const getResultData = (
     data: number[];
   }[];
 } => {
-  const myRounds = room.players.find((p: Player) => p.id === playerId)?.rounds;
-  const me = getResultsForRounds(myRounds as Round[]);
+  let me = [0, 0, 0, 0, 0, 0];
+  if (playerId) {
+    const myRounds = room.players.find(
+      (p: Player) => p.id === playerId
+    )?.rounds;
+    me = getResultsForRounds(myRounds as Round[]);
+  }
   const total = getResultsForAllPlayers(room.players);
   const groups = room.groups?.map((group: Group) => {
     return {

@@ -6,7 +6,7 @@ const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
   process.env.AIRTABLE_BASE_ID
 );
 
-export const storeGame = (room: RoomDto, playerId: string) => {
+const storeGame = (room: RoomDto, playerId: string) => {
   base(process.env.AIRTABLE_GAMES_TABLE).create(
     [
       {
@@ -26,3 +26,5 @@ export const storeGame = (room: RoomDto, playerId: string) => {
     }
   );
 };
+
+export default storeGame;
