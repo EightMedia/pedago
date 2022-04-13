@@ -27,11 +27,12 @@ const svgs: { [key: number]: ReactNode } = {
   5: <path d="M2 20.5h20l-10-18-10 18Z" fill="#A81AF4" />,
 };
 
-const ShapeComponent = ({ category, className }: ShapeType) => {
+const ShapeComponent = ({ category, className, size = 24 }: ShapeType) => {
   return (
     <svg
-      width="24"
-      height="24"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}

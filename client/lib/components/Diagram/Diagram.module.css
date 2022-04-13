@@ -1,6 +1,7 @@
 .wrapper {
   max-width: 600px;
-  margin: var(--space-xl) auto;
+  margin: 0 auto;
+  padding: var(--space-xl);
   position: relative;
 }
 
@@ -12,8 +13,24 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  font-size: --var(--font-size-2xs);
+  font-size: var(--font-size-2xs);
   font-weight: 700;
+  max-width: 100px;
+
+  @media (--sm) {
+    max-width: none;
+    font-size: var(--font-size-md);
+  }
+
+  & svg {
+    width: 16px;
+    height: 16px;
+
+    @media (--sm) {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 
 .label0 {

@@ -4,6 +4,7 @@ import { Center } from "../../layouts/Center";
 import { TimedCallback } from "../../utils/timedCallback.util";
 import { Loader } from "../Loader";
 import { Panel, PanelTitle } from "../Panel";
+import { Text } from "../Text";
 
 export type ResultLoaderProps = {
   time?: number;
@@ -20,7 +21,9 @@ export const ResultLoader = ({ time = 3, callback }: ResultLoaderProps) => {
         <Center>
           <Loader />
           <PanelTitle space="sm">{text.done}</PanelTitle>
-          <p>{text.fetchResult}</p>
+          <Text size="md" tone="light">
+            {text.fetchResult}
+          </Text>
         </Center>
       </Panel>
     </div>

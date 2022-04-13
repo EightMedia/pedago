@@ -24,6 +24,10 @@
 }
 .md {
   font-size: var(--font-size-md);
+
+  @media (--sm) {
+    font-size: 18px;
+  }
 }
 .lg {
   font-size: var(--font-size-lg);

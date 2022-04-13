@@ -4,7 +4,7 @@ import {
   LineElement,
   PointElement,
   RadialLinearScale,
-  Tooltip
+  Tooltip,
 } from "chart.js";
 import cx from "classnames";
 import { memo, useContext } from "react";
@@ -21,6 +21,7 @@ const DiagramComponent = ({
   secondary,
   primaryLabel,
   secondaryLabel,
+  className,
 }: DiagramType) => {
   const text = useContext(LanguageContext);
   const findCategoryTitles = () => {
@@ -28,8 +29,9 @@ const DiagramComponent = ({
     return categories.map((category) => category.title);
   };
   const labels = findCategoryTitles();
+
   const data = {
-    labels: labels, 
+    labels,
     datasets: [
       {
         label: primaryLabel,
@@ -77,13 +79,12 @@ const DiagramComponent = ({
       },
     },
   };
+
   return (
-    <div className={styles.wrapper}>
+    <div className={cx(styles.wrapper, className)}>
       {labels.map((label, index) => (
         <div key={index} className={cx(styles["label" + index], styles.label)}>
-          {label.split(" ").map((word, i) => (
-            <div key={i}>{word}</div>
-          ))}
+          {label}
           <Shape category={index} />
         </div>
       ))}
