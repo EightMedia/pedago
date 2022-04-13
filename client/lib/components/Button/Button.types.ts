@@ -1,8 +1,6 @@
-import { MouseEventHandler } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
-export type ButtonType = {
-  children: React.ReactNode;
-  onClick: MouseEventHandler;
+export interface ButtonType extends ComponentPropsWithoutRef<"button"> {
   variation?:
     | "default"
     | "line"
@@ -10,4 +8,4 @@ export type ButtonType = {
     | "whiteInactive"
     | "whiteBlocked";
   stretch?: boolean;
-};
+}
