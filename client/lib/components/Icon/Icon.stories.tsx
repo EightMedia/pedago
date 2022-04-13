@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Icon> = (args) => {
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       <div style={{ padding: "1em", flex: "1 0 150px", background: "#fff" }}>
         <Stack>
-          {iconKeys.map((icon: string, index: number) => (
+          {iconKeys?.map((icon: string, index: number) => (
             <div
               style={{
                 display: "flex",
@@ -58,7 +58,7 @@ const Template: ComponentStory<typeof Icon> = (args) => {
       </div>
       <div style={{ padding: "1em", flex: "1 0 150px", background: "#fff" }}>
         <Stack>
-          {iconKeys.map((icon: string, index: number) => (
+          {iconKeys?.map((icon: string, index: number) => (
             <div
               style={{
                 display: "flex",
