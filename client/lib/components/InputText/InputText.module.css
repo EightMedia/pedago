@@ -12,6 +12,10 @@
   border-radius: var(--border-radius-sm);
   text-align: center;
 }
+.input:focus {
+  outline: solid 1px var(--color-blue);
+  border-color: var(--color-blue);
+}
 
 /* Chrome, Safari, Edge, Opera */
 .input[type="number"]::-webkit-outer-spin-button,
