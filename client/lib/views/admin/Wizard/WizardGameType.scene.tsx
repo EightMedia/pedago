@@ -8,6 +8,7 @@ import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
+import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
 export const WizardGameType = ({
@@ -74,6 +75,7 @@ export const WizardGameType = ({
         <Button
           variation="line"
           onClick={() => handleStep(WizardStep.Organisation)}
+          className={styles.backButton}
         >
           {wizardGameTypeText.back}
         </Button>
