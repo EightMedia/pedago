@@ -10,4 +10,5 @@ export type ButtonType = {
     | "whiteInactive"
     | "whiteBlocked";
   stretch?: boolean;
+  className?: string;
 };
