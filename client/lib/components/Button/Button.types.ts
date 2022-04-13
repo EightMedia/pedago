@@ -8,4 +8,4 @@ export interface ButtonType extends ComponentPropsWithoutRef<"button"> {
     | "whiteInactive"
     | "whiteBlocked";
   stretch?: boolean;
-};
+}
