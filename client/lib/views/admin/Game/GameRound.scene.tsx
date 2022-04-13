@@ -80,46 +80,48 @@ export const GameRound = ({
           </ButtonGroup>
         </PageSlot>
 
-        <div className={styles.round}>
-          <Center>
-            <p>
-              {gameText.category}: {round.current}
-            </p>
-            <Title>
-              {text.game.round} {round.current} {text.game.of} {round.total}
-            </Title>
-            <div className={styles.timerAndStop}>
-              {timer && <Timer time={600} />}
-              <Button
-                onClick={() =>
-                  teamsStillPlaying
-                    ? setShowStopModal(!showStopModal)
-                    : handleStopRound()
-                }
-              >
-                {gameText.finish}
-              </Button>
-            </div>
-          </Center>
-        </div>
+        <PageSlot location="body">
+          <div className={styles.round}>
+            <Center>
+              <p>
+                {gameText.category}: {round.current}
+              </p>
+              <Title>
+                {text.game.round} {round.current} {text.game.of} {round.total}
+              </Title>
+              <div className={styles.timerAndStop}>
+                {timer && <Timer time={600} />}
+                <Button
+                  onClick={() =>
+                    teamsStillPlaying
+                      ? setShowStopModal(!showStopModal)
+                      : handleStopRound()
+                  }
+                >
+                  {gameText.finish}
+                </Button>
+              </div>
+            </Center>
+          </div>
 
-        <PanelGroup>
-          <TeamsList
-            teams={notStartedTeams}
-            title={gameText.notStarted}
-            emptyText={gameText.allStarted}
-          />
-          <TeamsList
-            teams={inProgressTeams}
-            title={gameText.playing}
-            emptyText={gameText.notPlaying}
-          />
-          <TeamsList
-            teams={doneTeams}
-            title={gameText.done}
-            emptyText={gameText.notDone}
-          />
-        </PanelGroup>
+          <PanelGroup>
+            <TeamsList
+              teams={notStartedTeams}
+              title={gameText.notStarted}
+              emptyText={gameText.allStarted}
+            />
+            <TeamsList
+              teams={inProgressTeams}
+              title={gameText.playing}
+              emptyText={gameText.notPlaying}
+            />
+            <TeamsList
+              teams={doneTeams}
+              title={gameText.done}
+              emptyText={gameText.notDone}
+            />
+          </PanelGroup>
+        </PageSlot>
       </Page>
       {showStopModal && (
         <Modal handleClose={() => setShowStopModal(false)}>

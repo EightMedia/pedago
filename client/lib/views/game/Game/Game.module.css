@@ -1,3 +1,7 @@
 .countdownNumber {
-  font-size: clamp(160px, 2.5vw, 200px);
+  display: block;
+  text-align: center;
+  font-size: clamp(180px, 2.5vw, 200px);
+  font-weight: 700;
+  font-family: var(--font-headings);
 }

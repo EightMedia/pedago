@@ -8,6 +8,8 @@ import { Button } from "../../../components/Button";
 import { Icon } from "../../../components/Icon";
 import { IconsEnum } from "../../../components/Icon/Icon";
 import { Modal } from "../../../components/Modal";
+import { Page } from "../../../components/Page";
+import { PageSlot } from "../../../components/Page/Page";
 import { SortList } from "../../../components/SortList";
 import { Timer } from "../../../components/Timer";
 import { Center } from "../../../layouts/Center";
@@ -70,24 +72,35 @@ export const GameSort = ({ round }: GameSortType) => {
 
   return (
     <>
-      <Timer time={600} />
-      <Center space="sm">
-        <h2 className={styles.lead}>{roundText?.lead}</h2>
-      </Center>
-
-      <Button variation="whiteBlocked" onClick={() => setShowInfoModal(true)}>
-        <Icon icon={IconsEnum.Info} />
-        Info
-      </Button>
-      <SortList
-        cards={roundText?.cards}
-        round={round}
-        handleSortOrder={handleSortOrder}
-      />
-      <Center space="sm">
-        <Button onClick={() => handleDoneSorting()}>{text.game.done}</Button>
-      </Center>
-
+      <Page background={6}>
+        <PageSlot location="headerLeft">
+          <Timer time={600} />
+        </PageSlot>
+        <PageSlot location="headerCenter">
+          <h2 className={styles.lead}>{roundText?.lead}</h2>
+        </PageSlot>
+        <PageSlot location="headerRight">
+          <Button
+            variation="whiteBlocked"
+            onClick={() => setShowInfoModal(true)}
+          >
+            <Icon icon={IconsEnum.Info} />
+            Info
+          </Button>
+        </PageSlot>
+        <PageSlot location="body">
+          <SortList
+            cards={roundText?.cards}
+            round={round}
+            handleSortOrder={handleSortOrder}
+          />
+          <Center space="sm">
+            <Button onClick={() => handleDoneSorting()}>
+              {text.game.done}
+            </Button>
+          </Center>
+        </PageSlot>
+      </Page>
       {showInfoModal && (
         <Modal handleClose={() => setShowInfoModal(false)}>
           <Stack>info</Stack>

@@ -1,5 +1,4 @@
 import { memo, useState } from "react";
-import { Page } from "../../../components/Page";
 import { GameScenes, GameType } from "./Game.types";
 import { GameCountdown } from "./GameCountdown";
 import { GameLead } from "./GameLead";
@@ -15,13 +14,20 @@ export const GameComponent = ({
   const [scene, setScene] = useState(initialScene);
 
   return (
-    <Page background={6}>
+    <>
       {(() => {
         let callback = undefined;
         switch (scene) {
           case GameScenes.Countdown:
             callback = autoPlay ? () => setScene(GameScenes.Lead) : undefined;
-            return <GameCountdown time={countdownTime} callback={callback} />;
+            return (
+              <GameCountdown
+                time={countdownTime}
+                callback={callback}
+                round={round}
+                roundMax={6}
+              />
+            );
           case GameScenes.Lead:
             callback = autoPlay ? () => setScene(GameScenes.Sort) : undefined;
             return (
@@ -33,7 +39,7 @@ export const GameComponent = ({
             return null;
         }
       })()}
-    </Page>
+    </>
   );
 };
 

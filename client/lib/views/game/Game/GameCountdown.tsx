@@ -1,14 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { Page } from "../../../components/Page";
+import { PageSlot } from "../../../components/Page/Page";
+import { Player } from "../../../components/Player";
+import { Timer } from "../../../components/Timer";
 import styles from "./Game.module.css";
 
 export const GameCountdown = ({
   time = 3,
   callback,
+  round,
+  roundMax,
 }: {
   time?: number;
   callback?: () => void;
+  round: number;
+  roundMax: number;
 }) => {
   const [counter, setCounter] = useState(time);
+  const text = useContext(LanguageContext);
   useEffect(() => {
     if (!callback) return;
     const interval = setInterval(() => {
@@ -21,8 +31,20 @@ export const GameCountdown = ({
     return;
   }, [counter, setCounter, callback]);
   return (
-    <>
-      <span className={styles.countdownNumber}>{counter}</span>
-    </>
+    <Page background={6} valign="center">
+      <PageSlot location="headerLeft">
+        <Timer time={600} />
+      </PageSlot>
+      <PageSlot location="headerCenter">
+        {text.game.round} {round} {text.game.of} {roundMax}
+      </PageSlot>
+      <PageSlot location="body">
+        <div className={styles.players}>
+          <Player name="Demo player 1" />
+          <Player name="Demo player 1" />
+        </div>
+        <span className={styles.countdownNumber}>{counter}</span>
+      </PageSlot>
+    </Page>
   );
 };
