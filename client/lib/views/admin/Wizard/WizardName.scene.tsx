@@ -45,6 +45,7 @@ export const WizardName = ({
           id="email"
           type="email"
           label={wizardNameText.email}
+          helptext={wizardNameText.emailHelp}
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.email")}
         />
@@ -57,8 +58,8 @@ export const WizardName = ({
           enumOptions={true}
           handleChange={(newData: Role) => {
             updateData(newData, "info.role");
-            if (!(data.info?.role?.includes(Role.Other))){
-              updateData(undefined, "info.customRole")
+            if (!data.info?.role?.includes(Role.Other)) {
+              updateData(undefined, "info.customRole");
             }
           }}
         />

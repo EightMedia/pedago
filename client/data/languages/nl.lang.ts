@@ -166,6 +166,7 @@ export const NL: Locale = {
       yourInfo: "Jouw gegevens",
       name: "Naam",
       email: "E-mailadres",
+      emailHelp: "We gebruiken het enkel om de resultaten te sturen",
       role: "Functie",
       customRole: "Anders, namelijk:",
       nextButton: "Volgende",

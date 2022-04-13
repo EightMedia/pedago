@@ -112,6 +112,7 @@ export interface Locale {
       yourInfo: string;
       name: string;
       email: string;
+      emailHelp: string;
       role: string;
       customRole: string;
       nextButton: string;
