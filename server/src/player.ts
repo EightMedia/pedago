@@ -1,6 +1,5 @@
 import { randomUUID } from "crypto";
 import {
-  Category,
   Event,
   Group,
   Player,
@@ -16,8 +15,6 @@ import { updateClientRoom, updatePlayersInLobby } from "./shared";
 import gamesStore from "./store/games.store";
 
 const store = gamesStore.getState();
-const reverseSortOrder = (arr: Category[]): Category[] =>
-  arr?.map((_, index) => arr[arr.length - 1 - index]);
 
 export const joinRoomByRoomCode = (
   playerId: string | undefined,
@@ -234,7 +231,7 @@ export const storeRound = (
   const index: number = store.getTeamIndex(roomId, playerId);
   store.storeRound(roomId, playerId, index, {
     ...round,
-    order: reverseSortOrder(round.order),
+    order: round.order,
   });
 
   store.setPlayerStatus(
@@ -300,7 +297,7 @@ export const finishRoundByAdmin = (
   const index: number = store.getTeamIndex(roomId, playerId);
   store.storeRound(roomId, playerId, index, {
     ...round,
-    order: reverseSortOrder(round.order),
+    order: round.order,
   });
 
   // Turn on countdown
@@ -312,8 +309,8 @@ export const finishRoundByAdmin = (
     status: "OK",
     message: "Round saved by administrator",
     data: {
-      sortOrder: round.order
-    }
+      sortOrder: round.order,
+    },
   });
 
   setTimeout(() => storeTeamReady(roomId, playerId, socket, callback), 1000);
@@ -340,7 +337,7 @@ export const getLatestSortOrder = (
       status: "OK",
       message: "Latest sort order requested",
       data: {
-        sortOrder: reverseSortOrder(rounds[lastIndex]?.order),
+        sortOrder: rounds[lastIndex]?.order,
       },
     });
   }

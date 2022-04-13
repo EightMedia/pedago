@@ -16,14 +16,17 @@ export const getDiscussType = (
   const currentTeam = room.teams?.find((t) => t.some((p) => p.id === playerId));
 
   const teamMembers: {
+    socketId: string;
     name: string;
     cards: number[];
   }[] = currentTeam?.map((p) => {      
     return {
+      socketId: p.socketId,
       name: p.name,
       cards: p.rounds.find(r => r.number === round)?.order,
     };
   }) as {
+    socketId: string;
     name: string;
     cards: number[];
   }[];
