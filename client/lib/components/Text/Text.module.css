@@ -11,8 +11,11 @@
 .light {
   color: var(--color-grey-neutral);
 }
-.dark {
+.medium {
   color: var(--color-grey-dark);
+}
+.dark {
+  color: var(--color-grey-darkest);
 }
 
 /* sizes */
@@ -25,6 +28,11 @@
 .md {
   font-size: var(--font-size-md);
 }
+
+.mdlg {
+  font-size: var(--font-size-mdlg);
+}
+
 .lg {
   font-size: var(--font-size-lg);
 }
