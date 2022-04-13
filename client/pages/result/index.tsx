@@ -1,3 +1,4 @@
+import { Language } from "models";
 import { useRouter } from "next/router";
 import { Page } from "../../lib/components/Page";
 import {
@@ -5,6 +6,7 @@ import {
   ResultSet
 } from "../../lib/components/Result/Result.types";
 import { ResultOverview } from "../../lib/components/Result/ResultOverview.scene";
+import LanguageProvider from "../../providers/Language.provider";
 
 const stringToResultSet = (nmbrs: string): ResultSet | undefined => {
   if (nmbrs === "undefined") {
@@ -40,7 +42,7 @@ const ResultPage = () => {
   }
 
   return (
-    <>
+    <LanguageProvider lang={typeof window !== "undefined" ? localStorage?.getItem("language") as Language : Language.NL}>
       {groups && (
         <Page valign="center" background={4}>
           <ResultOverview
@@ -52,7 +54,7 @@ const ResultPage = () => {
           />
         </Page>
       )}
-    </>
+    </LanguageProvider>
   );
 };
 
