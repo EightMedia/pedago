@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 
 export type TextType = {
   children: ReactNode;
-  size?: "xs" | "sm" | "md" | "lg"; // 12,16,18
+  size?: "xs" | "sm" | "md" | "mdlg" | "lg";
   weight?: "normal" | "bold";
-  tone?: "light" | "dark";
+  tone?: "light" | "medium" | "dark";
   align?: "left" | "center" | "right";
 };
