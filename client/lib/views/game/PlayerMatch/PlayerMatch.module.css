@@ -4,7 +4,7 @@
   padding: var(--space-xs);
 }
 
-.teamname {
+.teamName {
   color: var(--color-grey-darkest);
   font-weight: bold;
 }

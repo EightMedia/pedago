@@ -47,12 +47,10 @@ const PlayerMatchSceneComponent = ({
             <Player key={p.name} name={p.name} group={p.group} size="lg" />
           ))}
         
-        <div className={styles.playermatch}>
           <Text align="center" tone="light" size="md"> 
-            {text.playerMatch.youAre} <span className={styles.teamname}> Team {teamName}</span>.{" "}
+            {text.playerMatch.youAre} <span className={styles.teamName}> Team {teamName}</span>.{" "}
             {text.playerMatch.findEachOther}
           </Text>
-        </div>
        
         <Button stretch onClick={handleFoundPartner}>
           {text.playerMatch.found}
