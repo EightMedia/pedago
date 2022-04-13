@@ -52,7 +52,7 @@ const RoomCode = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
-  const [timer, setTimer] = useState<number>(600);
+  const [timer, setTimer] = useState<number>(0);
 
   const ROUND_MAX = 6;
   let playerId: string | null = "";
@@ -95,7 +95,10 @@ const RoomCode = () => {
     if (socket) {
       socket.on(Event.Message, handleMessage);
       socket.on(Event.To, setView);
-      socket.on(Event.Room, setRoom);
+      socket.on(Event.Room, (r: RoomDto) => {
+        setRoom(r);
+        setTimer(r.timerStamp);
+      });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(Event.Round, setRound);
       socket.on(PlayerEvent.GameScene, (setToCountdown: boolean) =>

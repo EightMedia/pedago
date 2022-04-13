@@ -43,7 +43,7 @@ const AdminGame = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
-  const [timer, setTimer] = useState<number>(600);
+  const [timer, setTimer] = useState<number>(0);
 
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
@@ -87,7 +87,10 @@ const AdminGame = () => {
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
-      socket.on(Event.Room, setRoom);
+      socket.on(Event.Room, (r: RoomDto) => {
+        setRoom(r);
+        setTimer(r.timerStamp);
+      });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
         setLobbyStep(setToInfo ? LobbyStep.Info : LobbyStep.Lobby);

@@ -101,6 +101,7 @@ export const startGame = (
     const room = store.getRoomById(roomId) as RoomDto;
     store.updateRoom({
       ...room,
+      timerStamp: Math.floor(Date.now() / 1000),
       view: ViewName.Game,
     });
 
@@ -171,7 +172,9 @@ export const finishRound = (
       ...room,
       players: filteredPlayers,
       round: roundNo + 1,
+      timerStamp: 0
     });
+    updateClientRoom(socket, roomId);
 
     setTimeout(() => startGame(roomId, socket, callback), 2000);
 

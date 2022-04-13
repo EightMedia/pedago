@@ -16,6 +16,7 @@ export interface RoomDto {
     active: boolean;
     locked: boolean;
     startDate: string | Date;
+    timerStamp: number;
     options?: Options;
     view: ViewName;
     round: number;
