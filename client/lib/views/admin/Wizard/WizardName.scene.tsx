@@ -5,8 +5,9 @@ import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
-import { Center } from "../../../layouts/Center";
+import { Text } from "../../../components/Text";
 import { Stack } from "../../../layouts/Stack";
+import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
 export const WizardName = ({
@@ -27,10 +28,12 @@ export const WizardName = ({
 
   return (
     <>
-      <Center>
-        <p>{wizardNameText.step} 1/4</p>
+      <div className={styles.stepHeader}>
+        <Text tone="medium" align="center" weight="bold">
+          {wizardNameText.step} 1/4
+        </Text>
         <PanelTitle>{wizardNameText.yourInfo}</PanelTitle>
-      </Center>
+      </div>
 
       <Stack gap="sm">
         <InputText

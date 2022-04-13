@@ -1,0 +1,11 @@
+.stepHeader {
+  @media (--sm-max) {
+    display: none;
+  }
+  @media (--sm) {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
