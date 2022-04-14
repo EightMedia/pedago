@@ -8,7 +8,9 @@ import { InfoItemType } from "./InfoItem.types";
 const InfoItemComponent = ({ title, text, icon }: InfoItemType) => {
   return (
     <div className={styles.item}>
-      {icon && <Icon icon={icon} className={styles.icon} infoIcon />}
+      {typeof icon !== "undefined" && (
+        <Icon icon={icon} className={styles.icon} infoIcon />
+      )}
       <div className={styles.text}>
         <TextTitle>{title}</TextTitle>
         <Text tone="light">{text}</Text>
