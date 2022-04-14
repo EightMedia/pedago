@@ -34,10 +34,13 @@
   flex-direction: column;
 }
 
-.name {
+.lg .name {
   color: var(--color-grey-darkest);
   line-height: 1.35;
   font-weight: 700;
+}
+.sm .name {
+  color: var(--color-white);
 }
 
 .group {
