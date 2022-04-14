@@ -1,5 +1,6 @@
 import cx from "classnames";
 import { memo } from "react";
+import { Text } from "../Text";
 import styles from "./InputSwitch.module.css";
 import { InputSwitchType } from "./InputSwitch.types";
 
@@ -51,8 +52,12 @@ const InputSwitchComponent = ({
         className={styles.input}
       />
       <div className={styles.text}>
-        <span className={cx(styles.label)}>{label}</span>
-        <span className={cx(styles.helpText)}>{helpText}</span>
+        <Text size="mdlg" weight="bold">
+          {label}
+        </Text>
+        <Text size="sm" tone="light">
+          {helpText}
+        </Text>
       </div>
       <div className={styles.icon}>
         <SwitchIcon checked={checked} />
