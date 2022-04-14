@@ -6,5 +6,7 @@
 
 .roomCode {
   font-size: 64px;
-  font-weight: bold;
+  font-weight: 700;
+  font-family: var(--font-headings);
+  line-height: 1.1;
 }

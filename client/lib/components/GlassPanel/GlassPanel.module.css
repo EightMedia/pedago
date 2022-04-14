@@ -1,5 +1,8 @@
 .glass {
   padding: var(--space-md);
+  @media (--sm) {
+    padding: var(--space-lg);
+  }
   background: var(--color-white-10);
   border-radius: var(--border-radius-md);
   backdrop-filter: blur(48px);

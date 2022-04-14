@@ -9,6 +9,7 @@ import { Panel } from "../../../components/Panel";
 import { PanelGroup } from "../../../components/PanelGroup";
 import { PlayerCount } from "../../../components/PlayerCount";
 import { PlayerGroup } from "../../../components/PlayerGroup";
+import { Text } from "../../../components/Text";
 import { Stack } from "../../../layouts/Stack";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
@@ -32,9 +33,11 @@ export const LobbyLobby = ({
       <PageSlot location="headerLeft">
         <PlayerCount players={room?.players} variation="light" />
       </PageSlot>
+
       <PageSlot location="headerCenter">
         <Logo />
       </PageSlot>
+
       <PageSlot location="headerRight">
         <ButtonGroup>
           <Button variation="whiteBlocked" onClick={handleSettings}>
@@ -48,13 +51,11 @@ export const LobbyLobby = ({
         </ButtonGroup>
       </PageSlot>
 
-      <Stack gap="xs">
+      <Stack gap="lg">
         <Panel width="full">
           <header className={styles.header}>
             <div className={styles.roomCode}>{room?.roomCode}</div>
-            <p>
-              {text.code} <a href={siteUrl}>{readableSiteUrl}</a> {text.andJoin}
-            </p>
+            <Text size="lg">{text.code}</Text>
             <Button onClick={handleStart as () => void}>{text.start}</Button>
           </header>
         </Panel>
