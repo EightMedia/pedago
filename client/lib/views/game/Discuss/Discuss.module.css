@@ -11,7 +11,6 @@
 
 .compare {
   display: grid;
-  grid-template-columns: repeat(3, minmax(45%, 1fr));
   gap: var(--space-sm);
   margin-left: -20px;
   margin-right: -20px;
@@ -25,7 +24,6 @@
 
   @media (--sm) {
     scroll-snap-type: none;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-md);
     margin: 0;
     padding: 0;
@@ -39,6 +37,22 @@
 
   & > * {
     scroll-snap-align: start;
+  }
+}
+
+.compareCols2 {
+  grid-template-columns: repeat(2, minmax(45%, 1fr));
+
+  @media (--sm) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.compareCols3 {
+  grid-template-columns: repeat(3, minmax(45%, 1fr));
+
+  @media (--sm) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

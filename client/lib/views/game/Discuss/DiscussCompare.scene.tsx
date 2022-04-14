@@ -1,3 +1,4 @@
+import cx from "classnames";
 import {
   ComponentPropsWithoutRef,
   forwardRef,
@@ -89,6 +90,8 @@ export const DiscussCompare = ({
 
   const [showInfoModal, setShowInfoModal] = useState(false);
 
+  const teamMembersCount = teamMembers?.length;
+
   const rowProps = teamMembers?.[0]?.cards.map(useEqualRows) || [];
 
   return (
@@ -112,7 +115,12 @@ export const DiscussCompare = ({
           </Button>
         </PageSlot>
         <PageSlot location="body">
-          <div className={styles.compare}>
+          <div
+            className={cx(
+              styles.compare,
+              styles["compareCols" + (teamMembers?.length || 2)]
+            )}
+          >
             {teamMembers?.map(({ name, cards }) => (
               <Stack key={name}>
                 <Player name={name} />
@@ -127,7 +135,9 @@ export const DiscussCompare = ({
               </Stack>
             ))}
           </div>
-          <Button onClick={handleReady}>{text.discuss.compare.ready}</Button>
+          <Center>
+            <Button onClick={handleReady}>{text.discuss.compare.ready}</Button>
+          </Center>
         </PageSlot>
       </Page>
       {showInfoModal && (
