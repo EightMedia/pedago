@@ -113,7 +113,7 @@ export const NL: Locale = {
       items: [
         {
           caption: "Meedoen",
-          text: "Alle spelers moeten eerst naar pedago.game gaan.",
+          text: "Alle spelers moeten eerst naar [pedagogame.com](https://pedagogame.com) gaan.",
           icon: IconsEnum.Info,
         },
         {

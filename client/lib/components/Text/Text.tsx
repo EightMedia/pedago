@@ -1,5 +1,6 @@
 import cx from "classnames";
-import { memo } from "react";
+import { Fragment, memo } from "react";
+import ReactMarkdown from "react-markdown";
 import styles from "./Text.module.css";
 import { TextType } from "./Text.types";
 
@@ -11,7 +12,7 @@ const TextComponent = ({
   children,
 }: TextType) => {
   return (
-    <p
+    <ReactMarkdown
       className={cx(
         styles.text,
         styles[tone],
@@ -19,9 +20,11 @@ const TextComponent = ({
         styles[size],
         styles[align]
       )}
-    >
-      {children}
-    </p>
+      components={{
+        p: Fragment,
+      }}
+      children={children}
+    />
   );
 };
 

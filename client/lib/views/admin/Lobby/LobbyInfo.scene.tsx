@@ -18,17 +18,17 @@ export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
       </PageSlot>
       <Panel>
         <PanelTitle>{text.title}</PanelTitle>
-        <Stack>
+        <Stack gap="sm">
           {text.items.map((item, index) => (
             <InfoItem
               key={index}
-              icon={item.icon ? item.icon : undefined}
+              icon={typeof item.icon !== "undefined" ? item.icon : undefined}
               title={item.caption}
               text={item.text}
             />
           ))}
+          <Button onClick={handleClick}>{text.understood}</Button>
         </Stack>
-        <Button onClick={handleClick}>{text.understood}</Button>
       </Panel>
     </Page>
   );
