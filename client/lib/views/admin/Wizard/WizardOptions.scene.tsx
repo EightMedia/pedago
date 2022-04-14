@@ -45,7 +45,7 @@ export const WizardOptions = ({
         <p>{text.step} 4/4</p>
         <PanelTitle>{text.title}</PanelTitle>
       </Center>
-      <Stack>
+      <Stack gap="sm">
         <InputSwitch
           id="timer"
           label={text.timerLabel}

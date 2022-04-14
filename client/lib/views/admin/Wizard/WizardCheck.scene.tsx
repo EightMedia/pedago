@@ -6,6 +6,8 @@ import { Button } from "../../../components/Button";
 import { List } from "../../../components/List";
 import { ListItem } from "../../../components/List/List";
 import { PanelTitle } from "../../../components/Panel";
+import { Stack } from "../../../layouts/Stack";
+import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
 export type WizardCheckProps = {
@@ -59,12 +61,18 @@ export const WizardCheck = ({
         />
       </List>
 
-      <Button stretch={true} onClick={() => handleCreateGame(data)}>
-        {text.create}
-      </Button>
-      <Button variation="line" onClick={() => handleStep(WizardStep.Options)}>
-        {text.back}
-      </Button>
+      <Stack gap="sm">
+        <Button stretch={true} onClick={() => handleCreateGame(data)}>
+          {text.create}
+        </Button>
+        <Button
+          variation="line"
+          onClick={() => handleStep(WizardStep.Options)}
+          className={styles.backButton}
+        >
+          {text.back}
+        </Button>
+      </Stack>
     </>
   );
 };
