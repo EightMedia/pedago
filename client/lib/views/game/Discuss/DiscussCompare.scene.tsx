@@ -16,8 +16,8 @@ import { PageSlot } from "../../../components/Page/Page";
 import { Player } from "../../../components/Player";
 import { Shape } from "../../../components/Shape";
 import { Text } from "../../../components/Text";
-import { TextTitle } from "../../../components/TextTitle";
 import { Timer } from "../../../components/Timer";
+import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { GameInfo } from "../../admin/Game/GameOnboarding";
 import styles from "./Discuss.module.css";
@@ -66,21 +66,19 @@ interface CompareCardProps extends ComponentPropsWithoutRef<"div"> {
   round: number;
 }
 
-const CompareCard = forwardRef(
-  (
-    { card, round = 0, ...rest }: CompareCardProps,
-    ref?: Ref<HTMLDivElement>
-  ) => {
-    const text = useContext(LanguageContext);
+const CompareCard = forwardRef(function CompareCard(
+  { card, round = 0, ...rest }: CompareCardProps,
+  ref?: Ref<HTMLDivElement>
+) {
+  const text = useContext(LanguageContext);
 
-    return (
-      <div {...rest} ref={ref} className={styles.card}>
-        <Shape category={Number(card)} />
-        <Text>{text.rounds[round]?.cards[card]?.title}</Text>
-      </div>
-    );
-  }
-);
+  return (
+    <div {...rest} ref={ref} className={styles.card}>
+      <Shape category={Number(card)} />
+      <Text size="sm">{text.rounds[round]?.cards[card]?.title}</Text>
+    </div>
+  );
+});
 
 export const DiscussCompare = ({
   handleReady,
@@ -100,7 +98,7 @@ export const DiscussCompare = ({
           <Timer time={600} />
         </PageSlot>
         <PageSlot location="headerCenter">
-          <TextTitle>{text.discuss.compare.discussDiff}</TextTitle>
+          <Center>{text.discuss.compare.discussDiff}</Center>
         </PageSlot>
         <PageSlot location="headerRight">
           <Button
