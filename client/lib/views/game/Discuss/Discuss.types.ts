@@ -22,7 +22,7 @@ export type DiscussType = {
 };
 
 export type DiscussCompareProps = {
-  teamMembers: TeamMember[];
+  teamMembers: TeamMember[] | null;
   handleReady: () => void;
   round: number;
 };
