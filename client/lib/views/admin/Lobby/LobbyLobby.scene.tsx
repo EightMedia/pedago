@@ -41,10 +41,10 @@ export const LobbyLobby = ({
 
       <PageSlot location="headerRight">
         <ButtonGroup>
-          <Button variation="whiteBlocked" onClick={handleSettings}>
+          {/* <Button variation="whiteBlocked" onClick={handleSettings}>
             <Icon icon={IconsEnum.Settings} />
             {text.settingsButton}
-          </Button>
+          </Button> */}
           <Button variation="whiteBlocked" onClick={handleInfo as () => void}>
             <Icon icon={IconsEnum.Info} />
             {text.rulesButton}
