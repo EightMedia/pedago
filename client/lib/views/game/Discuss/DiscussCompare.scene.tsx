@@ -91,7 +91,7 @@ export const DiscussCompare = ({
 
   const [showInfoModal, setShowInfoModal] = useState(false);
 
-  const rowProps = useEqualRows();
+  const rowProps = teamMembers?.[0]?.cards.map(useEqualRows) || [];
 
   return (
     <>
@@ -118,10 +118,10 @@ export const DiscussCompare = ({
             {teamMembers?.map(({ name, cards }) => (
               <Stack key={name}>
                 <Player name={name} />
-                {cards?.map((card) => (
+                {cards?.map((card, index) => (
                   <CompareCard
                     key={card}
-                    {...rowProps}
+                    {...rowProps[index]}
                     card={card}
                     round={round}
                   />
