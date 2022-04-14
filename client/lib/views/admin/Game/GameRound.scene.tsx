@@ -62,7 +62,7 @@ export const GameRound = ({
         router.reload();
       }, 500);
     }
-  }, [timerContext]);
+  }, [router, timerContext]);
 
   return (
     <>
