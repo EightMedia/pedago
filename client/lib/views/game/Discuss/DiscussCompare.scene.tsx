@@ -1,4 +1,12 @@
-import { useContext, useState } from "react";
+import {
+  ComponentPropsWithoutRef,
+  forwardRef,
+  Ref,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
@@ -8,39 +16,70 @@ import { PageSlot } from "../../../components/Page/Page";
 import { Player } from "../../../components/Player";
 import { Shape } from "../../../components/Shape";
 import { Text } from "../../../components/Text";
+import { TextTitle } from "../../../components/TextTitle";
 import { Timer } from "../../../components/Timer";
 import { Stack } from "../../../layouts/Stack";
 import { GameInfo } from "../../admin/Game/GameOnboarding";
 import styles from "./Discuss.module.css";
 import { DiscussCompareProps } from "./Discuss.types";
 
-const CompareCard = ({ id, round = 0 }: { id: number; round: number }) => {
-  const text = useContext(LanguageContext);
-  return (
-    <div className={styles.card}>
-      <Shape category={Number(id)} className={styles.icon} />
-      <div className={styles.title}>
-        {text.rounds[round]?.cards[id]?.title}
-      </div>
-    </div>
-  );
-};
+function useEqualRows() {
+  const [maxHeight, setMaxHeight] = useState(0);
 
-const CompareCardsList = ({
-  player,
-  cards = [],
-  round = 0,
-}: {
-  player: string;
-  cards: number[];
+  const elementsRef = useRef<HTMLElement[]>([]);
+
+  function getRefs(element: HTMLElement | null) {
+    if (element && !elementsRef.current.includes(element)) {
+      elementsRef.current.push(element);
+    }
+  }
+
+  function getMaxHeight() {
+    setMaxHeight(0);
+
+    const newMaxHeight = Math.max(
+      ...elementsRef.current.map(({ offsetHeight }) => offsetHeight)
+    );
+
+    setMaxHeight(newMaxHeight);
+  }
+
+  useEffect(() => {
+    getMaxHeight();
+
+    const observer = new ResizeObserver(getMaxHeight);
+    const [element] = elementsRef.current;
+    observer.observe(element);
+    return () => observer.unobserve(element);
+  }, []);
+
+  return {
+    ref: getRefs,
+    style: {
+      height: maxHeight || undefined,
+    },
+  };
+}
+
+interface CompareCardProps extends ComponentPropsWithoutRef<"div"> {
+  card: number;
   round: number;
-}) => (
-  <Stack>
-    <Player name={player} />
-    {cards?.map((card) => (
-      <CompareCard key={card} id={card} round={round} />
-    ))}
-  </Stack>
+}
+
+const CompareCard = forwardRef(
+  (
+    { card, round = 0, ...rest }: CompareCardProps,
+    ref?: Ref<HTMLDivElement>
+  ) => {
+    const text = useContext(LanguageContext);
+
+    return (
+      <div {...rest} ref={ref} className={styles.card}>
+        <Shape category={Number(card)} />
+        <Text>{text.rounds[round]?.cards[card]?.title}</Text>
+      </div>
+    );
+  }
 );
 
 export const DiscussCompare = ({
@@ -49,7 +88,11 @@ export const DiscussCompare = ({
   round = 0,
 }: DiscussCompareProps) => {
   const text = useContext(LanguageContext);
+
   const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const rowProps = useEqualRows();
+
   return (
     <>
       <Page>
@@ -57,7 +100,7 @@ export const DiscussCompare = ({
           <Timer time={600} />
         </PageSlot>
         <PageSlot location="headerCenter">
-          <Text align="center">{text.discuss.compare.discussDiff}</Text>
+          <TextTitle>{text.discuss.compare.discussDiff}</TextTitle>
         </PageSlot>
         <PageSlot location="headerRight">
           <Button
@@ -71,20 +114,22 @@ export const DiscussCompare = ({
           </Button>
         </PageSlot>
         <PageSlot location="body">
-          <Stack>
-            <div className={styles.compare}>
-              {teamMembers &&
-                teamMembers.map((member) => (
-                  <CompareCardsList
-                    key={member.name}
-                    player={member.name}
-                    cards={member.cards}
+          <div className={styles.compare}>
+            {teamMembers?.map(({ name, cards }) => (
+              <Stack key={name}>
+                <Player name={name} />
+                {cards?.map((card) => (
+                  <CompareCard
+                    key={card}
+                    {...rowProps}
+                    card={card}
                     round={round}
                   />
                 ))}
-            </div>
-            <Button onClick={handleReady}>{text.discuss.compare.ready}</Button>
-          </Stack>
+              </Stack>
+            ))}
+          </div>
+          <Button onClick={handleReady}>{text.discuss.compare.ready}</Button>
         </PageSlot>
       </Page>
       {showInfoModal && (
