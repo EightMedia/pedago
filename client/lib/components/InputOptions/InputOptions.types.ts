@@ -10,10 +10,14 @@ export type OptionsType = { [key: string]: string } | OptionType[];
 export type InputOptionsType = {
   value?: OptionValueType[];
   label?: string;
+  helptext?: string;
   multi?: boolean;
   options: OptionsType;
   handleChange?: any;
   id: string;
   condition?: boolean;
   enumOptions?: boolean;
+  customStyles?: {
+    readonly [key: string]: string;
+  };
 };

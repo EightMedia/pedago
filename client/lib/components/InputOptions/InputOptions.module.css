@@ -1,0 +1,69 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  @media (--sm) {
+    gap: 12px;
+  }
+  margin-top: var(--space-3xs);
+  @media (--sm) {
+    margin-top: var(--space-2xs);
+  }
+}
+.option {
+  flex: 1 1 200px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: var(--border-light);
+  padding: var(--space-3xs);
+  border-radius: var(--border-radius-md);
+}
+.optionChecked {
+  border: var(--border-blue);
+  box-shadow: 0 0 0 1px var(--color-blue);
+}
+
+.checkbox {
+  position: absolute;
+  left: -999em;
+  width: 0;
+  height: 0;
+}
+
+/* global icon styles */
+.iconCheck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-white);
+  /* Grey/Neutral */
+  border: 2px solid #9b98ac;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+}
+
+/* icon for multi select */
+.iconMulti {
+  border-radius: 4px;
+}
+.iconMultiChecked {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* icon for single select */
+.iconSingle {
+  border-radius: 50%;
+}
+.iconSingleChecked {
+  border-color: var(--color-blue);
+  background: var(--color-blue);
+  box-shadow: inset 0 0 0 4px var(--color-white);
+}

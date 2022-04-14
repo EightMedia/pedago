@@ -5,6 +5,13 @@ import { InputOptionsData } from "./InputOptions.data";
 export default {
   title: "Components/InputOptions",
   component: InputOptions,
+  argTypes: {
+    multi: {
+      control: {
+        type: "boolean",
+      },
+    },
+  },
 } as ComponentMeta<typeof InputOptions>;
 
 const Template: ComponentStory<typeof InputOptions> = (args) => (

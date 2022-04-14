@@ -48,6 +48,10 @@
   font-weight: 700;
   font-size: (var--font-size-sm);
 }
+.line:hover {
+  background: transparent;
+  color: var(--color-blue);
+}
 
 .whiteActive,
 .whiteInactive {

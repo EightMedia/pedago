@@ -1,5 +1,6 @@
 import cx from "classnames";
 import { memo } from "react";
+import { Text } from "../Text";
 import styles from "./InputText.module.css";
 import { InputTextType } from "./InputText.types";
 
@@ -10,6 +11,7 @@ export const InputTextComponent = ({
   error,
   type = "text",
   label,
+  helptext,
   placeholder,
   showLabel = false,
   value,
@@ -21,7 +23,14 @@ export const InputTextComponent = ({
         htmlFor={id}
         className={cx("label", styles.label, showLabel ? "" : "sr-only")}
       >
-        {label}
+        <Text size="md" weight="bold">
+          {label}
+        </Text>
+        {helptext && (
+          <Text size="sm" tone="light">
+            {helptext}
+          </Text>
+        )}
       </label>
       <input
         id={id}

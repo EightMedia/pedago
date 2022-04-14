@@ -2,6 +2,7 @@ import { InputOptionsType } from "./InputOptions.types";
 
 export const InputOptionsData: InputOptionsType = {
   label: "A list of options",
+  helptext: "Helptext for the input to help the user",
   multi: true,
   id: "multi",
   enumOptions: true,
