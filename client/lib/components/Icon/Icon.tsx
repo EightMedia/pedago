@@ -5,6 +5,7 @@ import { IconType } from "./Icon.types";
 
 export enum IconsEnum {
   Info,
+  Copy,
   Close,
   Timer,
   Check,
@@ -47,6 +48,12 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
   [IconsEnum.Info]: (
     <path
       d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Z"
+      fill="currentColor"
+    />
+  ),
+  [IconsEnum.Copy]: (
+    <path
+      d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Zm0 16H8V7h11v14Z"
       fill="currentColor"
     />
   ),

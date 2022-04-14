@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button, ButtonGroup } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
@@ -54,7 +55,13 @@ export const LobbyLobby = ({
       <Stack gap="lg">
         <Panel width="full">
           <header className={styles.header}>
-            <div className={styles.roomCode}>{room?.roomCode}</div>
+            <div className={styles.roomCode}>
+              <CopyToClipboard text={siteUrl + "/game/" + room?.roomCode}>
+                <button className={styles.codeButton}>
+                  {room?.roomCode} <Icon icon={IconsEnum.Copy} />
+                </button>
+              </CopyToClipboard>
+            </div>
             <Text size="lg">{text.code}</Text>
             <Button onClick={handleStart as () => void}>{text.start}</Button>
           </header>

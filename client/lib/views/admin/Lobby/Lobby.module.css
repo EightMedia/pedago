@@ -5,8 +5,39 @@
 }
 
 .roomCode {
+  display: flex;
+  gap: var(--space-xl);
+  &::after {
+    content: "";
+    display: block;
+    border-right: var(--border-light);
+    margin-top: -16px;
+    margin-bottom: -16px;
+  }
+}
+
+.codeButton {
   font-size: 64px;
   font-weight: 700;
   font-family: var(--font-headings);
   line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+  &:focus {
+    animation: click 0.5s;
+  }
+}
+
+@keyframes click {
+  99% {
+    color: var(--color-green);
+  }
+  100% {
+    color: inherit;
+  }
 }
