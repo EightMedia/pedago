@@ -54,7 +54,10 @@
 }
 
 .lg {
-  font-size: var(--font-size-lg);
+  font-size: 20px;
+  @media (--sm) {
+    font-size: var(--font-size-lg);
+  }
 }
 
 /* align */
