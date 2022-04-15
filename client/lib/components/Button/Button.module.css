@@ -1,7 +1,10 @@
 .buttonGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: var(--space-3xs);
+  @media (--sm) {
+    gap: var(--space-xs);
+  }
 }
 
 .button {
