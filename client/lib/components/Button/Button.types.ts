@@ -6,6 +6,7 @@ export interface ButtonType extends ComponentPropsWithoutRef<"button"> {
     | "line"
     | "whiteActive"
     | "whiteInactive"
-    | "whiteBlocked";
+    | "whiteBlocked"
+    | "whiteBlockedOutline";
   stretch?: boolean;
 }

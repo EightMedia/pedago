@@ -94,6 +94,7 @@
   }
 }
 
+.whiteBlockedOutline,
 .whiteBlocked {
   padding: var(--space-3xs);
   @media (--sm) {
@@ -102,6 +103,13 @@
   border-radius: var(--border-radius-xs);
   background: var(--color-white);
   color: var(--color-dark-blue);
+  &:focus {
+    outline: 2px var(--color-blue) solid;
+  }
+}
+
+.whiteBlockedOutline {
+  border: var(--border-light);
 }
 
 .large {
