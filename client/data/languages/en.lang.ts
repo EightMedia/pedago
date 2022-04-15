@@ -90,7 +90,6 @@ export const EN: Locale = {
       settingsButton: "",
       rulesButton: "",
       code: "",
-      andJoin: "",
       start: "",
     },
     playerGroup: {
