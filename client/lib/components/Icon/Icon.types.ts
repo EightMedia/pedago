@@ -5,5 +5,5 @@ export type IconType = {
   icon: IconsEnum;
   color?: string;
   infoIcon?: boolean;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg" | "xl";
 };

@@ -15,3 +15,12 @@
     width: 24px;
   }
 }
+
+/* .lg is not used yet */
+
+.xl {
+  width: 32px;
+  @media (--sm) {
+    width: 36px;
+  }
+}
