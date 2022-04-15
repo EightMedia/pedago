@@ -7,7 +7,7 @@ const TextTitleComponent = ({ children, element = "h3" }: TextTitleType) => {
   return createElement(
     element,
     { className: cx(styles.title, styles[element]) },
-    typeof children === "object" ? children : <p>{children}</p>
+    children
   );
 };
 
