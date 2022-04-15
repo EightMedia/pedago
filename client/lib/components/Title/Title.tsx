@@ -12,7 +12,7 @@ const TitleComponent = ({
   return createElement(
     element,
     { className: cx(styles.title, styles[size], styles[align]) },
-    typeof children === "object" ? children : <p>{children}</p>
+    children
   );
 };
 
