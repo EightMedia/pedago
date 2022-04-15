@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button, ButtonGroup } from "../../../components/Button";
@@ -22,11 +22,18 @@ export const LobbyLobby = ({
   handleInfo,
 }: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
-  const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
   const text = useContext(LanguageContext).adminLobby.lobby;
+  const [lock, setLock] = useState(IconsEnum.LockOpen);
 
   const handleSettings = () => {
     alert("settings view");
+  };
+
+  const handleLock = () => {
+    setLock(
+      lock === IconsEnum.LockOpen ? IconsEnum.LockClosed : IconsEnum.LockOpen
+    );
+    console.log("locking not implemented yet");
   };
 
   return (
@@ -41,13 +48,13 @@ export const LobbyLobby = ({
 
       <PageSlot location="headerRight">
         <ButtonGroup>
-          {/* <Button variation="whiteBlocked" onClick={handleSettings}>
-            <Icon icon={IconsEnum.Settings} />
-            {text.settingsButton}
-          </Button> */}
+          <Button variation="whiteBlocked" onClick={handleSettings}>
+            <Icon icon={IconsEnum.Settings} size="md" />
+            <span className={"lg-only"}>{text.settingsButton}</span>
+          </Button>
           <Button variation="whiteBlocked" onClick={handleInfo as () => void}>
-            <Icon icon={IconsEnum.Info} />
-            {text.rulesButton}
+            <Icon icon={IconsEnum.Info} size="md" />
+            <span className={"lg-only"}>{text.rulesButton}</span>
           </Button>
         </ButtonGroup>
       </PageSlot>
@@ -62,8 +69,24 @@ export const LobbyLobby = ({
                 </button>
               </CopyToClipboard>
             </div>
-            <Text size="lg">{text.code}</Text>
-            <Button onClick={handleStart as () => void}>{text.start}</Button>
+            <Text size="lg" align="center">
+              {text.code}
+            </Text>
+            <ButtonGroup>
+              <Button
+                onClick={handleLock as () => void}
+                variation="whiteBlockedOutline"
+              >
+                <Icon icon={lock} size="xl" />
+                <span className="sr-only">Lock</span>
+              </Button>
+              <Button
+                onClick={handleStart as () => void}
+                className={styles.startButton}
+              >
+                {text.start}
+              </Button>
+            </ButtonGroup>
           </header>
         </Panel>
         <PanelGroup>
