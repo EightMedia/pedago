@@ -245,7 +245,13 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
   ),
 };
 
-const IconComponent = ({ icon, className, color, infoIcon }: IconType) => {
+const IconComponent = ({
+  icon,
+  className,
+  color,
+  infoIcon,
+  size,
+}: IconType) => {
   const colorStyle = color ? { color: color } : {};
   if (infoIcon) {
     const mask = `url(#icon-${icon})`;
@@ -317,7 +323,7 @@ const IconComponent = ({ icon, className, color, infoIcon }: IconType) => {
       height="24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cx(styles.icon, className)}
+      className={cx(styles.icon, className, styles[size || ""])}
       style={colorStyle}
     >
       {Icons[icon]}
