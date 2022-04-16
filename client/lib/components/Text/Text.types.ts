@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
+
 export type TextType = {
-  children: string;
+  children: ReactNode;
   size?: "xs" | "sm" | "md" | "mdlg" | "lg";
   weight?: "normal" | "bold";
   tone?: "light" | "medium" | "dark";
