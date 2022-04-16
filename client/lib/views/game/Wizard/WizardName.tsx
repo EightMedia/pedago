@@ -46,7 +46,9 @@ export const WizardName = ({
             onChange={(e) => setName(e?.target?.value)}
           />
         </div>
-        <Button onClick={() => handleSubmit()}>{text.nextButton}</Button>
+        <Button onClick={() => handleSubmit()} disabled={name.length < 1}>
+          {text.nextButton}
+        </Button>
       </Stack>
     </>
   );
