@@ -6,23 +6,6 @@ import { InfoItem } from "../../../components/InfoItem";
 import { PanelTitle } from "../../../components/Panel";
 import { Stack } from "../../../layouts/Stack";
 
-// const WizardInfoItem = ({
-//   title,
-//   text,
-//   icon,
-// }: {
-//   title: string;
-//   text: string;
-//   icon: string;
-// }) => {
-//   return (
-//     <div className={styles.infoItem}>
-//       <TextTitle>{title}</TextTitle>
-//       <Text tone="light">{text}</Text>
-//     </div>
-//   );
-// };
-
 export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
   const text = useContext(LanguageContext).gameWizard.info;
 
