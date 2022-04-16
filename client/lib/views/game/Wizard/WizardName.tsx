@@ -5,6 +5,7 @@ import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { avatarColors } from "../../../components/Player/Player";
+import { Text } from "../../../components/Text";
 import { Stack } from "../../../layouts/Stack";
 import styles from "./Wizard.module.css";
 import { WizardStep } from "./Wizard.types";
@@ -27,9 +28,11 @@ export const WizardName = ({
 
   return (
     <>
-      <PanelTitle>{text.title}</PanelTitle>
+      <PanelTitle space="sm">{text.title}</PanelTitle>
       <Stack>
-        <p>{text.othersWillSee}</p>
+        <Text align="center" tone="medium">
+          {text.othersWillSee}
+        </Text>
         <div className={styles.avatarInput}>
           <figure className={styles.avatarFigure}>
             <Avatar
@@ -43,6 +46,7 @@ export const WizardName = ({
           <InputText
             id="name"
             label={text.nameLabel}
+            placeholder={text.nameLabel}
             onChange={(e) => setName(e?.target?.value)}
           />
         </div>
