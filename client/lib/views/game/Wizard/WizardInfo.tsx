@@ -9,35 +9,27 @@ import { Stack } from "../../../layouts/Stack";
 export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
   const text = useContext(LanguageContext).gameWizard.info;
 
+  const items = text.items;
+  const icons = [
+    IconsEnum.Flag,
+    IconsEnum.Timer,
+    IconsEnum.Sort,
+    IconsEnum.Chat,
+    IconsEnum.Result,
+  ];
+
   return (
     <>
       <PanelTitle>{text.title}</PanelTitle>
-      <Stack gap="xs">
-        <InfoItem
-          icon={IconsEnum.Info}
-          title={text.items[0].caption}
-          text={text.items[0].text}
-        />
-        <InfoItem
-          icon={IconsEnum.Info}
-          title={text.items[1].caption}
-          text={text.items[1].text}
-        />
-        <InfoItem
-          icon={IconsEnum.Info}
-          title={text.items[2].caption}
-          text={text.items[2].text}
-        />
-        <InfoItem
-          icon={IconsEnum.Info}
-          title={text.items[3].caption}
-          text={text.items[3].text}
-        />
-        <InfoItem
-          icon={IconsEnum.Info}
-          title={text.items[4].caption}
-          text={text.items[4].text}
-        />
+      <Stack gap="sm">
+        {items.map((item, index) => (
+          <InfoItem
+            key={index}
+            icon={icons[index]}
+            title={item.caption}
+            text={item.text}
+          />
+        ))}
         <Button stretch onClick={onClick}>
           {text.understood}
         </Button>
