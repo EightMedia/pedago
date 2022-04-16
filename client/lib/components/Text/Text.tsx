@@ -19,8 +19,9 @@ const TextComponent = ({
         styles[size],
         styles[align]
       )}
-      children={children}
-    />
+    >
+      {children}
+    </p>
   );
 };
 
