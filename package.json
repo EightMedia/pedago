@@ -11,6 +11,10 @@
     "client",
     "models"
   ],
+  "resolutions": {
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.15"
+  },
   "scripts": {
     "start": "yarn workspace server run start",
     "build": "yarn workspace models run build && yarn workspace server run build",
