@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { Fragment, memo } from "react";
+import ReactMarkdown from "react-markdown";
 import { Icon } from "../Icon";
 import { Text } from "../Text";
 import { TextTitle } from "../TextTitle";
@@ -13,7 +14,9 @@ const InfoItemComponent = ({ title, text, icon }: InfoItemType) => {
       )}
       <div className={styles.text}>
         <TextTitle>{title}</TextTitle>
-        <Text tone="light">{text}</Text>
+        <Text tone="light">
+          <ReactMarkdown components={{ p: Fragment }}>{text}</ReactMarkdown>
+        </Text>
       </div>
     </div>
   );
