@@ -5,3 +5,10 @@
   font-weight: 700;
   font-family: var(--font-headings);
 }
+
+.lead {
+  font-size: --var(--font-size-sm);
+  @media (--sm) {
+    font-size: 20px;
+  }
+}
