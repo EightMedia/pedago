@@ -193,6 +193,7 @@ export interface Locale {
     hi: string;
     willStart: string;
     waiting: string;
+    changeToThisGroup: string;
   };
   waiting: {
     goodBusy: string;

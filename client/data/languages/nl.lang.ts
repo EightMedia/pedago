@@ -266,6 +266,7 @@ export const NL: Locale = {
     hi: "Hoi",
     willStart: "Het spel begint zo",
     waiting: "We wachten even tot iedereen er is en dan kunnen we starten",
+    changeToThisGroup: "Wissel naar deze groep",
   },
   waiting: {
     goodBusy: "Goed bezig!",
