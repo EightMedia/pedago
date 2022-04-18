@@ -12,7 +12,7 @@ import { PlayerGroupType } from "./PlayerGroup.types";
 export const PlayerGroupComponent = ({
   name,
   players,
-  counter,
+  counter = true,
   handleGroupChange,
 }: PlayerGroupType) => {
   const text = useContext(LanguageContext);
