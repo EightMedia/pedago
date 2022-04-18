@@ -182,6 +182,7 @@ export const EN: Locale = {
     hi: "",
     willStart: "",
     waiting: "",
+    changeToThisGroup: "",
   },
   waiting: {
     goodBusy: "",
