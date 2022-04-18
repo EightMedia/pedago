@@ -204,7 +204,8 @@ export const NL: Locale = {
       inGroups: "Werken in groepen",
       inGroupsText:
         "Spelers spelen zoveel mogelijk met spelers uit andere groepen",
-      group1: "Groep 1",
+      group1: "Groepen",
+      group1Help: "Je kan met minimaal 2 en maximaal 4 groepen spelen.",
       group2: "Groep 2",
       group3: "Groep 3",
       group4: "Groep 4",
