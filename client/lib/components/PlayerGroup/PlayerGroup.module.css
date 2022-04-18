@@ -12,9 +12,13 @@
 
 .groupName {
   color: var(--color-white);
-  font-size: 23px;
   font-weight: 700;
-  margin: var(--space-2xs) 0 var(--space-xs);
+  font-size: 18px;
+  margin: var(--space-3xs) 0 var(--space-xs);
+  @media (--sm) {
+    font-size: 23px;
+    margin: var(--space-2xs) 0 var(--space-md);
+  }
 }
 
 .players {
