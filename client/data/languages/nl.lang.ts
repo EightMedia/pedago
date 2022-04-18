@@ -113,7 +113,7 @@ export const NL: Locale = {
       items: [
         {
           caption: "Meedoen",
-          text: "Alle spelers moeten eerst naar pedago.game gaan.",
+          text: "Alle spelers moeten eerst naar [pedagogame.com](https://pedagogame.com) gaan.",
           icon: IconsEnum.Info,
         },
         {
@@ -152,8 +152,7 @@ export const NL: Locale = {
     lobby: {
       settingsButton: "Instellingen",
       rulesButton: "Uitleg",
-      code: "Voer de code in op",
-      andJoin: "en doe mee",
+      code: "Voer de code in op [pedagogame.com](https://pedagogame.com) en doe mee",
       start: "Start",
     },
     playerGroup: {
