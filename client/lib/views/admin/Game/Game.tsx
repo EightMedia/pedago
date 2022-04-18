@@ -43,11 +43,16 @@ const GameComponent = ({
         />
       );
     case GameScene.Lead:
+      const callBack = initialScene
+        ? undefined
+        : () => setScene(GameScene.Round);
       return (
         <GameLead
+          openSettings={openSettings}
           round={round.current}
           roundMax={round.total}
-          callback={() => setScene(GameScene.Round)}
+          callback={callBack}
+          teams={teams}
         />
       );
     default:
