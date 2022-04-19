@@ -68,7 +68,7 @@ export function InputOptions<Value extends InputOptionValue>(
         </Text>
       )}
       <div className={styles.group}>
-        {options.map((option) => {
+        {options?.map((option) => {
           const checked = isChecked(option.value, value);
           return (
             <label
