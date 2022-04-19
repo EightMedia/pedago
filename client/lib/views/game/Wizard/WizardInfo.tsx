@@ -22,7 +22,7 @@ export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
     <>
       <PanelTitle>{text.title}</PanelTitle>
       <Stack gap="sm">
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <InfoItem
             key={index}
             icon={icons[index]}
