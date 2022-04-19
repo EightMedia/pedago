@@ -1,6 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { InputOptions } from "./InputOptions";
-import { InputOptionsData } from "./InputOptions.data";
+import {
+  inputOptionsDataMulti,
+  inputOptionsDataSingle,
+} from "./InputOptions.data";
 
 export default {
   title: "Components/InputOptions",
@@ -20,22 +23,8 @@ const Template: ComponentStory<typeof InputOptions> = (args) => (
 
 // multiple options
 export const EnumMulti = Template.bind({});
-EnumMulti.args = { ...InputOptionsData, multi: true };
-
-// multiple options with preset
-export const EnumMultiWithPresetSelection = Template.bind({});
-EnumMultiWithPresetSelection.args = {
-  ...InputOptionsData,
-  multi: true,
-};
+EnumMulti.args = inputOptionsDataMulti;
 
 // single option
 export const EnumSingle = Template.bind({});
-EnumSingle.args = { ...InputOptionsData, multi: false };
-
-// single options with preset
-export const EnumsingleWithPresetSelection = Template.bind({});
-EnumsingleWithPresetSelection.args = {
-  ...InputOptionsData,
-  multi: false,
-};
+EnumSingle.args = inputOptionsDataSingle;
