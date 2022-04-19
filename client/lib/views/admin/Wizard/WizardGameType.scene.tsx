@@ -34,7 +34,7 @@ export const WizardGameType = ({
             value,
             label,
           }))}
-          value={data.info?.players?.type!}
+          value={data.info?.players?.type}
           onChange={(value) => {
             updateData(value, "info.players.type");
             if (value === PlayerType.Professionals) {
