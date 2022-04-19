@@ -76,12 +76,12 @@ Options.args = {
   data: wizardDataStudents,
 };
 
-// Check Students
-export const CheckStudents = Template.bind({});
-CheckStudents.parameters = params(
+// Check
+export const Check = Template.bind({});
+Check.parameters = params(
   "https://www.figma.com/file/DZM2PnJJJuuqsxjO8tv8Kn/Pedago?node-id=519%3A5446"
 );
-CheckStudents.args = {
+Check.args = {
   ...WizardData,
   initialStep: WizardStep.Check,
   data: wizardDataStudents,
