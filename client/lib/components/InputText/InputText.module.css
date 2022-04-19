@@ -11,6 +11,10 @@
   padding: var(--space-xs);
   border-radius: var(--border-radius-sm);
   text-align: center;
+  @media (--md) {
+    padding: var(--space-sm) var(--space-xl);
+    font-size: 20px;
+  }
 }
 .input:focus {
   outline: solid 1px var(--color-blue);
