@@ -19,7 +19,7 @@ export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
       <Panel>
         <PanelTitle>{text.title}</PanelTitle>
         <Stack gap="sm">
-          {text.items.map((item, index) => (
+          {text.items?.map((item, index) => (
             <InfoItem
               key={index}
               icon={typeof item.icon !== "undefined" ? item.icon : undefined}
