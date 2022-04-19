@@ -33,14 +33,13 @@ export const DiscussReady = ({
         {text.game.round} {round} {text.game.of} {roundMax}
       </PageSlot>
       <div>
-        {teamMembers &&
-          teamMembers?.map((p, i) => {
-            return (
-              <Title key={i}>
-                {p.name} {text.discuss.ready.ready}
-              </Title>
-            );
-          })}
+        {teamMembers?.map((p, i) => {
+          return (
+            <Title key={i}>
+              {p.name} {text.discuss.ready.ready}
+            </Title>
+          );
+        })}
       </div>
     </Page>
   );

@@ -66,16 +66,18 @@ const LandingPage = ({
           </Title>
           <div className={styles.description}>{data?.landing?.description}</div>
           <div className={styles.action}>
-            <div className={styles.inputGroup}>
-              <InputText
-                type="number"
-                onChange={handleInputChange}
-                placeholder={data?.landing?.input}
-                id={"roomCode"}
-                label={"spelcode"}
-              />
-              <Button onClick={handleSubmit}>{data?.landing?.button}</Button>
-            </div>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.inputGroup}>
+                <InputText
+                  type="number"
+                  onChange={handleInputChange}
+                  placeholder={data?.landing?.input}
+                  id={"roomCode"}
+                  label={"spelcode"}
+                />
+                <Button type="submit">{data?.landing?.button}</Button>
+              </div>
+            </form>
             <div className={styles.adminText}>
               <Link href="/admin">{data?.landing?.create}</Link>{" "}
               {data?.landing?.asAdmin}

@@ -142,6 +142,7 @@ export const EN: Locale = {
       inGroups: "",
       inGroupsText: "",
       group1: "",
+      group1Help: "",
       group2: "",
       group3: "",
       group4: "",

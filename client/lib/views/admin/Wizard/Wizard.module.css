@@ -6,11 +6,11 @@
 }
 
 .stepHeader {
-  & > p {
+  /* & > p {
     @media (--sm-max) {
       display: none;
     }
-  }
+  } */
 }
 
 .backButton {

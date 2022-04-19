@@ -7,7 +7,7 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState
+  ViewState,
 } from "models";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
@@ -16,14 +16,14 @@ import { SocketContext } from "../../contexts/SocketContext";
 import { getAdminGameType } from "../../factories/AdminGame.factory";
 import {
   getAdminLobbyType,
-  getLobbyRoom
+  getLobbyRoom,
 } from "../../factories/AdminLobby.factory";
 import { getWizardData } from "../../factories/AdminWizard.factory";
 import { getResultData } from "../../factories/Result.factory";
 import {
   ResultGroup,
   ResultSet,
-  ResultStep
+  ResultStep,
 } from "../../lib/components/Result/Result.types";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
@@ -102,7 +102,11 @@ const AdminGame = () => {
 
   return (
     <LanguageProvider
-    lang={typeof window !== "undefined" ? localStorage?.getItem("language") as Language : Language.NL}
+      lang={
+        typeof window !== "undefined"
+          ? (localStorage?.getItem("language") as Language)
+          : Language.NL
+      }
     >
       <SocketContext.Provider value={socket}>
         <RoomContext.Provider value={room}>

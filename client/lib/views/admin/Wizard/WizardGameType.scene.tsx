@@ -1,6 +1,5 @@
-import { Players, Sector } from "models";
-import { PlayerType } from "models/lib/models/player-type.enum";
-import { useContext, useState } from "react";
+import { PlayerType, Sector } from "models";
+import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
@@ -9,6 +8,7 @@ import { PanelTitle } from "../../../components/Panel";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import playerTypeOptionStyles from "./PlayerTypeOptionsStyles.module.css";
+import { numberEnumToEntries } from "./utils";
 import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
@@ -17,9 +17,9 @@ export const WizardGameType = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const [typeTouched, setTypeTouched] = useState(false);
   const text = useContext(LanguageContext);
   const wizardGameTypeText = text.adminWizard.gameType;
+
   return (
     <>
       <Center>
@@ -30,20 +30,20 @@ export const WizardGameType = ({
         <InputOptions
           customStyles={playerTypeOptionStyles}
           id="type"
-          multi={false}
-          options={text.playerType}
-          value={[data.info?.players?.type ?? PlayerType.Students]}
-          enumOptions={true}
-          handleChange={(newData: any) => {
-            setTypeTouched(true);
-            updateData(newData[0], "info.players.type");
-            if (newData[0] === PlayerType.Professionals) {
+          options={numberEnumToEntries(PlayerType).map(([label, value]) => ({
+            value,
+            label,
+          }))}
+          value={data.info?.players?.type}
+          onChange={(value) => {
+            updateData(value, "info.players.type");
+            if (value === PlayerType.Professionals) {
               updateData(undefined, "info.players.education");
               updateData(undefined, "info.players.year");
             }
           }}
         />
-        {typeTouched && (
+        {data.info?.players?.type !== undefined && (
           <>
             <InputText
               value={data.info?.players?.education || ""}
@@ -57,24 +57,28 @@ export const WizardGameType = ({
             />
             <InputOptions
               id="year"
-              options={text.year}
+              options={Object.values(text.year).map((label, index) => ({
+                label,
+                value: index,
+              }))}
+              multi
               label={wizardGameTypeText.year}
-              value={data.info?.players?.year}
-              enumOptions={true}
-              handleChange={(newData: Players["year"]) =>
-                updateData(newData, "info.players.year")
-              }
+              value={data.info?.players?.year ?? []}
+              onChange={(newData) => {
+                updateData(newData, "info.players.year");
+              }}
               condition={data.info?.players?.type !== PlayerType.Professionals}
             />
             <InputOptions
               id="sector"
-              options={text.sector}
+              options={numberEnumToEntries(Sector).map(([label, value]) => ({
+                value,
+                label,
+              }))}
+              multi
               label={wizardGameTypeText.sector}
-              value={data.info?.players?.sector}
-              enumOptions={true}
-              handleChange={(newData: Sector) =>
-                updateData(newData, "info.players.sector")
-              }
+              value={data.info?.players?.sector ?? []}
+              onChange={(newData) => updateData(newData, "info.players.sector")}
             />
             <Button
               stretch={true}
