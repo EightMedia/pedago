@@ -36,8 +36,8 @@
     font-size: 20px;
   }
 
-  &:active,
-  &:hover {
+  &:not([disabled]):active,
+  &:not([disabled]):hover {
     background: var(--color-hover-blue);
   }
 }
