@@ -111,6 +111,7 @@ export interface Locale {
             yourInfo: string;
             name: string;
             email: string;
+            emailHelp: string;
             role: string;
             customRole: string;
             nextButton: string;
@@ -149,6 +150,7 @@ export interface Locale {
             inGroups: string;
             inGroupsText: string;
             group1: string;
+            group1Help: string;
             group2: string;
             group3: string;
             group4: string;
@@ -160,6 +162,7 @@ export interface Locale {
             yourOrg: string;
             organisation: string;
             location: string;
+            locationHelp: string;
             next: string;
             back: string;
         };

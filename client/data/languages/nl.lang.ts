@@ -73,9 +73,9 @@ export const NL: Locale = {
   playerMatch: {
     youPlayWith: "Je speelt met",
     youAre: "Jullie zijn",
-    findEachOther: "Zoek elkaar op en maak je klaar",
+    findEachOther: "Zoek elkaar op en maak je klaar.",
     found: "Gevonden!",
-    waitForOthers: "Wachten op medespelers...",
+    waitForOthers: "Wachten op medespeler...",
     waitUntil: "Nog even wachten tot iedereen klaar is",
   },
   game: {
@@ -166,6 +166,7 @@ export const NL: Locale = {
       yourInfo: "Jouw gegevens",
       name: "Naam",
       email: "E-mailadres",
+      emailHelp: "We gebruiken het enkel om de resultaten te sturen",
       role: "Functie",
       customRole: "Anders, namelijk:",
       nextButton: "Volgende",
@@ -204,7 +205,8 @@ export const NL: Locale = {
       inGroups: "Werken in groepen",
       inGroupsText:
         "Spelers spelen zoveel mogelijk met spelers uit andere groepen",
-      group1: "Groep 1",
+      group1: "Groepen",
+      group1Help: "Je kan met minimaal 2 en maximaal 4 groepen spelen.",
       group2: "Groep 2",
       group3: "Groep 3",
       group4: "Groep 4",
@@ -216,6 +218,7 @@ export const NL: Locale = {
       yourOrg: "Jouw organisatie",
       organisation: "Organisatie",
       location: "Locatie",
+      locationHelp: "Eventueel met extra uitleg",
       next: "Volgende",
       back: "Terug naar de vorige stap",
     },

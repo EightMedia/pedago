@@ -5,22 +5,24 @@ export enum DiscussStep {
   Compare,
 }
 
+interface TeamMember {
+  socketId: string;
+  name: string;
+  cards: number[];
+}
+
 export type DiscussType = {
   round: number;
   roundMax: number;
   initialStep: DiscussStep;
   pause: boolean;
-  teamMembers: {
-    socketId: string;
-    name: string;
-    cards: number[];
-  }[];
+  teamMembers: TeamMember[] | null;
   autoPlay?: boolean;
   handleReady?: () => void;
 };
 
 export type DiscussCompareProps = {
-  teamMembers: DiscussType["teamMembers"];
+  teamMembers: TeamMember[] | null;
   handleReady: () => void;
   round: number;
 };

@@ -1,19 +1,34 @@
-export type OptionValueType = string | number;
+export type InputOptionValue = string | number;
 
-export type OptionType = {
+export interface InputOption<Value extends InputOptionValue> {
   label: string;
-  value: OptionValueType;
-};
+  value: Value;
+}
 
-export type OptionsType = { [key: string]: string } | OptionType[];
-
-export type InputOptionsType = {
-  value?: OptionValueType[];
+interface InputOptionsPropsBase<Value extends InputOptionValue> {
   label?: string;
-  multi?: boolean;
-  options: OptionsType;
-  handleChange?: any;
+  helptext?: string;
   id: string;
   condition?: boolean;
-  enumOptions?: boolean;
-};
+  customStyles?: {
+    readonly [key: string]: string;
+  };
+  options: InputOption<Value>[];
+}
+interface InputOptionsPropsSingle<Value extends InputOptionValue>
+  extends InputOptionsPropsBase<Value> {
+  value: Value | undefined;
+  multi?: false;
+  onChange: (value: Value | undefined) => void;
+}
+
+interface InputOptionsPropsMulti<Value extends InputOptionValue>
+  extends InputOptionsPropsBase<Value> {
+  value: Value[];
+  multi: true;
+  onChange: (value: Value[]) => void;
+}
+
+export type InputOptionsProps<Value extends InputOptionValue> =
+  | InputOptionsPropsSingle<Value>
+  | InputOptionsPropsMulti<Value>;

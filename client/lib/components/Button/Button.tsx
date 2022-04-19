@@ -1,26 +1,24 @@
 import cx from "classnames";
-import { memo, ReactNode } from "react";
+import { memo } from "react";
 import styles from "./Button.module.css";
 import { ButtonType } from "./Button.types";
 
-const ButtonGroup = ({ children }: { children: ReactNode }) => {
-  <div className={styles.buttonGroup}>{children}</div>;
-};
-
 const ButtonComponent = ({
-  children,
-  onClick,
   variation = "default",
-  stretch = false,
+  stretch,
+  className,
+  children,
+  ...rest
 }: ButtonType) => {
   return (
     <button
       className={cx(
         styles.button,
         styles[variation],
-        stretch ? styles.stretch : null
+        stretch ? styles.stretch : null,
+        className
       )}
-      onClick={onClick}
+      {...rest}
     >
       {children}
     </button>

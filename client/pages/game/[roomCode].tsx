@@ -1,5 +1,6 @@
 import {
   Event,
+  Language,
   Player,
   PlayerEvent,
   RoomDto,
@@ -36,6 +37,7 @@ import { Waiting } from "../../lib/views/game/Waiting";
 import { Wizard } from "../../lib/views/game/Wizard";
 import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
 import TimerProvider from "../../providers/Timer.provider";
+import LanguageProvider from "../../providers/Language.provider";
 
 const RoomCode = () => {
   const socket: Socket | null = useSocket(
@@ -115,6 +117,7 @@ const RoomCode = () => {
   }, [socket]);
 
   return (
+    <LanguageProvider lang={typeof window !== "undefined" ? localStorage?.getItem("language") as Language : Language.NL}>
     <SocketContext.Provider value={socket}>
       <RoomContext.Provider value={room}>
         <TimerProvider timeStamp={timer}>
@@ -201,6 +204,7 @@ const RoomCode = () => {
         </TimerProvider>
       </RoomContext.Provider>
     </SocketContext.Provider>
+    </LanguageProvider>
   );
 };
 

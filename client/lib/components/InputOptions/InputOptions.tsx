@@ -1,93 +1,113 @@
 import cx from "classnames";
-import { ChangeEvent, memo, useState } from "react";
-import styles from "./InputOptions.module.css";
-import {
-  InputOptionsType,
-  OptionsType,
-  OptionType,
-  OptionValueType
-} from "./InputOptions.types";
+import { ChangeEvent } from "react";
+import { Icon } from "../Icon";
+import { IconsEnum } from "../Icon/Icon";
+import { Text } from "../Text";
+import defaultStyles from "./InputOptions.module.css";
+import { InputOptionsProps, InputOptionValue } from "./InputOptions.types";
 
-const convertToInt = (value: string) => {
-  if (value === "" || value === "0") return 0;
-  return parseInt(value, 10);
-};
+function isChecked<Value extends InputOptionValue>(
+  optionValue: Value,
+  value: Value | Value[] | undefined
+): value is Value {
+  if (Array.isArray(value)) {
+    return value.includes(optionValue);
+  }
 
-const prepVals = (vals: OptionValueType[], enumOptions: boolean) => {
-  if (!Array.isArray(vals)) return [];
-  return enumOptions ? vals.map((v: any) => convertToInt(v)) : vals;
-};
-const valsToString = (vals: OptionValueType[]) => {
-  if (!Array.isArray(vals)) return [];
-  return vals.map((v: any) => v.toString());
-};
+  return value === optionValue;
+}
 
-const InputOptionsComponent = ({
-  label,
-  condition = true,
-  id,
-  value = [],
-  options,
-  multi = true,
-  handleChange,
-  enumOptions = false,
-}: InputOptionsType) => {
-  const [selected, setSelected] = useState(valsToString(value));
+export function InputOptions<Value extends InputOptionValue>(
+  props: InputOptionsProps<Value>
+) {
+  const {
+    label,
+    helptext,
+    condition = true,
+    id,
+    value,
+    options,
+    customStyles,
+  } = props;
+
+  const styles = customStyles ? customStyles : defaultStyles;
 
   if (condition === false) return null;
 
-  let optionsArr: OptionsType = Array.isArray(options) ? options : [];
-  if (!Array.isArray(options)) {
-    optionsArr = Object.keys(options).map((key) => ({
-      label: options[key],
-      value: key,
-    }));
-  }
-
   const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
-    const value: OptionType["value"] = e.target.value;
+    const isNumber = typeof options?.[0]?.value === "number";
+
+    const newValue = (
+      isNumber ? parseInt(e.target.value) : e.target.value
+    ) as Value;
 
     const checked = e.target.checked;
-    let newSelection: OptionValueType[];
 
-    if (multi && Array.isArray(selected)) {
-      newSelection = checked
-        ? [...selected, value]
-        : selected.filter((v: any) => v !== value);
+    if (props.multi) {
+      const { onChange, value } = props;
+
+      onChange(
+        checked ? [...value, newValue] : value.filter((v) => v !== newValue)
+      );
     } else {
-      newSelection = checked ? [value] : [];
+      const { onChange } = props;
+      onChange(checked ? newValue : undefined);
     }
-
-    setSelected(valsToString(newSelection));
-
-    handleChange
-      ? handleChange(prepVals(newSelection, enumOptions))
-      : console.log(
-          "No handleChange, so loggin here: ",
-          prepVals(newSelection, enumOptions)
-        );
   };
+
+  const isMulti = "multi" in props;
+
+  const iconType = isMulti ? "iconMulti" : "iconSingle";
 
   return (
     <div className={cx(styles.wrapper)}>
-      {label ?? <p className={styles.groupLabel}></p>}
+      {label && <Text weight="bold">{label}</Text>}
+      {helptext && (
+        <Text size="sm" tone="light">
+          {helptext}
+        </Text>
+      )}
       <div className={styles.group}>
-        {optionsArr?.map((item: OptionType, i: number) => (
-          <label className={styles.option} key={i}>
-            <input
-              name={id}
-              value={item.value}
-              type={multi ? "checkbox" : "radio"}
-              className={styles.checkbox}
-              onChange={(e) => handleSelect(e)}
-              checked={selected?.includes(item.value)}
-            />
-            <span className={styles.label}>{item.label}</span>
-          </label>
-        ))}
+        {options?.map((option) => {
+          const checked = isChecked(option.value, value);
+          return (
+            <label
+              className={cx(
+                styles.option,
+                styles[checked ? "optionChecked" : "optionUnchecked"]
+              )}
+              key={option.value}
+            >
+              <input
+                name={id}
+                value={option.value}
+                type={isMulti ? "checkbox" : "radio"}
+                className={styles.checkbox}
+                onChange={(e) => handleSelect(e)}
+                checked={isChecked(option.value, value)}
+              />
+              <span
+                className={cx(
+                  styles.iconCheck,
+                  styles[iconType],
+                  styles[
+                    checked ? iconType + "Checked" : iconType + "Unchecked"
+                  ]
+                )}
+              >
+                {isMulti && (
+                  <Icon
+                    icon={IconsEnum.Check}
+                    color="var(--color-white)"
+                    className={styles.icon}
+                  />
+                )}
+              </span>
+              <span className={styles.label}>{option.label}</span>
+            </label>
+          );
+        })}
       </div>
     </div>
   );
-};
-
-export const InputOptions = memo(InputOptionsComponent);
+}

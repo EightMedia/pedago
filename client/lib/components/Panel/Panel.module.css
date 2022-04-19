@@ -12,8 +12,13 @@
 }
 
 .panelTitle {
-  font-weight: bold;
-  font: 700 23px / 1.1 var(--font-headings);
+  font-family: var(--font-headings);
+  font-size: var(--font-size-lg);
+  line-height: 1.1;
+  font-weight: 700;
+  @media (--sm) {
+    font-size: 28px;
+  }
 }
 
 .space-sm {

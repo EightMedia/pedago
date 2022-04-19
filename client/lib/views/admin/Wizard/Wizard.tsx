@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import set from "set-value";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { convertToRoomDto } from "../../../../factories/AdminWizard.factory";
 import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
@@ -14,19 +15,15 @@ import { WizardOptions } from "./WizardOptions.scene";
 import { WizardOrganisation } from "./WizardOrganisation.scene";
 
 const WizardComponent = ({
-  initialStep,
   data = {},
+  initialStep,
   handleRegisterGame,
 }: WizardType) => {
-  const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
+  const text = useContext(LanguageContext);
+  const [step, setStep] = useState<WizardStep>(initialStep);
   const [wizardData, setWizardData] = useState<WizardType["data"]>(data);
 
-  useEffect(() => {
-    setStep(initialStep as WizardStep);
-    return;
-  }, [initialStep]);
-
-  const updateWizardData = (value: any, path: string) => {
+  const updateWizardData = (value: unknown, path: string) => {
     const newData: WizardType["data"] = set(
       { ...data, ...wizardData },
       path,
@@ -51,7 +48,7 @@ const WizardComponent = ({
         <Logo />
       </PageSlot>
       <div>
-        <Title>Spel aanmaken</Title>
+        <Title>{text.adminWizard.check.create}</Title>
         <Panel>
           {(() => {
             switch (step) {

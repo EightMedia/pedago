@@ -11,6 +11,14 @@ import { Panel, PanelTitle } from "../../../components/Panel";
 import { Timer } from "../../../components/Timer";
 import { Stack } from "../../../layouts/Stack";
 
+const icons: IconsEnum[] = [
+  IconsEnum.Columns,
+  IconsEnum.Important,
+  IconsEnum.Ask,
+  IconsEnum.Check,
+  IconsEnum.Person,
+];
+
 export type DiscussInfoProps = {
   handleBack: () => void;
   round: number;
@@ -37,17 +45,19 @@ export const DiscussInfo = ({
       <PageSlot location="body">
         <Panel>
           <PanelTitle>{text.discuss.info.discussDiff}</PanelTitle>
-          <Stack>
+          <Stack gap="md">
             {text.discuss.intro.items.map((item, i) => (
               <InfoItem
                 key={i}
-                icon={IconsEnum.Info}
+                icon={icons[i]}
                 title={item.caption}
                 text={item.text}
               />
             ))}
+            <Button stretch onClick={handleBack}>
+              {text.discuss.info.understood}
+            </Button>
           </Stack>
-          <Button onClick={handleBack}>{text.discuss.info.understood}</Button>
         </Panel>
       </PageSlot>
     </Page>

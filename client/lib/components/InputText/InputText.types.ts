@@ -10,4 +10,5 @@ export type InputTextType = {
   showLabel?: boolean;
   value?: string;
   condition?: boolean;
+  helptext?: string;
 };

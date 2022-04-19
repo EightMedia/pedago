@@ -3,16 +3,22 @@
 }
 
 /* weight */
+.normal {
+  font-weight: 500;
+}
 .bold {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 /* tone */
 .light {
   color: var(--color-grey-neutral);
 }
-.dark {
+.medium {
   color: var(--color-grey-dark);
+}
+.dark {
+  color: var(--color-grey-darkest);
 }
 
 /* sizes */
@@ -24,7 +30,16 @@
 }
 .md {
   font-size: var(--font-size-md);
+
+  @media (--sm) {
+    font-size: 18px;
+  }
 }
+
+.mdlg {
+  font-size: var(--font-size-mdlg);
+}
+
 .lg {
   font-size: var(--font-size-lg);
 }

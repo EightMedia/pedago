@@ -10,29 +10,10 @@
   text-align: center;
   align-items: center;
   gap: var(--space-3xs);
-}
 
-.button:active,
-.button:hover {
-  background: var(--color-hover-blue);
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
-  gap: --var(--space-2xs);
-}
-
-.default {
-  border-radius: var(--border-radius-sm);
-  background: var(--color-blue);
-  padding: var(--space-xs) var(--space-md);
-  color: var(--color-white);
-}
-
-.line {
-  display: inline-block;
-  text-decoration: underline;
+  &:disabled {
+    opacity: 0.4;
+  }
 }
 
 .stretch {
@@ -41,20 +22,73 @@
   justify-content: center;
 }
 
-.whiteActive {
-  border-radius: 2em;
-  padding: var(--space-2xs) var(--space-sm);
-  background: var(--color-white);
-  color: var(--color-dark-blue);
-  border: solid 1px var(--color-white);
+/* Button variations */
+.default {
+  border-radius: var(--border-radius-sm);
+  background: var(--color-blue);
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-white);
+  transition: background-color 0.15s ease;
+  font-size: var(--font-size-md);
+
+  @media (--md) {
+    padding: var(--space-sm) var(--space-xl);
+    font-size: 20px;
+  }
+
+  &:active,
+  &:hover {
+    background: var(--color-hover-blue);
+  }
 }
 
+.line {
+  display: inline-block;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: (var--font-size-sm);
+}
+.line:hover {
+  background: transparent;
+  color: var(--color-blue);
+}
+
+.whiteActive,
 .whiteInactive {
   border-radius: 2em;
   padding: var(--space-2xs) var(--space-sm);
+  border: solid 1px var(--color-white);
+  transition: background-color 0.15s ease;
+
+  &:focus {
+    outline-offset: -1px;
+  }
+}
+
+.whiteActive {
+  background: var(--color-white);
+  color: var(--color-dark-blue);
+
+  &:active,
+  &:hover {
+    background: var(--color-hover-dark-blue);
+    color: var(--color-white);
+  }
+}
+
+.whiteInactive {
   background: transparent;
   color: var(--color-white);
-  border: solid 1px var(--color-white);
+
+  &:focus {
+    outline-color: white;
+  }
+
+  &:active,
+  &:hover {
+    color: var(--color-dark-blue);
+    background: var(--color-white);
+  }
 }
 
 .whiteBlocked {
@@ -67,8 +101,6 @@
   color: var(--color-dark-blue);
 }
 
-.buttonGroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
+.large {
+  padding: 40px;
 }

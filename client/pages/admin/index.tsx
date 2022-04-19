@@ -2,6 +2,7 @@ import {
   AdminEvent,
   Event,
   Group,
+  Language,
   Player,
   RoomDto,
   SocketCallback,
@@ -33,6 +34,7 @@ import { Result } from "../../lib/views/admin/Result";
 import { Wizard } from "../../lib/views/admin/Wizard";
 import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
 import TimerProvider from "../../providers/Timer.provider";
+import LanguageProvider from "../../providers/Language.provider";
 
 const AdminGame = () => {
   const socket: Socket | null = useSocket(
@@ -105,8 +107,15 @@ const AdminGame = () => {
   }, [socket]);
 
   return (
-    <SocketContext.Provider value={socket}>
-      <RoomContext.Provider value={room}>
+    <LanguageProvider
+      lang={
+        typeof window !== "undefined"
+          ? (localStorage?.getItem("language") as Language)
+          : Language.NL
+      }
+    >
+      <SocketContext.Provider value={socket}>
+        <RoomContext.Provider value={room}>
         <TimerProvider timeStamp={timer}>
           {(() => {
             switch (view.name) {
@@ -153,8 +162,9 @@ const AdminGame = () => {
             }
           })()}
         </TimerProvider>
-      </RoomContext.Provider>
-    </SocketContext.Provider>
+        </RoomContext.Provider>
+      </SocketContext.Provider>
+    </LanguageProvider>
   );
 };
 

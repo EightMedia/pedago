@@ -9,8 +9,11 @@
 .lg {
   display: flex;
   color: var(--color-grey-darkest);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-mdlg);
   border: var(--border-light);
+  & > svg {
+    flex: 0 0 68px;
+  }
 }
 
 .sm {
@@ -26,14 +29,17 @@
 }
 
 .nameWrapper {
-  padding: 2px var(--space-3xs);
+  padding: 2px var(--space-sm);
   display: flex;
   flex-direction: column;
 }
 
 .name {
+  line-height: 1.35;
+  font-weight: 700;
 }
 
 .group {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
+  line-height: 1.35;
 }

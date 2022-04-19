@@ -9,7 +9,10 @@ export default {
   component: Wizard,
   argTypes: {
     initialStep: {
-      control: false,
+      control: {
+        type: "select",
+        options: Object.values(WizardStep),
+      },
     },
   },
 } as ComponentMeta<typeof Wizard>;

@@ -5,8 +5,10 @@ import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
-import { Center } from "../../../layouts/Center";
+import { Text } from "../../../components/Text";
 import { Stack } from "../../../layouts/Stack";
+import { numberEnumToEntries } from "./utils";
+import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
 export const WizardName = ({
@@ -27,12 +29,14 @@ export const WizardName = ({
 
   return (
     <>
-      <Center>
-        <p>{wizardNameText.step} 1/4</p>
+      <div className={styles.stepHeader}>
+        <Text tone="medium" align="center" weight="bold">
+          {wizardNameText.step} 1/4
+        </Text>
         <PanelTitle>{wizardNameText.yourInfo}</PanelTitle>
-      </Center>
+      </div>
 
-      <Stack>
+      <Stack gap="sm">
         <InputText
           value={data?.info?.name || ""}
           id="name"
@@ -45,20 +49,24 @@ export const WizardName = ({
           id="email"
           type="email"
           label={wizardNameText.email}
+          helptext={wizardNameText.emailHelp}
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.email")}
         />
 
         <InputOptions
           id="role"
-          options={text.roles}
+          options={numberEnumToEntries(Role).map(([, value]) => ({
+            value,
+            label: text.roles[value],
+          }))}
+          multi
           label={wizardNameText.role}
-          value={data?.info?.role}
-          enumOptions={true}
-          handleChange={(newData: Role) => {
-            updateData(newData, "info.role");
-            if (!(data.info?.role?.includes(Role.Other))){
-              updateData(undefined, "info.customRole")
+          value={data?.info?.role ?? []}
+          onChange={(role) => {
+            updateData(role, "info.role");
+            if (!data.info?.role?.includes(Role.Other)) {
+              updateData(undefined, "info.customRole");
             }
           }}
         />

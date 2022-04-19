@@ -31,9 +31,9 @@ export const DiscussIntro = ({
   const timer = useContext(TimerContext);
   const room  = useContext(RoomContext);
 
-  const names = teamMembers
-    ?.filter((p) => p.socketId !== socket?.id)
-    .map((p) => p.name);
+  const names =
+    teamMembers?.filter((p) => p.socketId !== socket?.id).map((p) => p.name) ??
+    [];
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">
@@ -44,7 +44,7 @@ export const DiscussIntro = ({
       </PageSlot>
       <Title>
         {text.discuss.intro.discussDiff}{" "}
-        {names?.length > 1 ? names?.join(" and ") : names.join()}
+        {names.length > 1 ? names.join(" and ") : names.join()}
       </Title>
     </Page>
   );
