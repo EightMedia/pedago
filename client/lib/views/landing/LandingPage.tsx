@@ -10,6 +10,8 @@ import {
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Button } from "../../components/Button";
+import { Icon } from "../../components/Icon";
+import { IconsEnum } from "../../components/Icon/Icon";
 import { InputText } from "../../components/InputText";
 import { Logo } from "../../components/Logo";
 import { Page } from "../../components/Page";
@@ -29,6 +31,7 @@ const LandingPage = ({
   const languageValues = Object.values(Language);
   const data = useContext(LanguageContext);
   const router = useRouter();
+  const [languageSelect, setLanguageSelect] = useState<boolean>(false);
 
   const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setLanguage(event.target.value as Language);
@@ -51,15 +54,28 @@ const LandingPage = ({
             <Logo className={styles.logo} />
           </div>
           <div className={styles.languageSelect}>
-            <select value={language} onChange={handleLanguageChange}>
+            <button
+              className={styles.languageToggle}
+              onClick={() => setLanguageSelect(!languageSelect)}
+            >
+              <Icon icon={IconsEnum.Language} />
+              <span>NL</span>
+            </button>
+            {languageSelect && (
+              <div className={styles.languages}>
+                <button>Nederlands</button>
+                <button>Engels</button>
+              </div>
+            )}
+          </div>
+        </div>
+        {/* <select value={language} onChange={handleLanguageChange}>
               {languageValues.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
                 </option>
               ))}
-            </select>
-          </div>
-        </div>
+            </select> */}
         <div className={styles.body}>
           <Title size="lg" element="h1">
             {data?.landing?.title}
