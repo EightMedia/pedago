@@ -26,7 +26,68 @@
   grid-column: 3 / 3;
 }
 
-.action {
+.languageToggle {
+  background-color: var(--color-grey-6);
+  color: white, 0.25;
+  font-size: var(--font-size-md);
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 8px;
+  position: absolute;
+  right: 119px;
+  top: 28px;
+  border: 1px solid var(--color-grey-6);
+  border-radius: 4px;
+  display: flex;
+  gap: var(--space-4xs);
+}
+
+.languageToggle:hover {
+  background-color: var(--color-grey-darkest);
+  border-color: var(----color-grey-darkest);
+}
+
+.languages {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 120px;
+  top: 76px;
+  text-align: left;
+  border: var(--border-light);
+  border-radius: 4px;
+  background-color: var(--color-white);
+}
+
+.languages button {
+  padding: 12px 16px;
+  height: 48px;
+  width: 200px;
+  shadow: box-shadow(0px 2px 12px 0px #00000066);
+}
+
+.languages button:hover {
+  background-color: var(--color-grey-lightest);
+}
+
+.langnl {
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-mdlg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.langeng {
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-mdlg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.lang .action {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -40,7 +101,7 @@
   }
   margin: 0 auto;
   display: flex;
-  jusitfy-content: center;
+  justify-content: center;
   gap: var(--space-xs);
   margin-bottom: var(--space-md);
 }

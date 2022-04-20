@@ -32,14 +32,18 @@
   --color-white: rgba(255, 255, 255, 1);
   --color-white-15: rgba(255, 255, 255, 0.15);
   --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-40: rgba(255, 255, 255, 0.4);
 
   /* grey */
   --color-grey-darkest: #201a47;
   --color-grey-dark: #6e6a87;
   --color-grey-neutral: #9b98ac;
   --color-grey-light: #dedde3;
+  --color-grey-6: rgba(32, 26, 71, 0.6);
+  --color-grey-lightest: #f4f4f6;
 
   /* spacings... not sure if this is right yet */
+  --space-4xs: 4px;
   --space-3xs: 8px;
   --space-2xs: 12px;
   --space-xs: 16px;

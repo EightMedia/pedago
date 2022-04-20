@@ -63,8 +63,8 @@ const LandingPage = ({
             </button>
             {languageSelect && (
               <div className={styles.languages}>
-                <button>Nederlands</button>
-                <button>Engels</button>
+                <button className={styles.langnl}>Nederlands</button>
+                <button className={styles.langeng}>Engels</button>
               </div>
             )}
           </div>
