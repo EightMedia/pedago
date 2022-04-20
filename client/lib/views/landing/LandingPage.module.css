@@ -116,3 +116,15 @@
   max-width: 784px;
   margin: 0 auto;
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-mdlg);
+  margin-bottom: var(--space-mdlg);
+}
+
+.footer a {
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+}

@@ -100,6 +100,10 @@ const LandingPage = ({
             </div>
           </div>
           <LandingIllustration className={styles.illustration} />
+          <footer className={styles.footer}>
+            <a>Privacy</a>
+            <a>Cookies</a>
+          </footer>
         </div>
       </Center>
     </Page>
