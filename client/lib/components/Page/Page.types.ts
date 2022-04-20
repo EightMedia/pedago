@@ -2,7 +2,13 @@ import { ReactNode } from "react";
 
 // page slot
 export type PageSlotType = {
-  location: "headerLeft" | "headerCenter" | "headerRight" | "footer" | "body";
+  location:
+    | "headerLeft"
+    | "headerCenter"
+    | "headerRight"
+    | "subheader"
+    | "footer"
+    | "body";
   children: ReactNode | string;
   className?: string;
 };
