@@ -46,7 +46,7 @@
     "chromatic": "^6.5.3",
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.5",
-    "eslint-plugin-storybook": "^0.5.10",
+    "eslint-plugin-storybook": "^0.5.11",
     "handlebars": "^4.7.7",
     "postcss": "^8",
     "postcss-preset-env": "^7.4.2",
