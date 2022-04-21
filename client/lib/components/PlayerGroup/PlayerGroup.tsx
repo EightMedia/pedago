@@ -28,7 +28,7 @@ export const PlayerGroupComponent = ({
             ))}
           </div>
         ) : (
-          <p>{text.waiting}</p>
+          <p>{text.waiting.waiting}</p>
         )}
         {handleGroupChange && (
           <Button
