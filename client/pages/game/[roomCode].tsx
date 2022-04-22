@@ -17,7 +17,11 @@ import { getDiscussType } from "../../factories/Discuss.factory";
 import { getLobbyType } from "../../factories/Lobby.factory";
 import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
 import { getResultData } from "../../factories/Result.factory";
-import { getPlayerIdFromLocalStorage } from "../../factories/shared.factory";
+import {
+  getPlayerIdFromLocalStorage,
+  getTimeStampFromLocalStorage,
+  setTimeStampToLocalStorage
+} from "../../factories/shared.factory";
 import { getWaitingType } from "../../factories/Waiting.factory";
 import {
   ResultGroup,
@@ -51,7 +55,7 @@ const RoomCode = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
-  const [timer, setTimer] = useState<number>(0);
+  const [timer, setTimer] = useState<number | null>(0);
 
   const ROUND_MAX = 6;
   let playerId: string | null = "";
@@ -71,6 +75,10 @@ const RoomCode = () => {
 
   const router = useRouter();
   const roomCode = parseInt(router.query.roomCode as string, 10);
+
+  useEffect(() => {
+    setTimer(getTimeStampFromLocalStorage());
+  }, []);
 
   useEffect(() => {
     if (roomCode && socket) {
@@ -97,6 +105,7 @@ const RoomCode = () => {
       socket.on(Event.Room, (r: RoomDto) => {
         setRoom(r);
         setTimer(r.timerStamp);
+        setTimeStampToLocalStorage(r.timerStamp);
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(Event.Round, setRound);
@@ -122,7 +131,7 @@ const RoomCode = () => {
     >
       <SocketContext.Provider value={socket}>
         <RoomContext.Provider value={room}>
-          <TimerProvider timeStamp={timer}>
+          <TimerProvider timeStamp={timer as number}>
             {(() => {
               switch (view.name) {
                 case ViewName.Wizard:

@@ -15,8 +15,8 @@ const TimerProvider = ({
 
   useEffect(() => {
     if (timeStamp <= 0) {
-      setTimer(() => 0);
-    } else {
+      setTimer(0);
+    } else {      
       setTimer(endTime - currentTime);
     }
   }, [endTime, timeStamp, timer, currentTime]);
