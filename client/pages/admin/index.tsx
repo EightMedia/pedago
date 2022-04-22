@@ -20,6 +20,7 @@ import {
 } from "../../factories/AdminLobby.factory";
 import { getWizardData } from "../../factories/AdminWizard.factory";
 import { getResultData } from "../../factories/Result.factory";
+import { getTimeStampFromLocalStorage, setTimeStampToLocalStorage } from "../../factories/shared.factory";
 import {
   ResultGroup,
   ResultSet,
@@ -33,8 +34,8 @@ import { LobbyStep } from "../../lib/views/admin/Lobby/Lobby.types";
 import { Result } from "../../lib/views/admin/Result";
 import { Wizard } from "../../lib/views/admin/Wizard";
 import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
-import TimerProvider from "../../providers/Timer.provider";
 import LanguageProvider from "../../providers/Language.provider";
+import TimerProvider from "../../providers/Timer.provider";
 
 const AdminGame = () => {
   const socket: Socket | null = useSocket(
@@ -45,7 +46,7 @@ const AdminGame = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
-  const [timer, setTimer] = useState<number>(0);
+  const [timer, setTimer] = useState<number | null>(0);
 
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
@@ -64,6 +65,10 @@ const AdminGame = () => {
       });
     }
   };
+
+  useEffect(() => {
+    setTimer(getTimeStampFromLocalStorage());
+  }, []);
 
   useEffect(() => {
     if (localRoom) {
@@ -93,6 +98,7 @@ const AdminGame = () => {
       socket.on(Event.Room, (r: RoomDto) => {
         setRoom(r);
         setTimer(r.timerStamp);
+        setTimeStampToLocalStorage(r.timerStamp);
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
@@ -116,7 +122,7 @@ const AdminGame = () => {
     >
       <SocketContext.Provider value={socket}>
         <RoomContext.Provider value={room}>
-        <TimerProvider timeStamp={timer}>
+        <TimerProvider timeStamp={timer as number}>
           {(() => {
             switch (view.name) {
               case ViewName.Wizard:
