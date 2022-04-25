@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Player } from "../../../components/Player";
@@ -19,6 +21,9 @@ export const GameCountdown = ({
 }) => {
   const [counter, setCounter] = useState(time);
   const text = useContext(LanguageContext);
+  const timer = useContext(TimerContext);
+  const room = useContext(RoomContext);
+
   useEffect(() => {
     if (!callback) return;
     const interval = setInterval(() => {
@@ -28,12 +33,15 @@ export const GameCountdown = ({
         callback();
       }
     }, 1000);
-    return;
+    return () => {
+      clearInterval(interval);
+    };
   }, [counter, setCounter, callback]);
+
   return (
     <Page background={6} valign="center">
       <PageSlot location="headerLeft">
-        <Timer time={600} />
+        {(room?.options?.timer as boolean) && <Timer time={timer} />}
       </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}

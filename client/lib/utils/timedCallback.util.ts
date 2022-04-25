@@ -11,6 +11,6 @@ export const TimedCallback = (time: number, callback?: () => void) => {
         callback();
       }
     }, 1000);
-    return;
+    return () => clearInterval(interval);
   }, [counter, setCounter, callback]);
 };
