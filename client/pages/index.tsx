@@ -35,7 +35,6 @@ const ContentPage = () => {
       </Head>
       <LanguageProvider lang={language}>
         <LandingWithoutSSR
-          language={language}
           setLanguage={setLanguage}
         ></LandingWithoutSSR>
       </LanguageProvider>

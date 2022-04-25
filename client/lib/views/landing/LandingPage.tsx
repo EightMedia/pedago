@@ -21,14 +21,11 @@ import { LandingIllustration } from "./Landing.illustration";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = ({
-  language,
   setLanguage,
 }: {
-  language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
   const [roomCode, setRoomCode] = useState<string>("");
-  const languageValues = Object.values(Language);
   const data = useContext(LanguageContext);
   const router = useRouter();
   const [languageSelect, setLanguageSelect] = useState<boolean>(false);
