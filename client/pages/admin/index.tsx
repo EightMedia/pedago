@@ -22,6 +22,10 @@ import {
 import { getWizardData } from "../../factories/AdminWizard.factory";
 import { getResultData } from "../../factories/Result.factory";
 import {
+  getTimeStampFromLocalStorage,
+  setTimeStampToLocalStorage
+} from "../../factories/shared.factory";
+import {
   ResultGroup,
   ResultSet,
   ResultStep
@@ -35,6 +39,7 @@ import { Result } from "../../lib/views/admin/Result";
 import { Wizard } from "../../lib/views/admin/Wizard";
 import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
 import LanguageProvider from "../../providers/Language.provider";
+import TimerProvider from "../../providers/Timer.provider";
 
 const AdminGame = () => {
   const socket: Socket | null = useSocket(
@@ -45,6 +50,7 @@ const AdminGame = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
+  const [timer, setTimer] = useState<number | null>(0);
 
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
@@ -65,6 +71,10 @@ const AdminGame = () => {
   };
 
   useEffect(() => {
+    setTimer(getTimeStampFromLocalStorage());
+  }, []);
+
+  useEffect(() => {
     if (localRoom) {
       const parsedRoom = JSON.parse(localRoom);
       if (socket) {
@@ -73,6 +83,7 @@ const AdminGame = () => {
           parsedRoom,
           (res: SocketCallback) => {
             setRoom(res?.data?.room as RoomDto);
+            setTimer(res?.data?.room?.timerStamp as number);
             localStorage.setItem(
               "room",
               JSON.stringify(res?.data?.room as RoomDto)
@@ -88,7 +99,11 @@ const AdminGame = () => {
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
-      socket.on(Event.Room, setRoom);
+      socket.on(Event.Room, (r: RoomDto) => {
+        setRoom(r);
+        setTimer(r.timerStamp);
+        setTimeStampToLocalStorage(r.timerStamp);
+      });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
         setLobbyStep(setToInfo ? LobbyStep.Info : LobbyStep.Lobby);
@@ -115,50 +130,52 @@ const AdminGame = () => {
       >
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
-            {(() => {
-              switch (view.name) {
-                case ViewName.Wizard:
-                  return (
-                    <Wizard
-                      data={getWizardData(room)}
-                      initialStep={WizardStep.Name}
-                      handleRegisterGame={handleRegisterGame}
-                    />
-                  );
-                case ViewName.Lobby:
-                  return (
-                    <Lobby
-                      room={getLobbyRoom(room)}
-                      groups={getAdminLobbyType(
-                        room.groups as Group[],
-                        playerList
-                      )}
-                      initialStep={lobbyStep}
-                    />
-                  );
-                case ViewName.Game:
-                  return (
-                    <Game
-                      {...getAdminGameType(room as RoomDto)}
-                      initialScene={gameScene}
-                    />
-                  );
-                case ViewName.Result:
-                  return (
-                    <Result
-                      initialStep={ResultStep.Loader}
-                      data={
-                        getResultData(room, null) as {
-                          me?: ResultSet;
-                          groups: ResultGroup[];
+            <TimerProvider timeStamp={timer as number}>
+              {(() => {
+                switch (view.name) {
+                  case ViewName.Wizard:
+                    return (
+                      <Wizard
+                        data={getWizardData(room)}
+                        initialStep={WizardStep.Name}
+                        handleRegisterGame={handleRegisterGame}
+                      />
+                    );
+                  case ViewName.Lobby:
+                    return (
+                      <Lobby
+                        room={getLobbyRoom(room)}
+                        groups={getAdminLobbyType(
+                          room.groups as Group[],
+                          playerList
+                        )}
+                        initialStep={lobbyStep}
+                      />
+                    );
+                  case ViewName.Game:
+                    return (
+                      <Game
+                        {...getAdminGameType(room as RoomDto)}
+                        initialScene={gameScene}
+                      />
+                    );
+                  case ViewName.Result:
+                    return (
+                      <Result
+                        initialStep={ResultStep.Loader}
+                        data={
+                          getResultData(room, null) as {
+                            me?: ResultSet;
+                            groups: ResultGroup[];
+                          }
                         }
-                      }
-                    />
-                  );
-                default:
-                  return <>ERROR: ViewName not found</>;
-              }
-            })()}
+                      />
+                    );
+                  default:
+                    return <>ERROR: ViewName not found</>;
+                }
+              })()}
+            </TimerProvider>
           </RoomContext.Provider>
         </SocketContext.Provider>
       </LanguageProvider>

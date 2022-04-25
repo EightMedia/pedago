@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Player } from "../../../components/Player";
@@ -27,6 +28,7 @@ export const GameLead = ({
   const socket = useContext(SocketContext);
   const room = useContext(RoomContext);
   const players = getTeamFromSocketId(room as RoomDto, socket?.id as string);
+  const timer = useContext(TimerContext);
 
   useEffect(() => {
     if (!callback) return;
@@ -37,12 +39,12 @@ export const GameLead = ({
         callback && callback();
       }
     }, 1000);
-    return;
+    return () => clearInterval(interval);
   }, [counter, setCounter, callback]);
   return (
     <Page valign="center" background={6}>
       <PageSlot location="headerLeft">
-        <Timer time={600} />
+      {(room?.options?.timer as boolean) && <Timer time={timer} />}
       </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}

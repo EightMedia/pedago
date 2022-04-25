@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Button } from "../../../components/Button";
 import { IconsEnum } from "../../../components/Icon/Icon";
 import { InfoItem } from "../../../components/InfoItem";
@@ -29,10 +31,13 @@ export const DiscussInfo = ({
   roundMax,
 }: DiscussInfoProps) => {
   const text = useContext(LanguageContext);
+  const timer = useContext(TimerContext);
+  const room = useContext(RoomContext);
+
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">
-        <Timer time={600} />
+        {(room?.options?.timer as boolean) && <Timer time={timer} />}
       </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}

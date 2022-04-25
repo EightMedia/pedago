@@ -9,7 +9,7 @@ export enum GameScene {
 export type GameType = {
   openSettings?: () => void;
   stopRound?: () => void;
-  timer: boolean;
+  timer?: boolean;
   teams: {
     name: string;
     status: PlayerStatus;

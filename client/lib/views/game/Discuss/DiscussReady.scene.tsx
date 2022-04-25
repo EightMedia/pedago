@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Timer } from "../../../components/Timer";
@@ -24,10 +26,13 @@ export const DiscussReady = ({
 }: DiscussReadyProps) => {
   TimedCallback(time, callback);
   const text = useContext(LanguageContext);
+  const timer = useContext(TimerContext);
+  const room = useContext(RoomContext);
+
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">
-        <Timer time={600} />
+        {(room?.options?.timer as boolean) && <Timer time={timer} />}
       </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}
