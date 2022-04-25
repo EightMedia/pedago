@@ -6,7 +6,7 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
-  useState,
+  useState
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Button } from "../../components/Button";
@@ -33,8 +33,8 @@ const LandingPage = ({
   const router = useRouter();
   const [languageSelect, setLanguageSelect] = useState<boolean>(false);
 
-  const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(event.target.value as Language);
+  const handleLanguageChange = (lang: Language) => {
+    setLanguage(lang);
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,19 +63,22 @@ const LandingPage = ({
             </button>
             {languageSelect && (
               <div className={styles.languages}>
-                <button className={styles.langnl}>Nederlands</button>
-                <button className={styles.langeng}>Engels</button>
+                <button
+                  onClick={() => handleLanguageChange(Language.NL)}
+                  className={styles.langnl}
+                >
+                  Nederlands
+                </button>
+                <button
+                  onClick={() => handleLanguageChange(Language.EN)}
+                  className={styles.langeng}
+                >
+                  English
+                </button>
               </div>
             )}
           </div>
         </div>
-        {/* <select value={language} onChange={handleLanguageChange}>
-              {languageValues.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select> */}
         <div className={styles.body}>
           <Title size="lg" element="h1">
             {data?.landing?.title}
