@@ -25,8 +25,8 @@ export const NL: Locale = {
     [Sector.MBO]: "MBO",
     [Sector.HBO]: "HBO",
     [Sector.WO]: "WO",
-    [Sector.PrMaHBO]: "PrMaHBO",
-    [Sector.AcMa]: "AcMa",
+    [Sector.PrMaHBO]: "Profesionele Master",
+    [Sector.AcMa]: "Academische Master",
     [Sector.Other]: "Anders",
   },
   categories: {
@@ -48,12 +48,12 @@ export const NL: Locale = {
     3: {
       title: "Kritische legitimering",
       description:
-        "is erop gericht leerlingen te begrijpen als unieke sociale wezens, die een persoonlijke relatie met de leraar hebben.",
+        "is erop gericht leerlingen te begrijpen als unieke sociale mensen, die een persoonlijke relatie met de leraar hebben.",
     },
     4: {
       title: "Functionele legitimering",
       description:
-        "is erop gericht leerlingen te zien als kwetsbare wezens, die afhankelijk zijn van volwassenen om te overleven in een veeleisende wereld.",
+        "is erop gericht leerlingen te zien als kwetsbare mensen, die afhankelijk zijn van volwassenen om te overleven in een veeleisende wereld.",
     },
     5: {
       title: "Psychologische legitimering",
@@ -64,7 +64,7 @@ export const NL: Locale = {
   landing: {
     title: "Ontdek jouw idealen als leraar",
     description:
-      "Leer jouw eigen pedagogisch krachten kennen met dit spel. Je speelt met andere spelers, samen bespreken jullie de resultaten.",
+      "Leer jouw eigen pedagogische krachten kennen met dit spel. Je speelt met andere spelers, samen bespreken jullie de resultaten.",
     input: "Voer spelcode in",
     button: "Meedoen aan spel",
     create: "Spel aanmaken",
@@ -113,7 +113,7 @@ export const NL: Locale = {
       items: [
         {
           caption: "Meedoen",
-          text: "Alle spelers moeten eerst naar pedago.game gaan.",
+          text: "Alle spelers moeten eerst naar pedagogame.com gaan.",
           icon: IconsEnum.Info,
         },
         {
@@ -138,7 +138,7 @@ export const NL: Locale = {
         },
         {
           caption: "Spelers verwijderen",
-          text: "Spelers kunnen worden gekickt wanneer ze niet welkom zijn, door er op te klikken of tappen.",
+          text: "Spelers kunnen worden verwijderd wanneer ze niet welkom zijn, door er op te klikken of te tappen.",
           icon: IconsEnum.Remove,
         },
         {
@@ -152,8 +152,7 @@ export const NL: Locale = {
     lobby: {
       settingsButton: "Instellingen",
       rulesButton: "Uitleg",
-      code: "Voer de code in op",
-      andJoin: "en doe mee",
+      code: "Voer de code in op [pedagogame.com](https://pedagogame.com) en doe mee",
       start: "Start",
     },
     playerGroup: {
@@ -183,7 +182,7 @@ export const NL: Locale = {
       none: "n.v.t.",
       on: "Aan",
       off: "Uit",
-      group: "Groepen",
+      group: "Groep",
       groups: "Groepen",
       create: "Spel aanmaken",
       back: "Terug naar vorige stap",
@@ -205,7 +204,7 @@ export const NL: Locale = {
       inGroups: "Werken in groepen",
       inGroupsText:
         "Spelers spelen zoveel mogelijk met spelers uit andere groepen",
-      group1: "Groepen",
+      group1: "Groep 1",
       group1Help: "Je kan met minimaal 2 en maximaal 4 groepen spelen.",
       group2: "Groep 2",
       group3: "Groep 3",
@@ -246,7 +245,7 @@ export const NL: Locale = {
         },
         {
           caption: "10 minuten",
-          text: "Voor elke rond heb je tien minuten om kaarten te sorteren en te bespreken.",
+          text: "Voor elke ronde heb je tien minuten om kaarten te sorteren en te bespreken.",
         },
         {
           caption: "Kaarten sorteren",
@@ -287,15 +286,15 @@ export const NL: Locale = {
       items: [
         {
           caption: "Links begint",
-          text: "De persoon met de linker rij trapt af.",
+          text: "De persoon met de linker rij begint.",
         },
         {
-          caption: "Bespreek de kaarten per positie ",
-          text: "Bespreek elkaars kaarten tegelijk van meest naar minst belangrijk.",
+          caption: "Bespreek de verschillen en overeenkomsten",
+          text: "Bespreek met name die kaarten die opvallen.",
         },
         {
           caption: "Stel elkaar vragen",
-          text: "Vraag elkaar waarom de keuze hoog staat.",
+          text: "Vraag elkaar waarom een stelling hoog of juist laag staat.",
         },
         {
           caption: "Niks is fout",
@@ -330,7 +329,7 @@ export const NL: Locale = {
     sendToMail: "We kunnen de uitkomst naar je e-mailadres toe sturen.",
     yourMail: "Jouw e-mailadres",
     send: "Versturen",
-    privacy: "Je mail wordt alleen gebruikt voor het opsturen.",
+    privacy: "Je mail wordt alleen gebruikt voor het opsturen van jouw uitkomst.",
   },
   rounds: [
     {
@@ -347,12 +346,12 @@ export const NL: Locale = {
         },
         {
           id: "2",
-          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
         },
         {
           id: "3",
           title:
-            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+            "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
         },
         {
           id: "4",
@@ -371,29 +370,29 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Dat ze leren zichzelf te redden in een veeleisende wereld.",
+          title: "Ze met geduld, zorg en aandacht te begeleiden bij hun leerproces.",
         },
         {
           id: "1",
-          title: "Dat ze zelf leren richting te geven aan hun leven.",
+          title: "Aan te sluiten bij hun innerlijke motivatie en ambities.",
         },
         {
           id: "2",
-          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "De leeromgeving op een realistische manier vorm te geven.",
         },
         {
           id: "3",
           title:
-            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+            "Ze kennis te laten maken met verschillende gezichtspunten op de werkelijkheid.",
         },
         {
           id: "4",
-          title: "Dat ze doorstromen naar zo hoog mogelijk vervolgonderwijs.",
+          title: "Toe te werken naar vooraf vastgestelde leerdoelen.",
         },
         {
           id: "5",
           title:
-            "Dat ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
+            "Didactisch aan te sluiten bij hun cognitieve en sociaal-emotionele (on)mogelijkheden.",
         },
       ],
     },
@@ -403,29 +402,29 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Dat ze leren zichzelf te redden in een veeleisende wereld.",
+          title: "Dat ze een gevoel van eigenwaarde en een positief zelfbeeld ontwikkelen.",
         },
         {
           id: "1",
-          title: "Dat ze zelf leren richting te geven aan hun leven.",
+          title: "Dat ze gebruik leren maken van hun creativiteit.",
         },
         {
           id: "2",
-          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "Dat ze competenties verwerven waarmee ze kunnen deelnemen aan de maatschappij.",
         },
         {
           id: "3",
           title:
-            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+            "Dat ze leren onderbouwde meningen te vormen.",
         },
         {
           id: "4",
-          title: "Dat ze doorstromen naar zo hoog mogelijk vervolgonderwijs.",
+          title: "Dat ze leerstof verwerven die onderdeel uitmaakt van het officiële curriculum.",
         },
         {
           id: "5",
           title:
-            "Dat ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
+            "Dat ze leren hun sociale, psychologische en fysieke beperkingen te ondervangen.",
         },
       ],
     },
@@ -435,29 +434,29 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Dat ze leren zichzelf te redden in een veeleisende wereld.",
+          title: "Dat ze op eigen tempo met geleidelijke stappen toegroeien naar zelfstandigheid.",
         },
         {
           id: "1",
-          title: "Dat ze zelf leren richting te geven aan hun leven.",
+          title: "Hun unieke ontwikkelingsvoortgang als uitgangspunt te nemen.",
         },
         {
           id: "2",
-          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "Hun ontwikkelingsmogelijkheden in het licht van hun leefomstandigheden te beoordelen.",
         },
         {
           id: "3",
           title:
-            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+            "Kritisch te zijn op wat de maatschappij van hen verwacht in verschillende leeftijdsfases.",
         },
         {
           id: "4",
-          title: "Dat ze doorstromen naar zo hoog mogelijk vervolgonderwijs.",
+          title: "Dat de volgorde van het curriculum gevolgd wordt.",
         },
         {
           id: "5",
           title:
-            "Dat ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
+            "Dat ze geen belemmeringen ondervinden in hun ontwikkelingsmogelijkheden",
         },
       ],
     },
@@ -467,29 +466,29 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Dat ze leren zichzelf te redden in een veeleisende wereld.",
+          title: "Dat de school een beschermende en veilige plaats biedt.",
         },
         {
           id: "1",
-          title: "Dat ze zelf leren richting te geven aan hun leven.",
+          title: "Dat de school hen uitdaagt hun potentieel te verwezenlijken.",
         },
         {
           id: "2",
-          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "Dat de school in verbinding staat met de wereld daarbuiten.",
         },
         {
           id: "3",
           title:
-            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+            "Dat de school een plaats is waar leerlingen een stem hebben.",
         },
         {
           id: "4",
-          title: "Dat ze doorstromen naar zo hoog mogelijk vervolgonderwijs.",
+          title: "Dat de school een omgeving is waarin leerprestaties hoog worden gewaardeerd.",
         },
         {
           id: "5",
           title:
-            "Dat ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
+            "Dat de school toegang biedt tot gespecialiseerde zorg",
         },
       ],
     },
@@ -499,29 +498,29 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Dat ze leren zichzelf te redden in een veeleisende wereld.",
+          title: "Ze te zien als personen die nog afhankelijk zijn van volwassenen.",
         },
         {
           id: "1",
-          title: "Dat ze zelf leren richting te geven aan hun leven.",
+          title: "Ze te zien als unieke personen met een eigenstandige positie.",
         },
         {
           id: "2",
-          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "Ze te zien als deelnemers in de echte wereld.",
         },
         {
           id: "3",
           title:
-            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+            "Ze te zien als een waardevolle nieuwe generatie.",
         },
         {
           id: "4",
-          title: "Dat ze doorstromen naar zo hoog mogelijk vervolgonderwijs.",
+          title: "Ze te zien als lerenden in een dienstverlenend instituut.",
         },
         {
           id: "5",
           title:
-            "Dat ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
+            "Ze te zien als personen met speciale kenmerken en leerbehoeften",
         },
       ],
     },

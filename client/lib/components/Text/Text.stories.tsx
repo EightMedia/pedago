@@ -8,14 +8,7 @@ export default {
   component: Text,
 } as ComponentMeta<typeof Text>;
 
-const Template: ComponentStory<typeof Text> = (args) => (
-  <Text {...args}>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam voluptates
-    ullam omnis suscipit accusamus, inventore facere dolorem quasi, repellendus
-    cum impedit nam optio sapiente nihil odit! Exercitationem cupiditate fugit
-    voluptate!
-  </Text>
-);
+const Template: ComponentStory<typeof Text> = (args) => <Text {...args} />;
 
 const params = {
   design: {

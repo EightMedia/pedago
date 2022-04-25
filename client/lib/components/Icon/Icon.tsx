@@ -5,6 +5,7 @@ import { IconType } from "./Icon.types";
 
 export enum IconsEnum {
   Info,
+  Copy,
   Close,
   Timer,
   Check,
@@ -47,6 +48,12 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
   [IconsEnum.Info]: (
     <path
       d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Z"
+      fill="currentColor"
+    />
+  ),
+  [IconsEnum.Copy]: (
+    <path
+      d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Zm0 16H8V7h11v14Z"
       fill="currentColor"
     />
   ),
@@ -169,7 +176,7 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
     <path
       fillRule="evenodd"
       clipRule="evenodd"
-      d="M4 8.501h3v-1.79c0-2.61 1.91-4.94 4.51-5.19A5.008 5.008 0 0 1 17 6.501h-2c0-1.13-.6-2.24-1.64-2.7-2.21-.99-4.36.6-4.36 2.7v2h11v14H4v-14Zm2 2v10h12v-10H6Zm4 5c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2Z"
+      d="M17 6.5v2h3v14H4v-14h3v-2c0-2.76 2.24-5 5-5s5 2.24 5 5Zm-5-3c-1.66 0-3 1.34-3 3v2h6v-2c0-1.66-1.34-3-3-3Zm-6 17v-10h12v10H6Zm8-5c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2Z"
       fill="currentColor"
     />
   ),
@@ -238,7 +245,13 @@ const Icons: { [key in IconsEnum]: ReactElement } = {
   ),
 };
 
-const IconComponent = ({ icon, className, color, infoIcon }: IconType) => {
+const IconComponent = ({
+  icon,
+  className,
+  color,
+  infoIcon,
+  size,
+}: IconType) => {
   const colorStyle = color ? { color: color } : {};
   if (infoIcon) {
     const mask = `url(#icon-${icon})`;
@@ -310,7 +323,7 @@ const IconComponent = ({ icon, className, color, infoIcon }: IconType) => {
       height="24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cx(styles.icon, className)}
+      className={cx(styles.icon, className, styles[size || ""])}
       style={colorStyle}
     >
       {Icons[icon]}

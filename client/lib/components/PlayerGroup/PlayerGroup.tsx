@@ -17,20 +17,23 @@ export const PlayerGroupComponent = ({
 }: PlayerGroupType) => {
   const { text } = useContext(LanguageContext);
   return (
-    <GlassPanel>
-      <Center>
-        {counter && <PlayerCount players={players?.length as number} />}
-        <div className={cx(styles.groupName)}>{name}</div>
-        {players?.length ? (
-          <div className={cx(styles.players)}>
-            {players.map((player, index) => (
-              <Player key={index} {...player} />
-            ))}
-          </div>
-        ) : (
-          <p>{text.waiting.waiting}</p>
-        )}
-        {handleGroupChange && (
+    <div className={styles.playerGroup}>
+      <GlassPanel>
+        <Center>
+          {players?.length ? (
+            <>
+              <PlayerCount players={players?.length as number} />
+              <div className={cx(styles.groupName)}>{name}</div>
+              <div className={cx(styles.players)}>
+                {players.map((player, index) => (
+                  <Player key={index} {...player} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className={styles.waiting}>{text.adminLobby.playerGroup.waiting}</p>
+          )}
+          {handleGroupChange && (
           <Button
             variation="line"
             className={styles.changeButton}
@@ -39,8 +42,9 @@ export const PlayerGroupComponent = ({
             {text.gameLobby.changeToThisGroup}
           </Button>
         )}
-      </Center>
-    </GlassPanel>
+        </Center>
+      </GlassPanel>
+    </div>
   );
 };
 
