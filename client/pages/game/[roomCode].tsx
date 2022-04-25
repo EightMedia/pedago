@@ -101,7 +101,7 @@ const RoomCode = () => {
           }
         }
       );
-    }    
+    }
   }, [socket, roomCode, error, language]);
 
   useEffect(() => {
