@@ -1,6 +1,9 @@
 .box {
   display: inline-flex;
-  padding: var(--space-2xs) var(--space-xs);
+  padding: 11px;
+  @media (--sm) {
+    padding: var(--space-2xs) var(--space-xs);
+  }
   background: var(--color-dark-blue);
   align-items: center;
   color: var(--color-white);
@@ -9,7 +12,10 @@
 
 .text {
   margin-left: var(--space-3xs);
-  font-size: 18px;
+  font-size: var(--font-size-sm);
+  @media (--sm) {
+    font-size: var(--font-size-mdlg);
+  }
 }
 
 .dark {

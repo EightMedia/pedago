@@ -1,13 +1,13 @@
 /* css module */
 
 .playerGroup {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2xs);
-  background: var(--color-white-15);
-  padding: var(--space-md);
+}
+
+.playerGroup:only-child {
+  & [class*="PlayerCount"],
+  & .groupName {
+    display: none;
+  }
 }
 
 .groupName {
