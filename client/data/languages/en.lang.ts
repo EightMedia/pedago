@@ -1,4 +1,5 @@
 import { Locale } from "models";
+import { NL } from "./nl.lang";
 
 export const EN: Locale = {
   landing: {
@@ -226,4 +227,5 @@ export const EN: Locale = {
     privacy: "",
   },
   rounds: [],
+  ...NL,
 };
