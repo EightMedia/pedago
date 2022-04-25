@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlayerEvent = void 0;
 var PlayerEvent;
 (function (PlayerEvent) {
+    PlayerEvent["RoomCodeExists"] = "roomCodeExists";
     PlayerEvent["JoinRoomByRoomCode"] = "joinRoomByRoomCode";
     PlayerEvent["JoinRoomWithName"] = "joinRoomWithName";
     PlayerEvent["JoinGroup"] = "joinGroup";

@@ -39,3 +39,12 @@
     margin-bottom: var(--space-2xs);
   }
 }
+
+.invalid {
+  outline: solid 1px var(--color-red);
+  border-color: var(--color-red);
+}
+
+.error {
+  color: var(--color-red);
+}

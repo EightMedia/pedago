@@ -31,9 +31,7 @@ export const GameRound = ({
 }: GameType) => {
   const [showStopModal, setShowStopModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const text = useContext(LanguageContext);
-  const timerContext = useContext(TimerContext);
-  const room = useContext(RoomContext);
+  const { text } = useContext(LanguageContext);
   const gameText = text.adminGame.round;
   const router = useRouter();
 

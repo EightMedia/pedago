@@ -23,7 +23,7 @@ export const GameCountdown = ({
   roundMax: number;
 }) => {
   const [counter, setCounter] = useState(time);
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const room = useContext(RoomContext);
   const players = getTeamFromSocketId(room as RoomDto, socket?.id as string);

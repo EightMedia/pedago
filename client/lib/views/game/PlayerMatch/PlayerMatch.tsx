@@ -16,7 +16,7 @@ export const PlayerMatch = ({
   teamMembers,
   initialScene,
 }: PlayerMatchType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const room = useContext(RoomContext);
   const timer = useContext(TimerContext);
 
@@ -41,7 +41,7 @@ export const PlayerMatch = ({
               />
             );
           case PlayerMatchSceneEnum.Wait:
-            return <PlayerMatchWaitScene round={round} roundMax={roundMax} />;
+            return <PlayerMatchWaitScene />;
           default:
             return null;
         }

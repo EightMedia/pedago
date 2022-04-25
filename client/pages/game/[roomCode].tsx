@@ -56,8 +56,10 @@ const RoomCode = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
+  const [error, setError] = useState<string | undefined>();
   const [timer, setTimer] = useState<number | null>(0);
 
+  let language = Language.NL;
   const ROUND_MAX = 6;
   let playerId: string | null = "";
 
@@ -72,6 +74,7 @@ const RoomCode = () => {
 
   if (typeof window !== "undefined") {
     playerId = getPlayerIdFromLocalStorage();
+    language = (localStorage?.getItem("language") as Language) || Language.NL;
   }
 
   const router = useRouter();
@@ -90,14 +93,16 @@ const RoomCode = () => {
         (r: SocketCallback) => {
           if (r.status === "OK") {
             setWizardStep(WizardStep.Name);
+            setError(undefined);
           } else {
             setWizardStep(WizardStep.RoomCode);
+            const messageObject = r.message as { EN: string; NL: string };
+            setError(messageObject[language]);
           }
-          console.log(r);
         }
       );
     }
-  }, [socket, roomCode]);
+  }, [socket, roomCode, error, language]);
 
   useEffect(() => {
     if (socket) {
@@ -127,20 +132,14 @@ const RoomCode = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider
-        lang={
-          typeof window !== "undefined"
-            ? (localStorage?.getItem("language") as Language)
-            : Language.NL
-        }
-      >
+      <LanguageProvider lang={language}>
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>
               {(() => {
                 switch (view.name) {
                   case ViewName.Wizard:
-                    return <Wizard initialStep={wizardStep} />;
+                    return <Wizard initialStep={wizardStep} error={error} />;
                   case ViewName.Lobby:
                     return (
                       <Lobby

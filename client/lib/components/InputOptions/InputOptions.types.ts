@@ -20,6 +20,7 @@ interface InputOptionsPropsSingle<Value extends InputOptionValue>
   value: Value | undefined;
   multi?: false;
   onChange: (value: Value | undefined) => void;
+  error?: string | undefined;
 }
 
 interface InputOptionsPropsMulti<Value extends InputOptionValue>
@@ -27,6 +28,7 @@ interface InputOptionsPropsMulti<Value extends InputOptionValue>
   value: Value[];
   multi: true;
   onChange: (value: Value[]) => void;
+  error?: string | undefined;
 }
 
 export type InputOptionsProps<Value extends InputOptionValue> =

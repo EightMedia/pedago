@@ -52,9 +52,11 @@ const AdminGame = () => {
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
   const [timer, setTimer] = useState<number | null>(0);
 
+  let language = Language.NL;
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
     localRoom = localStorage.getItem("room");
+    language = (localStorage?.getItem("language") as Language) || Language.NL;
   }
 
   const handleRegisterGame = (room: Partial<RoomDto>): void => {
@@ -121,13 +123,7 @@ const AdminGame = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider
-        lang={
-          typeof window !== "undefined"
-            ? (localStorage?.getItem("language") as Language)
-            : Language.NL
-        }
-      >
+      <LanguageProvider lang={language}>
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>

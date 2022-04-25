@@ -6,7 +6,7 @@ import {
   useContext,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
@@ -73,7 +73,7 @@ const CompareCard = forwardRef(function CompareCard(
   { card, round = 0, ...rest }: CompareCardProps,
   ref?: Ref<HTMLDivElement>
 ) {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
 
   return (
     <div {...rest} ref={ref} className={styles.card}>
@@ -88,13 +88,11 @@ export const DiscussCompare = ({
   teamMembers,
   round = 0,
 }: DiscussCompareProps) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const timer = useContext(TimerContext);
   const room = useContext(RoomContext);
 
   const [showInfoModal, setShowInfoModal] = useState(false);
-
-  const teamMembersCount = teamMembers?.length;
 
   const rowProps = teamMembers?.[0]?.cards.map(useEqualRows) || [];
 

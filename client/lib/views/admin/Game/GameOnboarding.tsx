@@ -13,12 +13,12 @@ export type GameOnboardingProps = {
 };
 
 export const GameInfo = ({ title }: { title: string }) => {
-  const text = useContext(LanguageContext).adminLobby.info;
+  const { text } = useContext(LanguageContext);
   return (
     <>
       <PanelTitle>{title}</PanelTitle>
       <Stack>
-        {text.items.map((item, index) => (
+        {text.adminLobby.info.items?.map((item, index) => (
           <InfoItem
             key={index}
             icon={item.icon}
@@ -32,14 +32,14 @@ export const GameInfo = ({ title }: { title: string }) => {
 };
 
 export const GameOnboarding = ({ handleOk }: { handleOk: () => void }) => {
-  const text = useContext(LanguageContext).adminLobby.info;
+  const { text } = useContext(LanguageContext);
   return (
     <Page>
       <PageSlot location="headerCenter">
         <Logo />
       </PageSlot>
       <Panel>
-        <GameInfo title={text.title} />
+        <GameInfo title={text.adminLobby.info.title} />
         <Button onClick={handleOk}>Ik snap het</Button>
       </Panel>
     </Page>

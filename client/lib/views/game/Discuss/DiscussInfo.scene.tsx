@@ -30,10 +30,10 @@ export const DiscussInfo = ({
   round,
   roundMax,
 }: DiscussInfoProps) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const timer = useContext(TimerContext);
   const room = useContext(RoomContext);
-
+  
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">

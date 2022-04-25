@@ -7,9 +7,9 @@ import { PanelTitle } from "../../../components/Panel";
 import { Stack } from "../../../layouts/Stack";
 
 export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
-  const text = useContext(LanguageContext).gameWizard.info;
+  const { text } = useContext(LanguageContext);
 
-  const items = text.items;
+  const items = text.gameWizard.info.items;
   const icons = [
     IconsEnum.Flag,
     IconsEnum.Timer,
@@ -20,9 +20,9 @@ export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
 
   return (
     <>
-      <PanelTitle>{text.title}</PanelTitle>
+      <PanelTitle>{text.gameWizard.info.title}</PanelTitle>
       <Stack gap="sm">
-        {items?.map((item, index) => (
+        {items?.map((item: any, index: number) => (
           <InfoItem
             key={index}
             icon={icons[index]}
@@ -31,7 +31,7 @@ export const WizardInfo = ({ onClick }: { onClick: () => void }) => {
           />
         ))}
         <Button stretch onClick={onClick}>
-          {text.understood}
+          {text.gameWizard.info.understood}
         </Button>
       </Stack>
     </>

@@ -22,7 +22,8 @@ export const LobbyLobby = ({
   handleInfo,
 }: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
-  const text = useContext(LanguageContext).adminLobby.lobby;
+  const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
+  const { text } = useContext(LanguageContext);
   const [lock, setLock] = useState(IconsEnum.LockOpen);
 
   const handleSettings = () => {
@@ -50,11 +51,11 @@ export const LobbyLobby = ({
         <ButtonGroup>
           <Button variation="whiteBlocked" onClick={handleSettings}>
             <Icon icon={IconsEnum.Settings} size="md" />
-            <span className={"lg-only"}>{text.settingsButton}</span>
+            <span className={"lg-only"}>{text.adminLobby.lobby.settingsButton}</span>
           </Button>
           <Button variation="whiteBlocked" onClick={handleInfo as () => void}>
             <Icon icon={IconsEnum.Info} size="md" />
-            <span className={"lg-only"}>{text.rulesButton}</span>
+            <span className={"lg-only"}>{text.adminLobby.lobby.rulesButton}</span>
           </Button>
         </ButtonGroup>
       </PageSlot>
@@ -70,7 +71,7 @@ export const LobbyLobby = ({
               </CopyToClipboard>
             </div>
             <Text size="lg" align="center">
-              {text.code}
+              {text.adminLobby.lobby.code}
             </Text>
             <ButtonGroup>
               <Button
@@ -84,7 +85,7 @@ export const LobbyLobby = ({
                 onClick={handleStart as () => void}
                 className={styles.startButton}
               >
-                {text.start}
+                {text.adminLobby.lobby.start}
               </Button>
             </ButtonGroup>
           </header>

@@ -22,6 +22,7 @@ import {
   finishRoundByAdmin,
   gameStart,
   getLatestSortOrder,
+  getRoomCodeExists,
   joinGroup,
   joinRoomByRoomCode,
   joinRoomWithName,
@@ -83,6 +84,10 @@ io.on("connection", (socket: Socket) => {
   socket.on(AdminEvent.Disconnect, () => disconnectAll(socket));
 
   // Player Listeners
+  socket.on(
+    PlayerEvent.RoomCodeExists,
+    (roomCode: number, callback: (args: SocketCallback) => void) => getRoomCodeExists(roomCode, callback)
+  );
   socket.on(
     PlayerEvent.JoinRoomByRoomCode,
     (

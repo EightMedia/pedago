@@ -1,8 +1,9 @@
 import { Role } from "models";
-import { useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputOptions } from "../../../components/InputOptions";
+import { InputOptionValue } from "../../../components/InputOptions/InputOptions.types";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { Text } from "../../../components/Text";
@@ -16,14 +17,72 @@ export const WizardName = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const text = useContext(LanguageContext);
+  const [nameError, setNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [roleError, setRoleError] = useState<string>("");
+  const [customRoleError, setCustomRoleError] = useState<string>("");
+  const { text, lang } = useContext(LanguageContext);
   const wizardNameText = text.adminWizard.name;
 
+  const errorObject = {
+    name: { EN: "Please fill in a name", NL: "Vul uw naam in" },
+    email: {
+      EN: "Please fill in your e-mail address",
+      NL: "Vul uw e-mailadres in",
+    },
+    role: {
+      EN: "Please check at least on of the roles",
+      NL: "Geef tenminste één functie op",
+    },
+    customRole: {
+      EN: "Please fill in your role",
+      NL: "Vul uw functie in",
+    },
+  };
+
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    updateData(e.target.value, "info.name");
+    setNameError("");
+  };
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    updateData(e.target.value, "info.email");
+    setEmailError("");
+  };
+  const handleRoleChange = (role: InputOptionValue[]) => {
+    updateData(role, "info.role");
+    setRoleError("");
+  };
+  const handleCustomRoleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    updateData(e.target.value, "info.customRole");
+    setCustomRoleError("");
+  };
+
   const handleNextStep = () => {
-    if (data.info?.name && data.info.email && data.info.role) {
+    if (!data.info?.name) {
+      setNameError(errorObject.name[lang]);
+    }
+    if (!data.info?.email) {
+      setEmailError(errorObject.email[lang]);
+    }
+    if (!data.info?.role?.length) {
+      setRoleError(errorObject.role[lang]);
+    }
+    if (
+      Boolean(data.info?.role?.includes(Role.Other)) &&
+      !data?.info?.customRole
+    ) {
+      setCustomRoleError(errorObject.customRole[lang]);
+    }
+    if (
+      data.info?.name &&
+      data.info.email &&
+      data.info.role?.length &&
+      !(
+        Boolean(data.info?.role?.includes(Role.Other)) &&
+        !data?.info?.customRole
+      )
+    ) {
       handleStep(WizardStep.Organisation);
-    } else {
-      console.error("Please fill in the form");
     }
   };
 
@@ -42,7 +101,8 @@ export const WizardName = ({
           id="name"
           label={wizardNameText.name}
           showLabel={true}
-          onChange={(e) => updateData(e.target.value, "info.name")}
+          error={nameError}
+          onChange={handleNameChange}
         />
         <InputText
           value={data?.info?.email || ""}
@@ -51,7 +111,8 @@ export const WizardName = ({
           label={wizardNameText.email}
           helptext={wizardNameText.emailHelp}
           showLabel={true}
-          onChange={(e) => updateData(e.target.value, "info.email")}
+          error={emailError}
+          onChange={handleEmailChange}
         />
 
         <InputOptions
@@ -63,8 +124,9 @@ export const WizardName = ({
           multi
           label={wizardNameText.role}
           value={data?.info?.role ?? []}
-          onChange={(role) => {
-            updateData(role, "info.role");
+          error={roleError}
+          onChange={(role: InputOptionValue[]) => {
+            handleRoleChange(role);
             if (!data.info?.role?.includes(Role.Other)) {
               updateData(undefined, "info.customRole");
             }
@@ -76,8 +138,9 @@ export const WizardName = ({
           id="customRole"
           label={wizardNameText.customRole}
           showLabel={true}
+          error={customRoleError}
           condition={Boolean(data.info?.role?.includes(Role.Other))}
-          onChange={(e) => updateData(e.target.value, "info.customRole")}
+          onChange={handleCustomRoleChange}
         />
 
         <Button stretch={true} onClick={handleNextStep}>

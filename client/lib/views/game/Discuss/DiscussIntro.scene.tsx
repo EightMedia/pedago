@@ -26,7 +26,7 @@ export const DiscussIntro = ({
   roundMax,
 }: DiscussIntroProps) => {
   TimedCallback(time, callback);
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const timer = useContext(TimerContext);
   const room  = useContext(RoomContext);
