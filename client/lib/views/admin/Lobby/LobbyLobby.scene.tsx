@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import ReactMarkdown from "react-markdown";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button, ButtonGroup } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
@@ -71,7 +72,7 @@ export const LobbyLobby = ({
               </CopyToClipboard>
             </div>
             <Text size="lg" align="center">
-              {text.adminLobby.lobby.code}
+              <ReactMarkdown>{text.adminLobby.lobby.code}</ReactMarkdown>
             </Text>
             <ButtonGroup>
               <Button

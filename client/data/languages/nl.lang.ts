@@ -152,7 +152,7 @@ export const NL: Locale = {
     lobby: {
       settingsButton: "Instellingen",
       rulesButton: "Uitleg",
-      code: "Voer de code in op [pedagogame.com](https://pedagogame.com) en doe mee",
+      code: "Voer de code in op [**pedagogame.com**](https://pedagogame.com) en doe mee",
       start: "Start",
     },
     playerGroup: {
