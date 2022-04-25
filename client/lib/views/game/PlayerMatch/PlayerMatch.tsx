@@ -36,7 +36,7 @@ const PlayerMatchComponent = ({
               />
             );
           case PlayerMatchSceneEnum.Wait:
-            return <PlayerMatchWaitScene round={round} roundMax={roundMax} />;
+            return <PlayerMatchWaitScene />;
           default:
             return null;
         }
