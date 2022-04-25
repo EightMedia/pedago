@@ -26,7 +26,10 @@ export const joinRoomByRoomCode = (
   if (!room) {
     callback({
       status: "ERROR",
-      message: `Room with game code ${roomCode} does not exist.`,
+      message: {
+        NL: "Deze code wordt niet herkend. Controleer de code en probeer het opnieuw.",
+        EN: "This code is not valid. Make sure to fill in the right code and try again.",
+      },
     });
     return;
   }
@@ -78,7 +81,10 @@ export const joinRoomWithName = (
   if (!room) {
     callback({
       status: "ERROR",
-      message: `Room does not exist.`,
+      message: {
+        NL: "Deze code wordt niet herkend. Controleer de code en probeer het opnieuw.",
+        EN: "This code is not valid. Make sure to fill in the right code and try again.",
+      },
     });
     return;
   }
@@ -113,7 +119,10 @@ export const joinRoomWithName = (
   } else {
     callback({
       status: "ERROR",
-      message: `Name taken: ${name}. Choose a different name.`,
+      message: {
+        NL: `Deze naam wordt al gebruikt. Probeer een andere naam, suggestie: “${name}2”`,
+        EN: `This name is in use. Try a different name, something like: “${name}2”`,
+      },
     });
   }
 };
@@ -133,12 +142,18 @@ export const joinGroup = (
   if (!player) {
     callback({
       status: "ERROR",
-      message: `Player with ID ${playerId} was not found`,
+      message: {
+        NL: `Speler met ID ${playerId} bestaat niet`,
+        EN: `Player with ID ${playerId} was not found`,
+      },
     });
   } else if (!group) {
     callback({
       status: "ERROR",
-      message: `Group with ID ${groupId} was not found`,
+      message: {
+        NL: `Groep met ID ${groupId} bestaat niet`,
+        EN: `Group with ID ${groupId} was not found`,
+      },
     });
   } else {
     store.updatePlayer(roomId, playerId, {
@@ -224,7 +239,10 @@ export const storeRound = (
   if (!roomId || !playerId) {
     callback({
       status: "ERROR",
-      message: "Room and/or player unknown",
+      message: {
+        NL: "Spel en/of speler niet bekend",
+        EN: "Room and/or player unknown",
+      },
     });
     return;
   }
@@ -290,7 +308,10 @@ export const finishRoundByAdmin = (
   if (!roomId || !playerId) {
     callback({
       status: "ERROR",
-      message: "Room and/or player unknown",
+      message: {
+        NL: "Spel en/of speler niet bekend",
+        EN: "Room and/or player unknown",
+      },
     });
     return;
   }
