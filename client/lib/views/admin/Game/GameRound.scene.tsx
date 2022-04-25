@@ -31,6 +31,8 @@ export const GameRound = ({
 }: GameType) => {
   const [showStopModal, setShowStopModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const timerContext = useContext(TimerContext);
+  const room = useContext(RoomContext);
   const { text } = useContext(LanguageContext);
   const gameText = text.adminGame.round;
   const router = useRouter();
@@ -101,7 +103,9 @@ export const GameRound = ({
                 {text.game.round} {round.current} {text.game.of} {round.total}
               </Title>
               <div className={styles.timerAndStop}>
-              {(room?.options?.timer as boolean) && <Timer time={timerContext as number} />}
+                {(room?.options?.timer as boolean) && (
+                  <Timer time={timerContext as number} />
+                )}
                 <Button
                   onClick={() =>
                     teamsStillPlaying
