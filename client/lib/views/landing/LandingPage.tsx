@@ -21,8 +21,10 @@ import { LandingIllustration } from "./Landing.illustration";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = ({
+  language,
   setLanguage,
 }: {
+  language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
   const [roomCode, setRoomCode] = useState<string>("");
@@ -56,19 +58,19 @@ const LandingPage = ({
               onClick={() => setLanguageSelect(!languageSelect)}
             >
               <Icon icon={IconsEnum.Language} />
-              <span>NL</span>
+              <span>{language.toString()}</span>
             </button>
             {languageSelect && (
               <div className={styles.languages}>
                 <button
                   onClick={() => handleLanguageChange(Language.NL)}
-                  className={styles.langnl}
+                  className={styles.langNl}
                 >
                   Nederlands
                 </button>
                 <button
                   onClick={() => handleLanguageChange(Language.EN)}
-                  className={styles.langeng}
+                  className={styles.langEn}
                 >
                   English
                 </button>

@@ -71,7 +71,7 @@
   background-color: var(--color-grey-lightest);
 }
 
-.langnl {
+.langNl {
   color: var(--color-grey-dark);
   font-size: var(--font-size-mdlg);
   font-family: var(--font-body);
@@ -79,7 +79,7 @@
   line-height: 1.35;
 }
 
-.langeng {
+.langEn {
   color: var(--color-grey-dark);
   font-size: var(--font-size-mdlg);
   font-family: var(--font-body);
