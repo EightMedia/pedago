@@ -1,5 +1,5 @@
 import Avatar from "boring-avatars";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
@@ -17,7 +17,7 @@ export const WizardName = ({
   setStep: (step: WizardStep, name: string) => void;
   error?: string;
 }) => {
-  const [errorMsg, setErrorMsg] = useState<string | undefined>(error);
+  const [errorMsg, setErrorMsg] = useState<string | undefined>();
   const [name, setName] = useState<string>("");
   const { text, lang } = useContext(LanguageContext);
   const errorObject = {
@@ -25,12 +25,15 @@ export const WizardName = ({
     NL: "Gebruik tenminste twee karakters als naam",
   };
 
+  useEffect(() => {
+    setErrorMsg(error);
+  }, [error]);
+
   const handleSubmit = () => {
-    setErrorMsg(undefined);
-    if (name.length >= 2 && !error) {
+    if (name.length >= 2) {
       setStep(WizardStep.Group, name);
     } else {
-      setErrorMsg(error || errorObject[lang]);
+      setErrorMsg(errorObject[lang]);
     }
   };
 

@@ -83,6 +83,7 @@ const RoomCode = () => {
         (r: SocketCallback) => {
           if (r.status === "OK") {
             setWizardStep(WizardStep.Name);
+            setError(undefined);
           } else {
             setWizardStep(WizardStep.RoomCode);
             const messageObject = r.message as { EN: string; NL: string };

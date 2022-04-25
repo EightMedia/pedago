@@ -30,7 +30,11 @@ const WizardComponent = ({ initialStep, error }: WizardType) => {
     setStep(initialStep as WizardStep);
   }, [initialStep]);
 
-  const handleRoomCode = (step: WizardStep, roomCode: number) => {    
+  useEffect(() => {
+      setErrorMsg(error);
+  }, [error]);
+
+  const handleRoomCode = (step: WizardStep, roomCode: number) => {
     (socket as Socket).emit(
       PlayerEvent.RoomCodeExists,
       roomCode,
