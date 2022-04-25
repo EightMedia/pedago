@@ -85,7 +85,7 @@ export const GameSort = ({ round }: GameSortType) => {
             onClick={() => setShowInfoModal(true)}
           >
             <Icon icon={IconsEnum.Info} />
-            Info
+            <span className="lg-only">Info</span>
           </Button>
         </PageSlot>
         <PageSlot location="body">

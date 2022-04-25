@@ -1,22 +1,36 @@
 .team {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   gap: var(--space-xs);
-  padding: var(--space-xs);
-  border-top: 1px dashed #ffffff;
-  &:not(:first-child) {
-    margin-top: 25px;
+  &:not(:last-child) {
+    margin-bottom: var(--space-xs);
+  }
+}
+
+.teamNameTitle {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  gap: 8px;
+  &:before,
+  &:after {
+    content: "";
+    display: inline-block;
+    border-bottom: 1px dashed var(--color-grey-neutral);
+    height: 50%;
+  }
+  &:before {
+    grid-column: 1 / span 1;
+  }
+  &:after {
+    grid-column: 3 / span 1;
   }
 }
 
 .teamName {
   display: inline-block;
-  padding: 0 8px;
-  background: var(--color-dark-blue);
-  position: absolute;
-  top: 0;
-  right: 50%;
-  transform: translate(0, -50%);
+  grid-column: 2 / span 1;
 }

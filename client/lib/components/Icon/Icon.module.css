@@ -1,0 +1,26 @@
+.icon {
+  height: auto;
+}
+
+.sm {
+  width: 20px;
+  @media (--sm) {
+    width: 22px;
+  }
+}
+
+.md {
+  width: 22px;
+  @media (--md) {
+    width: 24px;
+  }
+}
+
+/* .lg is not used yet */
+
+.xl {
+  width: 32px;
+  @media (--sm) {
+    width: 36px;
+  }
+}
