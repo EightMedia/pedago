@@ -9,6 +9,7 @@ import {
   ViewName,
   ViewState
 } from "models";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
@@ -101,58 +102,67 @@ const AdminGame = () => {
   }, [socket]);
 
   return (
-    <LanguageProvider
-    lang={typeof window !== "undefined" ? localStorage?.getItem("language") as Language : Language.NL}
-    >
-      <SocketContext.Provider value={socket}>
-        <RoomContext.Provider value={room}>
-          {(() => {
-            switch (view.name) {
-              case ViewName.Wizard:
-                return (
-                  <Wizard
-                    data={getWizardData(room)}
-                    initialStep={WizardStep.Name}
-                    handleRegisterGame={handleRegisterGame}
-                  />
-                );
-              case ViewName.Lobby:
-                return (
-                  <Lobby
-                    room={getLobbyRoom(room)}
-                    groups={getAdminLobbyType(
-                      room.groups as Group[],
-                      playerList
-                    )}
-                    initialStep={lobbyStep}
-                  />
-                );
-              case ViewName.Game:
-                return (
-                  <Game
-                    {...getAdminGameType(room as RoomDto)}
-                    initialScene={gameScene}
-                  />
-                );
-              case ViewName.Result:
-                return (
-                  <Result
-                    initialStep={ResultStep.Loader}
-                    data={
-                      getResultData(room, null) as {
-                        me?: ResultSet;
-                        groups: ResultGroup[];
+    <>
+      <Head>
+        <title>Pedago Game</title>
+      </Head>
+      <LanguageProvider
+        lang={
+          typeof window !== "undefined"
+            ? (localStorage?.getItem("language") as Language)
+            : Language.NL
+        }
+      >
+        <SocketContext.Provider value={socket}>
+          <RoomContext.Provider value={room}>
+            {(() => {
+              switch (view.name) {
+                case ViewName.Wizard:
+                  return (
+                    <Wizard
+                      data={getWizardData(room)}
+                      initialStep={WizardStep.Name}
+                      handleRegisterGame={handleRegisterGame}
+                    />
+                  );
+                case ViewName.Lobby:
+                  return (
+                    <Lobby
+                      room={getLobbyRoom(room)}
+                      groups={getAdminLobbyType(
+                        room.groups as Group[],
+                        playerList
+                      )}
+                      initialStep={lobbyStep}
+                    />
+                  );
+                case ViewName.Game:
+                  return (
+                    <Game
+                      {...getAdminGameType(room as RoomDto)}
+                      initialScene={gameScene}
+                    />
+                  );
+                case ViewName.Result:
+                  return (
+                    <Result
+                      initialStep={ResultStep.Loader}
+                      data={
+                        getResultData(room, null) as {
+                          me?: ResultSet;
+                          groups: ResultGroup[];
+                        }
                       }
-                    }
-                  />
-                );
-              default:
-                return <>ERROR: ViewName not found</>;
-            }
-          })()}
-        </RoomContext.Provider>
-      </SocketContext.Provider>
-    </LanguageProvider>
+                    />
+                  );
+                default:
+                  return <>ERROR: ViewName not found</>;
+              }
+            })()}
+          </RoomContext.Provider>
+        </SocketContext.Provider>
+      </LanguageProvider>
+    </>
   );
 };
 

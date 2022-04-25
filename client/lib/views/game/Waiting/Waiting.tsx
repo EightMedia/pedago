@@ -6,11 +6,10 @@ import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Panel, PanelTitle } from "../../../components/Panel";
 import { Text } from "../../../components/Text";
+import { Timer } from "../../../components/Timer";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
 import { WaitingType } from "./Waiting.types";
-import styles from "./Waiting.module.css";
-import { Timer } from "../../../components/Timer";
 
 const WaitingComponent = ({
   round,

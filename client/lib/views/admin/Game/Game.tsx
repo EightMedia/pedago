@@ -29,6 +29,10 @@ const GameComponent = ({
     );
   };
 
+  const leadCallBack = initialScene
+    ? undefined
+    : () => setScene(GameScene.Round);
+
   switch (scene) {
     case GameScene.Onboarding:
       return <GameOnboarding handleOk={() => setScene(GameScene.Round)} />;
@@ -45,9 +49,11 @@ const GameComponent = ({
     case GameScene.Lead:
       return (
         <GameLead
+          openSettings={openSettings}
           round={round.current}
           roundMax={round.total}
-          callback={() => setScene(GameScene.Round)}
+          callback={leadCallBack}
+          teams={teams}
         />
       );
     default:

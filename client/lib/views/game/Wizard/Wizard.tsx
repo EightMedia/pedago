@@ -80,7 +80,7 @@ const WizardComponent = ({ initialStep }: WizardType) => {
       <PageSlot location="headerCenter">
         <Logo />
       </PageSlot>
-      <Panel>
+      <Panel width="sm">
         {(() => {
           switch (step) {
             case WizardStep.RoomCode:

@@ -150,6 +150,7 @@ export interface Locale {
       inGroups: string;
       inGroupsText: string;
       group1: string;
+      group1Help: string;
       group2: string;
       group3: string;
       group4: string;
@@ -193,6 +194,7 @@ export interface Locale {
     hi: string;
     willStart: string;
     waiting: string;
+    changeToThisGroup: string;
   };
   waiting: {
     goodBusy: string;

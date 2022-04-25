@@ -4,11 +4,20 @@
 
 .listItem {
   display: flex;
+  flex-direction: column;
+  @media (--sm) {
+    flex-direction: row;
+  }
+  &:not(:first-child) {
+    margin-top: var(--space-2xs);
+  }
 }
 
 .dt {
   font-weight: bold;
-  flex: 0 0 150px;
+  @media (--sm) {
+    flex: 0 0 150px;
+  }
 }
 
 .dd {

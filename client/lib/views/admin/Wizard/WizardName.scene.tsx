@@ -7,6 +7,7 @@ import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
 import { Text } from "../../../components/Text";
 import { Stack } from "../../../layouts/Stack";
+import { numberEnumToEntries } from "./utils";
 import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
@@ -55,12 +56,15 @@ export const WizardName = ({
 
         <InputOptions
           id="role"
-          options={text.roles}
+          options={numberEnumToEntries(Role).map(([, value]) => ({
+            value,
+            label: text.roles[value],
+          }))}
+          multi
           label={wizardNameText.role}
-          value={data?.info?.role}
-          enumOptions={true}
-          handleChange={(newData: Role) => {
-            updateData(newData, "info.role");
+          value={data?.info?.role ?? []}
+          onChange={(role) => {
+            updateData(role, "info.role");
             if (!data.info?.role?.includes(Role.Other)) {
               updateData(undefined, "info.customRole");
             }

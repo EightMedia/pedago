@@ -4,7 +4,7 @@ import { Button } from "../../../components/Button";
 import { InputSwitch } from "../../../components/InputSwitch";
 import { InputText } from "../../../components/InputText";
 import { PanelTitle } from "../../../components/Panel";
-import { Center } from "../../../layouts/Center";
+import { Text } from "../../../components/Text";
 import { Stack } from "../../../layouts/Stack";
 import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
@@ -14,7 +14,7 @@ export const WizardOptions = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const text = useContext(LanguageContext).adminWizard.options;
+  const text = useContext(LanguageContext).adminWizard;
   const groupName = (id: number) => {
     if (data.groups && data.groups[id]) {
       return data.groups[id].name;
@@ -41,31 +41,35 @@ export const WizardOptions = ({
 
   return (
     <>
-      <Center>
-        <p>{text.step} 4/4</p>
-        <PanelTitle>{text.title}</PanelTitle>
-      </Center>
+      <div className={styles.stepHeader}>
+        <Text tone="medium" align="center" weight="bold">
+          {text.name.step} 4/4
+        </Text>
+        <PanelTitle>{text.options.title}</PanelTitle>
+      </div>
+
       <Stack>
         <InputSwitch
           id="timer"
-          label={text.timerLabel}
-          helpText={text.timerText}
+          label={text.options.timerLabel}
+          helpText={text.options.timerText}
           checked={data.options?.timer}
           onChange={(e) => updateData(e.target.checked, "options.timer")}
         />
         <InputSwitch
           id="inGroups"
-          label={text.inGroups}
-          helpText={text.inGroupsText}
+          label={text.options.inGroups}
+          helpText={text.options.inGroupsText}
           checked={data.options?.inGroups}
           onChange={(e) => updateData(e.target.checked, "options.inGroups")}
         />
         <InputText
           value={groupName(0)}
           id="group1"
-          label={text.group1}
-          placeholder={text.group1}
-          showLabel={false}
+          label={text.options.group1}
+          helptext={text.options.group1Help}
+          placeholder={text.options.group1}
+          showLabel={true}
           onChange={(e) => {
             handleGroupChange(0, e.target.value);
           }}
@@ -74,8 +78,8 @@ export const WizardOptions = ({
         <InputText
           value={groupName(1)}
           id="group2"
-          label={text.group2}
-          placeholder={text.group2}
+          label={text.options.group2}
+          placeholder={text.options.group2}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(1, e.target.value);
@@ -85,8 +89,8 @@ export const WizardOptions = ({
         <InputText
           value={groupName(2)}
           id="group3"
-          label={text.group3}
-          placeholder={text.group3}
+          label={text.options.group3}
+          placeholder={text.options.group3}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(2, e.target.value);
@@ -96,8 +100,8 @@ export const WizardOptions = ({
         <InputText
           value={groupName(3)}
           id="group4"
-          label={text.group4}
-          placeholder={text.group4}
+          label={text.options.group4}
+          placeholder={text.options.group4}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(3, e.target.value);
@@ -105,14 +109,14 @@ export const WizardOptions = ({
           condition={(data.options?.inGroups && groupName(2) !== "") || false}
         />
         <Button stretch={true} onClick={handleNextStep}>
-          {text.next}
+          {text.options.next}
         </Button>
         <Button
           variation="line"
           onClick={() => handleStep(WizardStep.GameType)}
           className={styles.backButton}
         >
-          {text.back}
+          {text.options.back}
         </Button>
       </Stack>
     </>

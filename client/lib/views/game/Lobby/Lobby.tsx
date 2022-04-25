@@ -3,9 +3,9 @@ import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Intro } from "../../../components/Intro";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
+import { PanelGroup } from "../../../components/PanelGroup";
 import { PlayerGroup } from "../../../components/PlayerGroup";
 import { Title } from "../../../components/Title";
-import { Stack } from "../../../layouts/Stack";
 import { LobbyType } from "./Lobby.types";
 
 const LobbyComponent = ({ round, roundMax, groups, playerName }: LobbyType) => {
@@ -23,14 +23,17 @@ const LobbyComponent = ({ round, roundMax, groups, playerName }: LobbyType) => {
           {text.gameLobby.willStart}
         </Title>
         <Intro> {text.gameLobby.waiting}</Intro>
-        <Stack gap="xs">
+        <PanelGroup>
           {groups &&
             groups.map((group) => (
-              <div key={group.id}>
-                <PlayerGroup {...group} />
-              </div>
+              <PlayerGroup
+                key={group.id}
+                {...group}
+                counter={false}
+                handleGroupChange={() => alert("not implemented yet")}
+              />
             ))}
-        </Stack>
+        </PanelGroup>
       </PageSlot>
     </Page>
   );

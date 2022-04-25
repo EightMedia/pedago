@@ -38,11 +38,13 @@ export const GameCountdown = ({
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}
       </PageSlot>
-      <PageSlot location="body">
+      <PageSlot location="subheader">
         <div className={styles.players}>
-          <Player name="Demo player 1" />
-          <Player name="Demo player 1" />
+          <Player name="Stijn" />
+          <Player name="Vincent" />
         </div>
+      </PageSlot>
+      <PageSlot location="body">
         <span className={styles.countdownNumber}>{counter}</span>
       </PageSlot>
     </Page>
