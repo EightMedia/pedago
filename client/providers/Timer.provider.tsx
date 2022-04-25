@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { TimerContext } from "../contexts/TimerContext";
+import { TimerContext, TIMER_SECONDS } from "../contexts/TimerContext";
 
 const TimerProvider = ({
   children,
@@ -9,11 +9,11 @@ const TimerProvider = ({
   timeStamp: number;
 }) => {
   const currentTime = Math.floor(new Date().valueOf() / 1000);
-  const endTime = timeStamp + 60;
+  const endTime = timeStamp + TIMER_SECONDS;
   const initialTimer = endTime - currentTime;
   const [timer, setTimer] = useState<number>(initialTimer);
 
-  useEffect(() => {    
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimer(timer - 1);
     }, 1000);
