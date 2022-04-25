@@ -1,10 +1,10 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { GameScenes, GameType } from "./Game.types";
 import { GameCountdown } from "./GameCountdown";
 import { GameLead } from "./GameLead";
 import { GameSort } from "./GameSort";
 
-export const GameComponent = ({
+ export const Game = ({
   autoPlay = true,
   round,
   countdownTime,
@@ -42,5 +42,3 @@ export const GameComponent = ({
     </>
   );
 };
-
-export const Game = memo(GameComponent);

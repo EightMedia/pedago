@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { getPlayerId } from "../../../../factories/shared.factory";
 import { Button } from "../../../components/Button";
 import { Icon } from "../../../components/Icon";
@@ -20,8 +21,9 @@ import { GameSortType } from "./Game.types";
 export const GameSort = ({ round }: GameSortType) => {
   const { text } = useContext(LanguageContext);
   const roundText = text.rounds[round - 1];
-  const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
+  const room = useContext(RoomContext);
+  const timer = useContext(TimerContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
   const [showInfoModal, setShowInfoModal] = useState(false);
 
@@ -74,7 +76,7 @@ export const GameSort = ({ round }: GameSortType) => {
     <>
       <Page background={6}>
         <PageSlot location="headerLeft">
-          <Timer time={600} />
+          {(room?.options?.timer as boolean) && <Timer time={timer} />}
         </PageSlot>
         <PageSlot location="headerCenter">
           <h2 className={styles.lead}>{roundText?.lead}</h2>

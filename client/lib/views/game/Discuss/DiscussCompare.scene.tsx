@@ -9,6 +9,8 @@ import {
   useState
 } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Button } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
 import { Modal } from "../../../components/Modal";
@@ -87,6 +89,8 @@ export const DiscussCompare = ({
   round = 0,
 }: DiscussCompareProps) => {
   const { text } = useContext(LanguageContext);
+  const timer = useContext(TimerContext);
+  const room = useContext(RoomContext);
 
   const [showInfoModal, setShowInfoModal] = useState(false);
 
@@ -96,7 +100,7 @@ export const DiscussCompare = ({
     <>
       <Page>
         <PageSlot location="headerLeft">
-          <Timer time={600} />
+          {(room?.options?.timer as boolean) && <Timer time={timer} />}
         </PageSlot>
         <PageSlot location="headerCenter">
           <Center>{text.discuss.compare.discussDiff}</Center>
