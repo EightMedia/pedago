@@ -2,7 +2,6 @@ import { Locale } from "models";
 import { NL } from "./nl.lang";
 
 export const EN: Locale = {
-  ...NL,
   landing: {
     title: "Discover your ideals as a teacher",
     description:
@@ -227,4 +226,5 @@ export const EN: Locale = {
     privacy: "",
   },
   rounds: [],
+  ...NL,
 };
