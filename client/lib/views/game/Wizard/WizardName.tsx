@@ -1,5 +1,5 @@
 import Avatar from "boring-avatars";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
@@ -17,6 +17,7 @@ export const WizardName = ({
   setStep: (step: WizardStep, name: string) => void;
   error?: string;
 }) => {
+  const [changed, setChanged] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | undefined>();
   const [name, setName] = useState<string>("");
   const { text, lang } = useContext(LanguageContext);
@@ -30,11 +31,17 @@ export const WizardName = ({
   }, [error]);
 
   const handleSubmit = () => {
+    setChanged(false);
     if (name.length >= 2) {
       setStep(WizardStep.Group, name);
     } else {
       setErrorMsg(errorObject[lang]);
     }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e?.target?.value);
+    setChanged(true);
   };
 
   return (
@@ -57,9 +64,9 @@ export const WizardName = ({
           <InputText
             id="name"
             label={text.gameWizard.name.nameLabel}
-            error={errorMsg}
+            error={!changed ? errorMsg : undefined}
             placeholder={text.gameWizard.name.nameLabel}
-            onChange={(e) => setName(e?.target?.value)}
+            onChange={handleChange}
           />
         </div>
         <Button onClick={() => handleSubmit()} disabled={name.length < 1}>

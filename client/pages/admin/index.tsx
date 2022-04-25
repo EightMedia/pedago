@@ -1,7 +1,9 @@
 import {
   AdminEvent,
   Event,
-  Group, Language, Player,
+  Group,
+  Language,
+  Player,
   RoomDto,
   SocketCallback,
   ViewName,
@@ -44,9 +46,11 @@ const AdminGame = () => {
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
 
+  let language = Language.NL;
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
     localRoom = localStorage.getItem("room");
+    language = (localStorage?.getItem("language") as Language) || Language.NL;
   }
 
   const handleRegisterGame = (room: Partial<RoomDto>): void => {
@@ -104,13 +108,8 @@ const AdminGame = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider
-        lang={
-          typeof window !== "undefined"
-            ? (localStorage?.getItem("language") as Language)
-            : Language.NL
-        }
-      >        <SocketContext.Provider value={socket}>
+      <LanguageProvider lang={language}>
+        <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             {(() => {
               switch (view.name) {
