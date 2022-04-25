@@ -16,7 +16,7 @@ export const WizardName = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const wizardNameText = text.adminWizard.name;
 
   const handleNextStep = () => {

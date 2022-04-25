@@ -10,10 +10,10 @@ const LanguageProvider = ({
   children: ReactNode;
   lang: Language;
 }) => {
-  const data: Locale = languages[lang];
+  const text: Locale = languages[lang];
   return (
     <>
-      <LanguageContext.Provider value={data}>
+      <LanguageContext.Provider value={{text, lang}}>
         {children}
       </LanguageContext.Provider>
     </>

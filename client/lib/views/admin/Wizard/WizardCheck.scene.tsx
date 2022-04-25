@@ -21,7 +21,7 @@ export const WizardCheck = ({
   handleStep,
   handleCreateGame,
 }: WizardCheckProps) => {
-  const text = useContext(LanguageContext).adminWizard.check;
+  const { text } = useContext(LanguageContext);
   const groupNames = data.groups?.map((group) => group.name);
   const playerType =
     Object.values(PlayerType)[data?.info?.players?.type as number];
@@ -35,42 +35,42 @@ export const WizardCheck = ({
 
   return (
     <>
-      <PanelTitle align="left">{text.yourInfo}</PanelTitle>
+      <PanelTitle align="left">{text.adminWizard.check.yourInfo}</PanelTitle>
 
       <List>
-        <ListItem label={text.name} value={data?.info?.name} />
-        <ListItem label={text.email} value={data?.info?.email} />
-        <ListItem label={text.role} value={roles?.join(", ")} />{" "}
+        <ListItem label={text.adminWizard.check.name} value={data?.info?.name} />
+        <ListItem label={text.adminWizard.check.email} value={data?.info?.email} />
+        <ListItem label={text.adminWizard.check.role} value={roles?.join(", ")} />{" "}
         <ListItem
-          label={text.organisation}
+          label={text.adminWizard.check.organisation}
           value={`${data?.info?.organisation?.name} (${data?.info?.organisation?.location})`}
         />
       </List>
 
-      <PanelTitle align="left">{text.gameOptions}</PanelTitle>
+      <PanelTitle align="left">{text.adminWizard.check.gameOptions}</PanelTitle>
 
       <List>
-        <ListItem label={text.players} value={playerType as string} />
+        <ListItem label={text.adminWizard.check.players} value={playerType as string} />
         <ListItem
-          label={text.timer}
-          value={data?.options?.timer ? text.on : text.off}
+          label={text.adminWizard.check.timer}
+          value={data?.options?.timer ? text.adminWizard.check.on : text.adminWizard.check.off}
         />
         <ListItem
-          label={(groupNames?.length as number) > 1 ? text.groups : text.group}
-          value={groupNames?.length ? groupNames?.join(", ") : text.none}
+          label={(groupNames?.length as number) > 1 ? text.adminWizard.check.groups : text.adminWizard.check.group}
+          value={groupNames?.length ? groupNames?.join(", ") : text.adminWizard.check.none}
         />
       </List>
 
       <Stack gap="sm">
         <Button stretch={true} onClick={() => handleCreateGame(data)}>
-          {text.create}
+          {text.adminWizard.check.create}
         </Button>
         <Button
           variation="line"
           onClick={() => handleStep(WizardStep.Options)}
           className={styles.backButton}
         >
-          {text.back}
+          {text.adminWizard.check.back}
         </Button>
       </Stack>
     </>

@@ -16,7 +16,7 @@ export const WizardName = ({
   setStep: (step: WizardStep, name: string) => void;
 }) => {
   const [name, setName] = useState<string>("");
-  const text = useContext(LanguageContext).gameWizard.name;
+  const { text } = useContext(LanguageContext);
 
   const handleSubmit = () => {
     if (name.length >= 3) {
@@ -28,10 +28,10 @@ export const WizardName = ({
 
   return (
     <>
-      <PanelTitle space="sm">{text.title}</PanelTitle>
+      <PanelTitle space="sm">{text.gameWizard.name.title}</PanelTitle>
       <Stack>
         <Text align="center" tone="medium">
-          {text.othersWillSee}
+          {text.gameWizard.name.othersWillSee}
         </Text>
         <div className={styles.avatarInput}>
           <figure className={styles.avatarFigure}>
@@ -45,13 +45,13 @@ export const WizardName = ({
           </figure>
           <InputText
             id="name"
-            label={text.nameLabel}
-            placeholder={text.nameLabel}
+            label={text.gameWizard.name.nameLabel}
+            placeholder={text.gameWizard.name.nameLabel}
             onChange={(e) => setName(e?.target?.value)}
           />
         </div>
         <Button onClick={() => handleSubmit()} disabled={name.length < 1}>
-          {text.nextButton}
+          {text.gameWizard.name.nextButton}
         </Button>
       </Stack>
     </>

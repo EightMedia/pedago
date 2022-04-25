@@ -17,7 +17,7 @@ export const WizardGameType = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const wizardGameTypeText = text.adminWizard.gameType;
 
   return (

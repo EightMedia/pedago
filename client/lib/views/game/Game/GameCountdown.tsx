@@ -18,7 +18,7 @@ export const GameCountdown = ({
   roundMax: number;
 }) => {
   const [counter, setCounter] = useState(time);
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   useEffect(() => {
     if (!callback) return;
     const interval = setInterval(() => {

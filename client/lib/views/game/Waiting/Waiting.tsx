@@ -17,7 +17,7 @@ const WaitingComponent = ({
   teamMembers,
   backToSort,
 }: WaitingType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const waitingText = text.waiting;
 
   return (

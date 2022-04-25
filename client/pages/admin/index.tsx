@@ -1,9 +1,7 @@
 import {
   AdminEvent,
   Event,
-  Group,
-  Language,
-  Player,
+  Group, Language, Player,
   RoomDto,
   SocketCallback,
   ViewName,
@@ -112,8 +110,7 @@ const AdminGame = () => {
             ? (localStorage?.getItem("language") as Language)
             : Language.NL
         }
-      >
-        <SocketContext.Provider value={socket}>
+      >        <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             {(() => {
               switch (view.name) {

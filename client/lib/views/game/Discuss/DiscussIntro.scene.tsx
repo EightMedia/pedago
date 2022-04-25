@@ -24,7 +24,7 @@ export const DiscussIntro = ({
   roundMax,
 }: DiscussIntroProps) => {
   TimedCallback(time, callback);
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const names =
     teamMembers?.filter((p) => p.socketId !== socket?.id).map((p) => p.name) ??

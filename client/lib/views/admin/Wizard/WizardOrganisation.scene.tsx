@@ -13,7 +13,7 @@ export const WizardOrganisation = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const text = useContext(LanguageContext).adminWizard;
+  const { text } = useContext(LanguageContext);
 
   const handleNextStep = () => {
     if (data.info?.organisation?.name && data.info.organisation.location) {
@@ -26,37 +26,37 @@ export const WizardOrganisation = ({
     <>
       <div className={styles.stepHeader}>
         <Text tone="medium" align="center" weight="bold">
-          {text.name.step} 2/4
+          {text.adminWizard.name.step} 2/4
         </Text>
-        <PanelTitle>{text.organisation.yourOrg}</PanelTitle>
+        <PanelTitle>{text.adminWizard.organisation.yourOrg}</PanelTitle>
       </div>
       <Stack gap="sm">
         <InputText
           value={data?.info?.organisation?.name || ""}
           id="organisation"
-          label={text.organisation.organisation}
+          label={text.adminWizard.organisation.organisation}
           showLabel={true}
           onChange={(e) => updateData(e.target.value, "info.organisation.name")}
         />
         <InputText
           value={data?.info?.organisation?.location || ""}
           id="location"
-          label={text.organisation.location}
-          helptext={text.organisation.locationHelp}
+          label={text.adminWizard.organisation.location}
+          helptext={text.adminWizard.organisation.locationHelp}
           showLabel={true}
           onChange={(e) =>
             updateData(e.target.value, "info.organisation.location")
           }
         />
         <Button stretch={true} onClick={handleNextStep}>
-          {text.organisation.next}
+          {text.adminWizard.organisation.next}
         </Button>
         <Button
           variation="line"
           onClick={() => handleStep(WizardStep.Name)}
           className={styles.backButton}
         >
-          {text.organisation.back}
+          {text.adminWizard.organisation.back}
         </Button>
       </Stack>
     </>

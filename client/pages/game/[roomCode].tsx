@@ -123,8 +123,7 @@ const RoomCode = () => {
             ? (localStorage?.getItem("language") as Language)
             : Language.NL
         }
-      >
-        <SocketContext.Provider value={socket}>
+      >        <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             {(() => {
               switch (view.name) {

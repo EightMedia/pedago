@@ -23,7 +23,7 @@ export const DiscussReady = ({
   roundMax,
 }: DiscussReadyProps) => {
   TimedCallback(time, callback);
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">

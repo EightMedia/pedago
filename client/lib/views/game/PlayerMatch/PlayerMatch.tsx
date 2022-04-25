@@ -14,7 +14,7 @@ const PlayerMatchComponent = ({
   teamMembers,
   initialScene,
 }: PlayerMatchType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   return (
     <Page background={5} valign="center">
       <PageSlot location="headerLeft">

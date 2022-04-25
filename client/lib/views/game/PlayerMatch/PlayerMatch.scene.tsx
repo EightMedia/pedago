@@ -7,11 +7,10 @@ import { getPlayerId } from "../../../../factories/shared.factory";
 import { Button } from "../../../components/Button";
 import { Panel, PanelTitle } from "../../../components/Panel";
 import { Player } from "../../../components/Player";
-import { Center } from "../../../layouts/Center";
-import { Stack } from "../../../layouts/Stack";
-import { PlayerMatchType } from "./PlayerMatch.types";
-import styles from "./PlayerMatch.module.css";
 import { Text } from "../../../components/Text";
+import { Stack } from "../../../layouts/Stack";
+import styles from "./PlayerMatch.module.css";
+import { PlayerMatchType } from "./PlayerMatch.types";
 
 const PlayerMatchSceneComponent = ({
   round,
@@ -21,7 +20,7 @@ const PlayerMatchSceneComponent = ({
 }: PlayerMatchType) => {
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const playerId = getPlayerId(
     socket?.id as string,
     room?.players as PlayerModel[]

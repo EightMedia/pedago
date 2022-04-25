@@ -21,7 +21,7 @@ export const LobbyLobby = ({
 }: LobbyType) => {
   const siteUrl = process.env.SITE_URL || "https://example.com";
   const readableSiteUrl = process.env.SITE_READABLE_URL || "example.com";
-  const text = useContext(LanguageContext).adminLobby.lobby;
+  const { text } = useContext(LanguageContext);
 
   const handleSettings = () => {
     alert("settings view");
@@ -39,11 +39,11 @@ export const LobbyLobby = ({
         <ButtonGroup>
           <Button variation="whiteBlocked" onClick={handleSettings}>
             <Icon icon={IconsEnum.Settings} />
-            {text.settingsButton}
+            {text.adminLobby.lobby.settingsButton}
           </Button>
           <Button variation="whiteBlocked" onClick={handleInfo as () => void}>
             <Icon icon={IconsEnum.Info} />
-            {text.rulesButton}
+            {text.adminLobby.lobby.rulesButton}
           </Button>
         </ButtonGroup>
       </PageSlot>
@@ -53,9 +53,9 @@ export const LobbyLobby = ({
           <header className={styles.header}>
             <div className={styles.roomCode}>{room?.roomCode}</div>
             <p>
-              {text.code} <a href={siteUrl}>{readableSiteUrl}</a> {text.andJoin}
+              {text.adminLobby.lobby.code} <a href={siteUrl}>{readableSiteUrl}</a> {text.adminLobby.lobby.andJoin}
             </p>
-            <Button onClick={handleStart as () => void}>{text.start}</Button>
+            <Button onClick={handleStart as () => void}>{text.adminLobby.lobby.start}</Button>
           </header>
         </Panel>
         <PanelGroup>

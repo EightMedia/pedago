@@ -29,7 +29,7 @@ export const GameRound = ({
 }: GameType) => {
   const [showStopModal, setShowStopModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const gameText = text.adminGame.round;
 
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);

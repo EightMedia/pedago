@@ -19,7 +19,7 @@ const WizardComponent = ({
   initialStep,
   handleRegisterGame,
 }: WizardType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const [step, setStep] = useState<WizardStep>(initialStep);
   const [wizardData, setWizardData] = useState<WizardType["data"]>(data);
 

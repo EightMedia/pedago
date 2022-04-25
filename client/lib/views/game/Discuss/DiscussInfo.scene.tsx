@@ -28,7 +28,7 @@ export const DiscussInfo = ({
   round,
   roundMax,
 }: DiscussInfoProps) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">

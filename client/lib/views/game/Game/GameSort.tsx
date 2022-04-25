@@ -18,7 +18,7 @@ import styles from "./Game.module.css";
 import { GameSortType } from "./Game.types";
 
 export const GameSort = ({ round }: GameSortType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const roundText = text.rounds[round - 1];
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);

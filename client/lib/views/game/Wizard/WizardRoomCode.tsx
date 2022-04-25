@@ -12,14 +12,14 @@ export const WizardRoomCode = ({
   setStep: (step: WizardStep, roomCode: number) => void;
 }) => {
   const [roomCode, setRoomCode] = useState<number>(0);
-  const text = useContext(LanguageContext).gameWizard.roomCode;
+  const { text } = useContext(LanguageContext);
   return (
     <>
-      <PanelTitle>{text.roomCodeLabel}</PanelTitle>
+      <PanelTitle>{text.gameWizard.roomCode.roomCodeLabel}</PanelTitle>
       <Stack>
         <InputText
           id="roomcode"
-          label={text.roomCodeLabel}
+          label={text.gameWizard.roomCode.roomCodeLabel}
           type="number"
           onChange={(e) => setRoomCode(parseInt(e?.target?.value, 10))}
         />
@@ -27,7 +27,7 @@ export const WizardRoomCode = ({
           onClick={() => setStep(WizardStep.Name, roomCode)}
           disabled={roomCode < 999 || roomCode > 9999}
         >
-          {text.nextButton}
+          {text.gameWizard.roomCode.nextButton}
         </Button>
       </Stack>
     </>
