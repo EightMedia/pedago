@@ -7,8 +7,9 @@ import {
   RoomDto,
   SocketCallback,
   ViewName,
-  ViewState,
+  ViewState
 } from "models";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
@@ -16,14 +17,14 @@ import { SocketContext } from "../../contexts/SocketContext";
 import { getAdminGameType } from "../../factories/AdminGame.factory";
 import {
   getAdminLobbyType,
-  getLobbyRoom,
+  getLobbyRoom
 } from "../../factories/AdminLobby.factory";
 import { getWizardData } from "../../factories/AdminWizard.factory";
 import { getResultData } from "../../factories/Result.factory";
 import {
   ResultGroup,
   ResultSet,
-  ResultStep,
+  ResultStep
 } from "../../lib/components/Result/Result.types";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
@@ -101,62 +102,67 @@ const AdminGame = () => {
   }, [socket]);
 
   return (
-    <LanguageProvider
-      lang={
-        typeof window !== "undefined"
-          ? (localStorage?.getItem("language") as Language)
-          : Language.NL
-      }
-    >
-      <SocketContext.Provider value={socket}>
-        <RoomContext.Provider value={room}>
-          {(() => {
-            switch (view.name) {
-              case ViewName.Wizard:
-                return (
-                  <Wizard
-                    data={getWizardData(room)}
-                    initialStep={WizardStep.Name}
-                    handleRegisterGame={handleRegisterGame}
-                  />
-                );
-              case ViewName.Lobby:
-                return (
-                  <Lobby
-                    room={getLobbyRoom(room)}
-                    groups={getAdminLobbyType(
-                      room.groups as Group[],
-                      playerList
-                    )}
-                    initialStep={lobbyStep}
-                  />
-                );
-              case ViewName.Game:
-                return (
-                  <Game
-                    {...getAdminGameType(room as RoomDto)}
-                    initialScene={gameScene}
-                  />
-                );
-              case ViewName.Result:
-                return (
-                  <Result
-                    initialStep={ResultStep.Loader}
-                    data={
-                      getResultData(room, null) as {
-                        me?: ResultSet;
-                        groups: ResultGroup[];
+    <>
+      <Head>
+        <title>Pedago Game</title>
+      </Head>
+      <LanguageProvider
+        lang={
+          typeof window !== "undefined"
+            ? (localStorage?.getItem("language") as Language)
+            : Language.NL
+        }
+      >
+        <SocketContext.Provider value={socket}>
+          <RoomContext.Provider value={room}>
+            {(() => {
+              switch (view.name) {
+                case ViewName.Wizard:
+                  return (
+                    <Wizard
+                      data={getWizardData(room)}
+                      initialStep={WizardStep.Name}
+                      handleRegisterGame={handleRegisterGame}
+                    />
+                  );
+                case ViewName.Lobby:
+                  return (
+                    <Lobby
+                      room={getLobbyRoom(room)}
+                      groups={getAdminLobbyType(
+                        room.groups as Group[],
+                        playerList
+                      )}
+                      initialStep={lobbyStep}
+                    />
+                  );
+                case ViewName.Game:
+                  return (
+                    <Game
+                      {...getAdminGameType(room as RoomDto)}
+                      initialScene={gameScene}
+                    />
+                  );
+                case ViewName.Result:
+                  return (
+                    <Result
+                      initialStep={ResultStep.Loader}
+                      data={
+                        getResultData(room, null) as {
+                          me?: ResultSet;
+                          groups: ResultGroup[];
+                        }
                       }
-                    }
-                  />
-                );
-              default:
-                return <>ERROR: ViewName not found</>;
-            }
-          })()}
-        </RoomContext.Provider>
-      </SocketContext.Provider>
-    </LanguageProvider>
+                    />
+                  );
+                default:
+                  return <>ERROR: ViewName not found</>;
+              }
+            })()}
+          </RoomContext.Provider>
+        </SocketContext.Provider>
+      </LanguageProvider>
+    </>
   );
 };
 

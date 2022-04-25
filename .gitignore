@@ -10,3 +10,4 @@ node_modules
 client/build-storybook.log
 .vercel
 auth.json
+client/yarn-error.log

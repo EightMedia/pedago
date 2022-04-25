@@ -99,7 +99,6 @@ export interface Locale {
       settingsButton: string;
       rulesButton: string;
       code: string;
-      andJoin: string;
       start: string;
     };
     playerGroup: {

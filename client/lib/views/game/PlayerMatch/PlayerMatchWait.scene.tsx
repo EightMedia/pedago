@@ -1,11 +1,10 @@
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Panel, PanelTitle } from "../../../components/Panel";
-import { Center } from "../../../layouts/Center";
-import { Stack } from "../../../layouts/Stack";
-import { PlayerMatchType } from "./PlayerMatch.types";
-import styles from "./PlayerMatch.module.css";
 import { Text } from "../../../components/Text";
+import { Stack } from "../../../layouts/Stack";
+import styles from "./PlayerMatch.module.css";
+import { PlayerMatchType } from "./PlayerMatch.types";
 
 const PlayerMatchWaitComponent = ({ round, roundMax }: PlayerMatchType) => {
   const text = useContext(LanguageContext);
