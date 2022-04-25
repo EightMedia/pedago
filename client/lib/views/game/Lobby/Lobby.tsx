@@ -9,7 +9,7 @@ import { Title } from "../../../components/Title";
 import { LobbyType } from "./Lobby.types";
 
 const LobbyComponent = ({ round, roundMax, groups, playerName }: LobbyType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
 
   return (
     <Page background={2}>

@@ -6,8 +6,8 @@ export enum PlayerMatchSceneEnum {
 }
 
 export type PlayerMatchType = {
-  round: number;
-  roundMax: number;
+  round?: number;
+  roundMax?: number;
   teamName?: number;
   teamMembers?: {
     name: Player["name"];

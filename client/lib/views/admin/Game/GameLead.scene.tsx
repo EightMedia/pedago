@@ -33,7 +33,7 @@ export const GameLead = ({
   teams,
   callback,
 }: GameLeadProps) => {
-  const text = useContext(LanguageContext).adminGame;
+  const { text } = useContext(LanguageContext);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
 
@@ -56,19 +56,19 @@ export const GameLead = ({
               onClick={openSettings as () => void}
             >
               <Icon icon={IconsEnum.Settings} />
-              <span className="lg-only">{text.round.settingsButton}</span>
+              <span className="lg-only">{text.adminGame.round.settingsButton}</span>
             </Button>
             <Button
               variation="whiteBlocked"
               onClick={() => setShowInfoModal(true)}
             >
               <Icon icon={IconsEnum.Info} />
-              <span className="lg-only">{text.round.rulesButton}</span>
+              <span className="lg-only">{text.adminGame.round.rulesButton}</span>
             </Button>
           </ButtonGroup>
         </PageSlot>
         <Title>
-          {text.lead.continuing} {round} {text.lead.of} {roundMax}
+          {text.adminGame.lead.continuing} {round} {text.adminGame.lead.of} {roundMax}
         </Title>
       </Page>
       {showInfoModal && (

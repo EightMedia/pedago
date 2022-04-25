@@ -14,7 +14,7 @@ export const WizardOptions = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const text = useContext(LanguageContext).adminWizard;
+  const { text } = useContext(LanguageContext);
   const groupName = (id: number) => {
     if (data.groups && data.groups[id]) {
       return data.groups[id].name;
@@ -43,32 +43,32 @@ export const WizardOptions = ({
     <>
       <div className={styles.stepHeader}>
         <Text tone="medium" align="center" weight="bold">
-          {text.name.step} 4/4
+          {text.adminWizard.name.step} 4/4
         </Text>
-        <PanelTitle>{text.options.title}</PanelTitle>
+        <PanelTitle>{text.adminWizard.options.title}</PanelTitle>
       </div>
 
       <Stack>
         <InputSwitch
           id="timer"
-          label={text.options.timerLabel}
-          helpText={text.options.timerText}
+          label={text.adminWizard.options.timerLabel}
+          helpText={text.adminWizard.options.timerText}
           checked={data.options?.timer}
           onChange={(e) => updateData(e.target.checked, "options.timer")}
         />
         <InputSwitch
           id="inGroups"
-          label={text.options.inGroups}
-          helpText={text.options.inGroupsText}
+          label={text.adminWizard.options.inGroups}
+          helpText={text.adminWizard.options.inGroupsText}
           checked={data.options?.inGroups}
           onChange={(e) => updateData(e.target.checked, "options.inGroups")}
         />
         <InputText
           value={groupName(0)}
           id="group1"
-          label={text.options.group1}
-          helptext={text.options.group1Help}
-          placeholder={text.options.group1}
+          label={text.adminWizard.options.group1}
+          helptext={text.adminWizard.options.group1Help}
+          placeholder={text.adminWizard.options.group1}
           showLabel={true}
           onChange={(e) => {
             handleGroupChange(0, e.target.value);
@@ -78,8 +78,8 @@ export const WizardOptions = ({
         <InputText
           value={groupName(1)}
           id="group2"
-          label={text.options.group2}
-          placeholder={text.options.group2}
+          label={text.adminWizard.options.group2}
+          placeholder={text.adminWizard.options.group2}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(1, e.target.value);
@@ -89,8 +89,8 @@ export const WizardOptions = ({
         <InputText
           value={groupName(2)}
           id="group3"
-          label={text.options.group3}
-          placeholder={text.options.group3}
+          label={text.adminWizard.options.group3}
+          placeholder={text.adminWizard.options.group3}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(2, e.target.value);
@@ -100,8 +100,8 @@ export const WizardOptions = ({
         <InputText
           value={groupName(3)}
           id="group4"
-          label={text.options.group4}
-          placeholder={text.options.group4}
+          label={text.adminWizard.options.group4}
+          placeholder={text.adminWizard.options.group4}
           showLabel={false}
           onChange={(e) => {
             handleGroupChange(3, e.target.value);
@@ -109,14 +109,14 @@ export const WizardOptions = ({
           condition={(data.options?.inGroups && groupName(2) !== "") || false}
         />
         <Button stretch={true} onClick={handleNextStep}>
-          {text.options.next}
+          {text.adminWizard.options.next}
         </Button>
         <Button
           variation="line"
           onClick={() => handleStep(WizardStep.GameType)}
           className={styles.backButton}
         >
-          {text.options.back}
+          {text.adminWizard.options.back}
         </Button>
       </Stack>
     </>

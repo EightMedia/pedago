@@ -15,7 +15,7 @@ export const PlayerGroupComponent = ({
   counter = true,
   handleGroupChange,
 }: PlayerGroupType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   return (
     <div className={styles.playerGroup}>
       <GlassPanel>

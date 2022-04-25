@@ -9,7 +9,7 @@ import { Panel, PanelTitle } from "../../../components/Panel";
 import { Stack } from "../../../layouts/Stack";
 
 export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
-  const text = useContext(LanguageContext).adminLobby.info;
+  const { text } = useContext(LanguageContext);
 
   return (
     <Page background={2}>
@@ -17,9 +17,9 @@ export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
         <Logo />
       </PageSlot>
       <Panel>
-        <PanelTitle>{text.title}</PanelTitle>
+        <PanelTitle>{text.adminLobby.info.title}</PanelTitle>
         <Stack gap="sm">
-          {text.items?.map((item, index) => (
+          {text.adminLobby.info.items?.map((item, index) => (
             <InfoItem
               key={index}
               icon={item?.icon}
@@ -27,7 +27,7 @@ export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
               text={item.text}
             />
           ))}
-          <Button onClick={handleClick}>{text.understood}</Button>
+          <Button onClick={handleClick}>{text.adminLobby.info.understood}</Button>
         </Stack>
       </Panel>
     </Page>

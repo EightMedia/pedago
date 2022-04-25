@@ -36,11 +36,11 @@ export const InputTextComponent = ({
         id={id}
         type={type}
         onChange={onChange}
-        className={cx(styles.input, styles[error ? "valid" : "invalid"])}
+        className={cx(styles.input, styles[!error ? "valid" : "invalid"])}
         placeholder={placeholder}
         value={value}
       />
-      {error ?? <div className="error">{error}</div>}
+      <div className={cx(styles.error)}>{error}</div>
     </div>
   );
 };
