@@ -2,6 +2,7 @@ import { PlayerStatus } from "models";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
 import { TimerContext, TIMER_SECONDS } from "../../../../contexts/TimerContext";
 import { ButtonGroup } from "../../../components/Button";
 import { Button } from "../../../components/Button/Button";
@@ -27,12 +28,12 @@ export const GameRound = ({
   stopRound,
   round,
   teams,
-  timer,
 }: GameType) => {
   const [showStopModal, setShowStopModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const text = useContext(LanguageContext);
   const timerContext = useContext(TimerContext);
+  const room = useContext(RoomContext);
   const gameText = text.adminGame.round;
   const router = useRouter();
 
@@ -102,7 +103,7 @@ export const GameRound = ({
                 {text.game.round} {round.current} {text.game.of} {round.total}
               </Title>
               <div className={styles.timerAndStop}>
-                {timer && <Timer time={timerContext} />}
+              {(room?.options?.timer as boolean) && <Timer time={timerContext as number} />}
                 <Button
                   onClick={() =>
                     teamsStillPlaying

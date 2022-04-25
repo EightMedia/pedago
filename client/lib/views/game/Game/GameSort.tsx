@@ -21,8 +21,8 @@ import { GameSortType } from "./Game.types";
 export const GameSort = ({ round }: GameSortType) => {
   const text = useContext(LanguageContext);
   const roundText = text.rounds[round - 1];
-  const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
+  const room = useContext(RoomContext);
   const timer = useContext(TimerContext);
   const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
   const [showInfoModal, setShowInfoModal] = useState(false);
