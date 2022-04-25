@@ -28,6 +28,7 @@ export function InputOptions<Value extends InputOptionValue>(
     value,
     options,
     customStyles,
+    error
   } = props;
 
   const styles = customStyles ? customStyles : defaultStyles;
@@ -108,6 +109,7 @@ export function InputOptions<Value extends InputOptionValue>(
           );
         })}
       </div>
+      <div className={cx(styles.error)}>{error}</div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
@@ -13,15 +13,42 @@ export const WizardOrganisation = ({
   updateData,
   handleStep,
 }: WizardStepProps) => {
-  const { text } = useContext(LanguageContext);
+  const [orgError, setOrgError] = useState<string>("");
+  const [locationError, setLocationError] = useState<string>("");
+  const { text, lang } = useContext(LanguageContext);
+
+  const errorObject = {
+    organisation: {
+      EN: "Please fill in the name of your organisation",
+      NL: "Vul de naam van jouw organisatie in",
+    },
+    location: {
+      EN: "Please fill in the location of your organisation",
+      NL: "Vul de locatie van jouw organisatie in",
+    },
+  };
+
+  const handleOrgChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setOrgError("");
+    updateData(e.target.value, "info.organisation.name");
+  };
+  const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLocationError("");
+    updateData(e.target.value, "info.organisation.location");
+  };
 
   const handleNextStep = () => {
+    if (!data?.info?.organisation?.name) {
+      setOrgError(errorObject.organisation[lang]);
+    }
+    if (!data?.info?.organisation?.location) {
+      setLocationError(errorObject.location[lang]);
+    }
     if (data.info?.organisation?.name && data.info.organisation.location) {
       handleStep(WizardStep.GameType);
-    } else {
-      console.error("Please fill in the form");
     }
   };
+
   return (
     <>
       <div className={styles.stepHeader}>
@@ -36,7 +63,8 @@ export const WizardOrganisation = ({
           id="organisation"
           label={text.adminWizard.organisation.organisation}
           showLabel={true}
-          onChange={(e) => updateData(e.target.value, "info.organisation.name")}
+          error={orgError}
+          onChange={handleOrgChange}
         />
         <InputText
           value={data?.info?.organisation?.location || ""}
@@ -44,9 +72,8 @@ export const WizardOrganisation = ({
           label={text.adminWizard.organisation.location}
           helptext={text.adminWizard.organisation.locationHelp}
           showLabel={true}
-          onChange={(e) =>
-            updateData(e.target.value, "info.organisation.location")
-          }
+          error={locationError}
+          onChange={handleLocationChange}
         />
         <Button stretch={true} onClick={handleNextStep}>
           {text.adminWizard.organisation.next}
