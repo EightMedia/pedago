@@ -4,13 +4,13 @@ import {
   KeyboardSensor,
   PointerSensor,
   useSensor,
-  useSensors
+  useSensors,
 } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { Category, Player, PlayerEvent, SocketCallback } from "models";
 import { memo, useContext, useEffect, useState } from "react";
@@ -19,7 +19,7 @@ import { SocketContext } from "../../../contexts/SocketContext";
 import { getPlayerId } from "../../../factories/shared.factory";
 import {
   categoryToSortList,
-  sortListToCategory
+  sortListToCategory,
 } from "../../utils/sortlist-conversion.util";
 import { SortableItem } from "./SortableItem";
 import styles from "./SortList.module.css";
@@ -55,23 +55,25 @@ const SortListComponent = ({ cards, round, handleSortOrder }: SortListType) => {
   }, [items]);
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-    >
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        <div className={styles.list}>
-          {items?.map((item) => (
-            <SortableItem
-              key={item.id}
-              id={item.id.toString()}
-              title={item.title}
-            />
-          ))}
-        </div>
-      </SortableContext>
-    </DndContext>
+    <div className={styles.sortList}>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          <div className={styles.list}>
+            {items?.map((item) => (
+              <SortableItem
+                key={item.id}
+                id={item.id.toString()}
+                title={item.title}
+              />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
+    </div>
   );
 
   function handleDragEnd(event: any) {

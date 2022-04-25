@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
-import { IconsEnum } from "../../../components/Icon/Icon";
 import { InfoItem } from "../../../components/InfoItem";
 import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
@@ -17,12 +16,12 @@ export const GameInfo = ({ title }: { title: string }) => {
   const text = useContext(LanguageContext).adminLobby.info;
   return (
     <>
-      <PanelTitle>{text.title}</PanelTitle>
+      <PanelTitle>{title}</PanelTitle>
       <Stack>
         {text.items.map((item, index) => (
           <InfoItem
             key={index}
-            icon={IconsEnum.Info}
+            icon={item.icon}
             title={item.caption}
             text={item.text}
           />
@@ -33,13 +32,14 @@ export const GameInfo = ({ title }: { title: string }) => {
 };
 
 export const GameOnboarding = ({ handleOk }: { handleOk: () => void }) => {
+  const text = useContext(LanguageContext).adminLobby.info;
   return (
     <Page>
       <PageSlot location="headerCenter">
         <Logo />
       </PageSlot>
       <Panel>
-        <GameInfo title="Voor we beginnen" />
+        <GameInfo title={text.title} />
         <Button onClick={handleOk}>Ik snap het</Button>
       </Panel>
     </Page>

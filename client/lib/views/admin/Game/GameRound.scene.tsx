@@ -81,14 +81,14 @@ export const GameRound = ({
               onClick={openSettings as () => void}
             >
               <Icon icon={IconsEnum.Settings} />
-              {gameText.settingsButton}
+              <span className="lg-only">{gameText.settingsButton}</span>
             </Button>
             <Button
               variation="whiteBlocked"
               onClick={() => setShowInfoModal(true)}
             >
               <Icon icon={IconsEnum.Info} />
-              {gameText.rulesButton}
+              <span className="lg-only">{gameText.rulesButton}</span>
             </Button>
           </ButtonGroup>
         </PageSlot>

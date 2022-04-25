@@ -1,5 +1,6 @@
 import { Language } from "models";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE } from "../contexts/LanguageContext";
 import LanguageProvider from "../providers/Language.provider";
@@ -29,6 +30,9 @@ const ContentPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Pedago Game</title>
+      </Head>
       <LanguageProvider lang={language}>
         <LandingWithoutSSR
           language={language}

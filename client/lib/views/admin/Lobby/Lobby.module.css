@@ -1,10 +1,73 @@
 .header {
+  text-align: center;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  @media (--sm) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .roomCode {
-  font-size: 64px;
-  font-weight: bold;
+  position: relative;
+  @media (--sm-max) {
+    padding-bottom: 16px;
+  }
+  @media (--sm) {
+    padding-right: 40px;
+    margin-right: 40px;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    @media (--sm-max) {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-bottom: var(--border-light);
+    }
+    @media (--sm) {
+      right: 0;
+      top: -16px;
+      bottom: -16px;
+      border-right: var(--border-light);
+    }
+  }
+}
+
+.codeButton {
+  font-size: 48px;
+  @media (--sm) {
+    font-size: 64px;
+  }
+  font-weight: 700;
+  font-family: var(--font-headings);
+  line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+  &:focus {
+    animation: click 0.5s;
+  }
+}
+
+.startButton {
+  @media (--sm-max) {
+    flex-grow: 1;
+  }
+}
+
+@keyframes click {
+  99% {
+    color: var(--color-green);
+  }
+  100% {
+    color: inherit;
+  }
 }

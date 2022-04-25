@@ -1,7 +1,10 @@
 .buttonGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: var(--space-3xs);
+  @media (--sm) {
+    gap: var(--space-xs);
+  }
 }
 
 .button {
@@ -36,8 +39,8 @@
     font-size: 20px;
   }
 
-  &:active,
-  &:hover {
+  &:not([disabled]):active,
+  &:not([disabled]):hover {
     background: var(--color-hover-blue);
   }
 }
@@ -91,6 +94,7 @@
   }
 }
 
+.whiteBlockedOutline,
 .whiteBlocked {
   padding: var(--space-3xs);
   @media (--sm) {
@@ -99,6 +103,13 @@
   border-radius: var(--border-radius-xs);
   background: var(--color-white);
   color: var(--color-dark-blue);
+  &:focus {
+    outline: 2px var(--color-blue) solid;
+  }
+}
+
+.whiteBlockedOutline {
+  border: var(--border-light);
 }
 
 .large {

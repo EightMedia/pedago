@@ -1,4 +1,5 @@
 import { Language } from "models";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Page } from "../../lib/components/Page";
 import {
@@ -42,19 +43,30 @@ const ResultPage = () => {
   }
 
   return (
-    <LanguageProvider lang={typeof window !== "undefined" ? localStorage?.getItem("language") as Language : Language.NL}>
-      {groups && (
-        <Page valign="center" background={4}>
-          <ResultOverview
-            data={{
-              me: meData,
-              groups: groupsData,
-            }}
-            showEmailPanel={false}
-          />
-        </Page>
-      )}
-    </LanguageProvider>
+    <>
+      <Head>
+        <title>Pedago Game</title>
+      </Head>
+      <LanguageProvider
+        lang={
+          typeof window !== "undefined"
+            ? (localStorage?.getItem("language") as Language)
+            : Language.NL
+        }
+      >
+        {groups && (
+          <Page valign="center" background={4}>
+            <ResultOverview
+              data={{
+                me: meData,
+                groups: groupsData,
+              }}
+              showEmailPanel={false}
+            />
+          </Page>
+        )}
+      </LanguageProvider>
+    </>
   );
 };
 

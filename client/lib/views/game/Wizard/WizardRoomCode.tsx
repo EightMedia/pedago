@@ -17,8 +17,18 @@ export const WizardRoomCode = ({
     <>
       <PanelTitle>{text.roomCodeLabel}</PanelTitle>
       <Stack>
-        <InputText id="roomcode" label={text.roomCodeLabel} type="number" onChange={e => setRoomCode(parseInt(e?.target?.value, 10))} />
-        <Button onClick={() => setStep(WizardStep.Name, roomCode)}>{text.nextButton}</Button>
+        <InputText
+          id="roomcode"
+          label={text.roomCodeLabel}
+          type="number"
+          onChange={(e) => setRoomCode(parseInt(e?.target?.value, 10))}
+        />
+        <Button
+          onClick={() => setStep(WizardStep.Name, roomCode)}
+          disabled={roomCode < 999 || roomCode > 9999}
+        >
+          {text.nextButton}
+        </Button>
       </Stack>
     </>
   );

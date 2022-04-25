@@ -90,7 +90,6 @@ export const EN: Locale = {
       settingsButton: "",
       rulesButton: "",
       code: "",
-      andJoin: "",
       start: "",
     },
     playerGroup: {
@@ -183,6 +182,7 @@ export const EN: Locale = {
     hi: "",
     willStart: "",
     waiting: "",
+    changeToThisGroup: "",
   },
   waiting: {
     goodBusy: "",

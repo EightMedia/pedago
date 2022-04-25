@@ -1,5 +1,12 @@
-.font {
+.text {
   font-family: var(--font-body);
+  & > a {
+    text-decoration: underline;
+  }
+
+  & > a:hover {
+    color: var(--color-blue);
+  }
 }
 
 /* weight */
@@ -13,9 +20,15 @@
 /* tone */
 .light {
   color: var(--color-grey-neutral);
+  & > a {
+    color: var(--color-grey-darkest);
+  }
 }
 .medium {
   color: var(--color-grey-dark);
+  & > a {
+    color: var(--color-grey-darkest);
+  }
 }
 .dark {
   color: var(--color-grey-darkest);
@@ -41,7 +54,10 @@
 }
 
 .lg {
-  font-size: var(--font-size-lg);
+  font-size: 20px;
+  @media (--sm) {
+    font-size: var(--font-size-lg);
+  }
 }
 
 /* align */
