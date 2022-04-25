@@ -48,13 +48,12 @@ const RoomCode = () => {
   const [playerMatchScene, setPlayerMatchScene] =
     useState<PlayerMatchSceneEnum>(PlayerMatchSceneEnum.Wait);
   const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Sort);
-  const [discussStep, setDiscussStep] = useState<DiscussStep>(
-    DiscussStep.Intro
-  );
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
   const [round, setRound] = useState<number>(1);
+  const [error, setError] = useState<string | undefined>();
 
+  let language = Language.NL;
   const ROUND_MAX = 6;
   let playerId: string | null = "";
 
@@ -69,6 +68,7 @@ const RoomCode = () => {
 
   if (typeof window !== "undefined") {
     playerId = getPlayerIdFromLocalStorage();
+    language = (localStorage?.getItem("language") as Language) || Language.NL;
   }
 
   const router = useRouter();
@@ -85,12 +85,13 @@ const RoomCode = () => {
             setWizardStep(WizardStep.Name);
           } else {
             setWizardStep(WizardStep.RoomCode);
+            const messageObject = r.message as { EN: string; NL: string };
+            setError(messageObject[language]);
           }
-          console.log(r);
         }
       );
-    }
-  }, [socket, roomCode]);
+    }    
+  }, [socket, roomCode, error, language]);
 
   useEffect(() => {
     if (socket) {
@@ -117,18 +118,13 @@ const RoomCode = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider
-        lang={
-          typeof window !== "undefined"
-            ? (localStorage?.getItem("language") as Language)
-            : Language.NL
-        }
-      >        <SocketContext.Provider value={socket}>
+      <LanguageProvider lang={language}>
+        <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             {(() => {
               switch (view.name) {
                 case ViewName.Wizard:
-                  return <Wizard initialStep={wizardStep} />;
+                  return <Wizard initialStep={wizardStep} error={error} />;
                 case ViewName.Lobby:
                   return (
                     <Lobby
@@ -181,7 +177,7 @@ const RoomCode = () => {
                       {...getDiscussType(
                         round,
                         ROUND_MAX,
-                        discussStep,
+                        DiscussStep.Intro,
                         false,
                         true,
                         room,

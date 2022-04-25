@@ -12,17 +12,25 @@ import { WizardStep } from "./Wizard.types";
 
 export const WizardName = ({
   setStep,
+  error,
 }: {
   setStep: (step: WizardStep, name: string) => void;
+  error?: string;
 }) => {
+  const [errorMsg, setErrorMsg] = useState<string | undefined>(error);
   const [name, setName] = useState<string>("");
-  const { text } = useContext(LanguageContext);
+  const { text, lang } = useContext(LanguageContext);
+  const errorObject = {
+    EN: "Your name should at least consist of two characters",
+    NL: "Gebruik tenminste twee karakters als naam",
+  };
 
   const handleSubmit = () => {
-    if (name.length >= 3) {
+    setErrorMsg(undefined);
+    if (name.length >= 2 && !error) {
       setStep(WizardStep.Group, name);
     } else {
-      console.error("Your name should, at least, consist of three characters");
+      setErrorMsg(error || errorObject[lang]);
     }
   };
 
@@ -46,6 +54,7 @@ export const WizardName = ({
           <InputText
             id="name"
             label={text.gameWizard.name.nameLabel}
+            error={errorMsg}
             placeholder={text.gameWizard.name.nameLabel}
             onChange={(e) => setName(e?.target?.value)}
           />

@@ -8,11 +8,18 @@ import { WizardStep } from "./Wizard.types";
 
 export const WizardRoomCode = ({
   setStep,
+  error,
 }: {
   setStep: (step: WizardStep, roomCode: number) => void;
+  error?: string;
 }) => {
   const [roomCode, setRoomCode] = useState<number>(0);
   const { text } = useContext(LanguageContext);
+
+  const handleSubmit = () => {
+      setStep(WizardStep.Name, roomCode);
+  }
+  
   return (
     <>
       <PanelTitle>{text.gameWizard.roomCode.roomCodeLabel}</PanelTitle>
@@ -21,10 +28,11 @@ export const WizardRoomCode = ({
           id="roomcode"
           label={text.gameWizard.roomCode.roomCodeLabel}
           type="number"
+          error={error}
           onChange={(e) => setRoomCode(parseInt(e?.target?.value, 10))}
         />
         <Button
-          onClick={() => setStep(WizardStep.Name, roomCode)}
+          onClick={handleSubmit}
           disabled={roomCode < 999 || roomCode > 9999}
         >
           {text.gameWizard.roomCode.nextButton}

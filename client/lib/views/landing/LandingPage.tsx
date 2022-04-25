@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import {
   ChangeEvent,
   Dispatch,
-  SetStateAction,
+  FormEvent, SetStateAction,
   useContext,
   useState
 } from "react";
@@ -38,7 +38,8 @@ const LandingPage = ({
     setRoomCode(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     localStorage.setItem("roomCode", roomCode);
     router.push(`/game/${roomCode}`);
   };

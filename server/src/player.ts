@@ -16,6 +16,27 @@ import gamesStore from "./store/games.store";
 
 const store = gamesStore.getState();
 
+export const getRoomCodeExists = (
+  roomCode: number,
+  callback: (args: SocketCallback) => void
+) => {
+  const room = store.getRoomByRoomCode(roomCode);  
+  if (!room) {
+    callback({
+      status: "ERROR",
+      message: {
+        NL: "Deze code wordt niet herkend. Controleer de code en probeer het opnieuw.",
+        EN: "This code is not valid. Make sure to fill in the right code and try again.",
+      },
+    });
+    return;
+  } else {
+    callback({
+      status: "OK",
+    });
+  }
+};
+
 export const joinRoomByRoomCode = (
   playerId: string | undefined,
   roomCode: number,

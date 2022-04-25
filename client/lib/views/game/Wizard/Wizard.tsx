@@ -2,6 +2,7 @@ import { Group, PlayerEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
 import { memo, useContext, useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
 import { setPlayerIdToLocalStorage } from "../../../../factories/shared.factory";
@@ -15,23 +16,36 @@ import { WizardInfo } from "./WizardInfo";
 import { WizardName } from "./WizardName";
 import { WizardRoomCode } from "./WizardRoomCode";
 
-const WizardComponent = ({ initialStep }: WizardType) => {
+const WizardComponent = ({ initialStep, error }: WizardType) => {
   const [step, setStep] = useState<WizardStep>(initialStep as WizardStep);
   const [playerId, setPlayerId] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string | undefined>(error);
   const router = useRouter();
 
   const room = useContext(RoomContext);
   const socket = useContext(SocketContext);
+  const { lang } = useContext(LanguageContext);
 
   useEffect(() => {
     setStep(initialStep as WizardStep);
-    return;
   }, [initialStep]);
 
-  const handleRoomCode = (step: WizardStep, roomCode: number) => {
-    localStorage.setItem("roomCode", roomCode.toString());
-    router.push(`/game/${roomCode}`);
-    setStep(step);
+  const handleRoomCode = (step: WizardStep, roomCode: number) => {    
+    (socket as Socket).emit(
+      PlayerEvent.RoomCodeExists,
+      roomCode,
+      (res: SocketCallback) => {
+        if (res.status === "OK") {
+          localStorage.setItem("roomCode", roomCode.toString());
+          router.push(`/game/${roomCode}`);
+          setStep(step);
+          setErrorMsg(undefined);
+        } else {
+          const messageObject = res.message as { EN: string; NL: string };
+          setErrorMsg(messageObject[lang]);
+        }
+      }
+    );
   };
 
   const handleName = (step: WizardStep, name: string) => {
@@ -41,12 +55,16 @@ const WizardComponent = ({ initialStep }: WizardType) => {
       name,
       (r: SocketCallback) => {
         const resData = r.data;
-        if (resData) {
-          setPlayerId(resData?.playerId as string);
-          setPlayerIdToLocalStorage(resData?.playerId as string);
-          setStep(step);
+        if (r.status === "OK") {
+          if (resData) {
+            setPlayerId(resData?.playerId as string);
+            setPlayerIdToLocalStorage(resData?.playerId as string);
+            setStep(step);
+          }
+        } else {
+          const messageObject = r.message as { EN: string; NL: string };
+          setErrorMsg(messageObject[lang]);
         }
-        console.log(r);
       }
     );
   };
@@ -84,9 +102,11 @@ const WizardComponent = ({ initialStep }: WizardType) => {
         {(() => {
           switch (step) {
             case WizardStep.RoomCode:
-              return <WizardRoomCode setStep={handleRoomCode} />;
+              return (
+                <WizardRoomCode error={errorMsg} setStep={handleRoomCode} />
+              );
             case WizardStep.Name:
-              return <WizardName setStep={handleName} />;
+              return <WizardName error={errorMsg} setStep={handleName} />;
             case WizardStep.Group:
               if (room && room.groups?.length) {
                 return (
