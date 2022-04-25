@@ -1,11 +1,14 @@
+import { RoomDto } from "models";
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Player } from "../../../components/Player";
 import { Timer } from "../../../components/Timer";
+import { getTeamFromSocketId } from "../../../utils/getTeamFromSocketId";
 import styles from "./Game.module.css";
 
 export const GameCountdown = ({
@@ -21,8 +24,10 @@ export const GameCountdown = ({
 }) => {
   const [counter, setCounter] = useState(time);
   const text = useContext(LanguageContext);
-  const timer = useContext(TimerContext);
+  const socket = useContext(SocketContext);
   const room = useContext(RoomContext);
+  const players = getTeamFromSocketId(room as RoomDto, socket?.id as string);
+  const timer = useContext(TimerContext);
 
   useEffect(() => {
     if (!callback) return;
@@ -48,8 +53,8 @@ export const GameCountdown = ({
       </PageSlot>
       <PageSlot location="subheader">
         <div className={styles.players}>
-          <Player name="Stijn" />
-          <Player name="Vincent" />
+          {players?.length &&
+            players.map((player, i) => <Player key={i} name={player.name} />)}
         </div>
       </PageSlot>
       <PageSlot location="body">
