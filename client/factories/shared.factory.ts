@@ -1,3 +1,4 @@
+import { setCookies } from "cookies-next";
 import { Player } from "models";
 
 export const getPlayerId = (
@@ -5,17 +6,12 @@ export const getPlayerId = (
   players: Player[]
 ): string | undefined => {
   return (
-    getPlayerIdFromLocalStorage() ||
     players?.find((p) => p.socketId === socketId)?.id
   );
 };
 
-export const setPlayerIdToLocalStorage = (playerId: string): void => {
-  localStorage.setItem("playerId", playerId);
-};
-
-export const getPlayerIdFromLocalStorage = (): string | null => {
-  return localStorage.getItem("playerId");
+export const setPlayerIdToCookies = (playerId: string): void => {
+  setCookies("playerId", playerId);
 };
 
 export const setTimeStampToLocalStorage = (timeStamp: number): void => {

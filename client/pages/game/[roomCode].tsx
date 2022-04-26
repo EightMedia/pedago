@@ -21,7 +21,6 @@ import { getLobbyType } from "../../factories/Lobby.factory";
 import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
 import { getResultData } from "../../factories/Result.factory";
 import {
-  getPlayerIdFromLocalStorage,
   getTimeStampFromLocalStorage,
   setTimeStampToLocalStorage
 } from "../../factories/shared.factory";
@@ -46,7 +45,13 @@ import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
 import LanguageProvider from "../../providers/Language.provider";
 import TimerProvider from "../../providers/Timer.provider";
 
-const RoomCode = ({ localLang }: { localLang: Language }) => {
+const RoomCode = ({
+  localLang,
+  playerId,
+}: {
+  localLang: Language;
+  playerId: string;
+}) => {
   const socket: Socket | null = useSocket(
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
   );
@@ -62,7 +67,6 @@ const RoomCode = ({ localLang }: { localLang: Language }) => {
   const [timer, setTimer] = useState<number | null>(0);
 
   const ROUND_MAX = 6;
-  let playerId: string | null = "";
 
   const handleMessage = (v: any) => {
     console.log(v);
@@ -72,10 +76,6 @@ const RoomCode = ({ localLang }: { localLang: Language }) => {
     setView({ name: ViewName.Game });
     setGameScene(GameScenes.Sort);
   };
-
-  if (typeof window !== "undefined") {
-    playerId = getPlayerIdFromLocalStorage();
-  }
 
   const router = useRouter();
   const roomCode = parseInt(router.query.roomCode as string, 10);
@@ -88,7 +88,7 @@ const RoomCode = ({ localLang }: { localLang: Language }) => {
     if (roomCode && socket) {
       (socket as Socket).emit(
         PlayerEvent.JoinRoomByRoomCode,
-        getPlayerIdFromLocalStorage(),
+        playerId,
         roomCode,
         (r: SocketCallback) => {
           if (r.status === "OK") {
@@ -224,9 +224,10 @@ const RoomCode = ({ localLang }: { localLang: Language }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {  
-  const localLang = getCookie("language", { req, res});  
-  return { props: { localLang: localLang || Language.NL } };
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const localLang = getCookie("language", { req, res });
+  const playerId = getCookie("playerId", { req, res });
+  return { props: { localLang: localLang || Language.NL, playerId: playerId || null } };
 };
 
 export default RoomCode;
