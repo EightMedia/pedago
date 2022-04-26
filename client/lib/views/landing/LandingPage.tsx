@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import {
   ChangeEvent,
   Dispatch,
-  FormEvent, SetStateAction,
+  FormEvent,
+  SetStateAction,
   useContext,
   useState
 } from "react";
@@ -15,6 +16,7 @@ import { IconsEnum } from "../../components/Icon/Icon";
 import { InputText } from "../../components/InputText";
 import { Logo } from "../../components/Logo";
 import { Page } from "../../components/Page";
+import { PageSlot } from "../../components/Page/Page";
 import { Title } from "../../components/Title";
 import { Center } from "../../layouts/Center";
 import { LandingIllustration } from "./Landing.illustration";
@@ -49,71 +51,75 @@ const LandingPage = ({
   const handleChangeLanguage = (lang: Language) => {
     handleLanguageChange(lang);
     setLanguageSelect(false);
-  }
+  };
 
   return (
-    <Page>
-      <Center>
-        <div className={styles.header}>
-          <div className={styles.logoWrapper}>
-            <Logo className={styles.logo} />
-          </div>
-          <div className={styles.languageSelect}>
+    <Page valign="center">
+      <PageSlot location="headerCenter">
+        <Logo />
+      </PageSlot>
+      <PageSlot location="headerRight" className={styles.languageSelect}>
+        <button
+          className={styles.languageToggle}
+          onClick={() => setLanguageSelect(!languageSelect)}
+        >
+          <Icon icon={IconsEnum.Language} />
+          <span>{language.toString()}</span>
+        </button>
+        {languageSelect && (
+          <div className={styles.languages}>
             <button
-              className={styles.languageToggle}
-              onClick={() => setLanguageSelect(!languageSelect)}
+              onClick={() => handleChangeLanguage(Language.NL)}
+              className={styles.lang}
             >
-              <Icon icon={IconsEnum.Language} />
-              <span>{language.toString()}</span>
+              Nederlands
             </button>
-            {languageSelect && (
-              <div className={styles.languages}>
-                <button
-                  onClick={() => handleChangeLanguage(Language.NL)}
-                  className={styles.langNl}
-                >
-                  Nederlands
-                </button>
-                <button
-                  onClick={() => handleChangeLanguage(Language.EN)}
-                  className={styles.langEn}
-                >
-                  English
-                </button>
-              </div>
-            )}
+            <button
+              onClick={() => handleChangeLanguage(Language.EN)}
+              className={styles.lang}
+            >
+              English
+            </button>
           </div>
-        </div>
-        <div className={styles.body} onClick={() => setLanguageSelect(false)}>
-          <Title size="lg" element="h1">
-            {text?.landing?.title}
-          </Title>
-          <div className={styles.description}>{text?.landing?.description}</div>
-          <div className={styles.action}>
-            <form onSubmit={handleSubmit}>
-              <div className={styles.inputGroup}>
-                <InputText
-                  type="number"
-                  onChange={handleInputChange}
-                  placeholder={text?.landing?.input}
-                  id={"roomCode"}
-                  label={"spelcode"}
-                />
-                <Button type="submit">{text?.landing?.button}</Button>
-              </div>
-            </form>
-            <div className={styles.adminText}>
-              <Link href="/admin">{text?.landing?.create}</Link>{" "}
-              {text?.landing?.asAdmin}
+        )}
+      </PageSlot>
+      <PageSlot location="subheader" className={styles.subHeader}>
+        <Title size="lg" element="h1">
+          {text?.landing?.title}
+        </Title>
+        <div className={styles.description}>{text?.landing?.description}</div>
+      </PageSlot>
+      <PageSlot location="body">
+        <div className={styles.action}>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputGroup}>
+              <InputText
+                type="number"
+                onChange={handleInputChange}
+                placeholder={text?.landing?.input}
+                id={"roomCode"}
+                label={"spelcode"}
+              />
+              <Button type="submit">{text?.landing?.button}</Button>
             </div>
-          </div>
-          <LandingIllustration className={styles.illustration} />
-          <footer className={styles.footer}>
-            <a>Privacy</a>
-            <a>Cookies</a>
-          </footer>
+          </form>
+          <Center>
+            <div className={styles.adminText}>
+              <Link href="/admin" passHref>
+                <span className={styles.createGame}>
+                  {text?.landing?.create}
+                </span>
+              </Link>{" "}
+              <span>{text?.landing?.asAdmin}</span>
+            </div>
+          </Center>
         </div>
-      </Center>
+        <LandingIllustration className={styles.illustration} />
+      </PageSlot>
+      <PageSlot location="footer" className={styles.footer}>
+        <a>Privacy</a>
+        <a>Cookies</a>
+      </PageSlot>
     </Page>
   );
 };
