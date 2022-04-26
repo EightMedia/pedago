@@ -191,5 +191,6 @@ export const updateRoomDto = (room: Partial<RoomDto>) => {
 
 export const reset = (roomId: string, socket: Socket) => {
   store.removeRoom(roomId);
+  socket.broadcast.to(roomId).emit(PlayerEvent.ExitGame);
   socket.removeAllListeners();
 };

@@ -1,4 +1,4 @@
-import { getCookie } from "cookies-next";
+import { getCookie, removeCookies } from "cookies-next";
 import {
   Event,
   Language,
@@ -126,6 +126,11 @@ const RoomCode = ({
           setToWait ? PlayerMatchSceneEnum.Wait : PlayerMatchSceneEnum.Match
         )
       );
+      socket.on(PlayerEvent.ExitGame, () => {
+        removeCookies("playerId");
+        removeCookies("roomCode");
+        router.push("/");
+      })
     }
   }, [socket]);
   return (
