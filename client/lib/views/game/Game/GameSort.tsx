@@ -14,7 +14,7 @@ import { PageSlot } from "../../../components/Page/Page";
 import { SortList } from "../../../components/SortList";
 import { Timer } from "../../../components/Timer";
 import { Center } from "../../../layouts/Center";
-import { Stack } from "../../../layouts/Stack";
+import { WizardInfo } from "../Wizard/WizardInfo";
 import styles from "./Game.module.css";
 import { GameSortType } from "./Game.types";
 
@@ -105,7 +105,7 @@ export const GameSort = ({ round }: GameSortType) => {
       </Page>
       {showInfoModal && (
         <Modal handleClose={() => setShowInfoModal(false)}>
-          <Stack>info</Stack>
+          <WizardInfo onClick={() => setShowInfoModal(false)} />
         </Modal>
       )}
     </>
