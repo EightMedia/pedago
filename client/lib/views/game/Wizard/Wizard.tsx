@@ -103,7 +103,7 @@ const WizardComponent = ({ initialStep, error }: WizardType) => {
       <PageSlot location="headerCenter">
         <Logo />
       </PageSlot>
-      <Panel width="sm">
+      <Panel width={step === WizardStep.Info ? "md" : "sm"}>
         {(() => {
           switch (step) {
             case WizardStep.RoomCode:
