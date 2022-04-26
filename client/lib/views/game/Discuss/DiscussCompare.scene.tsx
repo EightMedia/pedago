@@ -22,7 +22,7 @@ import { Text } from "../../../components/Text";
 import { Timer } from "../../../components/Timer";
 import { Center } from "../../../layouts/Center";
 import { Stack } from "../../../layouts/Stack";
-import { GameInfo } from "../../admin/Game/GameOnboarding";
+import { WizardInfo } from "../Wizard/WizardInfo";
 import styles from "./Discuss.module.css";
 import { DiscussCompareProps } from "./Discuss.types";
 
@@ -88,12 +88,10 @@ export const DiscussCompare = ({
   teamMembers,
   round = 0,
 }: DiscussCompareProps) => {
+  const [showInfoModal, setShowInfoModal] = useState(false);
   const { text } = useContext(LanguageContext);
   const timer = useContext(TimerContext);
   const room = useContext(RoomContext);
-
-  const [showInfoModal, setShowInfoModal] = useState(false);
-
   const rowProps = teamMembers?.[0]?.cards.map(useEqualRows) || [];
 
   return (
@@ -144,9 +142,7 @@ export const DiscussCompare = ({
       </Page>
       {showInfoModal && (
         <Modal handleClose={() => setShowInfoModal(false)}>
-          <Stack>
-            <GameInfo title="Info" />
-          </Stack>
+          <WizardInfo onClick={() => setShowInfoModal(false)} />
         </Modal>
       )}
     </>
