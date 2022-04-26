@@ -1,10 +1,12 @@
+import { setCookies } from "cookies-next";
 import { Language } from "models";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   ChangeEvent,
   Dispatch,
-  FormEvent, SetStateAction,
+  FormEvent,
+  SetStateAction,
   useContext,
   useState
 } from "react";
@@ -40,7 +42,7 @@ const LandingPage = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    localStorage.setItem("roomCode", roomCode);
+    if (roomCode) setCookies("roomCode", roomCode.toString());
     router.push(`/game/${roomCode}`);
   };
 

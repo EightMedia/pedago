@@ -1,3 +1,4 @@
+import { setCookies } from "cookies-next";
 import { Group, PlayerEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
 import { memo, useContext, useEffect, useState } from "react";
@@ -31,7 +32,7 @@ const WizardComponent = ({ initialStep, error }: WizardType) => {
   }, [initialStep]);
 
   useEffect(() => {
-      setErrorMsg(error);
+    setErrorMsg(error);
   }, [error]);
 
   const handleRoomCode = (step: WizardStep, roomCode: number) => {
@@ -40,7 +41,7 @@ const WizardComponent = ({ initialStep, error }: WizardType) => {
       roomCode,
       (res: SocketCallback) => {
         if (res.status === "OK") {
-          localStorage.setItem("roomCode", roomCode.toString());
+          if (roomCode) setCookies("roomCode", roomCode.toString());
           router.push(`/game/${roomCode}`);
           setStep(step);
           setErrorMsg(undefined);
