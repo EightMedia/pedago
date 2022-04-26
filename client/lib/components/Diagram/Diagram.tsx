@@ -4,7 +4,7 @@ import {
   LineElement,
   PointElement,
   RadialLinearScale,
-  Tooltip,
+  Tooltip
 } from "chart.js";
 import cx from "classnames";
 import { memo, useContext } from "react";
@@ -23,7 +23,7 @@ const DiagramComponent = ({
   secondaryLabel,
   className,
 }: DiagramType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const findCategoryTitles = () => {
     const categories = Object.values(text.categories);
     return categories.map((category) => category.title);

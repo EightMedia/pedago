@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import {
   ChangeEvent,
   Dispatch,
-  SetStateAction,
+  FormEvent, SetStateAction,
   useContext,
   useState
 } from "react";
@@ -28,7 +28,7 @@ const LandingPage = ({
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
   const [roomCode, setRoomCode] = useState<string>("");
-  const data = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const router = useRouter();
   const [languageSelect, setLanguageSelect] = useState<boolean>(false);
 
@@ -40,7 +40,8 @@ const LandingPage = ({
     setRoomCode(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     localStorage.setItem("roomCode", roomCode);
     router.push(`/game/${roomCode}`);
   };
@@ -80,25 +81,25 @@ const LandingPage = ({
         </div>
         <div className={styles.body}>
           <Title size="lg" element="h1">
-            {data?.landing?.title}
+            {text?.landing?.title}
           </Title>
-          <div className={styles.description}>{data?.landing?.description}</div>
+          <div className={styles.description}>{text?.landing?.description}</div>
           <div className={styles.action}>
             <form onSubmit={handleSubmit}>
               <div className={styles.inputGroup}>
                 <InputText
                   type="number"
                   onChange={handleInputChange}
-                  placeholder={data?.landing?.input}
+                  placeholder={text?.landing?.input}
                   id={"roomCode"}
                   label={"spelcode"}
                 />
-                <Button type="submit">{data?.landing?.button}</Button>
+                <Button type="submit">{text?.landing?.button}</Button>
               </div>
             </form>
             <div className={styles.adminText}>
-              <Link href="/admin">{data?.landing?.create}</Link>{" "}
-              {data?.landing?.asAdmin}
+              <Link href="/admin">{text?.landing?.create}</Link>{" "}
+              {text?.landing?.asAdmin}
             </div>
           </div>
           <LandingIllustration className={styles.illustration} />

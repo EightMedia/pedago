@@ -10,24 +10,26 @@ if (process.env.AIRTABLE_API_KEY) {
 }
 
 const storeGame = (room: RoomDto, playerId: string) => {
-  base(process.env.AIRTABLE_GAMES_TABLE).create(
-    [
-      {
-        fields: {
-          Game: dataToJson(room, playerId),
+  if (base) {
+    base(process.env.AIRTABLE_GAMES_TABLE).create(
+      [
+        {
+          fields: {
+            Game: dataToJson(room, playerId),
+          },
         },
-      },
-    ],
-    (err: any, records: any[]) => {
-      if (err) {
-        console.error(err);
-        return;
+      ],
+      (err: any, records: any[]) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        records.forEach((record) => {
+          console.log(record.getId());
+        });
       }
-      records.forEach((record) => {
-        console.log(record.getId());
-      });
-    }
-  );
+    );
+  }
 };
 
 export default storeGame;

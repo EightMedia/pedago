@@ -1,5 +1,7 @@
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Button } from "../../../components/Button";
 import { Loader } from "../../../components/Loader";
 import { Page } from "../../../components/Page";
@@ -17,19 +19,20 @@ const WaitingComponent = ({
   teamMembers,
   backToSort,
 }: WaitingType) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
   const waitingText = text.waiting;
+  const timer = useContext(TimerContext);
+  const room = useContext(RoomContext);
 
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">
-        <Timer time={600} />
+        {(room?.options?.timer as boolean) && <Timer time={timer as number} />}{" "}
       </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}
       </PageSlot>
       <Panel>
-      
         <Center>
           <Loader />
           <PanelTitle space="sm">{waitingText.goodBusy}</PanelTitle>

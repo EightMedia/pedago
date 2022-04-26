@@ -6,9 +6,11 @@ import {
   useContext,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { RoomContext } from "../../../../contexts/RoomContext";
+import { TimerContext } from "../../../../contexts/TimerContext";
 import { Button } from "../../../components/Button";
 import { Icon, IconsEnum } from "../../../components/Icon/Icon";
 import { Modal } from "../../../components/Modal";
@@ -71,7 +73,7 @@ const CompareCard = forwardRef(function CompareCard(
   { card, round = 0, ...rest }: CompareCardProps,
   ref?: Ref<HTMLDivElement>
 ) {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
 
   return (
     <div {...rest} ref={ref} className={styles.card}>
@@ -86,11 +88,11 @@ export const DiscussCompare = ({
   teamMembers,
   round = 0,
 }: DiscussCompareProps) => {
-  const text = useContext(LanguageContext);
+  const { text } = useContext(LanguageContext);
+  const timer = useContext(TimerContext);
+  const room = useContext(RoomContext);
 
   const [showInfoModal, setShowInfoModal] = useState(false);
-
-  const teamMembersCount = teamMembers?.length;
 
   const rowProps = teamMembers?.[0]?.cards.map(useEqualRows) || [];
 
@@ -98,7 +100,7 @@ export const DiscussCompare = ({
     <>
       <Page>
         <PageSlot location="headerLeft">
-          <Timer time={600} />
+          {(room?.options?.timer as boolean) && <Timer time={timer} />}
         </PageSlot>
         <PageSlot location="headerCenter">
           <Center>{text.discuss.compare.discussDiff}</Center>

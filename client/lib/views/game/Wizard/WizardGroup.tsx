@@ -13,11 +13,11 @@ export const WizardGroup = ({
   groups: Group[];
   setStep: (step: WizardStep, group: Group) => void;
 }) => {
-  const text = useContext(LanguageContext).gameWizard.group;
+  const { text } = useContext(LanguageContext);
 
   return (
     <>
-      <PanelTitle>{text.title}</PanelTitle>
+      <PanelTitle>{text.gameWizard.group.title}</PanelTitle>
       <Stack gap="2xs">
         {groups.map((group: Group) => (
           <Button key={group.id} onClick={() => setStep(WizardStep.Info, group)}>

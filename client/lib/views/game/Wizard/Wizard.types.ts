@@ -8,4 +8,5 @@ export enum WizardStep {
 
 export type WizardType = {
   initialStep?: WizardStep;
+  error?: string;
 };

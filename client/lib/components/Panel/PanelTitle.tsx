@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import styles from "./Panel.module.css";
 
 export interface PanelTitleType {
-  children: ReactNode;
+  children: ReactNode | string;
   space?: "lg" | "sm";
   align?: "left" | "center";
 }
