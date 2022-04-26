@@ -37,6 +37,14 @@
   }
 }
 
+.codeText {
+  font-size: var(--font-size-lg);
+  text-align: center;
+  color: var(--color-grey-darkest);
+  font-weight: 500;
+  font-family: var(--font-body);
+}
+
 .codeButton {
   font-size: 48px;
   @media (--sm) {
