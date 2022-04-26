@@ -97,6 +97,7 @@ export const NL: Locale = {
       notDone: "Er zijn nog geen teams klaar",
       areYouSure: "Weet je het zeker?",
       yesSure: "Ja, start de volgende ronde",
+      yesToResult: "Ja, door naar de resultaten",
       there: "Er",
       isOneTeam: "is nog 1 team",
       are: "zijn nog",

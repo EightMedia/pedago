@@ -38,7 +38,7 @@ export const GameLead = ({
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
 
   if (callback) {
-    TimedCallback(3, callback);
+    TimedCallback(2, callback);
   }
   return (
     <>

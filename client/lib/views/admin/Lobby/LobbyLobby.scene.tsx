@@ -11,7 +11,6 @@ import { Panel } from "../../../components/Panel";
 import { PanelGroup } from "../../../components/PanelGroup";
 import { PlayerCount } from "../../../components/PlayerCount";
 import { PlayerGroup } from "../../../components/PlayerGroup";
-import { Text } from "../../../components/Text";
 import { Stack } from "../../../layouts/Stack";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
@@ -52,11 +51,15 @@ export const LobbyLobby = ({
         <ButtonGroup>
           <Button variation="whiteBlocked" onClick={handleSettings}>
             <Icon icon={IconsEnum.Settings} size="md" />
-            <span className={"lg-only"}>{text.adminLobby.lobby.settingsButton}</span>
+            <span className={"lg-only"}>
+              {text.adminLobby.lobby.settingsButton}
+            </span>
           </Button>
           <Button variation="whiteBlocked" onClick={handleInfo as () => void}>
             <Icon icon={IconsEnum.Info} size="md" />
-            <span className={"lg-only"}>{text.adminLobby.lobby.rulesButton}</span>
+            <span className={"lg-only"}>
+              {text.adminLobby.lobby.rulesButton}
+            </span>
           </Button>
         </ButtonGroup>
       </PageSlot>
@@ -71,9 +74,7 @@ export const LobbyLobby = ({
                 </button>
               </CopyToClipboard>
             </div>
-            <Text size="lg" align="center">
-              <ReactMarkdown>{text.adminLobby.lobby.code}</ReactMarkdown>
-            </Text>
+            <ReactMarkdown className={styles.codeText}>{text.adminLobby.lobby.code}</ReactMarkdown>
             <ButtonGroup>
               <Button
                 onClick={handleLock as () => void}

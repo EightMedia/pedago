@@ -19,6 +19,7 @@ const GameComponent = ({
   const room = useContext(RoomContext);
 
   const stopRound = () => {
+    setScene(GameScene.Lead);
     socket?.emit(
       AdminEvent.FinishRound,
       room?.id,
@@ -29,9 +30,7 @@ const GameComponent = ({
     );
   };
 
-  const leadCallBack = initialScene
-    ? undefined
-    : () => setScene(GameScene.Round);
+  const leadCallBack = () => setScene(GameScene.Round);
 
   switch (scene) {
     case GameScene.Onboarding:

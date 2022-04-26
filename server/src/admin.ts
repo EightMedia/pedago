@@ -156,7 +156,6 @@ export const finishRound = (
   } else {
     // Fetch latest sortorder from all players
     socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
-
     const room = store.getRoomById(roomId) as RoomDto;
 
     // Remove idle players

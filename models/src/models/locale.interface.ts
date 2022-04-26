@@ -75,6 +75,7 @@ export interface Locale {
       notDone: string;
       areYouSure: string;
       yesSure: string;
+      yesToResult: string;
       there: string;
       isOneTeam: string;
       are: string;
