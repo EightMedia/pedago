@@ -89,10 +89,10 @@ export const DiscussCompare = ({
   round = 0,
 }: DiscussCompareProps) => {
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const { text } = useContext(LanguageContext);
   const timer = useContext(TimerContext);
   const room = useContext(RoomContext);
-  const rowProps = teamMembers?.[0]?.cards.map(useEqualRows) || [];
+  const { text } = useContext(LanguageContext);
+  const rowProps = teamMembers?.[0]?.cards?.map(useEqualRows) || [];
 
   return (
     <>

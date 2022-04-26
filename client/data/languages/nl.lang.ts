@@ -314,7 +314,7 @@ export const NL: Locale = {
     },
     compare: {
       discussDiff: "Bespreek de verschillen en overeenkomsten",
-      ready: "Wij zij klaar",
+      ready: "Wij zijn klaar",
       info: "Uitleg",
     },
   },

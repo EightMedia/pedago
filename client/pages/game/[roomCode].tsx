@@ -86,6 +86,10 @@ const RoomCode = ({
   }, []);
 
   useEffect(() => {
+    setPlayerId(localPlayerId)
+  }, [localPlayerId])
+
+  useEffect(() => {
     if (roomCode && socket) {
       (socket as Socket).emit(
         PlayerEvent.JoinRoomByRoomCode,
@@ -133,6 +137,7 @@ const RoomCode = ({
       })
     }
   }, [socket]);
+
   return (
     <>
       <Head>
