@@ -1,32 +1,20 @@
+import { getCookie, setCookies } from "cookies-next";
 import { Language } from "models";
-import dynamic from "next/dynamic";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { DEFAULT_LANGUAGE } from "../contexts/LanguageContext";
+import LandingPage from "../lib/views/landing/LandingPage";
 import LanguageProvider from "../providers/Language.provider";
 
-const ContentPage = () => {
-  const [language, setLanguage] = useState<Language>(() => {
-    let langFromLocalStorage;
-    if (typeof window !== "undefined") {
-      langFromLocalStorage = localStorage.getItem("language");
-    }
-
-    return langFromLocalStorage
-      ? (langFromLocalStorage as Language)
-      : DEFAULT_LANGUAGE;
-  });
+const ContentPage = ({ localLang }: { localLang: Language }) => {
+  const [language, setLanguage] = useState<Language>(
+    localLang || DEFAULT_LANGUAGE
+  );
 
   useEffect(() => {
-    localStorage.setItem("language", language);
+    setCookies("language", language);
   }, [language]);
-
-  const LandingWithoutSSR = dynamic(
-    () => import("../lib/views/landing/LandingPage"),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <>
@@ -34,12 +22,18 @@ const ContentPage = () => {
         <title>Pedago Game</title>
       </Head>
       <LanguageProvider lang={language}>
-        <LandingWithoutSSR
+        <LandingPage
           language={language}
           setLanguage={setLanguage}
-        ></LandingWithoutSSR>
+        ></LandingPage>
       </LanguageProvider>
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async ({req, res}) => {  
+  const localLang = getCookie("language", { req, res});  
+  return { props: { localLang: localLang || Language.NL } };
+};
+
 export default ContentPage;

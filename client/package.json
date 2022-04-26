@@ -21,6 +21,7 @@
     "boring-avatars": "^1.6.3",
     "chart.js": "^3.7.1",
     "classnames": "^2.3.1",
+    "cookies-next": "^2.0.4",
     "cross-env": "^7.0.3",
     "css-reset-and-normalize": "^2.3.6",
     "next": "12.1.5",

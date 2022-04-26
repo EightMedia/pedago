@@ -1,3 +1,4 @@
+import { removeCookies } from "cookies-next";
 import { memo, useEffect, useState } from "react";
 import { Logo } from "../Logo";
 import { Page } from "../Page";
@@ -14,7 +15,7 @@ const ResultComponent = ({
   const [step, setStep] = useState(initialStep);
 
   useEffect(() => {
-    return () => localStorage.removeItem("room");
+    return () => removeCookies("room");
   }, []);
 
   return (

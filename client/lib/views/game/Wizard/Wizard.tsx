@@ -1,3 +1,4 @@
+import { setCookies } from "cookies-next";
 import { Group, PlayerEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
 import { memo, useContext, useEffect, useState } from "react";
@@ -5,7 +6,7 @@ import { Socket } from "socket.io-client";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
-import { setPlayerIdToLocalStorage } from "../../../../factories/shared.factory";
+import { setPlayerIdToCookies } from "../../../../factories/shared.factory";
 import { Logo } from "../../../components/Logo";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
@@ -31,7 +32,7 @@ const WizardComponent = ({ initialStep, error }: WizardType) => {
   }, [initialStep]);
 
   useEffect(() => {
-      setErrorMsg(error);
+    setErrorMsg(error);
   }, [error]);
 
   const handleRoomCode = (step: WizardStep, roomCode: number) => {
@@ -40,7 +41,7 @@ const WizardComponent = ({ initialStep, error }: WizardType) => {
       roomCode,
       (res: SocketCallback) => {
         if (res.status === "OK") {
-          localStorage.setItem("roomCode", roomCode.toString());
+          if (roomCode) setCookies("roomCode", roomCode.toString());
           router.push(`/game/${roomCode}`);
           setStep(step);
           setErrorMsg(undefined);
@@ -62,7 +63,7 @@ const WizardComponent = ({ initialStep, error }: WizardType) => {
         if (r.status === "OK") {
           if (resData) {
             setPlayerId(resData?.playerId as string);
-            setPlayerIdToLocalStorage(resData?.playerId as string);
+            setPlayerIdToCookies(resData?.playerId as string);
             setStep(step);
           }
         } else {

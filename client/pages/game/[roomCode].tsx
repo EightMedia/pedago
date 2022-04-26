@@ -1,3 +1,4 @@
+import { getCookie } from "cookies-next";
 import {
   Event,
   Language,
@@ -8,6 +9,7 @@ import {
   ViewName,
   ViewState
 } from "models";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -19,7 +21,6 @@ import { getLobbyType } from "../../factories/Lobby.factory";
 import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
 import { getResultData } from "../../factories/Result.factory";
 import {
-  getPlayerIdFromLocalStorage,
   getTimeStampFromLocalStorage,
   setTimeStampToLocalStorage
 } from "../../factories/shared.factory";
@@ -44,7 +45,13 @@ import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
 import LanguageProvider from "../../providers/Language.provider";
 import TimerProvider from "../../providers/Timer.provider";
 
-const RoomCode = () => {
+const RoomCode = ({
+  localLang,
+  playerId,
+}: {
+  localLang: Language;
+  playerId: string;
+}) => {
   const socket: Socket | null = useSocket(
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
   );
@@ -59,9 +66,7 @@ const RoomCode = () => {
   const [error, setError] = useState<string | undefined>();
   const [timer, setTimer] = useState<number | null>(0);
 
-  let language = Language.NL;
   const ROUND_MAX = 6;
-  let playerId: string | null = "";
 
   const handleMessage = (v: any) => {
     console.log(v);
@@ -71,11 +76,6 @@ const RoomCode = () => {
     setView({ name: ViewName.Game });
     setGameScene(GameScenes.Sort);
   };
-
-  if (typeof window !== "undefined") {
-    playerId = getPlayerIdFromLocalStorage();
-    language = (localStorage?.getItem("language") as Language) || Language.NL;
-  }
 
   const router = useRouter();
   const roomCode = parseInt(router.query.roomCode as string, 10);
@@ -88,7 +88,7 @@ const RoomCode = () => {
     if (roomCode && socket) {
       (socket as Socket).emit(
         PlayerEvent.JoinRoomByRoomCode,
-        getPlayerIdFromLocalStorage(),
+        playerId,
         roomCode,
         (r: SocketCallback) => {
           if (r.status === "OK") {
@@ -97,12 +97,12 @@ const RoomCode = () => {
           } else {
             setWizardStep(WizardStep.RoomCode);
             const messageObject = r.message as { EN: string; NL: string };
-            setError(messageObject[language]);
+            setError(messageObject[localLang]);
           }
         }
       );
     }
-  }, [socket, roomCode, error, language]);
+  }, [socket, roomCode, error, localLang]);
 
   useEffect(() => {
     if (socket) {
@@ -132,7 +132,7 @@ const RoomCode = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider lang={language}>
+      <LanguageProvider lang={localLang}>
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>
@@ -222,6 +222,12 @@ const RoomCode = () => {
       </LanguageProvider>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const localLang = getCookie("language", { req, res });
+  const playerId = getCookie("playerId", { req, res });
+  return { props: { localLang: localLang || Language.NL, playerId: playerId || null } };
 };
 
 export default RoomCode;

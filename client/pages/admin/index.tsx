@@ -1,3 +1,4 @@
+import { getCookie, setCookies } from "cookies-next";
 import {
   AdminEvent,
   Event,
@@ -9,6 +10,7 @@ import {
   ViewName,
   ViewState
 } from "models";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
@@ -41,7 +43,7 @@ import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
 import LanguageProvider from "../../providers/Language.provider";
 import TimerProvider from "../../providers/Timer.provider";
 
-const AdminGame = () => {
+const AdminGame = ({ localLang, localRoom }: { localLang: Language, localRoom: RoomDto }) => {
   const socket: Socket | null = useSocket(
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
   );
@@ -52,22 +54,12 @@ const AdminGame = () => {
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
   const [timer, setTimer] = useState<number | null>(0);
 
-  let language = Language.NL;
-  let localRoom: string | null = "";
-  if (typeof window !== "undefined") {
-    localRoom = localStorage.getItem("room");
-    language = (localStorage?.getItem("language") as Language) || Language.NL;
-  }
-
   const handleRegisterGame = (room: Partial<RoomDto>): void => {
     if (socket) {
       socket.emit(AdminEvent.RegisterGame, room, (res: SocketCallback) => {
         if (res) console.log(res.message);
         setRoom(res?.data?.room as RoomDto);
-        localStorage.setItem(
-          "room",
-          JSON.stringify(res?.data?.room as RoomDto)
-        );
+        setCookies("room", JSON.stringify(res?.data?.room));
       });
     }
   };
@@ -76,21 +68,17 @@ const AdminGame = () => {
     setTimer(getTimeStampFromLocalStorage());
   }, []);
 
-  useEffect(() => {
+  useEffect(() => {    
     if (localRoom) {
-      const parsedRoom = JSON.parse(localRoom);
       if (socket) {
         socket.emit(
           AdminEvent.RegisterGame,
-          parsedRoom,
+          localRoom,
           (res: SocketCallback) => {
             setRoom(res?.data?.room as RoomDto);
             setTimer(res?.data?.room?.timerStamp as number);
-            localStorage.setItem(
-              "room",
-              JSON.stringify(res?.data?.room as RoomDto)
-            );
-            console.log(res);
+            setCookies("room", JSON.stringify(res?.data?.room));
+            console.log(res.message);
           }
         );
       }
@@ -123,7 +111,7 @@ const AdminGame = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider lang={language}>
+      <LanguageProvider lang={localLang}>
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>
@@ -177,6 +165,13 @@ const AdminGame = () => {
       </LanguageProvider>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const localLang = getCookie("language", { req, res });
+  const room = getCookie("room", { req, res });
+  
+  return { props: { localLang: localLang || Language.NL, localRoom: room ? JSON.parse(room as string) : null } };
 };
 
 export default AdminGame;
