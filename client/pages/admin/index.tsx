@@ -48,7 +48,7 @@ const AdminGame = ({ localLang, localRoom }: { localLang: Language, localRoom: R
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
   );
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
-  const [room, setRoom] = useState<RoomDto>({} as RoomDto);
+  const [room, setRoom] = useState<RoomDto>(localRoom);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
