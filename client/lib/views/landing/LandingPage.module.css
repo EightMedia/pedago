@@ -1,32 +1,62 @@
-.container {
-  margin: 0 auto;
+.languageSelect {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.languageToggle {
+  background-color: var(--color-grey-6);
+  color: white, 0.25;
+  font-size: var(--font-size-md);
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 8px;
+  border: 1px solid var(--color-grey-6);
+  border-radius: 4px;
+  display: flex;
+  gap: var(--space-4xs);
+}
+
+.languageToggle:hover {
+  background-color: var(--color-grey-darkest);
+  border-color: var(----color-grey-darkest);
+}
+
+.languages {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 78px;
+  text-align: left;
+  border: var(--border-light);
+  border-radius: 4px;
+  background-color: var(--color-white);
+
+  @media (--sm) {
+    top: 90px;
+  }
 }
 
-.header {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  margin-bottom: 80px;
+.languages button {
+  padding: 12px 16px;
+  height: 48px;
+  width: 200px;
+  shadow: box-shadow(0px 2px 12px 0px #00000066);
 }
 
-.logoWrapper {
-  grid-column: 2 / 2;
-  width: 160px;
+.languages button:hover {
+  background-color: var(--color-grey-lightest);
 }
 
-.logo {
-  display: block;
-  width: 160px;
-  height: auto;
+.lang {
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-mdlg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.35;
 }
 
-.languageSelect {
-  grid-column: 3 / 3;
-}
-
-.action {
+.lang .action {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -40,13 +70,9 @@
   }
   margin: 0 auto;
   display: flex;
-  jusitfy-content: center;
+  justify-content: center;
   gap: var(--space-xs);
   margin-bottom: var(--space-md);
-}
-
-.adminText {
-  flex: 0 0 100%;
 }
 
 .illustration {
@@ -54,4 +80,52 @@
   height: auto;
   max-width: 784px;
   margin: 0 auto;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-mdlg);
+  margin-bottom: var(--space-mdlg);
+  margin-top: 2.5rem;
+  @media (--xs) {
+    margin-top: 4rem;
+  }
+  & a {
+    font-family: var(--font-body);
+    font-size: var(--font-size-md);
+  }
+}
+
+.subHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  margin-bottom: 2rem;
+  @media (--xs) {
+    margin-bottom: 3rem;
+  }
+}
+
+.createGame {
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.action {
+  margin-bottom: 2.5rem;
+  @media (--xs) {
+    margin-bottom: 4rem;
+  }
+}
+
+.adminText {
+  flex: 0 0 100%;
+  margin-top: 1rem;
+  @media (--xs) {
+    margin-top: 1.5rem;
+  }
 }

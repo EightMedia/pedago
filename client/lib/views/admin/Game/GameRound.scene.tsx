@@ -148,7 +148,7 @@ export const GameRound = ({
               : `${gameText.are} ${teamsStillPlaying} teams`}{" "}
             {gameText.stillPlaying}
           </p>
-          <Button onClick={handleStopRound}>{gameText.yesSure}</Button>
+          <Button onClick={handleStopRound}>{round.current === 6 ? gameText.yesToResult : gameText.yesSure}</Button>
         </Modal>
       )}
       {showInfoModal && (
