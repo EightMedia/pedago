@@ -128,3 +128,17 @@
   font-family: var(--font-body);
   font-size: var(--font-size-md);
 }
+
+.description {
+  margin-bottom: 2rem;
+  @media (--xs) {
+    margin-bottom: 3rem;
+  }
+}
+
+.action {
+  @media (--xs) {
+    margin-bottom: 2.5rem;
+    margin-bottom: 4rem;
+  }
+}

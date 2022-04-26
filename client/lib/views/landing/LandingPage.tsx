@@ -46,6 +46,11 @@ const LandingPage = ({
     router.push(`/game/${roomCode}`);
   };
 
+  const handleChangeLanguage = (lang: Language) => {
+    handleLanguageChange(lang);
+    setLanguageSelect(false);
+  }
+
   return (
     <Page>
       <Center>
@@ -64,13 +69,13 @@ const LandingPage = ({
             {languageSelect && (
               <div className={styles.languages}>
                 <button
-                  onClick={() => handleLanguageChange(Language.NL)}
+                  onClick={() => handleChangeLanguage(Language.NL)}
                   className={styles.langNl}
                 >
                   Nederlands
                 </button>
                 <button
-                  onClick={() => handleLanguageChange(Language.EN)}
+                  onClick={() => handleChangeLanguage(Language.EN)}
                   className={styles.langEn}
                 >
                   English
@@ -79,7 +84,7 @@ const LandingPage = ({
             )}
           </div>
         </div>
-        <div className={styles.body}>
+        <div className={styles.body} onClick={() => setLanguageSelect(false)}>
           <Title size="lg" element="h1">
             {text?.landing?.title}
           </Title>
