@@ -41,10 +41,10 @@
 }
 
 .compareCols2 {
-  grid-template-columns: repeat(2, minmax(45%, 1fr));
+  grid-template-columns: repeat(1, minmax(45%, 1fr));
 
   @media (--sm) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
