@@ -11,14 +11,13 @@ import { Logo } from "../../../components/Logo";
 import { Modal } from "../../../components/Modal";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
-import { PanelTitle } from "../../../components/Panel";
+import { Panel, PanelTitle } from "../../../components/Panel";
 import { PanelGroup } from "../../../components/PanelGroup";
 import { PlayerCount } from "../../../components/PlayerCount";
 import { TeamsList } from "../../../components/TeamsList";
 import { Timer } from "../../../components/Timer";
 import { Title } from "../../../components/Title";
 import { Center } from "../../../layouts/Center";
-import { Stack } from "../../../layouts/Stack";
 import styles from "./Game.module.css";
 import { GameType } from "./Game.types";
 import { GameInfo } from "./GameOnboarding";
@@ -153,9 +152,9 @@ export const GameRound = ({
       )}
       {showInfoModal && (
         <Modal handleClose={() => setShowInfoModal(false)}>
-          <Stack>
+          <Panel width="md">
             <GameInfo title="Info" />
-          </Stack>
+          </Panel>
         </Modal>
       )}
     </>
