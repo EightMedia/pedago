@@ -1,4 +1,4 @@
-import { setCookies } from "cookies-next";
+import { getCookie, setCookies } from "cookies-next";
 import { Player } from "models";
 
 export const getPlayerId = (
@@ -6,7 +6,7 @@ export const getPlayerId = (
   players: Player[]
 ): string | undefined => {
   return (
-    players?.find((p) => p.socketId === socketId)?.id
+    getCookie("playerId") as string || players?.find((p) => p.socketId === socketId)?.id
   );
 };
 
