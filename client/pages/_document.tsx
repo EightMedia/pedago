@@ -1,9 +1,9 @@
 import Document, {
-    DocumentContext,
-    Head,
-    Html,
-    Main,
-    NextScript
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript
 } from "next/document";
 
 class MyDocument extends Document {
@@ -24,7 +24,19 @@ class MyDocument extends Document {
           />
           <meta name="apple-mobile-web-app-title" content="Pedago Game" />
           <meta name="mobile-web-app-capable" content="yes" />
-
+          <meta name="theme-color" content="#12008A" />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/favicons/android-chrome-192x192.png"
+          ></link>
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="512x512"
+            href="/favicons/android-chrome-512x512.png"
+          ></link>
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -43,8 +55,6 @@ class MyDocument extends Document {
             href="/favicons/favicon-16x16.png"
           />
           <link rel="manifest" href="/favicons/site.webmanifest" />
-          <link rel="shortcut icon" href="/favicons/favicon.ico" />
-          <meta name="msapplication-TileColor" content="#ffffff" />
         </Head>
         <body>
           <Main />
