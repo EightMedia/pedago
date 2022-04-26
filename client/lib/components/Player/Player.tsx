@@ -30,7 +30,7 @@ const PlayerComponent = ({ name, group, size = "sm", active }: PlayerType) => {
         colors={avatarColors}
       />
       <div className={styles.nameWrapper}>
-        <span className={styles.name}>{name}</span>
+        <span className={cx(styles.name, active ? styles.active : null)}>{name}</span>
         {size === "lg" && group && (
           <span className={styles.group}>{group}</span>
         )}
