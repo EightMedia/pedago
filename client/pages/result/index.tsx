@@ -1,4 +1,6 @@
+import { getCookie } from "cookies-next";
 import { Language } from "models";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Page } from "../../lib/components/Page";
@@ -31,7 +33,7 @@ const stringToGroups = (grps: string): ResultGroup[] | [] => {
   });
 };
 
-const ResultPage = () => {
+const ResultPage = ({ localLang }: { localLang: Language }) => {
   const { me, groups } = useRouter().query;
   let meData = undefined;
   let groupsData: ResultGroup[] = [];
@@ -47,13 +49,7 @@ const ResultPage = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider
-        lang={
-          typeof window !== "undefined"
-            ? (localStorage?.getItem("language") as Language)
-            : Language.NL
-        }
-      >
+      <LanguageProvider lang={localLang}>
         {groups && (
           <Page valign="center" background={4}>
             <ResultOverview
@@ -68,6 +64,11 @@ const ResultPage = () => {
       </LanguageProvider>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({req, res}) => {  
+  const localLang = getCookie("language", { req, res});  
+  return { props: { localLang: localLang || Language.NL } };
 };
 
 export default ResultPage;

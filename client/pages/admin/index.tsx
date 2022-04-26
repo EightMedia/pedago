@@ -1,3 +1,4 @@
+import { getCookie } from "cookies-next";
 import {
   AdminEvent,
   Event,
@@ -9,6 +10,7 @@ import {
   ViewName,
   ViewState
 } from "models";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
@@ -41,7 +43,7 @@ import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
 import LanguageProvider from "../../providers/Language.provider";
 import TimerProvider from "../../providers/Timer.provider";
 
-const AdminGame = () => {
+const AdminGame = ({ localLang }: { localLang: Language }) => {
   const socket: Socket | null = useSocket(
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
   );
@@ -52,11 +54,9 @@ const AdminGame = () => {
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
   const [timer, setTimer] = useState<number | null>(0);
 
-  let language = Language.NL;
   let localRoom: string | null = "";
   if (typeof window !== "undefined") {
     localRoom = localStorage.getItem("room");
-    language = (localStorage?.getItem("language") as Language) || Language.NL;
   }
 
   const handleRegisterGame = (room: Partial<RoomDto>): void => {
@@ -123,7 +123,7 @@ const AdminGame = () => {
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider lang={language}>
+      <LanguageProvider lang={localLang}>
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>
@@ -177,6 +177,11 @@ const AdminGame = () => {
       </LanguageProvider>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({req, res}) => {  
+  const localLang = getCookie("language", { req, res});  
+  return { props: { localLang: localLang || Language.NL } };
 };
 
 export default AdminGame;
