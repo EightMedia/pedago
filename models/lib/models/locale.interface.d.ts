@@ -79,6 +79,7 @@ export interface Locale {
             isOneTeam: string;
             are: string;
             stillPlaying: string;
+            destroyGame: string;
         };
         lead: {
             continuing: string;
