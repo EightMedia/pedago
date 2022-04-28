@@ -45,7 +45,7 @@
   }
 }
 
-.delete {
+.danger {
   border-radius: var(--border-radius-sm);
   background: var(--color-red);
   padding: var(--space-xs) var(--space-md);
