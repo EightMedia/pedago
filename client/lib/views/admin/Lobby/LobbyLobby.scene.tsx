@@ -61,7 +61,10 @@ export const LobbyLobby = ({
 
         <PageSlot location="headerRight">
           <ButtonGroup>
-            <Button variation="whiteBlocked" onClick={() => setShowSettingsModal(true)}>
+            <Button
+              variation="whiteBlocked"
+              onClick={() => setShowSettingsModal(true)}
+            >
               <Icon icon={IconsEnum.Settings} size="md" />
               <span className={"lg-only"}>
                 {text.adminLobby.lobby.settingsButton}
@@ -116,7 +119,12 @@ export const LobbyLobby = ({
         <Modal handleClose={() => setShowSettingsModal(false)}>
           <Panel width="md">
             <PanelTitle>{text.adminLobby.lobby.settingsButton}</PanelTitle>
-            <Button stretch variation="danger" onClick={handleDestroyGame}>
+            <Button
+              stretch
+              variation="danger"
+              warning={text.adminGame.round.destroyWarning}
+              onClick={handleDestroyGame}
+            >
               {text.adminGame.round.destroyGame}
             </Button>
           </Panel>

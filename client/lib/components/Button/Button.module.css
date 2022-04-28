@@ -134,3 +134,7 @@
 .large {
   padding: 40px;
 }
+
+.warning {
+  color: var(--color-red);
+}

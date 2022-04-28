@@ -10,4 +10,5 @@ export interface ButtonType extends ComponentPropsWithoutRef<"button"> {
     | "whiteBlocked"
     | "whiteBlockedOutline";
   stretch?: boolean;
+  warning?: string;
 }

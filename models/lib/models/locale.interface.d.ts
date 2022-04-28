@@ -80,6 +80,7 @@ export interface Locale {
             are: string;
             stillPlaying: string;
             destroyGame: string;
+            destroyWarning: string;
         };
         lead: {
             continuing: string;

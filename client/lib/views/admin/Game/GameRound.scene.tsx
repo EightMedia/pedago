@@ -174,7 +174,7 @@ export const GameRound = ({
         <Modal handleClose={() => setShowSettingsModal(false)}>
           <Panel width="md">
             <PanelTitle>{gameText.settingsButton}</PanelTitle>
-            <Button stretch variation="danger" onClick={handleDestroyGame}>{gameText.destroyGame}</Button>
+            <Button stretch variation="danger" warning={gameText.destroyWarning} onClick={handleDestroyGame}>{gameText.destroyGame}</Button>
           </Panel>
         </Modal>
       )}
