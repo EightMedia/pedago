@@ -8,20 +8,24 @@ const ButtonComponent = ({
   stretch,
   className,
   children,
+  warning,
   ...rest
 }: ButtonType) => {
   return (
-    <button
-      className={cx(
-        styles.button,
-        styles[variation],
-        stretch ? styles.stretch : null,
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </button>
+    <>
+      <button
+        className={cx(
+          styles.button,
+          styles[variation],
+          stretch ? styles.stretch : null,
+          className
+        )}
+        {...rest}
+      >
+        {children}
+      </button>
+      <div className={cx(styles.warning)}>{warning}</div>
+    </>
   );
 };
 

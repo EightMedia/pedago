@@ -55,6 +55,7 @@ export interface GamesState {
     teamIndex: number,
     round: Round
   ) => void;
+  removeRoom: (roomId: string) => void;
   removeAllGames: () => void;
 }
 
@@ -114,6 +115,11 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       teamIndex: number,
       round: Round
     ) => storeRoundFn(set, roomId, playerId, teamIndex, round),
+    removeRoom: (roomId: string) => {
+      set((state: GamesState) => ({
+        games: state.games.filter((room) => room.id !== roomId),
+      }));
+    },
     removeAllGames: () => set({ games: [] }),
   })
 );

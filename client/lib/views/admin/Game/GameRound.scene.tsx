@@ -1,8 +1,11 @@
-import { PlayerStatus } from "models";
+import { removeCookies } from "cookies-next";
+import { AdminEvent, PlayerStatus } from "models";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import { Socket } from "socket.io-client";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
+import { SocketContext } from "../../../../contexts/SocketContext";
 import { TimerContext, TIMER_SECONDS } from "../../../../contexts/TimerContext";
 import { ButtonGroup } from "../../../components/Button";
 import { Button } from "../../../components/Button/Button";
@@ -30,8 +33,10 @@ export const GameRound = ({
 }: GameType) => {
   const [showStopModal, setShowStopModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const timerContext = useContext(TimerContext);
   const room = useContext(RoomContext);
+  const socket = useContext(SocketContext);
   const { text } = useContext(LanguageContext);
   const gameText = text.adminGame.round;
   const router = useRouter();
@@ -56,6 +61,12 @@ export const GameRound = ({
     (stopRound as () => void)();
   };
 
+  const handleDestroyGame = () => {
+    (socket as Socket).emit(AdminEvent.Reset, room?.id);
+    removeCookies("room");
+    router.push("/");
+  }
+
   useEffect(() => {
     if (timerContext === TIMER_SECONDS) {
       setTimeout(() => {
@@ -77,7 +88,7 @@ export const GameRound = ({
           <ButtonGroup>
             <Button
               variation="whiteBlocked"
-              onClick={openSettings as () => void}
+              onClick={() => setShowSettingsModal(true)}
             >
               <Icon icon={IconsEnum.Settings} />
               <span className="lg-only">{gameText.settingsButton}</span>
@@ -147,13 +158,23 @@ export const GameRound = ({
               : `${gameText.are} ${teamsStillPlaying} teams`}{" "}
             {gameText.stillPlaying}
           </p>
-          <Button onClick={handleStopRound}>{round.current === 6 ? gameText.yesToResult : gameText.yesSure}</Button>
+          <Button onClick={handleStopRound}>
+            {round.current === 6 ? gameText.yesToResult : gameText.yesSure}
+          </Button>
         </Modal>
       )}
       {showInfoModal && (
         <Modal handleClose={() => setShowInfoModal(false)}>
           <Panel width="md">
             <GameInfo title="Info" />
+          </Panel>
+        </Modal>
+      )}
+      {showSettingsModal && (
+        <Modal handleClose={() => setShowSettingsModal(false)}>
+          <Panel width="md">
+            <PanelTitle>{gameText.settingsButton}</PanelTitle>
+            <Button stretch variation="danger" warning={gameText.destroyWarning} onClick={handleDestroyGame}>{gameText.destroyGame}</Button>
           </Panel>
         </Modal>
       )}

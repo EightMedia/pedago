@@ -45,6 +45,25 @@
   }
 }
 
+.danger {
+  border-radius: var(--border-radius-sm);
+  background: var(--color-red);
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-white);
+  transition: background-color 0.15s ease;
+  font-size: var(--font-size-md);
+
+  @media (--md) {
+    padding: var(--space-sm) var(--space-xl);
+    font-size: 20px;
+  }
+
+  &:not([disabled]):active,
+  &:not([disabled]):hover {
+    background: var(--color-hover-red);
+  }
+}
+
 .line {
   display: inline-block;
   text-decoration: underline;
@@ -114,4 +133,8 @@
 
 .large {
   padding: 40px;
+}
+
+.warning {
+  color: var(--color-red);
 }

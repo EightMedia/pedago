@@ -10,7 +10,6 @@ import {
 } from "models";
 import { Server, Socket } from "socket.io";
 import {
-  disconnectAll,
   finishRound,
   registerGame,
   reset,
@@ -80,8 +79,7 @@ io.on("connection", (socket: Socket) => {
       callback: (args: SocketCallback) => void
     ) => finishRound(roomId, roundNo, socket, callback)
   );
-  socket.on(AdminEvent.Reset, () => reset(socket));
-  socket.on(AdminEvent.Disconnect, () => disconnectAll(socket));
+  socket.on(AdminEvent.Reset, (roomId: string) => reset(roomId, socket));
 
   // Player Listeners
   socket.on(

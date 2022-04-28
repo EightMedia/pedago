@@ -189,10 +189,8 @@ export const updateRoomDto = (room: Partial<RoomDto>) => {
   store.updateRoom(room as RoomDto);
 };
 
-export const reset = (socket: Socket) => {
-  socket.broadcast.emit(Event.To, { name: ViewName.Wizard });
-};
-
-export const disconnectAll = (socket: Socket) => {
+export const reset = (roomId: string, socket: Socket) => {
+  store.removeRoom(roomId);
+  socket.broadcast.to(roomId).emit(PlayerEvent.ExitGame);
   socket.removeAllListeners();
 };

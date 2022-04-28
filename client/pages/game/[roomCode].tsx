@@ -1,4 +1,4 @@
-import { getCookie } from "cookies-next";
+import { getCookie, removeCookies } from "cookies-next";
 import {
   Event,
   Language,
@@ -47,10 +47,10 @@ import TimerProvider from "../../providers/Timer.provider";
 
 const RoomCode = ({
   localLang,
-  playerId,
+  localPlayerId,
 }: {
   localLang: Language;
-  playerId: string;
+  localPlayerId: string;
 }) => {
   const socket: Socket | null = useSocket(
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
@@ -65,6 +65,7 @@ const RoomCode = ({
   const [round, setRound] = useState<number>(1);
   const [error, setError] = useState<string | undefined>();
   const [timer, setTimer] = useState<number | null>(0);
+  const [playerId, setPlayerId] = useState<string | null>(localPlayerId);
 
   const ROUND_MAX = 6;
 
@@ -83,6 +84,10 @@ const RoomCode = ({
   useEffect(() => {
     setTimer(getTimeStampFromLocalStorage());
   }, []);
+
+  useEffect(() => {
+    setPlayerId(localPlayerId)
+  }, [localPlayerId])
 
   useEffect(() => {
     if (roomCode && socket) {
@@ -125,8 +130,14 @@ const RoomCode = ({
           setToWait ? PlayerMatchSceneEnum.Wait : PlayerMatchSceneEnum.Match
         )
       );
+      socket.on(PlayerEvent.ExitGame, () => {
+        removeCookies("playerId");
+        removeCookies("roomCode");
+        router.push("/");
+      })
     }
   }, [socket]);
+
   return (
     <>
       <Head>
@@ -226,8 +237,9 @@ const RoomCode = ({
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const localLang = getCookie("language", { req, res });
-  const playerId = getCookie("playerId", { req, res });
-  return { props: { localLang: localLang || Language.NL, playerId: playerId || null } };
+  const playerId = getCookie("playerId", { req, res });  
+
+  return { props: { localLang: localLang || Language.NL, localPlayerId: playerId || null } };
 };
 
 export default RoomCode;
