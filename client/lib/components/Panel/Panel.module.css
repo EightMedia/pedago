@@ -41,6 +41,9 @@
 .md {
   max-width: 576px;
 }
+.mdlg {
+  max-width: 768px;
+}
 .lg {
   max-width: 1200px;
 }

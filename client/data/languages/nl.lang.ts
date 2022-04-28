@@ -103,7 +103,8 @@ export const NL: Locale = {
       are: "zijn nog",
       stillPlaying: "bezig met het afronden van de ronde.",
       destroyGame: "Spel beëindigen en verwijderen",
-      destroyWarning: "Alle gegevens en spelers worden verwijderd uit het systeem"
+      destroyWarning:
+        "Alle gegevens en spelers worden verwijderd uit het systeem",
     },
     lead: {
       continuing: "Door naar ronde",
@@ -332,7 +333,8 @@ export const NL: Locale = {
     sendToMail: "We kunnen de uitkomst naar je e-mailadres toe sturen.",
     yourMail: "Jouw e-mailadres",
     send: "Versturen",
-    privacy: "Je mail wordt alleen gebruikt voor het opsturen van jouw uitkomst.",
+    privacy:
+      "Je mail wordt alleen gebruikt voor het opsturen van jouw uitkomst.",
   },
   rounds: [
     {
@@ -349,12 +351,12 @@ export const NL: Locale = {
         },
         {
           id: "2",
-          title: "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+          title:
+            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
         },
         {
           id: "3",
-          title:
-            "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
         },
         {
           id: "4",
@@ -373,7 +375,8 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Ze met geduld, zorg en aandacht te begeleiden bij hun leerproces.",
+          title:
+            "Ze met geduld, zorg en aandacht te begeleiden bij hun leerproces.",
         },
         {
           id: "1",
@@ -405,7 +408,8 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Dat ze een gevoel van eigenwaarde en een positief zelfbeeld ontwikkelen.",
+          title:
+            "Dat ze een gevoel van eigenwaarde en een positief zelfbeeld ontwikkelen.",
         },
         {
           id: "1",
@@ -413,16 +417,17 @@ export const NL: Locale = {
         },
         {
           id: "2",
-          title: "Dat ze competenties verwerven waarmee ze kunnen deelnemen aan de maatschappij.",
+          title:
+            "Dat ze competenties verwerven waarmee ze kunnen deelnemen aan de maatschappij.",
         },
         {
           id: "3",
-          title:
-            "Dat ze leren onderbouwde meningen te vormen.",
+          title: "Dat ze leren onderbouwde meningen te vormen.",
         },
         {
           id: "4",
-          title: "Dat ze leerstof verwerven die onderdeel uitmaakt van het officiële curriculum.",
+          title:
+            "Dat ze leerstof verwerven die onderdeel uitmaakt van het officiële curriculum.",
         },
         {
           id: "5",
@@ -437,7 +442,8 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Dat ze op eigen tempo met geleidelijke stappen toegroeien naar zelfstandigheid.",
+          title:
+            "Dat ze op eigen tempo met geleidelijke stappen toegroeien naar zelfstandigheid.",
         },
         {
           id: "1",
@@ -445,7 +451,8 @@ export const NL: Locale = {
         },
         {
           id: "2",
-          title: "Hun ontwikkelingsmogelijkheden in het licht van hun leefomstandigheden te beoordelen.",
+          title:
+            "Hun ontwikkelingsmogelijkheden in het licht van hun leefomstandigheden te beoordelen.",
         },
         {
           id: "3",
@@ -481,17 +488,16 @@ export const NL: Locale = {
         },
         {
           id: "3",
-          title:
-            "Dat de school een plaats is waar leerlingen een stem hebben.",
+          title: "Dat de school een plaats is waar leerlingen een stem hebben.",
         },
         {
           id: "4",
-          title: "Dat de school een omgeving is waarin leerprestaties hoog worden gewaardeerd.",
+          title:
+            "Dat de school een omgeving is waarin leerprestaties hoog worden gewaardeerd.",
         },
         {
           id: "5",
-          title:
-            "Dat de school toegang biedt tot gespecialiseerde zorg",
+          title: "Dat de school toegang biedt tot gespecialiseerde zorg",
         },
       ],
     },
@@ -501,11 +507,13 @@ export const NL: Locale = {
       cards: [
         {
           id: "0",
-          title: "Ze te zien als personen die nog afhankelijk zijn van volwassenen.",
+          title:
+            "Ze te zien als personen die nog afhankelijk zijn van volwassenen.",
         },
         {
           id: "1",
-          title: "Ze te zien als unieke personen met een eigenstandige positie.",
+          title:
+            "Ze te zien als unieke personen met een eigenstandige positie.",
         },
         {
           id: "2",
@@ -513,8 +521,7 @@ export const NL: Locale = {
         },
         {
           id: "3",
-          title:
-            "Ze te zien als een waardevolle nieuwe generatie.",
+          title: "Ze te zien als een waardevolle nieuwe generatie.",
         },
         {
           id: "4",
@@ -528,4 +535,16 @@ export const NL: Locale = {
       ],
     },
   ],
+  privacy: {
+    responsibility: "Pedago is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring.",
+    persoonsGegevensCaption: "Persoonsgegevens die wij verwerken",
+    persoonsGegevensText: "Pedago verwerkt alleen de persoonsgegevens die u zelf actief verstrekt. Dit zijn wanneer u zich aanmeldt voor de Pedago-nieuwsbrieven minimaal: uw e-mailadres, voornaam en achternaam. Optioneel kun u daaraan toevoegen: aanhef, tussenvoegsel, affiliatie/organisatie, interessegebieden.",
+    periodCaption: "Hoe lang we persoonsgegevens bewaren",
+    periodText: "Pedago bewaart uw persoonsgegevens niet langer dan strikt nodig is om de doelen te realiseren waarvoor uw gegevens worden verzameld. In het geval van de Pedago nieuwsbrieven betekent dit dat uw gegevens direct uit ons bestand worden verwijderd op het moment dat u zich afmeldt.",
+    cookiesCaption: "Cookies, of vergelijkbare technieken, die wij gebruiken",
+    cookiesText1: "Pedago gebruikt functionele cookies en analytische cookies die geen inbreuk maken op uw privacy. Een cookie is een klein tekstbestand dat bij het eerste bezoek aan deze website wordt opgeslagen op uw computer, tablet of smartphone. De cookies die wij gebruiken zijn noodzakelijk voor de technische werking van de website en uw gebruiksgemak. Ze zorgen ervoor dat de website naar behoren werkt en onthouden bijvoorbeeld uw voorkeursinstellingen.",
+    cookiesText2: "Daarnaast kunt u ervoor kiezen om Social Media cookies te accepteren, die ervoor zorgen dat bezoekers content van social media-netwerken zoals YouTube kunnen bekijken op onze website. Deze social media-netwerken kunnen bezoekers mogelijk volgen en hun internetgedrag monitoren voor eigen doeleinden. Pedago gebruikt of bewaart deze gegevens niet.",
+    modifyPersonalDataCaption: "Persoonsgegevens wijzigen",
+    modifyPersonalDataText: "U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. Dit kunt u zelf doen via de links onderaan de Pedago-nieuwsbrieven of door een verzoek daartoe te sturen naar [**info@pedagogame.com**](mailto:info@pedagogame.com) vanaf het e-mailadres waarmee u zich heeft aangemeld voor de nieuwsbrieven.",
+  },
 };

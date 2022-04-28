@@ -8,8 +8,25 @@ const TextComponent = ({
   weight = "normal",
   tone = "dark",
   align = "left",
+  height = "low",
   children,
-}: TextType) => {
+}: TextType) => {  
+  if (typeof children === "object") {
+    return (
+      <span
+        className={cx(
+          styles.text,
+          styles[tone],
+          styles[weight],
+          styles[size],
+          styles[align],
+          styles[height]
+        )}
+      >
+        {children}
+      </span>
+    );
+  }
   return (
     <p
       className={cx(
@@ -17,7 +34,8 @@ const TextComponent = ({
         styles[tone],
         styles[weight],
         styles[size],
-        styles[align]
+        styles[align],
+        styles[height]
       )}
     >
       {children}

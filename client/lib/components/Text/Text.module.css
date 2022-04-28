@@ -70,3 +70,11 @@
 .right {
   text-align: right;
 }
+
+.low {
+  line-height: unset;
+}
+
+.high {
+  line-height: 24.3px;
+}
