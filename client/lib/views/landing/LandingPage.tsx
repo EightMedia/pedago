@@ -18,6 +18,7 @@ import { InputText } from "../../components/InputText";
 import { Logo } from "../../components/Logo";
 import { Page } from "../../components/Page";
 import { PageSlot } from "../../components/Page/Page";
+import PrivacyStatement from "../../components/PrivacyStatement";
 import { Title } from "../../components/Title";
 import { Center } from "../../layouts/Center";
 import { LandingIllustration } from "./Landing.illustration";
@@ -30,6 +31,7 @@ const LandingPage = ({
   language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
+  const [showPrivacyStatement, setShowPrivacyStatement] = useState<boolean>(false);
   const [roomCode, setRoomCode] = useState<string>("");
   const { text } = useContext(LanguageContext);
   const router = useRouter();
@@ -84,42 +86,61 @@ const LandingPage = ({
           </div>
         )}
       </PageSlot>
-      <PageSlot location="subheader" className={styles.subHeader}>
-        <Title size="lg" element="h1">
-          {text?.landing?.title}
-        </Title>
-        <div className={styles.description}>{text?.landing?.description}</div>
-      </PageSlot>
-      <PageSlot location="body">
-        <div className={styles.action}>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.inputGroup}>
-              <InputText
-                type="number"
-                onChange={handleInputChange}
-                placeholder={text?.landing?.input}
-                id={"roomCode"}
-                label={"spelcode"}
-              />
-              <Button type="submit">{text?.landing?.button}</Button>
-            </div>
-          </form>
-          <Center>
-            <div className={styles.adminText}>
-              <Link href="/admin" passHref>
-                <span className={styles.createGame}>
-                  {text?.landing?.create}
-                </span>
-              </Link>{" "}
-              <span>{text?.landing?.asAdmin}</span>
-            </div>
-          </Center>
-        </div>
-        <LandingIllustration className={styles.illustration} />
-      </PageSlot>
+      {(() => {
+        switch (showPrivacyStatement === true) {
+          case true:
+            return (
+              <>
+                <PrivacyStatement
+                  handleClose={() => setShowPrivacyStatement(false)}
+                ></PrivacyStatement>
+              </>
+            );
+          case false:
+            return (
+              <>
+                <PageSlot location="subheader" className={styles.subHeader}>
+                  <Title size="lg" element="h1">
+                    {text?.landing?.title}
+                  </Title>
+                  <div className={styles.description}>
+                    {text?.landing?.description}
+                  </div>
+                </PageSlot>
+                <PageSlot location="body">
+                  <div className={styles.action}>
+                    <form onSubmit={handleSubmit}>
+                      <div className={styles.inputGroup}>
+                        <InputText
+                          type="number"
+                          onChange={handleInputChange}
+                          placeholder={text?.landing?.input}
+                          id={"roomCode"}
+                          label={"spelcode"}
+                        />
+                        <Button type="submit">{text?.landing?.button}</Button>
+                      </div>
+                    </form>
+                    <Center>
+                      <div className={styles.adminText}>
+                        <Link href="/admin" passHref>
+                          <span className={styles.createGame}>
+                            {text?.landing?.create}
+                          </span>
+                        </Link>{" "}
+                        <span>{text?.landing?.asAdmin}</span>
+                      </div>
+                    </Center>
+                  </div>
+                  <LandingIllustration className={styles.illustration} />
+                </PageSlot>
+              </>
+            );
+        }
+      })()}
       <PageSlot location="footer" className={styles.footer}>
-        <a>Privacy</a>
-        <a>Cookies</a>
+        <a onClick={() => setShowPrivacyStatement(!showPrivacyStatement)}>Privacy</a>
+        <a onClick={() => setShowPrivacyStatement(!showPrivacyStatement)}>Cookies</a>
       </PageSlot>
     </Page>
   );

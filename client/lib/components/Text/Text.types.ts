@@ -6,4 +6,5 @@ export type TextType = {
   weight?: "normal" | "bold";
   tone?: "light" | "medium" | "dark";
   align?: "left" | "center" | "right";
+  height?: "low" | "high"
 };
