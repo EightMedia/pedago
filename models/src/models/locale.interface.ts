@@ -251,4 +251,16 @@ export interface Locale {
       title: string;
     }[];
   }[];
+  privacy: {
+    responsibility: string;
+    persoonsGegevensCaption: string;
+    persoonsGegevensText: string;
+    periodCaption: string;
+    periodText: string;
+    cookiesCaption: string;
+    cookiesText1: string;
+    cookiesText2: string;
+    modifyPersonalDataCaption: string;
+    modifyPersonalDataText: string;
+  }
 }
