@@ -4,27 +4,26 @@ require("dotenv").config();
 
 const emailResults = async (
   email: string,
-  url: string,
+  html: string,
   callback: (args: SocketCallback) => void
 ): Promise<Promise<void>> => {
 
-  try {
+  try {    
     let transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_SMTP,
-      port: 587,
-      secure: false,
+      host: process.env.EMAIL_SMTP || "smtp.transip.email",
+      port: 465,
+      secure: true,
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.EMAIL || "info@pedagogame.com",
+        pass: process.env.EMAIL_PASSWORD || "bpt3hrh!zfg0KFD7eaf",
       },
     });
-
+    
     let info = await transporter.sendMail({
-      from: '"Pedago Game" <noreply@pedagogame.com>',
+      from: '"Pedago Game" <info@pedagogame.com>',
       to: email,
-      subject: "Pedago Game Results",
-      text: "What kind of teacher am I?",
-      html: `<b>Bingo!</b> <a href="https://pedagogame.com${url}">Here are your result!</a>`,
+      subject: "Game Results",
+      html,
     });
 
     console.log("Message sent: %s", info.messageId);

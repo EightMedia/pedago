@@ -1,7 +1,9 @@
 import { Event, SocketCallback } from "models";
 import { useContext, useState } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { SocketContext } from "../../../contexts/SocketContext";
+import emailTemplate from "../../../factories/emailTemplate.factory";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
 import { Stack } from "../../layouts/Stack";
@@ -42,6 +44,8 @@ export const ResultOverview = ({
     data?.me ? "me" : "total"
   );
   const [email, setEmail] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const { lang } = useContext(LanguageContext);
 
   const handleEmail = () => {
     const groupsParams = data.groups
@@ -56,16 +60,30 @@ export const ResultOverview = ({
       : undefined;
 
     const url = `/result?me=${meParams}&groups=${groupsParams}`;
-    socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
-      console.log(res);
-    });
+    socket?.emit(
+      Event.Email,
+      email,
+      renderToStaticMarkup(emailTemplate(url)),
+      (res: SocketCallback) => {
+        console.log(res);
+      }
+    );
   };
 
   const handleClick = () => {
-    if (email) {
+    setEmailError("");
+    const errorObject = {
+      NL: "Voer een geldig e-mailadres in",
+      EN: "Please enter a valid email address",
+    };
+    const emailRegExp = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+
+    if (email && emailRegExp.test(email)) {
       handleEmail();
     } else {
-      console.error("No email provided");
+      setEmailError(errorObject[lang]);
     }
   };
 
@@ -169,15 +187,19 @@ export const ResultOverview = ({
                 <Text align="center" tone="light">
                   {resultsText.sendToMail}
                 </Text>
-                <InputText
-                  id={"email"}
-                  label={"E-mail"}
-                  placeholder={resultsText.yourMail}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Button stretch={true} onClick={handleClick}>
-                  {resultsText.send}
-                </Button>
+                <form onSubmit={handleClick}>
+                  <InputText
+                    id={"email"}
+                    label={"E-mail"}
+                    placeholder={resultsText.yourMail}
+                    type="email"
+                    error={emailError}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <Button stretch={true} type="submit">
+                    {resultsText.send}
+                  </Button>
+                </form>
                 <Text align="center" size="xs" tone="light">
                   {resultsText.privacy}
                 </Text>

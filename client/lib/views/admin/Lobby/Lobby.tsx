@@ -1,6 +1,8 @@
-import { AdminEvent, SocketCallback } from "models";
+import { AdminEvent, Event, SocketCallback } from "models";
 import { memo, useContext, useState } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { SocketContext } from "../../../../contexts/SocketContext";
+import emailTemplate from "../../../../factories/emailTemplate.factory";
 import { LobbyStep, LobbyType } from "./Lobby.types";
 import { LobbyInfo } from "./LobbyInfo.scene";
 import { LobbyLobby } from "./LobbyLobby.scene";
@@ -22,17 +24,32 @@ const LobbyComponent = ({
     };
   }
 
+  const handleEmail = () => {
+    const url = "PIK";
+    socket?.emit(
+      Event.Email,
+      "rene@eight.nl",
+      renderToStaticMarkup(emailTemplate(url)),
+      (res: SocketCallback) => {
+        console.log(res);
+      }
+    );
+  };
+
   switch (step) {
     case LobbyStep.Info:
       return <LobbyInfo handleClick={() => setStep(LobbyStep.Lobby)} />;
     case LobbyStep.Lobby:
       return (
-        <LobbyLobby
-          room={room}
-          groups={groups}
-          handleStart={handleStart}
-          handleInfo={() => setStep(LobbyStep.Info)}
-        />
+        <>
+          <button onClick={handleEmail}>E-mail</button>
+          <LobbyLobby
+            room={room}
+            groups={groups}
+            handleStart={handleStart}
+            handleInfo={() => setStep(LobbyStep.Info)}
+          />
+        </>
       );
     default:
       return null;
