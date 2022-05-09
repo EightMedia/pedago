@@ -55,6 +55,17 @@ export const joinRoomByRoomCode = (
     return;
   }
 
+  if (room.locked) {
+    callback({
+      status: "ERROR",
+      message: {
+        NL: "Het spel met deze code zit op slot. Vraag de beheerder om toegang te verlenen.",
+        EN: "The game with this code is locked. Ask the administrator to grant access.",
+      },
+    });
+    return;
+  }
+
   const player = room?.players?.find((p: Player) => p.id === playerId);
   if (!player) {
     updateClientRoom(socket, room.id);
