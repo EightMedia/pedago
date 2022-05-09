@@ -1,8 +1,8 @@
 import { AdminEvent, Event, SocketCallback } from "models";
 import { memo, useContext, useState } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { renderEmail } from "react-html-email";
 import { SocketContext } from "../../../../contexts/SocketContext";
-import emailTemplate from "../../../../factories/emailTemplate.factory";
+import EmailTemplate from "../../../../factories/EmailTemplate";
 import { LobbyStep, LobbyType } from "./Lobby.types";
 import { LobbyInfo } from "./LobbyInfo.scene";
 import { LobbyLobby } from "./LobbyLobby.scene";
@@ -26,10 +26,15 @@ const LobbyComponent = ({
 
   const handleEmail = () => {
     const url = "PIK";
+    console.log(EmailTemplate(url));
+    
+    const renderedHTML = renderEmail(EmailTemplate(url));
+    console.log(renderedHTML);
+
     socket?.emit(
       Event.Email,
       "rene@eight.nl",
-      renderToStaticMarkup(emailTemplate(url)),
+      renderedHTML,
       (res: SocketCallback) => {
         console.log(res);
       }

@@ -1,9 +1,8 @@
 import { Event, SocketCallback } from "models";
 import { useContext, useState } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { SocketContext } from "../../../contexts/SocketContext";
-import emailTemplate from "../../../factories/emailTemplate.factory";
+import EmailTemplate from "../../../factories/EmailTemplate";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
 import { Stack } from "../../layouts/Stack";
@@ -63,7 +62,7 @@ export const ResultOverview = ({
     socket?.emit(
       Event.Email,
       email,
-      renderToStaticMarkup(emailTemplate(url)),
+      EmailTemplate(url),
       (res: SocketCallback) => {
         console.log(res);
       }

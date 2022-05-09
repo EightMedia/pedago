@@ -2848,6 +2848,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-html-email@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-html-email/-/react-html-email-3.0.1.tgz#0169231b3e72e3e7ec1cf21148ade90a95817b6f"
+  integrity sha512-SddMwMqMu6s4sVVlcXoHurm45VHosZMFSsMdoGgCOgPU25QqYOLVd0dy+P/2VkKKfBHLA+FIhJuenBKhBany5A==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-syntax-highlighter@11.0.5":
   version "11.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-syntax-highlighter/-/react-syntax-highlighter-11.0.5.tgz#0d546261b4021e1f9d85b50401c0a42acb106087"
@@ -2855,7 +2862,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@18.0.9", "@types/react@^17", "@types/react@^17.0.15":
+"@types/react@*":
   version "17.0.45"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.45.tgz#9b3d5b661fd26365fefef0e766a1c6c30ccf7b3f"
   integrity sha512-YfhQ22Lah2e3CHPsb93tRwIGNiSwkuz1/blk4e6QrWS0jQzCSNbGLtOEYhPg02W0yGTTmpajp7dCTbBAMN3qsg==
@@ -2864,10 +2871,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@18.0.7":
-  version "18.0.7"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.7.tgz#8437a226763adf854969954dfe582529a406cbad"
-  integrity sha512-CXSXHzTexlX9esf4ReIUJeaemKcmBEvYzxHDUk19c3BCcEGUvUjkeC3jkscPSfSaQ6SPDRNd/zMxi8oc/P1zxA==
+"@types/react@18.0.9":
+  version "18.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.9.tgz#d6712a38bd6cd83469603e7359511126f122e878"
+  integrity sha512-9bjbg1hJHUm4De19L1cHiW0Jvx3geel6Qczhjd0qY5VKVE2X5+x77YxAepuCwVh4vrgZJdgEJw48zrhRIeF4Nw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -9684,7 +9691,7 @@ prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.0.0, prop-types@^15.6.0, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -9941,6 +9948,13 @@ react-helmet-async@^1.0.7:
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
+
+react-html-email@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-html-email/-/react-html-email-3.0.0.tgz#a5a51b78271a33daf9b14638e9e4c5df93f691aa"
+  integrity sha512-eIBmZjqoS1SLAOi/QYTHLnZSmBM5AhP/cScJGhVDHlBJFtMyiR4qBUQYQDCqRtNPDKHWGMbbS/+XHSgD+C2hng==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-inspector@^5.1.0:
   version "5.1.1"
