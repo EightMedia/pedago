@@ -12,6 +12,7 @@ export type LobbyType = {
     roomCode: RoomDto["roomCode"];
     players: number;
     id: RoomDto["id"];
+    locked: boolean;
   };
   initialStep?: LobbyStep;
   handleStart?: () => void;

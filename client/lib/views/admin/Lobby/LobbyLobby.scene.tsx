@@ -1,5 +1,5 @@
 import { removeCookies } from "cookies-next";
-import { AdminEvent } from "models";
+import { AdminEvent, SocketCallback } from "models";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -28,18 +28,24 @@ export const LobbyLobby = ({
   handleInfo,
 }: LobbyType) => {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
-  const [lock, setLock] = useState(IconsEnum.LockOpen);
+  const [lock, setLock] = useState(room?.locked ? IconsEnum.LockClosed : IconsEnum.LockOpen);
+  const [lockClicked, setLockClicked] = useState<boolean>(false);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
-  const readableSiteUrl = process.env.NEXT_PUBLIC_SITE_READABLE_URL || "pedagogame.com";
   const { text } = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const router = useRouter();
 
   const handleLock = () => {
-    setLock(
-      lock === IconsEnum.LockOpen ? IconsEnum.LockClosed : IconsEnum.LockOpen
-    );
-    console.log("locking not implemented yet");
+    setLockClicked(true);
+    (socket as Socket).emit(AdminEvent.Lock, room?.id, lock === IconsEnum.LockOpen, (res: SocketCallback) => {
+      if (res.status === "OK") {
+        setLock(
+          lock === IconsEnum.LockOpen ? IconsEnum.LockClosed : IconsEnum.LockOpen
+        );
+        setLockClicked(false);
+        console.warn(res.message);
+      }
+    });
   };
 
   const handleDestroyGame = () => {
@@ -96,6 +102,7 @@ export const LobbyLobby = ({
                 <Button
                   onClick={handleLock as () => void}
                   variation="whiteBlockedOutline"
+                  disabled={lockClicked}
                 >
                   <Icon icon={lock} size="xl" />
                   <span className="sr-only">Lock</span>
