@@ -11,5 +11,6 @@ export enum PlayerEvent {
   SortOrder = "sortOrder",
   PlayerMatchScene = "playerMatchScene",
   FinishRoundByAdmin = "finishRoundByAdmin",
-  ExitGame = "exitGame"
+  ExitGame = "exitGame",
+  ChangeGroup = "changeGroup"
 }
