@@ -162,6 +162,7 @@ const RoomCode = ({
                           room,
                           playerList
                         )}
+                        playerId={playerId || undefined}
                       />
                     );
                   case ViewName.PlayerMatch:

@@ -19,6 +19,7 @@ import {
 } from "./admin";
 import emailResults from "./email";
 import {
+  changeGroup,
   finishRoundByAdmin,
   gameStart,
   getLatestSortOrder,
@@ -86,7 +87,8 @@ io.on("connection", (socket: Socket) => {
   // Player Listeners
   socket.on(
     PlayerEvent.RoomCodeExists,
-    (roomCode: number, callback: (args: SocketCallback) => void) => getRoomCodeExists(roomCode, callback)
+    (roomCode: number, callback: (args: SocketCallback) => void) =>
+      getRoomCodeExists(roomCode, callback)
   );
   socket.on(
     PlayerEvent.JoinRoomByRoomCode,
@@ -160,6 +162,15 @@ io.on("connection", (socket: Socket) => {
       playerId: string,
       callback: (args: SocketCallback) => void
     ) => storeTeamReady(roomId, playerId, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.ChangeGroup,
+    (
+      roomId: string,
+      playerId: string,
+      groupId: string,
+      callback: (args: SocketCallback) => void
+    ) => changeGroup(roomId, playerId, groupId, socket, callback)
   );
 });
 

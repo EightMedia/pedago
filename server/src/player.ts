@@ -20,7 +20,7 @@ export const getRoomCodeExists = (
   roomCode: number,
   callback: (args: SocketCallback) => void
 ) => {
-  const room = store.getRoomByRoomCode(roomCode);  
+  const room = store.getRoomByRoomCode(roomCode);
   if (!room) {
     callback({
       status: "ERROR",
@@ -451,4 +451,27 @@ export const storeTeamReady = (
       message: "Going to the next round",
     });
   }
+};
+
+export const changeGroup = (
+  roomId: string,
+  playerId: string,
+  groupId: string,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  const groups = store.getGroupsByRoomId(roomId);
+  const group = groups?.filter((g: Group) => g.id === groupId)[0];
+
+  const partialPlayer: Partial<Player> = {
+    group,
+  };
+  store.updatePlayer(roomId, playerId, partialPlayer);
+
+  updateClientRoom(socket, roomId);
+
+  callback({
+    status: "OK",
+    message: `Changed to group: ${group?.name}`
+  })
 };

@@ -5,5 +5,6 @@ export type LobbyType = {
   round: number;
   roundMax: number;
   playerName: Player["name"];
+  playerId?: Player["id"];
   groups: PlayerGroupType[];
 };
