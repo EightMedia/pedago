@@ -86,8 +86,8 @@ const RoomCode = ({
   }, []);
 
   useEffect(() => {
-    setPlayerId(localPlayerId)
-  }, [localPlayerId])
+    setPlayerId(localPlayerId);
+  }, [localPlayerId]);
 
   useEffect(() => {
     if (roomCode && socket) {
@@ -117,6 +117,7 @@ const RoomCode = ({
         setRoom(r);
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
+        setPlayerId(getCookie("playerId") as string)
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(Event.Round, setRound);
@@ -134,7 +135,7 @@ const RoomCode = ({
         removeCookies("playerId");
         removeCookies("roomCode");
         router.push("/");
-      })
+      });
     }
   }, [socket]);
 
@@ -237,9 +238,14 @@ const RoomCode = ({
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const localLang = getCookie("language", { req, res });
-  const playerId = getCookie("playerId", { req, res });  
+  const playerId = getCookie("playerId", { req, res });
 
-  return { props: { localLang: localLang || Language.NL, localPlayerId: playerId || null } };
+  return {
+    props: {
+      localLang: localLang || Language.NL,
+      localPlayerId: playerId || null,
+    },
+  };
 };
 
 export default RoomCode;
