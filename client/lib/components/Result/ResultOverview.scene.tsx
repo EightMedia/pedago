@@ -56,7 +56,8 @@ export const ResultOverview = ({
       ? encodeURIComponent(data.me?.toString())
       : undefined;
 
-    const url = `https://pedagogame.com/result?me=${meParams}&groups=${groupsParams}`;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
+    const url = `${siteUrl}/result?me=${meParams}&groups=${groupsParams}`;
 
     socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
       console.log(res);
