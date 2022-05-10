@@ -6,5 +6,6 @@ export declare enum AdminEvent {
     Reset = "reset",
     Disconnect = "disconnect",
     LobbyStep = "lobbyStep",
-    GameScene = "gameScene"
+    GameScene = "gameScene",
+    Lock = "lock"
 }
