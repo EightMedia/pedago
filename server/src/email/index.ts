@@ -1,47 +1,40 @@
 import { SocketCallback } from "models";
-import { createTransport } from "nodemailer";
-require("dotenv").config();
 
-const emailResults = async (
+const emailResults = (
   email: string,
-  html: string,
+  url: string,
   callback: (args: SocketCallback) => void
-): Promise<Promise<void>> => {
-  try {
-    let transporter = createTransport({
-      host: process.env.EMAIL_SMTP,
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-      dkim: {
-        domainName: process.env.DOMAIN_NAME,
-        keySelector: process.env.KEY_SELECTOR,
-        privateKey: process.env.PRIVATE_KEY,
-      },
-    });
-
-    let info = await transporter.sendMail({
+) => {
+  const formData = require("form-data");
+  const Mailgun = require("mailgun.js");
+  const mailgun = new Mailgun(formData);
+  const mg = mailgun.client({
+    username: "api",
+    key: "3f1578f837a3320c159996ceb26d3ac6-100b5c8d-90e327c3",
+  });
+  mg.messages
+    .create("sandboxa0f798192c164e828cb0146819533cee.mailgun.org", {
       from: '"Pedago Game" <info@pedagogame.com>',
-      to: email,
-      subject: "Results",
-      html,
+      to: [email],
+      subject: "Game Result",
+      template: "pedago",
+      "h:X-Mailgun-Variables": JSON.stringify({
+        url: "https://www.pedagogame.com" + url,
+        logo: "https://www.pedagogame.com/images/logo.png"
+      }),
+    })
+    .then((msg: any) => {
+      callback({
+        status: "OK",
+        message: `E-mail sent to: ${email}. ${msg}`,
+      });
+    })
+    .catch((err: any) => {
+      callback({
+        status: "ERROR",
+        message: err,
+      });
     });
-
-    console.log("Message sent: %s", info.messageId);
-
-    callback({
-      status: "OK",
-      message: `E-mail sent to: ${email}`,
-    });
-  } catch (error) {
-    callback({
-      status: "ERROR",
-      message: (error as string).toString(),
-    });
-  }
 };
 
 export default emailResults;
