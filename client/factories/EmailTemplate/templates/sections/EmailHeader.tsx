@@ -1,33 +1,8 @@
-import { A, Item, Span } from "react-html-email";
-import { Logo } from "../../../../lib/components/Logo";
+import { Image, Item } from "react-html-email";
 
-const EmailHeader = ({
-  styles,
-  title,
-  emailHeaderHref,
-  emailHeaderText,
-}: {
-  styles: any;
-  title: string;
-  emailHeaderHref: string;
-  emailHeaderText: string;
-}) => (
-  <Item align={styles.itemAlign} style={styles.item}>
-    <Span>
-      <h1>
-        <A
-          href={emailHeaderHref}
-          textDecoration={styles.a.textDecoration}
-          style={styles.a}
-        >
-          <Logo />
-          {title}
-        </A>
-      </h1>
-    </Span>
-    <Span>
-      <h2 style={styles.emailHeaderText}>{emailHeaderText}</h2>
-    </Span>
+const EmailHeader = ({ styles }: { styles: any }) => (
+  <Item align={styles.itemAlign} valign={styles.vAlign} style={styles.item}>
+    <Image height={120} width={400} src="https://pedagogame.com/images/logo.png" alt="Pedago Logo" />
   </Item>
 );
 

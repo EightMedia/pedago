@@ -1,13 +1,13 @@
-const EMAIL_BACKGROUND_COLOR = "#000";
+const EMAIL_BACKGROUND_COLOR = "#12008a";
 const EMAIL_LOGO_WIDTH = 314 / 2;
 const EMAIL_LOGO_HEIGHT = 88 / 2;
-const BODY_BOX_BACKGROUND_COLOR = "#222";
+const BODY_BOX_BACKGROUND_COLOR = "#fff";
 const BODY_BOX_WIDTH = "600px";
-const CALLOUT_BACKGROUND_COLOR = "#4202ff";
-const BODY_CONTENT_COLOR = "#eee";
-const BODY_CONTENT_LINK_COLOR = "#9f82ff";
-const BODY_FOOTER_COLOR = "#999";
-const BODY_CONTENT_FONT_SIZE = "18px";
+const CALLOUT_BACKGROUND_COLOR = "#196cff";
+const BODY_CONTENT_COLOR = "#201a47";
+const BODY_CONTENT_LINK_COLOR = "#201a47";
+const BODY_FOOTER_COLOR = "#fff";
+const BODY_CONTENT_FONT_SIZE = 18;
 const BORDER_RADIUS = "6";
 const PADDING_M = "50";
 const PADDING_S = "25";
@@ -26,13 +26,19 @@ const bodyItemStyle = {
 export const theme = {
   email: {
     backgroundColor: EMAIL_BACKGROUND_COLOR,
-    padding: "25px",
     width: "100%",
+  },
+  emailBox: {
+    ...emailItemStyle,
+    height: EMAIL_LOGO_HEIGHT,
   },
   emailHeader: {
     itemAlign: "center",
+    vAlign: "top",
     item: {
       ...emailItemStyle,
+      width: EMAIL_LOGO_WIDTH,
+      height: EMAIL_LOGO_HEIGHT,
     },
     logo: {
       width: EMAIL_LOGO_WIDTH,
@@ -45,7 +51,7 @@ export const theme = {
     },
     emailHeaderText: {
       color: BODY_CONTENT_COLOR,
-      fontSize: "16px",
+      fontSize: 16,
     },
   },
   emailBody: {
@@ -54,6 +60,7 @@ export const theme = {
       style: {
         width: BODY_BOX_WIDTH,
       },
+      backgroundColor: EMAIL_BACKGROUND_COLOR,
     },
     bodyHeader: {
       item: {
@@ -86,12 +93,13 @@ export const theme = {
       item: {
         ...bodyItemStyle,
         ...{
-          padding: padding(PADDING_S, PADDING_M, PADDING_S, PADDING_M),
+          padding: padding(0, PADDING_M, PADDING_M, PADDING_M),
+          borderRadius: padding(0, 0, BORDER_RADIUS, BORDER_RADIUS),
         },
       },
       itemAlign: "center",
       a: {
-        fontSize: "22px",
+        fontSize: 22,
         textDecoration: "none",
         display: "inline-block",
         background: CALLOUT_BACKGROUND_COLOR,
@@ -105,24 +113,13 @@ export const theme = {
         ),
       },
     },
-    bodyFooter: {
-      item: {
-        ...bodyItemStyle,
-        ...{
-          padding: padding(0, PADDING_M, PADDING_M, PADDING_M),
-          borderRadius: padding(0, 0, BORDER_RADIUS, BORDER_RADIUS),
-        },
-      },
-      span: {
-        color: BODY_FOOTER_COLOR,
-      },
-      a: {
-        color: BODY_CONTENT_LINK_COLOR,
-      },
-    },
   },
   emailFooter: {
-    item: { ...emailItemStyle },
+    item: {
+      ...emailItemStyle,
+      width: EMAIL_LOGO_WIDTH,
+      height: EMAIL_LOGO_HEIGHT,
+    },
     itemAlign: "center",
     span: {
       color: BODY_FOOTER_COLOR,

@@ -1,5 +1,5 @@
 import { SocketCallback } from "models";
-import nodemailer from "nodemailer";
+import { createTransport } from "nodemailer";
 require("dotenv").config();
 
 const emailResults = async (
@@ -7,22 +7,26 @@ const emailResults = async (
   html: string,
   callback: (args: SocketCallback) => void
 ): Promise<Promise<void>> => {
-
-  try {    
-    let transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_SMTP || "smtp.transip.email",
+  try {
+    let transporter = createTransport({
+      host: process.env.EMAIL_SMTP,
       port: 465,
       secure: true,
       auth: {
-        user: process.env.EMAIL || "info@pedagogame.com",
-        pass: process.env.EMAIL_PASSWORD || "bpt3hrh!zfg0KFD7eaf",
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+      dkim: {
+        domainName: process.env.DOMAIN_NAME,
+        keySelector: process.env.KEY_SELECTOR,
+        privateKey: process.env.PRIVATE_KEY,
       },
     });
-    
+
     let info = await transporter.sendMail({
       from: '"Pedago Game" <info@pedagogame.com>',
       to: email,
-      subject: "Game Results",
+      subject: "Results",
       html,
     });
 

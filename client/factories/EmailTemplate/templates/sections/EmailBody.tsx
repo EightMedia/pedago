@@ -1,7 +1,6 @@
-import { Box } from "react-html-email";
+import { Span } from "react-html-email";
 import BodyCallout from "./BodyCallout";
 import BodyContent from "./BodyContent";
-import BodyFooter from "./BodyFooter";
 import BodyHeader from "./BodyHeader";
 
 const EmailBody = ({
@@ -9,25 +8,20 @@ const EmailBody = ({
   bodyContentComponent,
   bodyCalloutHref,
   bodyCalloutText,
-  bodyFooterText,
-  bodyFooterHref,
-  styles: { box, bodyHeader, bodyContent, bodyCallout, bodyFooter },
+  styles: { box, bodyHeader, bodyContent, bodyCallout },
 }: {
   bodyHeaderText: string;
   bodyContentComponent: any;
   bodyCalloutHref: string;
   bodyCalloutText: string;
-  bodyFooterText: string;
-  bodyFooterHref: string;
   styles: {
     box: any;
     bodyHeader: any;
     bodyContent: any;
     bodyCallout: any;
-    bodyFooter: any;
   };
 }) => (
-  <Box align={box.align} style={box.style}>
+  <Span style={box.style}>
     <BodyHeader bodyHeaderText={bodyHeaderText} styles={bodyHeader} />
     <BodyContent
       bodyContentComponent={bodyContentComponent}
@@ -38,12 +32,7 @@ const EmailBody = ({
       bodyCalloutText={bodyCalloutText}
       styles={bodyCallout}
     />
-    <BodyFooter
-      bodyFooterText={bodyFooterText}
-      bodyFooterHref={bodyFooterHref}
-      styles={bodyFooter}
-    />
-  </Box>
+  </Span>
 );
 
 export default EmailBody;

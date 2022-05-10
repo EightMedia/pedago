@@ -1,5 +1,6 @@
 import { Event, SocketCallback } from "models";
 import { useContext, useState } from "react";
+import { renderEmail } from "react-html-email";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { SocketContext } from "../../../contexts/SocketContext";
 import EmailTemplate from "../../../factories/EmailTemplate";
@@ -31,7 +32,7 @@ export const ResultOverview = ({
 }: ResultOverviewProps) => {
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me ? data.me : groupsTotal;
-  const { text } = useContext(LanguageContext);
+  const { text, lang } = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const resultsText = text.results;
   const [primaryData, setPrimaryData] = useState<ResultSet>(initialPrimaryData);
@@ -44,7 +45,6 @@ export const ResultOverview = ({
   );
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
-  const { lang } = useContext(LanguageContext);
 
   const handleEmail = () => {
     const groupsParams = data.groups
@@ -59,10 +59,12 @@ export const ResultOverview = ({
       : undefined;
 
     const url = `/result?me=${meParams}&groups=${groupsParams}`;
+    const renderedHTML = renderEmail(<EmailTemplate url={url} />);
+
     socket?.emit(
       Event.Email,
       email,
-      EmailTemplate(url),
+      renderedHTML,
       (res: SocketCallback) => {
         console.log(res);
       }

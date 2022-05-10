@@ -547,4 +547,9 @@ export const NL: Locale = {
     modifyPersonalDataCaption: "Persoonsgegevens wijzigen",
     modifyPersonalDataText: "U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. Dit kunt u zelf doen via de links onderaan de Pedago-nieuwsbrieven of door een verzoek daartoe te sturen naar [**info@pedagogame.com**](mailto:info@pedagogame.com) vanaf het e-mailadres waarmee u zich heeft aangemeld voor de nieuwsbrieven.",
   },
+  email: {
+    thanksForPlaying: "Bedankt voor het spelen van",
+    click: "Klik op de knop hieronder om het resultaat van het spel te bekijken.",
+    result: "Bekijk het resultaat"
+  }
 };

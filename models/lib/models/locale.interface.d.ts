@@ -262,4 +262,9 @@ export interface Locale {
         modifyPersonalDataCaption: string;
         modifyPersonalDataText: string;
     };
+    email: {
+        thanksForPlaying: string;
+        click: string;
+        result: string;
+    };
 }

@@ -262,5 +262,10 @@ export interface Locale {
     cookiesText2: string;
     modifyPersonalDataCaption: string;
     modifyPersonalDataText: string;
+  },
+  email: {
+    thanksForPlaying: string;
+    click: string;
+    result: string;
   }
 }

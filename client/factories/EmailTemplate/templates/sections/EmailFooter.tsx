@@ -7,7 +7,7 @@ const EmailFooter = (props: any) => (
       <A href={props.copyrightLinkHref} color={props.styles.a.color}>
         {props.copyrightLinkText}
       </A>{" "}
-      {new Date().getFullYear()} all rights reserved.
+      {new Date().getFullYear()}
     </Span>
   </Item>
 );

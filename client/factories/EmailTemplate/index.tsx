@@ -1,60 +1,58 @@
-import { ReactElement } from "react";
-import { EmailProps } from "react-html-email";
-import HtmlEmail from "./templates/HtmlEmail";
+import { ReactElement, useContext } from "react";
+import { Box, configStyleValidator, Email, EmailProps } from "react-html-email";
+import { LanguageContext } from "../../contexts/LanguageContext";
+import EmailBody from "./templates/sections/EmailBody";
+import EmailFooter from "./templates/sections/EmailFooter";
+import EmailHeader from "./templates/sections/EmailHeader";
 import { theme } from "./templates/theme";
 
-const mockDownloadLink = "https://getnebula.app/download";
-const websiteLink = "https://getnebula.app";
-const companyLink = "http://creativelifeform.com";
-const title = "nebula";
-const emailHeaderText =
-  "Download the Nebula particle system designer for MacOS";
+export default function EmailTemplate({
+  url,
+}: {
+  url: string;
+}): ReactElement<EmailProps> {
+  const { text } = useContext(LanguageContext);
+  const companyLink = "https://pedagogame.com";
+  const title = "Pedago Game Results";
 
-export default function EmailTemplate(url: string): ReactElement<EmailProps> {
+  const bodyHeaderText = "Hi,";
+  const bodyContentComponent = () => {
+    return (
+      <>
+        <p>
+          {text.email.thanksForPlaying}{" "}<strong>Pedago</strong>.{" "}
+          {text.email.click}
+        </p>
+      </>
+    );
+  };
+  const bodyCalloutHref = companyLink + url;
+  const buttonText = text.email.result;
+  const copyrightLinkHref = companyLink;
+  const copyrightLinkText = "Pedago Game";
+
+  configStyleValidator({
+    strict: false,
+    warn: false,
+  });
+
   return (
-    <HtmlEmail
-      theme={theme}
-      title={title}
-      emailHeaderHref={url}
-      emailHeaderText={emailHeaderText}
-      bodyHeaderText={"Hi there 👋,"}
-      bodyContentComponent={() => {
-        const linkStyle = { color: theme.emailBody.bodyContent.a.color };
-        return (
-          <>
-            <p>
-              Thanks for signing up for the <b>Nebula</b> particle system
-              designer alpha. Please download the app by clicking the download
-              button below.
-            </p>
-            <p>
-              As part of the alpha, wed really appreciate it if you could let us
-              know your thoughts about the app in our{" "}
-              <a href="https://spectrum.chat/nebula" style={linkStyle}>
-                spectrum.chat
-              </a>{" "}
-              space.
-            </p>
-            <p>
-              {" "}
-              You can also submit any bugs or issues to our{" "}
-              <a
-                href="https://github.com/creativelifeform/nebula-issues/issues"
-                style={linkStyle}
-              >
-                issue tracker
-              </a>
-              .
-            </p>
-          </>
-        );
-      }}
-      bodyCalloutHref={mockDownloadLink}
-      bodyCalloutText={"Download Nebula"}
-      bodyFooterText={`If you're having trouble accessing the link, copy and paste the following link into your web browser `}
-      bodyFooterHref={mockDownloadLink}
-      copyrightLinkHref={companyLink}
-      copyrightLinkText={"Creativelifeform"}
-    />
+    <Email title={title} style={theme.email}>
+      <Box align="center" style={theme.emailBox}>
+        <EmailHeader styles={theme.emailHeader} />
+        <EmailBody
+          bodyHeaderText={bodyHeaderText}
+          bodyContentComponent={bodyContentComponent}
+          bodyCalloutHref={bodyCalloutHref}
+          bodyCalloutText={buttonText}
+          styles={theme.emailBody}
+        />
+        <EmailFooter
+          copyrightLinkHref={copyrightLinkHref}
+          copyrightLinkText={copyrightLinkText}
+          styles={theme.emailFooter}
+        />
+      </Box>
+    </Email>
   );
 }
