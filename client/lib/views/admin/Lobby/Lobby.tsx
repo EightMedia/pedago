@@ -27,14 +27,12 @@ const LobbyComponent = ({
       return <LobbyInfo handleClick={() => setStep(LobbyStep.Lobby)} />;
     case LobbyStep.Lobby:
       return (
-        <>
-          <LobbyLobby
-            room={room}
-            groups={groups}
-            handleStart={handleStart}
-            handleInfo={() => setStep(LobbyStep.Info)}
-          />
-        </>
+        <LobbyLobby
+          room={room}
+          groups={groups}
+          handleStart={handleStart}
+          handleInfo={() => setStep(LobbyStep.Info)}
+        />
       );
     default:
       return null;
