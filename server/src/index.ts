@@ -53,8 +53,8 @@ io.on("connection", (socket: Socket) => {
   // Event Listeners
   socket.on(
     Event.Email,
-    (email: string, html: string, callback: (args: SocketCallback) => void) =>
-      emailResults(email, html, callback)
+    (email: string, url: string, callback: (args: SocketCallback) => void) =>
+      emailResults(email, url, callback)
   );
 
   // Admin Listeners
