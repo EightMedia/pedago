@@ -6,6 +6,8 @@ const emailResults = (
   callback: (args: SocketCallback) => void
 ) => {
   const formData = require("form-data");
+  const siteUrl = process.env.SITE_URL || "https://www.pedagogame.com";
+  const mailSender = process.env.MAIL_SENDER || "'Pedago Game' <info@pedagogame.com>"
   const Mailgun = require("mailgun.js");
   const mailgun = new Mailgun(formData);
   const mg = mailgun.client({
@@ -14,13 +16,13 @@ const emailResults = (
   });
   mg.messages
     .create("sandboxa0f798192c164e828cb0146819533cee.mailgun.org", {
-      from: '"Pedago Game" <info@pedagogame.com>',
+      from: mailSender,
       to: [email],
       subject: "Game Result",
       template: "pedago",
       "h:X-Mailgun-Variables": JSON.stringify({
-        url: "https://www.pedagogame.com" + url,
-        logo: "https://www.pedagogame.com/images/logo.png"
+        url: url,
+        logo: `${siteUrl}/images/logo.png`
       }),
     })
     .then((msg: any) => {
