@@ -546,5 +546,5 @@ export const NL: Locale = {
     cookiesText2: "Daarnaast kunt u ervoor kiezen om Social Media cookies te accepteren, die ervoor zorgen dat bezoekers content van social media-netwerken zoals YouTube kunnen bekijken op onze website. Deze social media-netwerken kunnen bezoekers mogelijk volgen en hun internetgedrag monitoren voor eigen doeleinden. Pedago gebruikt of bewaart deze gegevens niet.",
     modifyPersonalDataCaption: "Persoonsgegevens wijzigen",
     modifyPersonalDataText: "U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. Dit kunt u zelf doen via de links onderaan de Pedago-nieuwsbrieven of door een verzoek daartoe te sturen naar [**info@pedagogame.com**](mailto:info@pedagogame.com) vanaf het e-mailadres waarmee u zich heeft aangemeld voor de nieuwsbrieven.",
-  },
+  }
 };

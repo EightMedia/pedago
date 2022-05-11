@@ -10,6 +10,11 @@ if (process.env.AIRTABLE_API_KEY) {
 }
 
 const storeGame = (room: RoomDto, playerId: string) => {
+  if (!base) {
+    base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+      process.env.AIRTABLE_BASE_ID
+    );
+  }
   if (base) {
     base(process.env.AIRTABLE_GAMES_TABLE).create(
       [
