@@ -23,6 +23,24 @@
   font-size: var(--font-size-sm);
 }
 
+.deletable:hover {
+  cursor: pointer;
+  position: relative;
+  text-decoration: line-through;
+  & svg {
+    filter: brightness(50%);
+  }
+  &::before {
+    content: "✕";
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: var(--color-white);
+    z-index: 1;
+  }
+}
+
 .active {
   background: var(--color-white);
   color: var(--color-grey-darkest) !important;

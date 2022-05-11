@@ -11,6 +11,7 @@ import {
 import { Server, Socket } from "socket.io";
 import {
   finishRound,
+  kickPlayer,
   lockRoom,
   registerGame,
   reset,
@@ -83,6 +84,7 @@ io.on("connection", (socket: Socket) => {
   );
   socket.on(AdminEvent.Reset, (roomId: string) => reset(roomId, socket));
   socket.on(AdminEvent.Lock, (roomId: string, lock: boolean, callback: (args: SocketCallback) => void) => lockRoom(roomId, lock, callback));
+  socket.on(AdminEvent.KickPlayer, (roomId: string, playerId: string, callback: (args: SocketCallback) => void) => kickPlayer(roomId, playerId, socket, callback))
 
   // Player Listeners
   socket.on(

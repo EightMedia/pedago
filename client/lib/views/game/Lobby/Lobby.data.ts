@@ -12,15 +12,19 @@ export const LobbyDataOneGroup: LobbyType = {
         {
           name: "Stijn",
           active: true,
+          id: "ID",
         },
         {
           name: "Esmee",
+          id: "ID",
         },
         {
           name: "Dilara",
+          id: "ID",
         },
         {
           name: "Susanne",
+          id: "ID",
         },
       ],
     },
@@ -39,15 +43,19 @@ export const LobbyDataTwoGroups: LobbyType = {
         {
           name: "Stijn",
           active: true,
+          id: "ID",
         },
         {
           name: "Esmee",
+          id: "ID",
         },
         {
           name: "Dilara",
+          id: "ID",
         },
         {
           name: "Vincent",
+          id: "ID",
         },
       ],
     },
@@ -57,15 +65,19 @@ export const LobbyDataTwoGroups: LobbyType = {
       players: [
         {
           name: "Dilara",
+          id: "ID",
         },
         {
           name: "Esmee",
+          id: "ID",
         },
         {
           name: "Vincent",
+          id: "ID",
         },
         {
           name: "Stijn",
+          id: "ID",
         },
       ],
     },

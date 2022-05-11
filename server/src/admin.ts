@@ -42,7 +42,7 @@ export const registerGame = (
       socketId: socket.id,
       admin: {
         ...partialRoom.admin,
-        id: adminId
+        id: adminId,
       } as Admin,
       roomCode: roomCode,
       players: [],
@@ -52,7 +52,7 @@ export const registerGame = (
       startDate: timestamp,
       timerStamp: 0,
       view: ViewName.Lobby,
-      round: 1
+      round: 1,
     };
     // Add room to store
     store.addRoom(room);
@@ -63,16 +63,16 @@ export const registerGame = (
       status: "OK",
       message: `You have created a room with code: ${room.roomCode}`,
       data: {
-        room: room
-      }
+        room: room,
+      },
     });
   } else {
     room = {
       ...partialRoom,
       ...store.getRoomByRoomCode(partialRoom.roomCode),
       admin: {
-        socketId: socket.id
-      }
+        socketId: socket.id,
+      },
     };
     // Update room to store
     store.updateRoom(room);
@@ -83,8 +83,8 @@ export const registerGame = (
       status: "OK",
       message: `You have joined the room with code: ${room.roomCode}`,
       data: {
-        room: room
-      }
+        room: room,
+      },
     });
   }
   socket.join(room.id);
@@ -103,12 +103,12 @@ export const startGame = (
     store.updateRoom({
       ...room,
       timerStamp: Math.floor(new Date().valueOf() / 1000),
-      view: ViewName.Game
+      view: ViewName.Game,
     });
 
     store.updateAllPlayers(roomId, <Partial<Player>>{
       status: PlayerStatus.NotStarted,
-      view: ViewName.PlayerMatch
+      view: ViewName.PlayerMatch,
     });
     store.makeTeams(roomId);
 
@@ -125,12 +125,12 @@ export const startGame = (
     updateClientRoom(socket, roomId);
     callback({
       status: "OK",
-      message: "Game started"
+      message: "Game started",
     });
   } catch {
     callback({
       status: "ERROR",
-      message: "Unknown error, trying to start the game"
+      message: "Unknown error, trying to start the game",
     });
   }
 };
@@ -151,7 +151,7 @@ export const finishRound = (
 
     callback({
       status: "OK",
-      message: "Here are the results..."
+      message: "Here are the results...",
     });
   } else {
     // Fetch latest sortorder from all players
@@ -172,7 +172,7 @@ export const finishRound = (
       ...room,
       players: filteredPlayers,
       round: roundNo + 1,
-      timerStamp: 0
+      timerStamp: 0,
     });
     updateClientRoom(socket, roomId);
 
@@ -180,7 +180,7 @@ export const finishRound = (
 
     callback({
       status: "OK",
-      message: "Going to the next round"
+      message: "Going to the next round",
     });
   }
 };
@@ -195,15 +195,36 @@ export const reset = (roomId: string, socket: Socket) => {
   socket.removeAllListeners();
 };
 
-export const lockRoom = (roomId: string, lock: boolean, callback: (args: SocketCallback) => void) => {
+export const lockRoom = (
+  roomId: string,
+  lock: boolean,
+  callback: (args: SocketCallback) => void
+) => {
   const room = store.getRoomById(roomId);
   store.updateRoom({
-    ...room as RoomDto,
+    ...(room as RoomDto),
     id: roomId,
-    locked: lock
+    locked: lock,
   });
   callback({
     status: "OK",
-    message: `Room ${lock ? "locked" : "unlocked"}`
-  })
+    message: `Room ${lock ? "locked" : "unlocked"}`,
+  });
+};
+
+export const kickPlayer = (
+  roomId: string,
+  playerId: string,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  const playerSocketId = store.kickPlayer(roomId, playerId);
+  socket.to(playerSocketId).emit(PlayerEvent.ExitGame);
+
+  updatePlayersInLobby(socket, roomId);
+  updateClientRoom(socket, roomId);
+  callback({
+    status: "OK",
+    message: `Kicked player with ID: ${playerId}`,
+  });
 };

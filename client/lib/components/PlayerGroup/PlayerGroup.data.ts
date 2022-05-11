@@ -6,22 +6,28 @@ export const PlayerGroupData: PlayerGroupType = {
   players: [
     {
       name: "Stijn",
+      id: "ID",
       active: true,
     },
     {
       name: "Esmee",
+      id: "ID",
     },
     {
       name: "Dilara",
+      id: "ID",
     },
     {
       name: "Vincent",
+      id: "ID",
     },
     {
       name: "Taco",
+      id: "ID",
     },
     {
       name: "Sander",
+      id: "ID",
     },
   ],
 };
