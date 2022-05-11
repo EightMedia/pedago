@@ -14,6 +14,7 @@ const ButtonComponent = ({
   return (
     <>
       <button
+        tabIndex={1}
         className={cx(
           styles.button,
           styles[variation],

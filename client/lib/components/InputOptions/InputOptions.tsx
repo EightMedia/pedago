@@ -28,7 +28,7 @@ export function InputOptions<Value extends InputOptionValue>(
     value,
     options,
     customStyles,
-    error
+    error,
   } = props;
 
   const styles = customStyles ? customStyles : defaultStyles;
@@ -73,6 +73,7 @@ export function InputOptions<Value extends InputOptionValue>(
           const checked = isChecked(option.value, value);
           return (
             <label
+              tabIndex={1}
               className={cx(
                 styles.option,
                 styles[checked ? "optionChecked" : "optionUnchecked"]
