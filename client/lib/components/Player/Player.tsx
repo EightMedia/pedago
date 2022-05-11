@@ -12,15 +12,31 @@ export const avatarColors = [
   "#196cff",
 ];
 
-const PlayerComponent = ({ name, group, size = "sm", active }: PlayerType) => {
+const PlayerComponent = ({
+  name,
+  id,
+  group,
+  size = "sm",
+  active,
+  kickPlayer,
+}: PlayerType) => {
   const avatarSize = size === "sm" ? 32 : 68;
+
+  const handleDeletePlayer = () => {
+    if (!kickPlayer) {
+      return;
+    }
+    kickPlayer(id);
+  };
   return (
     <div
       className={cx(
         styles.player,
         active ? styles.active : null,
-        size === "sm" ? styles.sm : styles.lg
+        size === "sm" ? styles.sm : styles.lg,
+        kickPlayer ? styles.deletable : null
       )}
+      onClick={handleDeletePlayer}
     >
       <Avatar
         square={true}
@@ -30,7 +46,9 @@ const PlayerComponent = ({ name, group, size = "sm", active }: PlayerType) => {
         colors={avatarColors}
       />
       <div className={styles.nameWrapper}>
-        <span className={cx(styles.name, active ? styles.active : null)}>{name}</span>
+        <span className={cx(styles.name, active ? styles.active : null)}>
+          {name}
+        </span>
         {size === "lg" && group && (
           <span className={styles.group}>{group}</span>
         )}

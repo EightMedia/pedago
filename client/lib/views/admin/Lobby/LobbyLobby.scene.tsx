@@ -48,6 +48,12 @@ export const LobbyLobby = ({
     });
   };
 
+  const handleDeletePlayer = (playerId: string) => {
+    (socket as Socket).emit(AdminEvent.KickPlayer, room?.id, playerId, (res: SocketCallback) => {
+      console.log(res?.message);
+    });
+  }
+
   const handleDestroyGame = () => {
     (socket as Socket).emit(AdminEvent.Reset, room?.id);
     removeCookies("room");
@@ -118,7 +124,7 @@ export const LobbyLobby = ({
           </Panel>
           <PanelGroup>
             {groups &&
-              groups.map((group) => <PlayerGroup key={group.id} {...group} />)}
+              groups.map((group) => <PlayerGroup key={group.id} {...group} kickPlayer={handleDeletePlayer} />)}
           </PanelGroup>
         </Stack>
       </Page>

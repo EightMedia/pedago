@@ -89,7 +89,7 @@ const AdminGame = ({ localLang, localRoom }: { localLang: Language, localRoom: R
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
-      socket.on(Event.Room, (r: RoomDto) => {
+      socket.on(Event.Room, (r: RoomDto) => {        
         setRoom(r);
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);

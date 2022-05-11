@@ -5,6 +5,7 @@ import {
   addRoomFn,
   getGroupsByRoomIdFn,
   getPlayerByIdFn,
+  kickPlayerFn,
   makeTeamsFn,
   setPlayerStatusFn,
   setTeamReadyFn,
@@ -57,6 +58,7 @@ export interface GamesState {
   ) => void;
   removeRoom: (roomId: string) => void;
   removeAllGames: () => void;
+  kickPlayer: (roomId: string, playerId: string) => string;
 }
 
 const gamesStore: StoreApi<GamesState> = create<GamesState>(
@@ -121,6 +123,7 @@ const gamesStore: StoreApi<GamesState> = create<GamesState>(
       }));
     },
     removeAllGames: () => set({ games: [] }),
+    kickPlayer: (roomId: string, playerId: string) => kickPlayerFn(set, roomId, playerId)
   })
 );
 
