@@ -44,7 +44,7 @@ const LobbyComponent = ({ round, roundMax, groups, playerName, playerId }: Lobby
                 key={group.id}
                 {...group}
                 counter={false}
-                handleGroupChange={groups.length ? () => handleGroupChange(group.id) : undefined}
+                handleGroupChange={groups.length > 1 ? () => handleGroupChange(group.id) : undefined}
               />
             ))}
         </PanelGroup>
