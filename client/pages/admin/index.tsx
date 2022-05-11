@@ -43,12 +43,18 @@ import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
 import LanguageProvider from "../../providers/Language.provider";
 import TimerProvider from "../../providers/Timer.provider";
 
-const AdminGame = ({ localLang, localRoom }: { localLang: Language, localRoom: RoomDto }) => {
+const AdminGame = ({
+  localLang,
+  localRoom,
+}: {
+  localLang: Language;
+  localRoom: RoomDto;
+}) => {
   const socket: Socket | null = useSocket(
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
   );
   const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
-  const [room, setRoom] = useState<RoomDto>(localRoom || {} as RoomDto);
+  const [room, setRoom] = useState<RoomDto>(localRoom || ({} as RoomDto));
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
@@ -68,7 +74,7 @@ const AdminGame = ({ localLang, localRoom }: { localLang: Language, localRoom: R
     setTimer(getTimeStampFromLocalStorage());
   }, []);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (localRoom) {
       if (socket) {
         socket.emit(
@@ -89,7 +95,7 @@ const AdminGame = ({ localLang, localRoom }: { localLang: Language, localRoom: R
     if (socket) {
       socket.on(Event.To, setView);
       socket.on(Event.Message, console.warn);
-      socket.on(Event.Room, (r: RoomDto) => {        
+      socket.on(Event.Room, (r: RoomDto) => {
         setRoom(r);
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
@@ -170,8 +176,13 @@ const AdminGame = ({ localLang, localRoom }: { localLang: Language, localRoom: R
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const localLang = getCookie("language", { req, res });
   const room = getCookie("room", { req, res });
-  
-  return { props: { localLang: localLang || Language.NL, localRoom: room ? JSON.parse(room as string) : null } };
+
+  return {
+    props: {
+      localLang: localLang || Language.NL,
+      localRoom: room ? JSON.parse(room as string) : null,
+    },
+  };
 };
 
 export default AdminGame;
