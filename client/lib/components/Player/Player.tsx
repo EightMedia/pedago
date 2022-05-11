@@ -26,7 +26,9 @@ const PlayerComponent = ({
     if (!kickPlayer) {
       return;
     }
-    kickPlayer(id);
+    if (id) {
+      kickPlayer(id);
+    }
   };
   return (
     <div
