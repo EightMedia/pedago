@@ -14,9 +14,10 @@ const emailResults = (
   const mg = mailgun.client({
     username: "api",
     key: process.env.MAILGUN_KEY,
+    url: 'https://api.eu.mailgun.net'
   });
   mg.messages
-    .create("sandboxa0f798192c164e828cb0146819533cee.mailgun.org", {
+    .create(process.env.MAILGUN_DOMAIN || "pedagogame.com", {
       from: mailSender,
       to: [email],
       subject: "Game Result",
