@@ -8,7 +8,7 @@ import {
   FormEvent,
   SetStateAction,
   useContext,
-  useState
+  useState,
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Button } from "../../components/Button";
@@ -21,7 +21,6 @@ import { PageSlot } from "../../components/Page/Page";
 import PrivacyStatement from "../../components/PrivacyStatement";
 import { Title } from "../../components/Title";
 import { Center } from "../../layouts/Center";
-import { LandingIllustration } from "./Landing.illustration";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = ({
@@ -31,7 +30,8 @@ const LandingPage = ({
   language: Language;
   setLanguage: Dispatch<SetStateAction<Language>>;
 }) => {
-  const [showPrivacyStatement, setShowPrivacyStatement] = useState<boolean>(false);
+  const [showPrivacyStatement, setShowPrivacyStatement] =
+    useState<boolean>(false);
   const [roomCode, setRoomCode] = useState<string>("");
   const { text } = useContext(LanguageContext);
   const router = useRouter();
@@ -132,15 +132,19 @@ const LandingPage = ({
                       </div>
                     </Center>
                   </div>
-                  <LandingIllustration className={styles.illustration} />
+                  <img src="images/visual.png" className={styles.visual} />
                 </PageSlot>
               </>
             );
         }
       })()}
       <PageSlot location="footer" className={styles.footer}>
-        <a onClick={() => setShowPrivacyStatement(!showPrivacyStatement)}>Privacy</a>
-        <a onClick={() => setShowPrivacyStatement(!showPrivacyStatement)}>Cookies</a>
+        <a onClick={() => setShowPrivacyStatement(!showPrivacyStatement)}>
+          Privacy
+        </a>
+        <a onClick={() => setShowPrivacyStatement(!showPrivacyStatement)}>
+          Cookies
+        </a>
       </PageSlot>
     </Page>
   );

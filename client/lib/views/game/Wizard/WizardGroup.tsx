@@ -15,6 +15,11 @@ export const WizardGroup = ({
 }) => {
   const { text } = useContext(LanguageContext);
 
+  if (groups?.length === 1) {
+    setStep(WizardStep.Info, groups[0])
+    return null;
+  }
+
   return (
     <>
       <PanelTitle>{text.gameWizard.group.title}</PanelTitle>

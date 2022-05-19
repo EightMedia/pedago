@@ -18,6 +18,7 @@ import { Panel, PanelTitle } from "../../../components/Panel";
 import { PanelGroup } from "../../../components/PanelGroup";
 import { PlayerCount } from "../../../components/PlayerCount";
 import { TeamsList } from "../../../components/TeamsList";
+import { Text } from "../../../components/Text";
 import { Timer } from "../../../components/Timer";
 import { Title } from "../../../components/Title";
 import { Center } from "../../../layouts/Center";
@@ -151,13 +152,14 @@ export const GameRound = ({
       {showStopModal && (
         <Modal handleClose={() => setShowStopModal(false)}>
           <PanelTitle>{gameText.areYouSure}</PanelTitle>
-          <p>
+          <Text>
             {gameText.there}{" "}
             {teamsStillPlaying === 1
               ? gameText.isOneTeam
               : `${gameText.are} ${teamsStillPlaying} teams`}{" "}
             {gameText.stillPlaying}
-          </p>
+          </Text>
+          <br />
           <Button onClick={handleStopRound}>
             {round.current === 6 ? gameText.yesToResult : gameText.yesSure}
           </Button>

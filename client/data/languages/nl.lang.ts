@@ -127,7 +127,7 @@ export const NL: Locale = {
         },
         {
           caption: "Scherm delen",
-          text: "Het is handig om je scherm te delen, zodat spelers ten alle tijden zien of ze al meedoen, of wat de code is.",
+          text: "Het is handig om je scherm te delen, zodat spelers te allen tijde zien of ze al meedoen, of wat de code is.",
           icon: IconsEnum.ScreenShare,
         },
         {
@@ -546,5 +546,5 @@ export const NL: Locale = {
     cookiesText2: "Daarnaast kunt u ervoor kiezen om Social Media cookies te accepteren, die ervoor zorgen dat bezoekers content van social media-netwerken zoals YouTube kunnen bekijken op onze website. Deze social media-netwerken kunnen bezoekers mogelijk volgen en hun internetgedrag monitoren voor eigen doeleinden. Pedago gebruikt of bewaart deze gegevens niet.",
     modifyPersonalDataCaption: "Persoonsgegevens wijzigen",
     modifyPersonalDataText: "U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. Dit kunt u zelf doen via de links onderaan de Pedago-nieuwsbrieven of door een verzoek daartoe te sturen naar [**info@pedagogame.com**](mailto:info@pedagogame.com) vanaf het e-mailadres waarmee u zich heeft aangemeld voor de nieuwsbrieven.",
-  },
+  }
 };

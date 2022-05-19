@@ -103,6 +103,32 @@ export const updatePlayerFn = (
   }));
 };
 
+export const kickPlayerFn = (
+  set: SetState<GamesState>,
+  roomId: string,
+  playerId: string
+): string => {
+  let socketId = "";
+  set((state: GamesState) => ({
+    games: state.games.map((room: RoomDto) => {
+      if (roomId === room.id) {
+        return {
+          ...room,
+          players: room.players.filter((p: Player) => {
+            if (p.id === playerId) {
+              socketId = p.socketId;
+            }
+            return p.id !== playerId
+          }),
+        } as RoomDto;
+      } else {
+        return room as RoomDto;
+      }
+    }),
+  }));
+  return socketId;
+};
+
 export const setPlayerStatusFn = (
   set: SetState<GamesState>,
   roomId: string,

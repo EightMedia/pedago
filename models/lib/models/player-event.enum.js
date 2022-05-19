@@ -16,4 +16,5 @@ var PlayerEvent;
     PlayerEvent["PlayerMatchScene"] = "playerMatchScene";
     PlayerEvent["FinishRoundByAdmin"] = "finishRoundByAdmin";
     PlayerEvent["ExitGame"] = "exitGame";
+    PlayerEvent["ChangeGroup"] = "changeGroup";
 })(PlayerEvent = exports.PlayerEvent || (exports.PlayerEvent = {}));

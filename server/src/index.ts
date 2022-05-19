@@ -11,6 +11,8 @@ import {
 import { Server, Socket } from "socket.io";
 import {
   finishRound,
+  kickPlayer,
+  lockRoom,
   registerGame,
   reset,
   startGame,
@@ -18,6 +20,7 @@ import {
 } from "./admin";
 import emailResults from "./email";
 import {
+  changeGroup,
   finishRoundByAdmin,
   gameStart,
   getLatestSortOrder,
@@ -80,11 +83,14 @@ io.on("connection", (socket: Socket) => {
     ) => finishRound(roomId, roundNo, socket, callback)
   );
   socket.on(AdminEvent.Reset, (roomId: string) => reset(roomId, socket));
+  socket.on(AdminEvent.Lock, (roomId: string, lock: boolean, callback: (args: SocketCallback) => void) => lockRoom(roomId, lock, callback));
+  socket.on(AdminEvent.KickPlayer, (roomId: string, playerId: string, callback: (args: SocketCallback) => void) => kickPlayer(roomId, playerId, socket, callback))
 
   // Player Listeners
   socket.on(
     PlayerEvent.RoomCodeExists,
-    (roomCode: number, callback: (args: SocketCallback) => void) => getRoomCodeExists(roomCode, callback)
+    (roomCode: number, callback: (args: SocketCallback) => void) =>
+      getRoomCodeExists(roomCode, callback)
   );
   socket.on(
     PlayerEvent.JoinRoomByRoomCode,
@@ -158,6 +164,15 @@ io.on("connection", (socket: Socket) => {
       playerId: string,
       callback: (args: SocketCallback) => void
     ) => storeTeamReady(roomId, playerId, socket, callback)
+  );
+  socket.on(
+    PlayerEvent.ChangeGroup,
+    (
+      roomId: string,
+      playerId: string,
+      groupId: string,
+      callback: (args: SocketCallback) => void
+    ) => changeGroup(roomId, playerId, groupId, socket, callback)
   );
 });
 

@@ -20,7 +20,7 @@ export const getRoomCodeExists = (
   roomCode: number,
   callback: (args: SocketCallback) => void
 ) => {
-  const room = store.getRoomByRoomCode(roomCode);  
+  const room = store.getRoomByRoomCode(roomCode);
   if (!room) {
     callback({
       status: "ERROR",
@@ -50,6 +50,17 @@ export const joinRoomByRoomCode = (
       message: {
         NL: "Deze code wordt niet herkend. Controleer de code en probeer het opnieuw.",
         EN: "This code is not valid. Make sure to fill in the right code and try again.",
+      },
+    });
+    return;
+  }
+
+  if (room.locked) {
+    callback({
+      status: "ERROR",
+      message: {
+        NL: "Het spel met deze code zit op slot. Vraag de beheerder om toegang te verlenen.",
+        EN: "The game with this code is locked. Ask the administrator to grant access.",
       },
     });
     return;
@@ -440,4 +451,27 @@ export const storeTeamReady = (
       message: "Going to the next round",
     });
   }
+};
+
+export const changeGroup = (
+  roomId: string,
+  playerId: string,
+  groupId: string,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  const groups = store.getGroupsByRoomId(roomId);
+  const group = groups?.filter((g: Group) => g.id === groupId)[0];
+
+  const partialPlayer: Partial<Player> = {
+    group,
+  };
+  store.updatePlayer(roomId, playerId, partialPlayer);
+
+  updateClientRoom(socket, roomId);
+
+  callback({
+    status: "OK",
+    message: `Changed to group: ${group?.name}`
+  })
 };

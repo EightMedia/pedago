@@ -10,7 +10,7 @@ const getPlayerGroupType = (
     players: playerList
       .filter((p) => p.group?.id === group.id)
       .map((p) => {
-        return { name: p.name, active: false };
+        return { name: p.name, id: p.id, active: false };
       }),
   };
 };
@@ -26,10 +26,11 @@ export const getAdminLobbyType = (
 
 export const getLobbyRoom = (
   room: RoomDto
-): { roomCode: number; id: string; players: number } => {
+): { roomCode: number; id: string; players: number, locked: boolean } => {
   return {
     roomCode: room.roomCode,
     id: room.id,
     players: room.players?.length,
+    locked: room.locked
   };
 };

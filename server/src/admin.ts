@@ -145,7 +145,7 @@ export const finishRound = (
     socket.emit(Event.To, { name: ViewName.Result });
     // Fetch latest sortorder from all players
     socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
-    
+
     // Airtable
     storeGame(store.getRoomById(roomId) as RoomDto, "");
 
@@ -167,12 +167,12 @@ export const finishRound = (
       if (p.status === PlayerStatus.NotStarted) {
         socket.to(p.socketId).socketsLeave(roomId);
       }
-    })
+    });
     store.updateRoom({
       ...room,
       players: filteredPlayers,
       round: roundNo + 1,
-      timerStamp: 0
+      timerStamp: 0,
     });
     updateClientRoom(socket, roomId);
 
@@ -193,4 +193,38 @@ export const reset = (roomId: string, socket: Socket) => {
   store.removeRoom(roomId);
   socket.broadcast.to(roomId).emit(PlayerEvent.ExitGame);
   socket.removeAllListeners();
+};
+
+export const lockRoom = (
+  roomId: string,
+  lock: boolean,
+  callback: (args: SocketCallback) => void
+) => {
+  const room = store.getRoomById(roomId);
+  store.updateRoom({
+    ...(room as RoomDto),
+    id: roomId,
+    locked: lock,
+  });
+  callback({
+    status: "OK",
+    message: `Room ${lock ? "locked" : "unlocked"}`,
+  });
+};
+
+export const kickPlayer = (
+  roomId: string,
+  playerId: string,
+  socket: Socket,
+  callback: (args: SocketCallback) => void
+) => {
+  const playerSocketId = store.kickPlayer(roomId, playerId);
+  socket.to(playerSocketId).emit(PlayerEvent.ExitGame);
+
+  updatePlayersInLobby(socket, roomId);
+  updateClientRoom(socket, roomId);
+  callback({
+    status: "OK",
+    message: `Kicked player with ID: ${playerId}`,
+  });
 };

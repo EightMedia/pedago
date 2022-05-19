@@ -12,7 +12,7 @@ import { PlayerGroupType } from "./PlayerGroup.types";
 export const PlayerGroupComponent = ({
   name,
   players,
-  counter = true,
+  kickPlayer,
   handleGroupChange,
 }: PlayerGroupType) => {
   const { text } = useContext(LanguageContext);
@@ -26,7 +26,7 @@ export const PlayerGroupComponent = ({
               <div className={cx(styles.groupName)}>{name}</div>
               <div className={cx(styles.players)}>
                 {players.map((player, index) => (
-                  <Player key={index} {...player} />
+                  <Player key={index} {...player} kickPlayer={kickPlayer} />
                 ))}
               </div>
             </>

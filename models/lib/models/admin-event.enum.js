@@ -11,4 +11,6 @@ var AdminEvent;
     AdminEvent["Disconnect"] = "disconnect";
     AdminEvent["LobbyStep"] = "lobbyStep";
     AdminEvent["GameScene"] = "gameScene";
+    AdminEvent["Lock"] = "lock";
+    AdminEvent["KickPlayer"] = "kickPlayer";
 })(AdminEvent = exports.AdminEvent || (exports.AdminEvent = {}));
