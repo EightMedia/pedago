@@ -127,7 +127,7 @@ export const NL: Locale = {
         },
         {
           caption: "Scherm delen",
-          text: "Het is handig om je scherm te delen, zodat spelers ten alle tijden zien of ze al meedoen, of wat de code is.",
+          text: "Het is handig om je scherm te delen, zodat spelers te allen tijde zien of ze al meedoen, of wat de code is.",
           icon: IconsEnum.ScreenShare,
         },
         {
