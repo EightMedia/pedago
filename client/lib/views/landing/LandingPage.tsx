@@ -124,11 +124,14 @@ const LandingPage = ({
                     <Center>
                       <div className={styles.adminText}>
                         <Link href="/admin" passHref>
-                          <span className={styles.createGame}>
-                            {text?.landing?.create}
-                          </span>
-                        </Link>{" "}
-                        <span>{text?.landing?.asAdmin}</span>
+                          <a tabIndex={1}>
+                            <span className={styles.createGame}>
+                              {text?.landing?.create}
+                            </span>
+                          </a>
+                        </Link>
+
+                        <span> {text?.landing?.asAdmin}</span>
                       </div>
                     </Center>
                   </div>

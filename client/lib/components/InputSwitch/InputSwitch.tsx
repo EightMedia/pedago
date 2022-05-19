@@ -44,13 +44,6 @@ const InputSwitchComponent = ({
 }: InputSwitchType) => {
   return (
     <label className={cx(styles.wrapper)}>
-      <input
-        type="checkbox"
-        id={id}
-        checked={checked}
-        onChange={onChange}
-        className={styles.input}
-      />
       <div className={styles.text}>
         <Text size="mdlg" weight="bold">
           {label}
@@ -60,12 +53,20 @@ const InputSwitchComponent = ({
         </Text>
       </div>
       <div className={styles.icon}>
-        <SwitchIcon checked={checked} />
         {optionLabels?.length === 2 && (
           <span className={styles.switchLabel}>
             {checked ? optionLabels[0] : optionLabels[1]}
           </span>
         )}
+        <input
+          type="checkbox"
+          id={id}
+          checked={checked}
+          onChange={onChange}
+          className={styles.input}
+          tabIndex={1}
+        />
+        <SwitchIcon checked={checked} />
       </div>
     </label>
   );
