@@ -181,7 +181,7 @@ export const ResultOverview = ({
                 <Text align="center" tone="light">
                   {resultsText.sendToMail}
                 </Text>
-                <form onSubmit={handleClick}>
+                <form onSubmit={handleClick} className={styles.emailForm}>
                   <InputText
                     id={"email"}
                     label={"E-mail"}
