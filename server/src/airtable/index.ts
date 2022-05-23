@@ -2,20 +2,21 @@ import { RoomDto } from "models";
 import { dataToJson } from "../utils/data-to-json.util";
 
 const Airtable = require("airtable");
-let base: any;
-if (process.env.AIRTABLE_API_KEY) {
-  base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
-    process.env.AIRTABLE_BASE_ID
-  );
+
+function createAirtable() {
+  if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
+    return new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+      process.env.AIRTABLE_BASE_ID
+    );
+  } else {
+    return undefined;
+  }
 }
 
 const storeGame = (room: RoomDto, playerId: string) => {
-  if (!base) {
-    base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
-      process.env.AIRTABLE_BASE_ID
-    );
-  }
-  if (base) {
+  const base = createAirtable();
+
+  if (base && process.env.AIRTABLE_GAMES_TABLE) {
     base(process.env.AIRTABLE_GAMES_TABLE).create(
       [
         {
