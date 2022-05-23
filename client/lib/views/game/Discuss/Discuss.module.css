@@ -62,4 +62,5 @@
   border-radius: var(--border-radius-sm);
   color: var(--color-grey-darkest);
   border: var(--border-light);
+  word-break: break-word;
 }

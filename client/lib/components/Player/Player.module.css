@@ -4,6 +4,10 @@
   align-items: center;
   overflow: hidden;
   border-radius: var(--border-radius-xs);
+
+  & svg {
+    flex-shrink: 0;
+  }
 }
 
 .lg {
