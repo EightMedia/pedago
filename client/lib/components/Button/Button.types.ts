@@ -4,6 +4,7 @@ export interface ButtonType extends ComponentPropsWithoutRef<"button"> {
   variation?:
     | "default"
     | "danger"
+    | "dangerOutline"
     | "line"
     | "whiteActive"
     | "whiteInactive"
