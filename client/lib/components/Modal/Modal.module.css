@@ -30,4 +30,12 @@
   color: var(--color-dark-blue);
   padding: 32px;
   border-radius: var(--border-radius-md);
+
+  & .closeButton {
+    position: absolute;
+    padding: 17px;
+    right: 0;
+    top: 0;
+    color: var(--color-grey-dark);
+  }
 }
