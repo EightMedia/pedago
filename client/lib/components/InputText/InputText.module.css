@@ -46,5 +46,6 @@
 }
 
 .error {
+  margin-top: var(--space-4xs);
   color: var(--color-red);
 }
