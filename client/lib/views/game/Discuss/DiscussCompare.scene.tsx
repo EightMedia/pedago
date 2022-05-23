@@ -70,7 +70,7 @@ interface CompareCardProps extends ComponentPropsWithoutRef<"div"> {
 }
 
 const CompareCard = forwardRef(function CompareCard(
-  { card, round = 0, ...rest }: CompareCardProps,
+  { card, round, ...rest }: CompareCardProps,
   ref?: Ref<HTMLDivElement>
 ) {
   const { text } = useContext(LanguageContext);
@@ -86,7 +86,7 @@ const CompareCard = forwardRef(function CompareCard(
 export const DiscussCompare = ({
   handleReady,
   teamMembers,
-  round = 0,
+  round,
 }: DiscussCompareProps) => {
   const [showInfoModal, setShowInfoModal] = useState(false);
   const timer = useContext(TimerContext);
@@ -129,7 +129,7 @@ export const DiscussCompare = ({
                     key={card}
                     {...rowProps[index]}
                     card={card}
-                    round={round}
+                    round={round - 1}
                   />
                 ))}
               </Stack>
