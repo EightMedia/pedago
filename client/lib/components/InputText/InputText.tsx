@@ -33,6 +33,7 @@ export const InputTextComponent = ({
         )}
       </label>
       <input
+        tabIndex={1}
         id={id}
         type={type}
         onChange={onChange}
