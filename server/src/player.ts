@@ -54,8 +54,9 @@ export const joinRoomByRoomCode = (
     });
     return;
   }
+  const player = room?.players?.find((p: Player) => p.id === playerId);
 
-  if (room.locked) {
+  if (room.locked && !player) {
     callback({
       status: "ERROR",
       message: {
@@ -66,7 +67,6 @@ export const joinRoomByRoomCode = (
     return;
   }
 
-  const player = room?.players?.find((p: Player) => p.id === playerId);
   if (!player) {
     updateClientRoom(socket, room.id);
 
