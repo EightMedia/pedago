@@ -16,6 +16,7 @@
   font-size: var(--font-size-2xs);
   font-weight: 700;
   max-width: 100px;
+  gap: 10px;
 
   @media (--sm) {
     max-width: none;
@@ -36,17 +37,17 @@
 .label0 {
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-30%);
 }
 .label1 {
   top: 25%;
   right: 0;
-  transform: translateY(-50%);
+  transform: translateY(-70%) translateX(25%);
 }
 .label2 {
   top: 75%;
   right: 0;
-  transform: translateY(-50%);
+  transform: translateY(-30%) translateX(20%);
   & svg {
     order: -1;
   }
@@ -54,7 +55,7 @@
 .label3 {
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(30%);
   & svg {
     order: -1;
   }
@@ -62,7 +63,7 @@
 .label4 {
   top: 75%;
   left: 0;
-  transform: translateY(-50%);
+  transform: translateY(-30%) translateX(-20%);
   & svg {
     order: -1;
   }
@@ -70,5 +71,5 @@
 .label5 {
   top: 25%;
   left: 0;
-  transform: translateY(-50%);
+  transform: translateY(-70%) translateX(-25%);
 }
