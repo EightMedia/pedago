@@ -1,5 +1,5 @@
 import { Event, SocketCallback } from "models";
-import { useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { SocketContext } from "../../../contexts/SocketContext";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
@@ -64,7 +64,8 @@ export const ResultOverview = ({
     });
   };
 
-  const handleClick = () => {
+  const handleClick = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setEmailError("");
     const errorObject = {
       NL: "Voer een geldig e-mailadres in",
