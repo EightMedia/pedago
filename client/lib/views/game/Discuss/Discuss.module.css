@@ -19,6 +19,7 @@
   scroll-padding-inline-start: 20px;
   scroll-padding-inline-end: 20px;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   margin-bottom: var(--space-md);
 
