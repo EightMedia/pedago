@@ -21,8 +21,9 @@
   padding: var(--space-2xs) var(--space-xs);
   background: var(--color-white);
   gap: var(--space-xs);
-  border: --var(--border-light);
+  border: var(--border-light);
   border-radius: var(--border-radius-sm);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
@@ -30,9 +31,14 @@
 }
 
 .title {
+  user-select: none;
   color: var(--color-grey-darkest);
 }
 
 .item[aria-pressed] {
-  transform: rotate(10deg);
+  z-index: 5;
+  & .inner {
+    transition: transform 0.2s;
+    transform: rotate(5deg);
+  }
 }
