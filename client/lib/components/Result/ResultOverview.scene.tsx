@@ -56,7 +56,8 @@ export const ResultOverview = ({
       ? encodeURIComponent(data.me?.toString())
       : undefined;
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
     const url = `${siteUrl}/result?me=${meParams}&groups=${groupsParams}`;
 
     socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
@@ -181,18 +182,20 @@ export const ResultOverview = ({
                 <Text align="center" tone="light">
                   {resultsText.sendToMail}
                 </Text>
-                <form onSubmit={handleClick} className={styles.emailForm}>
-                  <InputText
-                    id={"email"}
-                    label={"E-mail"}
-                    placeholder={resultsText.yourMail}
-                    type="email"
-                    error={emailError}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <Button stretch={true} type="submit">
-                    {resultsText.send}
-                  </Button>
+                <form onSubmit={handleClick}>
+                  <Stack gap="2xs">
+                    <InputText
+                      id={"email"}
+                      label={"E-mail"}
+                      placeholder={resultsText.yourMail}
+                      type="email"
+                      error={emailError}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Button stretch={true} type="submit">
+                      {resultsText.send}
+                    </Button>
+                  </Stack>
                 </form>
                 <Text align="center" size="xs" tone="light">
                   {resultsText.privacy}

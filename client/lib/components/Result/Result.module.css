@@ -76,9 +76,3 @@
   gap: var(--space-3xs);
   flex-grow: 1;
 }
-
-.emailForm {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
