@@ -11,34 +11,45 @@ const emailResults = (
     process.env.MAIL_SENDER || "'Pedago Game' <info@pedagogame.com>";
   const Mailgun = require("mailgun.js");
   const mailgun = new Mailgun(formData);
-  const mg = mailgun.client({
-    username: "api",
-    key: process.env.MAILGUN_KEY,
-    url: 'https://api.eu.mailgun.net'
-  });
-  mg.messages
-    .create(process.env.MAILGUN_DOMAIN || "pedagogame.com", {
-      from: mailSender,
-      to: [email],
-      subject: "Game Result",
-      template: "pedago",
-      "h:X-Mailgun-Variables": JSON.stringify({
-        url: url,
-        logo: `${siteUrl}/images/logo.png`,
-      }),
-    })
-    .then((msg: any) => {
-      callback({
-        status: "OK",
-        message: `E-mail sent to: ${email}. ${msg}`,
-      });
-    })
-    .catch((err: any) => {
-      callback({
-        status: "ERROR",
-        message: err,
-      });
+  let mg;
+
+  if (process.env.MAILGUN_KEY) {
+    mg = mailgun.client({
+      username: "api",
+      key: process.env.MAILGUN_KEY,
+      url: 'https://api.eu.mailgun.net'
     });
+  }
+  if (mg) {
+    mg.messages
+      .create(process.env.MAILGUN_DOMAIN || "pedagogame.com", {
+        from: mailSender,
+        to: [email],
+        subject: "Game Result",
+        template: "pedago",
+        "h:X-Mailgun-Variables": JSON.stringify({
+          url: url,
+          logo: `${siteUrl}/images/logo.png`,
+        }),
+      })
+      .then((msg: any) => {
+        callback({
+          status: "OK",
+          message: `E-mail sent to: ${email}. ${msg}`,
+        });
+      })
+      .catch((err: any) => {
+        callback({
+          status: "ERROR",
+          message: err,
+        });
+      });
+  } else {
+    callback({
+      status: "ERROR",
+      message: "No Mailgun key found"
+    })
+  }
 };
 
 export default emailResults;

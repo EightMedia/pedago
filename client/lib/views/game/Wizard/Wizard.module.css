@@ -1,5 +1,7 @@
 .avatarInput {
   position: relative;
+  margin-bottom: var(--space-md);
+
   & > div > input {
     text-align: left !important;
     padding-left: 60px;

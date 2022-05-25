@@ -1,5 +1,10 @@
 import Avatar from "boring-avatars";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import {
+  ChangeEvent, FormEvent,
+  useContext,
+  useEffect,
+  useState
+} from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
@@ -30,7 +35,8 @@ export const WizardName = ({
     setErrorMsg(error);
   }, [error]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setChanged(false);
     if (name.length >= 2) {
       setStep(WizardStep.Group, name);
@@ -51,27 +57,29 @@ export const WizardName = ({
         <Text align="center" tone="medium">
           {text.gameWizard.name.othersWillSee}
         </Text>
-        <div className={styles.avatarInput}>
-          <figure className={styles.avatarFigure}>
-            <Avatar
-              square={true}
-              name={name}
-              variant="beam"
-              size={40}
-              colors={avatarColors}
+        <form onSubmit={handleSubmit}>
+          <div className={styles.avatarInput}>
+            <figure className={styles.avatarFigure}>
+              <Avatar
+                square={true}
+                name={name}
+                variant="beam"
+                size={40}
+                colors={avatarColors}
+              />
+            </figure>
+            <InputText
+              id="name"
+              label={text.gameWizard.name.nameLabel}
+              error={!changed ? errorMsg : undefined}
+              placeholder={text.gameWizard.name.nameLabel}
+              onChange={handleChange}
             />
-          </figure>
-          <InputText
-            id="name"
-            label={text.gameWizard.name.nameLabel}
-            error={!changed ? errorMsg : undefined}
-            placeholder={text.gameWizard.name.nameLabel}
-            onChange={handleChange}
-          />
-        </div>
-        <Button onClick={() => handleSubmit()} disabled={name.length < 1}>
-          {text.gameWizard.name.nextButton}
-        </Button>
+          </div>
+          <Button stretch disabled={name.length < 1}>
+            {text.gameWizard.name.nextButton}
+          </Button>
+        </form>
       </Stack>
     </>
   );
