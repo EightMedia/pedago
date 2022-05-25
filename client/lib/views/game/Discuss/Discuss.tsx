@@ -57,13 +57,13 @@ const DiscussComponent = ({
               />
             );
           case DiscussStep.Compare:
-            return (
+            return teamMembers?.[0]?.cards ? (
               <DiscussCompare
                 teamMembers={teamMembers}
                 handleReady={handleReady}
                 round={round}
               />
-            );
+            ) : null;
           case DiscussStep.Info:
             return (
               <DiscussInfo

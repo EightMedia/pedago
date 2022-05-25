@@ -21,6 +21,7 @@
   overflow: -moz-scrollbars-vertical;
   overflow-y: hidden;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   margin-bottom: var(--space-xs);
   padding-bottom: 10px;
