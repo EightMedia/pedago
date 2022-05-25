@@ -37,17 +37,17 @@
 .label0 {
   top: 0;
   left: 50%;
-  transform: translateX(-50%) translateY(-30%);
+  transform: translate(-50%, -30%);
 }
 .label1 {
   top: 25%;
   right: 0;
-  transform: translateY(-70%) translateX(25%);
+  transform: translate(25%, -70%);
 }
 .label2 {
   top: 75%;
   right: 0;
-  transform: translateY(-30%) translateX(20%);
+  transform: translate(20%, -30%);
   & svg {
     order: -1;
   }
@@ -55,7 +55,7 @@
 .label3 {
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%) translateY(30%);
+  transform: translate(-50%, 30%);
   & svg {
     order: -1;
   }
@@ -63,7 +63,7 @@
 .label4 {
   top: 75%;
   left: 0;
-  transform: translateY(-30%) translateX(-20%);
+  transform: translate(-20%, -30%);
   & svg {
     order: -1;
   }
@@ -71,5 +71,5 @@
 .label5 {
   top: 25%;
   left: 0;
-  transform: translateY(-70%) translateX(-25%);
+  transform: translate(-25%, -70%);
 }
