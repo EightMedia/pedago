@@ -19,17 +19,17 @@ export type DiscussIntroProps = {
 };
 
 export const DiscussIntro = ({
-  time = 3,
+  time = 6,
   callback,
   teamMembers,
   round,
   roundMax,
 }: DiscussIntroProps) => {
   TimedCallback(time, callback);
-  const { text } = useContext(LanguageContext);
+  const { text, lang } = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const timer = useContext(TimerContext);
-  const room  = useContext(RoomContext);
+  const room = useContext(RoomContext);
 
   const names =
     teamMembers?.filter((p) => p.socketId !== socket?.id).map((p) => p.name) ??
@@ -37,14 +37,16 @@ export const DiscussIntro = ({
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">
-      {room?.options?.timer as boolean && <Timer time={timer} />}
+        {(room?.options?.timer as boolean) && <Timer time={timer} />}
       </PageSlot>
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}
       </PageSlot>
       <Title>
         {text.discuss.intro.discussDiff}{" "}
-        {names.length > 1 ? names.join(" and ") : names.join()}
+        {names.length > 1
+          ? names.join(` ${lang === "NL" ? "en" : "and"} `)
+          : names.join()}
       </Title>
     </Page>
   );
