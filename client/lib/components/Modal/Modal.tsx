@@ -9,8 +9,8 @@ const ModalComponent = ({ children, handleClose }: ModalType) => {
     <div className={cx(styles.wrapper)}>
       <div className={styles.backdrop} onClick={handleClose} />
       <div className={styles.modal}>
-        <button onClick={handleClose}>
-          <Icon icon={IconsEnum.Close} />
+        <button onClick={handleClose} className={styles.closeButton}>
+          <Icon icon={IconsEnum.Close} color={"#6E6A87"} size={"sm"} />
         </button>
         {children}
       </div>

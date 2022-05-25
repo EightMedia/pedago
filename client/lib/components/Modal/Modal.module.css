@@ -30,4 +30,19 @@
   color: var(--color-dark-blue);
   padding: 32px;
   border-radius: var(--border-radius-md);
+
+  & .closeButton {
+    position: absolute;
+    padding: 17px;
+    right: 0;
+    top: 0;
+    color: var(--color-grey-dark);
+    transition: transform 0.1s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
 }
