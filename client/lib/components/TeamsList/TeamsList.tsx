@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { Stack } from "../../layouts/Stack";
 import { GlassPanel } from "../GlassPanel";
 import { Player } from "../Player";
 import { PlayerCount } from "../PlayerCount";
@@ -11,8 +12,10 @@ const TeamsListComponent = ({ teams, title, emptyText }: TeamsListType) => {
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
   return (
     <GlassPanel>
-      <PlayerCount players={playerCount} />
-      <Title>{title}</Title>
+      <Stack gap="3xs">
+        <PlayerCount players={playerCount} />
+        <Title>{title}</Title>
+      </Stack>
       {teams.map((team) => (
         <div key={team.name} className={styles.team}>
           <h3 className={styles.teamNameTitle}>
