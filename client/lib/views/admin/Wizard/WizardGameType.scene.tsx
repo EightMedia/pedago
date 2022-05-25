@@ -96,7 +96,6 @@ export const WizardGameType = ({
             value,
             label,
           }))}
-          error={yearError}
           value={data.info?.players?.type}
           onChange={(value) => {
             updateData(value, "info.players.type");

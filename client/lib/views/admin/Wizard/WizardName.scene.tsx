@@ -27,8 +27,8 @@ export const WizardName = ({
   const errorObject = {
     name: { EN: "Please fill in a name", NL: "Vul uw naam in" },
     email: {
-      EN: "Please fill in your e-mail address",
-      NL: "Vul uw e-mailadres in",
+      EN: "Please fill in a valid email address",
+      NL: "Vul een geldig e-mailadres in",
     },
     role: {
       EN: "Please check at least on of the roles",
@@ -58,10 +58,13 @@ export const WizardName = ({
   };
 
   const handleNextStep = () => {
+    const emailRegExp = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
     if (!data.info?.name) {
       setNameError(errorObject.name[lang]);
     }
-    if (!data.info?.email) {
+    if (!emailRegExp.test(data.info?.email as string)) {
       setEmailError(errorObject.email[lang]);
     }
     if (!data.info?.role?.length) {
@@ -76,6 +79,7 @@ export const WizardName = ({
     if (
       data.info?.name &&
       data.info.email &&
+      emailRegExp.test(data.info?.email as string) &&
       data.info.role?.length &&
       !(
         Boolean(data.info?.role?.includes(Role.Other)) &&
