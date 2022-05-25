@@ -6,6 +6,11 @@
     text-align: left !important;
     padding-left: 60px;
   }
+  @media (--md) {
+    & > div > input {
+      padding-left: 68px;
+    }
+  }
 }
 
 .avatarFigure {
@@ -18,4 +23,14 @@
   overflow: hidden;
   overflow: hidden;
   border-radius: var(--border-radius-xs);
+  & svg {
+    width: 100%;
+    height: auto;
+  }
+  @media (--md) {
+    left: 10px;
+    top: 11px;
+    width: 47px;
+    height: 47px;
+  }
 }
