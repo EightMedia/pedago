@@ -115,10 +115,12 @@
   background: var(--color-white);
   color: var(--color-dark-blue);
 
-  &:active,
-  &:hover {
-    background: var(--color-hover-dark-blue);
-    color: var(--color-white);
+  @media (pointer: fine) {
+    &:active,
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--color-white);
+    }
   }
 }
 
