@@ -11,5 +11,5 @@ export type InputTextType = {
   value?: string;
   condition?: boolean;
   helptext?: string;
-  align?: string;
+  align?: "left" | "center";
 };

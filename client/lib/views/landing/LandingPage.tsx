@@ -8,7 +8,7 @@ import {
   FormEvent,
   SetStateAction,
   useContext,
-  useState
+  useState,
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Button } from "../../components/Button";
@@ -135,7 +135,11 @@ const LandingPage = ({
                       </div>
                     </Center>
                   </div>
-                  <img src="images/visual.png" alt="Landing-visual" className={styles.visual} />
+                  <img
+                    src="images/visual.png"
+                    alt="illustratie van het pedago spel"
+                    className={styles.visual}
+                  />
                 </PageSlot>
               </>
             );

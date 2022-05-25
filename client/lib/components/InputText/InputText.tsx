@@ -1,4 +1,3 @@
-import { TextAlign } from "chart.js";
 import cx from "classnames";
 import { memo } from "react";
 import { Text } from "../Text";
@@ -16,7 +15,7 @@ export const InputTextComponent = ({
   placeholder,
   showLabel = false,
   value,
-  align = "center"
+  align = "center",
 }: InputTextType) => {
   if (condition === false) return null;
   return (
@@ -40,7 +39,7 @@ export const InputTextComponent = ({
         type={type}
         onChange={onChange}
         className={cx(styles.input, styles[!error ? "valid" : "invalid"])}
-        style={{textAlign: align as TextAlign}}
+        style={{ textAlign: align }}
         placeholder={placeholder}
         value={value}
       />

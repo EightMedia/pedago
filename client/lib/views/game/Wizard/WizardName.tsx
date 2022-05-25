@@ -67,7 +67,7 @@ export const WizardName = ({
             error={!changed ? errorMsg : undefined}
             placeholder={text.gameWizard.name.nameLabel}
             onChange={handleChange}
-            align={"left"}
+            align="left"
           />
         </div>
         <Button onClick={() => handleSubmit()} disabled={name.length < 1}>
