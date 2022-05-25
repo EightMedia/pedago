@@ -135,7 +135,11 @@ const LandingPage = ({
                       </div>
                     </Center>
                   </div>
-                  <img src="images/visual.png" className={styles.visual} />
+                  <img
+                    src="images/visual.png"
+                    alt="illustratie van het pedago spel"
+                    className={styles.visual}
+                  />
                 </PageSlot>
               </>
             );

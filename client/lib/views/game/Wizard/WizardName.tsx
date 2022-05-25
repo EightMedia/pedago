@@ -1,10 +1,5 @@
 import Avatar from "boring-avatars";
-import {
-  ChangeEvent, FormEvent,
-  useContext,
-  useEffect,
-  useState
-} from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
 import { InputText } from "../../../components/InputText";
@@ -74,6 +69,7 @@ export const WizardName = ({
               error={!changed ? errorMsg : undefined}
               placeholder={text.gameWizard.name.nameLabel}
               onChange={handleChange}
+              align="left"
             />
           </div>
           <Button stretch disabled={name.length < 1}>

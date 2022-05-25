@@ -5,6 +5,19 @@ import { InputTextData } from "./InputText.data";
 export default {
   title: "Components/InputText",
   component: InputText,
+  argTypes: {
+    align: {
+      options: ["left", "center"],
+      control: {
+        type: "radio",
+      },
+    },
+    showLabel: {
+      control: {
+        type: "boolean",
+      },
+    },
+  },
 } as ComponentMeta<typeof InputText>;
 
 const Template: ComponentStory<typeof InputText> = (args) => (

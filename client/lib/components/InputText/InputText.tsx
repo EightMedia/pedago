@@ -15,6 +15,7 @@ export const InputTextComponent = ({
   placeholder,
   showLabel = false,
   value,
+  align = "center",
 }: InputTextType) => {
   if (condition === false) return null;
   return (
@@ -38,6 +39,7 @@ export const InputTextComponent = ({
         type={type}
         onChange={onChange}
         className={cx(styles.input, styles[!error ? "valid" : "invalid"])}
+        style={{ textAlign: align }}
         placeholder={placeholder}
         value={value}
       />
