@@ -54,8 +54,9 @@ export const joinRoomByRoomCode = (
     });
     return;
   }
+  const player = room?.players?.find((p: Player) => p.id === playerId);
 
-  if (room.locked) {
+  if (room.locked && !player) {
     callback({
       status: "ERROR",
       message: {
@@ -66,7 +67,6 @@ export const joinRoomByRoomCode = (
     return;
   }
 
-  const player = room?.players?.find((p: Player) => p.id === playerId);
   if (!player) {
     updateClientRoom(socket, room.id);
 
@@ -403,10 +403,20 @@ export const storeTeamReady = (
   callback: (args: SocketCallback) => void
 ) => {
   const index: number = store.getTeamIndex(roomId, playerId);
-  const team = (store.getTeams(roomId) as Player[][])[index];
+  const team = (store.getTeams(roomId) as Player[][])
+    ? (store.getTeams(roomId) as Player[][])[index]
+    : undefined;
   store.setPlayerStatus(roomId, playerId, index as number, PlayerStatus.Done);
   const player = store.getPlayerById(roomId, playerId);
   const lastRound = player?.rounds.find((r: Round) => r.number === 6);
+
+  if (!team) {
+    callback({
+      status: "ERROR",
+      message: "Team not found",
+    });
+    return;
+  }
 
   if (lastRound) {
     socket.emit(Event.To, { name: ViewName.Result });
@@ -472,6 +482,6 @@ export const changeGroup = (
 
   callback({
     status: "OK",
-    message: `Changed to group: ${group?.name}`
-  })
+    message: `Changed to group: ${group?.name}`,
+  });
 };
