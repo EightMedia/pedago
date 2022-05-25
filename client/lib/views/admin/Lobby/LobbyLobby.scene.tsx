@@ -107,10 +107,10 @@ export const LobbyLobby = ({
               <ButtonGroup>
                 <Button
                   onClick={handleLock as () => void}
-                  variation="whiteBlockedOutline"
+                  variation={lock === IconsEnum.LockOpen ? "whiteBlockedOutline" : "dangerOutline"}
                   disabled={lockClicked}
                 >
-                  <Icon icon={lock} size="xl" />
+                  <Icon icon={lock} size="xl" color={lock === IconsEnum.LockOpen ? "" : "#f82a42"} />
                   <span className="sr-only">Lock</span>
                 </Button>
                 <Button
