@@ -326,7 +326,7 @@ export const NL: Locale = {
       fetchResult: "We halen jouw resultaten op.",
     },
     results: "Resultaten",
-    myResult: "Het resultaat",
+    myResult: "Jouw resultaat",
     everyone: "Iedereen",
     yourResult: "Jouw uitkomst",
     save: "Bewaren",
