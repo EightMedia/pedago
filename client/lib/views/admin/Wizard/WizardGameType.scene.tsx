@@ -1,4 +1,4 @@
-import { PlayerType, Sector } from "models";
+import { PlayerType } from "models";
 import { ChangeEvent, useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { Button } from "../../../components/Button";
@@ -131,9 +131,9 @@ export const WizardGameType = ({
             />
             <InputOptions
               id="sector"
-              options={numberEnumToEntries(Sector).map(([label, value]) => ({
-                value,
-                label,
+              options={Object.entries(text.sector).map(([key, value]) => ({
+                value: key,
+                label: value,
               }))}
               multi
               error={sectorError}
