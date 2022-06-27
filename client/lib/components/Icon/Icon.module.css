@@ -2,6 +2,13 @@
   height: auto;
 }
 
+.xs {
+  width: 14px;
+  @media (--sm) {
+    width: 16px;
+  }
+}
+
 .sm {
   width: 20px;
   @media (--sm) {

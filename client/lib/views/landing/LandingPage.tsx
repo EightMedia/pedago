@@ -76,12 +76,14 @@ const LandingPage = ({
               className={styles.lang}
             >
               Nederlands
+              {language === "NL" && <Icon icon={IconsEnum.Check} size="xs" />}
             </button>
             <button
               onClick={() => handleChangeLanguage(Language.EN)}
               className={styles.lang}
             >
               English
+              {language === "EN" && <Icon icon={IconsEnum.Check} size="xs" />}
             </button>
           </div>
         )}

@@ -49,7 +49,10 @@
 }
 
 .lang {
-  color: var(--color-grey-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-grey-darkest);
   font-size: var(--font-size-mdlg);
   font-family: var(--font-body);
   font-weight: 500;
