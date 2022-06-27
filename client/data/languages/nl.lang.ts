@@ -326,7 +326,7 @@ export const NL: Locale = {
       fetchResult: "We halen jouw resultaten op.",
     },
     results: "Resultaten",
-    myResult: "Het resultaat",
+    myResult: "Jouw resultaat",
     everyone: "Iedereen",
     yourResult: "Jouw uitkomst",
     save: "Bewaren",
@@ -339,33 +339,33 @@ export const NL: Locale = {
   rounds: [
     {
       id: 1,
-      lead: "In mijn onderwijs vind ik het van belang voor leerlingen...",
+      lead: "In mijn onderwijs vind ik het van belang voor leerlingen dat...",
       cards: [
         {
           id: "0",
-          title: "Dat ze leren zichzelf te redden in een veeleisende wereld.",
+          title: "Ze leren zichzelf te redden in een veeleisende wereld.",
         },
         {
           id: "1",
-          title: "Dat ze zelf leren richting te geven aan hun leven.",
+          title: "Ze zelf leren richting te geven aan hun leven.",
         },
         {
           id: "2",
           title:
-            "Dat ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
+            "Ze hun weg leren vinden in het sociaal maatschappelijk verkeer.",
         },
         {
           id: "3",
-          title: "Dat ze opgroeien tot bewuste, onafhankelijke volwassenen.",
+          title: "Ze opgroeien tot bewuste, onafhankelijke volwassenen.",
         },
         {
           id: "4",
-          title: "Dat ze doorstromen naar zo hoog mogelijk vervolgonderwijs.",
+          title: "Ze doorstromen naar zo hoog mogelijk vervolgonderwijs.",
         },
         {
           id: "5",
           title:
-            "Dat ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
+            "Ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
         },
       ],
     },
@@ -404,35 +404,35 @@ export const NL: Locale = {
     },
     {
       id: 3,
-      lead: "In mijn onderwijs vind ik het van belang voor leerlingen...",
+      lead: "In mijn onderwijs vind ik het van belang voor leerlingen dat...",
       cards: [
         {
           id: "0",
           title:
-            "Dat ze een gevoel van eigenwaarde en een positief zelfbeeld ontwikkelen.",
+            "Ze een gevoel van eigenwaarde en een positief zelfbeeld ontwikkelen.",
         },
         {
           id: "1",
-          title: "Dat ze gebruik leren maken van hun creativiteit.",
+          title: "Ze gebruik leren maken van hun creativiteit.",
         },
         {
           id: "2",
           title:
-            "Dat ze competenties verwerven waarmee ze kunnen deelnemen aan de maatschappij.",
+            "Ze competenties verwerven waarmee ze kunnen deelnemen aan de maatschappij.",
         },
         {
           id: "3",
-          title: "Dat ze leren onderbouwde meningen te vormen.",
+          title: "Ze leren onderbouwde meningen te vormen.",
         },
         {
           id: "4",
           title:
-            "Dat ze leerstof verwerven die onderdeel uitmaakt van het officiële curriculum.",
+            "Ze leerstof verwerven die onderdeel uitmaakt van het officiële curriculum.",
         },
         {
           id: "5",
           title:
-            "Dat ze leren hun sociale, psychologische en fysieke beperkingen te ondervangen.",
+            "Ze leren hun sociale, psychologische en fysieke beperkingen te ondervangen.",
         },
       ],
     },
@@ -472,32 +472,32 @@ export const NL: Locale = {
     },
     {
       id: 5,
-      lead: "In mijn onderwijs vind ik het van belang voor leerlingen...",
+      lead: "In mijn onderwijs vind ik het van belang voor leerlingen dat...",
       cards: [
         {
           id: "0",
-          title: "Dat de school een beschermende en veilige plaats biedt.",
+          title: "De school een beschermende en veilige plaats biedt.",
         },
         {
           id: "1",
-          title: "Dat de school hen uitdaagt hun potentieel te verwezenlijken.",
+          title: "De school hen uitdaagt hun potentieel te verwezenlijken.",
         },
         {
           id: "2",
-          title: "Dat de school in verbinding staat met de wereld daarbuiten.",
+          title: "De school in verbinding staat met de wereld daarbuiten.",
         },
         {
           id: "3",
-          title: "Dat de school een plaats is waar leerlingen een stem hebben.",
+          title: "De school een plaats is waar leerlingen een stem hebben.",
         },
         {
           id: "4",
           title:
-            "Dat de school een omgeving is waarin leerprestaties hoog worden gewaardeerd.",
+            "De school een omgeving is waarin leerprestaties hoog worden gewaardeerd.",
         },
         {
           id: "5",
-          title: "Dat de school toegang biedt tot gespecialiseerde zorg",
+          title: "De school toegang biedt tot gespecialiseerde zorg",
         },
       ],
     },
