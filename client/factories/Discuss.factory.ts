@@ -14,7 +14,7 @@ export const getDiscussType = (
   playerId: string
 ): DiscussType => {
   const currentTeam = room.teams?.find((t) => t.some((p) => p.id === playerId));
-
+  const discussInfoSeen = room.round > 1;
   const teamMembers: {
     socketId: string;
     name: string;
@@ -37,6 +37,7 @@ export const getDiscussType = (
     initialStep,
     pause,
     teamMembers,
+    discussInfoSeen,
     autoPlay
   };
 };
