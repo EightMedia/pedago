@@ -146,7 +146,7 @@ export const ResultOverview = ({
         secondaryLabel={resultsText.everyone}
         className={styles.diagram}
       />
-      <div className={styles.panels}>
+      <div className={showEmailPanel ? styles.panels : styles.singlePanel}>
         <Panel>
           <PanelTitle>{detailsTitle}</PanelTitle>
           <Stack gap="lg">

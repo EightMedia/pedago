@@ -16,9 +16,7 @@ const stringToResultSet = (nmbrs: string): ResultSet | undefined => {
     return undefined;
   }
   const decoded = decodeURIComponent(nmbrs);
-  return Object.assign([], decoded)
-    ?.filter((i: string) => i !== ",")
-    ?.map((i: string) => parseInt(i, 10)) as ResultSet;
+  return decoded.split(",").map((item) => parseInt(item, 10)) as ResultSet;
 };
 
 const stringToGroups = (grps: string): ResultGroup[] | [] => {
@@ -66,8 +64,8 @@ const ResultPage = ({ localLang }: { localLang: Language }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {  
-  const localLang = getCookie("language", { req, res});  
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const localLang = getCookie("language", { req, res });
   return { props: { localLang: localLang || Language.NL } };
 };
 

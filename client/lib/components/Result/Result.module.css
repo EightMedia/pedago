@@ -25,7 +25,7 @@
 }
 
 .diagram {
-  margin-bottom: var(--space-xl);
+  margin-bottom: calc(var(--space-xl) + 1rem);
 }
 
 .panels {
@@ -47,6 +47,17 @@
         max-width: 368px;
       }
     }
+  }
+}
+
+.singlePanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (--md) {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
