@@ -130,7 +130,7 @@ export const ResultOverview = ({
                     setActiveButton(group.name);
                     setPrimaryData(group.data);
                     setDetailsTitle(group.name);
-                    setSecondaryData(groupsTotal);
+                    setSecondaryData(data.me || groupsTotal);
                   }}
                 >
                   {group.name}

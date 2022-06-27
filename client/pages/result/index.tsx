@@ -37,8 +37,6 @@ const ResultPage = ({ localLang }: { localLang: Language }) => {
   let groupsData: ResultGroup[] = [];
   if (groups) {
     groupsData = stringToGroups(groups as string);
-    console.log(groups, groupsData);
-    
   }
   if (me) {
     meData = stringToResultSet(me as string);
