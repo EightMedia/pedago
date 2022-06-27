@@ -34,7 +34,7 @@ export const registerGame = (
     const roomId = randomUUID();
     const adminId = randomUUID();
     const roomCode = Math.floor(1000 + Math.random() * 9000);
-    const timestamp = new Date().toISOString();
+    const timestamp = new Date().toLocaleString('nl-NL');
 
     room = {
       ...partialRoom,
