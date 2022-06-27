@@ -326,6 +326,7 @@ export const NL: Locale = {
       fetchResult: "We halen jouw resultaten op.",
     },
     results: "Resultaten",
+    subTitle: "Leer jouw eigen pedagogisch krachten kennen met dit spel. Je speelt met andere spelers, samen bespreken jullie de resultaten.",
     myResult: "Jouw resultaat",
     everyone: "Iedereen",
     yourResult: "Jouw uitkomst",

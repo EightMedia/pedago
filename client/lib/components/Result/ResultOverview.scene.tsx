@@ -9,6 +9,7 @@ import { Baro } from "../Baro";
 import { Button } from "../Button";
 import { Diagram } from "../Diagram";
 import { InputText } from "../InputText";
+import { PageSlot } from "../Page/Page";
 import { Panel, PanelTitle } from "../Panel";
 import { Shape } from "../Shape";
 import { Text } from "../Text";
@@ -85,7 +86,12 @@ export const ResultOverview = ({
 
   return (
     <div>
-      <Title>{resultsText.results}</Title>
+      <PageSlot location="subheader" className={styles.header}>
+        <Title size="lg" element="h1">
+          {resultsText.results}
+        </Title>
+        <div className={styles.description}>{resultsText.subTitle}</div>
+      </PageSlot>
       {(data.groups?.length > 1 || data.me) && (
         <div className={styles.buttonsWrapper}>
           <div className={styles.buttons} dir="ltr">

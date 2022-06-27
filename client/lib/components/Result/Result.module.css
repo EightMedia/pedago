@@ -4,6 +4,18 @@
   margin-bottom: var(--space-xl);
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  margin-bottom: 2rem;
+  @media (--xs) {
+    margin-bottom: 3rem;
+  }
+}
+
 .buttons {
   white-space: nowrap;
   display: inline-flex;

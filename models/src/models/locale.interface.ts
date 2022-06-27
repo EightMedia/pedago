@@ -234,6 +234,7 @@ export interface Locale {
       fetchResult: string;
     };
     results: string;
+    subTitle: string;
     myResult: string;
     everyone: string;
     yourResult: string;
