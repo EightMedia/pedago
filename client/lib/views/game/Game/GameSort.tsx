@@ -1,10 +1,7 @@
-import { Category, Player, PlayerEvent, Round, SocketCallback } from "models";
+import { Category, PlayerEvent, Round, SocketCallback } from "models";
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
-import { getPlayerId } from "../../../../factories/shared.factory";
 import { Button } from "../../../components/Button";
 import { Icon } from "../../../components/Icon";
 import { IconsEnum } from "../../../components/Icon/Icon";
@@ -18,13 +15,16 @@ import { WizardInfo } from "../Wizard/WizardInfo";
 import styles from "./Game.module.css";
 import { GameSortType } from "./Game.types";
 
-export const GameSort = ({ round }: GameSortType) => {
-  const { text } = useContext(LanguageContext);
+export const GameSort = ({
+  round,
+  playerId,
+  socket,
+  room,
+  teamName,
+}: GameSortType) => {
+  const { text, lang } = useContext(LanguageContext);
   const roundText = text.rounds[round - 1];
-  const socket = useContext(SocketContext);
-  const room = useContext(RoomContext);
   const timer = useContext(TimerContext);
-  const playerId = getPlayerId(socket?.id as string, room?.players as Player[]);
   const [showInfoModal, setShowInfoModal] = useState(false);
 
   const handleSortOrder = (order: Category[]): void => {
@@ -66,6 +66,11 @@ export const GameSort = ({ round }: GameSortType) => {
     );
   };
 
+  const belongText = {
+    NL: "Je hoort bij",
+    EN: "You are part of",
+  };
+
   useEffect(() => {
     if (socket) {
       socket.on(PlayerEvent.FinishRoundByAdmin, finishRoundByAdmin);
@@ -73,7 +78,12 @@ export const GameSort = ({ round }: GameSortType) => {
   }, [socket]);
 
   return (
-    <>
+    <div className={styles.gameSort}>
+      <div className={styles.belongBar}>
+        {belongText[lang]}
+        &nbsp;
+        <span style={{ fontWeight: 700 }}>Team {teamName}</span>
+      </div>
       <Page background={6}>
         <PageSlot location="headerLeft">
           {(room?.options?.timer as boolean) && <Timer time={timer} />}
@@ -108,6 +118,6 @@ export const GameSort = ({ round }: GameSortType) => {
           <WizardInfo onClick={() => setShowInfoModal(false)} />
         </Modal>
       )}
-    </>
+    </div>
   );
 };

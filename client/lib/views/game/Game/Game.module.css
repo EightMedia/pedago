@@ -19,3 +19,41 @@
   justify-content: center;
   gap: var(--space-2xs);
 }
+
+.belongBar {
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--color-white);
+  font: var(--font-body);
+
+  @media (--sm) {
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+.gameSort > *:not(:first-child) {
+  padding-top: 48px;
+  @media (--sm) {
+    padding-top: 64px;
+  }
+}
+
+.playersList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  @media (--sm) {
+    gap: 20px;
+  }
+}

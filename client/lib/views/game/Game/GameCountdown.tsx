@@ -1,14 +1,11 @@
-import { RoomDto } from "models";
+import { Player as PlayerModel, RoomDto } from "models";
 import { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
 import { Page } from "../../../components/Page";
 import { PageSlot } from "../../../components/Page/Page";
 import { Player } from "../../../components/Player";
 import { Timer } from "../../../components/Timer";
-import { getTeamFromSocketId } from "../../../utils/getTeamFromSocketId";
 import styles from "./Game.module.css";
 
 export const GameCountdown = ({
@@ -16,17 +13,20 @@ export const GameCountdown = ({
   callback,
   round,
   roundMax,
+  players,
+  teamName,
+  room,
 }: {
   time?: number;
   callback?: () => void;
   round: number;
   roundMax: number;
+  teamName: string;
+  players: PlayerModel[];
+  room: RoomDto;
 }) => {
   const [counter, setCounter] = useState(time);
   const { text } = useContext(LanguageContext);
-  const socket = useContext(SocketContext);
-  const room = useContext(RoomContext);
-  const players = getTeamFromSocketId(room as RoomDto, socket?.id as string);
   const timer = useContext(TimerContext);
 
   useEffect(() => {
@@ -51,10 +51,15 @@ export const GameCountdown = ({
       <PageSlot location="headerCenter">
         {text.game.round} {round} {text.game.of} {roundMax}
       </PageSlot>
-      <PageSlot location="subheader">
+      <PageSlot className={styles.playersList} location="subheader">
         <div className={styles.players}>
           {players?.length &&
             players.map((player, i) => <Player key={i} name={player.name} />)}
+        </div>
+        <div>
+          {text.playerMatch.youAre}
+          &nbsp;
+          <span style={{ fontWeight: 700 }}>Team {teamName}</span>
         </div>
       </PageSlot>
       <PageSlot location="body">
