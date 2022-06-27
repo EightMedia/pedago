@@ -71,6 +71,8 @@ export const registerGame = (
       ...partialRoom,
       ...store.getRoomByRoomCode(partialRoom.roomCode),
       admin: {
+        ...partialRoom.admin,
+        ...store.getRoomByRoomCode(partialRoom.roomCode)?.admin,
         socketId: socket.id,
       },
     };
