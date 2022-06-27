@@ -20,7 +20,7 @@ const stringToResultSet = (nmbrs: string): ResultSet | undefined => {
 };
 
 const stringToGroups = (grps: string): ResultGroup[] | [] => {
-  const groupsArray = grps.split("&");
+  const groupsArray = grps.split("*");
   return groupsArray.map((g: string, i: number) => {
     const gArr = g.split("_");
     return {
@@ -37,6 +37,8 @@ const ResultPage = ({ localLang }: { localLang: Language }) => {
   let groupsData: ResultGroup[] = [];
   if (groups) {
     groupsData = stringToGroups(groups as string);
+    console.log(groups, groupsData);
+    
   }
   if (me) {
     meData = stringToResultSet(me as string);

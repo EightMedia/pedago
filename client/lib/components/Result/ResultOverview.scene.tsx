@@ -51,7 +51,7 @@ export const ResultOverview = ({
           e.data.toString()
         )}`;
       })
-      .join("&");
+      .join("*");
     const meParams = data.me
       ? encodeURIComponent(data.me?.toString())
       : undefined;
