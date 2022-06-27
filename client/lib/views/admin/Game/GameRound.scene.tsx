@@ -2,6 +2,7 @@ import { removeCookies } from "cookies-next";
 import { AdminEvent, PlayerStatus } from "models";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { Socket } from "socket.io-client";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
@@ -56,6 +57,8 @@ export const GameRound = ({
   // teams with status Done
   const doneTeams = teams.filter((team) => team.status === PlayerStatus.Done);
   const teamsStillPlaying = notStartedTeams?.length + inProgressTeams?.length;
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
 
   const handleStopRound = () => {
     setShowStopModal(false);
@@ -66,7 +69,7 @@ export const GameRound = ({
     (socket as Socket).emit(AdminEvent.Reset, room?.id);
     removeCookies("room");
     router.push("/");
-  }
+  };
 
   useEffect(() => {
     if (timerContext === TIMER_SECONDS) {
@@ -126,6 +129,11 @@ export const GameRound = ({
                 >
                   {gameText.finish}
                 </Button>
+                <CopyToClipboard text={siteUrl + "/game/" + room?.roomCode}>
+                  <Button variation="whiteBlocked" className={styles.codeButton} tabIndex={2}>
+                    {room?.roomCode} <Icon icon={IconsEnum.Copy} />
+                  </Button>
+                </CopyToClipboard>
               </div>
             </Center>
           </div>
@@ -176,7 +184,14 @@ export const GameRound = ({
         <Modal handleClose={() => setShowSettingsModal(false)}>
           <Panel width="md">
             <PanelTitle>{gameText.settingsButton}</PanelTitle>
-            <Button stretch variation="danger" warning={gameText.destroyWarning} onClick={handleDestroyGame}>{gameText.destroyGame}</Button>
+            <Button
+              stretch
+              variation="danger"
+              warning={gameText.destroyWarning}
+              onClick={handleDestroyGame}
+            >
+              {gameText.destroyGame}
+            </Button>
           </Panel>
         </Modal>
       )}

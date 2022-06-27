@@ -11,3 +11,19 @@
   display: flex;
   gap: var(--space-xs);
 }
+
+.codeButton {
+  font-size: var(--font-size-mdlg);
+  &:focus {
+    animation: click 0.5s;
+  }
+}
+
+@keyframes click {
+  99% {
+    color: var(--color-green);
+  }
+  100% {
+    color: inherit;
+  }
+}
