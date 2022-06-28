@@ -6,6 +6,7 @@ export const DiscussDataOneCompanion: DiscussType = {
   roundMax: 6,
   initialStep: DiscussStep.Ready,
   pause: true,
+  discussInfoSeen: false,
   teamMembers: [
     {
       socketId: "",
@@ -29,6 +30,7 @@ export const DiscussDataTwoCompanions: DiscussType = {
   roundMax: 6,
   initialStep: DiscussStep.Ready,
   pause: true,
+  discussInfoSeen: false,
   teamMembers: [
     {
       socketId: "",
