@@ -3,12 +3,12 @@ import { Language } from "models";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Page } from "../../lib/components/Page";
+import { Result } from "../../lib/components/Result";
 import {
   ResultGroup,
-  ResultSet
+  ResultSet,
+  ResultStep
 } from "../../lib/components/Result/Result.types";
-import { ResultOverview } from "../../lib/components/Result/ResultOverview.scene";
 import LanguageProvider from "../../providers/Language.provider";
 
 const stringToResultSet = (nmbrs: string): ResultSet | undefined => {
@@ -49,15 +49,14 @@ const ResultPage = ({ localLang }: { localLang: Language }) => {
       </Head>
       <LanguageProvider lang={localLang}>
         {groups && (
-          <Page valign="center" background={4}>
-            <ResultOverview
-              data={{
-                me: meData,
-                groups: groupsData,
-              }}
-              showEmailPanel={false}
-            />
-          </Page>
+          <Result
+            data={{
+              me: meData,
+              groups: groupsData,
+            }}
+            showEmailPanel={false}
+            initialStep={ResultStep.Result}
+          />
         )}
       </LanguageProvider>
     </>

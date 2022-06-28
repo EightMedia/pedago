@@ -18,4 +18,5 @@ export type ResultType = {
     me?: ResultSet;
     groups: ResultGroup[];
   };
+  showEmailPanel?: boolean;
 };
