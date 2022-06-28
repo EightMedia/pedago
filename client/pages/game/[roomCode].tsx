@@ -30,6 +30,7 @@ import {
   ResultSet,
   ResultStep
 } from "../../lib/components/Result/Result.types";
+import { onDisconnect } from "../../lib/utils/onDisconnect.util";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Discuss } from "../../lib/views/game/Discuss";
 import { DiscussStep } from "../../lib/views/game/Discuss/Discuss.types";
@@ -117,7 +118,7 @@ const RoomCode = ({
         setRoom(r);
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
-        setPlayerId(getCookie("playerId") as string)
+        setPlayerId(getCookie("playerId") as string);
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(Event.Round, setRound);
@@ -136,6 +137,7 @@ const RoomCode = ({
         removeCookies("roomCode");
         router.push("/");
       });
+      socket.on("disconnect", reason => onDisconnect(reason, router));
     }
   }, [socket]);
 

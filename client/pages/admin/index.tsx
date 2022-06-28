@@ -12,6 +12,7 @@ import {
 } from "models";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
@@ -32,6 +33,7 @@ import {
   ResultSet,
   ResultStep
 } from "../../lib/components/Result/Result.types";
+import { onDisconnect } from "../../lib/utils/onDisconnect.util";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";
 import { GameScene } from "../../lib/views/admin/Game/Game.types";
@@ -59,6 +61,7 @@ const AdminGame = ({
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
   const [timer, setTimer] = useState<number | null>(0);
+  const router = useRouter();
 
   const handleRegisterGame = (room: Partial<RoomDto>): void => {
     if (socket) {
@@ -109,6 +112,7 @@ const AdminGame = ({
           ? setGameScene(GameScene.Onboarding)
           : setGameScene(GameScene.Round)
       );
+      socket.on("disconnect", reason => onDisconnect(reason, router));
     }
   }, [socket]);
 

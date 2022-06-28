@@ -38,6 +38,8 @@ require("dotenv").config();
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
+  pingInterval: 25000,
+  pingTimeout: 6000,
   cors: {
     origin: ["http://localhost:8000", process.env.SOCKET_ORIGIN as string],
     allowedHeaders: ["pedago-header"],
@@ -85,8 +87,19 @@ io.on("connection", (socket: Socket) => {
   );
   socket.on(AdminEvent.Reset, (roomId: string) => reset(roomId, socket));
   socket.on(AdminEvent.EndGame, (roomId: string) => endGame(roomId, socket));
-  socket.on(AdminEvent.Lock, (roomId: string, lock: boolean, callback: (args: SocketCallback) => void) => lockRoom(roomId, lock, callback));
-  socket.on(AdminEvent.KickPlayer, (roomId: string, playerId: string, callback: (args: SocketCallback) => void) => kickPlayer(roomId, playerId, socket, callback))
+  socket.on(
+    AdminEvent.Lock,
+    (roomId: string, lock: boolean, callback: (args: SocketCallback) => void) =>
+      lockRoom(roomId, lock, callback)
+  );
+  socket.on(
+    AdminEvent.KickPlayer,
+    (
+      roomId: string,
+      playerId: string,
+      callback: (args: SocketCallback) => void
+    ) => kickPlayer(roomId, playerId, socket, callback)
+  );
 
   // Player Listeners
   socket.on(
