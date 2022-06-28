@@ -19,10 +19,18 @@
   margin-bottom: var(--space-3xs);
 }
 
+.sm-md {
+  font-size: var(--font-size-lg);
+
+  @media (--md) {
+    font-size: var(--font-size-xl);
+  }
+}
+
 .md {
-  font-size: --var(--font-size-xl);
+  font-size: var(--font-size-xl);
   @media (--sm) {
-    font-size: --var(--font-size-2xl);
+    font-size: var(--font-size-2xl);
   }
 }
 

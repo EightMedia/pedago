@@ -142,7 +142,7 @@ const LandingPage = ({
                     alt="illustratie van het pedago spel"
                     className={styles.visual}
                   />
-                  <Title size="md">Mogelijk gemaakt door</Title>
+                  <Title size="sm-md">{language === "NL" ? "Mogelijk gemaakt door" : "Made possible by"}</Title>
                   <div className={styles.logos}>
                     <div></div>
                     <div></div>
