@@ -150,25 +150,18 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
+  max-width: 784px;
+  width: 100%;
+  margin: 0 auto;
 
   @media (--sm) {
     gap: 32px;
   }
 
   & > * {
-    height: 104px;
-    width: 104px;
+    flex-basis: 33%;
     aspect-ratio: 1 / 1;
 
-    @media (--xs) {
-      height: 172px;
-      width: 172px;
-    }
-
-    @media (--sm) {
-      height: 240px;
-      width: 240px;
-    }
     border-radius: 8px;
     background-image: url(/images/han_logo.svg);
     background-size: 70%;
