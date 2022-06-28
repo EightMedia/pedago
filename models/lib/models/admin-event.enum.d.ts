@@ -4,6 +4,7 @@ export declare enum AdminEvent {
     UpdateRoom = "updateRoom",
     FinishRound = "finishRound",
     Reset = "reset",
+    EndGame = "endGame",
     Disconnect = "disconnect",
     LobbyStep = "lobbyStep",
     GameScene = "gameScene",

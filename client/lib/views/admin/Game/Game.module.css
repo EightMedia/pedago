@@ -31,6 +31,12 @@
   }
 }
 
+.settingsButtonGroup {
+  & > div:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
 @keyframes click {
   99% {
     color: var(--color-green);

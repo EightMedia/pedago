@@ -10,6 +10,7 @@ import {
 } from "models";
 import { Server, Socket } from "socket.io";
 import {
+  endGame,
   finishRound,
   kickPlayer,
   lockRoom,
@@ -83,6 +84,7 @@ io.on("connection", (socket: Socket) => {
     ) => finishRound(roomId, roundNo, socket, callback)
   );
   socket.on(AdminEvent.Reset, (roomId: string) => reset(roomId, socket));
+  socket.on(AdminEvent.EndGame, (roomId: string) => endGame(roomId, socket));
   socket.on(AdminEvent.Lock, (roomId: string, lock: boolean, callback: (args: SocketCallback) => void) => lockRoom(roomId, lock, callback));
   socket.on(AdminEvent.KickPlayer, (roomId: string, playerId: string, callback: (args: SocketCallback) => void) => kickPlayer(roomId, playerId, socket, callback))
 

@@ -71,6 +71,12 @@ export const GameRound = ({
     router.push("/");
   };
 
+  const handleEndGame = () => {
+    (socket as Socket).emit(AdminEvent.EndGame, room?.id);
+    setShowSettingsModal(false);
+    removeCookies("room");
+  };
+
   useEffect(() => {
     if (timerContext === TIMER_SECONDS) {
       setTimeout(() => {
@@ -130,7 +136,11 @@ export const GameRound = ({
                   {gameText.finish}
                 </Button>
                 <CopyToClipboard text={siteUrl + "/game/" + room?.roomCode}>
-                  <Button variation="whiteBlocked" className={styles.codeButton} tabIndex={2}>
+                  <Button
+                    variation="whiteBlocked"
+                    className={styles.codeButton}
+                    tabIndex={2}
+                  >
                     {room?.roomCode} <Icon icon={IconsEnum.Copy} />
                   </Button>
                 </CopyToClipboard>
@@ -184,14 +194,24 @@ export const GameRound = ({
         <Modal handleClose={() => setShowSettingsModal(false)}>
           <Panel width="md">
             <PanelTitle>{gameText.settingsButton}</PanelTitle>
-            <Button
-              stretch
-              variation="danger"
-              warning={gameText.destroyWarning}
-              onClick={handleDestroyGame}
-            >
-              {gameText.destroyGame}
-            </Button>
+            <div className={styles.settingsButtonGroup}>
+              <Button
+                stretch
+                variation="danger"
+                warning={gameText.endGameWarning}
+                onClick={handleEndGame}
+              >
+                {gameText.endGame}
+              </Button>
+              <Button
+                stretch
+                variation="danger"
+                warning={gameText.destroyWarning}
+                onClick={handleDestroyGame}
+              >
+                {gameText.destroyGame}
+              </Button>
+            </div>
           </Panel>
         </Modal>
       )}

@@ -102,6 +102,8 @@ export const NL: Locale = {
       isOneTeam: "is nog 1 team",
       are: "zijn nog",
       stillPlaying: "bezig met het afronden van de ronde.",
+      endGame: "Spel beëindigen",
+      endGameWarning: "U en alle spelers gaan door naar de resultaten",
       destroyGame: "Spel beëindigen en verwijderen",
       destroyWarning:
         "Alle gegevens en spelers worden verwijderd uit het systeem",

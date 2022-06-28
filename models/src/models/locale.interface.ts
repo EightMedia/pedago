@@ -80,6 +80,8 @@ export interface Locale {
       isOneTeam: string;
       are: string;
       stillPlaying: string;
+      endGame: string;
+      endGameWarning: string;
       destroyGame: string;
       destroyWarning: string;
     };

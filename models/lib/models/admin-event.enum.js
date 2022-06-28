@@ -8,6 +8,7 @@ var AdminEvent;
     AdminEvent["UpdateRoom"] = "updateRoom";
     AdminEvent["FinishRound"] = "finishRound";
     AdminEvent["Reset"] = "reset";
+    AdminEvent["EndGame"] = "endGame";
     AdminEvent["Disconnect"] = "disconnect";
     AdminEvent["LobbyStep"] = "lobbyStep";
     AdminEvent["GameScene"] = "gameScene";
