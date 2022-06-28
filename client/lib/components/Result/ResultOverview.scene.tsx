@@ -8,6 +8,8 @@ import { Stack } from "../../layouts/Stack";
 import { Baro } from "../Baro";
 import { Button } from "../Button";
 import { Diagram } from "../Diagram";
+import { Icon } from "../Icon";
+import { IconsEnum } from "../Icon/Icon";
 import { InputText } from "../InputText";
 import { PageSlot } from "../Page/Page";
 import { Panel, PanelTitle } from "../Panel";
@@ -24,6 +26,12 @@ export type ResultOverviewProps = {
   data: ResultType["data"];
   showEmailPanel: boolean;
 };
+
+enum EmailSentEnum {
+  NotSent,
+  Sent,
+  Error,
+}
 
 export const ResultOverview = ({
   data,
@@ -44,6 +52,7 @@ export const ResultOverview = ({
   );
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
+  const [sent, setSent] = useState<EmailSentEnum>(EmailSentEnum.NotSent);
 
   const handleEmail = () => {
     const groupsParams = data.groups
@@ -62,7 +71,15 @@ export const ResultOverview = ({
     const url = `${siteUrl}/result?me=${meParams}&groups=${groupsParams}`;
 
     socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
+      setSent(EmailSentEnum.NotSent);
+      setEmailError("")
       console.log(res);
+      if (res.status === "OK") {
+        setSent(EmailSentEnum.Sent);
+      } else if (res.status === "ERROR") {
+        setSent(EmailSentEnum.Error);
+        res.message && setEmailError(res.message as string);
+      }
     });
   };
 
@@ -201,6 +218,20 @@ export const ResultOverview = ({
                     />
                     <Button stretch={true} type="submit">
                       {resultsText.send}
+                      {sent === EmailSentEnum.Sent && (
+                        <Icon
+                          className={styles.emailSent}
+                          icon={IconsEnum.Check}
+                          color="green"
+                        />
+                      )}
+                      {sent === EmailSentEnum.Error && (
+                        <Icon
+                          className={styles.emailError}
+                          icon={IconsEnum.Close}
+                          color="red"
+                        />
+                      )}
                     </Button>
                   </Stack>
                 </form>

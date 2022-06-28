@@ -99,3 +99,9 @@
   gap: var(--space-3xs);
   flex-grow: 1;
 }
+
+.emailSent,
+.emailError {
+  position: absolute;
+  transform: translateX(68px);
+}
