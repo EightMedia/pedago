@@ -138,5 +138,56 @@
   max-width: 784px;
   height: auto;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 48px;
+
+  @media (--md) {
+    margin-bottom: 80px;
+  }
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  @media (--sm) {
+    gap: 32px;
+  }
+
+  & > * {
+    height: 104px;
+    width: 104px;
+    aspect-ratio: 1 / 1;
+
+    @media (--xs) {
+      height: 172px;
+      width: 172px;
+    }
+
+    @media (--sm) {
+      height: 240px;
+      width: 240px;
+    }
+    border-radius: 8px;
+    background-image: url(/images/han_logo.svg);
+    background-size: 70%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(48px);
+  }
+
+  & > *:first-child {
+    background-image: url(/images/han_logo.svg);
+  }
+
+  & > *:nth-child(2) {
+    background-image: url(/images/hr_logo.svg);
+    background-size: 45%;
+  }
+
+  & > *:nth-child(3) {
+    background-image: url(/images/eight_logo.svg);
+  }
 }

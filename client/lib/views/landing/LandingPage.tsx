@@ -142,6 +142,12 @@ const LandingPage = ({
                     alt="illustratie van het pedago spel"
                     className={styles.visual}
                   />
+                  <Title size="md">Mogelijk gemaakt door</Title>
+                  <div className={styles.logos}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
                 </PageSlot>
               </>
             );
