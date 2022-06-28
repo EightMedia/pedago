@@ -9,7 +9,19 @@
 
 .timerAndStop {
   display: flex;
+  justify-content: center;
   gap: var(--space-xs);
+  flex-wrap: wrap;
+
+  & > *:nth-child(2) {
+    order: 2;
+  }
+
+  @media (--xs) {
+    & > *:nth-child(2) {
+      order: unset;
+    }
+  }
 }
 
 .codeButton {
