@@ -1,3 +1,5 @@
+import { RoomDto } from "models";
+import { Socket } from "socket.io-client";
 
 export enum GameScenes {
   Countdown,
@@ -15,4 +17,8 @@ export type GameType = {
 
 export type GameSortType = {
   round: number;
+  playerId: string;
+  socket: Socket;
+  room: RoomDto;
+  teamName: string;
 };

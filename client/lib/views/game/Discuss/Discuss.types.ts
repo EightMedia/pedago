@@ -18,6 +18,7 @@ export type DiscussType = {
   pause: boolean;
   teamMembers: TeamMember[] | null;
   autoPlay?: boolean;
+  discussInfoSeen: boolean;
   handleReady?: () => void;
 };
 

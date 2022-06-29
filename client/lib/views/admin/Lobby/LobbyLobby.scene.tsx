@@ -116,6 +116,7 @@ export const LobbyLobby = ({
                 <Button
                   onClick={handleStart as () => void}
                   className={styles.startButton}
+                  disabled={!groups[0].players?.length}
                 >
                   {text.adminLobby.lobby.start}
                 </Button>

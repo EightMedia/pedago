@@ -15,6 +15,7 @@ const DiscussComponent = ({
   initialStep,
   teamMembers,
   autoPlay = true,
+  discussInfoSeen,
 }: DiscussType) => {
   const socket = useContext(SocketContext);
   const room = useContext(RoomContext);
@@ -46,7 +47,12 @@ const DiscussComponent = ({
               />
             );
           case DiscussStep.Intro:
-            callback = autoPlay ? () => setStep(DiscussStep.Info) : undefined;
+            callback = autoPlay
+              ? () =>
+                  setStep(
+                    discussInfoSeen ? DiscussStep.Compare : DiscussStep.Info
+                  )
+              : undefined;
             return (
               <DiscussIntro
                 time={3}

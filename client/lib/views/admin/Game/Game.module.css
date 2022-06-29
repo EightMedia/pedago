@@ -9,5 +9,39 @@
 
 .timerAndStop {
   display: flex;
+  justify-content: center;
   gap: var(--space-xs);
+  flex-wrap: wrap;
+
+  & > *:nth-child(2) {
+    order: 2;
+  }
+
+  @media (--xs) {
+    & > *:nth-child(2) {
+      order: unset;
+    }
+  }
+}
+
+.codeButton {
+  font-size: var(--font-size-mdlg);
+  &:focus {
+    animation: click 0.5s;
+  }
+}
+
+.settingsButtonGroup {
+  & > div:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+@keyframes click {
+  99% {
+    color: var(--color-green);
+  }
+  100% {
+    color: inherit;
+  }
 }

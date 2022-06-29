@@ -1,4 +1,4 @@
-import { setCookies } from "cookies-next";
+import { removeCookies, setCookies } from "cookies-next";
 import { Language } from "models";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import {
   FormEvent,
   SetStateAction,
   useContext,
-  useState,
+  useState
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Button } from "../../components/Button";
@@ -76,12 +76,14 @@ const LandingPage = ({
               className={styles.lang}
             >
               Nederlands
+              {language === "NL" && <Icon icon={IconsEnum.Check} size="xs" />}
             </button>
             <button
               onClick={() => handleChangeLanguage(Language.EN)}
               className={styles.lang}
             >
               English
+              {language === "EN" && <Icon icon={IconsEnum.Check} size="xs" />}
             </button>
           </div>
         )}
@@ -124,7 +126,7 @@ const LandingPage = ({
                     <Center>
                       <div className={styles.adminText}>
                         <Link href="/admin" passHref>
-                          <a tabIndex={1}>
+                          <a tabIndex={1} onClick={() => removeCookies("room")}>
                             <span className={styles.createGame}>
                               {text?.landing?.create}
                             </span>
@@ -140,6 +142,12 @@ const LandingPage = ({
                     alt="illustratie van het pedago spel"
                     className={styles.visual}
                   />
+                  <Title size="sm-md">{language === "NL" ? "Mogelijk gemaakt door" : "Made possible by"}</Title>
+                  <div className={styles.logos}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
                 </PageSlot>
               </>
             );

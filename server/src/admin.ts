@@ -34,7 +34,7 @@ export const registerGame = (
     const roomId = randomUUID();
     const adminId = randomUUID();
     const roomCode = Math.floor(1000 + Math.random() * 9000);
-    const timestamp = new Date().toISOString();
+    const timestamp = new Date().toLocaleString("nl-NL");
 
     room = {
       ...partialRoom,
@@ -71,6 +71,8 @@ export const registerGame = (
       ...partialRoom,
       ...store.getRoomByRoomCode(partialRoom.roomCode),
       admin: {
+        ...partialRoom.admin,
+        ...store.getRoomByRoomCode(partialRoom.roomCode)?.admin,
         socketId: socket.id,
       },
     };
@@ -193,6 +195,19 @@ export const reset = (roomId: string, socket: Socket) => {
   store.removeRoom(roomId);
   socket.broadcast.to(roomId).emit(PlayerEvent.ExitGame);
   socket.removeAllListeners();
+};
+
+export const endGame = (roomId: string, socket: Socket) => {
+  // Fetch latest sortorder from all players
+  socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
+
+  // Airtable
+  storeGame(store.getRoomById(roomId) as RoomDto, "");
+
+  setTimeout(() => {
+    socket.emit(Event.To, { name: ViewName.Result });
+    socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.Result });
+  }, 1500);
 };
 
 export const lockRoom = (

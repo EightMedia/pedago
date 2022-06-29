@@ -25,7 +25,7 @@ const ButtonComponent = ({
       >
         {children}
       </button>
-      <div className={cx(styles.warning)}>{warning}</div>
+      {warning && <div className={cx(styles.warning)}>{warning}</div>}
     </>
   );
 };

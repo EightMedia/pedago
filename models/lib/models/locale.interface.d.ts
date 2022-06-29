@@ -79,6 +79,8 @@ export interface Locale {
             isOneTeam: string;
             are: string;
             stillPlaying: string;
+            endGame: string;
+            endGameWarning: string;
             destroyGame: string;
             destroyWarning: string;
         };
@@ -233,6 +235,7 @@ export interface Locale {
             fetchResult: string;
         };
         results: string;
+        subTitle: string;
         myResult: string;
         everyone: string;
         yourResult: string;

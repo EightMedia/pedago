@@ -12,7 +12,7 @@ const TeamsListComponent = ({ teams, title, emptyText }: TeamsListType) => {
   const playerCount = teams.reduce((acc, team) => acc + team.players.length, 0);
   return (
     <GlassPanel>
-      <Stack gap="3xs">
+      <Stack gap="3xs" align="center">
         <PlayerCount players={playerCount} />
         <Title>{title}</Title>
       </Stack>

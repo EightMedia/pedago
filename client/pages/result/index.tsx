@@ -3,12 +3,12 @@ import { Language } from "models";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Page } from "../../lib/components/Page";
+import { Result } from "../../lib/components/Result";
 import {
   ResultGroup,
-  ResultSet
+  ResultSet,
+  ResultStep
 } from "../../lib/components/Result/Result.types";
-import { ResultOverview } from "../../lib/components/Result/ResultOverview.scene";
 import LanguageProvider from "../../providers/Language.provider";
 
 const stringToResultSet = (nmbrs: string): ResultSet | undefined => {
@@ -16,13 +16,11 @@ const stringToResultSet = (nmbrs: string): ResultSet | undefined => {
     return undefined;
   }
   const decoded = decodeURIComponent(nmbrs);
-  return Object.assign([], decoded)
-    ?.filter((i: string) => i !== ",")
-    ?.map((i: string) => parseInt(i, 10)) as ResultSet;
+  return decoded.split(",").map((item) => parseInt(item, 10)) as ResultSet;
 };
 
 const stringToGroups = (grps: string): ResultGroup[] | [] => {
-  const groupsArray = grps.split("&");
+  const groupsArray = grps.split("*");
   return groupsArray.map((g: string, i: number) => {
     const gArr = g.split("_");
     return {
@@ -51,23 +49,22 @@ const ResultPage = ({ localLang }: { localLang: Language }) => {
       </Head>
       <LanguageProvider lang={localLang}>
         {groups && (
-          <Page valign="center" background={4}>
-            <ResultOverview
-              data={{
-                me: meData,
-                groups: groupsData,
-              }}
-              showEmailPanel={false}
-            />
-          </Page>
+          <Result
+            data={{
+              me: meData,
+              groups: groupsData,
+            }}
+            showEmailPanel={false}
+            initialStep={ResultStep.Result}
+          />
         )}
       </LanguageProvider>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {  
-  const localLang = getCookie("language", { req, res});  
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const localLang = getCookie("language", { req, res });
   return { props: { localLang: localLang || Language.NL } };
 };
 

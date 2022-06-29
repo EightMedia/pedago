@@ -8,7 +8,10 @@ import { Stack } from "../../layouts/Stack";
 import { Baro } from "../Baro";
 import { Button } from "../Button";
 import { Diagram } from "../Diagram";
+import { Icon } from "../Icon";
+import { IconsEnum } from "../Icon/Icon";
 import { InputText } from "../InputText";
+import { PageSlot } from "../Page/Page";
 import { Panel, PanelTitle } from "../Panel";
 import { Shape } from "../Shape";
 import { Text } from "../Text";
@@ -23,6 +26,12 @@ export type ResultOverviewProps = {
   data: ResultType["data"];
   showEmailPanel: boolean;
 };
+
+enum EmailSentEnum {
+  NotSent,
+  Sent,
+  Error,
+}
 
 export const ResultOverview = ({
   data,
@@ -43,6 +52,7 @@ export const ResultOverview = ({
   );
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
+  const [sent, setSent] = useState<EmailSentEnum>(EmailSentEnum.NotSent);
 
   const handleEmail = () => {
     const groupsParams = data.groups
@@ -51,7 +61,7 @@ export const ResultOverview = ({
           e.data.toString()
         )}`;
       })
-      .join("&");
+      .join("*");
     const meParams = data.me
       ? encodeURIComponent(data.me?.toString())
       : undefined;
@@ -61,7 +71,15 @@ export const ResultOverview = ({
     const url = `${siteUrl}/result?me=${meParams}&groups=${groupsParams}`;
 
     socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
+      setSent(EmailSentEnum.NotSent);
+      setEmailError("")
       console.log(res);
+      if (res.status === "OK") {
+        setSent(EmailSentEnum.Sent);
+      } else if (res.status === "ERROR") {
+        setSent(EmailSentEnum.Error);
+        res.message && setEmailError(res.message as string);
+      }
     });
   };
 
@@ -85,7 +103,12 @@ export const ResultOverview = ({
 
   return (
     <div>
-      <Title>{resultsText.results}</Title>
+      <PageSlot location="subheader" className={styles.header}>
+        <Title size="lg" element="h1">
+          {resultsText.results}
+        </Title>
+        <div className={styles.description}>{resultsText.subTitle}</div>
+      </PageSlot>
       {(data.groups?.length > 1 || data.me) && (
         <div className={styles.buttonsWrapper}>
           <div className={styles.buttons} dir="ltr">
@@ -130,7 +153,7 @@ export const ResultOverview = ({
                     setActiveButton(group.name);
                     setPrimaryData(group.data);
                     setDetailsTitle(group.name);
-                    setSecondaryData(groupsTotal);
+                    setSecondaryData(data.me || groupsTotal);
                   }}
                 >
                   {group.name}
@@ -146,7 +169,7 @@ export const ResultOverview = ({
         secondaryLabel={resultsText.everyone}
         className={styles.diagram}
       />
-      <div className={styles.panels}>
+      <div className={showEmailPanel ? styles.panels : styles.singlePanel}>
         <Panel>
           <PanelTitle>{detailsTitle}</PanelTitle>
           <Stack gap="lg">
@@ -195,6 +218,20 @@ export const ResultOverview = ({
                     />
                     <Button stretch={true} type="submit">
                       {resultsText.send}
+                      {sent === EmailSentEnum.Sent && (
+                        <Icon
+                          className={styles.emailSent}
+                          icon={IconsEnum.Check}
+                          color="green"
+                        />
+                      )}
+                      {sent === EmailSentEnum.Error && (
+                        <Icon
+                          className={styles.emailError}
+                          icon={IconsEnum.Close}
+                          color="red"
+                        />
+                      )}
                     </Button>
                   </Stack>
                 </form>

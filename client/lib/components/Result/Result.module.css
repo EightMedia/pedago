@@ -4,6 +4,18 @@
   margin-bottom: var(--space-xl);
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  margin-bottom: 2rem;
+  @media (--xs) {
+    margin-bottom: 3rem;
+  }
+}
+
 .buttons {
   white-space: nowrap;
   display: inline-flex;
@@ -25,7 +37,7 @@
 }
 
 .diagram {
-  margin-bottom: var(--space-xl);
+  margin-bottom: calc(var(--space-xl) + 1rem);
 }
 
 .panels {
@@ -47,6 +59,17 @@
         max-width: 368px;
       }
     }
+  }
+}
+
+.singlePanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (--md) {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
@@ -75,4 +98,10 @@
   flex-direction: column;
   gap: var(--space-3xs);
   flex-grow: 1;
+}
+
+.emailSent,
+.emailError {
+  position: absolute;
+  transform: translateX(68px);
 }

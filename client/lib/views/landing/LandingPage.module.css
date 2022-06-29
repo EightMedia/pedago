@@ -49,7 +49,10 @@
 }
 
 .lang {
-  color: var(--color-grey-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-grey-darkest);
   font-size: var(--font-size-mdlg);
   font-family: var(--font-body);
   font-weight: 500;
@@ -135,5 +138,49 @@
   max-width: 784px;
   height: auto;
   width: 100%;
+  margin: 0 auto 48px;
+
+  @media (--md) {
+    margin-bottom: 80px;
+  }
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  max-width: 784px;
+  width: 100%;
   margin: 0 auto;
+
+  @media (--sm) {
+    gap: 32px;
+  }
+
+  & > * {
+    flex-basis: 33%;
+    aspect-ratio: 1 / 1;
+
+    border-radius: 8px;
+    background-image: url(/images/han_logo.svg);
+    background-size: 70%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(48px);
+  }
+
+  & > *:first-child {
+    background-image: url(/images/han_logo.svg);
+  }
+
+  & > *:nth-child(2) {
+    background-image: url(/images/hr_logo.svg);
+    background-size: 45%;
+  }
+
+  & > *:nth-child(3) {
+    background-image: url(/images/eight_logo.svg);
+  }
 }

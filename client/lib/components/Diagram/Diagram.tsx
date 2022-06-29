@@ -37,8 +37,9 @@ const DiagramComponent = ({
       {
         label: primaryLabel,
         data: primary,
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
-        borderColor: "rgba(255, 255, 255, 0.8)",
+        backgroundColor: "rgba(255, 255, 255, 0.85)",
+        borderColor: "rgba(255, 255, 255, 0.25)",
+        borderWidth: 2,
       },
     ],
   };
@@ -46,8 +47,9 @@ const DiagramComponent = ({
     data.datasets.push({
       label: secondaryLabel,
       data: secondary,
-      backgroundColor: "rgba(255, 255, 255, 0.2)",
-      borderColor: "rgba(255, 255, 255, 0.2)",
+      backgroundColor: "rgba(255, 255, 255, 0.15)",
+      borderColor: "rgba(255, 255, 255, 0.25)",
+      borderWidth: 2,
     });
   }
 
@@ -58,6 +60,7 @@ const DiagramComponent = ({
       },
       point: {
         radius: 0,
+        borderWith: 3,
       },
     },
     scales: {
@@ -72,10 +75,12 @@ const DiagramComponent = ({
           display: false,
         },
         angleLines: {
-          color: "rgba(255,255,255,0.15)",
+          color: "rgba(255,255,255,0.25)",
+          lineWidth: 2,
         },
         grid: {
-          color: "rgba(255,255,255,0.15)",
+          color: "rgba(255,255,255,0.25)",
+          lineWidth: 2,
         },
       },
     },
