@@ -103,5 +103,12 @@
 .emailSent,
 .emailError {
   position: absolute;
-  transform: translateX(68px);
+  background-color: white;
+  transform: translateX(17.5rem) translateY(17px);
+  @media (--sm) {
+    transform: translateX(15.8rem) translateY(17px);
+  }
+  @media (--md) {
+    transform: translateX(16.5rem) translateY(22px);
+  }
 }

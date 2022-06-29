@@ -72,7 +72,7 @@ export const ResultOverview = ({
 
     socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
       setSent(EmailSentEnum.NotSent);
-      setEmailError("")
+      setEmailError("");
       console.log(res);
       if (res.status === "OK") {
         setSent(EmailSentEnum.Sent);
@@ -208,6 +208,21 @@ export const ResultOverview = ({
                 </Text>
                 <form onSubmit={handleClick}>
                   <Stack gap="2xs">
+                    {sent === EmailSentEnum.Sent && (
+                      <Icon
+                        className={styles.emailSent}
+                        icon={IconsEnum.Check}
+                        color="green"
+                      />
+                    )}
+                    {sent === EmailSentEnum.Error && (
+                      <Icon
+                        className={styles.emailError}
+                        icon={IconsEnum.Close}
+                        color="red"
+                        size="sm"
+                      />
+                    )}
                     <InputText
                       id={"email"}
                       label={"E-mail"}
@@ -218,20 +233,6 @@ export const ResultOverview = ({
                     />
                     <Button stretch={true} type="submit">
                       {resultsText.send}
-                      {sent === EmailSentEnum.Sent && (
-                        <Icon
-                          className={styles.emailSent}
-                          icon={IconsEnum.Check}
-                          color="green"
-                        />
-                      )}
-                      {sent === EmailSentEnum.Error && (
-                        <Icon
-                          className={styles.emailError}
-                          icon={IconsEnum.Close}
-                          color="red"
-                        />
-                      )}
                     </Button>
                   </Stack>
                 </form>

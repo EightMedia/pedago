@@ -21,7 +21,6 @@ export const dataToJson = (room: RoomDto, playerId: string): string => {
     education: room.admin.players?.education,
     year: room.admin.players?.year?.join(", "),
     sector: getSector(room.admin.players?.sector as number[]),
-    individualResult: resultData.me,
     totalResult: resultData.total,
     ...groups,
   };
