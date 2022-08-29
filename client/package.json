@@ -47,7 +47,7 @@
     "@types/react-copy-to-clipboard": "^5.0.2",
     "@types/set-value": "^4.0.1",
     "babel-loader": "^8.2.5",
-    "chromatic": "^6.5.3",
+    "chromatic": "^6.8.0",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.5",
     "eslint-plugin-storybook": "^0.5.11",
