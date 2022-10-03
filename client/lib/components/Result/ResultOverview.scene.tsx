@@ -78,7 +78,7 @@ export const ResultOverview = ({
         setSent(EmailSentEnum.Sent);
       } else if (res.status === "ERROR") {
         setSent(EmailSentEnum.Error);
-        res.message && setEmailError(res.message as string);
+        res.message && setEmailError(typeof res.message === "string" ? res.message : (res.message as any).details || "UNKNOWN ERROR");
       }
     });
   };
