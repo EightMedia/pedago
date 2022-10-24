@@ -38,7 +38,7 @@ export const ResultOverview = ({
   showEmailPanel = true,
 }: ResultOverviewProps) => {
   const groupsTotal = getDataForAllGroups(data.groups);
-  const initialPrimaryData = data?.me ? data.me : groupsTotal;
+  const initialPrimaryData = data?.me || groupsTotal;
   const { text, lang } = useContext(LanguageContext);
   const socket = useContext(SocketContext);
   const resultsText = text.results;
@@ -119,7 +119,7 @@ export const ResultOverview = ({
                 }
                 onClick={() => {
                   setActiveButton("me");
-                  setPrimaryData(data.me || groupsTotal);
+                  setPrimaryData(initialPrimaryData);
                   setDetailsTitle(resultsText.myResult);
                   setSecondaryData(groupsTotal);
                 }}
@@ -135,7 +135,7 @@ export const ResultOverview = ({
                 setActiveButton("total");
                 setPrimaryData(groupsTotal);
                 setDetailsTitle(resultsText.everyone);
-                setSecondaryData(data.me || groupsTotal);
+                setSecondaryData(initialPrimaryData);
               }}
             >
               {resultsText.everyone}
@@ -153,7 +153,7 @@ export const ResultOverview = ({
                     setActiveButton(group.name);
                     setPrimaryData(group.data);
                     setDetailsTitle(group.name);
-                    setSecondaryData(data.me || groupsTotal);
+                    setSecondaryData(initialPrimaryData);
                   }}
                 >
                   {group.name}

@@ -33,32 +33,32 @@ export const NL: Locale = {
     0: {
       title: "Zorg legitimering",
       description:
-        "is erop gericht het maximale uit kinderen te halen in termen van hun prestaties op school.",
+      "is erop gericht leerlingen te zien als kwetsbare mensen, die afhankelijk zijn van volwassenen om te overleven in een veeleisende wereld.",
     },
     1: {
       title: "Persoonlijke legitimering",
       description:
-        "is erop gericht het gedrag van leerlingen te labelen in mentale of emotionele termen ten einde adequaat onderwijs te kunnen verzorgen.",
+      "is erop gericht leerlingen te begrijpen als unieke sociale mensen, die een persoonlijke relatie met de leraar hebben.",
     },
     2: {
       title: "Contextuele legitimering",
       description:
-        "is erop gericht de leefomstandigheden, het verleden, en de praktische levensbehoeften van leerlingen te betrekken bij onderwijssituaties.",
+      "is erop gericht de leefomstandigheden, het verleden, en de praktische levensbehoeften van leerlingen te betrekken bij onderwijssituaties.",
     },
     3: {
       title: "Kritische legitimering",
       description:
-        "is erop gericht leerlingen te begrijpen als unieke sociale mensen, die een persoonlijke relatie met de leraar hebben.",
+      "is erop gericht leerlingen te bevrijden van beperkende ideeën over zichzelf en van de levensomstandigheden die deze ideeën inslijpen.",
     },
     4: {
       title: "Functionele legitimering",
       description:
-        "is erop gericht leerlingen te zien als kwetsbare mensen, die afhankelijk zijn van volwassenen om te overleven in een veeleisende wereld.",
+      "is erop gericht het maximale uit kinderen te halen in termen van hun prestaties op school.",
     },
     5: {
       title: "Psychologische legitimering",
       description:
-        "is erop gericht leerlingen te bevrijden van beperkende ideeën over zichzelf en van de levensomstandigheden die deze ideeën inslijpen.",
+      "is erop gericht het gedrag van leerlingen te labelen in mentale of emotionele termen ten einde adequaat onderwijs te kunnen verzorgen.",
     },
   },
   landing: {
