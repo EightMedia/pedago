@@ -368,7 +368,7 @@ export const NL: Locale = {
         {
           id: "5",
           title:
-            "Ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven",
+            "Ze realistische verwachtingen ontwikkelen ten aanzien van wat ze kunnen bereiken in het leven.",
         },
       ],
     },
@@ -469,7 +469,7 @@ export const NL: Locale = {
         {
           id: "5",
           title:
-            "Dat ze geen belemmeringen ondervinden in hun ontwikkelingsmogelijkheden",
+            "Dat ze geen belemmeringen ondervinden in hun ontwikkelingsmogelijkheden.",
         },
       ],
     },
@@ -500,7 +500,7 @@ export const NL: Locale = {
         },
         {
           id: "5",
-          title: "De school toegang biedt tot gespecialiseerde zorg",
+          title: "De school toegang biedt tot gespecialiseerde zorg.",
         },
       ],
     },
@@ -533,7 +533,7 @@ export const NL: Locale = {
         {
           id: "5",
           title:
-            "Ze te zien als personen met speciale kenmerken en leerbehoeften",
+            "Ze te zien als personen met speciale kenmerken en leerbehoeften.",
         },
       ],
     },
