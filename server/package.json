@@ -7,7 +7,7 @@
   "author": "Eight Media",
   "license": "MIT",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "PORT=8000 node build/index.js",
     "dev": "(lsof -ti:3001 | xargs kill) && (run-p --print-label watch run-server)",
     "run-server": "(lsof -ti:3001 | xargs kill) && (nodemon ./src/index.ts)",
     "build": "tsc",
