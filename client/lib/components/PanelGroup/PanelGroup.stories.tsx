@@ -43,7 +43,7 @@ One.parameters = {
     url: "",
   },
 };
-One.args = { children: childs1 };
+One.args = { children: childs1() };
 
 // Two
 export const Two = Template.bind({});
@@ -59,4 +59,4 @@ Two.parameters = {
     url: "",
   },
 };
-Two.args = { children: childs2 };
+Two.args = { children: childs2() };
