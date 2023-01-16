@@ -425,6 +425,7 @@ export const storeTeamReady = (
         status: PlayerStatus.Done,
       });
     });
+    updateClientRoom(socket, roomId);
     callback({
       status: "OK",
       message: "Well played! Here are your results...",
