@@ -28,7 +28,6 @@ import { GameType } from "./Game.types";
 import { GameInfo } from "./GameOnboarding";
 
 export const GameRound = ({
-  openSettings,
   stopRound,
   round,
   teams,

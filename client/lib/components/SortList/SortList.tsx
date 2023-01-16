@@ -4,13 +4,13 @@ import {
   KeyboardSensor,
   PointerSensor,
   useSensor,
-  useSensors,
+  useSensors
 } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
+  verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { Category, Player, PlayerEvent, SocketCallback } from "models";
 import { memo, useContext, useEffect, useState } from "react";
@@ -19,7 +19,7 @@ import { SocketContext } from "../../../contexts/SocketContext";
 import { getPlayerId } from "../../../factories/shared.factory";
 import {
   categoryToSortList,
-  sortListToCategory,
+  sortListToCategory
 } from "../../utils/sortlist-conversion.util";
 import { SortableItem } from "./SortableItem";
 import styles from "./SortList.module.css";
@@ -79,10 +79,10 @@ const SortListComponent = ({ cards, round, handleSortOrder }: SortListType) => {
   function handleDragEnd(event: any) {
     const { active, over } = event;
 
-    if (active.id !== over.id) {
+    if (active?.id !== over?.id) {
       setItems((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
+        const oldIndex = items?.findIndex((item) => item?.id === active?.id);
+        const newIndex = items?.findIndex((item) => item?.id === over?.id);
         return arrayMove(items, oldIndex, newIndex);
       });
     }

@@ -78,7 +78,7 @@ const CompareCard = forwardRef(function CompareCard(
   return (
     <div {...rest} ref={ref} className={styles.card}>
       <Shape category={Number(card)} />
-      <Text size="sm">{text.rounds[round]?.cards[card]?.title}</Text>
+      <Text size="md">{text.rounds[round]?.cards[card]?.title}</Text>
     </div>
   );
 });
