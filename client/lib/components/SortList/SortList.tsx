@@ -81,8 +81,8 @@ const SortListComponent = ({ cards, round, handleSortOrder }: SortListType) => {
 
     if (active?.id !== over?.id) {
       setItems((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
+        const oldIndex = items?.findIndex((item) => item?.id === active?.id);
+        const newIndex = items?.findIndex((item) => item?.id === over?.id);
         return arrayMove(items, oldIndex, newIndex);
       });
     }

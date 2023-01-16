@@ -34,7 +34,6 @@
     scroll-snap-type: none;
     gap: var(--space-md);
     margin: 0;
-    padding: 0;
     margin-bottom: var(--space-md);
   }
 
