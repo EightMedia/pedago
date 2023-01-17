@@ -103,7 +103,6 @@
 .emailSent,
 .emailError {
   position: absolute;
-  background-color: white;
   transform: translateX(17.5rem) translateY(17px);
   @media (--sm) {
     transform: translateX(15.8rem) translateY(17px);

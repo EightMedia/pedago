@@ -1,7 +1,5 @@
-import { Event, SocketCallback } from "models";
 import { FormEvent, useContext, useState } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
-import { SocketContext } from "../../../contexts/SocketContext";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
 import { Stack } from "../../layouts/Stack";
@@ -40,7 +38,6 @@ export const ResultOverview = ({
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me || groupsTotal;
   const { text, lang } = useContext(LanguageContext);
-  const socket = useContext(SocketContext);
   const resultsText = text.results;
   const [primaryData, setPrimaryData] = useState<ResultSet>(initialPrimaryData);
   const [secondaryData, setSecondaryData] = useState<ResultSet>(groupsTotal);
@@ -70,17 +67,24 @@ export const ResultOverview = ({
       process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
     const url = `${siteUrl}/result?me=${meParams}&groups=${groupsParams}`;
 
-    socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
-      setSent(EmailSentEnum.NotSent);
-      setEmailError("");
-      console.log(res);
-      if (res.status === "OK") {
+    setSent(EmailSentEnum.NotSent);
+    setEmailError("");
+
+    fetch(`/api/email?email=${email}&url=${url}`)
+      .then((response: any) => {
         setSent(EmailSentEnum.Sent);
-      } else if (res.status === "ERROR") {
+        console.log(response);
+      })
+      .catch((response) => {
+        console.error(response);
         setSent(EmailSentEnum.Error);
-        res.message && setEmailError(typeof res.message === "string" ? res.message : (res.message as any).details || "UNKNOWN ERROR");
-      }
-    });
+        response.message &&
+          setEmailError(
+            typeof response.message === "string"
+              ? response.message
+              : (response.message as any).details || "UNKNOWN ERROR"
+          );
+      });
   };
 
   const handleClick = (e: FormEvent<HTMLFormElement>) => {

@@ -19,7 +19,6 @@ import {
   startGame,
   updateRoomDto
 } from "./admin";
-import emailResults from "./email";
 import {
   changeGroup,
   finishRoundByAdmin,
@@ -57,11 +56,6 @@ io.on("connection", (socket: Socket) => {
   socket.emit(Event.Message, "Hello you have connected to Pedago");
 
   // Event Listeners
-  socket.on(
-    Event.Email,
-    (email: string, url: string, callback: (args: SocketCallback) => void) =>
-      emailResults(email, url, callback)
-  );
 
   // Admin Listeners
   socket.on(
