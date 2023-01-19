@@ -23,7 +23,7 @@ export const registerGame = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  let room;
+  let room: RoomDto;
 
   // Check if room is already instantiated
   const roomExists: boolean = Boolean(
@@ -92,7 +92,6 @@ export const registerGame = (
   }
   socket.join(room.id);
   socket.emit(Event.To, { name: room.view });
-  socket.emit(Event.Room, store.getRoomByRoomCode(room.roomCode));
 };
 
 export const startGame = (
@@ -156,6 +155,9 @@ export const finishRound = (
       message: "Here are the results...",
     });
 
+    store.updateRoom({ ...store.getRoomById(roomId)!, view: ViewName.Result });
+    updateClientRoom(socket, roomId);
+
     socket.emit(Event.To, {
       name: ViewName.Result,
       data: { autoPlay: true },
@@ -178,6 +180,7 @@ export const finishRound = (
     room?.players?.forEach((p: Player) => {
       if (p.status === PlayerStatus.NotStarted) {
         socket.to(p.socketId).socketsLeave(roomId);
+        socket.to(p.socketId).emit(PlayerEvent.ExitGame);
       }
     });
 

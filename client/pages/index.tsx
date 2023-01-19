@@ -1,4 +1,4 @@
-import { getCookie, setCookies } from "cookies-next";
+import { getCookie, removeCookies, setCookies } from "cookies-next";
 import { Language } from "models";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -14,6 +14,7 @@ const ContentPage = ({ localLang }: { localLang: Language }) => {
 
   useEffect(() => {
     setCookies("language", language);
+    return () => removeCookies("room");
   }, [language]);
 
   return (

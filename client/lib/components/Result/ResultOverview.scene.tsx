@@ -179,7 +179,7 @@ export const ResultOverview = ({
             {primaryData?.map((item, index) => (
               <div
                 key={index}
-                style={{ order: 0 - item }}
+                style={!isNaN(item) ? { order: 0 - item } : {}}
                 className={styles.category}
               >
                 <Baro

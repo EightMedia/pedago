@@ -1,5 +1,4 @@
-import { removeCookies } from "cookies-next";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { IconsEnum } from "../Icon/Icon";
@@ -20,10 +19,6 @@ const ResultComponent = ({
 }: ResultType) => {
   const [step, setStep] = useState(initialStep);
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
-
-  useEffect(() => {
-    return () => removeCookies("room");
-  }, []);
 
   return (
     <Page background={4}>
