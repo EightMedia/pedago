@@ -102,6 +102,7 @@ const AdminGame = ({
         setRoom(r);
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
+        setCookies("room", JSON.stringify(r));
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
@@ -112,7 +113,7 @@ const AdminGame = ({
           ? setGameScene(GameScene.Onboarding)
           : setGameScene(GameScene.Round)
       );
-      socket.on("disconnect", reason => onDisconnect(reason, router));
+      socket.on("disconnect", (reason) => onDisconnect(reason, router));
     }
   }, [socket]);
 
@@ -157,6 +158,7 @@ const AdminGame = ({
                     return (
                       <Result
                         initialStep={ResultStep.Loader}
+                        autoPlay={view.data?.autoPlay}
                         data={
                           getResultData(room, null) as {
                             me?: ResultSet;

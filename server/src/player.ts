@@ -89,7 +89,6 @@ export const joinRoomByRoomCode = (
 
     updatePlayersInLobby(socket, room.id);
     updateClientRoom(socket, room.id);
-    socket.emit(Event.Round, player.round);
 
     socket.emit(
       PlayerEvent.PlayerMatchScene,
@@ -241,7 +240,11 @@ export const gameStart = (
   team?.forEach((player: Player) => {
     socket
       .to(player.socketId)
+      .emit(PlayerEvent.GameScene, true);
+    socket
+      .to(player.socketId)
       .emit(Event.To, <ViewState>{ name: ViewName.Game });
+
     store.updatePlayer(roomId, player.id, {
       view: ViewName.Game,
       status: PlayerStatus.InProgress,
@@ -253,7 +256,7 @@ export const gameStart = (
   socket.emit(PlayerEvent.PlayerMatchScene, true);
   // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
-  socket.emit(Event.To, <ViewState>{ name: ViewName.Game });
+  socket.emit(Event.To, { name: ViewName.Game });
 
   callback({
     status: "OK",
@@ -298,8 +301,6 @@ export const storeRound = (
 
   if (teamReady) {
     const team = (store.getTeams(roomId) as Player[][])[index];
-    updateClientRoom(socket, roomId);
-
     team?.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         ...player,
@@ -313,6 +314,8 @@ export const storeRound = (
     socket.emit(PlayerEvent.GameScene, true);
 
     socket.emit(Event.To, { name: ViewName.Discuss });
+
+    updateClientRoom(socket, roomId);
 
     callback({
       status: "OK",
@@ -347,16 +350,21 @@ export const finishRoundByAdmin = (
     });
     return;
   }
-  const index: number = store.getTeamIndex(roomId, playerId);
-  store.storeRound(roomId, playerId, index, {
-    ...round,
-    order: round.order,
-  });
+
+  // If round 6 is already stored, do not do so again.
+  const player = store.getPlayerById(roomId, playerId);
+  const lastRoundStored = player?.rounds.length === 6;
+
+  if (!lastRoundStored) {
+    const teamIndex: number = store.getTeamIndex(roomId, playerId);
+    store.storeRound(roomId, playerId, teamIndex, {
+      ...round,
+      order: round.order,
+    });
+  }
 
   // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
-
-  updateClientRoom(socket, roomId);
 
   callback({
     status: "OK",
@@ -419,12 +427,22 @@ export const storeTeamReady = (
   }
 
   if (lastRound) {
-    socket.emit(Event.To, { name: ViewName.Result });
     team?.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
         status: PlayerStatus.Done,
+        view: ViewName.Result
+      });
+      socket.to(player.socketId).emit(Event.To, {
+        name: ViewName.Result,
+        data: { autoPlay: false },
       });
     });
+
+    socket.emit(Event.To, {
+      name: ViewName.Result,
+      data: { autoPlay: false },
+    })
+
     updateClientRoom(socket, roomId);
     callback({
       status: "OK",
@@ -432,6 +450,12 @@ export const storeTeamReady = (
     });
   } else {
     const round = (player?.rounds?.length as number) + 1;
+
+    // Set PlayerMatchScene to Wait
+    socket.emit(PlayerEvent.PlayerMatchScene, true);
+    socket.emit(Event.To, {
+      name: ViewName.PlayerMatch,
+    });
 
     team?.forEach((player: Player) => {
       store.updatePlayer(roomId, player.id, {
@@ -441,21 +465,11 @@ export const storeTeamReady = (
       // Set PlayerMatchScene to Wait
       socket.to(player.socketId).emit(PlayerEvent.PlayerMatchScene, true);
 
-      socket.to(player.socketId).emit(Event.Round, round);
       socket.to(player.socketId).emit(Event.To, {
         name: ViewName.PlayerMatch,
       });
     });
-    // Set PlayerMatchScene to Wait
-    socket.emit(PlayerEvent.PlayerMatchScene, true);
-
-    socket.emit(Event.Round, round);
-
     updateClientRoom(socket, roomId);
-
-    socket.emit(Event.To, {
-      name: ViewName.PlayerMatch,
-    });
 
     callback({
       status: "OK",

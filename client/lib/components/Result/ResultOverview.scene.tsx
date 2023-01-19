@@ -1,15 +1,11 @@
-import { Event, SocketCallback } from "models";
 import { FormEvent, useContext, useState } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
-import { SocketContext } from "../../../contexts/SocketContext";
 import { getDataForAllGroups } from "../../../factories/Result.factory";
 import { Center } from "../../layouts/Center";
 import { Stack } from "../../layouts/Stack";
 import { Baro } from "../Baro";
 import { Button } from "../Button";
 import { Diagram } from "../Diagram";
-import { Icon } from "../Icon";
-import { IconsEnum } from "../Icon/Icon";
 import { InputText } from "../InputText";
 import { PageSlot } from "../Page/Page";
 import { Panel, PanelTitle } from "../Panel";
@@ -40,7 +36,6 @@ export const ResultOverview = ({
   const groupsTotal = getDataForAllGroups(data.groups);
   const initialPrimaryData = data?.me || groupsTotal;
   const { text, lang } = useContext(LanguageContext);
-  const socket = useContext(SocketContext);
   const resultsText = text.results;
   const [primaryData, setPrimaryData] = useState<ResultSet>(initialPrimaryData);
   const [secondaryData, setSecondaryData] = useState<ResultSet>(groupsTotal);
@@ -70,17 +65,25 @@ export const ResultOverview = ({
       process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
     const url = `${siteUrl}/result?me=${meParams}&groups=${groupsParams}`;
 
-    socket?.emit(Event.Email, email, url, (res: SocketCallback) => {
-      setSent(EmailSentEnum.NotSent);
-      setEmailError("");
-      console.log(res);
-      if (res.status === "OK") {
+    setSent(EmailSentEnum.NotSent)
+    setEmailError("");
+    const fetchUrl = `/api/email?email=${email}`;
+
+    fetch(fetchUrl, { method: "POST", body: url})
+      .then((response: any) => {
         setSent(EmailSentEnum.Sent);
-      } else if (res.status === "ERROR") {
+        console.log(response);
+      })
+      .catch((response) => {
+        console.error(response);
         setSent(EmailSentEnum.Error);
-        res.message && setEmailError(typeof res.message === "string" ? res.message : (res.message as any).details || "UNKNOWN ERROR");
-      }
-    });
+        response.message &&
+          setEmailError(
+            typeof response.message === "string"
+              ? response.message
+              : (response.message as any).details || "UNKNOWN ERROR"
+          );
+      });
   };
 
   const handleClick = (e: FormEvent<HTMLFormElement>) => {
@@ -176,7 +179,7 @@ export const ResultOverview = ({
             {primaryData?.map((item, index) => (
               <div
                 key={index}
-                style={{ order: 0 - item }}
+                style={!isNaN(item) ? { order: 0 - item } : {}}
                 className={styles.category}
               >
                 <Baro
@@ -208,27 +211,19 @@ export const ResultOverview = ({
                 </Text>
                 <form onSubmit={handleClick}>
                   <Stack gap="2xs">
-                    {sent === EmailSentEnum.Sent && (
-                      <Icon
-                        className={styles.emailSent}
-                        icon={IconsEnum.Check}
-                        color="green"
-                      />
-                    )}
-                    {sent === EmailSentEnum.Error && (
-                      <Icon
-                        className={styles.emailError}
-                        icon={IconsEnum.Close}
-                        color="red"
-                        size="sm"
-                      />
-                    )}
                     <InputText
                       id={"email"}
                       label={"E-mail"}
                       placeholder={resultsText.yourMail}
                       type="email"
                       error={emailError}
+                      success={
+                        sent === EmailSentEnum.Sent
+                          ? true
+                          : sent === EmailSentEnum.Error
+                          ? false
+                          : undefined
+                      }
                       onChange={(e) => setEmail(e.target.value)}
                     />
                     <Button stretch={true} type="submit">

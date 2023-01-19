@@ -8,6 +8,7 @@ export const InputTextComponent = ({
   onChange,
   condition = true,
   id,
+  success,
   error,
   type = "text",
   label,
@@ -38,7 +39,11 @@ export const InputTextComponent = ({
         id={id}
         type={type}
         onChange={onChange}
-        className={cx(styles.input, styles[!error ? "valid" : "invalid"])}
+        className={cx(
+          styles.input,
+          styles[error ? "invalid" : ""],
+          styles[success === true ? "success" : success === false ? "fail" : ""]
+        )}
         style={{ textAlign: align }}
         placeholder={placeholder}
         value={value}

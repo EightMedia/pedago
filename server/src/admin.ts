@@ -8,10 +8,11 @@ import {
   PlayerStatus,
   RoomDto,
   SocketCallback,
-  ViewName
+  ViewName,
+  ViewState
 } from "models";
 import { Socket } from "socket.io";
-import storeGame from "./airtable";
+import gameToAirtable from "./airtable";
 import { updateClientRoom, updatePlayersInLobby } from "./shared";
 import gamesStore from "./store/games.store";
 
@@ -22,7 +23,7 @@ export const registerGame = (
   socket: Socket,
   callback: (args: SocketCallback) => void
 ) => {
-  let room;
+  let room: RoomDto;
 
   // Check if room is already instantiated
   const roomExists: boolean = Boolean(
@@ -91,7 +92,6 @@ export const registerGame = (
   }
   socket.join(room.id);
   socket.emit(Event.To, { name: room.view });
-  socket.emit(Event.Room, store.getRoomByRoomCode(room.roomCode));
 };
 
 export const startGame = (
@@ -144,32 +144,49 @@ export const finishRound = (
   callback: (args: SocketCallback) => void
 ) => {
   if (roundNo === 6) {
-    socket.emit(Event.To, { name: ViewName.Result });
     // Fetch latest sortorder from all players
-    socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
+    fetchLatestSortOrderFromPlayers(socket, roomId);
 
     // Airtable
-    storeGame(store.getRoomById(roomId) as RoomDto, "");
+    gameToAirtable(store.getRoomById(roomId) as RoomDto, "");
 
     callback({
       status: "OK",
       message: "Here are the results...",
     });
+
+    store.updateRoom({ ...store.getRoomById(roomId)!, view: ViewName.Result });
+    updateClientRoom(socket, roomId);
+
+    socket.emit(Event.To, {
+      name: ViewName.Result,
+      data: { autoPlay: true },
+    });
+    setTimeout(() => {
+      socket.broadcast.to(roomId).emit(Event.To, <ViewState>{
+        name: ViewName.Result,
+        data: { autoPlay: true },
+      });
+    }, 1500);
   } else {
-    // Fetch latest sortorder from all players
-    socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
     const room = store.getRoomById(roomId) as RoomDto;
 
     // Remove idle players
     const filteredPlayers = room?.players?.filter(
       (p: Player) => p.status !== PlayerStatus.NotStarted
     );
+
     // Kick idle players out of the room
     room?.players?.forEach((p: Player) => {
       if (p.status === PlayerStatus.NotStarted) {
         socket.to(p.socketId).socketsLeave(roomId);
+        socket.to(p.socketId).emit(PlayerEvent.ExitGame);
       }
     });
+
+    // Fetch latest sortorder from all players
+    fetchLatestSortOrderFromPlayers(socket, roomId);
+
     store.updateRoom({
       ...room,
       players: filteredPlayers,
@@ -199,14 +216,16 @@ export const reset = (roomId: string, socket: Socket) => {
 
 export const endGame = (roomId: string, socket: Socket) => {
   // Fetch latest sortorder from all players
-  socket.broadcast.to(roomId).emit(PlayerEvent.FinishRoundByAdmin);
+  fetchLatestSortOrderFromPlayers(socket, roomId);
 
   // Airtable
-  storeGame(store.getRoomById(roomId) as RoomDto, "");
+  gameToAirtable(store.getRoomById(roomId) as RoomDto, "");
 
   setTimeout(() => {
-    socket.emit(Event.To, { name: ViewName.Result });
-    socket.broadcast.to(roomId).emit(Event.To, { name: ViewName.Result });
+    socket.emit(Event.To, { name: ViewName.Result, data: { autoPlay: true } });
+    socket.broadcast
+      .to(roomId)
+      .emit(Event.To, { name: ViewName.Result, data: { autoPlay: true } });
   }, 1500);
 };
 
@@ -241,5 +260,13 @@ export const kickPlayer = (
   callback({
     status: "OK",
     message: `Kicked player with ID: ${playerId}`,
+  });
+};
+
+const fetchLatestSortOrderFromPlayers = (socket: Socket, roomId: string) => {
+  store.getTeams(roomId)?.forEach((team) => {
+    team?.forEach((player) => {
+      socket.to(player?.socketId).emit(PlayerEvent.FinishRoundByAdmin);
+    });
   });
 };

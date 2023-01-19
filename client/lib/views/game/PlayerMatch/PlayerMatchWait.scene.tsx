@@ -17,7 +17,6 @@ const PlayerMatchWaitComponent = () => {
             {text.playerMatch.waitForOthers}
           </Text>
         </div>
-
         <Text align="center" tone="light" size="md">
           {text.playerMatch.waitUntil}
         </Text>

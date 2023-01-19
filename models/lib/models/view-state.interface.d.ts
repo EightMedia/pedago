@@ -14,4 +14,5 @@ export interface ViewState {
 export declare const initialViewState: ViewState;
 export interface ViewData {
     round?: number;
+    autoPlay?: boolean;
 }

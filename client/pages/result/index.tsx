@@ -48,7 +48,7 @@ const ResultPage = ({ localLang }: { localLang: Language }) => {
         <title>Pedago Game</title>
       </Head>
       <LanguageProvider lang={localLang}>
-        {groups && (
+        {(groupsData || meData) && (
           <Result
             data={{
               me: meData,

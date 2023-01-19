@@ -13,7 +13,7 @@ function createAirtable() {
   }
 }
 
-const storeGame = (room: RoomDto, playerId: string) => {
+const gameToAirtable = (room: RoomDto, playerId: string) => {
   const base = createAirtable();
 
   if (base && process.env.AIRTABLE_GAMES_TABLE) {
@@ -38,4 +38,4 @@ const storeGame = (room: RoomDto, playerId: string) => {
   }
 };
 
-export default storeGame;
+export default gameToAirtable;
