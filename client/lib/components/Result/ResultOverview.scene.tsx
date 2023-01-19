@@ -6,8 +6,6 @@ import { Stack } from "../../layouts/Stack";
 import { Baro } from "../Baro";
 import { Button } from "../Button";
 import { Diagram } from "../Diagram";
-import { Icon } from "../Icon";
-import { IconsEnum } from "../Icon/Icon";
 import { InputText } from "../InputText";
 import { PageSlot } from "../Page/Page";
 import { Panel, PanelTitle } from "../Panel";
@@ -212,27 +210,13 @@ export const ResultOverview = ({
                 </Text>
                 <form onSubmit={handleClick}>
                   <Stack gap="2xs">
-                    {sent === EmailSentEnum.Sent && (
-                      <Icon
-                        className={styles.emailSent}
-                        icon={IconsEnum.Check}
-                        color="green"
-                      />
-                    )}
-                    {sent === EmailSentEnum.Error && (
-                      <Icon
-                        className={styles.emailError}
-                        icon={IconsEnum.Close}
-                        color="red"
-                        size="sm"
-                      />
-                    )}
                     <InputText
                       id={"email"}
                       label={"E-mail"}
                       placeholder={resultsText.yourMail}
                       type="email"
                       error={emailError}
+                      success={sent === EmailSentEnum.Sent ? true : sent === EmailSentEnum.Error ? false : undefined}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                     <Button stretch={true} type="submit">
