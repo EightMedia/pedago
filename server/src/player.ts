@@ -366,8 +366,6 @@ export const finishRoundByAdmin = (
   // Turn on countdown
   socket.emit(PlayerEvent.GameScene, true);
 
-  // updateClientRoom(socket, roomId);
-
   callback({
     status: "OK",
     message: "Round saved by administrator",

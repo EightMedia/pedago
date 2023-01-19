@@ -118,7 +118,7 @@ export const kickPlayerFn = (
             if (p.id === playerId) {
               socketId = p.socketId;
             }
-            return p.id !== playerId
+            return p.id !== playerId;
           }),
         } as RoomDto;
       } else {
@@ -271,7 +271,7 @@ export const storeRoundFn = (
                     player.rounds.splice(roundIndex, 1);
                   }
                   player.rounds.push(round);
-                }                
+                }
                 return player;
               });
             } else {
