@@ -271,7 +271,7 @@ export const storeRoundFn = (
                     player.rounds.splice(roundIndex, 1);
                   }
                   player.rounds.push(round);
-                }
+                }                
                 return player;
               });
             } else {

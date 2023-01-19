@@ -63,7 +63,6 @@ const RoomCode = ({
   const [gameScene, setGameScene] = useState<GameScenes>(GameScenes.Sort);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [room, setRoom] = useState<RoomDto>({} as RoomDto);
-  const [round, setRound] = useState<number>(1);
   const [error, setError] = useState<string | undefined>();
   const [timer, setTimer] = useState<number | null>(0);
   const [playerId, setPlayerId] = useState<string | null>(localPlayerId);
@@ -121,7 +120,6 @@ const RoomCode = ({
         setPlayerId(getCookie("playerId") as string);
       });
       socket.on(Event.PlayerList, setPlayerList);
-      socket.on(Event.Round, setRound);
       socket.on(PlayerEvent.GameScene, (setToCountdown: boolean) =>
         setToCountdown
           ? setGameScene(GameScenes.Countdown)
@@ -138,6 +136,9 @@ const RoomCode = ({
         router.push("/");
       });
       socket.on("disconnect", reason => onDisconnect(reason, router));
+    }
+    return () => {
+      socket?.off(PlayerEvent.JoinGroup);
     }
   }, [socket]);
 
@@ -159,7 +160,7 @@ const RoomCode = ({
                       <Lobby
                         {...getLobbyType(
                           socket as Socket,
-                          round,
+                          room.round,
                           ROUND_MAX,
                           room,
                           playerList
@@ -171,7 +172,7 @@ const RoomCode = ({
                     return (
                       <PlayerMatch
                         {...getPlayerMatchType(
-                          round,
+                          room.round,
                           ROUND_MAX,
                           room,
                           playerId as string
@@ -184,7 +185,7 @@ const RoomCode = ({
                       <Game
                         autoPlay={true}
                         initialScene={gameScene}
-                        round={round}
+                        round={room.round}
                         countdownTime={3}
                         leadTime={3}
                       />
@@ -193,7 +194,7 @@ const RoomCode = ({
                     return (
                       <Waiting
                         {...getWaitingType(
-                          round,
+                          room.round,
                           ROUND_MAX,
                           room,
                           playerId as string
@@ -205,7 +206,7 @@ const RoomCode = ({
                     return (
                       <Discuss
                         {...getDiscussType(
-                          round,
+                          room.round,
                           ROUND_MAX,
                           DiscussStep.Intro,
                           false,
@@ -219,6 +220,7 @@ const RoomCode = ({
                     return (
                       <Result
                         initialStep={ResultStep.Loader}
+                        autoPlay={view.data?.autoPlay}
                         data={
                           getResultData(room, playerId as string) as {
                             me?: ResultSet;

@@ -75,6 +75,9 @@ export const GameSort = ({
     if (socket) {
       socket.on(PlayerEvent.FinishRoundByAdmin, finishRoundByAdmin);
     }
+    return () => {
+      socket.off(PlayerEvent.FinishRoundByAdmin);
+    };
   }, [socket]);
 
   return (

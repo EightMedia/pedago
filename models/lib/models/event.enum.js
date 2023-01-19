@@ -9,6 +9,5 @@ var Event;
     Event["Room"] = "room";
     Event["Players"] = "players";
     Event["PlayerId"] = "playerId";
-    Event["Round"] = "round";
     Event["Airtable"] = "airtable";
 })(Event = exports.Event || (exports.Event = {}));
