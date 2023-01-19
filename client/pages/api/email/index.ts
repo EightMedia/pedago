@@ -28,7 +28,7 @@ const handler = async (
         subject: "Game Result",
         template: "pedago",
         "h:X-Mailgun-Variables": JSON.stringify({
-          url: req.query.url,
+          url: req.body,
           logo: `${siteUrl}/images/logo.png`,
         }),
       })

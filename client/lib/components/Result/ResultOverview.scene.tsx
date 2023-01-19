@@ -65,10 +65,11 @@ export const ResultOverview = ({
       process.env.NEXT_PUBLIC_SITE_URL || "https://www.pedagogame.com";
     const url = `${siteUrl}/result?me=${meParams}&groups=${groupsParams}`;
 
-    setSent(EmailSentEnum.NotSent);
+    setSent(EmailSentEnum.NotSent)
     setEmailError("");
+    const fetchUrl = `/api/email?email=${email}`;
 
-    fetch(`/api/email?email=${email}&url=${url}`)
+    fetch(fetchUrl, { method: "POST", body: url})
       .then((response: any) => {
         setSent(EmailSentEnum.Sent);
         console.log(response);
@@ -216,7 +217,13 @@ export const ResultOverview = ({
                       placeholder={resultsText.yourMail}
                       type="email"
                       error={emailError}
-                      success={sent === EmailSentEnum.Sent ? true : sent === EmailSentEnum.Error ? false : undefined}
+                      success={
+                        sent === EmailSentEnum.Sent
+                          ? true
+                          : sent === EmailSentEnum.Error
+                          ? false
+                          : undefined
+                      }
                       onChange={(e) => setEmail(e.target.value)}
                     />
                     <Button stretch={true} type="submit">
