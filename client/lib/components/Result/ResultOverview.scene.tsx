@@ -69,7 +69,7 @@ export const ResultOverview = ({
     setEmailError("");
     const fetchUrl = `/api/email?email=${email}`;
 
-    fetch(fetchUrl, { method: "POST", body: url})
+    fetch(fetchUrl, { method: "POST", body: url })
       .then((response: any) => {
         setSent(EmailSentEnum.Sent);
         console.log(response);
@@ -221,8 +221,8 @@ export const ResultOverview = ({
                         sent === EmailSentEnum.Sent
                           ? true
                           : sent === EmailSentEnum.Error
-                          ? false
-                          : undefined
+                            ? false
+                            : undefined
                       }
                       onChange={(e) => setEmail(e.target.value)}
                     />

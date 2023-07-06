@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { memo, useState } from "react";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
@@ -19,6 +20,11 @@ const ResultComponent = ({
 }: ResultType) => {
   const [step, setStep] = useState(initialStep);
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
+  const router = useRouter();
+
+  const handleExitGame = () => {
+    router.push("/");
+  };
 
   return (
     <Page background={4}>
@@ -49,6 +55,17 @@ const ResultComponent = ({
           }
         })()}
       </PageSlot>
+      {step === ResultStep.Result && (
+        <PageSlot location="footer">
+          <Button
+            variation="whiteBlockedInactive"
+            icon="close"
+            onClick={handleExitGame}
+          >
+            Spel verlaten
+          </Button>
+        </PageSlot>
+      )}
       {showInfoModal && (
         <Modal handleClose={() => setShowInfoModal(false)}>
           <ResultInfo onClick={() => setShowInfoModal(false)} />
