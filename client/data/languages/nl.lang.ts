@@ -338,6 +338,7 @@ export const NL: Locale = {
     send: "Versturen",
     privacy:
       "Je mail wordt alleen gebruikt voor het opsturen van jouw uitkomst.",
+      exitGame: "Spel verlaten"
   },
   rounds: [
     {

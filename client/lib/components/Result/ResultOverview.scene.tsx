@@ -226,7 +226,7 @@ export const ResultOverview = ({
                       }
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <Button stretch={true} type="submit">
+                    <Button stretch={true} disabled={sent === EmailSentEnum.Sent} type="submit">
                       {resultsText.send}
                     </Button>
                   </Stack>

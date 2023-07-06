@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { memo, useState } from "react";
+import { memo, useContext, useState } from "react";
+import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { IconsEnum } from "../Icon/Icon";
@@ -21,6 +22,8 @@ const ResultComponent = ({
   const [step, setStep] = useState(initialStep);
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
   const router = useRouter();
+  const { text } = useContext(LanguageContext);
+  const resultsText = text.results;
 
   const handleExitGame = () => {
     router.push("/");
@@ -62,7 +65,7 @@ const ResultComponent = ({
             icon="close"
             onClick={handleExitGame}
           >
-            Spel verlaten
+            {resultsText.exitGame}
           </Button>
         </PageSlot>
       )}
