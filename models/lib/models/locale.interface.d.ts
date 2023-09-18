@@ -244,7 +244,6 @@ export interface Locale {
         yourMail: string;
         send: string;
         privacy: string;
-        exitGame: string;
     };
     rounds: {
         id: number;
