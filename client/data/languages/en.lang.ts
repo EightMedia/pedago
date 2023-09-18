@@ -81,7 +81,7 @@ export const EN: Locale = {
   },
   game: {
     round: "Round",
-    of: "Of",
+    of: "of",
     done: "Done",
   },
   adminGame: {
@@ -90,7 +90,7 @@ export const EN: Locale = {
       rulesButton: "Rules",
       category: "Category",
       finish: "Finish",
-      notStarted: "Not yet started",
+      notStarted: "Unbegun",
       allStarted: "All started",
       playing: "Playing",
       notPlaying: "No teams playing",
@@ -139,7 +139,7 @@ export const EN: Locale = {
           icon: IconsEnum.Flag,
         },
         {
-          caption: "'Locken'",
+          caption: "Lock game",
           text: "Next to the start button is a lock that you can activate to prevent additional people from joining the game.",
           icon: IconsEnum.Lock,
         },
@@ -159,7 +159,7 @@ export const EN: Locale = {
     lobby: {
       settingsButton: "Settings",
       rulesButton: "Rules",
-      code: "Enter the code",
+      code: "Enter the code on [**pedagogame.com**](https://pedagogame.com) and join the game",
       start: "Start",
     },
     playerGroup: {
@@ -260,12 +260,12 @@ export const EN: Locale = {
           text: "Each round you will get 10 minutes to sort and discuss the cards.",
         },
         {
-          caption: "Kaarten sorteren",
+          caption: "Sort cards",
           text: "Each round you need to sort six cards, from most important to least important.",
         },
         {
           caption: "Discuss",
-          text: "If you and your co-player are finished sorting the cards; talk over the results.",
+          text: "If you and your co-player are finished sorting the cards, talk over the results.",
         },
         {
           caption: "Result",
@@ -278,13 +278,13 @@ export const EN: Locale = {
   gameLobby: {
     hi: "Hi",
     willStart: "The game will start any moment",
-    waiting: "We will wait until everybody is present and then we start",
+    waiting: "We will wait until everyone is present and then we start",
     changeToThisGroup: "Switch to this group",
   },
   waiting: {
     goodBusy: "You're doing great!",
-    waiting: "Waiting",
-    isReady: "Is ready..",
+    waiting: "Waiting until",
+    isReady: "is ready..",
     and: "and",
     areReady: "are ready..",
     changeSomething: "Any adjustments?",
