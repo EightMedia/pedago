@@ -33,32 +33,32 @@ export const NL: Locale = {
     0: {
       title: "Zorg legitimering",
       description:
-      "is erop gericht leerlingen te zien als kwetsbare mensen, die afhankelijk zijn van volwassenen om te overleven in een veeleisende wereld.",
+        "is erop gericht leerlingen te zien als kwetsbare mensen, die afhankelijk zijn van volwassenen om te overleven in een veeleisende wereld.",
     },
     1: {
       title: "Persoonlijke legitimering",
       description:
-      "is erop gericht leerlingen te begrijpen als unieke sociale mensen, die een persoonlijke relatie met de leraar hebben.",
+        "is erop gericht leerlingen te begrijpen als unieke sociale mensen, die een persoonlijke relatie met de leraar hebben.",
     },
     2: {
       title: "Contextuele legitimering",
       description:
-      "is erop gericht de leefomstandigheden, het verleden, en de praktische levensbehoeften van leerlingen te betrekken bij onderwijssituaties.",
+        "is erop gericht de leefomstandigheden, het verleden, en de praktische levensbehoeften van leerlingen te betrekken bij onderwijssituaties.",
     },
     3: {
       title: "Kritische legitimering",
       description:
-      "is erop gericht leerlingen te bevrijden van beperkende ideeën over zichzelf en van de levensomstandigheden die deze ideeën inslijpen.",
+        "is erop gericht leerlingen te bevrijden van beperkende ideeën over zichzelf en van de levensomstandigheden die deze ideeën inslijpen.",
     },
     4: {
       title: "Functionele legitimering",
       description:
-      "is erop gericht het maximale uit kinderen te halen in termen van hun prestaties op school.",
+        "is erop gericht het maximale uit kinderen te halen in termen van hun prestaties op school.",
     },
     5: {
       title: "Psychologische legitimering",
       description:
-      "is erop gericht het gedrag van leerlingen te labelen in mentale of emotionele termen ten einde adequaat onderwijs te kunnen verzorgen.",
+        "is erop gericht het gedrag van leerlingen te labelen in mentale of emotionele termen ten einde adequaat onderwijs te kunnen verzorgen.",
     },
   },
   landing: {
@@ -328,7 +328,8 @@ export const NL: Locale = {
       fetchResult: "We halen jouw resultaten op.",
     },
     results: "Resultaten",
-    subTitle: "Leer jouw eigen pedagogisch krachten kennen met dit spel. Je speelt met andere spelers, samen bespreken jullie de resultaten.",
+    subTitle:
+      "Leer jouw eigen pedagogisch krachten kennen met dit spel. Je speelt met andere spelers, samen bespreken jullie de resultaten.",
     myResult: "Jouw resultaat",
     everyone: "Iedereen",
     yourResult: "Jouw uitkomst",
@@ -338,7 +339,7 @@ export const NL: Locale = {
     send: "Versturen",
     privacy:
       "Je mail wordt alleen gebruikt voor het opsturen van jouw uitkomst.",
-      exitGame: "Spel verlaten"
+    exitGame: "Spel verlaten",
   },
   rounds: [
     {
@@ -540,15 +541,21 @@ export const NL: Locale = {
     },
   ],
   privacy: {
-    responsibility: "Pedago is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring.",
+    responsibility:
+      "Pedago is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring.",
     persoonsGegevensCaption: "Persoonsgegevens die wij verwerken",
-    persoonsGegevensText: "Pedago verwerkt alleen de persoonsgegevens die u zelf actief verstrekt. Dit zijn wanneer u zich aanmeldt voor de Pedago-nieuwsbrieven minimaal: uw e-mailadres, voornaam en achternaam. Optioneel kun u daaraan toevoegen: aanhef, tussenvoegsel, affiliatie/organisatie, interessegebieden.",
+    persoonsGegevensText:
+      "Pedago verwerkt alleen de persoonsgegevens die u zelf actief verstrekt. Dit zijn wanneer u zich aanmeldt voor de Pedago-nieuwsbrieven minimaal: uw e-mailadres, voornaam en achternaam. Optioneel kun u daaraan toevoegen: aanhef, tussenvoegsel, affiliatie/organisatie, interessegebieden.",
     periodCaption: "Hoe lang we persoonsgegevens bewaren",
-    periodText: "Pedago bewaart uw persoonsgegevens niet langer dan strikt nodig is om de doelen te realiseren waarvoor uw gegevens worden verzameld. In het geval van de Pedago nieuwsbrieven betekent dit dat uw gegevens direct uit ons bestand worden verwijderd op het moment dat u zich afmeldt.",
+    periodText:
+      "Pedago bewaart uw persoonsgegevens niet langer dan strikt nodig is om de doelen te realiseren waarvoor uw gegevens worden verzameld. In het geval van de Pedago nieuwsbrieven betekent dit dat uw gegevens direct uit ons bestand worden verwijderd op het moment dat u zich afmeldt.",
     cookiesCaption: "Cookies, of vergelijkbare technieken, die wij gebruiken",
-    cookiesText1: "Pedago gebruikt functionele cookies en analytische cookies die geen inbreuk maken op uw privacy. Een cookie is een klein tekstbestand dat bij het eerste bezoek aan deze website wordt opgeslagen op uw computer, tablet of smartphone. De cookies die wij gebruiken zijn noodzakelijk voor de technische werking van de website en uw gebruiksgemak. Ze zorgen ervoor dat de website naar behoren werkt en onthouden bijvoorbeeld uw voorkeursinstellingen.",
-    cookiesText2: "Daarnaast kunt u ervoor kiezen om Social Media cookies te accepteren, die ervoor zorgen dat bezoekers content van social media-netwerken zoals YouTube kunnen bekijken op onze website. Deze social media-netwerken kunnen bezoekers mogelijk volgen en hun internetgedrag monitoren voor eigen doeleinden. Pedago gebruikt of bewaart deze gegevens niet.",
+    cookiesText1:
+      "Pedago gebruikt functionele cookies en analytische cookies die geen inbreuk maken op uw privacy. Een cookie is een klein tekstbestand dat bij het eerste bezoek aan deze website wordt opgeslagen op uw computer, tablet of smartphone. De cookies die wij gebruiken zijn noodzakelijk voor de technische werking van de website en uw gebruiksgemak. Ze zorgen ervoor dat de website naar behoren werkt en onthouden bijvoorbeeld uw voorkeursinstellingen.",
+    cookiesText2:
+      "Daarnaast kunt u ervoor kiezen om Social Media cookies te accepteren, die ervoor zorgen dat bezoekers content van social media-netwerken zoals YouTube kunnen bekijken op onze website. Deze social media-netwerken kunnen bezoekers mogelijk volgen en hun internetgedrag monitoren voor eigen doeleinden. Pedago gebruikt of bewaart deze gegevens niet.",
     modifyPersonalDataCaption: "Persoonsgegevens wijzigen",
-    modifyPersonalDataText: "U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. Dit kunt u zelf doen via de links onderaan de Pedago-nieuwsbrieven of door een verzoek daartoe te sturen naar [**info@pedagogame.com**](mailto:info@pedagogame.com) vanaf het e-mailadres waarmee u zich heeft aangemeld voor de nieuwsbrieven.",
-  }
+    modifyPersonalDataText:
+      "U heeft het recht om uw persoonsgegevens in te zien, te corrigeren of te verwijderen. Dit kunt u zelf doen via de links onderaan de Pedago-nieuwsbrieven of door een verzoek daartoe te sturen naar [**info@pedagogame.com**](mailto:info@pedagogame.com) vanaf het e-mailadres waarmee u zich heeft aangemeld voor de nieuwsbrieven.",
+  },
 };

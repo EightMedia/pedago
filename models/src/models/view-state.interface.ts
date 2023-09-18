@@ -6,6 +6,7 @@ export enum ViewName {
   WaitingScreen,
   PlayerMatch,
   Discuss,
+  Blank
 }
 
 export interface ViewState {

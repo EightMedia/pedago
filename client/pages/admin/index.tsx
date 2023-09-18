@@ -55,7 +55,7 @@ const AdminGame = ({
   const socket: Socket | null = useSocket(
     process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:80"
   );
-  const [view, setView] = useState<ViewState>({ name: ViewName.Wizard });
+  const [view, setView] = useState<ViewState>({ name: ViewName.Blank });
   const [room, setRoom] = useState<RoomDto>(localRoom || ({} as RoomDto));
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [lobbyStep, setLobbyStep] = useState<LobbyStep>(LobbyStep.Lobby);
@@ -91,6 +91,8 @@ const AdminGame = ({
           }
         );
       }
+    } else {
+      setView({ name: ViewName.Wizard });
     }
   }, [localRoom, socket]);
 
@@ -127,7 +129,7 @@ const AdminGame = ({
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>
               {(() => {
-                switch (view.name) {
+                switch (view?.name) {
                   case ViewName.Wizard:
                     return (
                       <Wizard
@@ -158,7 +160,7 @@ const AdminGame = ({
                     return (
                       <Result
                         initialStep={ResultStep.Loader}
-                        autoPlay={view.data?.autoPlay}
+                        autoPlay={view?.data?.autoPlay}
                         data={
                           getResultData(room, null) as {
                             me?: ResultSet;
@@ -167,6 +169,8 @@ const AdminGame = ({
                         }
                       />
                     );
+                  case ViewName.Blank:
+                    return <></>;
                   default:
                     return <>ERROR: ViewName not found</>;
                 }

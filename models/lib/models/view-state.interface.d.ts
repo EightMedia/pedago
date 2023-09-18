@@ -5,7 +5,8 @@ export declare enum ViewName {
     Result = 3,
     WaitingScreen = 4,
     PlayerMatch = 5,
-    Discuss = 6
+    Discuss = 6,
+    Blank = 7
 }
 export interface ViewState {
     name: ViewName;
