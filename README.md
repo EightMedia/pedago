@@ -22,6 +22,7 @@ yarn dev:client
 ```
 
 ### Create new components
+
 To create consistent components use the skeleton script.
 In `.skeleton` the skeleton files for various component types exist.
 
@@ -37,3 +38,8 @@ yarn skeleton view lib/views/my/AwesomeView
 - the .handlebars extension is removed.
 
 So ie: `.skeleton/view/Component.stories.tsx.handlebars` is compiled and becomes `lib/views/my/AwesomeView/AwesomeView.stories.tsx`
+
+Deploy the server:
+
+- Login to Heroku with the Heroku CLI
+- Execute command `git push heroku main`

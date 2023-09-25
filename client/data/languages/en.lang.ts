@@ -9,7 +9,7 @@ export const EN: Locale = {
     [PlayerType.Students]: "Students",
   },
   roles: {
-    [Role.Lecturer]: "Lecturer",
+    [Role.Lecturer]: "Teacher",
     [Role.Trainer]: "Trainer",
     [Role.Manager]: "Manager",
     [Role.Other]: "Other",
@@ -65,7 +65,7 @@ export const EN: Locale = {
   landing: {
     title: "Explore your educational values and ideals",
     description:
-      "Learn to discover the power of your educational values and ideals. This is a multi player game, together you will give meaning to the results.",
+      "Learn to discover the power of your educational values and ideals. This is a multi player game; you need each other to give meaning to the results.",
     input: "Enter the game code",
     button: "Join the game",
     create: "Create game",
@@ -177,7 +177,6 @@ export const EN: Locale = {
       customRole: "Custom role:",
       nextButton: "Next",
     },
-
     check: {
       yourInfo: "Your info",
       name: "Name",
@@ -195,11 +194,10 @@ export const EN: Locale = {
       create: "Create game",
       back: "Back",
     },
-
     gameType: {
       step: "Step",
       typePlayers: "Type players",
-      education: "Education",
+      education: "Educational institution",
       year: "Year",
       sector: "Sector",
       next: "Next",
@@ -337,7 +335,7 @@ export const EN: Locale = {
       fetchResult: "We are retrieving your results.",
     },
     results: "Results",
-    subTitle: "Learn to discover the power of your educational values and ideals. This is a multi player game, together you will give meaning to the results.",
+    subTitle: "Learn to discover the power of your educational values and ideals. This is a multi player game; you need each other to give meaning to the results.",
     myResult: "My results",
     everyone: "Everybody",
     yourResult: "Your results",
