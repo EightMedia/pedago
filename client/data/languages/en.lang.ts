@@ -293,7 +293,7 @@ export const EN: Locale = {
     },
 
     intro: {
-      discussDiff: "Discuss similarities and differences",
+      discussDiff: "Discuss similarities and differences with",
       items: [
         {
           caption: "Left starts",
