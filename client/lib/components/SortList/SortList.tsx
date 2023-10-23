@@ -1,3 +1,5 @@
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
 import {
   closestCenter,
   DndContext,
@@ -13,14 +15,12 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { getPlayerId } from "@factories/shared.factory";
-import { Category, Player, PlayerEvent, SocketCallback } from "models";
-import { memo, useContext, useEffect, useState } from "react";
-import { RoomContext } from "../../contexts/RoomContext";
-import { SocketContext } from "../../contexts/SocketContext";
 import {
   categoryToSortList,
   sortListToCategory
-} from "../../utils/sortlist-conversion.util";
+} from "@utils/sortlist-conversion.util";
+import { Category, Player, PlayerEvent, SocketCallback } from "models";
+import { memo, useContext, useEffect, useState } from "react";
 import { SortableItem } from "./SortableItem";
 import styles from "./SortList.module.css";
 import { SortItemType, SortListType } from "./SortList.types";

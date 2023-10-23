@@ -7,6 +7,7 @@ import { Page } from "@components/Page";
 import { PageSlot } from "@components/Page/Page";
 import PrivacyStatement from "@components/PrivacyStatement";
 import { Title } from "@components/Title";
+import { LanguageContext } from "@contexts/LanguageContext";
 import { Center } from "@layouts/Center";
 import { removeCookies, setCookies } from "cookies-next";
 import { Language } from "models";
@@ -20,7 +21,6 @@ import {
   useContext,
   useState
 } from "react";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = ({

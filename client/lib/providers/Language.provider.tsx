@@ -1,7 +1,7 @@
+import { LanguageContext } from "@contexts/LanguageContext";
+import * as languages from "@data/languages";
 import { Language, Locale } from "models";
 import { ReactNode } from "react";
-import * as languages from "../../data/languages";
-import { LanguageContext } from "../contexts/LanguageContext";
 
 const LanguageProvider = ({
   children,

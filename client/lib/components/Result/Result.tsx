@@ -1,6 +1,6 @@
+import { LanguageContext } from "@contexts/LanguageContext";
 import { useRouter } from "next/router";
 import { memo, useContext, useState } from "react";
-import { LanguageContext } from "../../contexts/LanguageContext";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { IconsEnum } from "../Icon/Icon";

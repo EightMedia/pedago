@@ -1,5 +1,5 @@
+import { TimerContext, TIMER_SECONDS } from "@contexts/TimerContext";
 import { ReactNode, useEffect, useState } from "react";
-import { TimerContext, TIMER_SECONDS } from "../contexts/TimerContext";
 
 const TimerProvider = ({
   children,
