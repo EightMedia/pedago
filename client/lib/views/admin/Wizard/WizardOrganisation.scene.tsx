@@ -1,10 +1,10 @@
+import { Button } from "@components/Button";
+import { InputText } from "@components/InputText";
+import { PanelTitle } from "@components/Panel";
+import { Text } from "@components/Text";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import { ChangeEvent, useContext, useState } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button } from "../../../components/Button";
-import { InputText } from "../../../components/InputText";
-import { PanelTitle } from "../../../components/Panel";
-import { Text } from "../../../components/Text";
-import { Stack } from "../../../layouts/Stack";
 import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 

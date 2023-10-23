@@ -1,12 +1,12 @@
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { Timer } from "@components/Timer";
+import { Title } from "@components/Title";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { TimerContext } from "@contexts/TimerContext";
+import { TimedCallback } from "@utils/timedCallback.util";
 import { useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { Timer } from "../../../components/Timer";
-import { Title } from "../../../components/Title";
-import { TimedCallback } from "../../../utils/timedCallback.util";
 import { DiscussType } from "./Discuss.types";
 
 export type DiscussReadyProps = {

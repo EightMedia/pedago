@@ -1,5 +1,5 @@
+import { PlayerGroupType } from "@components/PlayerGroup/PlayerGroup.types";
 import { Player } from "models";
-import { PlayerGroupType } from "../../../components/PlayerGroup/PlayerGroup.types";
 
 export type LobbyType = {
   round: number;

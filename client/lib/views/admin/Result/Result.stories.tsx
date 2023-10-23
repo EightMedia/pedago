@@ -1,13 +1,12 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import { Result } from "../../../components/Result";
+import { Result } from "@components/Result";
 import {
   ResultData,
   ResultGroup1,
   ResultGroup2,
-  ResultGroup3,
-} from "../../../components/Result/Result.data";
-import { ResultStep } from "../../../components/Result/Result.types";
+  ResultGroup3
+} from "@components/Result/Result.data";
+import { ResultStep } from "@components/Result/Result.types";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {
   title: "Views/Admin/Result",

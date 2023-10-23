@@ -1,8 +1,8 @@
+import { Panel, PanelTitle } from "@components/Panel";
+import { Text } from "@components/Text";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import { memo, useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Panel, PanelTitle } from "../../../components/Panel";
-import { Text } from "../../../components/Text";
-import { Stack } from "../../../layouts/Stack";
 import styles from "./PlayerMatch.module.css";
 
 const PlayerMatchWaitComponent = () => {

@@ -1,14 +1,14 @@
+import { Button } from "@components/Button";
+import { Panel, PanelTitle } from "@components/Panel";
+import { Player } from "@components/Player";
+import { Text } from "@components/Text";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
+import { getPlayerId } from "@factories/shared.factory";
+import { Stack } from "@layouts/Stack";
 import { Player as PlayerModel, PlayerEvent, SocketCallback } from "models";
 import { memo, useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
-import { getPlayerId } from "../../../../factories/shared.factory";
-import { Button } from "../../../components/Button";
-import { Panel, PanelTitle } from "../../../components/Panel";
-import { Player } from "../../../components/Player";
-import { Text } from "../../../components/Text";
-import { Stack } from "../../../layouts/Stack";
 import styles from "./PlayerMatch.module.css";
 import { PlayerMatchType } from "./PlayerMatch.types";
 
@@ -45,16 +45,16 @@ const PlayerMatchSceneComponent = ({
           {teamMembers?.map((p) => (
             <Player key={p.name} name={p.name} group={p.group} size="lg" />
           ))}
-        
-          <Text align="center" tone="light" size="md"> 
+
+          <Text align="center" tone="light" size="md">
             {text.playerMatch.youAre} <span className={styles.teamName}> Team {teamName}</span>.{" "}
             {text.playerMatch.findEachOther}
           </Text>
-       
-        <Button stretch onClick={handleFoundPartner}>
-          {text.playerMatch.found}
-        </Button>
-         </Stack>
+
+          <Button stretch onClick={handleFoundPartner}>
+            {text.playerMatch.found}
+          </Button>
+        </Stack>
       </Panel>
     </>
   );

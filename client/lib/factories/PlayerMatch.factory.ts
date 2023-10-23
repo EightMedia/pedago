@@ -1,5 +1,5 @@
+import { PlayerMatchType } from "@views/game/PlayerMatch/PlayerMatch.types";
 import { RoomDto } from "models";
-import { PlayerMatchType } from "../lib/views/game/PlayerMatch/PlayerMatch.types";
 
 export const getPlayerMatchType = (
   round: number,

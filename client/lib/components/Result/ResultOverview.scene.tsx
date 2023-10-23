@@ -1,8 +1,8 @@
+import { LanguageContext } from "@contexts/LanguageContext";
+import { getDataForAllGroups } from "@factories/Result.factory";
+import { Center } from "@layouts/Center";
+import { Stack } from "@layouts/Stack";
 import { FormEvent, useContext, useState } from "react";
-import { LanguageContext } from "../../../contexts/LanguageContext";
-import { getDataForAllGroups } from "../../../factories/Result.factory";
-import { Center } from "../../layouts/Center";
-import { Stack } from "../../layouts/Stack";
 import { Baro } from "../Baro";
 import { Button } from "../Button";
 import { Diagram } from "../Diagram";

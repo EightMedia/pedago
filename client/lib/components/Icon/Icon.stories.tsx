@@ -1,6 +1,5 @@
+import { Stack } from "@layouts/Stack";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import { Stack } from "../../layouts/Stack";
 import { Icon, iconKeys, iconNames } from "./Icon";
 import { IconData } from "./Icon.data";
 

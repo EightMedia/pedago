@@ -1,6 +1,6 @@
+import { LanguageContext } from "@contexts/LanguageContext";
 import { useContext } from "react";
 import ReactMarkdown from "react-markdown";
-import { LanguageContext } from "../../../contexts/LanguageContext";
 import { Panel } from "../Panel";
 import { Text } from "../Text";
 import { Title } from "../Title";

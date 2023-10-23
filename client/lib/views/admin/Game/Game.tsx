@@ -1,7 +1,7 @@
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
 import { AdminEvent, SocketCallback } from "models";
 import { memo, useContext, useState } from "react";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import { GameScene, GameType } from "./Game.types";
 import { GameLead } from "./GameLead.scene";
 import { GameOnboarding } from "./GameOnboarding";

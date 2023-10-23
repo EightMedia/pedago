@@ -1,6 +1,5 @@
+import { Stack } from "@layouts/Stack";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import { Stack } from "../../layouts/Stack";
 import { GlassPanel } from "../GlassPanel";
 import { Text } from "../Text";
 import { Title } from "../Title";

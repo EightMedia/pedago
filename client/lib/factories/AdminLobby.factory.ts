@@ -1,5 +1,5 @@
+import { PlayerGroupType } from "@components/PlayerGroup/PlayerGroup.types";
 import { Group, Player, RoomDto } from "models";
-import { PlayerGroupType } from "../lib/components/PlayerGroup/PlayerGroup.types";
 
 const getPlayerGroupType = (
   group: Group,

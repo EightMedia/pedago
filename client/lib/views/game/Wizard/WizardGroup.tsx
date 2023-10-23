@@ -1,9 +1,9 @@
+import { Button } from "@components/Button";
+import { PanelTitle } from "@components/Panel";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import { Group } from "models";
 import { useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button } from "../../../components/Button";
-import { PanelTitle } from "../../../components/Panel";
-import { Stack } from "../../../layouts/Stack";
 import { WizardStep } from "./Wizard.types";
 
 export const WizardGroup = ({

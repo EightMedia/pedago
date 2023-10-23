@@ -1,5 +1,5 @@
+import { WaitingType } from "@views/game/Waiting/Waiting.types";
 import { RoomDto } from "models";
-import { WaitingType } from "../lib/views/game/Waiting/Waiting.types";
 
 export const getWaitingType = (
   round: number,

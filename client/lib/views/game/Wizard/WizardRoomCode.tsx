@@ -1,9 +1,9 @@
+import { Button } from "@components/Button";
+import { InputText } from "@components/InputText";
+import { PanelTitle } from "@components/Panel";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import { ChangeEvent, useContext, useState } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button } from "../../../components/Button";
-import { InputText } from "../../../components/InputText";
-import { PanelTitle } from "../../../components/Panel";
-import { Stack } from "../../../layouts/Stack";
 import { WizardStep } from "./Wizard.types";
 
 export const WizardRoomCode = ({
@@ -18,15 +18,15 @@ export const WizardRoomCode = ({
   const { text } = useContext(LanguageContext);
 
   const handleSubmit = () => {
-      setStep(WizardStep.Name, roomCode);
-      setChanged(false);
-    }
-    
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setRoomCode(parseInt(e?.target?.value, 10));
-      setChanged(true);
+    setStep(WizardStep.Name, roomCode);
+    setChanged(false);
   }
-  
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setRoomCode(parseInt(e?.target?.value, 10));
+    setChanged(true);
+  }
+
   return (
     <>
       <PanelTitle>{text.gameWizard.roomCode.roomCodeLabel}</PanelTitle>

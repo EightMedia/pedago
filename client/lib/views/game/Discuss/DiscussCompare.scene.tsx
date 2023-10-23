@@ -1,3 +1,17 @@
+import { Button } from "@components/Button";
+import { Icon, IconsEnum } from "@components/Icon/Icon";
+import { Modal } from "@components/Modal";
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { Player } from "@components/Player";
+import { Shape } from "@components/Shape";
+import { Text } from "@components/Text";
+import { Timer } from "@components/Timer";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { TimerContext } from "@contexts/TimerContext";
+import { Center } from "@layouts/Center";
+import { Stack } from "@layouts/Stack";
 import cx from "classnames";
 import {
   ComponentPropsWithoutRef,
@@ -8,20 +22,6 @@ import {
   useRef,
   useState
 } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
-import { Button } from "../../../components/Button";
-import { Icon, IconsEnum } from "../../../components/Icon/Icon";
-import { Modal } from "../../../components/Modal";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { Player } from "../../../components/Player";
-import { Shape } from "../../../components/Shape";
-import { Text } from "../../../components/Text";
-import { Timer } from "../../../components/Timer";
-import { Center } from "../../../layouts/Center";
-import { Stack } from "../../../layouts/Stack";
 import { WizardInfo } from "../Wizard/WizardInfo";
 import styles from "./Discuss.module.css";
 import { DiscussCompareProps } from "./Discuss.types";

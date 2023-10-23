@@ -1,8 +1,8 @@
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
+import { getPlayerId } from "@factories/shared.factory";
 import { Player, PlayerEvent } from "models";
 import { memo, useContext, useState } from "react";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
-import { getPlayerId } from "../../../../factories/shared.factory";
 import { DiscussStep, DiscussType } from "./Discuss.types";
 import { DiscussCompare } from "./DiscussCompare.scene";
 import { DiscussInfo } from "./DiscussInfo.scene";
@@ -49,9 +49,9 @@ const DiscussComponent = ({
           case DiscussStep.Intro:
             callback = autoPlay
               ? () =>
-                  setStep(
-                    discussInfoSeen ? DiscussStep.Compare : DiscussStep.Info
-                  )
+                setStep(
+                  discussInfoSeen ? DiscussStep.Compare : DiscussStep.Info
+                )
               : undefined;
             return (
               <DiscussIntro

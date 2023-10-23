@@ -1,12 +1,12 @@
+import { Button } from "@components/Button";
+import { InputText } from "@components/InputText";
+import { PanelTitle } from "@components/Panel";
+import { avatarColors } from "@components/Player/Player";
+import { Text } from "@components/Text";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import Avatar from "boring-avatars";
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button } from "../../../components/Button";
-import { InputText } from "../../../components/InputText";
-import { PanelTitle } from "../../../components/Panel";
-import { avatarColors } from "../../../components/Player/Player";
-import { Text } from "../../../components/Text";
-import { Stack } from "../../../layouts/Stack";
 import styles from "./Wizard.module.css";
 import { WizardStep } from "./Wizard.types";
 

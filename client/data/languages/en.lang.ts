@@ -1,5 +1,5 @@
+import { IconsEnum } from "@components/Icon/Icon";
 import { Locale, PlayerType, Role, Sector } from "models";
-import { IconsEnum } from "../../lib/components/Icon/Icon";
 import { NL } from "./nl.lang";
 
 export const EN: Locale = {

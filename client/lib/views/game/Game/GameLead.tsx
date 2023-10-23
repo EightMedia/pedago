@@ -1,12 +1,12 @@
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { Player } from "@components/Player";
+import { Timer } from "@components/Timer";
+import { Title } from "@components/Title";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { TimerContext } from "@contexts/TimerContext";
 import { Player as PlayerModel, RoomDto } from "models";
 import { useContext, useEffect, useState } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { Player } from "../../../components/Player";
-import { Timer } from "../../../components/Timer";
-import { Title } from "../../../components/Title";
 import styles from "./Game.module.css";
 
 export const GameLead = ({

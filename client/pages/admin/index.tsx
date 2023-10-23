@@ -1,3 +1,33 @@
+import {
+  ResultGroup,
+  ResultSet,
+  ResultStep
+} from "@components/Result/Result.types";
+import { DEFAULT_LANGUAGE } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
+import { getAdminGameType } from "@factories/AdminGame.factory";
+import {
+  getAdminLobbyType,
+  getLobbyRoom
+} from "@factories/AdminLobby.factory";
+import { getWizardData } from "@factories/AdminWizard.factory";
+import { getResultData } from "@factories/Result.factory";
+import {
+  getTimeStampFromLocalStorage,
+  setTimeStampToLocalStorage
+} from "@factories/shared.factory";
+import LanguageProvider from "@providers/Language.provider";
+import TimerProvider from "@providers/Timer.provider";
+import { onDisconnect } from "@utils/onDisconnect.util";
+import { useSocket } from "@utils/useSocket.util";
+import { Game } from "@views/admin/Game";
+import { GameScene } from "@views/admin/Game/Game.types";
+import { Lobby } from "@views/admin/Lobby";
+import { LobbyStep } from "@views/admin/Lobby/Lobby.types";
+import { Result } from "@views/admin/Result";
+import { Wizard } from "@views/admin/Wizard";
+import { WizardStep } from "@views/admin/Wizard/Wizard.types";
 import { getCookie, setCookies } from "cookies-next";
 import {
   AdminEvent,
@@ -15,35 +45,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
-import { RoomContext } from "../../contexts/RoomContext";
-import { SocketContext } from "../../contexts/SocketContext";
-import { getAdminGameType } from "../../factories/AdminGame.factory";
-import {
-  getAdminLobbyType,
-  getLobbyRoom
-} from "../../factories/AdminLobby.factory";
-import { getWizardData } from "../../factories/AdminWizard.factory";
-import { getResultData } from "../../factories/Result.factory";
-import {
-  getTimeStampFromLocalStorage,
-  setTimeStampToLocalStorage
-} from "../../factories/shared.factory";
-import {
-  ResultGroup,
-  ResultSet,
-  ResultStep
-} from "../../lib/components/Result/Result.types";
-import { onDisconnect } from "../../lib/utils/onDisconnect.util";
-import { useSocket } from "../../lib/utils/useSocket.util";
-import { Game } from "../../lib/views/admin/Game";
-import { GameScene } from "../../lib/views/admin/Game/Game.types";
-import { Lobby } from "../../lib/views/admin/Lobby";
-import { LobbyStep } from "../../lib/views/admin/Lobby/Lobby.types";
-import { Result } from "../../lib/views/admin/Result";
-import { Wizard } from "../../lib/views/admin/Wizard";
-import { WizardStep } from "../../lib/views/admin/Wizard/Wizard.types";
-import LanguageProvider from "../../providers/Language.provider";
-import TimerProvider from "../../providers/Timer.provider";
 
 const AdminGame = ({
   localLang,
@@ -87,6 +88,7 @@ const AdminGame = ({
             setRoom(res?.data?.room as RoomDto);
             setTimer(res?.data?.room?.timerStamp as number);
             setCookies("room", JSON.stringify(res?.data?.room));
+            setCookies("language", room.language || DEFAULT_LANGUAGE);
             console.log(res.message);
           }
         );
@@ -105,6 +107,7 @@ const AdminGame = ({
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
         setCookies("room", JSON.stringify(r));
+        setCookies("language", room.language || DEFAULT_LANGUAGE);
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
@@ -189,7 +192,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   return {
     props: {
-      localLang: localLang || Language.NL,
+      localLang: localLang || DEFAULT_LANGUAGE,
       localRoom: room ? JSON.parse(room as string) : null,
     },
   };

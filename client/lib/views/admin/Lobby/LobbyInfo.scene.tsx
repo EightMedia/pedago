@@ -1,12 +1,12 @@
+import { Button } from "@components/Button";
+import { InfoItem } from "@components/InfoItem";
+import { Logo } from "@components/Logo";
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { Panel, PanelTitle } from "@components/Panel";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import { useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button } from "../../../components/Button";
-import { InfoItem } from "../../../components/InfoItem";
-import { Logo } from "../../../components/Logo";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { Panel, PanelTitle } from "../../../components/Panel";
-import { Stack } from "../../../layouts/Stack";
 
 export const LobbyInfo = ({ handleClick }: { handleClick: () => void }) => {
   const { text } = useContext(LanguageContext);

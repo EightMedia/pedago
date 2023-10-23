@@ -1,10 +1,10 @@
+import { Button } from "@components/Button";
+import { IconsEnum } from "@components/Icon/Icon";
+import { InfoItem } from "@components/InfoItem";
+import { PanelTitle } from "@components/Panel";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import { useContext } from "react";
-import { LanguageContext } from "../../../contexts/LanguageContext";
-import { Button } from "../../components/Button";
-import { IconsEnum } from "../../components/Icon/Icon";
-import { InfoItem } from "../../components/InfoItem";
-import { PanelTitle } from "../../components/Panel";
-import { Stack } from "../../layouts/Stack";
 
 export const ResultInfo = ({ onClick }: { onClick: () => void }) => {
   const { text } = useContext(LanguageContext);

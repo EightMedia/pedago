@@ -1,12 +1,12 @@
+import { Button } from "@components/Button";
+import { List } from "@components/List";
+import { ListItem } from "@components/List/List";
+import { PanelTitle } from "@components/Panel";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { Stack } from "@layouts/Stack";
 import { Role } from "models";
 import { PlayerType } from "models/lib/models/player-type.enum";
 import { useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button } from "../../../components/Button";
-import { List } from "../../../components/List";
-import { ListItem } from "../../../components/List/List";
-import { PanelTitle } from "../../../components/Panel";
-import { Stack } from "../../../layouts/Stack";
 import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 
