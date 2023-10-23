@@ -7,6 +7,9 @@ import { Player } from "@components/Player";
 import { Shape } from "@components/Shape";
 import { Text } from "@components/Text";
 import { Timer } from "@components/Timer";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { TimerContext } from "@contexts/TimerContext";
 import { Center } from "@layouts/Center";
 import { Stack } from "@layouts/Stack";
 import cx from "classnames";
@@ -19,9 +22,6 @@ import {
   useRef,
   useState
 } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
 import { WizardInfo } from "../Wizard/WizardInfo";
 import styles from "./Discuss.module.css";
 import { DiscussCompareProps } from "./Discuss.types";

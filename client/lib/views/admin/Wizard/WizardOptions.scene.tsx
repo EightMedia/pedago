@@ -3,9 +3,9 @@ import { InputSwitch } from "@components/InputSwitch";
 import { InputText } from "@components/InputText";
 import { PanelTitle } from "@components/Panel";
 import { Text } from "@components/Text";
+import { LanguageContext } from "@contexts/LanguageContext";
 import { Stack } from "@layouts/Stack";
 import { useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
 import styles from "./Wizard.module.css";
 import { WizardStep, WizardStepProps } from "./Wizard.types";
 

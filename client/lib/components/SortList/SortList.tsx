@@ -15,8 +15,8 @@ import {
 import { getPlayerId } from "@factories/shared.factory";
 import { Category, Player, PlayerEvent, SocketCallback } from "models";
 import { memo, useContext, useEffect, useState } from "react";
-import { RoomContext } from "../../../contexts/RoomContext";
-import { SocketContext } from "../../../contexts/SocketContext";
+import { RoomContext } from "../../contexts/RoomContext";
+import { SocketContext } from "../../contexts/SocketContext";
 import {
   categoryToSortList,
   sortListToCategory

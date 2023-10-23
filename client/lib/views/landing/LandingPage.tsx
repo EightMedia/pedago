@@ -20,7 +20,7 @@ import {
   useContext,
   useState
 } from "react";
-import { LanguageContext } from "../../../contexts/LanguageContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = ({

@@ -22,7 +22,10 @@
       "@layouts/*": ["./lib/layouts/*"],
       "@styles/*": ["./lib/styles/*"],
       "@views/*": ["./lib/views/*"],
-      "@contexts/*": ["./lib/views/*"]
+      "@utils/*": ["./lib/utils/*"],
+      "@providers/*": ["./lib/providers/*"],
+      "@contexts/*": ["./lib/contexts/*"],
+      "@data/*": ["./data/*"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

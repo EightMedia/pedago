@@ -1,6 +1,6 @@
+import { SocketContext } from "@contexts/SocketContext";
 import { AdminEvent, SocketCallback } from "models";
 import { memo, useContext, useState } from "react";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import { LobbyStep, LobbyType } from "./Lobby.types";
 import { LobbyInfo } from "./LobbyInfo.scene";
 import { LobbyLobby } from "./LobbyLobby.scene";

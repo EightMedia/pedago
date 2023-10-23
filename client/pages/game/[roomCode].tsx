@@ -1,4 +1,36 @@
-import { getCookie, removeCookies } from "cookies-next";
+import {
+  ResultGroup,
+  ResultSet,
+  ResultStep
+} from "@components/Result/Result.types";
+import { DEFAULT_LANGUAGE } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
+import { getDiscussType } from "@factories/Discuss.factory";
+import { getLobbyType } from "@factories/Lobby.factory";
+import { getPlayerMatchType } from "@factories/PlayerMatch.factory";
+import { getResultData } from "@factories/Result.factory";
+import {
+  getTimeStampFromLocalStorage,
+  setTimeStampToLocalStorage
+} from "@factories/shared.factory";
+import { getWaitingType } from "@factories/Waiting.factory";
+import LanguageProvider from "@providers/Language.provider";
+import TimerProvider from "@providers/Timer.provider";
+import { onDisconnect } from "@utils/onDisconnect.util";
+import { useSocket } from "@utils/useSocket.util";
+import { Discuss } from "@views/game/Discuss";
+import { DiscussStep } from "@views/game/Discuss/Discuss.types";
+import { Game } from "@views/game/Game";
+import { GameScenes } from "@views/game/Game/Game.types";
+import { Lobby } from "@views/game/Lobby";
+import { PlayerMatch } from "@views/game/PlayerMatch/PlayerMatch";
+import { PlayerMatchSceneEnum } from "@views/game/PlayerMatch/PlayerMatch.types";
+import { Result } from "@views/game/Result";
+import { Waiting } from "@views/game/Waiting";
+import { Wizard } from "@views/game/Wizard";
+import { WizardStep } from "@views/game/Wizard/Wizard.types";
+import { getCookie, removeCookies, setCookies } from "cookies-next";
 import {
   Event,
   Language,
@@ -14,37 +46,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
-import { RoomContext } from "../../contexts/RoomContext";
-import { SocketContext } from "../../contexts/SocketContext";
-import {
-  ResultGroup,
-  ResultSet,
-  ResultStep
-} from "../../lib/components/Result/Result.types";
-import { getDiscussType } from "../../lib/factories/Discuss.factory";
-import { getLobbyType } from "../../lib/factories/Lobby.factory";
-import { getPlayerMatchType } from "../../lib/factories/PlayerMatch.factory";
-import { getResultData } from "../../lib/factories/Result.factory";
-import {
-  getTimeStampFromLocalStorage,
-  setTimeStampToLocalStorage
-} from "../../lib/factories/shared.factory";
-import { getWaitingType } from "../../lib/factories/Waiting.factory";
-import { onDisconnect } from "../../lib/utils/onDisconnect.util";
-import { useSocket } from "../../lib/utils/useSocket.util";
-import { Discuss } from "../../lib/views/game/Discuss";
-import { DiscussStep } from "../../lib/views/game/Discuss/Discuss.types";
-import { Game } from "../../lib/views/game/Game";
-import { GameScenes } from "../../lib/views/game/Game/Game.types";
-import { Lobby } from "../../lib/views/game/Lobby";
-import { PlayerMatch } from "../../lib/views/game/PlayerMatch/PlayerMatch";
-import { PlayerMatchSceneEnum } from "../../lib/views/game/PlayerMatch/PlayerMatch.types";
-import { Result } from "../../lib/views/game/Result";
-import { Waiting } from "../../lib/views/game/Waiting";
-import { Wizard } from "../../lib/views/game/Wizard";
-import { WizardStep } from "../../lib/views/game/Wizard/Wizard.types";
-import LanguageProvider from "../../providers/Language.provider";
-import TimerProvider from "../../providers/Timer.provider";
 
 const RoomCode = ({
   localLang,
@@ -118,6 +119,7 @@ const RoomCode = ({
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
         setPlayerId(getCookie("playerId") as string);
+        setCookies("language", room.language || DEFAULT_LANGUAGE);
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(PlayerEvent.GameScene, (setToCountdown: boolean) =>
@@ -247,7 +249,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   return {
     props: {
-      localLang: localLang || Language.NL,
+      localLang: localLang || DEFAULT_LANGUAGE,
       localPlayerId: playerId || null,
     },
   };

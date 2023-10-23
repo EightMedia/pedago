@@ -8,6 +8,8 @@ import { Panel, PanelTitle } from "@components/Panel";
 import { PanelGroup } from "@components/PanelGroup";
 import { PlayerCount } from "@components/PlayerCount";
 import { PlayerGroup } from "@components/PlayerGroup";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { SocketContext } from "@contexts/SocketContext";
 import { Stack } from "@layouts/Stack";
 import { removeCookies } from "cookies-next";
 import { AdminEvent, SocketCallback } from "models";
@@ -16,8 +18,6 @@ import { useContext, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ReactMarkdown from "react-markdown";
 import { Socket } from "socket.io-client";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import styles from "./Lobby.module.css";
 import { LobbyType } from "./Lobby.types";
 

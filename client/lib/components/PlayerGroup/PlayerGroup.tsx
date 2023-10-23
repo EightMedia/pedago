@@ -1,7 +1,7 @@
 import { Center } from "@layouts/Center";
 import cx from "classnames";
 import { memo, useContext } from "react";
-import { LanguageContext } from "../../../contexts/LanguageContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { Button } from "../Button";
 import { GlassPanel } from "../GlassPanel";
 import { Player } from "../Player/Player";

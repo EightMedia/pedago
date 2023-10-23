@@ -1,9 +1,9 @@
 import { Button } from "@components/Button";
 import { InputText } from "@components/InputText";
 import { PanelTitle } from "@components/Panel";
+import { LanguageContext } from "@contexts/LanguageContext";
 import { Stack } from "@layouts/Stack";
 import { ChangeEvent, useContext, useState } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { WizardStep } from "./Wizard.types";
 
 export const WizardRoomCode = ({

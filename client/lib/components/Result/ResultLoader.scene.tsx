@@ -1,6 +1,6 @@
 import { Center } from "@layouts/Center";
 import { useContext } from "react";
-import { LanguageContext } from "../../../contexts/LanguageContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { TimedCallback } from "../../utils/timedCallback.util";
 import { Loader } from "../Loader";
 import { Panel, PanelTitle } from "../Panel";

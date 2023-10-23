@@ -1,15 +1,16 @@
+import { Result } from "@components/Result";
+import {
+  ResultGroup,
+  ResultSet,
+  ResultStep
+} from "@components/Result/Result.types";
+import { DEFAULT_LANGUAGE } from "@contexts/LanguageContext";
+import LanguageProvider from "@providers/Language.provider";
 import { getCookie } from "cookies-next";
 import { Language } from "models";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Result } from "../../lib/components/Result";
-import {
-  ResultGroup,
-  ResultSet,
-  ResultStep
-} from "../../lib/components/Result/Result.types";
-import LanguageProvider from "../../providers/Language.provider";
 
 const stringToResultSet = (nmbrs: string): ResultSet | undefined => {
   if (nmbrs === "undefined") {
@@ -65,7 +66,7 @@ const ResultPage = ({ localLang }: { localLang: Language }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const localLang = getCookie("language", { req, res });
-  return { props: { localLang: localLang || Language.NL } };
+  return { props: { localLang: localLang || DEFAULT_LANGUAGE } };
 };
 
 export default ResultPage;

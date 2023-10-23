@@ -5,11 +5,11 @@ import { Page } from "@components/Page";
 import { PageSlot } from "@components/Page/Page";
 import { Panel, PanelTitle } from "@components/Panel";
 import { Timer } from "@components/Timer";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { TimerContext } from "@contexts/TimerContext";
 import { Stack } from "@layouts/Stack";
 import { useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
 
 const icons: IconsEnum[] = [
   IconsEnum.Columns,

@@ -1,9 +1,9 @@
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
 import { getPlayerId } from "@factories/shared.factory";
 import { Player, RoomDto } from "models";
 import { useContext, useState } from "react";
 import { Socket } from "socket.io-client";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import { GameScenes, GameType } from "./Game.types";
 import { GameCountdown } from "./GameCountdown";
 import { GameLead } from "./GameLead";

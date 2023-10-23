@@ -4,7 +4,7 @@ import { InfoItem } from "@components/InfoItem";
 import { PanelTitle } from "@components/Panel";
 import { Stack } from "@layouts/Stack";
 import { useContext } from "react";
-import { LanguageContext } from "../../../contexts/LanguageContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
 
 export const ResultInfo = ({ onClick }: { onClick: () => void }) => {
   const { text } = useContext(LanguageContext);

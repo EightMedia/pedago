@@ -5,12 +5,12 @@ import { PageSlot } from "@components/Page/Page";
 import { Panel, PanelTitle } from "@components/Panel";
 import { Text } from "@components/Text";
 import { Timer } from "@components/Timer";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { TimerContext } from "@contexts/TimerContext";
 import { Center } from "@layouts/Center";
 import { Stack } from "@layouts/Stack";
 import { memo, useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
 import { WaitingType } from "./Waiting.types";
 
 const WaitingComponent = ({

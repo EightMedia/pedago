@@ -2,13 +2,13 @@ import { Button } from "@components/Button";
 import { Panel, PanelTitle } from "@components/Panel";
 import { Player } from "@components/Player";
 import { Text } from "@components/Text";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { RoomContext } from "@contexts/RoomContext";
+import { SocketContext } from "@contexts/SocketContext";
 import { getPlayerId } from "@factories/shared.factory";
 import { Stack } from "@layouts/Stack";
 import { Player as PlayerModel, PlayerEvent, SocketCallback } from "models";
 import { memo, useContext } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { RoomContext } from "../../../../contexts/RoomContext";
-import { SocketContext } from "../../../../contexts/SocketContext";
 import styles from "./PlayerMatch.module.css";
 import { PlayerMatchType } from "./PlayerMatch.types";
 

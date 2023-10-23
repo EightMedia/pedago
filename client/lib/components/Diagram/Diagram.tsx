@@ -9,7 +9,7 @@ import {
 import cx from "classnames";
 import { memo, useContext } from "react";
 import { Radar } from "react-chartjs-2";
-import { LanguageContext } from "../../../contexts/LanguageContext";
+import { LanguageContext } from "../../contexts/LanguageContext";
 import { Shape } from "../Shape";
 import styles from "./Diagram.module.css";
 import { DiagramType } from "./Diagram.types";

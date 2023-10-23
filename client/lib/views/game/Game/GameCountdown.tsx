@@ -2,10 +2,10 @@ import { Page } from "@components/Page";
 import { PageSlot } from "@components/Page/Page";
 import { Player } from "@components/Player";
 import { Timer } from "@components/Timer";
+import { LanguageContext } from "@contexts/LanguageContext";
+import { TimerContext } from "@contexts/TimerContext";
 import { Player as PlayerModel, RoomDto } from "models";
 import { useContext, useEffect, useState } from "react";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { TimerContext } from "../../../../contexts/TimerContext";
 import styles from "./Game.module.css";
 
 export const GameCountdown = ({
