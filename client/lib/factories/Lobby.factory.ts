@@ -1,7 +1,7 @@
+import { PlayerGroupType } from "@components/PlayerGroup/PlayerGroup.types";
+import { LobbyType } from "@views/game/Lobby/Lobby.types";
 import { Group, Player, RoomDto } from "models";
 import { Socket } from "socket.io-client";
-import { PlayerGroupType } from "../lib/components/PlayerGroup/PlayerGroup.types";
-import { LobbyType } from "../lib/views/game/Lobby/Lobby.types";
 import { getPlayerId } from "./shared.factory";
 
 const getPlayerGroupType = (

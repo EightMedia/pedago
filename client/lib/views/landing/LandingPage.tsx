@@ -1,3 +1,13 @@
+import { Button } from "@components/Button";
+import { Icon } from "@components/Icon";
+import { IconsEnum } from "@components/Icon/Icon";
+import { InputText } from "@components/InputText";
+import { Logo } from "@components/Logo";
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import PrivacyStatement from "@components/PrivacyStatement";
+import { Title } from "@components/Title";
+import { Center } from "@layouts/Center";
 import { removeCookies, setCookies } from "cookies-next";
 import { Language } from "models";
 import Link from "next/link";
@@ -11,16 +21,6 @@ import {
   useState
 } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
-import { Button } from "../../components/Button";
-import { Icon } from "../../components/Icon";
-import { IconsEnum } from "../../components/Icon/Icon";
-import { InputText } from "../../components/InputText";
-import { Logo } from "../../components/Logo";
-import { Page } from "../../components/Page";
-import { PageSlot } from "../../components/Page/Page";
-import PrivacyStatement from "../../components/PrivacyStatement";
-import { Title } from "../../components/Title";
-import { Center } from "../../layouts/Center";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = ({

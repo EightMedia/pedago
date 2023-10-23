@@ -1,5 +1,5 @@
+import { ResultGroup, ResultSet } from "@components/Result/Result.types";
 import { Category, Group, Player, RoomDto, Round } from "models";
-import { ResultGroup, ResultSet } from "../lib/components/Result/Result.types";
 
 const reverseSortOrder = (arr: Category[]): Category[] =>
   arr?.map((_, index) => arr[arr.length - 1 - index]);

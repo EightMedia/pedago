@@ -1,5 +1,5 @@
+import { PlayerGroupType } from "@components/PlayerGroup/PlayerGroup.types";
 import { RoomDto } from "models";
-import { PlayerGroupType } from "../../../components/PlayerGroup/PlayerGroup.types";
 
 export enum LobbyStep {
   Info,

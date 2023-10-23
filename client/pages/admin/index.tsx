@@ -17,22 +17,22 @@ import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
-import { getAdminGameType } from "../../factories/AdminGame.factory";
-import {
-  getAdminLobbyType,
-  getLobbyRoom
-} from "../../factories/AdminLobby.factory";
-import { getWizardData } from "../../factories/AdminWizard.factory";
-import { getResultData } from "../../factories/Result.factory";
-import {
-  getTimeStampFromLocalStorage,
-  setTimeStampToLocalStorage
-} from "../../factories/shared.factory";
 import {
   ResultGroup,
   ResultSet,
   ResultStep
 } from "../../lib/components/Result/Result.types";
+import { getAdminGameType } from "../../lib/factories/AdminGame.factory";
+import {
+  getAdminLobbyType,
+  getLobbyRoom
+} from "../../lib/factories/AdminLobby.factory";
+import { getWizardData } from "../../lib/factories/AdminWizard.factory";
+import { getResultData } from "../../lib/factories/Result.factory";
+import {
+  getTimeStampFromLocalStorage,
+  setTimeStampToLocalStorage
+} from "../../lib/factories/shared.factory";
 import { onDisconnect } from "../../lib/utils/onDisconnect.util";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Game } from "../../lib/views/admin/Game";

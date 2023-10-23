@@ -1,7 +1,7 @@
+import { Center } from "@layouts/Center";
 import cx from "classnames";
 import { memo, useContext } from "react";
 import { LanguageContext } from "../../../contexts/LanguageContext";
-import { Center } from "../../layouts/Center";
 import { Button } from "../Button";
 import { GlassPanel } from "../GlassPanel";
 import { Player } from "../Player/Player";
@@ -34,14 +34,14 @@ export const PlayerGroupComponent = ({
             <p className={styles.waiting}>{text.adminLobby.playerGroup.waiting}</p>
           )}
           {handleGroupChange && (
-          <Button
-            variation="line"
-            className={styles.changeButton}
-            onClick={handleGroupChange}
-          >
-            {text.gameLobby.changeToThisGroup}
-          </Button>
-        )}
+            <Button
+              variation="line"
+              className={styles.changeButton}
+              onClick={handleGroupChange}
+            >
+              {text.gameLobby.changeToThisGroup}
+            </Button>
+          )}
         </Center>
       </GlassPanel>
     </div>

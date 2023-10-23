@@ -1,8 +1,8 @@
-import { RoomDto } from "models";
 import {
-  DiscussStep,
-  DiscussType
-} from "../lib/views/game/Discuss/Discuss.types";
+    DiscussStep,
+    DiscussType
+} from "@views/game/Discuss/Discuss.types";
+import { RoomDto } from "models";
 
 export const getDiscussType = (
   round: number,

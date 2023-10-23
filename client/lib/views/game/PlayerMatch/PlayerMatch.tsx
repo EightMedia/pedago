@@ -1,10 +1,10 @@
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { Timer } from "@components/Timer";
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { Timer } from "../../../components/Timer";
 import { PlayerMatchScene } from "./PlayerMatch.scene";
 import { PlayerMatchSceneEnum, PlayerMatchType } from "./PlayerMatch.types";
 import { PlayerMatchWaitScene } from "./PlayerMatchWait.scene";

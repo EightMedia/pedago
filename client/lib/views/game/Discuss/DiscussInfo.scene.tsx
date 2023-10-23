@@ -1,15 +1,15 @@
+import { Button } from "@components/Button";
+import { IconsEnum } from "@components/Icon/Icon";
+import { InfoItem } from "@components/InfoItem";
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { Panel, PanelTitle } from "@components/Panel";
+import { Timer } from "@components/Timer";
+import { Stack } from "@layouts/Stack";
 import { useContext } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { TimerContext } from "../../../../contexts/TimerContext";
-import { Button } from "../../../components/Button";
-import { IconsEnum } from "../../../components/Icon/Icon";
-import { InfoItem } from "../../../components/InfoItem";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { Panel, PanelTitle } from "../../../components/Panel";
-import { Timer } from "../../../components/Timer";
-import { Stack } from "../../../layouts/Stack";
 
 const icons: IconsEnum[] = [
   IconsEnum.Columns,
@@ -33,7 +33,7 @@ export const DiscussInfo = ({
   const { text } = useContext(LanguageContext);
   const timer = useContext(TimerContext);
   const room = useContext(RoomContext);
-  
+
   return (
     <Page valign="center">
       <PageSlot location="headerLeft">

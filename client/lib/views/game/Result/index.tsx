@@ -1,1 +1,1 @@
-export { Result } from "../../../components/Result";
+export { Result } from "@components/Result";

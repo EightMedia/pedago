@@ -1,5 +1,6 @@
 import { Admin } from "./admin.interface";
 import { Group } from "./group.interface";
+import { Language } from "./language.enum";
 import { Options } from "./option.interface";
 import { Organisation } from "./organisation.interface";
 import { Player } from "./player.interface";
@@ -20,4 +21,5 @@ export interface RoomDto {
     options?: Options;
     view: ViewName;
     round: number;
+    language: Language;
 }

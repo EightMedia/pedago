@@ -16,20 +16,20 @@ import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 import { RoomContext } from "../../contexts/RoomContext";
 import { SocketContext } from "../../contexts/SocketContext";
-import { getDiscussType } from "../../factories/Discuss.factory";
-import { getLobbyType } from "../../factories/Lobby.factory";
-import { getPlayerMatchType } from "../../factories/PlayerMatch.factory";
-import { getResultData } from "../../factories/Result.factory";
-import {
-  getTimeStampFromLocalStorage,
-  setTimeStampToLocalStorage
-} from "../../factories/shared.factory";
-import { getWaitingType } from "../../factories/Waiting.factory";
 import {
   ResultGroup,
   ResultSet,
   ResultStep
 } from "../../lib/components/Result/Result.types";
+import { getDiscussType } from "../../lib/factories/Discuss.factory";
+import { getLobbyType } from "../../lib/factories/Lobby.factory";
+import { getPlayerMatchType } from "../../lib/factories/PlayerMatch.factory";
+import { getResultData } from "../../lib/factories/Result.factory";
+import {
+  getTimeStampFromLocalStorage,
+  setTimeStampToLocalStorage
+} from "../../lib/factories/shared.factory";
+import { getWaitingType } from "../../lib/factories/Waiting.factory";
 import { onDisconnect } from "../../lib/utils/onDisconnect.util";
 import { useSocket } from "../../lib/utils/useSocket.util";
 import { Discuss } from "../../lib/views/game/Discuss";

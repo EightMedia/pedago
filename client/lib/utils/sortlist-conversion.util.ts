@@ -1,5 +1,5 @@
+import { SortItemType } from "@components/SortList/SortList.types";
 import { Category } from "models";
-import { SortItemType } from "../components/SortList/SortList.types";
 
 export const sortListToCategory = (items: SortItemType[]): Category[] => {
   return items.map((i) => {

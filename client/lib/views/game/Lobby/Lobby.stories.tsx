@@ -1,6 +1,5 @@
+import { PlayerGroup } from "@components/PlayerGroup";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
-import { PlayerGroup } from "../../../components/PlayerGroup";
 import { Lobby } from "./Lobby";
 import { LobbyDataOneGroup, LobbyDataTwoGroups } from "./Lobby.data";
 

@@ -1,16 +1,16 @@
+import { Button, ButtonGroup } from "@components/Button";
+import { Icon } from "@components/Icon";
+import { IconsEnum } from "@components/Icon/Icon";
+import { Logo } from "@components/Logo";
+import { Modal } from "@components/Modal";
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { PlayerCount } from "@components/PlayerCount";
+import { Title } from "@components/Title";
+import { Stack } from "@layouts/Stack";
 import { PlayerStatus } from "models";
 import { useContext, useState } from "react";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { Button, ButtonGroup } from "../../../components/Button";
-import { Icon } from "../../../components/Icon";
-import { IconsEnum } from "../../../components/Icon/Icon";
-import { Logo } from "../../../components/Logo";
-import { Modal } from "../../../components/Modal";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { PlayerCount } from "../../../components/PlayerCount";
-import { Title } from "../../../components/Title";
-import { Stack } from "../../../layouts/Stack";
 import { TimedCallback } from "../../../utils/timedCallback.util";
 import { GameInfo } from "./GameOnboarding";
 

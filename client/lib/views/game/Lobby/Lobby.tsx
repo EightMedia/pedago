@@ -1,15 +1,15 @@
+import { Intro } from "@components/Intro";
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { PanelGroup } from "@components/PanelGroup";
+import { PlayerGroup } from "@components/PlayerGroup";
+import { Title } from "@components/Title";
 import { PlayerEvent, SocketCallback } from "models";
 import { memo, useContext } from "react";
 import { Socket } from "socket.io-client";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
 import { RoomContext } from "../../../../contexts/RoomContext";
 import { SocketContext } from "../../../../contexts/SocketContext";
-import { Intro } from "../../../components/Intro";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { PanelGroup } from "../../../components/PanelGroup";
-import { PlayerGroup } from "../../../components/PlayerGroup";
-import { Title } from "../../../components/Title";
 import { LobbyType } from "./Lobby.types";
 
 const LobbyComponent = ({ round, roundMax, groups, playerName, playerId }: LobbyType) => {

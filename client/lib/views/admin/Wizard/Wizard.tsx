@@ -1,12 +1,12 @@
+import { Logo } from "@components/Logo";
+import { Page } from "@components/Page";
+import { PageSlot } from "@components/Page/Page";
+import { Panel } from "@components/Panel";
+import { Title } from "@components/Title";
+import { convertToRoomDto } from "@factories/AdminWizard.factory";
 import { useContext, useState } from "react";
 import set from "set-value";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import { convertToRoomDto } from "../../../../factories/AdminWizard.factory";
-import { Logo } from "../../../components/Logo";
-import { Page } from "../../../components/Page";
-import { PageSlot } from "../../../components/Page/Page";
-import { Panel } from "../../../components/Panel";
-import { Title } from "../../../components/Title";
 import { WizardStep, WizardType } from "./Wizard.types";
 import { WizardCheck } from "./WizardCheck.scene";
 import { WizardGameType } from "./WizardGameType.scene";

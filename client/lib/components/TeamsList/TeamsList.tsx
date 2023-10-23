@@ -1,5 +1,5 @@
+import { Stack } from "@layouts/Stack";
 import { memo } from "react";
-import { Stack } from "../../layouts/Stack";
 import { GlassPanel } from "../GlassPanel";
 import { Player } from "../Player";
 import { PlayerCount } from "../PlayerCount";
