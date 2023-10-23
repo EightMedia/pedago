@@ -63,6 +63,7 @@ const AdminGame = ({
   const [gameScene, setGameScene] = useState<GameScene>(GameScene.Onboarding);
   const [timer, setTimer] = useState<number | null>(0);
   const router = useRouter();
+  const [language, setLanguage] = useState<Language>(localLang);
 
   const handleRegisterGame = (room: Partial<RoomDto>): void => {
     if (socket) {
@@ -88,7 +89,8 @@ const AdminGame = ({
             setRoom(res?.data?.room as RoomDto);
             setTimer(res?.data?.room?.timerStamp as number);
             setCookies("room", JSON.stringify(res?.data?.room));
-            setCookies("language", room.language || DEFAULT_LANGUAGE);
+            setCookies("language", res?.data?.room?.language || DEFAULT_LANGUAGE);
+            setLanguage(res?.data?.room?.language || DEFAULT_LANGUAGE)
             console.log(res.message);
           }
         );
@@ -107,7 +109,7 @@ const AdminGame = ({
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
         setCookies("room", JSON.stringify(r));
-        setCookies("language", room.language || DEFAULT_LANGUAGE);
+        setCookies("language", r.language || DEFAULT_LANGUAGE);
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(AdminEvent.LobbyStep, (setToInfo: boolean) => {
@@ -127,7 +129,7 @@ const AdminGame = ({
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider lang={localLang}>
+      <LanguageProvider lang={language}>
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>

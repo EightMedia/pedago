@@ -67,6 +67,7 @@ const RoomCode = ({
   const [error, setError] = useState<string | undefined>();
   const [timer, setTimer] = useState<number | null>(0);
   const [playerId, setPlayerId] = useState<string | null>(localPlayerId);
+  const [language, setLanguage] = useState<Language>(localLang);
 
   const ROUND_MAX = 6;
 
@@ -119,7 +120,8 @@ const RoomCode = ({
         setTimer(r.timerStamp);
         setTimeStampToLocalStorage(r.timerStamp);
         setPlayerId(getCookie("playerId") as string);
-        setCookies("language", room.language || DEFAULT_LANGUAGE);
+        setCookies("language", r.language || DEFAULT_LANGUAGE);
+        setLanguage(r.language || DEFAULT_LANGUAGE)
       });
       socket.on(Event.PlayerList, setPlayerList);
       socket.on(PlayerEvent.GameScene, (setToCountdown: boolean) =>
@@ -149,7 +151,7 @@ const RoomCode = ({
       <Head>
         <title>Pedago Game</title>
       </Head>
-      <LanguageProvider lang={localLang}>
+      <LanguageProvider lang={language}>
         <SocketContext.Provider value={socket}>
           <RoomContext.Provider value={room}>
             <TimerProvider timeStamp={timer as number}>
