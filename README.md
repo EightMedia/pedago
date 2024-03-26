@@ -43,3 +43,7 @@ Deploy the server:
 
 - Login to Heroku with the Heroku CLI
 - Execute command `git push heroku main`
+
+# License
+
+Pedago Game © 2022 by Eight Media is licensed under CC BY-NC-SA 4.0 International License. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0
